@@ -7,3 +7,11 @@
 /Development/assembly-crawler/.vs/assembly-crawler/v17
 /Development/assembly-crawler/AssemblyCrawler/obj
 /Development/.vs/assembly-crawler/v17
+/Development/.vs/assembly-crawler
+/Development/AssemblyCrawler.Test/bin
+/Development/AssemblyCrawler.Test/obj
+/Development/TestAssemblyNET48/obj/Debug
+/Development/TestFixtureSupport/obj
+/Output/AssemblyCrawler
+/Output/TestAssemblyNET48
+/Output/TestFixtureSupport/Release/net5.0

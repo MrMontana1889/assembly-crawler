@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
-    <BaseOutputPath>..\..\..\Output</BaseOutputPath>
+    <BaseOutputPath>$(SolutionDir)..\Output\$(AssemblyName)</BaseOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

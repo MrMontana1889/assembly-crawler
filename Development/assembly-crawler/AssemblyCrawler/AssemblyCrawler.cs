@@ -5,10 +5,10 @@ using System.Reflection;
 
 namespace AssemblyCrawler
 {
-	public class Crawler : IAssemblyCrawler
+	public class AssemblyCrawler : IAssemblyCrawler
 	{
 		#region Constructor
-		public Crawler()
+		public AssemblyCrawler()
 		{
 
 		}
