@@ -28,8 +28,14 @@ namespace TestAssemblyNET48.Domain.ModelingObjects
 		string Notes { get; set; }
 	}
 
-	public interface IElementManager
-	{ 
+	public interface IElementManager<TElementType>
+		where TElementType: class, IElement
+	{
+		TElementType Create();
+		TElementType Element(int id);
+		TElementType Element(string label);
+		List<TElementType> Elements();
+		void Delete(int id);
 		int Count { get; }
 		List<int> ElementIDs();
 		bool Exists(int id);

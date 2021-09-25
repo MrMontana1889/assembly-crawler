@@ -8,9 +8,9 @@ namespace TestAssemblyNET48.Support
 		#region Constructor
 		public GeometryPoint(double x, double y, double z)
 		{
-			X = x;
-			Y = y;
-			Z = z;
+			this.x = x;
+			this.y = y;
+			this.z = z;
 		}
 		#endregion
 

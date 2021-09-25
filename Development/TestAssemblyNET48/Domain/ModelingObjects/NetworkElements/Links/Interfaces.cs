@@ -25,14 +25,8 @@ namespace TestAssemblyNET48.Domain.ModelingObjects.NetworkElements
 		IDictionary<int, double?> Flows(int timeStepIndex, List<int> ids);
 	}
 
-	public interface IPipes : IElementManager
+	public interface IPipes : IElementManager<IPipe>
 	{
-		IPipe Create();
-		IPipe Element(int id);
-		IPipe Element(string label);
-		List<IPipe> Elements();
-		void Delete(int id);
-
 		IPipesInput Input { get; }
 		IPipesResults Results { get; }
 	}

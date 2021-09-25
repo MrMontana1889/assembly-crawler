@@ -6,6 +6,11 @@ using TestAssemblyNET48.Support;
 
 namespace TestAssemblyNET48.Domain.ModelingObjects.NetworkElements
 {
+	public interface INetwork
+	{
+		IPipes Pipes { get; }
+	}
+
 	public interface IActiveElementInput : IElementInput
 	{
 		bool IsActive { get; set; }
