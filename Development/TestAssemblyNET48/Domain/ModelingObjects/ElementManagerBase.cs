@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestAssemblyNET48.Domain.ModelingObjects
+namespace TestAssemblyNET48.Water
 {
 	public abstract class ElementManagerBase<TElementType> : IElementManager<TElementType>
 		where TElementType : class, IElement
@@ -35,7 +35,8 @@ namespace TestAssemblyNET48.Domain.ModelingObjects
 
 		public TElementType Create()
 		{
-			return NewElement();
+			ElementList.Add(NewElement());
+			return ElementList.Last();
 		}
 		public TElementType Element(int id)
 		{

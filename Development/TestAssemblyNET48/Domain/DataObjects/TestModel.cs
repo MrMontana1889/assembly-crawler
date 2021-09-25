@@ -1,11 +1,9 @@
 ﻿// TestModel.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-using TestAssemblyNET48.Domain.ModelingObjects.NetworkElements;
-
-namespace TestAssemblyNET48.Domain.DataObjects
+namespace TestAssemblyNET48.Water
 {
-	internal class TestModel : ITestModel
+	public class TestModel : ITestModel
 	{
 		#region Constructor
 		public TestModel(string filenmae)

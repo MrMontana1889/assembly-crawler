@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using TestAssemblyNET48.Support;
 
-namespace TestAssemblyNET48.Domain.ModelingObjects.NetworkElements
+namespace TestAssemblyNET48.Water
 {
 	public class Pipe : ElementBase, IPipe, IPipeInput, IPipeResults
 	{

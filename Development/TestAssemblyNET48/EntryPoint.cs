@@ -1,9 +1,7 @@
 ﻿// EntryPoint.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-using TestAssemblyNET48.Domain.DataObjects;
-
-namespace TestAssemblyNET48
+namespace TestAssemblyNET48.Water
 {
 	public static class EntryPoint
     {
@@ -17,6 +15,12 @@ namespace TestAssemblyNET48
 			if (!_sessionStarted) return null;
 
 			return new TestModel(filename);
+		}
+		public static TestModel GetModel()
+		{
+			if (!_sessionStarted) return null;
+
+			return new TestModel(string.Empty);
 		}
 		public static void EndSession()
 		{

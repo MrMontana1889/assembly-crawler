@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace TestAssemblyNET48.Domain.ModelingObjects
+namespace TestAssemblyNET48.Water
 {
 	public interface IElementInput
 	{
