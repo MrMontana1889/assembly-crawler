@@ -1,9 +1,17 @@
 from Domain import IWaterModel
 
-class OpenFlowsWaterAPI:
+class OpenFlowsWaterPython:
     
     @staticmethod
     def StartWaterGEMSSession() -> None:
+        pass
+
+    @staticmethod
+    def StartWaterCADSession() -> None:
+        pass
+
+    @staticmethod
+    def StartWaterOPSSession() -> None:
         pass
 
     @staticmethod
@@ -11,5 +19,5 @@ class OpenFlowsWaterAPI:
         pass
 
     @staticmethod
-    def EndWaterGEMSSession() -> None:
+    def EndSession() -> None:
         pass

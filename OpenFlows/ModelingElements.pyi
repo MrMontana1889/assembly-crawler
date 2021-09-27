@@ -1,3 +1,5 @@
+from array import array
+from datetime import datetime
 from typing import List, Generic, TypeVar, overload
 from enum import Enum
 
@@ -144,3 +146,100 @@ class INetworkElement(IModelingElementBase[TElementManagerType, TElementType, TU
 class IElementUnits:
     pass
 
+class IScenarioOptions(Generic[TUnitsType], IElement, ILabeled):
+    pass
+
+TScenarioOptionsType = TypeVar("TScenarioOptionsType", IScenarioOptions)
+TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType", IElementUnits)
+
+class IScenario(IModelingElementBase[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType]):
+    @property
+    def Options(self) -> TScenarioOptionsType:
+        pass
+
+    @property
+    def TimeStepsInSeconds(self) -> array[float]:
+        pass
+
+    @property
+    def HasResults(self) -> bool:
+        pass
+
+    @property
+    def ActiveTimeStep(self) -> int:
+        pass
+    @ActiveTimeStep.setter
+    def ActiveTimeStep(self, t: int) -> None:
+        pass
+
+    @property
+    def ParentScenario(self) -> IScenario[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType]:
+        pass
+    @ParentScenario.setter
+    def ParentScenario(self, s: IScenario[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType]) -> None:
+        pass
+
+    def MakeCurrent(self) -> None:
+        pass
+
+    def Run(self) -> None:
+        pass
+
+    def TimeIndexToDateTime(self, t: int) -> datetime:
+        pass
+    def TimeStepToDateTime(self, t: float) -> datetime:
+        pass
+
+class ModelingElementTypes(Enum):
+    Scenario = 2
+    SelectionSet = 7
+
+class IScenarios(IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes], IElements[TElementType], IElementManager):
+    @property
+    def ActiveScenario(self) -> TElementType:
+        pass
+
+    def BaseElements(self) -> List[TElementType]:
+        pass
+    def ChildrenOfElement(self, id: int) -> List[TElementType]:
+        pass
+
+    def Create(self, id: int) -> TElementType:
+        pass
+
+class IScenarioOptions(Generic[TUnitsType], IElement, ILabeled):
+    @property
+    def Units(self) -> TUnitsType:
+        pass
+
+TNetworkElementType = TypeVar("TNetworkElementType", IElement)
+TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum", Enum)
+
+class ISelectionSets(IModelingElementsBase[TElementManagerType, TElementType, TNetworkElementType], IElementManager):
+    pass
+
+class ISelectionSet(IModelingElementBase[TElementManagerType, TElementType, TNetworkElementType], IElement, ILabeled):
+    @property
+    def Count(self) -> int:
+        pass
+
+    def Elements(self) -> List[TNetworkElementType]:
+        pass
+
+    def Get(self) -> List[int]:
+        pass
+
+    @overload
+    def Set(self, l: List[int]) -> None:
+        pass
+
+    @overload
+    def Set(self, l: List[TNetworkElementType]) -> None:
+        pass
+
+class IModelComponents(Generic[TElementType, TElementTypeEnum]):
+    def Elements(self) -> List[TElementType]:
+        pass
+
+    def ElementType(self, id: int) -> TElementTypeEnum:
+        pass
