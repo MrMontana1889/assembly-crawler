@@ -1,7 +1,7 @@
 ﻿// GeometryPoint.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-namespace TestAssemblyNET48.Support
+namespace TestAssemblyNET48.Water.Support
 {
 	public struct GeometryPoint
 	{

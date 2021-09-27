@@ -1,26 +1,28 @@
-﻿// EntryPoint.cs
+﻿// OpenFlowsWater.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+
+using TestAssemblyNET48.Water.Domain.DataObjects;
 
 namespace TestAssemblyNET48.Water
 {
-	public static class EntryPoint
+	public static class OpenFlowsWater
     {
 		#region Public Methods
 		public static void StartSession()
 		{
 			_sessionStarted = true;
 		}
-		public static ITestModel Open(string filename)
+		public static IWaterModel Open(string filename)
 		{
 			if (!_sessionStarted) return null;
 
-			return new TestModel(filename);
+			return new WaterModel(filename);
 		}
-		public static TestModel GetModel()
+		public static IWaterModel GetModel()
 		{
 			if (!_sessionStarted) return null;
 
-			return new TestModel(string.Empty);
+			return new WaterModel(string.Empty);
 		}
 		public static void EndSession()
 		{

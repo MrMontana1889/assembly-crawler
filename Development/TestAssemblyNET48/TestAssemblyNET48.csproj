@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\DataObjects\Interfaces.cs" />
-    <Compile Include="Domain\DataObjects\TestModel.cs" />
+    <Compile Include="Domain\DataObjects\WaterModel.cs" />
     <Compile Include="Domain\Interfaces.cs" />
     <Compile Include="Domain\ModelingObjects\ElementBase.cs" />
     <Compile Include="Domain\ModelingObjects\ElementManagerBase.cs" />
@@ -52,7 +52,7 @@
     <Compile Include="Domain\ModelingObjects\NetworkElements\Links\Pipe.cs" />
     <Compile Include="Domain\ModelingObjects\NetworkElements\Links\Pipes.cs" />
     <Compile Include="Domain\ModelingObjects\NetworkElements\Network.cs" />
-    <Compile Include="EntryPoint.cs" />
+    <Compile Include="OpenFlowsWater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\GeometryPoint.cs" />
     <Compile Include="Support\RandomNumberLibrary.cs" />

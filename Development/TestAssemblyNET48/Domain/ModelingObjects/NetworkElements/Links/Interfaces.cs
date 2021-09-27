@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace TestAssemblyNET48.Water
+namespace TestAssemblyNET48.Water.Domain.ModelingObjects.NetworkElements
 {
 	public interface IPipeInput : IBaseLinkInput
 	{ 

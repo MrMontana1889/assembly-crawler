@@ -2,9 +2,9 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
-using TestAssemblyNET48.Support;
+using TestAssemblyNET48.Water.Support;
 
-namespace TestAssemblyNET48.Water
+namespace TestAssemblyNET48.Water.Domain.ModelingObjects.NetworkElements
 {
 	public interface INetwork
 	{

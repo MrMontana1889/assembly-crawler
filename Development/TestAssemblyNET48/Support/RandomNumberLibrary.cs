@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace TestAssemblyNET48.Support
+namespace TestAssemblyNET48.Water.Support
 {
 	internal static class RandomNumberLibrary
 	{

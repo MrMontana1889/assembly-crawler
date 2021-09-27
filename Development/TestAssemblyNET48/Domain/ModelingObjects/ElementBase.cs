@@ -1,7 +1,7 @@
 ﻿// Elementbase.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for detalis
 
-namespace TestAssemblyNET48.Water
+namespace TestAssemblyNET48.Water.Domain.ModelingObjects
 {
 	public abstract class ElementBase : IElement
 	{

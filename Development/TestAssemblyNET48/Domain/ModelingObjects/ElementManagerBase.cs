@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TestAssemblyNET48.Water
+namespace TestAssemblyNET48.Water.Domain.ModelingObjects
 {
 	public abstract class ElementManagerBase<TElementType> : IElementManager<TElementType>
 		where TElementType : class, IElement

@@ -4,7 +4,7 @@
 using System.Reflection;
 using AssemblyCrawler.Generators;
 using NUnit.Framework;
-using TestAssemblyNET48;
+using TestAssemblyNET48.Water;
 
 namespace AssemblyCrawler.Test
 {
@@ -25,7 +25,7 @@ namespace AssemblyCrawler.Test
 			IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(null);
 			Assert.IsNotNull(generator);
 
-			Assembly testAssembly = Assembly.GetAssembly(typeof(EntryPoint));
+			Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
 			Assert.IsNotNull(testAssembly);
 
 			IAssemblyCrawler crawler = new AssemblyCrawler();
