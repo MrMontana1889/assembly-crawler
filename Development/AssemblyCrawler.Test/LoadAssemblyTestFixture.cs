@@ -3,7 +3,7 @@
 
 using System.Reflection;
 using NUnit.Framework;
-using TestAssemblyNET48;
+using TestAssemblyNET48.Water;
 
 namespace AssemblyCrawler.Test
 {
@@ -21,7 +21,7 @@ namespace AssemblyCrawler.Test
 		[Test]
 		public void TestLoadTestASsembly()
 		{
-			Assembly testAssembly = Assembly.GetAssembly(typeof(EntryPoint));
+			Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
 			Assert.IsNotNull(testAssembly);
 		}
 		#endregion
