@@ -1,6 +1,6 @@
 from enum import Enum
 
-class ModelingElementType(Enum)
+class ModelingElementType(Enum):
     All = 0
     Scenario = 2
     NetworkElement = 3

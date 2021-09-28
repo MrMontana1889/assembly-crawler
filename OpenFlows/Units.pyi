@@ -56,7 +56,7 @@ class INetworkUnits:
 class IComponentUnits:
     pass
 
-class UnitSystemType(Enum)
+class UnitSystemType(Enum):
     UsCustomary = 0
     SI = 1
 
