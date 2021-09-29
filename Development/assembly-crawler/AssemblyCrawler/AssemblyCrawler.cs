@@ -31,10 +31,48 @@ namespace AssemblyCrawler
 
 				if (type.IsInterface)
 				{
-					Console.WriteLine($"{RemoveNamespace(type)}:");
+					string shortType = $"{RemoveNamespace(type)}";
 					var interfaces = type.GetInterfaces();
-					foreach (var interf in interfaces)
-						Console.WriteLine($"\t\t{interf.Name}");
+					if (interfaces.Length > 0)
+					{
+						Console.Write($"{shortType} : ");
+						foreach (var interf in interfaces)
+						{
+							if (interf.IsGenericType)
+							{
+								shortType = interf.Name + "[";
+								var args = interf.GetGenericArguments();
+								foreach (var arg in args)
+								{
+									if (arg.FullName != null)
+									{
+										string? a = arg.FullName;
+										if (a != null)
+										{
+											a = a.Replace(arg.FullName, arg.Name);
+											shortType += a + ",";
+										}
+									}
+								}
+								if (shortType.EndsWith(","))
+									shortType = shortType.Remove(shortType.Length - 1, 1);
+								shortType += "]";
+							}
+							else
+							{
+								shortType += interf.Name + ", ";
+							}
+						}
+						if (shortType.EndsWith(","))
+							shortType = shortType.Remove(shortType.Length - 1, 1);
+						else if (shortType.EndsWith(", "))
+							shortType = shortType.Remove(shortType.Length - 2, 2);
+						Console.WriteLine($"{shortType}");
+					}
+					else
+					{
+						Console.WriteLine($"{shortType}");
+					}
 
 					var methods = type.GetMethods();
 					foreach (var method in methods)
@@ -95,32 +133,25 @@ namespace AssemblyCrawler
 			if (retVal == null)
 				return "<unknown>";
 
-			string? ns = method.ReturnType.Namespace;
-			if (ns != null)
-			{
-				int index = retVal.IndexOf(ns);
-				if (index > -1)
-					retVal = retVal.Remove(index, ns.Length + 1);
-			}
+			var returnType = method.ReturnType;
+			if (returnType.FullName != null)
+				retVal = retVal.Replace(returnType.FullName, returnType.Name);
 
-			var parameters = method.GetParameters();
-			foreach (var parameter in parameters)
+			if (returnType.IsGenericType)
 			{
-				ns = parameter.ParameterType.Namespace;
+				string? ns = returnType.Namespace;
 				if (ns != null)
 				{
-					int index = retVal.IndexOf(ns);
-					if (index > -1)
-						retVal = retVal.Remove(index, ns.Length + 1);
+					retVal = retVal.Replace(ns + ".", "");
 				}
-			}
 
-			var genericArguments = method.ReturnType.GetGenericArguments();
-			foreach (var arg in genericArguments)
-			{
-				if (arg != null)
+				var returnTypeParameters = returnType.GetGenericArguments();
+				foreach (var rtParam in returnTypeParameters)
 				{
-					ns = arg.Namespace;
+					if (rtParam.FullName != null)
+						retVal = retVal.Replace(rtParam.FullName, rtParam.Name);
+
+					ns = rtParam.Namespace;
 					if (ns != null)
 					{
 						int index = retVal.IndexOf(ns);
@@ -130,10 +161,58 @@ namespace AssemblyCrawler
 				}
 			}
 
-			retVal = retVal.Replace("Int32", "int");
+			var parameters = method.GetParameters();
+			foreach (var parameter in parameters)
+			{
+				var pType = parameter.ParameterType;
+				if (pType.FullName != null)
+					retVal = retVal.Replace(pType.FullName, pType.Name);
+
+				if (pType.IsGenericType)
+				{
+					string? ns = pType.Namespace;
+					if (ns != null)
+					{
+						int index = retVal.IndexOf(ns);
+						if (index > -1)
+							retVal = retVal.Remove(index, ns.Length + 1);
+					}
+
+					var pTypes = pType.GetGenericArguments();
+					foreach (var t in pTypes)
+					{
+						if (t.FullName != null)
+							retVal = retVal.Replace(t.FullName, t.Name);
+
+						ns = t.Namespace;
+						if (ns != null)
+						{
+							int index = retVal.IndexOf(ns);
+							if (index > -1)
+								retVal = retVal.Remove(index, ns.Length + 1);
+						}
+					}
+				}
+			}
+
+			var genericArguments = method.ReturnType.GetGenericArguments();
+			foreach (var arg in genericArguments)
+			{
+				if (arg != null)
+				{
+					if (arg.FullName != null)
+						retVal = retVal.Replace(arg.FullName, arg.Name);
+
+					var paramArgs = arg.GetGenericArguments();
+					foreach (var pArg in paramArgs)
+					{
+						if (pArg.FullName != null)
+							retVal = retVal.Replace(pArg.FullName, pArg.Name);
+					}
+				}
+			}
 
 			return retVal;
-
 		}
 		#endregion
 	}
