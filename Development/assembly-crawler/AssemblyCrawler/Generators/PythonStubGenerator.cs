@@ -20,10 +20,10 @@ namespace AssemblyCrawler.Generators
 		{
 			
 		}
-		#endregion
+        #endregion
 
-		#region Private Properties
-		private StreamWriter Writer { get; }
+        #region Private Properties
+        private StreamWriter Writer { get; }
 		#endregion
 	}
 }
