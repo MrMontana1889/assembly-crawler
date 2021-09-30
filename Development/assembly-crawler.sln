@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyCrawler.Test", "Ass
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssemblyNET48", "TestAssemblyNET48\TestAssemblyNET48.csproj", "{3C6CBD22-D931-422C-A914-16C592FB7A09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFixtureSupport", "TestFixtureSupport\TestFixtureSupport.csproj", "{4F7DCF44-1429-4F0C-9B8E-4016F9F4E6A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestFixtureSupport", "TestFixtureSupport\TestFixtureSupport.csproj", "{4F7DCF44-1429-4F0C-9B8E-4016F9F4E6A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Barber.AutoDiagrammer", "Barber.AutoDiagrammer\Barber.AutoDiagrammer.csproj", "{216F3E86-77AC-4E35-915D-7D82DF825308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{4F7DCF44-1429-4F0C-9B8E-4016F9F4E6A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F7DCF44-1429-4F0C-9B8E-4016F9F4E6A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F7DCF44-1429-4F0C-9B8E-4016F9F4E6A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{216F3E86-77AC-4E35-915D-7D82DF825308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{216F3E86-77AC-4E35-915D-7D82DF825308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{216F3E86-77AC-4E35-915D-7D82DF825308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{216F3E86-77AC-4E35-915D-7D82DF825308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

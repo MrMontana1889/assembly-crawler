@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// TypeLibrary.cs
+// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+
+using System;
 
 namespace AssemblyCrawler.Library
 {
 	public static class TypeLibrary
 	{
+		#region Public Methods
 		public static string ConvertTypeToPythonType(Type type)
 		{
 			if (type == null) return "None";
@@ -47,5 +47,6 @@ namespace AssemblyCrawler.Library
 
 			}
 		}
+		#endregion
 	}
 }

@@ -1,11 +1,8 @@
 ﻿// Crawler.cs
 // Copyright (c) 2021 Kristopher L. Culin.  See LICENSE for details.
 
-using System.Linq;
 using System;
-using System.Diagnostics;
 using System.Reflection;
-using System.Text;
 
 namespace AssemblyCrawler
 {
@@ -93,7 +90,9 @@ namespace AssemblyCrawler
 				}
 			}
 		}
+		#endregion
 
+		#region Private Methods
 		private object RemoveNamespace(PropertyInfo property)
 		{
 			string? retVal = property.ToString();
