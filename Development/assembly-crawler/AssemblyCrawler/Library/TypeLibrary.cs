@@ -10,7 +10,7 @@ namespace AssemblyCrawler.Library
 	{
 		public static string ConvertTypeToPythonType(Type type)
 		{
-			if (type == null) return "None";
+			if (type == typeof(void)) return "None";
 
 			switch (Type.GetTypeCode(type))
 			{

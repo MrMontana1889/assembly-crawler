@@ -41,38 +41,52 @@ namespace AssemblyCrawler.Test
 
 		[Test]
 		public void TestWriteStub()
-        {
+		{
 			var filePath = @"D:\Temp\pythonStybText.pyi";
 			if (File.Exists(filePath))
 				File.Delete(filePath);
 
-            using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
-            {
+			using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
+			{
 				using(var streamWriter = new StreamWriter(fileStream, Encoding.ASCII))
-                {
+				{
 					Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
 					var testType = typeof(IPipeInput);
 					testType = typeof(IBaseLinkInput);
+					testType = typeof(IPipeResults);
 
 					var inheretedTypes = new List<Type>();
 
-                    foreach (var interf in testType.GetInterfaces())
-                    {
+					foreach (var interf in testType.GetInterfaces())
+					{
 						if (!interf.IsGenericType)
 							inheretedTypes.Add(interf);
 					}
 
 
 					// Write class
-					PythonStubWriterLibrary.WritePythonClassDefinition(streamWriter, testType.Name, inheretedTypes, PythonStubWriterLibrary.BlankDocString);
+					PythonStubWriterLibrary.WritePythonClassDefinition(streamWriter, testType, inheretedTypes, PythonStubWriterLibrary.BlankDocString);
 
+					// Write Constructor
+					if (testType.IsInterface)
+						PythonStubWriterLibrary.WritePytonConstructorUnsupported(streamWriter);
+
+					
 					// Get methods
 					var methods = testType.GetMethods();
+					foreach (var method in methods)
+					{
+						// skip property methods
+						if (method.Name.StartsWith("set_") || method.Name.StartsWith("get__"))
+							continue; 
+
+						// TODO: Find a way to handle overloaded methodss
+					}
 
 
-                    // Write properties
-                    foreach (var method in methods)
-                    {
+					// Write properties
+					foreach (var method in methods)
+					{
 						if (method.Name.StartsWith("get_"))
 							PythonStubWriterLibrary.WritePythonProperty(streamWriter, method.Name.Substring(4), method.ReturnType, PythonStubWriterLibrary.BlankDocString);
 
@@ -85,7 +99,7 @@ namespace AssemblyCrawler.Test
 
 					streamWriter.Flush();
 				}
-            }
+			}
 		}
 		#endregion
 	}

@@ -13,13 +13,14 @@ namespace AssemblyCrawler.Library
 
         public static void WritePythonClassDefinition(
             StreamWriter writer,
-            string className,
+            Type classType,
             List<Type>inheritedTypes,
             string docString,
             int indentLevel = 0)
         {
+            var className = classType.Name;
             var inhertedTypesString = string.Join(", ", inheritedTypes.Select(t => TypeLibrary.ConvertTypeToPythonType(t)));
-            var classString = $"class {className}({inhertedTypesString}):";
+            var classString = $"class {className}({inhertedTypesString}):";                        
 
             var indentaiton = GetIndentation(indentLevel);
 
@@ -27,7 +28,41 @@ namespace AssemblyCrawler.Library
             writer.WriteLine();
             writer.WriteLine($"{indentaiton}class {className}({inhertedTypesString}):");
             writer.WriteLine($"{indentaiton}{docString}");
+
             writer.WriteLine($"{indentaiton}\tpass");
+        }
+
+        public static void WritePytonConstructor(
+            StreamWriter writer,
+            List<KeyValuePair<string, Type>> arguments,
+            string docString,
+            int indentLevel = 1)
+        {
+            WritePythonMethod(
+                writer: writer,
+                methodName: "__init__",
+                arguments: arguments,
+                returnType: typeof(void),
+                docString: docString,
+                indentLevel: indentLevel
+                );
+        }
+
+        public static void WritePytonConstructorUnsupported(
+            StreamWriter writer,
+            int indentLevel = 1)
+        {
+            var docString = new PythonConstructorUnsupportedDocStringWriterLibrary().ToString();
+
+            WritePythonMethod(
+                writer: writer,
+                methodName: "__init__",
+                arguments: new List<KeyValuePair<string, Type>>(),
+                returnType: typeof(void),
+                docString: docString,
+                exception: "raise Exception(\"Creating a new Instance of this class is not allowed\")",
+                indentLevel: indentLevel
+                );
         }
 
         public static void WritePythonMethod(
@@ -36,6 +71,7 @@ namespace AssemblyCrawler.Library
             List<KeyValuePair<string, Type>> arguments,
             Type returnType,
             string docString,
+            string exception = "",
             int indentLevel=1)
         {
             var pythonArgumentList = new List<string>();
@@ -56,6 +92,10 @@ namespace AssemblyCrawler.Library
             writer.WriteLine();
             writer.WriteLine($"{indentaiton}{method}");
             writer.WriteLine($"{indentaiton}{docString}");
+
+            if (exception?.Length > 0)
+                writer.WriteLine($"{indentaiton}\t{exception}");
+
             writer.WriteLine($"{indentaiton}\tpass");
         }
 
@@ -92,6 +132,16 @@ namespace AssemblyCrawler.Library
         {
             //
         }
+
+        public static void WritePythonNotAllowedConstructor(
+            StreamWriter writer,
+            int indentLevel = 1)
+        {
+            var indentaiton = GetIndentation(indentLevel);
+
+            writer.WriteLine($"{indentaiton}def __init__(self):");
+
+        } 
 
 
         #region Private Static Methods
