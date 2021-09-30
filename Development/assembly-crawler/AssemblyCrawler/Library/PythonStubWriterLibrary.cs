@@ -16,10 +16,15 @@ namespace AssemblyCrawler.Library
             Type classType,
             List<Type>inheritedTypes,
             string docString,
+            bool isGenericType,
             int indentLevel = 0)
         {
             var className = classType.Name;
-            var inhertedTypesString = string.Join(", ", inheritedTypes.Select(t => TypeLibrary.ConvertTypeToPythonType(t)));
+            var inhertedTypesString = string.Join(", ", inheritedTypes.Select(t => TypeConvertLibrary.ToPythonType(t)));
+
+            if (isGenericType)
+                inhertedTypesString = $"[{inhertedTypesString}]";
+
             var classString = $"class {className}({inhertedTypesString}):";                        
 
             var indentaiton = GetIndentation(indentLevel);
@@ -44,6 +49,7 @@ namespace AssemblyCrawler.Library
                 arguments: arguments,
                 returnType: typeof(void),
                 docString: docString,
+                isStatic: false,
                 indentLevel: indentLevel
                 );
         }
@@ -60,9 +66,22 @@ namespace AssemblyCrawler.Library
                 arguments: new List<KeyValuePair<string, Type>>(),
                 returnType: typeof(void),
                 docString: docString,
+                isStatic: false,
                 exception: "raise Exception(\"Creating a new Instance of this class is not allowed\")",
+                isOverloaded: false,
                 indentLevel: indentLevel
                 );
+        }
+
+        public static void WritePythonGenericVariables(
+            StreamWriter writer, 
+            string typeName,
+            Type type,
+            int indentLevel = 0
+            )
+        {
+            var indentaiton = GetIndentation(indentLevel);
+            writer.WriteLine($"{indentaiton}{typeName} = TypeVar(\"{typeName}\", {TypeConvertLibrary.ToPythonType(type)})");
         }
 
         public static void WritePythonMethod(
@@ -71,7 +90,9 @@ namespace AssemblyCrawler.Library
             List<KeyValuePair<string, Type>> arguments,
             Type returnType,
             string docString,
+            bool isStatic,
             string exception = "",
+            bool isOverloaded = false,
             int indentLevel=1)
         {
             var pythonArgumentList = new List<string>();
@@ -79,17 +100,34 @@ namespace AssemblyCrawler.Library
             for (int i = 0; i < arguments.Count; i++)
             {
                 var pair = arguments[i];
-                pythonArgumentList.Add($"{pair.Key}: {TypeLibrary.ConvertTypeToPythonType(pair.Value)}");
+                pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value)}");
             }
 
             var pythonArguments = string.Join(", ", pythonArgumentList);
             pythonArguments = String.IsNullOrEmpty(pythonArguments) ? pythonArguments : $", {pythonArguments}";
 
-            var method = $"def {methodName}(self {pythonArguments}) -> {TypeLibrary.ConvertTypeToPythonType(returnType)}:";
+            // self keywork
+            var selfKeyword = isStatic ? string.Empty : "self";
+
+            // return type
+            var returnTypeString = TypeConvertLibrary.ToPythonType(returnType);
+            if (Nullable.GetUnderlyingType(returnType) != null)
+            {
+                returnType = Nullable.GetUnderlyingType(returnType) ?? typeof(void);
+                var actualPythonType = TypeConvertLibrary.ToPythonType(returnType);
+                returnTypeString = $"Union[{actualPythonType}, None]";
+            }
+
+            // definition
+            var method = $"def {methodName}({selfKeyword}{pythonArguments}) -> {returnTypeString}:";
 
             var indentaiton = GetIndentation(indentLevel);
 
             writer.WriteLine();
+
+            if(isOverloaded)
+                writer.WriteLine($"{indentaiton}@overload");
+
             writer.WriteLine($"{indentaiton}{method}");
             writer.WriteLine($"{indentaiton}{docString}");
 
@@ -104,27 +142,38 @@ namespace AssemblyCrawler.Library
             string propertyName,
             Type returnType,
             string docString,
+            bool isStatic,
             int indentLevel = 1)
         {
             var indentaiton = GetIndentation(indentLevel);
 
             writer.WriteLine();
             writer.WriteLine($"{indentaiton}@property");
-            writer.WriteLine($"{indentaiton}def {propertyName}(self) -> {TypeLibrary.ConvertTypeToPythonType(returnType)}:");
+
+            if(isStatic)
+                writer.WriteLine($"{indentaiton}@staticmethod");
+
+            var selfKeyword = isStatic ? string.Empty : "self";
+            writer.WriteLine($"{indentaiton}def {propertyName}({selfKeyword}) -> {TypeConvertLibrary.ToPythonType(returnType)}:");
             writer.WriteLine($"{indentaiton}{docString}");
             writer.WriteLine($"{indentaiton}\tpass");
         }
 
-        public static void WritePythongPropertySetter(StreamWriter writer,
+        public static void WritePythonPropertySetter(StreamWriter writer,
             string propertyName,            
             Type returnType,
+            bool isStatic,
             int indentLevel = 1)
         {
             var indentaiton = GetIndentation(indentLevel);
 
             writer.WriteLine();
             writer.WriteLine($"{indentaiton}@{propertyName}.setter");
-            writer.WriteLine($"{indentaiton}def {propertyName}(self, {propertyName.ToLower()}: {TypeLibrary.ConvertTypeToPythonType(returnType)}) -> None:");
+
+            if (isStatic)
+                writer.WriteLine($"{indentaiton}@staticmethod");
+
+            writer.WriteLine($"{indentaiton}def {propertyName}(self, {propertyName.ToLower()}: {TypeConvertLibrary.ToPythonType(returnType)}) -> None:");
             writer.WriteLine($"{indentaiton}\tpass");
         }
 

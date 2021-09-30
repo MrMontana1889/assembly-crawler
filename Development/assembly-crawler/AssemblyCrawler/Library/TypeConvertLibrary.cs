@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssemblyCrawler.Library
 {
-	public static class TypeLibrary
+    public static class TypeConvertLibrary
 	{
-		public static string ConvertTypeToPythonType(Type type)
+		public static string ToPythonType(Type type)
 		{
 			if (type == typeof(void)) return "None";
+			if (type == typeof(Enum))  return "Enum";
 
+			if(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
+            {
+				var itemType = type.GetGenericArguments().Single();
+				return $"List[{ToPythonPremitiveType(itemType)}]";
+			}
+
+			return ToPythonPremitiveType(type);
+		}
+
+		private static string ToPythonPremitiveType(Type type)
+        {
 			switch (Type.GetTypeCode(type))
 			{
 				case TypeCode.Byte:
