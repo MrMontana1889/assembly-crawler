@@ -70,8 +70,8 @@ namespace Barber.AutoDiagrammer.Models
             xmlFileLocation = Path.Combine(xmlFileLocation.Substring(0, xmlFileLocation.LastIndexOf(@"\")), xmlFileName);
 
             this.graphLayout = graphLayout;
-            this.graphLayout.OverlapRemovalParameters = OverlapRemovalParameters;
-            this.graphLayout.HighlightAlgorithmType = "Simple";
+            //this.graphLayout.OverlapRemovalParameters = OverlapRemovalParameters;
+            //this.graphLayout.HighlightAlgorithmType = "Simple";
 
             //Add Layout Algorithm Types
             layoutAlgorithmTypes.Add("BoundedFR");
@@ -90,7 +90,7 @@ namespace Barber.AutoDiagrammer.Models
             availableLayoutParameters.Add("Tree", new SimpleTreeLayoutParametersEx()); //Has existing control in GSharp
 
             //Pick a default Layout Algorithm Type
-            LayoutAlgorithmType = "EfficientSugiyama";
+            LayoutAlgorithmType = "Tree";
         }
 
         #endregion
@@ -137,8 +137,8 @@ namespace Barber.AutoDiagrammer.Models
             set
             {
                 layoutAlgorithmType = value;
-                graphLayout.LayoutAlgorithmType = layoutAlgorithmType;
-                LayoutParameters = availableLayoutParameters[layoutAlgorithmType];
+				//graphLayout.LayoutAlgorithmType = layoutAlgorithmType;
+				LayoutParameters = availableLayoutParameters[layoutAlgorithmType];
             }
         }
 
@@ -343,8 +343,8 @@ namespace Barber.AutoDiagrammer.Models
             set
             {
                 layoutParameters = value;
-                graphLayout.LayoutParameters = layoutParameters;
-            }
+				//graphLayout.LayoutParameters = layoutParameters;
+			}
         }
 
 
@@ -405,8 +405,8 @@ namespace Barber.AutoDiagrammer.Models
 
         private void ExecuteReLayoutCommand(Object parameter)
         {
-            GraphLayout.Relayout();
-        }
+			//GraphLayout.Relayout();
+		}
 
         private void ExecuteSaveSettingsAsXmlCommand(Object parameter)
         {

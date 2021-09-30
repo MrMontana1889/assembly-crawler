@@ -43,7 +43,7 @@ namespace AssemblyCrawler
 								{
 									if (arg.FullName != null)
 									{
-										string? a = arg.FullName;
+										string a = arg.FullName;
 										if (a != null)
 										{
 											a = a.Replace(arg.FullName, arg.Name);
@@ -95,11 +95,11 @@ namespace AssemblyCrawler
 		#region Private Methods
 		private object RemoveNamespace(PropertyInfo property)
 		{
-			string? retVal = property.ToString();
+			string retVal = property.ToString();
 			if (retVal == null)
 				return "<unknown>";
 
-			string? ns = property.PropertyType.Namespace;
+			string ns = property.PropertyType.Namespace;
 			if (ns != null)
 			{
 				int index = retVal.IndexOf(ns);
@@ -111,11 +111,11 @@ namespace AssemblyCrawler
 
 		private object RemoveNamespace(Type type)
 		{
-			string? retVal = type.ToString();
+			string retVal = type.ToString();
 			if (retVal == null)
 				return "<unknown>";
 
-			string? ns = type.Namespace;
+			string ns = type.Namespace;
 			if (ns != null)
 			{
 				int index = retVal.IndexOf(ns);
@@ -127,7 +127,7 @@ namespace AssemblyCrawler
 
 		private string RemoveNamespace(MethodInfo method)
 		{
-			string? retVal = method.ToString();
+			string retVal = method.ToString();
 
 			if (retVal == null)
 				return "<unknown>";
@@ -138,7 +138,7 @@ namespace AssemblyCrawler
 
 			if (returnType.IsGenericType)
 			{
-				string? ns = returnType.Namespace;
+				string ns = returnType.Namespace;
 				if (ns != null)
 				{
 					retVal = retVal.Replace(ns + ".", "");
@@ -169,7 +169,7 @@ namespace AssemblyCrawler
 
 				if (pType.IsGenericType)
 				{
-					string? ns = pType.Namespace;
+					string ns = pType.Namespace;
 					if (ns != null)
 					{
 						int index = retVal.IndexOf(ns);

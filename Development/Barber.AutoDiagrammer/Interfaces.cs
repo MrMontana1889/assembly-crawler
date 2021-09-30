@@ -13,6 +13,7 @@ namespace Barber.AutoDiagrammer
 		List<AssemblyTreeViewModel> TreeValues { get; }
 		List<AssemblyTreeViewModel> SelectedTreeValues { get; }
 		Task<GraphResults> CreateGraph();
+		GraphResults CreateGraphAsync();
 		void ReInitialise();
 		void CalculateSelectedTreeValues();
 		Task LoadNameSpacesAndTypes(string assemblyFileName);

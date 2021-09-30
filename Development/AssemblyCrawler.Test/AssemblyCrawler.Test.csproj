@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -15,10 +15,12 @@
     <PackageReference Include="NUnit" Version="3.13.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
+    <PackageReference Include="System.Security.Permissions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\assembly-crawler\AssemblyCrawler\AssemblyCrawler.csproj" />
+    <ProjectReference Include="..\Barber.AutoDiagrammer\Barber.AutoDiagrammer.csproj" />
     <ProjectReference Include="..\TestAssemblyNET48\TestAssemblyNET48.csproj" />
     <ProjectReference Include="..\TestFixtureSupport\TestFixtureSupport.csproj" />
   </ItemGroup>

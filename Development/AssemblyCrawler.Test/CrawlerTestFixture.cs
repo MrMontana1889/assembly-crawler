@@ -42,7 +42,8 @@ namespace AssemblyCrawler.Test
 		[Test]
 		public void TestWriteStub()
         {
-			var filePath = @"D:\Temp\pythonStybText.pyi";
+			//var filePath = @"D:\Temp\pythonStybText.pyi";
+			var filePath = Path.Combine(Path.GetTempPath(), "pythonStybText.pyi");
 			if (File.Exists(filePath))
 				File.Delete(filePath);
 
