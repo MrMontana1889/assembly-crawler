@@ -16,3 +16,6 @@
 /Output/TestAssemblyNET48
 /Output/TestFixtureSupport/Release/net5.0
 /Output/TestFixtureSupport/Debug/net5.0
+/Development/Barber.AutoDiagrammer/bin/Debug
+/Development/Barber.AutoDiagrammer/obj
+/Output/TestFixtureSupport/Debug/net48

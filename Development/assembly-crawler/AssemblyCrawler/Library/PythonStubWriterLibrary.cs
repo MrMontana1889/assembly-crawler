@@ -1,15 +1,25 @@
-﻿using System;
+﻿// PythonStubWriterLibrary.cs
+// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssemblyCrawler.Library
 {
-    public static class PythonStubWriterLibrary
-    {
-        public static string BlankDocString => "\t\"\"\" \"\"\"";
+	public static class PythonStubWriterLibrary
+	{
+		#region Constants
+		public static string BlankDocString => "\t\"\"\" \"\"\"";
+		public static string NONETYPE = "None";
+		public static string CLASS = "class";
+		public static string PASS = "pass";
+		public static string DEF = "def";
+		public static string SELF = "self";
+		public static string PROPERTY = "@property";
+		public static string SETTER = ".setter";
+		#endregion
 
         public static void WritePythonClassDefinition(
             StreamWriter writer,
@@ -27,7 +37,7 @@ namespace AssemblyCrawler.Library
 
             var classString = $"class {className}({inhertedTypesString}):";                        
 
-            var indentaiton = GetIndentation(indentLevel);
+			var indentaiton = GetIndentation(indentLevel);
 
             writer.WriteLine();
             writer.WriteLine();
@@ -103,8 +113,8 @@ namespace AssemblyCrawler.Library
                 pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value)}");
             }
 
-            var pythonArguments = string.Join(", ", pythonArgumentList);
-            pythonArguments = String.IsNullOrEmpty(pythonArguments) ? pythonArguments : $", {pythonArguments}";
+			var pythonArguments = string.Join(", ", pythonArgumentList);
+			pythonArguments = string.IsNullOrEmpty(pythonArguments) ? pythonArguments : $", {pythonArguments}";
 
             // self keywork
             var selfKeyword = isStatic ? string.Empty : "self";
@@ -193,13 +203,13 @@ namespace AssemblyCrawler.Library
         } 
 
 
-        #region Private Static Methods
-        private static string GetIndentation(int count)
-        {
-            var tabs = "";
-            for (int i = 0; i < count; i++) tabs += "\t";
-            return tabs;
-        }
-        #endregion
-    }
+		#region Private Static Methods
+		private static string GetIndentation(int count)
+		{
+			var tabs = "";
+			for (int i = 0; i < count; i++) tabs += "\t";
+			return tabs;
+		}
+		#endregion
+	}
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// TypeLibrary.cs
+// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -57,5 +60,6 @@ namespace AssemblyCrawler.Library
 
 			}
 		}
+		#endregion
 	}
 }

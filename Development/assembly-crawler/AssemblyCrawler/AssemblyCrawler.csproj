@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFramework>net48</TargetFramework>
     <BaseOutputPath>$(SolutionDir)..\Output\$(AssemblyName)</BaseOutputPath>
   </PropertyGroup>
 
@@ -21,6 +20,10 @@
     <Compile Remove="bin\**" />
     <EmbeddedResource Remove="bin\**" />
     <None Remove="bin\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Barber.AutoDiagrammer\Barber.AutoDiagrammer.csproj" />
   </ItemGroup>
 
 </Project>
