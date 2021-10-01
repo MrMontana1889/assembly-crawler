@@ -8,53 +8,152 @@ using AssemblyCrawler.Library;
 
 namespace AssemblyCrawler.Generators
 {
-	internal class PythonStubGenerator : IStubGenerator
-	{
-		#region Constructor
-		public PythonStubGenerator(StreamWriter writer)
-		{
-			Writer = writer;
-		}
-		#endregion
+    internal class PythonStubGenerator : IStubGenerator
+    {
+        #region Constructor
+        public PythonStubGenerator(StreamWriter writer)
+        {
+            Writer = writer;
+        }
+        #endregion
 
-		#region Public Methods
-		public void GenerateTypeStub(Type type)
-		{
-			var parentTypes = new List<Type>();
-			foreach (var t in type.GetInterfaces())
-			{
-				if (!t.IsGenericType)
-					parentTypes.Add(t);
-			}
+        #region Public Methods
+        public void GenerateTypeStub(Type type)
+        {
+            var typeParser = new TypeParserLibrary(type).Parse();
 
-			PythonStubWriterLibrary.WritePythonClassDefinition(Writer, type.Name, parentTypes, PythonStubWriterLibrary.BlankDocString);
+            // TODO: Find out how reflection can give generics
+            // Write Generics
+            if (typeParser.IsGenericType)
+            {
+                Writer.WriteLine();
+                Writer.WriteLine();
+                PythonStubWriterLibrary.WritePythonGenericVariables(
+                    writer: Writer,
+                    typeName: "TNameType",
+                    type: typeof(string)
+                    );
+            }
 
-			var methods = type.GetMethods();
-			foreach (var method in methods)
-			{
-				if (method.IsPublic)
-				{
-					if (!method.IsGenericMethod)
-					{
-						if (!method.Name.StartsWith("get_") && !method.Name.StartsWith("set_"))
-						{
-							var parameters = method.GetParameters();
-							List<KeyValuePair<string, Type>> arguments = new List<KeyValuePair<string, Type>>();
-							foreach (var p in parameters)
-							{
-								arguments.Add(new KeyValuePair<string, Type>(p.Name, p.ParameterType));
-							}
 
-							PythonStubWriterLibrary.WritePythonMethod(Writer, method.Name, arguments, method.ReturnType, PythonStubWriterLibrary.BlankDocString);
-						}
-					}
-				}
-			}
-		}
-		#endregion
+            // Write class
+            PythonStubWriterLibrary.WritePythonClassDefinition(
+                writer: Writer,
+                classType: type,
+                inheritedTypes: typeParser.NonGenericInterfaces,
+                docString: new PythonClassDocStringWriterLibrary("Class Description").ToString(),
+                isGenericType: typeParser.IsGenericType
+                );
 
-		#region Private Properties
-		private StreamWriter Writer { get; }
-		#endregion
-	}
+            #region Constructor
+            // Write Constructor
+            if (typeParser.IsInterface || typeParser.Type.IsAbstract)
+                PythonStubWriterLibrary.WritePythonConstructorUnsupported(Writer);
+
+            else if (typeParser.Type.IsClass)
+            {
+                var args = typeParser.GetConstructorArguments();
+                PythonStubWriterLibrary.WritePythonConstructor(
+                    writer: Writer,
+                    arguments: args,
+                    docString: new PythonConstructorDocStringWriterLibrary(
+                        description:"Constructor Description",
+                        arguments:args,
+                        indentLevel:2).ToString(),
+                    indentLevel: 1);
+            }
+            #endregion
+
+
+            #region Methods
+            // Overloaded methods
+            foreach (var m in typeParser.OverloadedMethods)
+            {
+                PythonStubWriterLibrary.WritePythonMethod(
+                    writer: Writer,
+                    methodName: typeParser.Name,
+                    arguments: typeParser.GetMethodArguments(m),
+                    returnType: m.ReturnType,
+                    docString: new PythonMethodDocStringWriterLibrary(
+                        methodInfo: m, 
+                        description: "Method Description", 
+                        indentLevel: 2).ToString(),
+                    isStatic: m.IsStatic,
+                    exception: String.Empty,
+                    isOverloaded: true,
+                    indentLevel: 1
+                    );
+            }
+
+            // Simple (non-overloaded) methods
+            foreach (var m in typeParser.SimpleMethods)
+            {
+                PythonStubWriterLibrary.WritePythonMethod(
+                    writer: Writer,
+                    methodName: m.Name,
+                    arguments: typeParser.GetMethodArguments(m),
+                    returnType: m.ReturnType,
+                    docString: new PythonMethodDocStringWriterLibrary(
+                        methodInfo: m, 
+                        description: "Method Description").ToString(),
+                    isStatic: m.IsStatic,
+                    exception: String.Empty,
+                    isOverloaded: false,
+                    indentLevel: 1
+                    );
+            }
+            #endregion
+
+
+            #region Properties
+            // Write ReadOnly properties
+            foreach (var p in typeParser.ReadOnlyProperties)
+                PythonStubWriterLibrary.WritePythonProperty(
+                    writer: Writer,
+                    propertyName: typeParser.GetPropertyName(p),
+                    returnType: p.ReturnType,
+                    docString: new PythonPropertyDocStringWriterLibrary(
+                        type:p.ReturnType,
+                        description: "No Description").ToString(),
+                    isStatic: p.IsStatic,
+                    indentLevel: 1
+                    );
+
+            // Write WriteOnly properties
+            foreach (var p in typeParser.WriteOnlyProperties)
+                PythonStubWriterLibrary.WritePythonPropertySetter(
+                    writer: Writer,
+                    propertyName: typeParser.GetPropertyName(p),
+                    returnType: p.GetParameters()[0].ParameterType,
+                    isStatic: p.IsStatic,
+                    indentLevel: 1
+                    );
+
+            //// Write Static ReadOnly properties
+            //foreach (var p in typeParser.StaticReadOnlyProperties)
+            //    PythonStubWriterLibrary.WritePythonProperty(
+            //        writer: Writer,
+            //        propertyName: typeParser.GetPropertyName(p),
+            //        returnType: p.ReturnType,
+            //        docString: new PythonPropertyDocStringWriterLibrary(p.ReturnType, "No Description").ToString(),
+            //        isStatic: true
+            //        );
+
+            //// Write Static WriteOnly properties
+            //foreach (var p in typeParser.StaticWriteOnlyProperties)
+            //    PythonStubWriterLibrary.WritePythonPropertySetter(
+            //        writer: Writer,
+            //        propertyName: typeParser.GetPropertyName(p),
+            //        returnType: p.GetParameters()[0].ParameterType,
+            //        isStatic: true
+            //        );
+
+            #endregion
+        }
+        #endregion
+
+        #region Private Properties
+        private StreamWriter Writer { get; }
+        #endregion
+    }
 }

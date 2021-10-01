@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using AssemblyCrawler.Generators;
 using AssemblyCrawler.Library;
 using NUnit.Framework;
 using TestAssemblyNET48.Water;
@@ -37,52 +38,35 @@ namespace AssemblyCrawler.Test
 
 		[Test]
 		public void TestWriteStub()
-        {
-			//var filePath = @"D:\Temp\pythonStybText.pyi";
-			var filePath = Path.Combine(Path.GetTempPath(), "pythonStybText.pyi");
+		{
+
+			Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
+			var testType = typeof(IPipeInput);
+			testType = typeof(IBaseLinkInput);
+			testType = typeof(IPipeResults);
+			testType = typeof(INetwork);
+			testType = typeof(Pipes);
+
+			var tempDir = Path.Combine(Path.GetTempPath(), "pythonStubs");
+			if (!Directory.Exists(tempDir))
+				Directory.CreateDirectory(tempDir);
+
+			var filePath = Path.Combine(Path.GetTempPath(),"pythonStubs", $"{testType.Name}.pyi");
 			if (File.Exists(filePath))
-				File.Delete(filePath);
-
-            using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
-            {
-				using(var streamWriter = new StreamWriter(fileStream, Encoding.ASCII))
-                {
-					Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
-					var testType = typeof(IPipeInput);
-					testType = typeof(IBaseLinkInput);
-
-					var inheretedTypes = new List<Type>();
-
-                    foreach (var interf in testType.GetInterfaces())
-                    {
-						if (!interf.IsGenericType)
-							inheretedTypes.Add(interf);
-					}
+				File.Delete(filePath);			
 
 
-					// Write class
-					PythonStubWriterLibrary.WritePythonClassDefinition(streamWriter, testType.Name, inheretedTypes, PythonStubWriterLibrary.BlankDocString);
+			using (var fileStream = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite))
+			{
+				using (var streamWriter = new StreamWriter(fileStream, Encoding.ASCII))
+				{
+					IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(streamWriter);
+					Assert.IsNotNull(generator);
 
-					// Get methods
-					var methods = testType.GetMethods();
-
-
-                    // Write properties
-                    foreach (var method in methods)
-                    {
-						if (method.Name.StartsWith("get_"))
-							PythonStubWriterLibrary.WritePythonProperty(streamWriter, method.Name.Substring(4), method.ReturnType, PythonStubWriterLibrary.BlankDocString);
-
-
-						if (method.Name.StartsWith("set_"))
-							PythonStubWriterLibrary.WritePythongPropertySetter(streamWriter, method.Name.Substring(4), method.GetParameters()[0].ParameterType);
-					}
-
-
-
+					generator.GenerateTypeStub(testType);
 					streamWriter.Flush();
 				}
-            }
+			}
 		}
 		#endregion
 	}

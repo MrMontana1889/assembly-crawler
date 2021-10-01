@@ -19,55 +19,139 @@ namespace AssemblyCrawler.Library
 		public static string SELF = "self";
 		public static string PROPERTY = "@property";
 		public static string SETTER = ".setter";
+		public static string INIT = "__init__";
+		public static string TAB = "\t";
+		public static string TYPE_VAR = "TypeVar";
+		public static string UNION = "Union";
+		public static string OVERLOAD = "@overload";
+		public static string STATIC_METHOD = "@staticmethod";
+
 		#endregion
 
-		#region Public Methods
 		public static void WritePythonClassDefinition(
 			StreamWriter writer,
-			string className,
-			List<Type> inheritedTypes,
+			Type classType,
+			List<Type>inheritedTypes,
 			string docString,
+			bool isGenericType,
 			int indentLevel = 0)
 		{
-			var inhertedTypesString = string.Join(", ", inheritedTypes.Select(t => TypeLibrary.ConvertTypeToPythonType(t)));
-			var classString = $"{CLASS} {className}({inhertedTypesString}):";
+			var className = classType.Name;
+			var inheritedTypesString = string.Join(", ", inheritedTypes.Select(t => TypeConvertLibrary.ToPythonType(t)));
 
-			var indentaiton = GetIndentation(indentLevel);
+			if (isGenericType)
+				inheritedTypesString = $"[{inheritedTypesString}]";
+
+			var classString = $"{CLASS} {className}({inheritedTypesString}):";                        
+
+			var indentation = GetIndentation(indentLevel);
 
 			writer.WriteLine();
 			writer.WriteLine();
-			writer.WriteLine($"{indentaiton}{CLASS} {className}({inhertedTypesString}):");
-			writer.WriteLine($"{indentaiton}{docString}");
-			writer.WriteLine($"{indentaiton}\t{PASS}");
+			writer.WriteLine($"{indentation}{CLASS} {className}({inheritedTypesString}):");
+			writer.WriteLine($"{indentation}{docString}");
+
+			writer.WriteLine($"{indentation}{TAB}{PASS}");
+		}
+
+		public static void WritePythonConstructor(
+			StreamWriter writer,
+			List<KeyValuePair<string, Type>> arguments,
+			string docString,
+			int indentLevel = 1)
+		{
+			WritePythonMethod(
+				writer: writer,
+				methodName: INIT,
+				arguments: arguments,
+				returnType: typeof(void),
+				docString: docString,
+				isStatic: false,
+				indentLevel: indentLevel
+				);
+		}
+
+		public static void WritePythonConstructorUnsupported(
+			StreamWriter writer,
+			int indentLevel = 1)
+		{
+			var docString = new PythonConstructorUnsupportedDocStringWriterLibrary().ToString();
+
+			WritePythonMethod(
+				writer: writer,
+				methodName: INIT,
+				arguments: new List<KeyValuePair<string, Type>>(),
+				returnType: typeof(void),
+				docString: docString,
+				isStatic: false,
+				exception: "raise Exception(\"Creating a new Instance of this class is not allowed\")",
+				isOverloaded: false,
+				indentLevel: indentLevel
+				);
+		}
+
+		public static void WritePythonGenericVariables(
+			StreamWriter writer, 
+			string typeName,
+			Type type,
+			int indentLevel = 0
+			)
+		{
+			var indentation = GetIndentation(indentLevel);
+			writer.WriteLine($"{indentation}{typeName} = {TYPE_VAR}(\"{typeName}\", {TypeConvertLibrary.ToPythonType(type)})");
 		}
 
 		public static void WritePythonMethod(
-			StreamWriter writer,
-			string methodName,
+			StreamWriter writer, 
+			string methodName, 
 			List<KeyValuePair<string, Type>> arguments,
 			Type returnType,
 			string docString,
-			int indentLevel = 1)
+			bool isStatic,
+			string exception = "",
+			bool isOverloaded = false,
+			int indentLevel=1)
 		{
 			var pythonArgumentList = new List<string>();
 
 			for (int i = 0; i < arguments.Count; i++)
 			{
 				var pair = arguments[i];
-				pythonArgumentList.Add($"{pair.Key}: {TypeLibrary.ConvertTypeToPythonType(pair.Value)}");
+				pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value)}");
 			}
 
 			var pythonArguments = string.Join(", ", pythonArgumentList);
 			pythonArguments = string.IsNullOrEmpty(pythonArguments) ? pythonArguments : $", {pythonArguments}";
 
-			var method = $"{DEF} {methodName}({SELF} {pythonArguments}) -> {TypeLibrary.ConvertTypeToPythonType(returnType)}:";
+			// self keywork
+			var selfKeyword = isStatic ? string.Empty : SELF;
 
-			var indentaiton = GetIndentation(indentLevel);
+			// return type
+			var returnTypeString = TypeConvertLibrary.ToPythonType(returnType);
+			if (Nullable.GetUnderlyingType(returnType) != null)
+			{
+				returnType = Nullable.GetUnderlyingType(returnType) ?? typeof(void);
+				var actualPythonType = TypeConvertLibrary.ToPythonType(returnType);
+				returnTypeString = $"{UNION}[{actualPythonType}, {NONETYPE}]";
+			}
+
+			// definition
+			var method = $"{DEF} {methodName}({selfKeyword}{pythonArguments}) -> {returnTypeString}:";
+
+			var indentation = GetIndentation(indentLevel);
 
 			writer.WriteLine();
-			writer.WriteLine($"{indentaiton}{method}");
-			writer.WriteLine($"{indentaiton}{docString}");
-			writer.WriteLine($"{indentaiton}\t{PASS}");
+
+			if(isOverloaded)
+				writer.WriteLine($"{indentation}{OVERLOAD}");
+
+			writer.WriteLine($"{indentation}{method}");
+			writer.WriteLine($"{indentation}{docString}");
+
+			if (exception?.Length > 0)
+				writer.WriteLine($"{indentation}\t{exception}");
+
+			writer.WriteLine($"{indentation}{TAB}{PASS}");
 		}
 
 		public static void WritePythonProperty(
@@ -75,41 +159,62 @@ namespace AssemblyCrawler.Library
 			string propertyName,
 			Type returnType,
 			string docString,
+			bool isStatic,
 			int indentLevel = 1)
 		{
-			var indentaiton = GetIndentation(indentLevel);
+			var indentation = GetIndentation(indentLevel);
 
 			writer.WriteLine();
-			writer.WriteLine($"{indentaiton}{PROPERTY}");
-			writer.WriteLine($"{indentaiton}{DEF} {propertyName}({PASS}) -> {TypeLibrary.ConvertTypeToPythonType(returnType)}:");
-			writer.WriteLine($"{indentaiton}{docString}");
-			writer.WriteLine($"{indentaiton}\t{PASS}");
+			writer.WriteLine($"{indentation}{PROPERTY}");
+
+			if(isStatic)
+				writer.WriteLine($"{indentation}{STATIC_METHOD}");
+
+			var selfKeyword = isStatic ? string.Empty : SELF;
+			writer.WriteLine($"{indentation}{DEF} {propertyName}({selfKeyword}) -> {TypeConvertLibrary.ToPythonType(returnType)}:");
+			writer.WriteLine($"{indentation}{docString}");
+			writer.WriteLine($"{indentation}{TAB}{PASS}");
 		}
 
-		public static void WritePythongPropertySetter(StreamWriter writer,
-			string propertyName,
+		public static void WritePythonPropertySetter(StreamWriter writer,
+			string propertyName,            
 			Type returnType,
+			bool isStatic,
 			int indentLevel = 1)
 		{
-			var indentaiton = GetIndentation(indentLevel);
+			var indentation = GetIndentation(indentLevel);
 
 			writer.WriteLine();
-			writer.WriteLine($"{indentaiton}@{propertyName}{SETTER}");
-			writer.WriteLine($"{indentaiton}{DEF} {propertyName}({SELF}, {propertyName.ToLower()}: {TypeLibrary.ConvertTypeToPythonType(returnType)}) -> {NONETYPE}:");
-			writer.WriteLine($"{indentaiton}\t{PASS}");
+			writer.WriteLine($"{indentation}@{propertyName}{SETTER}");
+
+			if (isStatic)
+				writer.WriteLine($"{indentation}{STATIC_METHOD}");
+
+			writer.WriteLine($"{indentation}{DEF} {propertyName}({SELF}, {propertyName.ToLower()}: {TypeConvertLibrary.ToPythonType(returnType)}) -> {NONETYPE}:");
+			writer.WriteLine($"{indentation}{TAB}{PASS}");
 		}
 
 		public static void WritePythonGenericClassDefinition(StreamWriter writer)
 		{
 			//
 		}
-		#endregion
+
+		public static void WritePythonNotAllowedConstructor(
+			StreamWriter writer,
+			int indentLevel = 1)
+		{
+			var indentation = GetIndentation(indentLevel);
+
+			writer.WriteLine($"{indentation}{DEF} {INIT}({SELF}):");
+
+		} 
+
 
 		#region Private Static Methods
 		private static string GetIndentation(int count)
 		{
-			var tabs = "";
-			for (int i = 0; i < count; i++) tabs += "\t";
+			var tabs = string.Empty;
+			for (int i = 0; i < count; i++) tabs += $"{TAB}";
 			return tabs;
 		}
 		#endregion
