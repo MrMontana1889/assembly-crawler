@@ -25,7 +25,7 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(string assemblyFilename)
+		public void Crawl(string assemblyFilename, string outputPath)
 		{
 			/*
 			 * First crawl the assembly and generate the interface tree using Barber.AutoDiagrammer.
@@ -51,12 +51,13 @@ namespace AssemblyCrawler
 
 					var graphResults = AssemblyManipulationService.CreateGraph();
 
-					AppDomain childDomain = BuildChildDomain(AppDomain.CurrentDomain, assemblyFilename);
+					//AppDomain childDomain = BuildChildDomain(AppDomain.CurrentDomain, assemblyFilename);
 
 					try
 					{
 						AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
-						Assembly assembly = childDomain.Load(assemblyName);
+						//Assembly assembly = childDomain.Load(assemblyFilename);
+						Assembly assembly = Assembly.Load(assemblyName);
 
 						IDictionary<string, List<Type>> typeMap = new Dictionary<string, List<Type>>(graphResults.Vertices.Count);
 
@@ -66,11 +67,20 @@ namespace AssemblyCrawler
 							string[] tokens = v.Name.Split(Type.Delimiter);
 							// Last one is the interface name, second to las tis the filename to use
 
-							string filename = string.Empty;
-							if (tokens.Length > 1)
-								filename = tokens[tokens.Length - 2] + ".pyi";
+							string filename = filename = tokens[tokens.Length - 2];
+
+							if (tokens.Length > 2)
+								Array.Resize(ref tokens, tokens.Length - 2);
 							else
-								filename = tokens[0] + ".pyi";
+								Array.Resize(ref tokens, tokens.Length - 1);
+
+							string path = Path.Combine(outputPath, string.Join(@"\", tokens));
+							if (!Directory.Exists(path))
+								Directory.CreateDirectory(path);
+
+							filename = filename + ".pyi";
+
+							filename = Path.Combine(path, filename);
 
 							if (!typeMap.ContainsKey(filename))
 								typeMap.Add(filename, new List<Type>());
@@ -81,7 +91,7 @@ namespace AssemblyCrawler
 
 						foreach (KeyValuePair<string, List<Type>> type in typeMap)
 						{
-							string pyiFilename = Path.Combine(Path.GetTempPath(), type.Key);
+							string pyiFilename = Path.Combine(outputPath, type.Key);
 							Console.WriteLine(pyiFilename);
 							using (FileStream fileStream = new FileStream(pyiFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
 							{
@@ -99,7 +109,7 @@ namespace AssemblyCrawler
 					}
 					finally
 					{
-						AppDomain.Unload(childDomain);
+						//AppDomain.Unload(childDomain);
 					}
 				}
 			}

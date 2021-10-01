@@ -32,7 +32,7 @@ namespace AssemblyCrawler.Test
             Assert.IsNotNull(testAssembly);
 
             IAssemblyCrawler crawler = new AssemblyCrawler();
-            crawler.Crawl(testAssembly.Location);
+            crawler.Crawl(testAssembly.Location, Path.GetTempPath());
         }
 
 

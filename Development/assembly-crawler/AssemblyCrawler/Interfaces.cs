@@ -23,6 +23,7 @@ namespace AssemblyCrawler
 		/// and generates the stubs for those classes.
 		/// </summary>
 		/// <param name="assemblyFilename">The full path and filename of the assembly to crawl.</param>
-		void Crawl(string assemblyFilename);
+		/// <param name="outputPath">The path where the stub files will be written</param>
+		void Crawl(string assemblyFilename, string outputPath);
 	}
 }

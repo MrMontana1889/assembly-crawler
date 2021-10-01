@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "AssemblyCrawler.Console": {
+      "commandName": "Project"
+    },
+    "Version": {
+      "commandName": "Project",
+      "commandLineArgs": "--version"
+    },
+    "OpenFlows": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+    },
+    "TestAssemblyNET48": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+    }
+  }
+}
