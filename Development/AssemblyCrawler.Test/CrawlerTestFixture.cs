@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using AssemblyCrawler.Generators;
 using AssemblyCrawler.Library;
 using NUnit.Framework;
 using TestAssemblyNET48.Water;
@@ -28,14 +27,11 @@ namespace AssemblyCrawler.Test
 		[Test]
 		public void TestSimpleCrawl()
 		{
-			IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(null);
-			Assert.IsNotNull(generator);
-
 			Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
 			Assert.IsNotNull(testAssembly);
 
 			IAssemblyCrawler crawler = new AssemblyCrawler();
-			crawler.Crawl(testAssembly, generator);
+			crawler.Crawl(testAssembly.Location);
 		}
 
 

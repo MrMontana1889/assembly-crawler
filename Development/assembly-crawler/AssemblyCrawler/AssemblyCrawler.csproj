@@ -21,4 +21,8 @@
     <None Remove="bin\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Barber.AutoDiagrammer\Barber.AutoDiagrammer.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,16 @@
 // Copyright (c) 2021 Kristopher L. Culin.  See LICENSE for details.
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Security.Policy;
+using System.Text;
+using AssemblyCrawler.Generators;
+using Barber.AutoDiagrammer;
+using Barber.AutoDiagrammer.Models;
+using Barber.AutoDiagrammer.Services;
+using Barber.AutoDiagrammer.Support;
 
 namespace AssemblyCrawler
 {
@@ -16,76 +25,81 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(Assembly assembly, IStubGenerator generator)
+		public void Crawl(string assemblyFilename)
 		{
-			var types = assembly.GetTypes();
+			/*
+			 * First crawl the assembly and generate the interface tree using Barber.AutoDiagrammer.
+			 * Then create the graph hierarchy which produces the list of interfaces from the bottom up.
+			 * 
+			 * Create a child domain to load the assembly given the full path and filename.
+			 * Loop through the list of interfaces and create a dictionary of filename to list of classes
+			 * The key will be the name of the pyi file to write to.  The value will be the list of
+			 * interfaces, in order, to write to that file.
+			*/
 
-			foreach (Type type in types)
+			if (DotNetObject.IsValidDotNetAssembly(assemblyFilename))
 			{
-				// Ignore abstract classes
-				if (type.IsAbstract && !type.IsInterface)
-					continue;
+				// Valid.  Continue.
 
-				if (type.IsInterface)
+				AssemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename);
+
+				if (AssemblyManipulationService.TreeValues.Count == 1)
 				{
-					string shortType = $"{RemoveNamespace(type)}";
-					var interfaces = type.GetInterfaces();
-					if (interfaces.Length > 0)
+					// Loaded successfully.
+					AssemblyManipulationService.TreeValues[0].IsChecked = true;
+					RecursivelyAddItems(AssemblyManipulationService.TreeValues[0]);
+
+					var graphResults = AssemblyManipulationService.CreateGraph();
+
+					AppDomain childDomain = BuildChildDomain(AppDomain.CurrentDomain, assemblyFilename);
+
+					try
 					{
-						Console.Write($"{shortType} : ");
-						foreach (var interf in interfaces)
+						AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
+						Assembly assembly = childDomain.Load(assemblyName);
+
+						IDictionary<string, List<Type>> typeMap = new Dictionary<string, List<Type>>(graphResults.Vertices.Count);
+
+						foreach (var v in graphResults.Vertices)
 						{
-							if (interf.IsGenericType)
+							// Determine the filename.
+							string[] tokens = v.Name.Split(Type.Delimiter);
+							// Last one is the interface name, second to las tis the filename to use
+
+							string filename = string.Empty;
+							if (tokens.Length > 1)
+								filename = tokens[tokens.Length - 2] + ".pyi";
+							else
+								filename = tokens[0] + ".pyi";
+
+							if (!typeMap.ContainsKey(filename))
+								typeMap.Add(filename, new List<Type>());
+
+							Type t = assembly.GetType(v.Name);
+							typeMap[filename].Add(t);
+						}
+
+						foreach (KeyValuePair<string, List<Type>> type in typeMap)
+						{
+							string pyiFilename = Path.Combine(Path.GetTempPath(), type.Key);
+							Console.WriteLine(pyiFilename);
+							using (FileStream fileStream = new FileStream(pyiFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
 							{
-								shortType = interf.Name + "[";
-								var args = interf.GetGenericArguments();
-								foreach (var arg in args)
+								using (StreamWriter sw = new StreamWriter(fileStream, Encoding.ASCII))
 								{
-									if (arg.FullName != null)
+									IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(sw);
+
+									foreach (Type t in type.Value)
 									{
-										string a = arg.FullName;
-										if (a != null)
-										{
-											a = a.Replace(arg.FullName, arg.Name);
-											shortType += a + ",";
-										}
+										generator.GenerateTypeStub(t);
 									}
 								}
-								if (shortType.EndsWith(","))
-									shortType = shortType.Remove(shortType.Length - 1, 1);
-								shortType += "]";
-							}
-							else
-							{
-								shortType += interf.Name + ", ";
 							}
 						}
-						if (shortType.EndsWith(","))
-							shortType = shortType.Remove(shortType.Length - 1, 1);
-						else if (shortType.EndsWith(", "))
-							shortType = shortType.Remove(shortType.Length - 2, 2);
-						Console.WriteLine($"{shortType}");
 					}
-					else
+					finally
 					{
-						Console.WriteLine($"{shortType}");
-					}
-
-					var methods = type.GetMethods();
-					foreach (var method in methods)
-					{
-						if (method.Name.StartsWith("get_") ||
-							method.Name.StartsWith("set_"))
-							continue;
-						if (method.IsConstructor) continue;
-
-						Console.WriteLine($"\t{RemoveNamespace(method)}");
-					}
-
-					var properties = type.GetProperties();
-					foreach (var property in properties)
-					{
-						Console.WriteLine($"\t{RemoveNamespace(property)}");
+						AppDomain.Unload(childDomain);
 					}
 				}
 			}
@@ -93,126 +107,33 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Private Methods
-		private object RemoveNamespace(PropertyInfo property)
+		private void RecursivelyAddItems(AssemblyTreeViewModel model)
 		{
-			string retVal = property.ToString();
-			if (retVal == null)
-				return "<unknown>";
-
-			string ns = property.PropertyType.Namespace;
-			if (ns != null)
+			if (model.NodeType != RepresentationType.Class)
 			{
-				int index = retVal.IndexOf(ns);
-				if (index > -1)
-					retVal = retVal.Remove(index, ns.Length + 1);
+				foreach (var child in model.Children)
+				{
+					if (child.NodeType == RepresentationType.Class)
+						AssemblyManipulationService.SelectedTreeValues.Add(child);
+					else
+						RecursivelyAddItems(child);
+				}
 			}
-			return retVal;
 		}
-
-		private object RemoveNamespace(Type type)
+		private AppDomain BuildChildDomain(AppDomain parentDomain, string fileName)
 		{
-			string retVal = type.ToString();
-			if (retVal == null)
-				return "<unknown>";
+			Evidence evidence = new Evidence(parentDomain.Evidence);
+			AppDomainSetup setup = parentDomain.SetupInformation;
+			FileInfo fi = new FileInfo(fileName);
+			AppDomain newAppDomain = AppDomain.CreateDomain("DiscoveryRegion", evidence, setup);
 
-			string ns = type.Namespace;
-			if (ns != null)
-			{
-				int index = retVal.IndexOf(ns);
-				if (index > -1)
-					retVal = retVal.Remove(index, ns.Length + 1);
-			}
-			return retVal;
+
+			return newAppDomain;
 		}
+		#endregion
 
-		private string RemoveNamespace(MethodInfo method)
-		{
-			string retVal = method.ToString();
-
-			if (retVal == null)
-				return "<unknown>";
-
-			var returnType = method.ReturnType;
-			if (returnType.FullName != null)
-				retVal = retVal.Replace(returnType.FullName, returnType.Name);
-
-			if (returnType.IsGenericType)
-			{
-				string ns = returnType.Namespace;
-				if (ns != null)
-				{
-					retVal = retVal.Replace(ns + ".", "");
-				}
-
-				var returnTypeParameters = returnType.GetGenericArguments();
-				foreach (var rtParam in returnTypeParameters)
-				{
-					if (rtParam.FullName != null)
-						retVal = retVal.Replace(rtParam.FullName, rtParam.Name);
-
-					ns = rtParam.Namespace;
-					if (ns != null)
-					{
-						int index = retVal.IndexOf(ns);
-						if (index > -1)
-							retVal = retVal.Remove(index, ns.Length + 1);
-					}
-				}
-			}
-
-			var parameters = method.GetParameters();
-			foreach (var parameter in parameters)
-			{
-				var pType = parameter.ParameterType;
-				if (pType.FullName != null)
-					retVal = retVal.Replace(pType.FullName, pType.Name);
-
-				if (pType.IsGenericType)
-				{
-					string ns = pType.Namespace;
-					if (ns != null)
-					{
-						int index = retVal.IndexOf(ns);
-						if (index > -1)
-							retVal = retVal.Remove(index, ns.Length + 1);
-					}
-
-					var pTypes = pType.GetGenericArguments();
-					foreach (var t in pTypes)
-					{
-						if (t.FullName != null)
-							retVal = retVal.Replace(t.FullName, t.Name);
-
-						ns = t.Namespace;
-						if (ns != null)
-						{
-							int index = retVal.IndexOf(ns);
-							if (index > -1)
-								retVal = retVal.Remove(index, ns.Length + 1);
-						}
-					}
-				}
-			}
-
-			var genericArguments = method.ReturnType.GetGenericArguments();
-			foreach (var arg in genericArguments)
-			{
-				if (arg != null)
-				{
-					if (arg.FullName != null)
-						retVal = retVal.Replace(arg.FullName, arg.Name);
-
-					var paramArgs = arg.GetGenericArguments();
-					foreach (var pArg in paramArgs)
-					{
-						if (pArg.FullName != null)
-							retVal = retVal.Replace(pArg.FullName, pArg.Name);
-					}
-				}
-			}
-
-			return retVal;
-		}
+		#region Private Properties
+		private IAssemblyManipulationService AssemblyManipulationService { get; } = new AssemblyManipulationService();
 		#endregion
 	}
 }

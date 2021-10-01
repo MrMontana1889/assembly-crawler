@@ -2,7 +2,6 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details.
 
 using System;
-using System.Reflection;
 
 namespace AssemblyCrawler
 {
@@ -23,8 +22,7 @@ namespace AssemblyCrawler
 		/// Crawls thru the assembly looking for public, internal, protected classes
 		/// and generates the stubs for those classes.
 		/// </summary>
-		/// <param name="assembly"></param>
-		/// <param name="generator">Used to generate the stub file(s) for the assembly</param>
-		void Crawl(Assembly assembly, IStubGenerator generator);
+		/// <param name="assemblyFilename">The full path and filename of the assembly to crawl.</param>
+		void Crawl(string assemblyFilename);
 	}
 }
