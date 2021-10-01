@@ -75,7 +75,7 @@ namespace AssemblyCrawler.Library
             //if (Returns.Count == 1)
             //    sb.AppendLine($" {TypeConvertLibrary.ToPythonType(Returns[0].Value)}: {Returns[0].Key}");
 
-            else if (Returns.Count > 0)
+            if (Returns.Count > 0)
             {
                 sb.AppendLine();
                 sb.Append(indentation).AppendLine(ReturnsDocString);
@@ -142,10 +142,10 @@ namespace AssemblyCrawler.Library
     {
         #region Constructor
         public PythonConstructorDocStringWriterLibrary(
-            string description, 
-            List<KeyValuePair<string, Type>> arguments, 
-            int indentLevel=2)
-            :base(description: description, indentLevel: indentLevel)
+            string description,
+            List<KeyValuePair<string, Type>> arguments,
+            int indentLevel = 2)
+            : base(description: description, indentLevel: indentLevel)
         {
             Args.AddRange(arguments);
         }

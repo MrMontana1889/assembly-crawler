@@ -11,7 +11,7 @@ namespace AssemblyCrawler.Library
         public TypeParserLibrary(Type type)
         {
             Type = type;
-            
+
             AllMethods = new List<MethodInfo>();
             SimpleMethods = new List<MethodInfo>();
             OverloadedMethods = new List<MethodInfo>();
@@ -23,6 +23,22 @@ namespace AssemblyCrawler.Library
             //StaticOverloadedMethods = new List<MethodInfo>();
             //StaticReadOnlyProperties = new List<MethodInfo>();
             //StaticWriteOnlyProperties = new List<MethodInfo>();
+
+            OperatorAddition = new List<MethodInfo>();
+            OperatorSubtraction = new List<MethodInfo>();
+            OperatorMultiplication = new List<MethodInfo>();
+            OperatorDivision = new List<MethodInfo>();
+            OperatorModulo = new List<MethodInfo>();
+            OperatorEquality = new List<MethodInfo>();
+            OperatorInequality = new List<MethodInfo>();
+            OperatorGreaterThan = new List<MethodInfo>();
+            OperatorLessThan = new List<MethodInfo>();
+            OperatorGreaterOrEqualTo = new List<MethodInfo>();
+            OperatorLessOrEqualTo = new List<MethodInfo>();
+            OperatorBitwiseAnd = new List<MethodInfo>();
+            OperatorBitwiseOr = new List<MethodInfo>();
+            OperatorBitwiseXor = new List<MethodInfo>();
+
 
             GenericInterfaces = new List<Type>();
             NonGenericInterfaces = new List<Type>();
@@ -45,33 +61,74 @@ namespace AssemblyCrawler.Library
 
             foreach (var method in AllMethods)
             {
-                if (method.Name.StartsWith("get_") /*&& !method.IsStatic*/)
+                if (method.Name.StartsWith("get_"))
                     ReadOnlyProperties.Add(method);
 
 
-                else if (method.Name.StartsWith("set_") /*&& !method.IsStatic*/)
+                else if (method.Name.StartsWith("set_"))
                     WriteOnlyProperties.Add(method);
 
-                //else if (method.Name.StartsWith("get_") && method.IsStatic)
-                //    StaticReadOnlyProperties.Add(method);
-
-
-                //else if (method.Name.StartsWith("set_") && method.IsStatic)
-                //    StaticWriteOnlyProperties.Add(method);
-
-
-                
-                else if(OverloadedMethodsName.Contains(method.Name) /*&& !method.IsStatic*/)
+                else if (OverloadedMethodsName.Contains(method.Name))
                     OverloadedMethods.Add(method);
 
-                else if (!OverloadedMethodsName.Contains(method.Name) /*&& !method.IsStatic*/)
+                else if (!OverloadedMethodsName.Contains(method.Name))
                     SimpleMethods.Add(method);
 
-                //else if (OverloadedMethodsName.Contains(method.Name) && method.IsStatic)
-                //    StaticOverloadedMethods.Add(method);
+                // +
+                else if (method.Name == "op_Addition")
+                    OperatorAddition.Add(method);
 
-                //else if (!OverloadedMethodsName.Contains(method.Name) && method.IsStatic)
-                //    StaticNonOverloadedMethods.Add(method);
+                // -
+                else if (method.Name == "op_Subtraction")
+                    OperatorSubtraction.Add(method);
+
+                // *
+                else if (method.Name == "op_Multiply")
+                    OperatorMultiplication.Add(method);
+
+                // /
+                else if (method.Name == "op_Division")
+                    OperatorDivision.Add(method);
+
+                // %
+                else if (method.Name == "op_Modulus")
+                    OperatorModulo.Add(method);
+
+                // ==
+                else if (method.Name == "op_Equality")
+                    OperatorEquality.Add(method);
+
+                // !=
+                else if (method.Name == "op_Inequality")
+                    OperatorInequality.Add(method);
+
+                // >
+                else if (method.Name == "op_GreaterThan")
+                    OperatorGreaterThan.Add(method);
+
+                // <
+                else if (method.Name == "op_LessThan")
+                    OperatorLessThan.Add(method);
+
+                // >=
+                else if (method.Name == "op_GreaterThanOrEqual")
+                    OperatorGreaterOrEqualTo.Add(method);
+
+                // <=
+                else if (method.Name == "op_LessThanOrEqual")
+                    OperatorLessOrEqualTo.Add(method);
+
+                // &
+                else if (method.Name == "op_BitwiseAnd")
+                    OperatorBitwiseAnd.Add(method);
+
+                // |
+                else if (method.Name == "op_BitwiseOr")
+                    OperatorBitwiseOr.Add(method);
+
+                // ^
+                else if (method.Name == "op_ExclusiveOr")
+                    OperatorBitwiseXor.Add(method);
 
             }
 
@@ -92,13 +149,13 @@ namespace AssemblyCrawler.Library
             var parameters = new List<ParameterInfo>();
             foreach (var c in Type.GetConstructors())
                 parameters.AddRange(new List<ParameterInfo>(c.GetParameters()));
-            
+
             return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
         }
 
         public List<KeyValuePair<string, Type>> GetMethodArguments(MethodInfo method)
         {
-            var parameters = new List<ParameterInfo> (method.GetParameters());
+            var parameters = new List<ParameterInfo>(method.GetParameters());
             return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
         }
 
@@ -116,11 +173,24 @@ namespace AssemblyCrawler.Library
         public List<MethodInfo> SimpleMethods { get; }
         public List<MethodInfo> ReadOnlyProperties { get; }
         public List<MethodInfo> WriteOnlyProperties { get; }
-        //public List<MethodInfo> StaticReadOnlyProperties { get; }
-        //public List<MethodInfo> StaticWriteOnlyProperties { get; }
-        //public List<MethodInfo> StaticOverloadedMethods { get; }
-        //public List<MethodInfo> StaticNonOverloadedMethods { get; }
         public List<MethodInfo> StaticFields { get; }
+
+        public List<MethodInfo> OperatorAddition { get; private set; }
+        public List<MethodInfo> OperatorSubtraction { get; private set; }
+        public List<MethodInfo> OperatorMultiplication { get; private set; }
+        public List<MethodInfo> OperatorDivision { get; private set; }
+        public List<MethodInfo> OperatorModulo { get; private set; }
+        public List<MethodInfo> OperatorEquality { get; private set; }
+        public List<MethodInfo> OperatorInequality { get; private set; }
+        public List<MethodInfo> OperatorGreaterThan { get; private set; }
+        public List<MethodInfo> OperatorLessThan { get; private set; }
+        public List<MethodInfo> OperatorGreaterOrEqualTo { get; private set; }
+        public List<MethodInfo> OperatorLessOrEqualTo { get; private set; }
+        public List<MethodInfo> OperatorBitwiseAnd { get; private set; }
+        public List<MethodInfo> OperatorBitwiseOr { get; private set; }
+        public List<MethodInfo> OperatorBitwiseXor { get; private set; }
+
+
         public List<Type> GenericInterfaces { get; private set; }
         public List<Type> NonGenericInterfaces { get; private set; }
         #endregion
