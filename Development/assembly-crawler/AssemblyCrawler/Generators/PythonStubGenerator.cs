@@ -71,7 +71,7 @@ namespace AssemblyCrawler.Generators
             {
                 PythonStubWriterLibrary.WritePythonMethod(
                     writer: Writer,
-                    methodName: typeParser.Name,
+                    methodName: m.Name,
                     arguments: typeParser.GetMethodArguments(m),
                     returnType: m.ReturnType,
                     docString: new PythonMethodDocStringWriterLibrary(methodInfo: m, description: "Method Description").ToString(),

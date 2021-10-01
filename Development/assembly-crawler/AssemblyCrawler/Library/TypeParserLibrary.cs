@@ -61,7 +61,7 @@ namespace AssemblyCrawler.Library
 
 
                 
-                if(OverloadedMethodsName.Contains(method.Name) /*&& !method.IsStatic*/)
+                else if(OverloadedMethodsName.Contains(method.Name) /*&& !method.IsStatic*/)
                     OverloadedMethods.Add(method);
 
                 else if (!OverloadedMethodsName.Contains(method.Name) /*&& !method.IsStatic*/)
