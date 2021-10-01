@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 
@@ -7,24 +8,30 @@ namespace AssemblyCrawler.Library
 {
     public class PythonDocStringWriterLibrary
     {
+        #region Constants
+        private string ArgsDocString = "Args:";
+        private string ReturnsDocString = "Returns:";
+        private string RaisesDocString = "Raises:";
+        #endregion
+
         #region Constructor
         public PythonDocStringWriterLibrary(int indentLevel = 1, string description = "")
         {
             Description = description;
             IndentLevel = indentLevel;
             ExceptionNames = new List<KeyValuePair<string, string>>();
-            Args = new List<KeyValuePair<Type, string>>();
-            Attributes = new List<KeyValuePair<Type, string>>();
-            Returns = new List<KeyValuePair<Type, string>>();
+            Args = new List<KeyValuePair<string, Type>>();
+            Attributes = new List<KeyValuePair<string, Type>>();
+            Returns = new List<KeyValuePair<string, Type>>();
         }
         #endregion
 
         #region Public Properties
         public List<KeyValuePair<string, string>> ExceptionNames { get; }
-        public List<KeyValuePair<Type, string>> Args { get; }
+        public List<KeyValuePair<string, Type>> Args { get; }
 
-        public List<KeyValuePair<Type, string>> Attributes { get; }
-        public List<KeyValuePair<Type, string>> Returns { get; }
+        public List<KeyValuePair<string, Type>> Attributes { get; }
+        public List<KeyValuePair<string, Type>> Returns { get; }
 
         #endregion
 
@@ -36,7 +43,7 @@ namespace AssemblyCrawler.Library
 
         private string GetIndentation()
         {
-            var tabs = "";
+            var tabs = string.Empty;
             for (int i = 0; i < IndentLevel; i++) tabs += Tab;
             return tabs;
         }
@@ -57,24 +64,24 @@ namespace AssemblyCrawler.Library
             if (Args.Count > 0)
             {
                 sb.AppendLine();
-                sb.AppendLine();
-                sb.Append(indentation).AppendLine("Args:");
+                sb.Append(indentation).AppendLine(ArgsDocString);
 
                 foreach (var kvp in Args)
-                    sb.Append(indentation).Append(Tab).Append(kvp.Key.Name).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Key)}): {kvp.Value}");
+                    sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Value)}): {kvp.Key}");
             }
 
 
             // Returns            
-            if (Returns.Count == 1)
-                sb.AppendLine($" {TypeConvertLibrary.ToPythonType(Returns[0].Key)}: {Returns[0].Value}");
+            //if (Returns.Count == 1)
+            //    sb.AppendLine($" {TypeConvertLibrary.ToPythonType(Returns[0].Value)}: {Returns[0].Key}");
 
-            else if (Returns.Count > 1)
+            else if (Returns.Count > 0)
             {
-                sb.Append(indentation).AppendLine("Returns:");
+                sb.AppendLine();
+                sb.Append(indentation).AppendLine(ReturnsDocString);
 
                 foreach (var kvp in Returns)
-                    sb.Append(indentation).Append(Tab).Append(TypeConvertLibrary.ToPythonType(kvp.Key)).Append(": ").AppendLine(kvp.Value);
+                    sb.Append(indentation).Append(Tab).Append(TypeConvertLibrary.ToPythonType(kvp.Value)).Append(": ").AppendLine(kvp.Key);
             }
 
 
@@ -84,7 +91,7 @@ namespace AssemblyCrawler.Library
             {
                 sb.AppendLine();
                 sb.AppendLine();
-                sb.Append(indentation).AppendLine("Raises:");
+                sb.Append(indentation).AppendLine(RaisesDocString);
 
                 foreach (var kvp in ExceptionNames)
                     sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($": {kvp.Value}");
@@ -116,7 +123,7 @@ namespace AssemblyCrawler.Library
         public PythonPropertyDocStringWriterLibrary(Type type, string description, int indentLevel = 2)
             : base(indentLevel)
         {
-            Returns.Add(new KeyValuePair<Type, string>(type, description));
+            Returns.Add(new KeyValuePair<string, Type>(description, type));
         }
         #endregion
     }
@@ -124,12 +131,27 @@ namespace AssemblyCrawler.Library
     public class PythonClassDocStringWriterLibrary : PythonDocStringWriterLibrary
     {
         #region Constructor
-        public PythonClassDocStringWriterLibrary(string description, int indentLevel = 0)
+        public PythonClassDocStringWriterLibrary(string description, int indentLevel = 1)
             : base(indentLevel, description)
         {
         }
         #endregion
     }
+
+    public class PythonConstructorDocStringWriterLibrary : PythonDocStringWriterLibrary
+    {
+        #region Constructor
+        public PythonConstructorDocStringWriterLibrary(
+            string description, 
+            List<KeyValuePair<string, Type>> arguments, 
+            int indentLevel=2)
+            :base(description: description, indentLevel: indentLevel)
+        {
+            Args.AddRange(arguments);
+        }
+        #endregion
+    }
+
 
     public class PythonConstructorUnsupportedDocStringWriterLibrary : PythonDocStringWriterLibrary
     {
@@ -149,8 +171,13 @@ namespace AssemblyCrawler.Library
             : base(indentLevel, description)
         {
             // Args
+            var paramsKvps = methodInfo.GetParameters().Select(p => new KeyValuePair<string, Type>(p.Name, p.ParameterType)).ToList();
+            Args.AddRange(paramsKvps);
 
             // Returns
+            var returnKvps = new List<KeyValuePair<string, Type>>();
+            returnKvps.Add(new KeyValuePair<string, Type>(methodInfo.ReturnParameter.Name, methodInfo.ReturnType));
+            Returns.AddRange(returnKvps);
         }
         #endregion
     }

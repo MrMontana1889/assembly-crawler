@@ -7,24 +7,41 @@ using System.Linq;
 
 namespace AssemblyCrawler.Library
 {
-    public static class TypeConvertLibrary
+	public static class TypeConvertLibrary
 	{
+
+		#region Public Static Methods
+
 		public static string ToPythonType(Type type)
 		{
 			if (type == typeof(void)) return "None";
 			if (type == typeof(Enum))  return "Enum";
 
-			if(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
-            {
+			if(type.IsGenericType 
+				&& (type.GetGenericTypeDefinition() == typeof(List<>) 
+				|| type.GetGenericTypeDefinition() == typeof(IList<>)))
+			{
 				var itemType = type.GetGenericArguments().Single();
-				return $"List[{ToPythonPremitiveType(itemType)}]";
+				return $"List[{ToPythonPrimitiveType(itemType)}]";
 			}
 
-			return ToPythonPremitiveType(type);
-		}
+			if (type.IsGenericType 
+				&& (type.GetGenericTypeDefinition() == typeof(Dictionary<,>)
+				|| type.GetGenericTypeDefinition() == typeof(IDictionary<,>)))
+			{
+				var keyType = type.GetGenericArguments()[0];
+				var valueType = type.GetGenericArguments()[0];
+				return $"Dict[{ToPythonPrimitiveType(keyType)},{ToPythonPrimitiveType(valueType)}]";
+			}
 
-		private static string ToPythonPremitiveType(Type type)
-        {
+			return ToPythonPrimitiveType(type);
+		}
+		#endregion
+
+		#region Private Static Methdos
+
+		private static string ToPythonPrimitiveType(Type type)
+		{
 			switch (Type.GetTypeCode(type))
 			{
 				case TypeCode.Byte:

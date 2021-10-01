@@ -41,18 +41,32 @@ namespace AssemblyCrawler.Generators
                 writer: Writer,
                 classType: type,
                 inheritedTypes: typeParser.NonGenericInterfaces,
-                docString: PythonStubWriterLibrary.BlankDocString,
+                docString: new PythonClassDocStringWriterLibrary("Class Description").ToString(),
                 isGenericType: typeParser.IsGenericType
                 );
 
-
+            #region Constructor
             // Write Constructor
-            if (typeParser.IsInterface)
-                PythonStubWriterLibrary.WritePytonConstructorUnsupported(Writer);
+            if (typeParser.IsInterface || typeParser.Type.IsAbstract)
+                PythonStubWriterLibrary.WritePythonConstructorUnsupported(Writer);
+
+            else if (typeParser.Type.IsClass)
+            {
+                var args = typeParser.GetConstructorArguments();
+                PythonStubWriterLibrary.WritePythonConstructor(
+                    writer: Writer,
+                    arguments: args,
+                    docString: new PythonConstructorDocStringWriterLibrary(
+                        description:"Constructor Description",
+                        arguments:args,
+                        indentLevel:2).ToString(),
+                    indentLevel: 1);
+            }
+            #endregion
 
 
             #region Methods
-            // TODO overloaded methods
+            // Overloaded methods
             foreach (var m in typeParser.OverloadedMethods)
             {
                 PythonStubWriterLibrary.WritePythonMethod(
@@ -60,7 +74,10 @@ namespace AssemblyCrawler.Generators
                     methodName: typeParser.Name,
                     arguments: typeParser.GetMethodArguments(m),
                     returnType: m.ReturnType,
-                    docString: new PythonMethodDocStringWriterLibrary(methodInfo: m, description: "Method Description", indentLevel: 3).ToString(),
+                    docString: new PythonMethodDocStringWriterLibrary(
+                        methodInfo: m, 
+                        description: "Method Description", 
+                        indentLevel: 2).ToString(),
                     isStatic: m.IsStatic,
                     exception: String.Empty,
                     isOverloaded: true,
@@ -68,6 +85,7 @@ namespace AssemblyCrawler.Generators
                     );
             }
 
+            // Simple (non-overloaded) methods
             foreach (var m in typeParser.SimpleMethods)
             {
                 PythonStubWriterLibrary.WritePythonMethod(
@@ -75,7 +93,9 @@ namespace AssemblyCrawler.Generators
                     methodName: m.Name,
                     arguments: typeParser.GetMethodArguments(m),
                     returnType: m.ReturnType,
-                    docString: new PythonMethodDocStringWriterLibrary(methodInfo: m, description: "Method Description").ToString(),
+                    docString: new PythonMethodDocStringWriterLibrary(
+                        methodInfo: m, 
+                        description: "Method Description").ToString(),
                     isStatic: m.IsStatic,
                     exception: String.Empty,
                     isOverloaded: false,
@@ -92,7 +112,9 @@ namespace AssemblyCrawler.Generators
                     writer: Writer,
                     propertyName: typeParser.GetPropertyName(p),
                     returnType: p.ReturnType,
-                    docString: new PythonPropertyDocStringWriterLibrary(p.ReturnType, "No Description").ToString(),
+                    docString: new PythonPropertyDocStringWriterLibrary(
+                        type:p.ReturnType,
+                        description: "No Description").ToString(),
                     isStatic: p.IsStatic,
                     indentLevel: 1
                     );

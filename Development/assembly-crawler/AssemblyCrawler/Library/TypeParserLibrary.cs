@@ -87,6 +87,15 @@ namespace AssemblyCrawler.Library
             return this;
         }
 
+        public List<KeyValuePair<string, Type>> GetConstructorArguments()
+        {
+            var parameters = new List<ParameterInfo>();
+            foreach (var c in Type.GetConstructors())
+                parameters.AddRange(new List<ParameterInfo>(c.GetParameters()));
+            
+            return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
+        }
+
         public List<KeyValuePair<string, Type>> GetMethodArguments(MethodInfo method)
         {
             var parameters = new List<ParameterInfo> (method.GetParameters());
