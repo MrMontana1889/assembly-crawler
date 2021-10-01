@@ -74,6 +74,7 @@ namespace Barber.AutoDiagrammer.Models
             //this.graphLayout.HighlightAlgorithmType = "Simple";
 
             //Add Layout Algorithm Types
+            layoutAlgorithmTypes.Clear();
             layoutAlgorithmTypes.Add("BoundedFR");
             layoutAlgorithmTypes.Add("EfficientSugiyama");
             layoutAlgorithmTypes.Add("FR");
@@ -82,6 +83,7 @@ namespace Barber.AutoDiagrammer.Models
             layoutAlgorithmTypes.Add("Tree");
 
             //Add available LayoutParameters 
+            availableLayoutParameters.Clear();
             availableLayoutParameters.Add("BoundedFR", new BoundedFRLayoutParametersEx()); //Has existing control in GSharp
             availableLayoutParameters.Add("EfficientSugiyama", new EfficientSugiyamaLayoutParametersEx()); //Has existing control in GSharp
             availableLayoutParameters.Add("FR", new FreeFRLayoutParametersEx());

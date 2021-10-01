@@ -49,7 +49,7 @@ namespace Barber.AutoDiagrammer.Services
 		#endregion
 
 		#region Public Methods
-		public GraphResults CreateGraphAsync()
+		public GraphResults CreateGraph()
 		{
 			List<PocVertex> vertices = new List<PocVertex>();
 			for (int i = 0; i < selectedTreeValues.Count; ++i)
@@ -76,7 +76,7 @@ namespace Barber.AutoDiagrammer.Services
 			}
 
 			List<PocEdge> edges = new List<PocEdge>();
-			foreach(var x in vertices)
+			foreach (var x in vertices)
 			{
 				PocVertex vertex1 = x;
 
@@ -103,76 +103,6 @@ namespace Barber.AutoDiagrammer.Services
 			}
 
 			return new GraphResults(vertices, edges);
-		}
-		public Task<GraphResults> CreateGraph()
-		{
-			Task<GraphResults> task = Task.Factory.StartNew<GraphResults>(() =>
-			{
-				//for each item in selectedTreeItems
-				//1. Create all PocVertex, and are them to Reflect() which will store an internal
-				//   List<Name> which are the Associations needed by that Vertex
-				//2. Go through each PocVertex Associations and see if we have that Association
-				//   Vertex and if so create a new PocEdge
-
-
-				List<PocVertex> vertices = new List<PocVertex>();
-				Parallel.For(0, selectedTreeValues.Count, (i) =>
-				{
-					SerializableVertex serializableVertex = selectedTreeValues[i].Vertex;
-					PocVertex vertex = new PocVertex(
-						serializableVertex.Name,
-						serializableVertex.ShortName,
-						serializableVertex.Constructors,
-						serializableVertex.Fields,
-						serializableVertex.Properties,
-						serializableVertex.Interfaces,
-						TranslateMethods(serializableVertex.Methods),
-						serializableVertex.Events,
-						serializableVertex.Associations,
-						serializableVertex.HasConstructors,
-						serializableVertex.HasFields,
-						serializableVertex.HasProperties,
-						serializableVertex.HasInterfaces,
-						serializableVertex.HasMethods,
-						serializableVertex.HasEvents);
-
-
-					vertices.Add(vertex);
-				});
-
-				List<PocEdge> edges = new List<PocEdge>();
-				Parallel.ForEach(vertices, (x) =>
-				{
-					PocVertex vertex1 = x;
-
-					foreach (String associationName in vertex1.Associations)
-					{
-						var matchinVertices = from vert in vertices
-											  where vert.Name == associationName
-											  select vert;
-						PocVertex vertex2 = matchinVertices.SingleOrDefault();
-
-						if (vertex2 != null)
-						{
-							if (vertex1.Name != vertex2.Name)
-							{
-								//TODO : Need to make sure both of these are in the
-								//list of selected items in the tree before they are added
-								edges.Add(AddNewGraphEdge(vertex1, vertex2));
-								vertex1.NumberOfEdgesFromThisVertex += 1;
-								vertex2.NumberOfEdgesToThisVertex += 1;
-							}
-						}
-
-					}
-				});
-
-
-				return new GraphResults(vertices, edges);
-
-			});
-			return task;
-
 		}
 
 		public void ReInitialise()
@@ -209,7 +139,18 @@ namespace Barber.AutoDiagrammer.Services
 				}
 			});
 			return task;
-
+		}
+		public void LoadNameSpacesAndTypesAsync(String assemblyFileName)
+		{
+			try
+			{
+				treeValues = treeCreator.ScanAssemblyAndCreateTree(assemblyFileName);
+			}
+			catch (Exception ex)
+			{
+				treeValues = null;
+				throw ex;
+			}
 		}
 
 		#endregion

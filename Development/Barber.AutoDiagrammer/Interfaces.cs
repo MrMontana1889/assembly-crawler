@@ -12,12 +12,12 @@ namespace Barber.AutoDiagrammer
 	{
 		List<AssemblyTreeViewModel> TreeValues { get; }
 		List<AssemblyTreeViewModel> SelectedTreeValues { get; }
-		Task<GraphResults> CreateGraph();
-		GraphResults CreateGraphAsync();
+		GraphResults CreateGraph();
 		void ReInitialise();
 		void CalculateSelectedTreeValues();
 		Task LoadNameSpacesAndTypes(string assemblyFileName);
 
+		void LoadNameSpacesAndTypesAsync(string assemblyFileName);
 	}
 
 	public interface ITreeCreator

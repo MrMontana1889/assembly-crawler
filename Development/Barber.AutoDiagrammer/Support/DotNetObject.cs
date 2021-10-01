@@ -113,8 +113,14 @@ namespace Barber.AutoDiagrammer.Support
         /// </summary>
         public static bool IsWantedForDiagramType(Type t)
         {
+            if (t == null)
+                return false;
+
+            if (t.IsNotPublic)
+                return false;       // Exclude all non-public types
+
             //check to see if the class lives in a namespace
-            if (!string.IsNullOrEmpty(t.Namespace))
+            if (t.Namespace != null && !string.IsNullOrEmpty(t.Namespace))
             {
                 //dont really want user to trawl the standard System namespaces
                 if (t.Namespace.StartsWith("System"))

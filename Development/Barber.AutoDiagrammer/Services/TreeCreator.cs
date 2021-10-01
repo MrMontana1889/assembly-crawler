@@ -178,7 +178,7 @@ namespace Barber.AutoDiagrammer.Services
 
         private Assembly ReflectionOnlyResolveEventHandler(object sender, ResolveEventArgs args)
         {
-            DirectoryInfo directory = new DirectoryInfo(assemblyFileName);
+            DirectoryInfo directory = new DirectoryInfo(Path.GetDirectoryName(assemblyFileName));
 
             Assembly loadedAssembly =
                 AppDomain.CurrentDomain.GetAssemblies()
