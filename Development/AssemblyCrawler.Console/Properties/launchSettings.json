@@ -14,6 +14,14 @@
     "TestAssemblyNET48": {
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+    },
+    "OpenFlowsWater": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+    },
+    "TestGenericAssembly": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestGenericAssembly\\Debug\\net48\\TestGenericAssembly.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\TestGenericAssembly\""
     }
   }
 }

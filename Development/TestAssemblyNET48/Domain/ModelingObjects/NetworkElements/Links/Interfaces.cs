@@ -25,15 +25,11 @@ namespace TestAssemblyNET48.Water.Domain.ModelingObjects.NetworkElements
 		IDictionary<int, double?> Flows(int timeStepIndex, List<int> ids);
 	}
 
-	public interface IPipes : IElementManager<IPipe>
+	public interface IPipes : IModelingElementsBase<IPipes, IPipe, IPipeInput, IPipeResults, IPipesInput, IPipesResults>
 	{
-		IPipesInput Input { get; }
-		IPipesResults Results { get; }
 	}
 
-	public interface IPipe : IElement
+	public interface IPipe : IModelingElementBase<IPipes, IPipe, IPipeInput, IPipeResults, IPipesInput, IPipesResults>
 	{
-		IPipeInput Input { get; }
-		IPipeResults Results { get; }
 	}
 }

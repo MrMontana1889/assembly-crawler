@@ -6,7 +6,8 @@ using TestAssemblyNET48.Water.Support;
 
 namespace TestAssemblyNET48.Water.Domain.ModelingObjects.NetworkElements
 {
-	public class Pipes : ElementManagerBase<IPipe>, IPipes, IPipesInput, IPipesResults
+	public class Pipes : ElementManagerBase<IPipes, IPipe, IPipeInput, IPipeResults, IPipesInput, IPipesResults>, 
+		IPipes, IPipesInput, IPipesResults
 	{
 		#region Constructor
 		public Pipes()
@@ -41,8 +42,8 @@ namespace TestAssemblyNET48.Water.Domain.ModelingObjects.NetworkElements
 		#endregion
 
 		#region Public Porperties
-		public IPipesInput Input => this;
-		public IPipesResults Results => this;
+		public override IPipesInput Input => this;
+		public override IPipesResults Results => this;
 		#endregion
 
 		#region Protected Methods

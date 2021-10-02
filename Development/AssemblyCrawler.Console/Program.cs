@@ -19,9 +19,8 @@ namespace AssemblyCrawler.Console
 				.WithParsed(RunOptions)
 				.WithNotParsed(HandleParserErrors);
 
-
 			Write("Press any key to continue...");
-			ReadKey();
+			Read();
 		}
 		#endregion
 
