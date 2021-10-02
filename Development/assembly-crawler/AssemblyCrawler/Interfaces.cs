@@ -1,7 +1,8 @@
 ﻿// Interfaces.cs
-// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details.
+// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System;
+using AssemblyCrawler.Support;
 
 namespace AssemblyCrawler
 {
@@ -24,6 +25,6 @@ namespace AssemblyCrawler
 		/// </summary>
 		/// <param name="assemblyFilename">The full path and filename of the assembly to crawl.</param>
 		/// <param name="outputPath">The path where the stub files will be written</param>
-		void Crawl(string assemblyFilename, string outputPath);
+		void Crawl(PythonPackageDefinition package, string assemblyFilename, string outputPath);
 	}
 }

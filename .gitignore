@@ -22,3 +22,6 @@
 /Development/AssemblyCrawler.Console/bin/Debug
 /Development/AssemblyCrawler.Console/obj
 /Development/AssemblyCrawler.Console/AssemblyCrawler.Console.csproj.user
+/Development/AssemblyCrawler.Console/bin/x64/Debug/net48
+/Development/TestGenericAssembly/obj
+/Output/TestGenericAssembly/Debug/net48

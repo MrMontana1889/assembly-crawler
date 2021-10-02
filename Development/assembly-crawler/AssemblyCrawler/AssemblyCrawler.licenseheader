@@ -1,0 +1,15 @@
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+// %FileName%
+// Copyright (c) %CurrentYear% Kristopher L. Culin See LICENSE for details
+
+extensions: .aspx .ascx
+<%-- 
+Copyright (c) %CurrentYear% Kristopher L. Culin See LICENSE for detils
+--%>
+extensions: .vb
+'Copyright (c) %CurrentYear% Kristopher L. Culin See LICENSE for detils
+extensions:  .xml .config .xsd
+<!--
+Copyright (c) %CurrentYear% Kristopher L. Culin See LICENSE for detils
+-->

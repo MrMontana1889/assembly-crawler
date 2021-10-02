@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.IO;
 using AssemblyCrawler.Console.Support;
+using AssemblyCrawler.Support;
 using Barber.AutoDiagrammer.Support;
 using CommandLine;
 using static System.Console;
@@ -19,9 +20,9 @@ namespace AssemblyCrawler.Console
 				.WithParsed(RunOptions)
 				.WithNotParsed(HandleParserErrors);
 
-
 			Write("Press any key to continue...");
-			ReadKey();
+			try { Read(); }
+			catch { }
 		}
 		#endregion
 
@@ -34,6 +35,8 @@ namespace AssemblyCrawler.Console
 
 		private static void RunOptions(CommandLineOptions obj)
 		{
+			PythonPackageDefinition package = new PythonPackageDefinition("Package");
+
 			foreach (var assemblyFile in obj.Assemblies)
 			{
 				if (!File.Exists(assemblyFile))
@@ -48,7 +51,7 @@ namespace AssemblyCrawler.Console
 						Directory.CreateDirectory(obj.OutputPath);
 
 					IAssemblyCrawler crawler = new AssemblyCrawler();
-					crawler.Crawl(assemblyFile, obj.OutputPath);
+					crawler.Crawl(package, assemblyFile, obj.OutputPath);
 				}
 			}
 		}

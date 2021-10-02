@@ -6,8 +6,14 @@ using System.Linq;
 
 namespace TestAssemblyNET48.Water.Domain.ModelingObjects
 {
-	public abstract class ElementManagerBase<TElementType> : IElementManager<TElementType>
-		where TElementType : class, IElement
+	public abstract class ElementManagerBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType> 
+		: IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementInputType : class, IElementInput
+		where TElementResultsType : class, IElementResults
+		where TElementsInputType : class, IElementsInput
+		where TElementsResultsType : class, IElementsResults
 	{
 		#region Constructor
 		public ElementManagerBase()
@@ -68,6 +74,8 @@ namespace TestAssemblyNET48.Water.Domain.ModelingObjects
 
 		#region Public Properties
 		public int Count => ElementList.Count;
+		public abstract TElementsInputType Input { get; }
+		public abstract TElementsResultsType Results { get; }
 		#endregion
 
 		#region Protected Methods
