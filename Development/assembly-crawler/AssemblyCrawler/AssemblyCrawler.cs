@@ -1,13 +1,14 @@
 ﻿// AssemblyCrawler.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Security.Policy;
-using System.Text;
 using AssemblyCrawler.Generators;
+using AssemblyCrawler.Support;
 using Barber.AutoDiagrammer;
 using Barber.AutoDiagrammer.Models;
 using Barber.AutoDiagrammer.Services;
@@ -25,7 +26,7 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(string assemblyFilename, string outputPath)
+		public void Crawl(PythonPackageDefinition package, string assemblyFilename, string outputPath)
 		{
 			/*
 			 * First crawl the assembly and generate the interface tree using Barber.AutoDiagrammer.
@@ -51,65 +52,52 @@ namespace AssemblyCrawler
 
 					var graphResults = AssemblyManipulationService.CreateGraph();
 
-					//AppDomain childDomain = BuildChildDomain(AppDomain.CurrentDomain, assemblyFilename);
+					AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
+					Assembly assembly = Assembly.Load(assemblyName);
 
-					try
+					IDictionary<string, List<Type>> typeMap = new Dictionary<string, List<Type>>(graphResults.Vertices.Count);
+
+					foreach (var v in graphResults.Vertices)
 					{
-						AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
-						//Assembly assembly = childDomain.Load(assemblyFilename);
-						Assembly assembly = Assembly.Load(assemblyName);
+						// Determine the filename.
+						string[] tokens = v.Name.Split(Type.Delimiter);
 
-						IDictionary<string, List<Type>> typeMap = new Dictionary<string, List<Type>>(graphResults.Vertices.Count);
+						// Last one is the interface name, second to last is the module name to use
+						string filename = filename = tokens[tokens.Length - 2];
 
-						foreach (var v in graphResults.Vertices)
-						{
-							// Determine the filename.
-							string[] tokens = v.Name.Split(Type.Delimiter);
-							// Last one is the interface name, second to las tis the filename to use
+						if (tokens.Length > 2)
+							Array.Resize(ref tokens, tokens.Length - 2);
+						else
+							Array.Resize(ref tokens, tokens.Length - 1);
 
-							string filename = filename = tokens[tokens.Length - 2];
+						string path = Path.Combine(outputPath, string.Join(@"\", tokens));
+						if (!Directory.Exists(path))
+							Directory.CreateDirectory(path);
 
-							if (tokens.Length > 2)
-								Array.Resize(ref tokens, tokens.Length - 2);
-							else
-								Array.Resize(ref tokens, tokens.Length - 1);
+						filename += ".pyi";
 
-							string path = Path.Combine(outputPath, string.Join(@"\", tokens));
-							if (!Directory.Exists(path))
-								Directory.CreateDirectory(path);
+						filename = Path.Combine(path, filename);
 
-							filename = filename + ".pyi";
+						if (!typeMap.ContainsKey(filename))
+							typeMap.Add(filename, new List<Type>());
 
-							filename = Path.Combine(path, filename);
-
-							if (!typeMap.ContainsKey(filename))
-								typeMap.Add(filename, new List<Type>());
-
-							Type t = assembly.GetType(v.Name);
-							typeMap[filename].Add(t);
-						}
-
-						foreach (KeyValuePair<string, List<Type>> type in typeMap)
-						{
-							string pyiFilename = Path.Combine(outputPath, type.Key);
-							Console.WriteLine(pyiFilename);
-							using (FileStream fileStream = new FileStream(pyiFilename, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
-							{
-								using (StreamWriter sw = new StreamWriter(fileStream, Encoding.ASCII))
-								{
-									IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(sw);
-
-									foreach (Type t in type.Value)
-									{
-										generator.GenerateTypeStub(t);
-									}
-								}
-							}
-						}
+						Type t = assembly.GetType(v.Name);
+						typeMap[filename].Add(t);
 					}
-					finally
+
+					 
+					foreach (KeyValuePair<string, List<Type>> type in typeMap)
 					{
-						//AppDomain.Unload(childDomain);
+						string pyiFilename = Path.Combine(outputPath, type.Key);
+						Console.WriteLine(pyiFilename);
+
+						PythonModuleDefinition stubFile = package.AddModule(type.Value.First().Namespace, pyiFilename);
+						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(stubFile);
+
+						foreach (Type t in type.Value)
+							generator.GenerateTypeStub(t);
+
+						stubFile.Write();
 					}
 				}
 			}

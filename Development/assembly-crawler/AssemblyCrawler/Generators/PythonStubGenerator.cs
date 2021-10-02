@@ -2,49 +2,49 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System;
-using System.IO;
 using AssemblyCrawler.Library;
+using AssemblyCrawler.Support;
 
 namespace AssemblyCrawler.Generators
 {
 	internal class PythonStubGenerator : IStubGenerator
 	{
 		#region Constants
-		string DefAddition = "__add__";
-		string DefSubtraction = "__sub__";
-		string DefMultiplication = "__mul__";
-		string DefDivision = "__truediv__";
-		string DefModulo = "__mod__";
-		string DefEquality = "__eq__";
-		string DefInEquality = "__ne__";
-		string DefGreaterThan = "__gt__";
-		string DefLessThan = "__lt__";
-		string DefGreaterOrEqualTo = "__ge__";
-		string DefLessOrEqualTo = "__le__";
-		string DefBitwiseAnd = "__and__";
-		string DefBitwisOr = "__or__";
-		string DefBitwiseXor = "__xor__";
+		const string DefAddition = "__add__";
+		const string DefSubtraction = "__sub__";
+		const string DefMultiplication = "__mul__";
+		const string DefDivision = "__truediv__";
+		const string DefModulo = "__mod__";
+		const string DefEquality = "__eq__";
+		const string DefInEquality = "__ne__";
+		const string DefGreaterThan = "__gt__";
+		const string DefLessThan = "__lt__";
+		const string DefGreaterOrEqualTo = "__ge__";
+		const string DefLessOrEqualTo = "__le__";
+		const string DefBitwiseAnd = "__and__";
+		const string DefBitwisOr = "__or__";
+		const string DefBitwiseXor = "__xor__";
 
-		string DocStringSummaryAddition = "Mathematical operation of Addition";
-		string DocStringSummarySubtraction = "Mathematical operation of Subtraction";
-		string DocStringSummaryMultiplication = "Mathematical operation of Multiplication";
-		string DocStringSummaryDivision = "Mathematical operation of Division";
-		string DocStringSummaryModulo = "Mathematical operation of Modulo";
-		string DocStringSummaryEquality = "Mathematical operation of Equality";
-		string DocStringSummaryInEquality = "Mathematical operation of InEquality";
-		string DocStringSummaryGreaterThan = "Mathematical operation of GreaterThan";
-		string DocStringSummaryLessThan = "Mathematical operation of LessThan";
-		string DocStringSummaryGreaterOrEqualTo = "Mathematical operation of GreaterOrEqual";
-		string DocStringSummaryLessOrEqualTo = "Mathematical operation of LessOrEqual";
-		string DocStringSummaryBitwiseAnd = "Mathematical operation of BitwiseAnd";
-		string DocStringSummaryBitwisOr = "Mathematical operation of BitwisOr";
-		string DocStringSummaryBitwiseXor = "Mathematical operation of BitwiseXor";
+		const string DocStringSummaryAddition = "Mathematical operation of Addition";
+		const string DocStringSummarySubtraction = "Mathematical operation of Subtraction";
+		const string DocStringSummaryMultiplication = "Mathematical operation of Multiplication";
+		const string DocStringSummaryDivision = "Mathematical operation of Division";
+		const string DocStringSummaryModulo = "Mathematical operation of Modulo";
+		const string DocStringSummaryEquality = "Mathematical operation of Equality";
+		const string DocStringSummaryInEquality = "Mathematical operation of InEquality";
+		const string DocStringSummaryGreaterThan = "Mathematical operation of GreaterThan";
+		const string DocStringSummaryLessThan = "Mathematical operation of LessThan";
+		const string DocStringSummaryGreaterOrEqualTo = "Mathematical operation of GreaterOrEqual";
+		const string DocStringSummaryLessOrEqualTo = "Mathematical operation of LessOrEqual";
+		const string DocStringSummaryBitwiseAnd = "Mathematical operation of BitwiseAnd";
+		const string DocStringSummaryBitwisOr = "Mathematical operation of BitwisOr";
+		const string DocStringSummaryBitwiseXor = "Mathematical operation of BitwiseXor";
 		#endregion
 
 		#region Constructor
-		public PythonStubGenerator(StreamWriter writer)
+		public PythonStubGenerator(PythonModuleDefinition stubFile)
 		{
-			Writer = writer;
+			StubFile = stubFile;
 		}
 		#endregion
 
@@ -53,55 +53,25 @@ namespace AssemblyCrawler.Generators
 		{
 			var typeParser = new TypeParserLibrary(type).Parse();
 
-			// TODO: Find out how reflection can give generics
-			// Write Generics
-			if (typeParser.IsGenericType)
-			{
-				if (typeParser.Type.ContainsGenericParameters)
-				{
-					Console.WriteLine($"\t{typeParser.Type.Name}");
-					// There are generic type parameters.
-					var args = typeParser.Type.GetGenericArguments();
-					foreach (var a in args)
-					{
-						var constraints = a.GetGenericParameterConstraints();
-						Console.Write($"\t\t{a.Name} : ");
-						foreach (var c in constraints)
-							Console.Write($"{c.Name}, ");
-						Console.WriteLine();
-					}
-				}
-
-				Writer.WriteLine();
-				Writer.WriteLine();
-				PythonStubWriterLibrary.WritePythonGenericVariables(
-					writer: Writer,
-					typeName: "TNameType",
-					type: typeof(string)
-					);
-			}
-			else
-			{
-				// Write class
-				PythonStubWriterLibrary.WritePythonClassDefinition(
-					writer: Writer,
-					classType: type,
-					inheritedTypes: typeParser.NonGenericInterfaces,
-					docString: new PythonClassDocStringWriterLibrary("Class Description").ToString(),
-					isGenericType: typeParser.IsGenericType
-					);
-			}
+			PythonStubWriterLibrary.WritePythonClassDef(
+				StubFile,
+				type,
+				PythonStubWriterLibrary.BlankDocString,
+				0);
 
 			#region Constructor
+
+			PythonClassDefinition classDef = StubFile.GetClassDefinition(type.AssemblyQualifiedName, type.Name);
+
 			// Write Constructor
 			if (typeParser.IsInterface || typeParser.Type.IsAbstract)
-				PythonStubWriterLibrary.WritePythonConstructorUnsupported(Writer);
+				PythonStubWriterLibrary.WritePythonConstructorUnsupported(classDef);
 
 			else if (typeParser.Type.IsClass)
 			{
 				var args = typeParser.GetConstructorArguments();
 				PythonStubWriterLibrary.WritePythonConstructor(
-					writer: Writer,
+					classDef: classDef,
 					arguments: args,
 					docString: new PythonConstructorDocStringWriterLibrary(
 						description: "Constructor Description",
@@ -111,13 +81,14 @@ namespace AssemblyCrawler.Generators
 			}
 			#endregion
 
-
 			#region Methods
 			// Overloaded methods
 			foreach (var m in typeParser.OverloadedMethods)
 			{
+				StubFile.AddImportModule("typing").AddType("overload");
+
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: typeParser.Name,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -136,7 +107,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.SimpleMethods)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: m.Name,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -154,7 +125,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorAddition)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefAddition,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -171,7 +142,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorSubtraction)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefSubtraction,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -188,7 +159,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorMultiplication)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefMultiplication,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -205,7 +176,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorDivision)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefDivision,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -222,7 +193,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorModulo)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefModulo,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -239,7 +210,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorEquality)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefEquality,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -256,7 +227,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorInequality)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefInEquality,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -273,7 +244,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorGreaterThan)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefGreaterThan,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -290,7 +261,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorLessThan)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefLessThan,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -307,7 +278,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorGreaterOrEqualTo)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefGreaterOrEqualTo,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -324,7 +295,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorLessOrEqualTo)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefLessOrEqualTo,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -341,7 +312,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorBitwiseAnd)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefBitwiseAnd,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -358,7 +329,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorBitwiseOr)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefBitwisOr,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -375,7 +346,7 @@ namespace AssemblyCrawler.Generators
 			foreach (var m in typeParser.OperatorBitwiseXor)
 			{
 				PythonStubWriterLibrary.WritePythonMethod(
-					writer: Writer,
+					classDef: classDef,
 					methodName: DefBitwiseXor,
 					arguments: typeParser.GetMethodArguments(m),
 					returnType: m.ReturnType,
@@ -390,12 +361,11 @@ namespace AssemblyCrawler.Generators
 			}
 			#endregion
 
-
 			#region Properties
 			// Write ReadOnly properties
 			foreach (var p in typeParser.ReadOnlyProperties)
 				PythonStubWriterLibrary.WritePythonProperty(
-					writer: Writer,
+					classDef: classDef,
 					propertyName: typeParser.GetPropertyName(p),
 					returnType: p.ReturnType,
 					docString: new PythonPropertyDocStringWriterLibrary(
@@ -408,7 +378,7 @@ namespace AssemblyCrawler.Generators
 			// Write WriteOnly properties
 			foreach (var p in typeParser.WriteOnlyProperties)
 				PythonStubWriterLibrary.WritePythonPropertySetter(
-					writer: Writer,
+					classDef: classDef,
 					propertyName: typeParser.GetPropertyName(p),
 					returnType: p.GetParameters()[0].ParameterType,
 					isStatic: p.IsStatic,
@@ -420,7 +390,7 @@ namespace AssemblyCrawler.Generators
 		#endregion
 
 		#region Private Properties
-		private StreamWriter Writer { get; }
+		private PythonModuleDefinition StubFile { get; }
 		#endregion
 	}
 }

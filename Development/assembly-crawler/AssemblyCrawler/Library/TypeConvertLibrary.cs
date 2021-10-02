@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AssemblyCrawler.Support;
 
 namespace AssemblyCrawler.Library
 {
@@ -51,6 +52,68 @@ namespace AssemblyCrawler.Library
 
 
 			return ToPythonPrimitiveType(type);
+		}
+		public static void AddImportForPythonType(PythonModuleDefinition module, Type type)
+		{
+			string pythonType = ToPythonType(type);
+			if (pythonType.StartsWith("List"))
+				module.AddImportModule("typing").AddType("List");
+			else if (pythonType.StartsWith("Dict"))
+				module.AddImportModule("typing").AddType("Dict");
+			else if (pythonType.StartsWith("Iterator"))
+				module.AddImportModule("typing").AddType("Iterator");
+			else if (pythonType.StartsWith("Comparer"))
+				module.AddImportModule("typing").AddType("Comparer");
+			else if (pythonType == "Enum")
+				module.AddImportModule("enum").AddType("Enum");
+			else if (pythonType == type.Name)
+			{
+				// One of the types being written to the package.
+				// Need to find the module where the type is located so it can be imported
+				// IF it is not part of the current module.
+				if (!type.IsGenericParameter)
+				{
+					var classDef = module.ClassDefinitions.Find(c => c.FullName == type.AssemblyQualifiedName);
+					if (classDef == null)
+					{
+						// The class definition is not part of the current module.
+						foreach (var mod in module.Package.Modules)
+						{
+							if (mod.Filename != module.Filename)
+							{
+								// Don't look at the current module.
+								classDef = mod.ClassDefinitions.Find(c => c.FullName == type.AssemblyQualifiedName);
+								if (classDef != null)
+								{
+									module.AddImportModule(classDef.ClassName).AddType(pythonType);
+								}
+							}
+						}
+					}
+				}
+				else
+				{
+					// This is a type parameer.  Still needs to be imported if needed
+					var typeVar = module.TypeVars.Find(t => t.TypeVarName == type.Name);
+					if (typeVar == null)
+					{
+						// Search through other modules.
+						foreach (var mod in module.Package.Modules)
+						{
+							if (mod.Filename != module.Filename)
+							{
+								typeVar = mod.TypeVars.Find(t => t.TypeVarName == type.Name);
+								if (typeVar != null)
+								{
+									// Found
+									Console.WriteLine($"Add import for {typeVar.TypeVarName} from {mod.Filename}");
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		#endregion
 

@@ -4,7 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using AssemblyCrawler.Support;
 
 namespace AssemblyCrawler.Library
 {
@@ -29,54 +29,80 @@ namespace AssemblyCrawler.Library
 
 		#endregion
 
-		public static void WritePythingClassDef(
-			StreamWriter sw,
+		public static void WritePythonClassDef(
+			PythonModuleDefinition module,
 			Type classType,
 			string docString,
 			int indentLevel = 0)
 		{
 			/*
-			 * For generic interfaces, they need to either inherit from Generic[] or a generic interface.
+			 * For generic interfaces, they need to either inherit from Generic[] or a generic interface and provide the types via Typevar.
 			 * So need to determine upfront which parent to use.
 			 * 
-			 * 
+			 * IsGenericType will determine if this type is generic.  Then check the list of interfaces for any generic interfaces it may inherit from.
 			*/
-		}
 
-		public static void WritePythonClassDefinition(
-			StreamWriter writer,
-			Type classType,
-			List<Type> inheritedTypes,
-			string docString,
-			bool isGenericType,
-			int indentLevel = 0)
-		{
-			var className = classType.Name.Split('`')[0];
-			var inheritedTypesString = string.Join(", ", inheritedTypes.Select(t => TypeConvertLibrary.ToPythonType(t)));
+			PythonClassDefinition classDef = module.AddClassDefinition(classType.AssemblyQualifiedName, classType.Name);
 
-			if (isGenericType)
-				inheritedTypesString = $"{GENERIC}[{inheritedTypesString}]";
+			// Process the interfaces this interface inherits from.  One or more can be generic.
+			List<string> interfaceNames = new List<string>();
+			bool hasGenericParent = false;
+			foreach (var interf in classType.GetInterfaces())
+			{
+				if (interf.IsGenericType)
+				{
+					interfaceNames.Add(CreateGenericParentClass(module, interf));
+					hasGenericParent = true;
+				}
+				else
+				{
+					//interfaceNames.Add(CorrectClassName(interf.Name, interf.GetGenericArguments().Length));
+					interfaceNames.Add(interf.Name);
 
-			var classString = $"{CLASS} {className}({inheritedTypesString}):";
+					// Check to see if this type needs to be imported.
+					AddReferenceImports(module, interf);
+				}
+			}
 
-			var indentation = GetIndentation(indentLevel);
+			if (classType.IsGenericType && !hasGenericParent)
+			{
+				module.AddImportModule("typing");
+				module.GetImport("typing").AddType("TypeVar");
 
-			writer.WriteLine();
-			writer.WriteLine();
-			writer.WriteLine($"{indentation}{CLASS} {className}({inheritedTypesString}):");
-			writer.WriteLine($"{indentation}{docString}");
+				List<string> genericArguments = new List<string>();
+				foreach (var ga in classType.GetGenericArguments())
+					genericArguments.Add(ga.Name);
 
-			writer.WriteLine($"{indentation}{TAB}{PASS}");
+				interfaceNames.Insert(0, $"Generic[{string.Join(", ", genericArguments)}]");
+
+				// This is a generic type with no parent generic interfaces.  So inherit from GENERIC
+				List<string> argumentTypes = new List<string>();
+				foreach (var arg in classType.GetGenericArguments())
+				{
+					argumentTypes.Add(arg.Name);
+					module.AddTypeVar(arg.Name, arg.GetGenericParameterConstraints());
+
+					AddReferenceImports(module, arg);
+				}
+			}
+
+			classDef.ClassDefinition.Append($"{CLASS} {CorrectClassName(classType.Name, classType.GetGenericArguments().Length)}");
+			string parent = string.Join(", ", interfaceNames);
+
+			if (!string.IsNullOrEmpty(parent))
+				classDef.ClassDefinition.AppendLine($"({parent}):");
+			else
+				classDef.ClassDefinition.AppendLine(":");
 		}
 
 		public static void WritePythonConstructor(
-			StreamWriter writer,
+			PythonClassDefinition classDef,
 			List<KeyValuePair<string, Type>> arguments,
 			string docString,
 			int indentLevel = 1)
 		{
 			WritePythonMethod(
-				writer: writer,
+				classDef: classDef,
 				methodName: INIT,
 				arguments: arguments,
 				returnType: typeof(void),
@@ -87,13 +113,13 @@ namespace AssemblyCrawler.Library
 		}
 
 		public static void WritePythonConstructorUnsupported(
-			StreamWriter writer,
+			PythonClassDefinition classDef,
 			int indentLevel = 1)
 		{
 			var docString = new PythonConstructorUnsupportedDocStringWriterLibrary().ToString();
 
 			WritePythonMethod(
-				writer: writer,
+				classDef: classDef,
 				methodName: INIT,
 				arguments: new List<KeyValuePair<string, Type>>(),
 				returnType: typeof(void),
@@ -117,7 +143,7 @@ namespace AssemblyCrawler.Library
 		}
 
 		public static void WritePythonMethod(
-			StreamWriter writer,
+			PythonClassDefinition classDef,
 			string methodName,
 			List<KeyValuePair<string, Type>> arguments,
 			Type returnType,
@@ -127,9 +153,10 @@ namespace AssemblyCrawler.Library
 			bool isOverloaded = false,
 			int indentLevel = 1)
 		{
+			AddReferenceImports(classDef.Module, returnType);
+
 			// To handle generic type name better
 			methodName = methodName.Split('`')[0];
-
 
 			// self keyword
 			var selfKeyword = isStatic ? string.Empty : SELF;
@@ -148,6 +175,7 @@ namespace AssemblyCrawler.Library
 
 			// return type
 			var returnTypeString = TypeConvertLibrary.ToPythonType(returnType);
+			TypeConvertLibrary.AddImportForPythonType(classDef.Module, returnType);
 			if (Nullable.GetUnderlyingType(returnType) != null)
 			{
 				returnType = Nullable.GetUnderlyingType(returnType) ?? typeof(void);
@@ -160,25 +188,25 @@ namespace AssemblyCrawler.Library
 
 			var indentation = GetIndentation(indentLevel);
 
-			writer.WriteLine();
+			classDef.Methods.AppendLine();
 
 			if (isStatic)
-				writer.WriteLine($"{indentation}{STATIC_METHOD}");
+				classDef.Methods.AppendLine($"{indentation}{STATIC_METHOD}");
 
 			if (isOverloaded)
-				writer.WriteLine($"{indentation}{OVERLOAD}");
+				classDef.Methods.AppendLine($"{indentation}{OVERLOAD}");
 
-			writer.WriteLine($"{indentation}{method}");
-			writer.WriteLine($"{indentation}{docString}");
+			classDef.Methods.AppendLine($"{indentation}{method}");
+			classDef.Methods.AppendLine($"{indentation}{docString}");
 
 			if (exception?.Length > 0)
-				writer.WriteLine($"{indentation}\t{exception}");
+				classDef.Methods.AppendLine($"{indentation}\t{exception}");
 
-			writer.WriteLine($"{indentation}{TAB}{PASS}");
+			classDef.Methods.AppendLine($"{indentation}{TAB}{PASS}");
 		}
 
 		public static void WritePythonProperty(
-			StreamWriter writer,
+			PythonClassDefinition classDef,
 			string propertyName,
 			Type returnType,
 			string docString,
@@ -187,19 +215,20 @@ namespace AssemblyCrawler.Library
 		{
 			var indentation = GetIndentation(indentLevel);
 
-			writer.WriteLine();
-			writer.WriteLine($"{indentation}{PROPERTY}");
+			classDef.Properties.AppendLine();
+			classDef.Properties.AppendLine($"{indentation}{PROPERTY}");
 
 			if (isStatic)
-				writer.WriteLine($"{indentation}{STATIC_METHOD}");
+				classDef.Properties.AppendLine($"{indentation}{STATIC_METHOD}");
 
 			var selfKeyword = isStatic ? string.Empty : SELF;
-			writer.WriteLine($"{indentation}{DEF} {propertyName}({selfKeyword}) -> {TypeConvertLibrary.ToPythonType(returnType)}:");
-			writer.WriteLine($"{indentation}{docString}");
-			writer.WriteLine($"{indentation}{TAB}{PASS}");
+			classDef.Properties.AppendLine($"{indentation}{DEF} {propertyName}({selfKeyword}) -> {TypeConvertLibrary.ToPythonType(returnType)}:");
+			classDef.Properties.AppendLine($"{indentation}{docString}");
+			classDef.Properties.AppendLine($"{indentation}{TAB}{PASS}");
 		}
 
-		public static void WritePythonPropertySetter(StreamWriter writer,
+		public static void WritePythonPropertySetter(
+			PythonClassDefinition classDef,
 			string propertyName,
 			Type returnType,
 			bool isStatic,
@@ -207,14 +236,14 @@ namespace AssemblyCrawler.Library
 		{
 			var indentation = GetIndentation(indentLevel);
 
-			writer.WriteLine();
-			writer.WriteLine($"{indentation}@{propertyName}{SETTER}");
+			classDef.Properties.AppendLine();
+			classDef.Properties.AppendLine($"{indentation}@{propertyName}{SETTER}");
 
 			if (isStatic)
-				writer.WriteLine($"{indentation}{STATIC_METHOD}");
+				classDef.Properties.AppendLine($"{indentation}{STATIC_METHOD}");
 
-			writer.WriteLine($"{indentation}{DEF} {propertyName}({SELF}, {propertyName.ToLower()}: {TypeConvertLibrary.ToPythonType(returnType)}) -> {NONETYPE}:");
-			writer.WriteLine($"{indentation}{TAB}{PASS}");
+			classDef.Properties.AppendLine($"{indentation}{DEF} {propertyName}({SELF}, {propertyName.ToLower()}: {TypeConvertLibrary.ToPythonType(returnType)}) -> {NONETYPE}:");
+			classDef.Properties.AppendLine($"{indentation}{TAB}{PASS}");
 		}
 
 		public static void WritePythonGenericClassDefinition(StreamWriter writer)
@@ -232,13 +261,76 @@ namespace AssemblyCrawler.Library
 
 		}
 
-
-		#region Private Static Methods
+		#region Private Methods
 		private static string GetIndentation(int count)
 		{
 			var tabs = string.Empty;
 			for (int i = 0; i < count; i++) tabs += $"{TAB}";
 			return tabs;
+		}
+		private static void AddReferenceImports(PythonModuleDefinition module, Type interf)
+		{
+			if (interf == typeof(void))
+				return;
+
+			if (!interf.IsGenericParameter)
+			{
+				var refClassDef = module.ClassDefinitions.Find(c => c.FullName == interf.AssemblyQualifiedName && c.ClassName == interf.Name);
+				if (refClassDef == null)
+				{
+					// Not found.  check entire package.
+					foreach (var mod in module.Package.Modules)
+					{
+						if (mod.Filename != module.Filename)
+						{
+							refClassDef = mod.ClassDefinitions.Find(c => c.FullName == interf.AssemblyQualifiedName && c.ClassName == interf.Name);
+							if (refClassDef != null)
+								module.AddImportModule(interf.Namespace).AddType(interf.Name);
+						}
+					}
+				}
+			}
+			else if (interf.IsGenericParameter)
+			{
+				var typeVar = module.GetTypeVar(interf.Name);
+
+				if (typeVar == null)
+				{
+					//foreach (var mod in module.Package.Modules)
+					for(int i = 0; i < module.Package.Modules.Count; ++i)
+					{
+						var mod = module.Package.Modules[i];
+						if (mod.ModuleNamespace != module.ModuleNamespace)
+						{
+							typeVar = mod.GetTypeVar(interf.Name);
+							if (typeVar != null)
+							{
+								module.AddImportModule(mod.ModuleNamespace).AddType(typeVar.TypeVarName);
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		private static string CreateGenericParentClass(PythonModuleDefinition stubFile, Type interf)
+		{
+			stubFile.AddImportModule("typing");
+			stubFile.GetImport("typing").AddType("Generic");
+
+			List<string> arguments = new List<string>();
+			foreach (var arg in interf.GetGenericArguments())
+			{
+				arguments.Add(arg.Name);
+				AddReferenceImports(stubFile, arg);
+			}
+			return $"{CorrectClassName(interf.Name, interf.GetGenericArguments().Length)}[{string.Join(", ", arguments)}]";
+		}
+
+		public static string CorrectClassName(string name, int count)
+		{
+			return name.Replace($"`{count}", "");
 		}
 		#endregion
 	}

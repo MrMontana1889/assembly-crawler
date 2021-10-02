@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
 	  <BaseOutputPath>$(SolutionDir)..\Output\$(AssemblyName)</BaseOutputPath>
+	  <AssemblyName>Test.TestGenericAssembly</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

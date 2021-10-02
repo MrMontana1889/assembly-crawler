@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 
-namespace TestGenericAssembly
+namespace Test.TestGenericAssembly
 {
 	public interface IElementInput { }
 	public interface IElementsInput { }
@@ -25,8 +25,8 @@ namespace TestGenericAssembly
 	}
 
 	public interface IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType> : IElement
-		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IElementManager
+		where TElementType : class, IElement
 		where TElementInputType : class, IElementInput
 		where TElementResultsType : class, IElementResults
 		where TElementsInputType : class, IElementsInput
@@ -37,8 +37,8 @@ namespace TestGenericAssembly
 	}
 
 	public interface IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType> : IElementManager
-		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IElementManager
+		where TElementType : class, IElement
 		where TElementInputType : class, IElementInput
 		where TElementResultsType : class, IElementResults
 		where TElementsInputType : class, IElementsInput
@@ -52,8 +52,8 @@ namespace TestGenericAssembly
 
 	public interface INetworkElement<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
 		: IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IElementManager
+		where TElementType : class, IElement
 		where TElementInputType : class, IElementInput
 		where TElementResultsType : class, IElementResults
 		where TElementsInputType : class, IElementsInput
@@ -64,8 +64,8 @@ namespace TestGenericAssembly
 
 	public interface INetworkElements<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
 		: IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IElementManager
+		where TElementType : class, IElement
 		where TElementInputType : class, IElementInput
 		where TElementResultsType : class, IElementResults
 		where TElementsInputType : class, IElementsInput
@@ -75,10 +75,10 @@ namespace TestGenericAssembly
 		TElementsResultsType Results { get; }
 	}
 
-	public interface IWaterNetworkElement<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType> 
+	public interface IWaterNetworkElement<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
 		: INetworkElement<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IElementManager
+		where TElementType : class, IElement
 		where TElementInputType : class, IElementInput
 		where TElementResultsType : class, IElementResults
 		where TElementsInputType : class, IElementsInput
@@ -91,8 +91,8 @@ namespace TestGenericAssembly
 
 	public interface IWaterNetworkElements<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
 		: INetworkElements<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementTypeManager : class, IModelingElementsBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
-		where TElementType : class, IModelingElementBase<TElementTypeManager, TElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType>
+		where TElementTypeManager : class, IElementManager
+		where TElementType : class, IElement
 		where TElementInputType : class, IElementInput
 		where TElementResultsType : class, IElementResults
 		where TElementsInputType : class, IElementsInput
@@ -100,4 +100,4 @@ namespace TestGenericAssembly
 	{
 
 	}
-}
+ }
