@@ -1,4 +1,4 @@
-from Domain import IWaterModel
+from OpenFlows.Water.Domain import IWaterModel
 
 class OpenFlowsWaterPython:
     
