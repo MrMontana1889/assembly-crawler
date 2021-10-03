@@ -2,10 +2,12 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 
 namespace AssemblyCrawler.Support
 {
+	[DebuggerDisplay("{MOdule} : {PythonTypes}")]
 	public class ImportDefinition
 	{
 		#region Constructor

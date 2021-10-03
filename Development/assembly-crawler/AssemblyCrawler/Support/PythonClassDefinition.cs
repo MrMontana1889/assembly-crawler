@@ -1,11 +1,13 @@
 ﻿// PythonClassDefinition.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
 namespace AssemblyCrawler.Support
 {
+	[DebuggerDisplay("{FullName}:{ClassName}")]
 	public class PythonClassDefinition
 	{
 		#region Constructor

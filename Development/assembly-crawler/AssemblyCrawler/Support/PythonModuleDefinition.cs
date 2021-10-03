@@ -3,11 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
 namespace AssemblyCrawler.Support
 {
+	[DebuggerDisplay("{ModuleNamespace} : {Filename}")]
 	public class PythonModuleDefinition : StubFileBase
 	{
 		#region Constructor

@@ -165,7 +165,7 @@ namespace AssemblyCrawler.Test
 			SettingsViewModel.Instance.IncludePropertyTypesAsAssociations = false;
 
 			SimpleTreeLayoutParametersEx settings = (SimpleTreeLayoutParametersEx)SettingsViewModel.Instance.LayoutParameters;
-			settings.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.RightToLeft;
+			settings.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.LeftToRight;
 		}
 		#endregion
 

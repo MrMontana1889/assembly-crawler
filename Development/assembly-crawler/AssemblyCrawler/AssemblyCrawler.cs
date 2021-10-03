@@ -13,6 +13,7 @@ using Barber.AutoDiagrammer;
 using Barber.AutoDiagrammer.Models;
 using Barber.AutoDiagrammer.Services;
 using Barber.AutoDiagrammer.Support;
+using Barber.AutoDiagrammer.GraphBits;
 
 namespace AssemblyCrawler
 {
@@ -41,6 +42,16 @@ namespace AssemblyCrawler
 			if (DotNetObject.IsValidDotNetAssembly(assemblyFilename))
 			{
 				// Valid.  Continue.
+
+				SettingsViewModel.Instance.SetGraphObject(null);
+				SettingsViewModel.Instance.LayoutAlgorithmType = "Tree";
+				SettingsViewModel.Instance.IncludeConstructorParametersAsAssociations = false;
+				SettingsViewModel.Instance.IncludeFieldTypesAsAssociations = false;
+				SettingsViewModel.Instance.IncludeMethodArgumentAsAssociations = false;
+				SettingsViewModel.Instance.IncludePropertyTypesAsAssociations = false;
+
+				SimpleTreeLayoutParametersEx settings = (SimpleTreeLayoutParametersEx)SettingsViewModel.Instance.LayoutParameters;
+				settings.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.LeftToRight;
 
 				AssemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename);
 
