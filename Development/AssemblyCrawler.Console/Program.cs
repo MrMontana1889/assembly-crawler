@@ -54,6 +54,8 @@ namespace AssemblyCrawler.Console
 					crawler.Crawl(package, assemblyFile, obj.OutputPath);
 				}
 			}
+
+			package.Write();
 		}
 		#endregion
 	}

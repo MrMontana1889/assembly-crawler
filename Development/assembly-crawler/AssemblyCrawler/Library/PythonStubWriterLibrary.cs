@@ -90,14 +90,13 @@ namespace AssemblyCrawler.Library
 
 			if (classType.IsGenericType)
 			{
-				module.AddImportModule("typing").AddType("TypeVar");
 				module.AddImportModule("typing").AddType("Generic");
 
 				List<string> genericArguments = new List<string>();
 				foreach (var ga in classType.GetGenericArguments())
 					genericArguments.Add(ga.Name);
 
-				interfaceNames.Insert(0, $"Generic[{string.Join(", ", genericArguments)}]");
+				interfaceNames.Insert(0, $"{GENERIC}[{string.Join(", ", genericArguments)}]");
 
 				// This is a generic type with no parent generic interfaces.  So inherit from GENERIC
 				foreach (var arg in classType.GetGenericArguments())
@@ -223,6 +222,9 @@ namespace AssemblyCrawler.Library
 
 			classDef.Module.AddGenericArgumentType(returnType);
 
+			if ((returnType.IsEnum || returnType == typeof(Enum)) && (!returnType.IsGenericType && !returnType.IsGenericParameter))
+				classDef.Module.Assembly.AddEnum(returnType);
+
 			// definition
 			var method = $"{DEF} {methodName}({selfKeyword}{pythonArguments}) -> {returnTypeString}:";
 
@@ -264,9 +266,16 @@ namespace AssemblyCrawler.Library
 			AddReferenceImports(classDef.Module, returnType);
 			classDef.Module.AddGenericArgumentType(returnType);
 
+			if ((returnType.IsEnum || returnType == typeof(Enum)) && (!returnType.IsGenericType && !returnType.IsGenericParameter))
+				classDef.Module.Assembly.AddEnum(returnType);
+
 			var selfKeyword = isStatic ? string.Empty : SELF;
 			var adjustedReturnType = CorrectClassName(TypeConvertLibrary.ToPythonType(returnType),
 				returnType.GetGenericArguments().Length);
+
+			if (returnType.IsArray)
+				classDef.Module.AddImportModule("array").AddType("array");
+
 			classDef.Properties.AppendLine($"{indentation}{DEF} {propertyName}({selfKeyword}) -> {adjustedReturnType}:");
 			classDef.Properties.AppendLine($"{indentation}{docString}");
 			classDef.Properties.AppendLine($"{indentation}{TAB}{PASS}");
@@ -306,14 +315,13 @@ namespace AssemblyCrawler.Library
 			TypeConvertLibrary.AddImportForPythonType(module, interf);
 		}
 
-		private static string CreateGenericParentClass(PythonModuleDefinition stubFile, Type interf)
+		private static string CreateGenericParentClass(PythonModuleDefinition module, Type interf)
 		{
-			stubFile.AddImportModule("typing").AddType("Generic");
-
 			if (interf.Namespace.Contains("IEnumerable") && interf != typeof(Enum))
 				return string.Empty;
 
-			AddReferenceImports(stubFile, interf);
+			AddReferenceImports(module, interf);
+			module.AddGenericArgumentType(interf);
 
 			List<string> arguments = new List<string>();
 			foreach (var arg in interf.GetGenericArguments())
@@ -321,8 +329,8 @@ namespace AssemblyCrawler.Library
 				if (arg == typeof(Enum) || !arg.Namespace.Contains("IEnumerable"))
 				{
 					arguments.Add(arg.Name);
-					AddReferenceImports(stubFile, arg);
-					stubFile.AddGenericArgumentType(arg);
+					AddReferenceImports(module, arg);
+					module.AddGenericArgumentType(arg);
 				}
 			}
 			return $"{CorrectClassName(interf.Name, interf.GetGenericArguments().Length)}[{string.Join(", ", arguments)}]";

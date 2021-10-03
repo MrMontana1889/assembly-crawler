@@ -1,8 +1,8 @@
 ﻿// PythonPackageDefinition.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AssemblyCrawler.Support
 {
@@ -20,32 +20,22 @@ namespace AssemblyCrawler.Support
 		#endregion
 
 		#region Public Methods
-		public PythonModuleDefinition AddModule(string moduleNamespace, string filename)
-		{
-			if (Modules.Find(m => m.Filename == filename) == null)
-				Modules.Add(new PythonModuleDefinition(this, moduleNamespace, filename));
-			return GetModule(filename);
-		}
-		public PythonModuleDefinition GetModule(string filename)
-		{
-			return Modules.Find(m => m.Filename == filename);
-		}
-		public void AddEnum(Type enumType)
-		{
-			if (Enumerations.Find(e => e.Name == enumType.Name) == null)
-				Enumerations.Add(enumType);
-		}
 		public void Write()
 		{
-			foreach (var module in Modules)
-				module.Write();
+			foreach (var assembly in Assemblies)
+				assembly.Write();
+		}
+		public PythonAssemblyDefinition AddAssembly(Assembly assembly, string outputPath)
+		{
+			if (Assemblies.Find(a => a.Assembly.FullName == assembly.FullName) == null)
+				Assemblies.Add(new PythonAssemblyDefinition(this, assembly, outputPath));
+			return Assemblies.Find(a => a.Assembly.FullName == assembly.FullName);
 		}
 		#endregion
 
 		#region Public Properties
 		public string PackageName { get; }
-		public List<Type> Enumerations { get; } = new List<Type>();
-		public List<PythonModuleDefinition> Modules { get; } = new List<PythonModuleDefinition>();
+		public List<PythonAssemblyDefinition> Assemblies { get; } = new List<PythonAssemblyDefinition>();
 		#endregion
 	}
 }

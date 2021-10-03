@@ -9,9 +9,9 @@ namespace AssemblyCrawler.Generators
 	public static class GeneratorLibrary
 	{
 		#region Public Methods
-		public static IStubGenerator NewPythonStubGenerator(PythonModuleDefinition stubFile)
+		public static IStubGenerator NewPythonStubGenerator(PythonModuleDefinition module)
 		{
-			return new PythonStubGenerator(stubFile);
+			return new PythonStubGenerator(module);
 		}
 		#endregion
 	}

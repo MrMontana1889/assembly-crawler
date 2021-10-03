@@ -42,9 +42,9 @@ namespace AssemblyCrawler.Generators
 		#endregion
 
 		#region Constructor
-		public PythonStubGenerator(PythonModuleDefinition stubFile)
+		public PythonStubGenerator(PythonModuleDefinition module)
 		{
-			Module = stubFile;
+			Module = module;
 		}
 		#endregion
 
@@ -52,6 +52,8 @@ namespace AssemblyCrawler.Generators
 		public void GenerateTypeStub(Type type)
 		{
 			var typeParser = new TypeParserLibrary(type).Parse();
+
+			string typeName = type.Name;
 
 			if (type == typeof(Enum))
 			{
@@ -370,6 +372,9 @@ namespace AssemblyCrawler.Generators
 				#region Properties
 				// Write ReadOnly properties
 				foreach (var p in typeParser.ReadOnlyProperties)
+				{
+					string pName = p.Name;
+
 					PythonStubWriterLibrary.WritePythonProperty(
 						classDef: classDef,
 						propertyName: typeParser.GetPropertyName(p),
@@ -380,6 +385,7 @@ namespace AssemblyCrawler.Generators
 						isStatic: p.IsStatic,
 						indentLevel: 1
 						);
+				}
 
 				// Write WriteOnly properties
 				foreach (var p in typeParser.WriteOnlyProperties)

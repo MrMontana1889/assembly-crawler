@@ -44,6 +44,8 @@ namespace AssemblyCrawler.Support
 
 				if (constraintNames.Count > 0)
 					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\", {string.Join(",", constraintNames)})");
+				else
+					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\")");
 			}
 			else
 			{

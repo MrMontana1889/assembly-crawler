@@ -66,6 +66,8 @@ namespace AssemblyCrawler
 					AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
 					Assembly assembly = Assembly.Load(assemblyName);
 
+					var assemblyDef = package.AddAssembly(assembly, outputPath);
+
 					IDictionary<string, List<Type>> typeMap = new Dictionary<string, List<Type>>(graphResults.Vertices.Count);
 
 					foreach (var v in graphResults.Vertices)
@@ -102,14 +104,12 @@ namespace AssemblyCrawler
 						string pyiFilename = Path.Combine(outputPath, type.Key);
 						Console.WriteLine(pyiFilename);
 
-						PythonModuleDefinition stubFile = package.AddModule(type.Value.First().Namespace, pyiFilename);
-						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(stubFile);
+						PythonModuleDefinition module = assemblyDef.AddModule(type.Value.First().Namespace, pyiFilename);
+						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
 
 						foreach (Type t in type.Value)
 							generator.GenerateTypeStub(t);
 					}
-
-					package.Write();
 				}
 			}
 		}
