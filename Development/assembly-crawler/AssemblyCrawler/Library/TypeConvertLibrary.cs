@@ -100,18 +100,24 @@ namespace AssemblyCrawler.Library
 					if (typeVar == null)
 					{
 						//foreach (var mod in module.Package.Modules)
-						for (int i = 0; i < module.Package.Modules.Count; ++i)
+						bool typeVarFound = false;
+						foreach (var mod in module.Package.Modules)
 						{
-							var mod = module.Package.Modules[i];
 							if (mod.ModuleNamespace != module.ModuleNamespace)
 							{
 								typeVar = mod.GetTypeVar(type.Name);
 								if (typeVar != null)
 								{
 									module.AddImportModule(mod.ModuleNamespace).AddType(typeVar.TypeVarName);
+									typeVarFound = true;
 									break;
 								}
 							}
+						}
+
+						if (!typeVarFound)
+						{
+							module.AddTypeVar(type.Name, type.GetGenericParameterConstraints());
 						}
 					}
 					else
@@ -151,6 +157,9 @@ namespace AssemblyCrawler.Library
 
 		private static string ToPythonPrimitiveType(Type type)
 		{
+			if (type.IsEnum)
+				return type.Name;
+
 			switch (Type.GetTypeCode(type))
 			{
 				case TypeCode.Byte:

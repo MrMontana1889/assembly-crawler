@@ -74,7 +74,7 @@ namespace AssemblyCrawler
 						string[] tokens = v.Name.Split(Type.Delimiter);
 
 						// Last one is the interface name, second to last is the module name to use
-						string filename = filename = tokens[tokens.Length - 2];
+						string filename = tokens[tokens.Length - 2];
 
 						if (tokens.Length > 2)
 							Array.Resize(ref tokens, tokens.Length - 2);
@@ -107,9 +107,9 @@ namespace AssemblyCrawler
 
 						foreach (Type t in type.Value)
 							generator.GenerateTypeStub(t);
-
-						stubFile.Write();
 					}
+
+					package.Write();
 				}
 			}
 		}

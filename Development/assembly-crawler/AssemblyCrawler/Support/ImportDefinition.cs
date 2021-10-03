@@ -25,6 +25,10 @@ namespace AssemblyCrawler.Support
 				PythonTypes.Add(pythonType);
 			}
 		}
+		public bool HasType(string pythonType)
+		{
+			return PythonTypes.Find(t => t == pythonType) != null;
+		}
 		public void Write(StreamWriter sw)
 		{
 			sw.Write($"from {Module} import ");

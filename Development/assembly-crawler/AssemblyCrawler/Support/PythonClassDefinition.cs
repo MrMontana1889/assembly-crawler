@@ -1,6 +1,8 @@
 ﻿// PythonClassDefinition.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
