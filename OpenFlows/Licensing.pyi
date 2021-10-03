@@ -1,4 +1,5 @@
 from typing import overload
+from OpenFlows.Enumerations import *
 
 class ILicenseManager(ILicenseProvider):
 

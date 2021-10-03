@@ -1,5 +1,5 @@
-from typing import Generic
 from OpenFlows.Domain.ModelingElements import IScenario, IScenarios, ISelectionSet, ISelectionSets
+from OpenFlows.Water.Enumerations import *
 from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
 from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetworkElement
 

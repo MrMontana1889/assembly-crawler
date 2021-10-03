@@ -1,7 +1,10 @@
 from OpenFlows.Units import IUnit
-from typing import TypeVar, Generic, List
+from typing import Generic, List, TypeVar
 from enum import Enum
+from OpenFlows.Enumerations import *
 
+TValueType = TypeVar("TValueType")
+TFieldType = TypeVar("TFieldType")
 TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum", Enum)
 TNetworkElementType = TypeVar("TNetworkElementType", Enum)
 

@@ -1,7 +1,9 @@
-from typing import List, TypeVar, Generic, overload
+from typing import List, Generic, overload, TypeVar
 from enum import Enum
 from OpenFlows.Units import IUnit
 from datetime import datetime
+from array import array
+from OpenFlows.Enumerations import *
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 
 TElementType = TypeVar("TElementType", IElement)
@@ -455,10 +457,10 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		pass
 
 	@property
-	def TimeStepsInSeconds(self) -> Double[]:
+	def TimeStepsInSeconds(self) -> array(float):
 		"""
 		Returns:
-			Double[]: No Description
+			array(float): No Description
 		"""
 		pass
 

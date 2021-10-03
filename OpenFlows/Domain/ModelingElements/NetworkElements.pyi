@@ -1,8 +1,9 @@
-from typing import Generic, TypeVar, List, overload, Dict
 from OpenFlows.Domain.ModelingElements import IModelingElementBase, TElementManagerType, TElementType, TElementTypeEnum, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IElement, IGeometryUnits
+from typing import Generic, List, overload, Dict, TypeVar
 from enum import Enum
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 from OpenFlows.Units import IUnit
+from OpenFlows.Enumerations import *
 
 TUnitsType = TypeVar("TUnitsType", IElementUnits)
 TElementInputType = TypeVar("TElementInputType", IElementInput)
@@ -478,19 +479,19 @@ class IBasePolygonInput(IActiveElementInput):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetRings(self) -> GeometryPoint[][]:
+	def GetRings(self) -> array():
 		"""Method Description
 
 		Returns:
-			GeometryPoint[][]: 
+			array(): 
 		"""
 		pass
 
-	def SetRings(self, rings: GeometryPoint[][]) -> None:
+	def SetRings(self, rings: array()) -> None:
 		"""Method Description
 
 		Args:
-			rings(GeometryPoint[][]): rings
+			rings(array()): rings
 
 		Returns:
 			None: 

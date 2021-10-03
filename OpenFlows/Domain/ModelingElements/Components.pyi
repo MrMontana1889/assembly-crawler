@@ -1,6 +1,7 @@
-from typing import TypeVar, Generic, List
+from typing import Generic, List, TypeVar
 from OpenFlows.Domain.ModelingElements import IElement, IModelingElementsBase, TElementManagerType, IElementUnits, IModelingElementBase
 from enum import Enum
+from OpenFlows.Enumerations import *
 
 TElementType = TypeVar("TElementType", IElement)
 TElementTypeEnum = TypeVar("TElementTypeEnum", Enum)

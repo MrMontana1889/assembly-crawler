@@ -1,6 +1,7 @@
-from typing import TypeVar, Generic, List, Iterator
+from typing import Generic, List, Iterator, TypeVar
 from OpenFlows.Domain.ModelingElements import IElementUnits
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
+from OpenFlows.Enumerations import *
 
 TCollectionType = TypeVar("TCollectionType", ICollection)
 TElementType = TypeVar("TElementType", ICollectionElement)

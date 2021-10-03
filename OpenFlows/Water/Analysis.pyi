@@ -1,7 +1,7 @@
-from typing import Generic
 from OpenFlows.Analysis import IAnalysisCalculator
 from OpenFlows.Water.Domain.ModelingElements import IWaterScenario, IWaterScenarios
 from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
+from OpenFlows.Water.Enumerations import *
 
 class IScenarioEnergyCostCalculator(IAnalysisCalculator[IWaterScenario, IWaterScenarios, IWaterScenarioOptions, IWaterScenarioOptionsUnits]):
 

@@ -1,9 +1,10 @@
-from typing import Generic, TypeVar
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType
 from OpenFlows.Units import IUnit
 from datetime import datetime
 from OpenFlows.Domain.ModelingElements.Components import IComponentElements, IComponentElement, IModelComponents
+from typing import Generic
+from OpenFlows.Water.Enumerations import *
 from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetworkElement
 
 

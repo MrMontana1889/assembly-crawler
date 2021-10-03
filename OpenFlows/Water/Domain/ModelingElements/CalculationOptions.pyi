@@ -1,10 +1,10 @@
-from typing import Generic
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
 from OpenFlows.Domain.ModelingElements import IElementUnits, IScenarioOptions
 from OpenFlows.Water.Domain.ModelingElements import IWaterSelectionSet
 from OpenFlows.Water.Domain.ModelingElements.Components import IPattern, IUnitDemandLoad
 from datetime import datetime
 from OpenFlows.Units import IUnit
+from OpenFlows.Water.Enumerations import *
 
 class IActiveDemandAdjustmentsCollection(ICollectionElements[IActiveDemandAdjustments, IActiveDemandAdjustment, IElementUnits]):
 

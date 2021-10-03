@@ -1,6 +1,6 @@
-from typing import Generic
 from OpenFlows.Domain.DataObjects import IModel
 from OpenFlows.Water.Units import INetworkElementUnits, IComponentElementUnits
+from OpenFlows.Water.Enumerations import *
 from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetwork, IWaterNetworkElement
 from OpenFlows.Water.Domain.ModelingElements.Components import IWaterModelSupport, IWaterComponent
 from OpenFlows.Water.Domain.ModelingElements import IWaterScenarios, IWaterScenario, IWaterSelectionSets, IWaterSelectionSet

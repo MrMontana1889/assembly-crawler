@@ -1,11 +1,12 @@
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
-from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, IZone, IUnitDemandLoad, IAirFlowCurve, ISCADASignal
-from typing import Generic, overload, Dict, List, Union, TypeVar
+from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve, ISCADASignal
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType
+from typing import overload, Dict, List, Union, Generic
 from array import array
 from OpenFlows.Units import IUnit
 from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput
 from OpenFlows.Domain.DataObjects import INetwork
+from OpenFlows.Water.Enumerations import *
 
 
 class IMinorLoss(ICollectionElement):
@@ -230,7 +231,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -238,7 +239,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -698,7 +699,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -706,7 +707,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -714,7 +715,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -722,7 +723,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1161,7 +1162,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1169,7 +1170,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1177,7 +1178,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1185,7 +1186,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1193,7 +1194,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1201,7 +1202,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -1209,7 +1210,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2193,7 +2194,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2201,7 +2202,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2209,7 +2210,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2217,7 +2218,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2225,7 +2226,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2233,7 +2234,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -2241,7 +2242,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3315,7 +3316,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3323,7 +3324,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3331,7 +3332,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3339,7 +3340,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3347,7 +3348,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3355,7 +3356,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3363,7 +3364,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3371,7 +3372,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3379,7 +3380,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3387,7 +3388,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3395,7 +3396,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -3403,7 +3404,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4047,7 +4048,7 @@ class IVSPBResults(IBasePumpResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4055,7 +4056,7 @@ class IVSPBResults(IBasePumpResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4594,7 +4595,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4602,7 +4603,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4610,7 +4611,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4618,7 +4619,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4626,7 +4627,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4634,7 +4635,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4642,7 +4643,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4650,7 +4651,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4658,7 +4659,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -4991,7 +4992,7 @@ class IFlowControlValveResults(IBaseValveResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -5219,7 +5220,7 @@ class IThrottleControlValveResults(IBaseValveResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -5600,7 +5601,7 @@ class IPressureValveResults(IBaseValveResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -6412,7 +6413,7 @@ class IWaterQualityResults:
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -6420,7 +6421,7 @@ class IWaterQualityResults:
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -6428,7 +6429,7 @@ class IWaterQualityResults:
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7405,7 +7406,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7413,7 +7414,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7421,7 +7422,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7429,7 +7430,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7437,7 +7438,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7932,7 +7933,7 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -7940,7 +7941,7 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -8714,7 +8715,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -8722,7 +8723,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -8730,7 +8731,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -8738,7 +8739,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -9914,7 +9915,7 @@ class IBaseTankResults(IDemandNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -10734,7 +10735,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -10742,7 +10743,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -10750,7 +10751,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -10758,7 +10759,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -11172,7 +11173,7 @@ class IHammerNodeResults(IBaseNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -11180,7 +11181,7 @@ class IHammerNodeResults(IBaseNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -11833,7 +11834,7 @@ class IPeriodicHeadFlowResults(IHammerNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -13252,7 +13253,7 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -13630,7 +13631,7 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -13801,7 +13802,7 @@ class IReservoirResults(IBaseNodeResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14273,7 +14274,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14281,7 +14282,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14289,7 +14290,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14297,7 +14298,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14313,7 +14314,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14719,7 +14720,7 @@ class ISpotElevationResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -14727,7 +14728,7 @@ class ISpotElevationResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -15184,7 +15185,7 @@ class ICustomerMeterResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 
@@ -15192,7 +15193,7 @@ class ICustomerMeterResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable[]: 
+			array(): 
 		"""
 		pass
 

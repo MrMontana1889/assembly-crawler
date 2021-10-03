@@ -1,10 +1,11 @@
 from datetime import datetime
-from typing import TypeVar, Generic, overload, List
+from typing import Generic, overload, List, TypeVar
 from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IModelingElementBase, IElement, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
 from enum import Enum
 from OpenFlows.Units import IModelUnits, TNetworkUnitsType, TComponentUnitsType, INetworkUnits, IComponentUnits
 from OpenFlows.Domain.ModelingElements.Components import IModelComponents
 from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
+from OpenFlows.Enumerations import *
 
 TScenarioManagerType = TypeVar("TScenarioManagerType", IModelingElementsBase)
 TScenarioType = TypeVar("TScenarioType", IModelingElementBase)

@@ -1,4 +1,5 @@
-from typing import TypeVar, Generic, overload
+from typing import Generic, overload, TypeVar
+from OpenFlows.Enumerations import *
 
 TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
 TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
