@@ -44,7 +44,7 @@ namespace AssemblyCrawler.Generators
 		#region Constructor
 		public PythonStubGenerator(PythonModuleDefinition stubFile)
 		{
-			StubFile = stubFile;
+			Module = stubFile;
 		}
 		#endregion
 
@@ -53,344 +53,351 @@ namespace AssemblyCrawler.Generators
 		{
 			var typeParser = new TypeParserLibrary(type).Parse();
 
-			PythonStubWriterLibrary.WritePythonClassDef(
-				StubFile,
-				type,
-				PythonStubWriterLibrary.BlankDocString,
-				0);
-
-			#region Constructor
-
-			PythonClassDefinition classDef = StubFile.GetClassDefinition(type.AssemblyQualifiedName, type.Name);
-
-			// Write Constructor
-			if (typeParser.IsInterface || typeParser.Type.IsAbstract)
-				PythonStubWriterLibrary.WritePythonConstructorUnsupported(classDef);
-
-			else if (typeParser.Type.IsClass)
+			if (type == typeof(Enum))
 			{
-				var args = typeParser.GetConstructorArguments();
-				PythonStubWriterLibrary.WritePythonConstructor(
-					classDef: classDef,
-					arguments: args,
-					docString: new PythonConstructorDocStringWriterLibrary(
-						description: "Constructor Description",
+				Console.WriteLine($"Create Enum: {typeParser.Type.Name}");
+			}
+			else
+			{
+				PythonStubWriterLibrary.WritePythonClassDef(
+					Module,
+					type,
+					PythonStubWriterLibrary.BlankDocString,
+					0);
+
+				#region Constructor
+
+				PythonClassDefinition classDef = Module.GetClassDefinition(type.AssemblyQualifiedName, type.Name);
+
+				// Write Constructor
+				if (typeParser.IsInterface || typeParser.Type.IsAbstract)
+					PythonStubWriterLibrary.WritePythonConstructorUnsupported(classDef);
+
+				else if (typeParser.Type.IsClass)
+				{
+					var args = typeParser.GetConstructorArguments();
+					PythonStubWriterLibrary.WritePythonConstructor(
+						classDef: classDef,
 						arguments: args,
-						indentLevel: 2).ToString(),
-					indentLevel: 1);
-			}
-			#endregion
+						docString: new PythonConstructorDocStringWriterLibrary(
+							description: "Constructor Description",
+							arguments: args,
+							indentLevel: 2).ToString(),
+						indentLevel: 1);
+				}
+				#endregion
 
-			#region Methods
-			// Overloaded methods
-			foreach (var m in typeParser.OverloadedMethods)
-			{
-				StubFile.AddImportModule("typing").AddType("overload");
+				#region Methods
+				// Overloaded methods
+				foreach (var m in typeParser.OverloadedMethods)
+				{
+					Module.AddImportModule("typing").AddType("overload");
 
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: typeParser.Name,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: "Method Description",
-						indentLevel: 2).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: true,
-					indentLevel: 1
-					);
-			}
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: typeParser.Name,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: "Method Description",
+							indentLevel: 2).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: true,
+						indentLevel: 1
+						);
+				}
 
-			// Simple (non-overloaded) methods
-			foreach (var m in typeParser.SimpleMethods)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: m.Name,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: "Method Description").ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
+				// Simple (non-overloaded) methods
+				foreach (var m in typeParser.SimpleMethods)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: m.Name,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: "Method Description").ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
 
-			// Operators +
-			foreach (var m in typeParser.OperatorAddition)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefAddition,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryAddition).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators -
-			foreach (var m in typeParser.OperatorSubtraction)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefSubtraction,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummarySubtraction).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators *
-			foreach (var m in typeParser.OperatorMultiplication)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefMultiplication,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryMultiplication).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators /
-			foreach (var m in typeParser.OperatorDivision)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefDivision,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryDivision).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators %
-			foreach (var m in typeParser.OperatorModulo)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefModulo,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryModulo).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators ==
-			foreach (var m in typeParser.OperatorEquality)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefEquality,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryEquality).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators !=
-			foreach (var m in typeParser.OperatorInequality)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefInEquality,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryInEquality).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators >
-			foreach (var m in typeParser.OperatorGreaterThan)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefGreaterThan,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryGreaterThan).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators <
-			foreach (var m in typeParser.OperatorLessThan)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefLessThan,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryLessThan).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators >=
-			foreach (var m in typeParser.OperatorGreaterOrEqualTo)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefGreaterOrEqualTo,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryGreaterOrEqualTo).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators <=
-			foreach (var m in typeParser.OperatorLessOrEqualTo)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefLessOrEqualTo,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryLessOrEqualTo).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators &
-			foreach (var m in typeParser.OperatorBitwiseAnd)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefBitwiseAnd,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryBitwiseAnd).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators |
-			foreach (var m in typeParser.OperatorBitwiseOr)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefBitwisOr,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryBitwisOr).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			// Operators ^
-			foreach (var m in typeParser.OperatorBitwiseXor)
-			{
-				PythonStubWriterLibrary.WritePythonMethod(
-					classDef: classDef,
-					methodName: DefBitwiseXor,
-					arguments: typeParser.GetMethodArguments(m),
-					returnType: m.ReturnType,
-					docString: new PythonMethodDocStringWriterLibrary(
-						methodInfo: m,
-						description: DocStringSummaryBitwiseXor).ToString(),
-					isStatic: m.IsStatic,
-					exception: String.Empty,
-					isOverloaded: false,
-					indentLevel: 1
-					);
-			}
-			#endregion
+				// Operators +
+				foreach (var m in typeParser.OperatorAddition)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefAddition,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryAddition).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators -
+				foreach (var m in typeParser.OperatorSubtraction)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefSubtraction,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummarySubtraction).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators *
+				foreach (var m in typeParser.OperatorMultiplication)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefMultiplication,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryMultiplication).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators /
+				foreach (var m in typeParser.OperatorDivision)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefDivision,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryDivision).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators %
+				foreach (var m in typeParser.OperatorModulo)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefModulo,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryModulo).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators ==
+				foreach (var m in typeParser.OperatorEquality)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefEquality,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryEquality).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators !=
+				foreach (var m in typeParser.OperatorInequality)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefInEquality,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryInEquality).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators >
+				foreach (var m in typeParser.OperatorGreaterThan)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefGreaterThan,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryGreaterThan).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators <
+				foreach (var m in typeParser.OperatorLessThan)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefLessThan,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryLessThan).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators >=
+				foreach (var m in typeParser.OperatorGreaterOrEqualTo)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefGreaterOrEqualTo,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryGreaterOrEqualTo).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators <=
+				foreach (var m in typeParser.OperatorLessOrEqualTo)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefLessOrEqualTo,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryLessOrEqualTo).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators &
+				foreach (var m in typeParser.OperatorBitwiseAnd)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefBitwiseAnd,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryBitwiseAnd).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators |
+				foreach (var m in typeParser.OperatorBitwiseOr)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefBitwisOr,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryBitwisOr).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				// Operators ^
+				foreach (var m in typeParser.OperatorBitwiseXor)
+				{
+					PythonStubWriterLibrary.WritePythonMethod(
+						classDef: classDef,
+						methodName: DefBitwiseXor,
+						arguments: typeParser.GetMethodArguments(m),
+						returnType: m.ReturnType,
+						docString: new PythonMethodDocStringWriterLibrary(
+							methodInfo: m,
+							description: DocStringSummaryBitwiseXor).ToString(),
+						isStatic: m.IsStatic,
+						exception: String.Empty,
+						isOverloaded: false,
+						indentLevel: 1
+						);
+				}
+				#endregion
 
-			#region Properties
-			// Write ReadOnly properties
-			foreach (var p in typeParser.ReadOnlyProperties)
-				PythonStubWriterLibrary.WritePythonProperty(
-					classDef: classDef,
-					propertyName: typeParser.GetPropertyName(p),
-					returnType: p.ReturnType,
-					docString: new PythonPropertyDocStringWriterLibrary(
-						type: p.ReturnType,
-						description: "No Description").ToString(),
-					isStatic: p.IsStatic,
-					indentLevel: 1
-					);
+				#region Properties
+				// Write ReadOnly properties
+				foreach (var p in typeParser.ReadOnlyProperties)
+					PythonStubWriterLibrary.WritePythonProperty(
+						classDef: classDef,
+						propertyName: typeParser.GetPropertyName(p),
+						returnType: p.ReturnType,
+						docString: new PythonPropertyDocStringWriterLibrary(
+							type: p.ReturnType,
+							description: "No Description").ToString(),
+						isStatic: p.IsStatic,
+						indentLevel: 1
+						);
 
-			// Write WriteOnly properties
-			foreach (var p in typeParser.WriteOnlyProperties)
-				PythonStubWriterLibrary.WritePythonPropertySetter(
-					classDef: classDef,
-					propertyName: typeParser.GetPropertyName(p),
-					returnType: p.GetParameters()[0].ParameterType,
-					isStatic: p.IsStatic,
-					indentLevel: 1
-					);
+				// Write WriteOnly properties
+				foreach (var p in typeParser.WriteOnlyProperties)
+					PythonStubWriterLibrary.WritePythonPropertySetter(
+						classDef: classDef,
+						propertyName: typeParser.GetPropertyName(p),
+						returnType: p.GetParameters()[0].ParameterType,
+						isStatic: p.IsStatic,
+						indentLevel: 1
+						);
 
-			#endregion
+				#endregion
+			}
 		}
 		#endregion
 
 		#region Private Properties
-		private PythonModuleDefinition StubFile { get; }
+		private PythonModuleDefinition Module { get; }
 		#endregion
 	}
 }

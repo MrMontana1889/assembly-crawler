@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using AssemblyCrawler.Support;
 
 namespace AssemblyCrawler.Library
@@ -44,19 +45,42 @@ namespace AssemblyCrawler.Library
 
 			PythonClassDefinition classDef = module.AddClassDefinition(classType.AssemblyQualifiedName, classType.Name);
 
+			string className = CorrectClassName(classType.Name, classType.GetGenericArguments().Length);
+
 			// Process the interfaces this interface inherits from.  One or more can be generic.
 			List<string> interfaceNames = new List<string>();
-			bool hasGenericParent = false;
+
+			// First need to determine the implemented interfaces.  We want to exclude these from the parent hierarchy since they
+			// are technically already included.  Plus, python doesn't like it much (MRO (method rendering order)) gets pretty whacked.
+
+			List<string> implementedInterfaces = new List<string>();
 			foreach (var interf in classType.GetInterfaces())
 			{
+				TypeInfo typeInfo = interf as TypeInfo;
+				if (typeInfo != null)
+				{
+					foreach (var ti in typeInfo.ImplementedInterfaces)
+						implementedInterfaces.Add(ti.Name);
+				}
+			}
+
+			foreach (var interf in classType.GetInterfaces())
+			{
+				if (implementedInterfaces.Count > 0 && implementedInterfaces.Find(i => i == interf.Name) != null)
+					continue;
+
 				if (interf.IsGenericType)
 				{
-					interfaceNames.Add(CreateGenericParentClass(module, interf));
-					hasGenericParent = true;
+					string parentInterface = CreateGenericParentClass(module, interf);
+					if (!string.IsNullOrEmpty(parentInterface))
+						interfaceNames.Add(parentInterface);
 				}
 				else
 				{
-					//interfaceNames.Add(CorrectClassName(interf.Name, interf.GetGenericArguments().Length));
+					if ((interf.Namespace.Contains("IEnumerable") || interf.Name.Contains("IDisposable"))
+						&& interf != typeof(Enum))
+						continue;
+
 					interfaceNames.Add(interf.Name);
 
 					// Check to see if this type needs to be imported.
@@ -64,10 +88,10 @@ namespace AssemblyCrawler.Library
 				}
 			}
 
-			if (classType.IsGenericType && !hasGenericParent)
+			if (classType.IsGenericType)
 			{
-				module.AddImportModule("typing");
-				module.GetImport("typing").AddType("TypeVar");
+				module.AddImportModule("typing").AddType("TypeVar");
+				module.AddImportModule("typing").AddType("Generic");
 
 				List<string> genericArguments = new List<string>();
 				foreach (var ga in classType.GetGenericArguments())
@@ -76,12 +100,12 @@ namespace AssemblyCrawler.Library
 				interfaceNames.Insert(0, $"Generic[{string.Join(", ", genericArguments)}]");
 
 				// This is a generic type with no parent generic interfaces.  So inherit from GENERIC
-				List<string> argumentTypes = new List<string>();
 				foreach (var arg in classType.GetGenericArguments())
 				{
-					argumentTypes.Add(arg.Name);
-					module.AddTypeVar(arg.Name, arg.GetGenericParameterConstraints());
+					module.AddGenericArgumentType(arg);
 
+					// Check to see if we are already importing this TypeVar.  if so, do not define it again.
+					module.AddTypeVar(arg.Name, arg.GetGenericParameterConstraints());
 					AddReferenceImports(module, arg);
 				}
 			}
@@ -167,6 +191,9 @@ namespace AssemblyCrawler.Library
 			{
 				var pair = arguments[i];
 				pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value)}");
+
+				TypeConvertLibrary.AddImportForPythonType(classDef.Module, pair.Value);
+				classDef.Module.AddGenericArgumentType(pair.Value);
 			}
 
 			var pythonArguments = string.Join(", ", pythonArgumentList);
@@ -181,7 +208,20 @@ namespace AssemblyCrawler.Library
 				returnType = Nullable.GetUnderlyingType(returnType) ?? typeof(void);
 				var actualPythonType = TypeConvertLibrary.ToPythonType(returnType);
 				returnTypeString = $"{UNION}[{actualPythonType}, {NONETYPE}]";
+
+				classDef.Module.AddImportModule("typing").AddType($"{UNION}");
 			}
+			else if (returnType.IsArray)
+			{
+				var genericArguments = returnType.GetGenericArguments();
+				if (genericArguments.Length == 1)
+				{
+					returnTypeString = $"array({UNION}[{TypeConvertLibrary.ToPythonType(genericArguments[0])}, {NONETYPE}])";
+					classDef.Module.AddImportModule("array").AddType("array");
+				}
+			}
+
+			classDef.Module.AddGenericArgumentType(returnType);
 
 			// definition
 			var method = $"{DEF} {methodName}({selfKeyword}{pythonArguments}) -> {returnTypeString}:";
@@ -221,8 +261,13 @@ namespace AssemblyCrawler.Library
 			if (isStatic)
 				classDef.Properties.AppendLine($"{indentation}{STATIC_METHOD}");
 
+			AddReferenceImports(classDef.Module, returnType);
+			classDef.Module.AddGenericArgumentType(returnType);
+
 			var selfKeyword = isStatic ? string.Empty : SELF;
-			classDef.Properties.AppendLine($"{indentation}{DEF} {propertyName}({selfKeyword}) -> {TypeConvertLibrary.ToPythonType(returnType)}:");
+			var adjustedReturnType = CorrectClassName(TypeConvertLibrary.ToPythonType(returnType),
+				returnType.GetGenericArguments().Length);
+			classDef.Properties.AppendLine($"{indentation}{DEF} {propertyName}({selfKeyword}) -> {adjustedReturnType}:");
 			classDef.Properties.AppendLine($"{indentation}{docString}");
 			classDef.Properties.AppendLine($"{indentation}{TAB}{PASS}");
 		}
@@ -246,21 +291,6 @@ namespace AssemblyCrawler.Library
 			classDef.Properties.AppendLine($"{indentation}{TAB}{PASS}");
 		}
 
-		public static void WritePythonGenericClassDefinition(StreamWriter writer)
-		{
-			//
-		}
-
-		public static void WritePythonNotAllowedConstructor(
-			StreamWriter writer,
-			int indentLevel = 1)
-		{
-			var indentation = GetIndentation(indentLevel);
-
-			writer.WriteLine($"{indentation}{DEF} {INIT}({SELF}):");
-
-		}
-
 		#region Private Methods
 		private static string GetIndentation(int count)
 		{
@@ -273,57 +303,27 @@ namespace AssemblyCrawler.Library
 			if (interf == typeof(void))
 				return;
 
-			if (!interf.IsGenericParameter)
-			{
-				var refClassDef = module.ClassDefinitions.Find(c => c.FullName == interf.AssemblyQualifiedName && c.ClassName == interf.Name);
-				if (refClassDef == null)
-				{
-					// Not found.  check entire package.
-					foreach (var mod in module.Package.Modules)
-					{
-						if (mod.Filename != module.Filename)
-						{
-							refClassDef = mod.ClassDefinitions.Find(c => c.FullName == interf.AssemblyQualifiedName && c.ClassName == interf.Name);
-							if (refClassDef != null)
-								module.AddImportModule(interf.Namespace).AddType(interf.Name);
-						}
-					}
-				}
-			}
-			else if (interf.IsGenericParameter)
-			{
-				var typeVar = module.GetTypeVar(interf.Name);
-
-				if (typeVar == null)
-				{
-					//foreach (var mod in module.Package.Modules)
-					for(int i = 0; i < module.Package.Modules.Count; ++i)
-					{
-						var mod = module.Package.Modules[i];
-						if (mod.ModuleNamespace != module.ModuleNamespace)
-						{
-							typeVar = mod.GetTypeVar(interf.Name);
-							if (typeVar != null)
-							{
-								module.AddImportModule(mod.ModuleNamespace).AddType(typeVar.TypeVarName);
-								break;
-							}
-						}
-					}
-				}
-			}
+			TypeConvertLibrary.AddImportForPythonType(module, interf);
 		}
 
 		private static string CreateGenericParentClass(PythonModuleDefinition stubFile, Type interf)
 		{
-			stubFile.AddImportModule("typing");
-			stubFile.GetImport("typing").AddType("Generic");
+			stubFile.AddImportModule("typing").AddType("Generic");
+
+			if (interf.Namespace.Contains("IEnumerable") && interf != typeof(Enum))
+				return string.Empty;
+
+			AddReferenceImports(stubFile, interf);
 
 			List<string> arguments = new List<string>();
 			foreach (var arg in interf.GetGenericArguments())
 			{
-				arguments.Add(arg.Name);
-				AddReferenceImports(stubFile, arg);
+				if (arg == typeof(Enum) || !arg.Namespace.Contains("IEnumerable"))
+				{
+					arguments.Add(arg.Name);
+					AddReferenceImports(stubFile, arg);
+					stubFile.AddGenericArgumentType(arg);
+				}
 			}
 			return $"{CorrectClassName(interf.Name, interf.GetGenericArguments().Length)}[{string.Join(", ", arguments)}]";
 		}

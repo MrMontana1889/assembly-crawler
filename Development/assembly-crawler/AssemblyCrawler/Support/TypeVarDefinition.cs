@@ -3,18 +3,33 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using AssemblyCrawler.Library;
 
 namespace AssemblyCrawler.Support
 {
+	[DebuggerDisplay("{TypeVarName} : {Constraints}")]
 	public class TypeVarDefinition
 	{
 		#region Constructor
-		public TypeVarDefinition(string name, Type[] constraint)
+		public TypeVarDefinition(string name, params Type[] constraints)
 		{
 			TypeVarName = name;
-			Constraints = constraint;
+
+			List<Type> nonSystemConstraints = new List<Type>();
+			if (constraints != null)
+			{
+				foreach (var t in constraints)
+				{
+					var typeNamespace = t.Namespace;
+					if (!typeNamespace.Contains("IEnumerable") || t == typeof(Enum))
+						nonSystemConstraints.Add(t);
+				}
+				Constraints = nonSystemConstraints.ToArray();
+			}
+			else
+				Constraints = new Type[] { };
 		}
 		#endregion
 
@@ -26,7 +41,9 @@ namespace AssemblyCrawler.Support
 				List<string> constraintNames = new List<string>();
 				foreach (var t in Constraints)
 					constraintNames.Add(PythonStubWriterLibrary.CorrectClassName(t.Name, t.GetGenericArguments().Length));
-				sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\", {string.Join(",", constraintNames)})");
+
+				if (constraintNames.Count > 0)
+					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\", {string.Join(",", constraintNames)})");
 			}
 			else
 			{

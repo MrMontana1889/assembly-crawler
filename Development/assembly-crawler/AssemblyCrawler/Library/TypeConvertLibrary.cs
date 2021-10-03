@@ -66,14 +66,16 @@ namespace AssemblyCrawler.Library
 				module.AddImportModule("typing").AddType("Comparer");
 			else if (pythonType == "Enum")
 				module.AddImportModule("enum").AddType("Enum");
-			else if (pythonType == type.Name)
+			else if (pythonType == "datetime")
+				module.AddImportModule("datetime").AddType("datetime");
+			else if (pythonType == PythonStubWriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length))
 			{
 				// One of the types being written to the package.
 				// Need to find the module where the type is located so it can be imported
 				// IF it is not part of the current module.
 				if (!type.IsGenericParameter)
 				{
-					var classDef = module.ClassDefinitions.Find(c => c.FullName == type.AssemblyQualifiedName);
+					var classDef = module.ClassDefinitions.Find(c => c.ClassName == type.Name);
 					if (classDef == null)
 					{
 						// The class definition is not part of the current module.
@@ -82,10 +84,10 @@ namespace AssemblyCrawler.Library
 							if (mod.Filename != module.Filename)
 							{
 								// Don't look at the current module.
-								classDef = mod.ClassDefinitions.Find(c => c.FullName == type.AssemblyQualifiedName);
+								classDef = mod.ClassDefinitions.Find(c => c.ClassName == type.Name);
 								if (classDef != null)
 								{
-									module.AddImportModule(classDef.ClassName).AddType(pythonType);
+									module.AddImportModule(type.Namespace).AddType(pythonType);
 								}
 							}
 						}
@@ -93,25 +95,59 @@ namespace AssemblyCrawler.Library
 				}
 				else
 				{
-					// This is a type parameer.  Still needs to be imported if needed
-					var typeVar = module.TypeVars.Find(t => t.TypeVarName == type.Name);
+					var typeVar = module.GetTypeVar(type.Name);
+
 					if (typeVar == null)
 					{
-						// Search through other modules.
+						//foreach (var mod in module.Package.Modules)
+						bool typeVarFound = false;
 						foreach (var mod in module.Package.Modules)
 						{
-							if (mod.Filename != module.Filename)
+							if (mod.ModuleNamespace != module.ModuleNamespace)
 							{
-								typeVar = mod.TypeVars.Find(t => t.TypeVarName == type.Name);
+								typeVar = mod.GetTypeVar(type.Name);
 								if (typeVar != null)
 								{
-									// Found
-									Console.WriteLine($"Add import for {typeVar.TypeVarName} from {mod.Filename}");
+									module.AddImportModule(mod.ModuleNamespace).AddType(typeVar.TypeVarName);
+									typeVarFound = true;
 									break;
 								}
 							}
 						}
+
+						if (!typeVarFound)
+						{
+							module.AddTypeVar(type.Name, type.GetGenericParameterConstraints());
+						}
 					}
+					else
+					{
+						var constraints = type.GetGenericParameterConstraints();
+						foreach (var c in constraints)
+						{
+							AddImportForPythonType(module, c);
+						}
+					}
+
+					//// This is a type parameer.  Still needs to be imported if needed
+					//var typeVar = module.TypeVars.Find(t => t.TypeVarName == type.Name);
+					//if (typeVar == null)
+					//{
+					//	// Search through other modules.
+					//	foreach (var mod in module.Package.Modules)
+					//	{
+					//		if (mod.Filename != module.Filename)
+					//		{
+					//			typeVar = mod.TypeVars.Find(t => t.TypeVarName == type.Name);
+					//			if (typeVar != null)
+					//			{
+					//				// Found
+					//				Console.WriteLine($"Add import for {typeVar.TypeVarName} from {mod.Filename}");
+					//				break;
+					//			}
+					//		}
+					//	}
+					//}
 				}
 			}
 		}
@@ -121,6 +157,9 @@ namespace AssemblyCrawler.Library
 
 		private static string ToPythonPrimitiveType(Type type)
 		{
+			if (type.IsEnum)
+				return type.Name;
+
 			switch (Type.GetTypeCode(type))
 			{
 				case TypeCode.Byte:
@@ -152,7 +191,7 @@ namespace AssemblyCrawler.Library
 				//	return "Any"; // must have "from typing import Any"
 
 				default:
-					return type.Name;
+					return PythonStubWriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length);
 
 			}
 		}

@@ -1,6 +1,7 @@
 ﻿// PythonPackageDefinition.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System;
 using System.Collections.Generic;
 
 namespace AssemblyCrawler.Support
@@ -29,10 +30,21 @@ namespace AssemblyCrawler.Support
 		{
 			return Modules.Find(m => m.Filename == filename);
 		}
+		public void AddEnum(Type enumType)
+		{
+			if (Enumerations.Find(e => e.Name == enumType.Name) == null)
+				Enumerations.Add(enumType);
+		}
+		public void Write()
+		{
+			foreach (var module in Modules)
+				module.Write();
+		}
 		#endregion
 
 		#region Public Properties
 		public string PackageName { get; }
+		public List<Type> Enumerations { get; } = new List<Type>();
 		public List<PythonModuleDefinition> Modules { get; } = new List<PythonModuleDefinition>();
 		#endregion
 	}

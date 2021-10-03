@@ -13,6 +13,7 @@ using Barber.AutoDiagrammer;
 using Barber.AutoDiagrammer.Models;
 using Barber.AutoDiagrammer.Services;
 using Barber.AutoDiagrammer.Support;
+using Barber.AutoDiagrammer.GraphBits;
 
 namespace AssemblyCrawler
 {
@@ -42,6 +43,16 @@ namespace AssemblyCrawler
 			{
 				// Valid.  Continue.
 
+				SettingsViewModel.Instance.SetGraphObject(null);
+				SettingsViewModel.Instance.LayoutAlgorithmType = "Tree";
+				SettingsViewModel.Instance.IncludeConstructorParametersAsAssociations = false;
+				SettingsViewModel.Instance.IncludeFieldTypesAsAssociations = false;
+				SettingsViewModel.Instance.IncludeMethodArgumentAsAssociations = false;
+				SettingsViewModel.Instance.IncludePropertyTypesAsAssociations = false;
+
+				SimpleTreeLayoutParametersEx settings = (SimpleTreeLayoutParametersEx)SettingsViewModel.Instance.LayoutParameters;
+				settings.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.LeftToRight;
+
 				AssemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename);
 
 				if (AssemblyManipulationService.TreeValues.Count == 1)
@@ -63,7 +74,7 @@ namespace AssemblyCrawler
 						string[] tokens = v.Name.Split(Type.Delimiter);
 
 						// Last one is the interface name, second to last is the module name to use
-						string filename = filename = tokens[tokens.Length - 2];
+						string filename = tokens[tokens.Length - 2];
 
 						if (tokens.Length > 2)
 							Array.Resize(ref tokens, tokens.Length - 2);
@@ -96,9 +107,9 @@ namespace AssemblyCrawler
 
 						foreach (Type t in type.Value)
 							generator.GenerateTypeStub(t);
-
-						stubFile.Write();
 					}
+
+					package.Write();
 				}
 			}
 		}
