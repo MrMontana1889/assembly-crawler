@@ -1,4 +1,5 @@
-from typing import TypeVar
+from typing import TypeVar, Generic
+from OpenFlows.Domain.ModelingElements import IScenario, IScenarios, IScenarioOptions, IElementUnits
 
 TScenarioType = TypeVar("TScenarioType", IScenario)
 TScenarioManagerType = TypeVar("TScenarioManagerType", IScenarios)

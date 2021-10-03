@@ -1,7 +1,16 @@
-from typing import Generic, List, overload, Dict
-from OpenFlows.Domain.ModelingElements import TElementManagerType, TElementType, TElementTypeEnum, IElement, IElementManager, IElementInput, IElementsInput, IElementsResults, IElementResults, IGeometryUnits, IElementUnits
+from typing import Generic, TypeVar, List, overload, Dict
+from OpenFlows.Domain.ModelingElements import IModelingElementBase, TElementManagerType, TElementType, TElementTypeEnum, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IElement, IGeometryUnits
+from enum import Enum
+from OpenFlows.Domain.ModelingElements.Support import IFieldManager
+from OpenFlows.Units import IUnit
 
-class INetworkElement(IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum], IElement, IEditLabeled, ILabeled):
+TUnitsType = TypeVar("TUnitsType", IElementUnits)
+TElementInputType = TypeVar("TElementInputType", IElementInput)
+TElementResultsType = TypeVar("TElementResultsType", IElementResults)
+TElementsInputType = TypeVar("TElementsInputType", IElementsInput)
+TElementsResultsType = TypeVar("TElementsResultsType", IElementsResults)
+
+class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -49,7 +58,7 @@ class INetworkElement(IModelingElementBase[TElementManagerType, TElementType, TE
 	def GISIDs(self, gisids: str) -> None:
 		pass
 
-class INetworkElements(IModelingElementsBase[TElementManagerType, TElementType, TElementTypeEnum], IElements[TElementType], IElementManager):
+class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementsBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -61,11 +70,11 @@ class INetworkElements(IModelingElementsBase[TElementManagerType, TElementType, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def Elements(self, state: int) -> List[TElementType]:
+	def Elements(self, state: ElementStateType) -> List[TElementType]:
 		"""Method Description
 
 		Args:
-			state(int): state
+			state(ElementStateType): state
 
 		Returns:
 			List[TElementType]: 
@@ -153,7 +162,7 @@ class IActiveElementsInput(IElementsInput):
 		"""
 		pass
 
-class IPointNodeInput(IActiveElementInput, IElementInput):
+class IPointNodeInput(IActiveElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -184,7 +193,7 @@ class IPointNodeInput(IActiveElementInput, IElementInput):
 		"""
 		pass
 
-class IPointNodesInput(IActiveElementsInput, IElementsInput):
+class IPointNodesInput(IActiveElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -217,7 +226,7 @@ class IPointNodesInput(IActiveElementsInput, IElementsInput):
 		"""
 		pass
 
-class IBaseLinkInput(IActiveElementInput, IElementInput):
+class IBaseLinkInput(IActiveElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -296,7 +305,7 @@ class IBaseLinkInput(IActiveElementInput, IElementInput):
 	def Length(self, length: float) -> None:
 		pass
 
-class IBaseLinksInput(IActiveElementsInput, IElementsInput):
+class IBaseLinksInput(IActiveElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -437,7 +446,7 @@ class IBaseLinkResults(IElementResults):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseLinkUnits(IGeometryUnits, IElementUnits):
+class IBaseLinkUnits(IGeometryUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -457,7 +466,7 @@ class IBaseLinkUnits(IGeometryUnits, IElementUnits):
 		"""
 		pass
 
-class IBasePolygonInput(IActiveElementInput, IElementInput):
+class IBasePolygonInput(IActiveElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -488,7 +497,7 @@ class IBasePolygonInput(IActiveElementInput, IElementInput):
 		"""
 		pass
 
-class IBasePolygonsInput(IActiveElementsInput, IElementsInput):
+class IBasePolygonsInput(IActiveElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed

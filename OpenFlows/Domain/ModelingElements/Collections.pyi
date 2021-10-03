@@ -1,4 +1,4 @@
-from typing import TypeVar, List, Generic
+from typing import TypeVar, Generic, List, Iterator
 from OpenFlows.Domain.ModelingElements import IElementUnits
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 
@@ -77,7 +77,7 @@ class ICollectionElement:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ICollection(IEnumerable[TElementType], IEnumerable):
+class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed

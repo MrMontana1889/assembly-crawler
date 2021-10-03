@@ -1,6 +1,6 @@
 from typing import overload
 
-class ILicenseManager(IDisposable, ILicenseProvider):
+class ILicenseManager(ILicenseProvider):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13,27 +13,27 @@ class ILicenseManager(IDisposable, ILicenseProvider):
 		pass
 
 	@overload
-	def ILicenseManager(self, product: int, parentWindow: IntPtr) -> int:
+	def ILicenseManager(self, product: ProductId, parentWindow: IntPtr) -> LicenseRunStatusEnum:
 		"""Method Description
 
 		Args:
-			product(int): product
+			product(ProductId): product
 			parentWindow(IntPtr): parentWindow
 
 		Returns:
-			int: 
+			LicenseRunStatusEnum: 
 		"""
 		pass
 
 	@overload
-	def ILicenseManager(self, licensedFeatureSet: ILicensedFeatureSet) -> int:
+	def ILicenseManager(self, licensedFeatureSet: ILicensedFeatureSet) -> LicenseRunStatusEnum:
 		"""Method Description
 
 		Args:
 			licensedFeatureSet(ILicensedFeatureSet): licensedFeatureSet
 
 		Returns:
-			int: 
+			LicenseRunStatusEnum: 
 		"""
 		pass
 
@@ -61,19 +61,19 @@ class ILicenseManager(IDisposable, ILicenseProvider):
 		"""
 		pass
 
-	def GetLicenseStatus(self) -> int:
+	def GetLicenseStatus(self) -> LicenseStatus:
 		"""Method Description
 
 		Returns:
-			int: 
+			LicenseStatus: 
 		"""
 		pass
 
 	@property
-	def LicenseRunStatus(self) -> int:
+	def LicenseRunStatus(self) -> LicenseRunStatusEnum:
 		"""
 		Returns:
-			int: No Description
+			LicenseRunStatusEnum: No Description
 		"""
 		pass
 

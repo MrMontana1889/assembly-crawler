@@ -1,8 +1,10 @@
-from typing import TypeVar, List, Generic
-from OpenFlows.Domain.ModelingElements import TElementManagerType, IElementManager, IElement
+from typing import TypeVar, Generic, List
+from OpenFlows.Domain.ModelingElements import IElement, IModelingElementsBase, TElementManagerType, IElementUnits, IModelingElementBase
+from enum import Enum
 
 TElementType = TypeVar("TElementType", IElement)
 TElementTypeEnum = TypeVar("TElementTypeEnum", Enum)
+TUnitsType = TypeVar("TUnitsType", IElementUnits)
 
 class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 
@@ -35,7 +37,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		"""
 		pass
 
-class IComponentElements(IModelingElementsBase[TElementManagerType, TElementType, TElementTypeEnum], IElements[TElementType], IElementManager):
+class IComponentElements(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum], IModelingElementsBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -47,7 +49,7 @@ class IComponentElements(IModelingElementsBase[TElementManagerType, TElementType
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IComponentElement(IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum], IElement, IEditLabeled, ILabeled):
+class IComponentElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum], IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed

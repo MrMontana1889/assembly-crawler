@@ -1,9 +1,11 @@
-from typing import Generic
-from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement
-from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, IElementManager, TElementManagerType, TElementType, TUnitsType
-from OpenFlows.Domain.ModelingElements.Collections import ICollection, ICollectionElement, ICollectionElements
-from OpenFlows.Domain.ModelingElements.Components import IComponentElement, IComponentElements, IModelComponents
+from typing import Generic, TypeVar
+from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
+from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType
 from OpenFlows.Units import IUnit
+from datetime import datetime
+from OpenFlows.Domain.ModelingElements.Components import IComponentElements, IComponentElement, IModelComponents
+from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetworkElement
+
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
 
@@ -17,7 +19,7 @@ class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlow
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IAirFlowPressures(ICollection[IAirFlowPressure], IEnumerable[IAirFlowPressure], IEnumerable):
+class IAirFlowPressures(ICollection[IAirFlowPressure]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -105,7 +107,7 @@ class IAirFlowPressureUnits(IElementUnits):
 		"""
 		pass
 
-class IAirFlowCurve(IWaterComponentBase[IAirFlowCurves, IAirFlowCurve, IAirFlowCurveUnits], IComponentElement[IAirFlowCurves, IAirFlowCurve, IAirFlowCurveUnits, WaterComponentType], IModelingElementBase[IAirFlowCurves, IAirFlowCurve, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IAirFlowCurve(IWaterComponentBase[IAirFlowCurves, IAirFlowCurve, IAirFlowCurveUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -125,7 +127,7 @@ class IAirFlowCurve(IWaterComponentBase[IAirFlowCurves, IAirFlowCurve, IAirFlowC
 		"""
 		pass
 
-class IAirFlowCurves(IWaterComponentsBase[IAirFlowCurves, IAirFlowCurve, IAirFlowCurveUnits], IComponentElements[IAirFlowCurves, IAirFlowCurve, IAirFlowCurveUnits, WaterComponentType], IModelingElementsBase[IAirFlowCurves, IAirFlowCurve, WaterComponentType], IElements[IAirFlowCurve], IElementManager):
+class IAirFlowCurves(IWaterComponentsBase[IAirFlowCurves, IAirFlowCurve, IAirFlowCurveUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -149,7 +151,7 @@ class IAirFlowCurveUnits(IElementUnits):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IComponentElement[IControls, IControl, IElementUnits, WaterComponentType], IModelingElementBase[IControls, IControl, WaterComponentType], IElement, IEditLabeled, ILabeled, IWaterComponent):
+class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterComponent):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -162,10 +164,10 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], ICompone
 		pass
 
 	@property
-	def ControlType(self) -> int:
+	def ControlType(self) -> ControlTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlTypeEnum: No Description
 		"""
 		pass
 
@@ -218,7 +220,7 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], ICompone
 		pass
 
 	@ControlType.setter
-	def ControlType(self, controltype: int) -> None:
+	def ControlType(self, controltype: ControlTypeEnum) -> None:
 		pass
 
 	@Condition.setter
@@ -266,10 +268,10 @@ class ILogicalControl:
 		pass
 
 	@property
-	def Priority(self) -> int:
+	def Priority(self) -> ControlPriorityEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlPriorityEnum: No Description
 		"""
 		pass
 
@@ -294,7 +296,7 @@ class ILogicalControl:
 		pass
 
 	@Priority.setter
-	def Priority(self, priority: int) -> None:
+	def Priority(self, priority: ControlPriorityEnum) -> None:
 		pass
 
 	@HasElse.setter
@@ -305,7 +307,7 @@ class ILogicalControl:
 	def ElseAction(self, elseaction: IControlAction) -> None:
 		pass
 
-class IControls(IWaterComponentsBase[IControls, IControl, IElementUnits], IComponentElements[IControls, IControl, IElementUnits, WaterComponentType], IModelingElementsBase[IControls, IControl, WaterComponentType], IElements[IControl], IElementManager):
+class IControls(IWaterComponentsBase[IControls, IControl, IElementUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -317,7 +319,7 @@ class IControls(IWaterComponentsBase[IControls, IControl, IElementUnits], ICompo
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IControlCondition(IWaterComponentBase[IControlConditions, IControlCondition, IControlConditionUnits], IComponentElement[IControlConditions, IControlCondition, IControlConditionUnits, WaterComponentType], IModelingElementBase[IControlConditions, IControlCondition, WaterComponentType], IElement, IEditLabeled, ILabeled, IWaterComponent):
+class IControlCondition(IWaterComponentBase[IControlConditions, IControlCondition, IControlConditionUnits], IWaterComponent):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -330,18 +332,18 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		pass
 
 	@property
-	def ConditionType(self) -> int:
+	def ConditionType(self) -> ConditionTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			ConditionTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def SimpleConditionType(self) -> int:
+	def SimpleConditionType(self) -> SimpleConditionType:
 		"""
 		Returns:
-			int: No Description
+			SimpleConditionType: No Description
 		"""
 		pass
 
@@ -410,11 +412,11 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		pass
 
 	@ConditionType.setter
-	def ConditionType(self, conditiontype: int) -> None:
+	def ConditionType(self, conditiontype: ConditionTypeEnum) -> None:
 		pass
 
 	@SimpleConditionType.setter
-	def SimpleConditionType(self, simpleconditiontype: int) -> None:
+	def SimpleConditionType(self, simpleconditiontype: SimpleConditionType) -> None:
 		pass
 
 	@IsUserDefinedDescriptionFormat.setter
@@ -438,23 +440,23 @@ class IControlSimpleConditionInput:
 		pass
 
 	@property
-	def SimpleConditionType(self) -> int:
+	def SimpleConditionType(self) -> SimpleConditionType:
 		"""
 		Returns:
-			int: No Description
+			SimpleConditionType: No Description
 		"""
 		pass
 
 	@property
-	def Comparison(self) -> int:
+	def Comparison(self) -> ConditionComparisonOperator:
 		"""
 		Returns:
-			int: No Description
+			ConditionComparisonOperator: No Description
 		"""
 		pass
 
 	@Comparison.setter
-	def Comparison(self, comparison: int) -> None:
+	def Comparison(self, comparison: ConditionComparisonOperator) -> None:
 		pass
 
 class IElementControlConditionInput(IControlSimpleConditionInput):
@@ -602,10 +604,10 @@ class INodeConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def NodeAttribute(self) -> int:
+	def NodeAttribute(self) -> NodeAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			NodeAttributeEnum: No Description
 		"""
 		pass
 
@@ -634,7 +636,7 @@ class INodeConditionInput(IElementConditionInput):
 		pass
 
 	@NodeAttribute.setter
-	def NodeAttribute(self, nodeattribute: int) -> None:
+	def NodeAttribute(self, nodeattribute: NodeAttributeEnum) -> None:
 		pass
 
 	@Demand.setter
@@ -662,10 +664,10 @@ class ITankConditionInput:
 		pass
 
 	@property
-	def TankAttribute(self) -> int:
+	def TankAttribute(self) -> TankAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			TankAttributeEnum: No Description
 		"""
 		pass
 
@@ -726,7 +728,7 @@ class ITankConditionInput:
 		pass
 
 	@TankAttribute.setter
-	def TankAttribute(self, tankattribute: int) -> None:
+	def TankAttribute(self, tankattribute: TankAttributeEnum) -> None:
 		pass
 
 	@Demand.setter
@@ -770,10 +772,10 @@ class IPumpConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PumpAttribute(self) -> int:
+	def PumpAttribute(self) -> ControlConditionPumpAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionPumpAttribute: No Description
 		"""
 		pass
 
@@ -794,15 +796,15 @@ class IPumpConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PumpStatus(self) -> int:
+	def PumpStatus(self) -> PumpStatus:
 		"""
 		Returns:
-			int: No Description
+			PumpStatus: No Description
 		"""
 		pass
 
 	@PumpAttribute.setter
-	def PumpAttribute(self, pumpattribute: int) -> None:
+	def PumpAttribute(self, pumpattribute: ControlConditionPumpAttribute) -> None:
 		pass
 
 	@Discharge.setter
@@ -814,7 +816,7 @@ class IPumpConditionInput(IElementConditionInput):
 		pass
 
 	@PumpStatus.setter
-	def PumpStatus(self, pumpstatus: int) -> None:
+	def PumpStatus(self, pumpstatus: PumpStatus) -> None:
 		pass
 
 class IPipeConditionInput(IElementConditionInput):
@@ -830,10 +832,10 @@ class IPipeConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PipeAttribute(self) -> int:
+	def PipeAttribute(self) -> ControlConditionPipeAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionPipeAttribute: No Description
 		"""
 		pass
 
@@ -846,15 +848,15 @@ class IPipeConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PipeStatus(self) -> int:
+	def PipeStatus(self) -> PipeStatus:
 		"""
 		Returns:
-			int: No Description
+			PipeStatus: No Description
 		"""
 		pass
 
 	@PipeAttribute.setter
-	def PipeAttribute(self, pipeattribute: int) -> None:
+	def PipeAttribute(self, pipeattribute: ControlConditionPipeAttribute) -> None:
 		pass
 
 	@Discharge.setter
@@ -862,7 +864,7 @@ class IPipeConditionInput(IElementConditionInput):
 		pass
 
 	@PipeStatus.setter
-	def PipeStatus(self, pipestatus: int) -> None:
+	def PipeStatus(self, pipestatus: PipeStatus) -> None:
 		pass
 
 class IPressureValveConditionInput(IElementConditionInput):
@@ -878,10 +880,10 @@ class IPressureValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PressureValveAttribute(self) -> int:
+	def PressureValveAttribute(self) -> ControlConditionPressureValveAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionPressureValveAttributeEnum: No Description
 		"""
 		pass
 
@@ -902,15 +904,15 @@ class IPressureValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def ValveStatus(self) -> int:
+	def ValveStatus(self) -> ControlConditionValveStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionValveStatus: No Description
 		"""
 		pass
 
 	@PressureValveAttribute.setter
-	def PressureValveAttribute(self, pressurevalveattribute: int) -> None:
+	def PressureValveAttribute(self, pressurevalveattribute: ControlConditionPressureValveAttributeEnum) -> None:
 		pass
 
 	@Discharge.setter
@@ -922,7 +924,7 @@ class IPressureValveConditionInput(IElementConditionInput):
 		pass
 
 	@ValveStatus.setter
-	def ValveStatus(self, valvestatus: int) -> None:
+	def ValveStatus(self, valvestatus: ControlConditionValveStatus) -> None:
 		pass
 
 class IFlowControLValveConditionInput(IElementConditionInput):
@@ -938,10 +940,10 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def FCVAttribute(self) -> int:
+	def FCVAttribute(self) -> ControlConditionFCVAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionFCVAttributeEnum: No Description
 		"""
 		pass
 
@@ -962,15 +964,15 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def FCVStatus(self) -> int:
+	def FCVStatus(self) -> FCVStatusEnum:
 		"""
 		Returns:
-			int: No Description
+			FCVStatusEnum: No Description
 		"""
 		pass
 
 	@FCVAttribute.setter
-	def FCVAttribute(self, fcvattribute: int) -> None:
+	def FCVAttribute(self, fcvattribute: ControlConditionFCVAttributeEnum) -> None:
 		pass
 
 	@Discharge.setter
@@ -982,7 +984,7 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		pass
 
 	@FCVStatus.setter
-	def FCVStatus(self, fcvstatus: int) -> None:
+	def FCVStatus(self, fcvstatus: FCVStatusEnum) -> None:
 		pass
 
 class IGeneralPurposeValveConditionInput(IElementConditionInput):
@@ -998,10 +1000,10 @@ class IGeneralPurposeValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def GPVAttribute(self) -> int:
+	def GPVAttribute(self) -> ControlConditionGPVAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionGPVAttributeEnum: No Description
 		"""
 		pass
 
@@ -1014,15 +1016,15 @@ class IGeneralPurposeValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def GPVStatus(self) -> int:
+	def GPVStatus(self) -> ControlConditionGPVStatusEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionGPVStatusEnum: No Description
 		"""
 		pass
 
 	@GPVAttribute.setter
-	def GPVAttribute(self, gpvattribute: int) -> None:
+	def GPVAttribute(self, gpvattribute: ControlConditionGPVAttributeEnum) -> None:
 		pass
 
 	@Discharge.setter
@@ -1030,7 +1032,7 @@ class IGeneralPurposeValveConditionInput(IElementConditionInput):
 		pass
 
 	@GPVStatus.setter
-	def GPVStatus(self, gpvstatus: int) -> None:
+	def GPVStatus(self, gpvstatus: ControlConditionGPVStatusEnum) -> None:
 		pass
 
 class IThrottleControlValveConditionInput(IElementConditionInput):
@@ -1046,10 +1048,10 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def TCVAttribute(self) -> int:
+	def TCVAttribute(self) -> ControlConditionTCVAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlConditionTCVAttributeEnum: No Description
 		"""
 		pass
 
@@ -1070,15 +1072,15 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def TCVStatus(self) -> int:
+	def TCVStatus(self) -> TCVStatusEnum:
 		"""
 		Returns:
-			int: No Description
+			TCVStatusEnum: No Description
 		"""
 		pass
 
 	@TCVAttribute.setter
-	def TCVAttribute(self, tcvattribute: int) -> None:
+	def TCVAttribute(self, tcvattribute: ControlConditionTCVAttributeEnum) -> None:
 		pass
 
 	@Discharge.setter
@@ -1090,7 +1092,7 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		pass
 
 	@TCVStatus.setter
-	def TCVStatus(self, tcvstatus: int) -> None:
+	def TCVStatus(self, tcvstatus: TCVStatusEnum) -> None:
 		pass
 
 class IHydroTankConditionInput(IElementConditionInput):
@@ -1106,10 +1108,10 @@ class IHydroTankConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def HydroTankAttribute(self) -> int:
+	def HydroTankAttribute(self) -> HydroTankAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			HydroTankAttributeEnum: No Description
 		"""
 		pass
 
@@ -1130,7 +1132,7 @@ class IHydroTankConditionInput(IElementConditionInput):
 		pass
 
 	@HydroTankAttribute.setter
-	def HydroTankAttribute(self, hydrotankattribute: int) -> None:
+	def HydroTankAttribute(self, hydrotankattribute: HydroTankAttributeEnum) -> None:
 		pass
 
 	@HydraulicGrade.setter
@@ -1154,10 +1156,10 @@ class ISurgeTankConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def SurgeTankAttribute(self) -> int:
+	def SurgeTankAttribute(self) -> SurgeTankAttributeEnum:
 		"""
 		Returns:
-			int: No Description
+			SurgeTankAttributeEnum: No Description
 		"""
 		pass
 
@@ -1186,7 +1188,7 @@ class ISurgeTankConditionInput(IElementConditionInput):
 		pass
 
 	@SurgeTankAttribute.setter
-	def SurgeTankAttribute(self, surgetankattribute: int) -> None:
+	def SurgeTankAttribute(self, surgetankattribute: SurgeTankAttributeEnum) -> None:
 		pass
 
 	@Demand.setter
@@ -1297,7 +1299,7 @@ class ITimeFromStartConditionInput(IControlSimpleConditionInput):
 	def TimeFromStart(self, timefromstart: float) -> None:
 		pass
 
-class IControlConditions(IWaterComponentsBase[IControlConditions, IControlCondition, IControlConditionUnits], IComponentElements[IControlConditions, IControlCondition, IControlConditionUnits, WaterComponentType], IModelingElementsBase[IControlConditions, IControlCondition, WaterComponentType], IElements[IControlCondition], IElementManager):
+class IControlConditions(IWaterComponentsBase[IControlConditions, IControlCondition, IControlConditionUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1414,10 +1416,10 @@ class ICompositeCondition(ICollectionElement):
 		pass
 
 	@property
-	def LogicalOperator(self) -> int:
+	def LogicalOperator(self) -> LogicalOperatorEnum:
 		"""
 		Returns:
-			int: No Description
+			LogicalOperatorEnum: No Description
 		"""
 		pass
 
@@ -1430,14 +1432,14 @@ class ICompositeCondition(ICollectionElement):
 		pass
 
 	@LogicalOperator.setter
-	def LogicalOperator(self, logicaloperator: int) -> None:
+	def LogicalOperator(self, logicaloperator: LogicalOperatorEnum) -> None:
 		pass
 
 	@Condition.setter
 	def Condition(self, condition: IControlCondition) -> None:
 		pass
 
-class ICompositeConditions(ICollection[ICompositeCondition], IEnumerable[ICompositeCondition], IEnumerable):
+class ICompositeConditions(ICollection[ICompositeCondition]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1449,11 +1451,11 @@ class ICompositeConditions(ICollection[ICompositeCondition], IEnumerable[ICompos
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def Add(self, logicalOperator: int, condition: IControlCondition) -> ICompositeCondition:
+	def Add(self, logicalOperator: LogicalOperatorEnum, condition: IControlCondition) -> ICompositeCondition:
 		"""Method Description
 
 		Args:
-			logicalOperator(int): logicalOperator
+			logicalOperator(LogicalOperatorEnum): logicalOperator
 			condition(IControlCondition): condition
 
 		Returns:
@@ -1473,7 +1475,7 @@ class ICompositeConditionCollection(ICollectionElements[ICompositeConditions, IC
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IControlActionUnits], IComponentElement[IControlActions, IControlAction, IControlActionUnits, WaterComponentType], IModelingElementBase[IControlActions, IControlAction, WaterComponentType], IElement, IEditLabeled, ILabeled, IWaterComponent):
+class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IControlActionUnits], IWaterComponent):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1486,10 +1488,10 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		pass
 
 	@property
-	def ActionType(self) -> int:
+	def ActionType(self) -> ControlActionTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			ControlActionTypeEnum: No Description
 		"""
 		pass
 
@@ -1582,7 +1584,7 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		pass
 
 	@ActionType.setter
-	def ActionType(self, actiontype: int) -> None:
+	def ActionType(self, actiontype: ControlActionTypeEnum) -> None:
 		pass
 
 	@Element.setter
@@ -1638,27 +1640,27 @@ class IPipeActionInput(IElementActionInput):
 		pass
 
 	@property
-	def PipeAttribute(self) -> int:
+	def PipeAttribute(self) -> ControlActionPipeAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlActionPipeAttribute: No Description
 		"""
 		pass
 
 	@property
-	def PipeStatus(self) -> int:
+	def PipeStatus(self) -> ControlActionPipeStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlActionPipeStatus: No Description
 		"""
 		pass
 
 	@PipeAttribute.setter
-	def PipeAttribute(self, pipeattribute: int) -> None:
+	def PipeAttribute(self, pipeattribute: ControlActionPipeAttribute) -> None:
 		pass
 
 	@PipeStatus.setter
-	def PipeStatus(self, pipestatus: int) -> None:
+	def PipeStatus(self, pipestatus: ControlActionPipeStatus) -> None:
 		pass
 
 class IPumpActionInput(IElementActionInput):
@@ -1682,18 +1684,18 @@ class IPumpActionInput(IElementActionInput):
 		pass
 
 	@property
-	def PumpAttribute(self) -> int:
+	def PumpAttribute(self) -> ControlActionPumpAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlActionPumpAttribute: No Description
 		"""
 		pass
 
 	@property
-	def PumpStatus(self) -> int:
+	def PumpStatus(self) -> ControlActionPumpStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlActionPumpStatus: No Description
 		"""
 		pass
 
@@ -1722,11 +1724,11 @@ class IPumpActionInput(IElementActionInput):
 		pass
 
 	@PumpAttribute.setter
-	def PumpAttribute(self, pumpattribute: int) -> None:
+	def PumpAttribute(self, pumpattribute: ControlActionPumpAttribute) -> None:
 		pass
 
 	@PumpStatus.setter
-	def PumpStatus(self, pumpstatus: int) -> None:
+	def PumpStatus(self, pumpstatus: ControlActionPumpStatus) -> None:
 		pass
 
 	@RelativeSpeedFactor.setter
@@ -1762,18 +1764,18 @@ class IThrottleControlValveActionInput(IElementActionInput):
 		pass
 
 	@property
-	def TCVAttribute(self) -> int:
+	def TCVAttribute(self) -> ControlActionTCVAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlActionTCVAttribute: No Description
 		"""
 		pass
 
 	@property
-	def TCVStatus(self) -> int:
+	def TCVStatus(self) -> ControlActionTCVStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlActionTCVStatus: No Description
 		"""
 		pass
 
@@ -1786,11 +1788,11 @@ class IThrottleControlValveActionInput(IElementActionInput):
 		pass
 
 	@TCVAttribute.setter
-	def TCVAttribute(self, tcvattribute: int) -> None:
+	def TCVAttribute(self, tcvattribute: ControlActionTCVAttribute) -> None:
 		pass
 
 	@TCVStatus.setter
-	def TCVStatus(self, tcvstatus: int) -> None:
+	def TCVStatus(self, tcvstatus: ControlActionTCVStatus) -> None:
 		pass
 
 	@HeadlossCoefficient.setter
@@ -1818,27 +1820,27 @@ class IGeneralPurposeValveActionInput(IElementActionInput):
 		pass
 
 	@property
-	def GPVAttribute(self) -> int:
+	def GPVAttribute(self) -> ControlActionGPVAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlActionGPVAttribute: No Description
 		"""
 		pass
 
 	@property
-	def GPVStatus(self) -> int:
+	def GPVStatus(self) -> ControlActionGPVStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlActionGPVStatus: No Description
 		"""
 		pass
 
 	@GPVAttribute.setter
-	def GPVAttribute(self, gpvattribute: int) -> None:
+	def GPVAttribute(self, gpvattribute: ControlActionGPVAttribute) -> None:
 		pass
 
 	@GPVStatus.setter
-	def GPVStatus(self, gpvstatus: int) -> None:
+	def GPVStatus(self, gpvstatus: ControlActionGPVStatus) -> None:
 		pass
 
 class IFlowControlValveActionInput(IElementActionInput):
@@ -1862,10 +1864,10 @@ class IFlowControlValveActionInput(IElementActionInput):
 		pass
 
 	@property
-	def FCVAttribute(self) -> int:
+	def FCVAttribute(self) -> ControlActionFCVAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlActionFCVAttribute: No Description
 		"""
 		pass
 
@@ -1878,15 +1880,15 @@ class IFlowControlValveActionInput(IElementActionInput):
 		pass
 
 	@property
-	def FCVStatus(self) -> int:
+	def FCVStatus(self) -> ControlActionFCVStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlActionFCVStatus: No Description
 		"""
 		pass
 
 	@FCVAttribute.setter
-	def FCVAttribute(self, fcvattribute: int) -> None:
+	def FCVAttribute(self, fcvattribute: ControlActionFCVAttribute) -> None:
 		pass
 
 	@Discharge.setter
@@ -1894,7 +1896,7 @@ class IFlowControlValveActionInput(IElementActionInput):
 		pass
 
 	@FCVStatus.setter
-	def FCVStatus(self, fcvstatus: int) -> None:
+	def FCVStatus(self, fcvstatus: ControlActionFCVStatus) -> None:
 		pass
 
 class IPressureValveActionInput(IElementActionInput):
@@ -1918,10 +1920,10 @@ class IPressureValveActionInput(IElementActionInput):
 		pass
 
 	@property
-	def PressureValveAttribute(self) -> int:
+	def PressureValveAttribute(self) -> ControlActionPressureValveAttribute:
 		"""
 		Returns:
-			int: No Description
+			ControlActionPressureValveAttribute: No Description
 		"""
 		pass
 
@@ -1942,15 +1944,15 @@ class IPressureValveActionInput(IElementActionInput):
 		pass
 
 	@property
-	def PressureValveStatus(self) -> int:
+	def PressureValveStatus(self) -> ControlActionPressureValveStatus:
 		"""
 		Returns:
-			int: No Description
+			ControlActionPressureValveStatus: No Description
 		"""
 		pass
 
 	@PressureValveAttribute.setter
-	def PressureValveAttribute(self, pressurevalveattribute: int) -> None:
+	def PressureValveAttribute(self, pressurevalveattribute: ControlActionPressureValveAttribute) -> None:
 		pass
 
 	@HydraulicGrade.setter
@@ -1962,10 +1964,10 @@ class IPressureValveActionInput(IElementActionInput):
 		pass
 
 	@PressureValveStatus.setter
-	def PressureValveStatus(self, pressurevalvestatus: int) -> None:
+	def PressureValveStatus(self, pressurevalvestatus: ControlActionPressureValveStatus) -> None:
 		pass
 
-class IControlActions(IWaterComponentsBase[IControlActions, IControlAction, IControlActionUnits], IComponentElements[IControlActions, IControlAction, IControlActionUnits, WaterComponentType], IModelingElementsBase[IControlActions, IControlAction, WaterComponentType], IElements[IControlAction], IElementManager):
+class IControlActions(IWaterComponentsBase[IControlActions, IControlAction, IControlActionUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2069,7 +2071,7 @@ class ICompositeAction(ICollectionElement):
 	def Action(self, action: IControlAction) -> None:
 		pass
 
-class ICompositeActions(ICollection[ICompositeAction], IEnumerable[ICompositeAction], IEnumerable):
+class ICompositeActions(ICollection[ICompositeAction]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2104,7 +2106,7 @@ class ICompositeActionCollection(ICollectionElements[ICompositeActions, IComposi
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IWaterComponent(IElement, IEditLabeled, ILabeled):
+class IWaterComponent(IElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2117,14 +2119,14 @@ class IWaterComponent(IElement, IEditLabeled, ILabeled):
 		pass
 
 	@property
-	def ElementType(self) -> int:
+	def ElementType(self) -> WaterComponentType:
 		"""
 		Returns:
-			int: No Description
+			WaterComponentType: No Description
 		"""
 		pass
 
-class IWaterComponentsBase(IComponentElements[TElementManagerType, TElementType, TUnitsType, WaterComponentType], IModelingElementsBase[TElementManagerType, TElementType, WaterComponentType], IElements[TElementType], IElementManager):
+class IWaterComponentsBase(Generic[TElementManagerType, TElementType, TUnitsType], IComponentElements[TElementManagerType, TElementType, TUnitsType, WaterComponentType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2136,7 +2138,7 @@ class IWaterComponentsBase(IComponentElements[TElementManagerType, TElementType,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IWaterComponentBase(IComponentElement[TElementManagerType, TElementType, TUnitsType, WaterComponentType], IModelingElementBase[TElementManagerType, TElementType, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IWaterComponentBase(Generic[TElementManagerType, TElementType, TUnitsType], IComponentElement[TElementManagerType, TElementType, TUnitsType, WaterComponentType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2148,7 +2150,7 @@ class IWaterComponentBase(IComponentElement[TElementManagerType, TElementType, T
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IZones(IWaterComponentsBase[IZones, IZone, IElementUnits], IComponentElements[IZones, IZone, IElementUnits, WaterComponentType], IModelingElementsBase[IZones, IZone, WaterComponentType], IElements[IZone], IElementManager):
+class IZones(IWaterComponentsBase[IZones, IZone, IElementUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2160,7 +2162,7 @@ class IZones(IWaterComponentsBase[IZones, IZone, IElementUnits], IComponentEleme
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IZone(IWaterComponentBase[IZones, IZone, IElementUnits], IComponentElement[IZones, IZone, IElementUnits, WaterComponentType], IModelingElementBase[IZones, IZone, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IZone(IWaterComponentBase[IZones, IZone, IElementUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2172,7 +2174,7 @@ class IZone(IWaterComponentBase[IZones, IZone, IElementUnits], IComponentElement
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits], IComponentElement[IPatterns, IPattern, IPatternUnits, WaterComponentType], IModelingElementBase[IPatterns, IPattern, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2185,18 +2187,18 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits], ICompone
 		pass
 
 	@property
-	def PatternCategory(self) -> int:
+	def PatternCategory(self) -> PatternCategory:
 		"""
 		Returns:
-			int: No Description
+			PatternCategory: No Description
 		"""
 		pass
 
 	@property
-	def PatternFormat(self) -> int:
+	def PatternFormat(self) -> PatternFormat:
 		"""
 		Returns:
-			int: No Description
+			PatternFormat: No Description
 		"""
 		pass
 
@@ -2241,11 +2243,11 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits], ICompone
 		pass
 
 	@PatternCategory.setter
-	def PatternCategory(self, patterncategory: int) -> None:
+	def PatternCategory(self, patterncategory: PatternCategory) -> None:
 		pass
 
 	@PatternFormat.setter
-	def PatternFormat(self, patternformat: int) -> None:
+	def PatternFormat(self, patternformat: PatternFormat) -> None:
 		pass
 
 	@PatternStartTime.setter
@@ -2256,7 +2258,7 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits], ICompone
 	def PatternStartingMultiplier(self, patternstartingmultiplier: float) -> None:
 		pass
 
-class IPatternUnits(IElementUnits, IPatternMultiplierUnits):
+class IPatternUnits(IPatternMultiplierUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2296,7 +2298,7 @@ class IPatternMultiplierUnits(IElementUnits):
 		"""
 		pass
 
-class IPatterns(IWaterComponentsBase[IPatterns, IPattern, IPatternUnits], IComponentElements[IPatterns, IPattern, IPatternUnits, WaterComponentType], IModelingElementsBase[IPatterns, IPattern, WaterComponentType], IElements[IPattern], IElementManager):
+class IPatterns(IWaterComponentsBase[IPatterns, IPattern, IPatternUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2320,7 +2322,7 @@ class IPatternCurveCollection(ICollectionElements[IPatternCurve, IPatternCurveEl
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPatternCurve(ICollection[IPatternCurveElement], IEnumerable[IPatternCurveElement], IEnumerable):
+class IPatternCurve(ICollection[IPatternCurveElement]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2632,7 +2634,7 @@ class IMonthlyMultipliers:
 	def December(self, december: float) -> None:
 		pass
 
-class IPumpDefinitions(IWaterComponentsBase[IPumpDefinitions, IPumpDefinition, IPumpDefinitionUnits], IComponentElements[IPumpDefinitions, IPumpDefinition, IPumpDefinitionUnits, WaterComponentType], IModelingElementsBase[IPumpDefinitions, IPumpDefinition, WaterComponentType], IElements[IPumpDefinition], IElementManager):
+class IPumpDefinitions(IWaterComponentsBase[IPumpDefinitions, IPumpDefinition, IPumpDefinitionUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2644,7 +2646,7 @@ class IPumpDefinitions(IWaterComponentsBase[IPumpDefinitions, IPumpDefinition, I
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpDefinition(IWaterComponentBase[IPumpDefinitions, IPumpDefinition, IPumpDefinitionUnits], IComponentElement[IPumpDefinitions, IPumpDefinition, IPumpDefinitionUnits, WaterComponentType], IModelingElementBase[IPumpDefinitions, IPumpDefinition, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IPumpDefinition(IWaterComponentBase[IPumpDefinitions, IPumpDefinition, IPumpDefinitionUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2753,10 +2755,10 @@ class IPumpDefinitionHead:
 		pass
 
 	@property
-	def PumpDefinitionType(self) -> int:
+	def PumpDefinitionType(self) -> PumpDefinitionType:
 		"""
 		Returns:
-			int: No Description
+			PumpDefinitionType: No Description
 		"""
 		pass
 
@@ -2825,7 +2827,7 @@ class IPumpDefinitionHead:
 		pass
 
 	@PumpDefinitionType.setter
-	def PumpDefinitionType(self, pumpdefinitiontype: int) -> None:
+	def PumpDefinitionType(self, pumpdefinitiontype: PumpDefinitionType) -> None:
 		pass
 
 	@ConstantPower.setter
@@ -2868,7 +2870,7 @@ class IPumpCurveCollection(ICollectionElements[IPumpCurve, IPumpCurveElement, IP
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpCurve(ICollection[IPumpCurveElement], IEnumerable[IPumpCurveElement], IEnumerable):
+class IPumpCurve(ICollection[IPumpCurveElement]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2969,10 +2971,10 @@ class IPumpDefinitionEfficiency:
 		pass
 
 	@property
-	def PumpEfficiencyType(self) -> int:
+	def PumpEfficiencyType(self) -> PumpEfficiencyTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			PumpEfficiencyTypeEnum: No Description
 		"""
 		pass
 
@@ -3025,7 +3027,7 @@ class IPumpDefinitionEfficiency:
 		pass
 
 	@PumpEfficiencyType.setter
-	def PumpEfficiencyType(self, pumpefficiencytype: int) -> None:
+	def PumpEfficiencyType(self, pumpefficiencytype: PumpEfficiencyTypeEnum) -> None:
 		pass
 
 	@BEPFlow.setter
@@ -3084,7 +3086,7 @@ class IFlowEfficiencyCurveElement(ICollectionElement):
 	def Efficiency(self, efficiency: float) -> None:
 		pass
 
-class IFlowEfficiencyCurve(ICollection[IFlowEfficiencyCurveElement], IEnumerable[IFlowEfficiencyCurveElement], IEnumerable):
+class IFlowEfficiencyCurve(ICollection[IFlowEfficiencyCurveElement]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3228,7 +3230,7 @@ class IFlowNPSHr(ICollectionElement):
 	def NPSHr(self, npshr: float) -> None:
 		pass
 
-class IFlowNPSHrCurve(ICollection[IFlowNPSHr], IEnumerable[IFlowNPSHr], IEnumerable):
+class IFlowNPSHrCurve(ICollection[IFlowNPSHr]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3372,7 +3374,7 @@ class ISpeedEfficiency(ICollectionElement):
 	def Efficiency(self, efficiency: float) -> None:
 		pass
 
-class ISpeedEfficiencyCurve(ICollection[ISpeedEfficiency], IEnumerable[ISpeedEfficiency], IEnumerable):
+class ISpeedEfficiencyCurve(ICollection[ISpeedEfficiency]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3436,7 +3438,7 @@ class ISpeedEfficiencyCurveCollection(ICollectionElements[ISpeedEfficiencyCurve,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituentUnits], IComponentElement[IConstituents, IConstituent, IConstituentUnits, WaterComponentType], IModelingElementBase[IConstituents, IConstituent, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituentUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3505,10 +3507,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		pass
 
 	@property
-	def WallReactionOrder(self) -> int:
+	def WallReactionOrder(self) -> WallReactionOrder:
 		"""
 		Returns:
-			int: No Description
+			WallReactionOrder: No Description
 		"""
 		pass
 
@@ -3557,7 +3559,7 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		pass
 
 	@WallReactionOrder.setter
-	def WallReactionOrder(self, wallreactionorder: int) -> None:
+	def WallReactionOrder(self, wallreactionorder: WallReactionOrder) -> None:
 		pass
 
 	@ZeroOrderWallReactionRate.setter
@@ -3568,7 +3570,7 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 	def FirstOrderWallReactionRate(self, firstorderwallreactionrate: float) -> None:
 		pass
 
-class IConstituents(IWaterComponentsBase[IConstituents, IConstituent, IConstituentUnits], IComponentElements[IConstituents, IConstituent, IConstituentUnits, WaterComponentType], IModelingElementsBase[IConstituents, IConstituent, WaterComponentType], IElements[IConstituent], IElementManager):
+class IConstituents(IWaterComponentsBase[IConstituents, IConstituent, IConstituentUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3592,7 +3594,7 @@ class IConstituentUnits(IElementUnits):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUnitDemandLoadUnits], IComponentElement[IUnitDemandLoads, IUnitDemandLoad, IUnitDemandLoadUnits, WaterComponentType], IModelingElementBase[IUnitDemandLoads, IUnitDemandLoad, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUnitDemandLoadUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3613,26 +3615,26 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		pass
 
 	@property
-	def UnitDemandType(self) -> int:
+	def UnitDemandType(self) -> UnitDemandLoadTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			UnitDemandLoadTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def PopulationUnit(self) -> int:
+	def PopulationUnit(self) -> PopulationUnit:
 		"""
 		Returns:
-			int: No Description
+			PopulationUnit: No Description
 		"""
 		pass
 
 	@property
-	def AreaUnit(self) -> int:
+	def AreaUnit(self) -> AreaUnit:
 		"""
 		Returns:
-			int: No Description
+			AreaUnit: No Description
 		"""
 		pass
 
@@ -3665,15 +3667,15 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		pass
 
 	@UnitDemandType.setter
-	def UnitDemandType(self, unitdemandtype: int) -> None:
+	def UnitDemandType(self, unitdemandtype: UnitDemandLoadTypeEnum) -> None:
 		pass
 
 	@PopulationUnit.setter
-	def PopulationUnit(self, populationunit: int) -> None:
+	def PopulationUnit(self, populationunit: PopulationUnit) -> None:
 		pass
 
 	@AreaUnit.setter
-	def AreaUnit(self, areaunit: int) -> None:
+	def AreaUnit(self, areaunit: AreaUnit) -> None:
 		pass
 
 	@CountUnit.setter
@@ -3688,7 +3690,7 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 	def PopulationEquivalent(self, populationequivalent: float) -> None:
 		pass
 
-class IUnitDemandLoads(IWaterComponentsBase[IUnitDemandLoads, IUnitDemandLoad, IUnitDemandLoadUnits], IComponentElements[IUnitDemandLoads, IUnitDemandLoad, IUnitDemandLoadUnits, WaterComponentType], IModelingElementsBase[IUnitDemandLoads, IUnitDemandLoad, WaterComponentType], IElements[IUnitDemandLoad], IElementManager):
+class IUnitDemandLoads(IWaterComponentsBase[IUnitDemandLoads, IUnitDemandLoad, IUnitDemandLoadUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3712,7 +3714,7 @@ class IUnitDemandLoadUnits(IElementUnits):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnits], IComponentElement[ISCADASignals, ISCADASignal, IElementUnits, WaterComponentType], IModelingElementBase[ISCADASignals, ISCADASignal, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3757,10 +3759,10 @@ class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnit
 		pass
 
 	@property
-	def TransformMethod(self) -> int:
+	def TransformMethod(self) -> SCADASignalTransformMethod:
 		"""
 		Returns:
-			int: No Description
+			SCADASignalTransformMethod: No Description
 		"""
 		pass
 
@@ -3777,10 +3779,10 @@ class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnit
 		pass
 
 	@TransformMethod.setter
-	def TransformMethod(self, transformmethod: int) -> None:
+	def TransformMethod(self, transformmethod: SCADASignalTransformMethod) -> None:
 		pass
 
-class ISCADASignals(IWaterComponentsBase[ISCADASignals, ISCADASignal, IElementUnits], IComponentElements[ISCADASignals, ISCADASignal, IElementUnits, WaterComponentType], IModelingElementsBase[ISCADASignals, ISCADASignal, WaterComponentType], IElements[ISCADASignal], IElementManager):
+class ISCADASignals(IWaterComponentsBase[ISCADASignals, ISCADASignal, IElementUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3792,7 +3794,7 @@ class ISCADASignals(IWaterComponentsBase[ISCADASignals, ISCADASignal, IElementUn
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IGPVHeadlossCurve(IWaterComponentBase[IGPVHeadlossCurves, IGPVHeadlossCurve, IGPVHeadlossUnits], IComponentElement[IGPVHeadlossCurves, IGPVHeadlossCurve, IGPVHeadlossUnits, WaterComponentType], IModelingElementBase[IGPVHeadlossCurves, IGPVHeadlossCurve, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IGPVHeadlossCurve(IWaterComponentBase[IGPVHeadlossCurves, IGPVHeadlossCurve, IGPVHeadlossUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3812,7 +3814,7 @@ class IGPVHeadlossCurve(IWaterComponentBase[IGPVHeadlossCurves, IGPVHeadlossCurv
 		"""
 		pass
 
-class IGPVHeadlossCurves(IWaterComponentsBase[IGPVHeadlossCurves, IGPVHeadlossCurve, IGPVHeadlossUnits], IComponentElements[IGPVHeadlossCurves, IGPVHeadlossCurve, IGPVHeadlossUnits, WaterComponentType], IModelingElementsBase[IGPVHeadlossCurves, IGPVHeadlossCurve, WaterComponentType], IElements[IGPVHeadlossCurve], IElementManager):
+class IGPVHeadlossCurves(IWaterComponentsBase[IGPVHeadlossCurves, IGPVHeadlossCurve, IGPVHeadlossUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3872,7 +3874,7 @@ class IGPVFlowHeadloss(ICollectionElement):
 	def Headloss(self, headloss: float) -> None:
 		pass
 
-class IGPVFlowHeadlossCurve(ICollection[IGPVFlowHeadloss], IEnumerable[IGPVFlowHeadloss], IEnumerable):
+class IGPVFlowHeadlossCurve(ICollection[IGPVFlowHeadloss]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3936,7 +3938,7 @@ class IGPVFlowHeadlossUnits(IElementUnits):
 		"""
 		pass
 
-class IValveCharacteristic(IWaterComponentBase[IValveCharacteristics, IValveCharacteristic, IValveCharacteristicUnits], IComponentElement[IValveCharacteristics, IValveCharacteristic, IValveCharacteristicUnits, WaterComponentType], IModelingElementBase[IValveCharacteristics, IValveCharacteristic, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IValveCharacteristic(IWaterComponentBase[IValveCharacteristics, IValveCharacteristic, IValveCharacteristicUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3956,7 +3958,7 @@ class IValveCharacteristic(IWaterComponentBase[IValveCharacteristics, IValveChar
 		"""
 		pass
 
-class IValveCharacteristics(IWaterComponentsBase[IValveCharacteristics, IValveCharacteristic, IValveCharacteristicUnits], IComponentElements[IValveCharacteristics, IValveCharacteristic, IValveCharacteristicUnits, WaterComponentType], IModelingElementsBase[IValveCharacteristics, IValveCharacteristic, WaterComponentType], IElements[IValveCharacteristic], IElementManager):
+class IValveCharacteristics(IWaterComponentsBase[IValveCharacteristics, IValveCharacteristic, IValveCharacteristicUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4016,7 +4018,7 @@ class IRelativeClosureRelativeArea(ICollectionElement):
 	def RelativeArea(self, relativearea: float) -> None:
 		pass
 
-class IRelativeClosureRelativeAreas(ICollection[IRelativeClosureRelativeArea], IEnumerable[IRelativeClosureRelativeArea], IEnumerable):
+class IRelativeClosureRelativeAreas(ICollection[IRelativeClosureRelativeArea]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4080,7 +4082,7 @@ class IRelativeClosureRelativeAreaUnits(IElementUnits):
 		"""
 		pass
 
-class IMinorLossCoefficients(IWaterComponentsBase[IMinorLossCoefficients, IMinorLossCoefficient, IMinorLossCoefficientUnits], IComponentElements[IMinorLossCoefficients, IMinorLossCoefficient, IMinorLossCoefficientUnits, WaterComponentType], IModelingElementsBase[IMinorLossCoefficients, IMinorLossCoefficient, WaterComponentType], IElements[IMinorLossCoefficient], IElementManager):
+class IMinorLossCoefficients(IWaterComponentsBase[IMinorLossCoefficients, IMinorLossCoefficient, IMinorLossCoefficientUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4092,7 +4094,7 @@ class IMinorLossCoefficients(IWaterComponentsBase[IMinorLossCoefficients, IMinor
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IMinorLossCoefficient(IWaterComponentBase[IMinorLossCoefficients, IMinorLossCoefficient, IMinorLossCoefficientUnits], IComponentElement[IMinorLossCoefficients, IMinorLossCoefficient, IMinorLossCoefficientUnits, WaterComponentType], IModelingElementBase[IMinorLossCoefficients, IMinorLossCoefficient, WaterComponentType], IElement, IEditLabeled, ILabeled):
+class IMinorLossCoefficient(IWaterComponentBase[IMinorLossCoefficients, IMinorLossCoefficient, IMinorLossCoefficientUnits]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4105,10 +4107,10 @@ class IMinorLossCoefficient(IWaterComponentBase[IMinorLossCoefficients, IMinorLo
 		pass
 
 	@property
-	def MinorLossType(self) -> int:
+	def MinorLossType(self) -> MinorLossTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			MinorLossTypeEnum: No Description
 		"""
 		pass
 
@@ -4121,7 +4123,7 @@ class IMinorLossCoefficient(IWaterComponentBase[IMinorLossCoefficients, IMinorLo
 		pass
 
 	@MinorLossType.setter
-	def MinorLossType(self, minorlosstype: int) -> None:
+	def MinorLossType(self, minorlosstype: MinorLossTypeEnum) -> None:
 		pass
 
 	@MinorLoss.setter

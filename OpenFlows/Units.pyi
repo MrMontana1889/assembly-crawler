@@ -1,4 +1,4 @@
-from typing import TypeVar, overload, Generic
+from typing import TypeVar, Generic, overload
 
 TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
 TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
@@ -19,7 +19,7 @@ class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 	def Units(self) -> IUnits:
 		"""
 		Returns:
-			IUnits`2: No Description
+			IUnits: No Description
 		"""
 		pass
 
@@ -73,13 +73,13 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 		pass
 
 	@overload
-	def IUnits(self, value: float, unit: IUnit, format: int, signficantDigits: int) -> str:
+	def IUnits(self, value: float, unit: IUnit, format: FormatCode, signficantDigits: int) -> str:
 		"""Method Description
 
 		Args:
 			value(float): value
 			unit(IUnit): unit
-			format(int): format
+			format(FormatCode): format
 			signficantDigits(int): signficantDigits
 
 		Returns:
@@ -100,11 +100,11 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 		"""
 		pass
 
-	def Reset(self, unitSystem: int) -> None:
+	def Reset(self, unitSystem: UnitSystemType) -> None:
 		"""Method Description
 
 		Args:
-			unitSystem(int): unitSystem
+			unitSystem(UnitSystemType): unitSystem
 
 		Returns:
 			None: 
@@ -152,12 +152,12 @@ class IUnit:
 		pass
 
 	@overload
-	def IUnit(self, value: float, format: int, significantDigits: int) -> str:
+	def IUnit(self, value: float, format: FormatCode, significantDigits: int) -> str:
 		"""Method Description
 
 		Args:
 			value(float): value
-			format(int): format
+			format(FormatCode): format
 			significantDigits(int): significantDigits
 
 		Returns:
@@ -205,10 +205,10 @@ class IUnit:
 		pass
 
 	@property
-	def FormatCode(self) -> int:
+	def FormatCode(self) -> FormatCode:
 		"""
 		Returns:
-			int: No Description
+			FormatCode: No Description
 		"""
 		pass
 
@@ -237,7 +237,7 @@ class IUnit:
 		pass
 
 	@FormatCode.setter
-	def FormatCode(self, formatcode: int) -> None:
+	def FormatCode(self, formatcode: FormatCode) -> None:
 		pass
 
 	@SignificantDigits.setter

@@ -1,6 +1,7 @@
-from typing import TypeVar
+from OpenFlows.Units import IUnit
+from typing import TypeVar, Generic, List
+from enum import Enum
 
-TFieldType = TypeVar("TFieldType", )
 TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum", Enum)
 TNetworkElementType = TypeVar("TNetworkElementType", Enum)
 
@@ -48,18 +49,18 @@ class IFieldInfo(INamable, ILabeled):
 		pass
 
 	@property
-	def FieldType(self) -> int:
+	def FieldType(self) -> DomainFieldType:
 		"""
 		Returns:
-			int: No Description
+			DomainFieldType: No Description
 		"""
 		pass
 
 	@property
-	def FieldDataType(self) -> int:
+	def FieldDataType(self) -> FieldDataType:
 		"""
 		Returns:
-			int: No Description
+			FieldDataType: No Description
 		"""
 		pass
 
@@ -79,7 +80,7 @@ class IFieldInfo(INamable, ILabeled):
 		"""
 		pass
 
-class INetworkFieldInfo(IFieldInfo, INamable, ILabeled):
+class INetworkFieldInfo(IFieldInfo):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -107,7 +108,7 @@ class INetworkFieldInfo(IFieldInfo, INamable, ILabeled):
 		"""
 		pass
 
-class IUserNetworkfieldInfo(INetworkFieldInfo, IFieldInfo, INamable, ILabeled):
+class IUserNetworkfieldInfo(INetworkFieldInfo):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -127,7 +128,7 @@ class IUserNetworkfieldInfo(INetworkFieldInfo, IFieldInfo, INamable, ILabeled):
 		"""
 		pass
 
-class IResultFieldInfo(IFieldInfo, INamable, ILabeled):
+class IResultFieldInfo(IFieldInfo):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -155,7 +156,7 @@ class IResultFieldInfo(IFieldInfo, INamable, ILabeled):
 		"""
 		pass
 
-class IComponentElementFieldInfo(IFieldInfo, INamable, ILabeled):
+class IComponentElementFieldInfo(IFieldInfo):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -210,10 +211,10 @@ class IFieldManager:
 		pass
 
 	@property
-	def FieldInfo(self) -> IReadOnlyCollection`1:
+	def FieldInfo(self) -> IReadOnlyCollection:
 		"""
 		Returns:
-			IReadOnlyCollection`1: No Description
+			IReadOnlyCollection: No Description
 		"""
 		pass
 
@@ -230,10 +231,10 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		pass
 
 	@property
-	def FieldType(self) -> int:
+	def FieldType(self) -> UserFieldDataType:
 		"""
 		Returns:
-			int: No Description
+			UserFieldDataType: No Description
 		"""
 		pass
 
@@ -329,19 +330,19 @@ class IUserFieldManager(Generic[TNetworkElementType]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def NewFieldOptions(self) -> IUserFieldOptions`2:
+	def NewFieldOptions(self) -> IUserFieldOptions:
 		"""Method Description
 
 		Returns:
-			IUserFieldOptions`2: 
+			IUserFieldOptions: 
 		"""
 		pass
 
-	def CreateField(self, options: IUserFieldOptions`2) -> IUserNetworkfieldInfo:
+	def CreateField(self, options: IUserFieldOptions) -> IUserNetworkfieldInfo:
 		"""Method Description
 
 		Args:
-			options(IUserFieldOptions`2): options
+			options(IUserFieldOptions): options
 
 		Returns:
 			IUserNetworkfieldInfo: 

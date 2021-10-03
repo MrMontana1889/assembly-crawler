@@ -1,9 +1,16 @@
 from typing import List, TypeVar, Generic, overload
+from enum import Enum
+from OpenFlows.Units import IUnit
+from datetime import datetime
+from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 
 TElementType = TypeVar("TElementType", IElement)
 TElementManagerType = TypeVar("TElementManagerType", IModelingElementsBase)
 TElementTypeEnum = TypeVar("TElementTypeEnum", Enum)
 TUnitsType = TypeVar("TUnitsType", IElementUnits)
+TScenarioOptionsType = TypeVar("TScenarioOptionsType", IScenarioOptions)
+TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType", IElementUnits)
+TNetworkElementType = TypeVar("TNetworkElementType", IElement)
 
 class IElementManager:
 
@@ -76,7 +83,7 @@ class IElements(Generic[TElementType], IElementManager):
 		"""
 		pass
 
-class IElement(IEditLabeled, ILabeled):
+class IElement(IEditLabeled):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -105,10 +112,10 @@ class IElement(IEditLabeled, ILabeled):
 		pass
 
 	@property
-	def ModelElementType(self) -> int:
+	def ModelElementType(self) -> ModelElementType:
 		"""
 		Returns:
-			int: No Description
+			ModelElementType: No Description
 		"""
 		pass
 
@@ -192,7 +199,7 @@ class IElementsResults:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTypeEnum], IElement, IEditLabeled, ILabeled):
+class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTypeEnum], IElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -228,7 +235,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 		"""
 		pass
 
-class IModelingElementsBase(IElements[TElementType], IElementManager):
+class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementTypeEnum], IElements[TElementType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -319,7 +326,7 @@ class IGeometryUnits(IElementUnits):
 		"""
 		pass
 
-class IScenarioOptions(Generic[TUnitsType], IElement, IEditLabeled, ILabeled):
+class IScenarioOptions(Generic[TUnitsType], IElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -339,7 +346,7 @@ class IScenarioOptions(Generic[TUnitsType], IElement, IEditLabeled, ILabeled):
 		"""
 		pass
 
-class IScenarios(IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes], IElements[TElementType], IElementManager):
+class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType], IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -389,7 +396,7 @@ class IScenarios(IModelingElementsBase[TElementManagerType, TElementType, Modeli
 		"""
 		pass
 
-class IScenario(IModelingElementBase[TElementManagerType, TElementType, ModelingElementTypes], IElement, IEditLabeled, ILabeled):
+class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType], IModelingElementBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -472,10 +479,10 @@ class IScenario(IModelingElementBase[TElementManagerType, TElementType, Modeling
 		pass
 
 	@property
-	def ParentScenario(self) -> IScenario`4:
+	def ParentScenario(self) -> IScenario:
 		"""
 		Returns:
-			IScenario`4: No Description
+			IScenario: No Description
 		"""
 		pass
 
@@ -484,10 +491,10 @@ class IScenario(IModelingElementBase[TElementManagerType, TElementType, Modeling
 		pass
 
 	@ParentScenario.setter
-	def ParentScenario(self, parentscenario: IScenario`4) -> None:
+	def ParentScenario(self, parentscenario: IScenario) -> None:
 		pass
 
-class ISelectionSet(IModelingElementBase[TElementManagerType, TElementType, ModelingElementTypes], IElement, IEditLabeled, ILabeled):
+class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementType], IModelingElementBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -547,7 +554,7 @@ class ISelectionSet(IModelingElementBase[TElementManagerType, TElementType, Mode
 		"""
 		pass
 
-class ISelectionSets(IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes], IElements[TElementType], IElementManager):
+class ISelectionSets(Generic[TElementManagerType, TElementType, TNetworkElementType], IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
