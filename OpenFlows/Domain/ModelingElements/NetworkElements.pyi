@@ -25,33 +25,37 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 
 	@property
 	def GISIDs(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			INetworkElement: 
 		"""
 		pass
 
 	@property
 	def Input(self) -> TElementInputType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementInputType: No Description
+			INetworkElement: 
 		"""
 		pass
 
 	@property
 	def Results(self) -> TElementResultsType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementResultsType: No Description
+			INetworkElement: 
 		"""
 		pass
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TUnitsType: No Description
+			INetworkElement: 
 		"""
 		pass
 
@@ -71,38 +75,41 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def Elements(self, state: ElementStateType) -> List[TElementType]:
-		"""Method Description
+	def Elements(self, state: ElementStateType = ElementStateType.All) -> List[TElementType]:
+		"""Returns a list of elements of the given state.
 
 		Args:
-			state(ElementStateType): state
+			state(ElementStateType): Determines the state of the element to include
 
 		Returns:
-			List[TElementType]: 
+			List[TElementType]: Returns a list of 
 		"""
 		pass
 
 	@property
 	def Results(self) -> TElementsResultsType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementsResultsType: No Description
+			INetworkElements: 
 		"""
 		pass
 
 	@property
 	def Input(self) -> TElementsInputType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementsInputType: No Description
+			INetworkElements: 
 		"""
 		pass
 
 	@property
 	def ResultFields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			INetworkElements: 
 		"""
 		pass
 
@@ -120,9 +127,10 @@ class IActiveElementInput(IElementInput):
 
 	@property
 	def IsActive(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IActiveElementInput: 
 		"""
 		pass
 
@@ -144,7 +152,7 @@ class IActiveElementsInput(IElementsInput):
 
 	@overload
 	def IActiveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets all IsActive values for all elements of this type.
 
 		Returns:
 			Dict[int,int]: 
@@ -153,7 +161,7 @@ class IActiveElementsInput(IElementsInput):
 
 	@overload
 	def IActiveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -176,7 +184,7 @@ class IPointNodeInput(IActiveElementInput):
 		pass
 
 	def GetPoint(self) -> GeometryPoint:
-		"""Method Description
+		"""Gets the geometry of the node.
 
 		Returns:
 			GeometryPoint: 
@@ -184,10 +192,10 @@ class IPointNodeInput(IActiveElementInput):
 		pass
 
 	def SetPoint(self, point: GeometryPoint) -> None:
-		"""Method Description
+		"""Sets the geometry of the node.
 
 		Args:
-			point(GeometryPoint): point
+			point(GeometryPoint): The point location of the node.
 
 		Returns:
 			None: 
@@ -208,7 +216,7 @@ class IPointNodesInput(IActiveElementsInput):
 
 	@overload
 	def IPointNodesInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets the geometry of all nodes of this type.
 
 		Returns:
 			Dict[int,int]: 
@@ -217,7 +225,7 @@ class IPointNodesInput(IActiveElementsInput):
 
 	@overload
 	def IPointNodesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -240,7 +248,8 @@ class IBaseLinkInput(IActiveElementInput):
 		pass
 
 	def GetPoints(self) -> List[GeometryPoint]:
-		"""Method Description
+		"""Gets the list of geometry for the link.  The first point is the geometry of the start node.  The last point
+            is the geometry of the stop node.
 
 		Returns:
 			List[GeometryPoint]: 
@@ -248,7 +257,7 @@ class IBaseLinkInput(IActiveElementInput):
 		pass
 
 	def SetPoints(self, points: List[GeometryPoint]) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			points(List[GeometryPoint]): points
@@ -260,33 +269,37 @@ class IBaseLinkInput(IActiveElementInput):
 
 	@property
 	def StartNode(self) -> IElement:
-		"""
+		"""No Description
+
 		Returns:
-			IElement: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
 	@property
 	def StopNode(self) -> IElement:
-		"""
+		"""No Description
+
 		Returns:
-			IElement: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
 	@property
 	def IsUserDefinedLength(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
 	@property
 	def Length(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
@@ -320,7 +333,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets the polyline geometries for all base links.
 
 		Returns:
 			Dict[int,int]: 
@@ -329,7 +342,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -341,7 +354,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets start nodes for all base links.
 
 		Returns:
 			Dict[int,int]: 
@@ -350,7 +363,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -362,7 +375,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets stop nodes for all base links.
 
 		Returns:
 			Dict[int,int]: 
@@ -371,7 +384,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -383,7 +396,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets user defined lengths for all base links.
 
 		Returns:
 			Dict[int,int]: 
@@ -392,7 +405,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -404,7 +417,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets lengths for all base links.
 
 		Returns:
 			Dict[int,int]: 
@@ -413,7 +426,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -461,9 +474,10 @@ class IBaseLinkUnits(IGeometryUnits):
 
 	@property
 	def LengthUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseLinkUnits: 
 		"""
 		pass
 
@@ -480,7 +494,7 @@ class IBasePolygonInput(IActiveElementInput):
 		pass
 
 	def GetRings(self) -> array():
-		"""Method Description
+		"""Gets the rings of the polygon.
 
 		Returns:
 			array(): 
@@ -488,7 +502,7 @@ class IBasePolygonInput(IActiveElementInput):
 		pass
 
 	def SetRings(self, rings: array()) -> None:
-		"""Method Description
+		"""Sets the rings of the polygon.
 
 		Args:
 			rings(array()): rings
@@ -512,7 +526,7 @@ class IBasePolygonsInput(IActiveElementsInput):
 
 	@overload
 	def IBasePolygonsInput(self) -> Dict[int,int]:
-		"""Method Description
+		"""Gets ring geometry for all polygons.
 
 		Returns:
 			Dict[int,int]: 
@@ -521,7 +535,7 @@ class IBasePolygonsInput(IActiveElementsInput):
 
 	@overload
 	def IBasePolygonsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids

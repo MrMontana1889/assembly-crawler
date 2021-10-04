@@ -13,7 +13,7 @@ class IParentFormSurrogate(IWin32Window, IUserInterface):
 		pass
 
 	def SetParentWindowHandle(self, handle: int) -> None:
-		"""Method Description
+		"""Sets the handle of the parent window.
 
 		Args:
 			handle(int): handle
@@ -36,7 +36,7 @@ class IApplicationManager:
 		pass
 
 	def Start(self) -> None:
-		"""Method Description
+		"""Starts the application
 
 		Returns:
 			None: 
@@ -44,7 +44,8 @@ class IApplicationManager:
 		pass
 
 	def SetParentFormSurrogateDelegate(self, parentFormSurrgateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""Method Description
+		"""Provides a custom ParentFormSurrogate to use for the application
+            instead of the default implementation.
 
 		Args:
 			parentFormSurrgateDelegate(ParentFormSurrogateDelegate): parentFormSurrgateDelegate
@@ -55,7 +56,7 @@ class IApplicationManager:
 		pass
 
 	def Stop(self) -> None:
-		"""Method Description
+		"""Stops the application
 
 		Returns:
 			None: 
@@ -64,41 +65,46 @@ class IApplicationManager:
 
 	@property
 	def DomainApplicationModel(self) -> IDomainApplicationModel:
-		"""
+		"""No Description
+
 		Returns:
-			IDomainApplicationModel: No Description
+			IApplicationManager: 
 		"""
 		pass
 
 	@property
 	def ParentFormModel(self) -> HaestadParentFormModel:
-		"""
+		"""No Description
+
 		Returns:
-			HaestadParentFormModel: No Description
+			IApplicationManager: 
 		"""
 		pass
 
 	@property
 	def ParentFormUIModel(self) -> GraphicalParentFormUIModelBase:
-		"""
+		"""No Description
+
 		Returns:
-			GraphicalParentFormUIModelBase: No Description
+			IApplicationManager: 
 		"""
 		pass
 
 	@property
 	def ParentFormSurrogate(self) -> IParentFormSurrogate:
-		"""
+		"""No Description
+
 		Returns:
-			IParentFormSurrogate: No Description
+			IApplicationManager: 
 		"""
 		pass
 
 	@property
 	def IsStarted(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IApplicationManager: 
 		"""
 		pass
 

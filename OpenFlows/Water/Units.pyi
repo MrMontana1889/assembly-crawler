@@ -19,249 +19,280 @@ class INetworkElementUnits(INetworkUnits):
 
 	@property
 	def Pump(self) -> IPumpUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def VSPBUnits(self) -> IVariableSpeedPumpBatteryUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IVariableSpeedPumpBatteryUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def FCV(self) -> IFlowControlValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IFlowControlValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def GPV(self) -> IGeneralPurposeValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IGeneralPurposeValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def PBV(self) -> IPressureBreakingValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureBreakingValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def PRV(self) -> IPressureReducingValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureReducingValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def PSV(self) -> IPressureSustainingValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureSustainingValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def TCV(self) -> IThrottleControlValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IThrottleControlValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Pipe(self) -> IPipeUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPipeUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Lateral(self) -> IBaseLinkUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IBaseLinkUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Junction(self) -> IJunctionUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IJunctionUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Hydrant(self) -> IHydrantUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IHydrantUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Tank(self) -> ITankUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ITankUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def CustomerMeter(self) -> ICustomerMeterUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ICustomerMeterUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Reservoir(self) -> IReservoirUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IReservoirUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def SCADAElement(self) -> IGeometryUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IGeometryUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Tap(self) -> IGeometryUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IGeometryUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def SpotElevation(self) -> ISpotElevationUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ISpotElevationUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def ValveWithLinearAreaChange(self) -> IValveWithLinearAreaChangeUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IValveWithLinearAreaChangeUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def PeriodicHeadFlow(self) -> IPeriodicHeadFlowUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPeriodicHeadFlowUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def AirValve(self) -> IAirValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IAirValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def OrificeBetweenTwoPipes(self) -> IOrificeBetweenTwoPipesUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IOrificeBetweenTwoPipesUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def SurgeValve(self) -> ISurgeValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ISurgeValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def DischargeToAtmosphere(self) -> IDischargeToAtmosphereUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IDischargeToAtmosphereUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def RuptureDisk(self) -> IRuptureDiskUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IRuptureDiskUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def Turbine(self) -> ITurbineUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ITurbineUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def SurgeTank(self) -> ISurgeTankUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ISurgeTankUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def HydropneumaticTank(self) -> IHydropneumaticTankUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IHydropneumaticTankUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def IsolationValve(self) -> IIsolationValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IIsolationValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def PumpStation(self) -> IPumpStationUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpStationUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
 	@property
 	def CheckValve(self) -> ICheckValveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			ICheckValveUnits: No Description
+			INetworkElementUnits: 
 		"""
 		pass
 
@@ -279,81 +310,91 @@ class IComponentElementUnits(IComponentUnits):
 
 	@property
 	def Constituent(self) -> IConstituentUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IConstituentUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def Condition(self) -> IControlConditionUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IControlConditionUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def Action(self) -> IControlActionUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IControlActionUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def Pattern(self) -> IPatternUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPatternUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def PumpDefinition(self) -> IPumpDefinitionUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpDefinitionUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def UnitDemandLoad(self) -> IUnitDemandLoadUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IUnitDemandLoadUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def AirFlowCurve(self) -> IAirFlowCurveUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurveUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def GPVHeadlossCurve(self) -> IGPVHeadlossUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IGPVHeadlossUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def ValveCharacteristic(self) -> IValveCharacteristicUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristicUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 
 	@property
 	def MinorLossCoefficient(self) -> IMinorLossCoefficientUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IMinorLossCoefficientUnits: No Description
+			IComponentElementUnits: 
 		"""
 		pass
 

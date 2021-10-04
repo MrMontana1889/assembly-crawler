@@ -20,7 +20,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TElementTypeEnum:
-		"""Method Description
+		"""Gets type of element for the given id.
 
 		Args:
 			id(int): id
@@ -31,7 +31,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		pass
 
 	def Elements(self) -> List[TElementType]:
-		"""Method Description
+		"""Returns a list of all support elements in the model.
 
 		Returns:
 			List[TElementType]: 
@@ -64,9 +64,10 @@ class IComponentElement(Generic[TElementManagerType, TElementType, TUnitsType, T
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TUnitsType: No Description
+			IComponentElement: 
 		"""
 		pass
 

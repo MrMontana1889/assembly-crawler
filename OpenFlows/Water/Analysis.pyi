@@ -29,9 +29,10 @@ class IAnalysisTools:
 
 	@property
 	def ScenarioEnergyCostCalculator(self) -> IScenarioEnergyCostCalculator:
-		"""
+		"""No Description
+
 		Returns:
-			IScenarioEnergyCostCalculator: No Description
+			IAnalysisTools: 
 		"""
 		pass
 
