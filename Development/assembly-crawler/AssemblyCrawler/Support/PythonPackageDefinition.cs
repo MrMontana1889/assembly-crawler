@@ -2,6 +2,7 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace AssemblyCrawler.Support
 {
@@ -19,21 +20,22 @@ namespace AssemblyCrawler.Support
 		#endregion
 
 		#region Public Methods
-		public PythonModuleDefinition AddModule(string moduleNamespace, string filename)
+		public void Write()
 		{
-			if (Modules.Find(m => m.Filename == filename) == null)
-				Modules.Add(new PythonModuleDefinition(this, moduleNamespace, filename));
-			return GetModule(filename);
+			foreach (var assembly in Assemblies)
+				assembly.Write();
 		}
-		public PythonModuleDefinition GetModule(string filename)
+		public PythonAssemblyDefinition AddAssembly(Assembly assembly, string outputPath)
 		{
-			return Modules.Find(m => m.Filename == filename);
+			if (Assemblies.Find(a => a.Assembly.FullName == assembly.FullName) == null)
+				Assemblies.Add(new PythonAssemblyDefinition(this, assembly, outputPath));
+			return Assemblies.Find(a => a.Assembly.FullName == assembly.FullName);
 		}
 		#endregion
 
 		#region Public Properties
 		public string PackageName { get; }
-		public List<PythonModuleDefinition> Modules { get; } = new List<PythonModuleDefinition>();
+		public List<PythonAssemblyDefinition> Assemblies { get; } = new List<PythonAssemblyDefinition>();
 		#endregion
 	}
 }

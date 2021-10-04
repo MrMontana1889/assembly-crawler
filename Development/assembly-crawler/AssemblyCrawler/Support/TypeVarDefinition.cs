@@ -13,18 +13,23 @@ namespace AssemblyCrawler.Support
 	public class TypeVarDefinition
 	{
 		#region Constructor
-		public TypeVarDefinition(string name, Type[] constraints)
+		public TypeVarDefinition(string name, params Type[] constraints)
 		{
 			TypeVarName = name;
 
 			List<Type> nonSystemConstraints = new List<Type>();
-			foreach (var t in constraints)
+			if (constraints != null)
 			{
-				var typeNamespace = t.Namespace;
-				if (!typeNamespace.StartsWith("System") || t == typeof(Enum))
-					nonSystemConstraints.Add(t);
+				foreach (var t in constraints)
+				{
+					var typeNamespace = t.Namespace;
+					if (!typeNamespace.Contains("IEnumerable") || t == typeof(Enum))
+						nonSystemConstraints.Add(t);
+				}
+				Constraints = nonSystemConstraints.ToArray();
 			}
-			Constraints = nonSystemConstraints.ToArray();
+			else
+				Constraints = new Type[] { };
 		}
 		#endregion
 
@@ -39,6 +44,8 @@ namespace AssemblyCrawler.Support
 
 				if (constraintNames.Count > 0)
 					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\", {string.Join(",", constraintNames)})");
+				else
+					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\")");
 			}
 			else
 			{

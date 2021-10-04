@@ -66,6 +66,8 @@ namespace AssemblyCrawler
 					AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
 					Assembly assembly = Assembly.Load(assemblyName);
 
+					var assemblyDef = package.AddAssembly(assembly, outputPath);
+
 					IDictionary<string, List<Type>> typeMap = new Dictionary<string, List<Type>>(graphResults.Vertices.Count);
 
 					foreach (var v in graphResults.Vertices)
@@ -74,7 +76,7 @@ namespace AssemblyCrawler
 						string[] tokens = v.Name.Split(Type.Delimiter);
 
 						// Last one is the interface name, second to last is the module name to use
-						string filename = filename = tokens[tokens.Length - 2];
+						string filename = tokens[tokens.Length - 2];
 
 						if (tokens.Length > 2)
 							Array.Resize(ref tokens, tokens.Length - 2);
@@ -102,14 +104,11 @@ namespace AssemblyCrawler
 						string pyiFilename = Path.Combine(outputPath, type.Key);
 						Console.WriteLine(pyiFilename);
 
-						PythonModuleDefinition stubFile = package.AddModule(type.Value.First()?.Namespace, pyiFilename);
-						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(stubFile);
+						PythonModuleDefinition module = assemblyDef.AddModule(type.Value.First().Namespace, pyiFilename);
+						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
 
 						foreach (Type t in type.Value)
-							if (t != null)
-								generator.GenerateTypeStub(t, xmlDocumentFileName);
-
-						stubFile.Write();
+							generator.GenerateTypeStub(t);
 					}
 				}
 			}

@@ -1,7 +1,11 @@
-from typing import TypeVar, overload, List, Generic
-from OpenFlows.Domain.ModelingElements import IElement
-from IElement import IElement
-from OpenFlows.Units import TNetworkUnitsType, TComponentUnitsType
+from datetime import datetime
+from typing import Generic, overload, List, TypeVar
+from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IModelingElementBase, IElement, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
+from enum import Enum
+from OpenFlows.Units import IModelUnits, TNetworkUnitsType, TComponentUnitsType, INetworkUnits, IComponentUnits
+from OpenFlows.Domain.ModelingElements.Components import IModelComponents
+from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
+from OpenFlows.Enumerations import *
 
 TScenarioManagerType = TypeVar("TScenarioManagerType", IModelingElementsBase)
 TScenarioType = TypeVar("TScenarioType", IModelingElementBase)
@@ -11,14 +15,12 @@ TSelectionSetsType = TypeVar("TSelectionSetsType", ISelectionSets)
 TSelectionSetElementType = TypeVar("TSelectionSetElementType", ISelectionSet)
 TSelectionSetNetworkElementType = TypeVar("TSelectionSetNetworkElementType", IElement)
 TNetworkType = TypeVar("TNetworkType", INetwork)
-TModelType = TypeVar("TModelType", IModel)
 TModelComponentsType = TypeVar("TModelComponentsType", IModelComponents)
 TScenarioOptionsType = TypeVar("TScenarioOptionsType", IScenarioOptions)
 TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType", IElementUnits)
 TComponentElementType = TypeVar("TComponentElementType", IElement)
 TComponentElementTypeEnum = TypeVar("TComponentElementTypeEnum", Enum)
-TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
-TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
+TModelType = TypeVar("TModelType", IModel)
 
 class IDomainModel:
 
@@ -210,7 +212,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		"""
 		pass
 
-class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum], IDisposable):
+class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -233,11 +235,11 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum], IDisposabl
 		"""
 		pass
 
-	def Elements(self, state: int) -> List[TNetworkElementType]:
+	def Elements(self, state: ElementStateType) -> List[TNetworkElementType]:
 		"""Method Description
 
 		Args:
-			state(int): state
+			state(ElementStateType): state
 
 		Returns:
 			List[TNetworkElementType]: 
@@ -279,14 +281,14 @@ class IModelElementManager:
 		"""
 		pass
 
-	def ModelElementType(self, id: int) -> int:
+	def ModelElementType(self, id: int) -> ModelElementType:
 		"""Method Description
 
 		Args:
 			id(int): id
 
 		Returns:
-			int: 
+			ModelElementType: 
 		"""
 		pass
 
@@ -376,7 +378,7 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 		"""
 		pass
 
-class IModel(IDisposable, IModelElementManager, IModelIOOperations, IModelUnits[TNetworkUnitsType, TComponentUnitsType], IModelScenarioManagement[TScenarioManagerType, TScenarioType], IDomainModel, IModelSelectionSetManagement[TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType]):
+class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType], IModelElementManager, IModelIOOperations, IModelUnits[TNetworkUnitsType, TComponentUnitsType], IModelScenarioManagement[TScenarioManagerType, TScenarioType], IDomainModel, IModelSelectionSetManagement[TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -424,14 +426,14 @@ class IModel(IDisposable, IModelElementManager, IModelIOOperations, IModelUnits[
 		pass
 
 	@property
-	def UserFieldManager(self) -> IUserFieldManager`1:
+	def UserFieldManager(self) -> IUserFieldManager:
 		"""
 		Returns:
-			IUserFieldManager`1: No Description
+			IUserFieldManager: No Description
 		"""
 		pass
 
-class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType], IDisposable):
+class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed

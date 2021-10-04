@@ -63,6 +63,8 @@ namespace AssemblyCrawler.Console
 					crawler.Crawl(package,pair.Assembly, pair.XmlDocument, obj.OutputPath);
 				}
 			}
+
+			package.Write();
 		}
 		#endregion
 	}

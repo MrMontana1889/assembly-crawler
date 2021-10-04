@@ -1,3 +1,5 @@
+from OpenFlows.Enumerations import *
+
 class IParentFormSurrogate(IWin32Window, IUserInterface):
 
 	def __init__(self) -> None:

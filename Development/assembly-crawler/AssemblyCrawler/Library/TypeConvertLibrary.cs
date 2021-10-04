@@ -18,6 +18,15 @@ namespace AssemblyCrawler.Library
 			if (type == typeof(void)) return "None";
 			if (type == typeof(Enum)) return "Enum";
 
+			if (type.IsArray)
+			{
+				var typeName = type.Name.Replace("[]", "");
+				if (typeName == "Double")
+					return $"array(float)";
+
+				return "array()";
+			}
+
 			if (type.IsGenericType)
 			{
 				if (type.GetGenericTypeDefinition() == typeof(List<>)
@@ -75,20 +84,15 @@ namespace AssemblyCrawler.Library
 				// IF it is not part of the current module.
 				if (!type.IsGenericParameter)
 				{
-					var classDef = module.ClassDefinitions.Find(c => c.ClassName == type.Name);
-					if (classDef == null)
+					foreach (var assem in module.Assembly.Package.Assemblies)
 					{
-						// The class definition is not part of the current module.
-						foreach (var mod in module.Package.Modules)
+						foreach (var mod in assem.Modules)
 						{
 							if (mod.Filename != module.Filename)
 							{
-								// Don't look at the current module.
-								classDef = mod.ClassDefinitions.Find(c => c.ClassName == type.Name);
-								if (classDef != null)
-								{
+								var classD = mod.ClassDefinitions.Find(c => c.ClassName == type.Name);
+								if (classD != null)
 									module.AddImportModule(type.Namespace).AddType(pythonType);
-								}
 							}
 						}
 					}
@@ -96,22 +100,29 @@ namespace AssemblyCrawler.Library
 				else
 				{
 					var typeVar = module.GetTypeVar(type.Name);
-
 					if (typeVar == null)
 					{
-						//foreach (var mod in module.Package.Modules)
-						for (int i = 0; i < module.Package.Modules.Count; ++i)
+						bool typeVarFound = false;
+						foreach (var assem in module.Assembly.Package.Assemblies)
 						{
-							var mod = module.Package.Modules[i];
-							if (mod.ModuleNamespace != module.ModuleNamespace)
+							foreach (var mod in assem.Modules)
 							{
-								typeVar = mod.GetTypeVar(type.Name);
-								if (typeVar != null)
+								if (mod.ModuleNamespace != module.ModuleNamespace)
 								{
-									module.AddImportModule(mod.ModuleNamespace).AddType(typeVar.TypeVarName);
-									break;
+									var modTypeVar = mod.GetTypeVar(type.Name);
+									if (modTypeVar != null)
+									{
+										module.AddImportModule(mod.ModuleNamespace).AddType(modTypeVar.TypeVarName);
+										typeVarFound = true;
+										break;
+									}
 								}
 							}
+						}
+
+						if (!typeVarFound)
+						{
+							module.AddTypeVar(type.Name, type.GetGenericParameterConstraints());
 						}
 					}
 					else
@@ -122,26 +133,11 @@ namespace AssemblyCrawler.Library
 							AddImportForPythonType(module, c);
 						}
 					}
+				}
 
-					//// This is a type parameer.  Still needs to be imported if needed
-					//var typeVar = module.TypeVars.Find(t => t.TypeVarName == type.Name);
-					//if (typeVar == null)
-					//{
-					//	// Search through other modules.
-					//	foreach (var mod in module.Package.Modules)
-					//	{
-					//		if (mod.Filename != module.Filename)
-					//		{
-					//			typeVar = mod.TypeVars.Find(t => t.TypeVarName == type.Name);
-					//			if (typeVar != null)
-					//			{
-					//				// Found
-					//				Console.WriteLine($"Add import for {typeVar.TypeVarName} from {mod.Filename}");
-					//				break;
-					//			}
-					//		}
-					//	}
-					//}
+				if (!type.IsGenericType && !type.IsGenericParameter && type.IsEnum)
+				{
+					module.Assembly.AddEnum(type);
 				}
 			}
 		}
@@ -151,6 +147,9 @@ namespace AssemblyCrawler.Library
 
 		private static string ToPythonPrimitiveType(Type type)
 		{
+			if (type.IsEnum)
+				return type.Name;
+
 			switch (Type.GetTypeCode(type))
 			{
 				case TypeCode.Byte:

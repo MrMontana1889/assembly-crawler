@@ -45,9 +45,9 @@ namespace AssemblyCrawler.Generators
 		#endregion
 
 		#region Constructor
-		public PythonStubGenerator(PythonModuleDefinition stubFile)
+		public PythonStubGenerator(PythonModuleDefinition module)
 		{
-			Module = stubFile;
+			Module = module;
 		}
 		#endregion
 
@@ -60,7 +60,7 @@ namespace AssemblyCrawler.Generators
 			var typeParser = new TypeParserLibrary(type).Parse();
 			var xmlDocument = new XmlDocumentaitonParserLibrary(xmlDocumentFileName).Parse();
 
-			MemberInfo memberInfo = null;
+			string typeName = type.Name;
 
 			if (type == typeof(Enum))
 			{
@@ -355,16 +355,9 @@ namespace AssemblyCrawler.Generators
                 }
                 #endregion
 
-                #region Properties
-                // Write ReadOnly properties
-                foreach (var p in typeParser.ReadOnlyProperties)
-                {
-					var docStringWriter = new PythonPropertyDocStringWriterLibrary(
-							type: type,
-							member: xmlDocument?.GetMember(p as MemberInfo),
-							indentLevel: 2);
-
-
+				#region Properties
+				// Write ReadOnly properties
+				foreach (var p in typeParser.ReadOnlyProperties)
 					PythonStubWriterLibrary.WritePythonProperty(
 						classDef: classDef,
 						propertyName: typeParser.GetPropertyName(p),
@@ -373,7 +366,6 @@ namespace AssemblyCrawler.Generators
 						isStatic: p.IsStatic,
 						indentLevel: 1
 						);
-                }
 
 				// Write WriteOnly properties
 				foreach (var p in typeParser.WriteOnlyProperties)

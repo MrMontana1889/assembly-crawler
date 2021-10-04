@@ -1,7 +1,13 @@
-from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement
-from typing import Generic, overload, Dict
-from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElementInput, IElementsInput, IGeometryUnits, IElementManager, IElement, TElementManagerType, TElementType, TUnitsType
-from OpenFlows.Domain.ModelingElements.NetworkElements import IPointNodeInput, IActiveElementInput, IPointNodesInput, IActiveElementsInput, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput
+from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
+from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve, ISCADASignal
+from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType
+from typing import overload, Dict, List, Union, Generic
+from array import array
+from OpenFlows.Units import IUnit
+from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput
+from OpenFlows.Domain.DataObjects import INetwork
+from OpenFlows.Water.Enumerations import *
+
 
 class IMinorLoss(ICollectionElement):
 
@@ -39,7 +45,7 @@ class IMinorLoss(ICollectionElement):
 	def MinorLossCoefficient(self, minorlosscoefficient: IMinorLossCoefficient) -> None:
 		pass
 
-class IMinorLosses(ICollection[IMinorLoss], IEnumerable[IMinorLoss], IEnumerable):
+class IMinorLosses(ICollection[IMinorLoss]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -184,7 +190,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -196,7 +202,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -205,7 +211,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -217,27 +223,27 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CannotDeliverFlowsOrHeads(self) -> Nullable`1[]:
+	def CannotDeliverFlowsOrHeads(self) -> array(Union[bool, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def IsOpens(self) -> Nullable`1[]:
+	def IsOpens(self) -> array(Union[bool, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IBaseDirectedNodeInput(IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IBaseDirectedNodeInput(IPhysicalNodeElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -273,7 +279,7 @@ class IBaseDirectedNodeInput(IPhysicalNodeElementInput, IPointNodeInput, IActive
 	def InstallationYear(self, installationyear: int) -> None:
 		pass
 
-class IBaseDirectedNodesInput(IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IBaseDirectedNodesInput(IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -306,7 +312,7 @@ class IBaseDirectedNodesInput(IPointNodesInput, IActiveElementsInput, IElementsI
 		"""
 		pass
 
-class IBaseDirectedNodeUnits(IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IBaseDirectedNodeUnits(IElementResults, IWaterQualityResultsUnits, IGeometryUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -326,7 +332,7 @@ class IBaseDirectedNodeUnits(IElementResults, IWaterQualityResultsUnits, IElemen
 		"""
 		pass
 
-class ICheckValveElementInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class ICheckValveElementInput(IBaseDirectedNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -355,10 +361,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput,
 		pass
 
 	@property
-	def FlowDirection(self) -> int:
+	def FlowDirection(self) -> CheckValveFlowDirectionEnum:
 		"""
 		Returns:
-			int: No Description
+			CheckValveFlowDirectionEnum: No Description
 		"""
 		pass
 
@@ -411,7 +417,7 @@ class ICheckValveElementInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput,
 		pass
 
 	@FlowDirection.setter
-	def FlowDirection(self, flowdirection: int) -> None:
+	def FlowDirection(self, flowdirection: CheckValveFlowDirectionEnum) -> None:
 		pass
 
 	@InitialTypicalFlow.setter
@@ -434,7 +440,7 @@ class ICheckValveElementInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput,
 	def AllowDisruptionOfOperation(self, allowdisruptionofoperation: bool) -> None:
 		pass
 
-class ICheckValveElementsInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class ICheckValveElementsInput(IBaseDirectedNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -593,7 +599,7 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput, IPointNodesInput, IActiv
 		"""
 		pass
 
-class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class ICheckValveElementResults(IBaseDirectedNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -610,7 +616,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -622,7 +628,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -631,7 +637,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -643,7 +649,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -652,7 +658,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -664,7 +670,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -673,7 +679,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -685,43 +691,43 @@ class ICheckValveElementResults(IBaseDirectedNodeResults, IElementResults, IWate
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def AbsoluteFlows(self) -> Nullable`1[]:
+	def AbsoluteFlows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Pressures(self) -> Nullable`1[]:
+	def Pressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def HydraulicGrades(self) -> Nullable`1[]:
+	def HydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class ICheckValveElementsResults(IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class ICheckValveElementsResults(IBaseDirectedNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -869,7 +875,7 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults, IElementsResults, IW
 		"""
 		pass
 
-class ICheckValveUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class ICheckValveUnits(IBaseDirectedNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -905,7 +911,7 @@ class ICheckValveUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityRes
 		"""
 		pass
 
-class ICheckValves(IWaterNetworkElements[ICheckValves, ICheckValve, ICheckValveUnits, ICheckValveElementInput, ICheckValveElementResults, ICheckValveElementsInput, ICheckValveElementsResults], INetworkElements[ICheckValves, ICheckValve, ICheckValveUnits, WaterNetworkElementType, ICheckValveElementInput, ICheckValveElementResults, ICheckValveElementsInput, ICheckValveElementsResults], IModelingElementsBase[ICheckValves, ICheckValve, WaterNetworkElementType], IElements[ICheckValve], IElementManager):
+class ICheckValves(IWaterNetworkElements[ICheckValves, ICheckValve, ICheckValveUnits, ICheckValveElementInput, ICheckValveElementResults, ICheckValveElementsInput, ICheckValveElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -917,7 +923,7 @@ class ICheckValves(IWaterNetworkElements[ICheckValves, ICheckValve, ICheckValveU
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ICheckValve(IWaterNetworkElement[ICheckValves, ICheckValve, ICheckValveUnits, ICheckValveElementInput, ICheckValveElementResults, ICheckValveElementsInput, ICheckValveElementsResults], INetworkElement[ICheckValves, ICheckValve, ICheckValveUnits, WaterNetworkElementType, ICheckValveElementInput, ICheckValveElementResults, ICheckValveElementsInput, ICheckValveElementsResults], IModelingElementBase[ICheckValves, ICheckValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ICheckValve(IWaterNetworkElement[ICheckValves, ICheckValve, ICheckValveUnits, ICheckValveElementInput, ICheckValveElementResults, ICheckValveElementsInput, ICheckValveElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -929,7 +935,7 @@ class ICheckValve(IWaterNetworkElement[ICheckValves, ICheckValve, ICheckValveUni
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IOrificeBetweenTwoPipesInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IOrificeBetweenTwoPipesInput(IBaseDirectedNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -965,7 +971,7 @@ class IOrificeBetweenTwoPipesInput(IBaseDirectedNodeInput, IPhysicalNodeElementI
 	def TypicalFlow(self, typicalflow: float) -> None:
 		pass
 
-class IOrificesBetweenTwoPipesInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IOrificesBetweenTwoPipesInput(IBaseDirectedNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -993,7 +999,7 @@ class IOrificesBetweenTwoPipesInput(IBaseDirectedNodesInput, IPointNodesInput, I
 		"""
 		pass
 
-class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1010,7 +1016,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1022,7 +1028,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1031,7 +1037,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1043,7 +1049,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1052,7 +1058,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1064,7 +1070,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1073,7 +1079,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1085,7 +1091,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1094,7 +1100,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1106,7 +1112,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1115,7 +1121,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1127,7 +1133,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1136,7 +1142,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -1148,67 +1154,67 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Headlosses(self) -> Nullable`1[]:
+	def Headlosses(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def FromHydraulicGrades(self) -> Nullable`1[]:
+	def FromHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def ToHydraulicGrades(self) -> Nullable`1[]:
+	def ToHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def FromPressures(self) -> Nullable`1[]:
+	def FromPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def ToPressures(self) -> Nullable`1[]:
+	def ToPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def AbsoluteFlows(self) -> Nullable`1[]:
+	def AbsoluteFlows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1457,7 +1463,7 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults, IElementsResult
 		"""
 		pass
 
-class IOrificeBetweenTwoPipesUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IOrificeBetweenTwoPipesUnits(IBaseDirectedNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1501,7 +1507,7 @@ class IOrificeBetweenTwoPipesUnits(IBaseDirectedNodeUnits, IElementResults, IWat
 		"""
 		pass
 
-class IOrificeBetweenTwoPipes(IWaterNetworkElement[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, IOrificeBetweenTwoPipesUnits, IOrificeBetweenTwoPipesInput, IOrificeBetweenTwoPipesResults, IOrificesBetweenTwoPipesInput, IOrificesBetweenTwoPipesResults], INetworkElement[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, IOrificeBetweenTwoPipesUnits, WaterNetworkElementType, IOrificeBetweenTwoPipesInput, IOrificeBetweenTwoPipesResults, IOrificesBetweenTwoPipesInput, IOrificesBetweenTwoPipesResults], IModelingElementBase[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IOrificeBetweenTwoPipes(IWaterNetworkElement[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, IOrificeBetweenTwoPipesUnits, IOrificeBetweenTwoPipesInput, IOrificeBetweenTwoPipesResults, IOrificesBetweenTwoPipesInput, IOrificesBetweenTwoPipesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1513,7 +1519,7 @@ class IOrificeBetweenTwoPipes(IWaterNetworkElement[IOrificesBetweenTwoPipes, IOr
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IOrificesBetweenTwoPipes(IWaterNetworkElements[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, IOrificeBetweenTwoPipesUnits, IOrificeBetweenTwoPipesInput, IOrificeBetweenTwoPipesResults, IOrificesBetweenTwoPipesInput, IOrificesBetweenTwoPipesResults], INetworkElements[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, IOrificeBetweenTwoPipesUnits, WaterNetworkElementType, IOrificeBetweenTwoPipesInput, IOrificeBetweenTwoPipesResults, IOrificesBetweenTwoPipesInput, IOrificesBetweenTwoPipesResults], IModelingElementsBase[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, WaterNetworkElementType], IElements[IOrificeBetweenTwoPipes], IElementManager):
+class IOrificesBetweenTwoPipes(IWaterNetworkElements[IOrificesBetweenTwoPipes, IOrificeBetweenTwoPipes, IOrificeBetweenTwoPipesUnits, IOrificeBetweenTwoPipesInput, IOrificeBetweenTwoPipesResults, IOrificesBetweenTwoPipesInput, IOrificesBetweenTwoPipesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1537,7 +1543,7 @@ class ITurbineCurveCollection(ICollectionElements[ITurbineFlowHeads, ITurbineFlo
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITurbineFlowHeads(ICollection[ITurbineFlowHead], IEnumerable[ITurbineFlowHead], IEnumerable):
+class ITurbineFlowHeads(ICollection[ITurbineFlowHead]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1637,7 +1643,7 @@ class IElectricalTorqueCollection(ICollectionElements[IElectricalTorques, IElect
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IElectricalTorques(ICollection[IElectricalTorque], IEnumerable[IElectricalTorque], IEnumerable):
+class IElectricalTorques(ICollection[IElectricalTorque]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1725,7 +1731,7 @@ class IElectricalTorqueUnits(IElementUnits):
 		"""
 		pass
 
-class ITurbineInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class ITurbineInput(IBaseDirectedNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -1818,10 +1824,10 @@ class ITurbineInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNod
 		pass
 
 	@property
-	def OperatingCase(self) -> int:
+	def OperatingCase(self) -> TurbineOperatingCaseEnum:
 		"""
 		Returns:
-			int: No Description
+			TurbineOperatingCaseEnum: No Description
 		"""
 		pass
 
@@ -1834,10 +1840,10 @@ class ITurbineInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNod
 		pass
 
 	@property
-	def TurbineInitialStatus(self) -> int:
+	def TurbineInitialStatus(self) -> TurbineStatusEnum:
 		"""
 		Returns:
-			int: No Description
+			TurbineStatusEnum: No Description
 		"""
 		pass
 
@@ -1898,7 +1904,7 @@ class ITurbineInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNod
 		pass
 
 	@OperatingCase.setter
-	def OperatingCase(self, operatingcase: int) -> None:
+	def OperatingCase(self, operatingcase: TurbineOperatingCaseEnum) -> None:
 		pass
 
 	@ReportPeriod.setter
@@ -1906,10 +1912,10 @@ class ITurbineInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNod
 		pass
 
 	@TurbineInitialStatus.setter
-	def TurbineInitialStatus(self, turbineinitialstatus: int) -> None:
+	def TurbineInitialStatus(self, turbineinitialstatus: TurbineStatusEnum) -> None:
 		pass
 
-class ITurbinesInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class ITurbinesInput(IBaseDirectedNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2025,7 +2031,7 @@ class ITurbinesInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsI
 		"""
 		pass
 
-class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class ITurbineResults(IBaseDirectedNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2042,7 +2048,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2054,7 +2060,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2063,7 +2069,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2075,7 +2081,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2084,7 +2090,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2096,7 +2102,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2105,7 +2111,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2117,7 +2123,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2126,7 +2132,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2138,7 +2144,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2147,7 +2153,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2159,7 +2165,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2168,7 +2174,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2180,63 +2186,63 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Headlosses(self) -> Nullable`1[]:
+	def Headlosses(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def FromHydraulicGrades(self) -> Nullable`1[]:
+	def FromHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def ToHydraulicGrades(self) -> Nullable`1[]:
+	def ToHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def FromPressures(self) -> Nullable`1[]:
+	def FromPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def ToPressures(self) -> Nullable`1[]:
+	def ToPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def AbsoluteFlows(self) -> Nullable`1[]:
+	def AbsoluteFlows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -2244,7 +2250,7 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -2252,11 +2258,11 @@ class ITurbineResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-class ITurbinesResults(IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class ITurbinesResults(IBaseDirectedNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2522,7 +2528,7 @@ class ITurbinesResults(IBaseDirectedNodesResults, IElementsResults, IWaterQualit
 		"""
 		pass
 
-class ITurbineUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class ITurbineUnits(IBaseDirectedNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2598,7 +2604,7 @@ class ITurbineUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResult
 		"""
 		pass
 
-class ITurbine(IWaterNetworkElement[ITurbines, ITurbine, ITurbineUnits, ITurbineInput, ITurbineResults, ITurbinesInput, ITurbinesResults], INetworkElement[ITurbines, ITurbine, ITurbineUnits, WaterNetworkElementType, ITurbineInput, ITurbineResults, ITurbinesInput, ITurbinesResults], IModelingElementBase[ITurbines, ITurbine, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ITurbine(IWaterNetworkElement[ITurbines, ITurbine, ITurbineUnits, ITurbineInput, ITurbineResults, ITurbinesInput, ITurbinesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2610,7 +2616,7 @@ class ITurbine(IWaterNetworkElement[ITurbines, ITurbine, ITurbineUnits, ITurbine
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITurbines(IWaterNetworkElements[ITurbines, ITurbine, ITurbineUnits, ITurbineInput, ITurbineResults, ITurbinesInput, ITurbinesResults], INetworkElements[ITurbines, ITurbine, ITurbineUnits, WaterNetworkElementType, ITurbineInput, ITurbineResults, ITurbinesInput, ITurbinesResults], IModelingElementsBase[ITurbines, ITurbine, WaterNetworkElementType], IElements[ITurbine], IElementManager):
+class ITurbines(IWaterNetworkElements[ITurbines, ITurbine, ITurbineUnits, ITurbineInput, ITurbineResults, ITurbinesInput, ITurbinesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -2622,427 +2628,7 @@ class ITurbines(IWaterNetworkElements[ITurbines, ITurbine, ITurbineUnits, ITurbi
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBasePumpsResults(IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IBasePumpsResults(IBaseDirectedNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3055,11 +2641,431 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		pass
 
 	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+class IBasePumpResults(IBaseDirectedNodeResults):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@overload
 	def IBasePumpResults(self) -> Union[float, None]:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3071,7 +3077,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3080,7 +3086,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3092,7 +3098,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3101,7 +3107,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3113,7 +3119,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3122,7 +3128,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3134,7 +3140,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3143,7 +3149,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3155,7 +3161,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3164,7 +3170,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3176,7 +3182,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3185,7 +3191,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3197,7 +3203,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3206,7 +3212,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3218,7 +3224,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3227,7 +3233,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3239,7 +3245,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3248,7 +3254,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3260,28 +3266,28 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[int, None]:
+	def IBasePumpResults(self) -> Union[PumpStatusEnum, None]:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[int, None]:
+	def IBasePumpResults(self, timeStepIndex: int) -> Union[PumpStatusEnum, None]:
 		"""Method Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3290,7 +3296,7 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -3302,107 +3308,107 @@ class IBasePumpResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityR
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedRelativeSpeedFactors(self) -> Nullable`1[]:
+	def CalculatedRelativeSpeedFactors(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def SuctionHyraulicGrades(self) -> Nullable`1[]:
+	def SuctionHyraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def DischargeHydraulicGrades(self) -> Nullable`1[]:
+	def DischargeHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def SuctionPressures(self) -> Nullable`1[]:
+	def SuctionPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def DischargePressures(self) -> Nullable`1[]:
+	def DischargePressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def PumpHeads(self) -> Nullable`1[]:
+	def PumpHeads(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def AvailableNPSHs(self) -> Nullable`1[]:
+	def AvailableNPSHs(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def RequiredNPSHs(self) -> Nullable`1[]:
+	def RequiredNPSHs(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def PumpExceedsOperatingRanges(self) -> Nullable`1[]:
+	def PumpExceedsOperatingRanges(self) -> array(Union[bool, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def CalculatedPumpStatuses(self) -> Nullable`1[]:
+	def CalculatedPumpStatuses(self) -> array(Union[PumpStatusEnum, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def WirePowers(self) -> Nullable`1[]:
+	def WirePowers(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IBasePumpInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IBasePumpInput(IBaseDirectedNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3438,7 +3444,7 @@ class IBasePumpInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNo
 	def InitialStatus(self, initialstatus: int) -> None:
 		pass
 
-class IBasePumpsInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IBasePumpsInput(IBaseDirectedNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3492,7 +3498,7 @@ class IBasePumpsInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElements
 		"""
 		pass
 
-class IBasePumpUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IBasePumpUnits(IBaseDirectedNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3560,7 +3566,7 @@ class IBasePumpUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResul
 		"""
 		pass
 
-class IPumps(IWaterNetworkElements[IPumps, IPump, IPumpUnits, IPumpInput, IPumpResults, IPumpsInput, IPumpsResults], INetworkElements[IPumps, IPump, IPumpUnits, WaterNetworkElementType, IPumpInput, IPumpResults, IPumpsInput, IPumpsResults], IModelingElementsBase[IPumps, IPump, WaterNetworkElementType], IElements[IPump], IElementManager):
+class IPumps(IWaterNetworkElements[IPumps, IPump, IPumpUnits, IPumpInput, IPumpResults, IPumpsInput, IPumpsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3572,7 +3578,7 @@ class IPumps(IWaterNetworkElements[IPumps, IPump, IPumpUnits, IPumpInput, IPumpR
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPump(IWaterNetworkElement[IPumps, IPump, IPumpUnits, IPumpInput, IPumpResults, IPumpsInput, IPumpsResults], INetworkElement[IPumps, IPump, IPumpUnits, WaterNetworkElementType, IPumpInput, IPumpResults, IPumpsInput, IPumpsResults], IModelingElementBase[IPumps, IPump, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IPump(IWaterNetworkElement[IPumps, IPump, IPumpUnits, IPumpInput, IPumpResults, IPumpsInput, IPumpsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3584,7 +3590,7 @@ class IPump(IWaterNetworkElement[IPumps, IPump, IPumpUnits, IPumpInput, IPumpRes
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpsInput(IBasePumpsInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IPumpsInput(IBasePumpsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3596,7 +3602,7 @@ class IPumpsInput(IBasePumpsInput, IBaseDirectedNodesInput, IPointNodesInput, IA
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpsResults(IBasePumpsResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IPumpsResults(IBasePumpsResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3608,7 +3614,7 @@ class IPumpsResults(IBasePumpsResults, IBaseDirectedNodesResults, IElementsResul
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IPumpResults(IBasePumpResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3620,7 +3626,7 @@ class IPumpResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpInput(IBasePumpInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IPumpInput(IBasePumpInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3644,7 +3650,7 @@ class IPumpInput(IBasePumpInput, IBaseDirectedNodeInput, IPhysicalNodeElementInp
 	def PumpDefinition(self, pumpdefinition: IPumpDefinition) -> None:
 		pass
 
-class IPumpUnits(IBasePumpUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IPumpUnits(IBasePumpUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3656,7 +3662,7 @@ class IPumpUnits(IBasePumpUnits, IBaseDirectedNodeUnits, IElementResults, IWater
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IVariableSpeedPumpBatterys(IWaterNetworkElements[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, IVariableSpeedPumpBatteryUnits, IVSPBInput, IVSPBResults, IVSPBsInput, IVSPBsResults], INetworkElements[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, IVariableSpeedPumpBatteryUnits, WaterNetworkElementType, IVSPBInput, IVSPBResults, IVSPBsInput, IVSPBsResults], IModelingElementsBase[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, WaterNetworkElementType], IElements[IVariableSpeedPumpBattery], IElementManager):
+class IVariableSpeedPumpBatterys(IWaterNetworkElements[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, IVariableSpeedPumpBatteryUnits, IVSPBInput, IVSPBResults, IVSPBsInput, IVSPBsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3668,7 +3674,7 @@ class IVariableSpeedPumpBatterys(IWaterNetworkElements[IVariableSpeedPumpBattery
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IVariableSpeedPumpBattery(IWaterNetworkElement[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, IVariableSpeedPumpBatteryUnits, IVSPBInput, IVSPBResults, IVSPBsInput, IVSPBsResults], INetworkElement[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, IVariableSpeedPumpBatteryUnits, WaterNetworkElementType, IVSPBInput, IVSPBResults, IVSPBsInput, IVSPBsResults], IModelingElementBase[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IVariableSpeedPumpBattery(IWaterNetworkElement[IVariableSpeedPumpBatterys, IVariableSpeedPumpBattery, IVariableSpeedPumpBatteryUnits, IVSPBInput, IVSPBResults, IVSPBsInput, IVSPBsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3680,7 +3686,7 @@ class IVariableSpeedPumpBattery(IWaterNetworkElement[IVariableSpeedPumpBatterys,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IVSPBsInput(IBasePumpsInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IVSPBsInput(IBasePumpsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3772,7 +3778,7 @@ class IVSPBsInput(IBasePumpsInput, IBaseDirectedNodesInput, IPointNodesInput, IA
 		"""
 		pass
 
-class IVSPBInput(IBasePumpInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IVSPBInput(IBasePumpInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3849,18 +3855,18 @@ class IVSPBInput(IBasePumpInput, IBaseDirectedNodeInput, IPhysicalNodeElementInp
 		pass
 
 	@property
-	def VSPBType(self) -> int:
+	def VSPBType(self) -> VSPBType:
 		"""
 		Returns:
-			int: No Description
+			VSPBType: No Description
 		"""
 		pass
 
 	@property
-	def VSPBFixedHeadType(self) -> int:
+	def VSPBFixedHeadType(self) -> VSPBFixedHeadType:
 		"""
 		Returns:
-			int: No Description
+			VSPBFixedHeadType: No Description
 		"""
 		pass
 
@@ -3897,14 +3903,14 @@ class IVSPBInput(IBasePumpInput, IBaseDirectedNodeInput, IPhysicalNodeElementInp
 		pass
 
 	@VSPBType.setter
-	def VSPBType(self, vspbtype: int) -> None:
+	def VSPBType(self, vspbtype: VSPBType) -> None:
 		pass
 
 	@VSPBFixedHeadType.setter
-	def VSPBFixedHeadType(self, vspbfixedheadtype: int) -> None:
+	def VSPBFixedHeadType(self, vspbfixedheadtype: VSPBFixedHeadType) -> None:
 		pass
 
-class IVSPBsResults(IBasePumpsResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IVSPBsResults(IBasePumpsResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -3984,7 +3990,7 @@ class IVSPBsResults(IBasePumpsResults, IBaseDirectedNodesResults, IElementsResul
 		"""
 		pass
 
-class IVSPBResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IVSPBResults(IBasePumpResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4001,7 +4007,7 @@ class IVSPBResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4013,7 +4019,7 @@ class IVSPBResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4022,7 +4028,7 @@ class IVSPBResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4034,27 +4040,27 @@ class IVSPBResults(IBasePumpResults, IBaseDirectedNodeResults, IElementResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def LoadPumpFlows(self) -> Nullable`1[]:
+	def LoadPumpFlows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def NumberRunningLagPumps(self) -> Nullable`1[]:
+	def NumberRunningLagPumps(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IVariableSpeedPumpBatteryUnits(IBasePumpUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IVariableSpeedPumpBatteryUnits(IBasePumpUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4066,325 +4072,7 @@ class IVariableSpeedPumpBatteryUnits(IBasePumpUnits, IBaseDirectedNodeUnits, IEl
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseValvesResults(IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IBaseValvesResults(IBaseDirectedNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4397,11 +4085,329 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		pass
 
 	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""Method Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+class IBaseValveResults(IBaseDirectedNodeResults):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@overload
 	def IBaseValveResults(self) -> Union[float, None]:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4413,7 +4419,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4422,7 +4428,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4434,7 +4440,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4443,7 +4449,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4455,7 +4461,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4464,7 +4470,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4476,7 +4482,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4485,7 +4491,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4497,7 +4503,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4506,7 +4512,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4518,7 +4524,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4527,7 +4533,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4539,7 +4545,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4548,7 +4554,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4560,7 +4566,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4569,7 +4575,7 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4581,83 +4587,83 @@ class IBaseValveResults(IBaseDirectedNodeResults, IElementResults, IWaterQuality
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Velocities(self) -> Nullable`1[]:
+	def Velocities(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Headlosses(self) -> Nullable`1[]:
+	def Headlosses(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def PressureLosses(self) -> Nullable`1[]:
+	def PressureLosses(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def FromHydraulicGrades(self) -> Nullable`1[]:
+	def FromHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def ToHydraulicGrades(self) -> Nullable`1[]:
+	def ToHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def FromPressures(self) -> Nullable`1[]:
+	def FromPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def ToPressures(self) -> Nullable`1[]:
+	def ToPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def CalculatedStatuses(self) -> Nullable`1[]:
+	def CalculatedStatuses(self) -> array(Union[int, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IBaseValveInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IBaseValveInput(IBaseDirectedNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4670,10 +4676,10 @@ class IBaseValveInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointN
 		pass
 
 	@property
-	def InitialStatus(self) -> int:
+	def InitialStatus(self) -> ValveSettingType:
 		"""
 		Returns:
-			int: No Description
+			ValveSettingType: No Description
 		"""
 		pass
 
@@ -4718,7 +4724,7 @@ class IBaseValveInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointN
 		pass
 
 	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: int) -> None:
+	def InitialStatus(self, initialstatus: ValveSettingType) -> None:
 		pass
 
 	@ValveDiameter.setter
@@ -4733,7 +4739,7 @@ class IBaseValveInput(IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointN
 	def SpecifyLocalMinorLoss(self, specifylocalminorloss: bool) -> None:
 		pass
 
-class IBaseValvesInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IBaseValvesInput(IBaseDirectedNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4811,7 +4817,7 @@ class IBaseValvesInput(IBaseDirectedNodesInput, IPointNodesInput, IActiveElement
 		"""
 		pass
 
-class IBaseValveUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IBaseValveUnits(IBaseDirectedNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4879,7 +4885,7 @@ class IBaseValveUnits(IBaseDirectedNodeUnits, IElementResults, IWaterQualityResu
 		"""
 		pass
 
-class IFlowControlValves(IWaterNetworkElements[IFlowControlValves, IFlowControlValve, IFlowControlValveUnits, IFlowControlValveInput, IFlowControlValveResults, IFlowControlValvesInput, IFlowControlValvesResults], INetworkElements[IFlowControlValves, IFlowControlValve, IFlowControlValveUnits, WaterNetworkElementType, IFlowControlValveInput, IFlowControlValveResults, IFlowControlValvesInput, IFlowControlValvesResults], IModelingElementsBase[IFlowControlValves, IFlowControlValve, WaterNetworkElementType], IElements[IFlowControlValve], IElementManager):
+class IFlowControlValves(IWaterNetworkElements[IFlowControlValves, IFlowControlValve, IFlowControlValveUnits, IFlowControlValveInput, IFlowControlValveResults, IFlowControlValvesInput, IFlowControlValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4891,7 +4897,7 @@ class IFlowControlValves(IWaterNetworkElements[IFlowControlValves, IFlowControlV
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IFlowControlValve(IWaterNetworkElement[IFlowControlValves, IFlowControlValve, IFlowControlValveUnits, IFlowControlValveInput, IFlowControlValveResults, IFlowControlValvesInput, IFlowControlValvesResults], INetworkElement[IFlowControlValves, IFlowControlValve, IFlowControlValveUnits, WaterNetworkElementType, IFlowControlValveInput, IFlowControlValveResults, IFlowControlValvesInput, IFlowControlValvesResults], IModelingElementBase[IFlowControlValves, IFlowControlValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IFlowControlValve(IWaterNetworkElement[IFlowControlValves, IFlowControlValve, IFlowControlValveUnits, IFlowControlValveInput, IFlowControlValveResults, IFlowControlValvesInput, IFlowControlValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4903,7 +4909,7 @@ class IFlowControlValve(IWaterNetworkElement[IFlowControlValves, IFlowControlVal
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IFlowControlValvesResults(IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IFlowControlValvesResults(IBaseValvesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4949,7 +4955,7 @@ class IFlowControlValvesResults(IBaseValvesResults, IBaseDirectedNodesResults, I
 		"""
 		pass
 
-class IFlowControlValveResults(IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IFlowControlValveResults(IBaseValveResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -4966,7 +4972,7 @@ class IFlowControlValveResults(IBaseValveResults, IBaseDirectedNodeResults, IEle
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -4978,19 +4984,19 @@ class IFlowControlValveResults(IBaseValveResults, IBaseDirectedNodeResults, IEle
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedFlowSettings(self) -> Nullable`1[]:
+	def CalculatedFlowSettings(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IFlowControlValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IFlowControlValvesInput(IBaseValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5039,7 +5045,7 @@ class IFlowControlValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointN
 		"""
 		pass
 
-class IFlowControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IFlowControlValveInput(IBaseValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5068,10 +5074,10 @@ class IFlowControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalN
 		pass
 
 	@property
-	def ValveType(self) -> int:
+	def ValveType(self) -> HammerValveType:
 		"""
 		Returns:
-			int: No Description
+			HammerValveType: No Description
 		"""
 		pass
 
@@ -5084,10 +5090,10 @@ class IFlowControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalN
 		pass
 
 	@ValveType.setter
-	def ValveType(self, valvetype: int) -> None:
+	def ValveType(self, valvetype: HammerValveType) -> None:
 		pass
 
-class IFlowControlValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IFlowControlValveUnits(IBaseValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5107,7 +5113,7 @@ class IFlowControlValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementRe
 		"""
 		pass
 
-class IThrottleControlValves(IWaterNetworkElements[IThrottleControlValves, IThrottleControlValve, IThrottleControlValveUnits, IThrottleControlValveInput, IThrottleControlValveResults, IThrottleControlValvesInput, IThrottleControlValvesResults], INetworkElements[IThrottleControlValves, IThrottleControlValve, IThrottleControlValveUnits, WaterNetworkElementType, IThrottleControlValveInput, IThrottleControlValveResults, IThrottleControlValvesInput, IThrottleControlValvesResults], IModelingElementsBase[IThrottleControlValves, IThrottleControlValve, WaterNetworkElementType], IElements[IThrottleControlValve], IElementManager):
+class IThrottleControlValves(IWaterNetworkElements[IThrottleControlValves, IThrottleControlValve, IThrottleControlValveUnits, IThrottleControlValveInput, IThrottleControlValveResults, IThrottleControlValvesInput, IThrottleControlValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5119,7 +5125,7 @@ class IThrottleControlValves(IWaterNetworkElements[IThrottleControlValves, IThro
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IThrottleControlValve(IWaterNetworkElement[IThrottleControlValves, IThrottleControlValve, IThrottleControlValveUnits, IThrottleControlValveInput, IThrottleControlValveResults, IThrottleControlValvesInput, IThrottleControlValvesResults], INetworkElement[IThrottleControlValves, IThrottleControlValve, IThrottleControlValveUnits, WaterNetworkElementType, IThrottleControlValveInput, IThrottleControlValveResults, IThrottleControlValvesInput, IThrottleControlValvesResults], IModelingElementBase[IThrottleControlValves, IThrottleControlValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IThrottleControlValve(IWaterNetworkElement[IThrottleControlValves, IThrottleControlValve, IThrottleControlValveUnits, IThrottleControlValveInput, IThrottleControlValveResults, IThrottleControlValvesInput, IThrottleControlValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5131,7 +5137,7 @@ class IThrottleControlValve(IWaterNetworkElement[IThrottleControlValves, IThrott
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IThrottleControlValvesResults(IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IThrottleControlValvesResults(IBaseValvesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5177,7 +5183,7 @@ class IThrottleControlValvesResults(IBaseValvesResults, IBaseDirectedNodesResult
 		"""
 		pass
 
-class IThrottleControlValveResults(IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IThrottleControlValveResults(IBaseValveResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5194,7 +5200,7 @@ class IThrottleControlValveResults(IBaseValveResults, IBaseDirectedNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -5206,19 +5212,19 @@ class IThrottleControlValveResults(IBaseValveResults, IBaseDirectedNodeResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedSettings(self) -> Nullable`1[]:
+	def CalculatedSettings(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IThrottleControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IThrottleControlValveInput(IBaseValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5231,10 +5237,10 @@ class IThrottleControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysi
 		pass
 
 	@property
-	def TCVCoefficientType(self) -> int:
+	def TCVCoefficientType(self) -> TCVCoefficientType:
 		"""
 		Returns:
-			int: No Description
+			TCVCoefficientType: No Description
 		"""
 		pass
 
@@ -5255,15 +5261,15 @@ class IThrottleControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysi
 		pass
 
 	@property
-	def ValveType(self) -> int:
+	def ValveType(self) -> HammerValveType:
 		"""
 		Returns:
-			int: No Description
+			HammerValveType: No Description
 		"""
 		pass
 
 	@TCVCoefficientType.setter
-	def TCVCoefficientType(self, tcvcoefficienttype: int) -> None:
+	def TCVCoefficientType(self, tcvcoefficienttype: TCVCoefficientType) -> None:
 		pass
 
 	@InitialCoefficient.setter
@@ -5275,10 +5281,10 @@ class IThrottleControlValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysi
 		pass
 
 	@ValveType.setter
-	def ValveType(self, valvetype: int) -> None:
+	def ValveType(self, valvetype: HammerValveType) -> None:
 		pass
 
-class IThrottleControlValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IThrottleControlValvesInput(IBaseValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5348,7 +5354,7 @@ class IThrottleControlValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPo
 		"""
 		pass
 
-class IThrottleControlValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IThrottleControlValveUnits(IBaseValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5368,7 +5374,7 @@ class IThrottleControlValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IEleme
 		"""
 		pass
 
-class IGeneralPurposeValves(IWaterNetworkElements[IGeneralPurposeValves, IGeneralPurposeValve, IGeneralPurposeValveUnits, IGeneralPurposeValveInput, IGeneralPurposeValveResults, IGeneralPurposeValvesInput, IGeneralPurposeValvesResults], INetworkElements[IGeneralPurposeValves, IGeneralPurposeValve, IGeneralPurposeValveUnits, WaterNetworkElementType, IGeneralPurposeValveInput, IGeneralPurposeValveResults, IGeneralPurposeValvesInput, IGeneralPurposeValvesResults], IModelingElementsBase[IGeneralPurposeValves, IGeneralPurposeValve, WaterNetworkElementType], IElements[IGeneralPurposeValve], IElementManager):
+class IGeneralPurposeValves(IWaterNetworkElements[IGeneralPurposeValves, IGeneralPurposeValve, IGeneralPurposeValveUnits, IGeneralPurposeValveInput, IGeneralPurposeValveResults, IGeneralPurposeValvesInput, IGeneralPurposeValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5380,7 +5386,7 @@ class IGeneralPurposeValves(IWaterNetworkElements[IGeneralPurposeValves, IGenera
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IGeneralPurposeValve(IWaterNetworkElement[IGeneralPurposeValves, IGeneralPurposeValve, IGeneralPurposeValveUnits, IGeneralPurposeValveInput, IGeneralPurposeValveResults, IGeneralPurposeValvesInput, IGeneralPurposeValvesResults], INetworkElement[IGeneralPurposeValves, IGeneralPurposeValve, IGeneralPurposeValveUnits, WaterNetworkElementType, IGeneralPurposeValveInput, IGeneralPurposeValveResults, IGeneralPurposeValvesInput, IGeneralPurposeValvesResults], IModelingElementBase[IGeneralPurposeValves, IGeneralPurposeValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IGeneralPurposeValve(IWaterNetworkElement[IGeneralPurposeValves, IGeneralPurposeValve, IGeneralPurposeValveUnits, IGeneralPurposeValveInput, IGeneralPurposeValveResults, IGeneralPurposeValvesInput, IGeneralPurposeValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5392,7 +5398,7 @@ class IGeneralPurposeValve(IWaterNetworkElement[IGeneralPurposeValves, IGeneralP
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IGeneralPurposeValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IGeneralPurposeValvesInput(IBaseValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5428,7 +5434,7 @@ class IGeneralPurposeValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPoi
 		"""
 		pass
 
-class IGeneralPurposeValvesResults(IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IGeneralPurposeValvesResults(IBaseValvesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5440,7 +5446,7 @@ class IGeneralPurposeValvesResults(IBaseValvesResults, IBaseDirectedNodesResults
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IGeneralPurposeValveResults(IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IGeneralPurposeValveResults(IBaseValveResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5452,7 +5458,7 @@ class IGeneralPurposeValveResults(IBaseValveResults, IBaseDirectedNodeResults, I
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IGeneralPurposeValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IGeneralPurposeValveInput(IBaseValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5481,10 +5487,10 @@ class IGeneralPurposeValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysic
 		pass
 
 	@property
-	def ValveType(self) -> int:
+	def ValveType(self) -> HammerValveType:
 		"""
 		Returns:
-			int: No Description
+			HammerValveType: No Description
 		"""
 		pass
 
@@ -5497,10 +5503,10 @@ class IGeneralPurposeValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysic
 		pass
 
 	@ValveType.setter
-	def ValveType(self, valvetype: int) -> None:
+	def ValveType(self, valvetype: HammerValveType) -> None:
 		pass
 
-class IGeneralPurposeValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IGeneralPurposeValveUnits(IBaseValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5512,7 +5518,7 @@ class IGeneralPurposeValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElemen
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureValvesResults(IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IPressureValvesResults(IBaseValvesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5558,7 +5564,7 @@ class IPressureValvesResults(IBaseValvesResults, IBaseDirectedNodesResults, IEle
 		"""
 		pass
 
-class IPressureValveResults(IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IPressureValveResults(IBaseValveResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5575,7 +5581,7 @@ class IPressureValveResults(IBaseValveResults, IBaseDirectedNodeResults, IElemen
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -5587,19 +5593,19 @@ class IPressureValveResults(IBaseValveResults, IBaseDirectedNodeResults, IElemen
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedSettings(self) -> Nullable`1[]:
+	def CalculatedSettings(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IPressureValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IPressureValveInput(IBaseValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5612,10 +5618,10 @@ class IPressureValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNode
 		pass
 
 	@property
-	def PressureValveSetting(self) -> int:
+	def PressureValveSetting(self) -> PressureValvesettingType:
 		"""
 		Returns:
-			int: No Description
+			PressureValvesettingType: No Description
 		"""
 		pass
 
@@ -5628,14 +5634,14 @@ class IPressureValveInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNode
 		pass
 
 	@PressureValveSetting.setter
-	def PressureValveSetting(self, pressurevalvesetting: int) -> None:
+	def PressureValveSetting(self, pressurevalvesetting: PressureValvesettingType) -> None:
 		pass
 
 	@InitialSetting.setter
 	def InitialSetting(self, initialsetting: float) -> None:
 		pass
 
-class IPressureValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IPressureValvesInput(IBaseValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5689,7 +5695,7 @@ class IPressureValvesInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointNode
 		"""
 		pass
 
-class IPressureValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IPressureValveUnits(IBaseValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5709,7 +5715,7 @@ class IPressureValveUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementResul
 		"""
 		pass
 
-class IPressureBreakingValves(IWaterNetworkElements[IPressureBreakingValves, IPressureBreakingValve, IPressureBreakingValveUnits, IPressureBreakingValveInput, IPressureBreakingValveResults, IPressureBreakingValvesInput, IPressureBreakingValvesResults], INetworkElements[IPressureBreakingValves, IPressureBreakingValve, IPressureBreakingValveUnits, WaterNetworkElementType, IPressureBreakingValveInput, IPressureBreakingValveResults, IPressureBreakingValvesInput, IPressureBreakingValvesResults], IModelingElementsBase[IPressureBreakingValves, IPressureBreakingValve, WaterNetworkElementType], IElements[IPressureBreakingValve], IElementManager):
+class IPressureBreakingValves(IWaterNetworkElements[IPressureBreakingValves, IPressureBreakingValve, IPressureBreakingValveUnits, IPressureBreakingValveInput, IPressureBreakingValveResults, IPressureBreakingValvesInput, IPressureBreakingValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5721,7 +5727,7 @@ class IPressureBreakingValves(IWaterNetworkElements[IPressureBreakingValves, IPr
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureBreakingValve(IWaterNetworkElement[IPressureBreakingValves, IPressureBreakingValve, IPressureBreakingValveUnits, IPressureBreakingValveInput, IPressureBreakingValveResults, IPressureBreakingValvesInput, IPressureBreakingValvesResults], INetworkElement[IPressureBreakingValves, IPressureBreakingValve, IPressureBreakingValveUnits, WaterNetworkElementType, IPressureBreakingValveInput, IPressureBreakingValveResults, IPressureBreakingValvesInput, IPressureBreakingValvesResults], IModelingElementBase[IPressureBreakingValves, IPressureBreakingValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IPressureBreakingValve(IWaterNetworkElement[IPressureBreakingValves, IPressureBreakingValve, IPressureBreakingValveUnits, IPressureBreakingValveInput, IPressureBreakingValveResults, IPressureBreakingValvesInput, IPressureBreakingValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5733,7 +5739,7 @@ class IPressureBreakingValve(IWaterNetworkElement[IPressureBreakingValves, IPres
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureBreakingValvesInput(IPressureValvesInput, IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IPressureBreakingValvesInput(IPressureValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5745,7 +5751,7 @@ class IPressureBreakingValvesInput(IPressureValvesInput, IBaseValvesInput, IBase
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureBreakingValvesResults(IPressureValvesResults, IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IPressureBreakingValvesResults(IPressureValvesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5757,7 +5763,7 @@ class IPressureBreakingValvesResults(IPressureValvesResults, IBaseValvesResults,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureBreakingValveResults(IPressureValveResults, IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IPressureBreakingValveResults(IPressureValveResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5769,7 +5775,7 @@ class IPressureBreakingValveResults(IPressureValveResults, IBaseValveResults, IB
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureBreakingValveInput(IPressureValveInput, IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IPressureBreakingValveInput(IPressureValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5781,7 +5787,7 @@ class IPressureBreakingValveInput(IPressureValveInput, IBaseValveInput, IBaseDir
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureBreakingValveUnits(IPressureValveUnits, IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IPressureBreakingValveUnits(IPressureValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5793,7 +5799,7 @@ class IPressureBreakingValveUnits(IPressureValveUnits, IBaseValveUnits, IBaseDir
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureSustainingValves(IWaterNetworkElements[IPressureSustainingValves, IPressureSustainingValve, IPressureSustainingValveUnits, IPressureSustainingValveInput, IPressureSustainingValveResults, IPressureSustainingValvesInput, IPressureSustainingValvesResults], INetworkElements[IPressureSustainingValves, IPressureSustainingValve, IPressureSustainingValveUnits, WaterNetworkElementType, IPressureSustainingValveInput, IPressureSustainingValveResults, IPressureSustainingValvesInput, IPressureSustainingValvesResults], IModelingElementsBase[IPressureSustainingValves, IPressureSustainingValve, WaterNetworkElementType], IElements[IPressureSustainingValve], IElementManager):
+class IPressureSustainingValves(IWaterNetworkElements[IPressureSustainingValves, IPressureSustainingValve, IPressureSustainingValveUnits, IPressureSustainingValveInput, IPressureSustainingValveResults, IPressureSustainingValvesInput, IPressureSustainingValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5805,7 +5811,7 @@ class IPressureSustainingValves(IWaterNetworkElements[IPressureSustainingValves,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureSustainingValve(IWaterNetworkElement[IPressureSustainingValves, IPressureSustainingValve, IPressureSustainingValveUnits, IPressureSustainingValveInput, IPressureSustainingValveResults, IPressureSustainingValvesInput, IPressureSustainingValvesResults], INetworkElement[IPressureSustainingValves, IPressureSustainingValve, IPressureSustainingValveUnits, WaterNetworkElementType, IPressureSustainingValveInput, IPressureSustainingValveResults, IPressureSustainingValvesInput, IPressureSustainingValvesResults], IModelingElementBase[IPressureSustainingValves, IPressureSustainingValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IPressureSustainingValve(IWaterNetworkElement[IPressureSustainingValves, IPressureSustainingValve, IPressureSustainingValveUnits, IPressureSustainingValveInput, IPressureSustainingValveResults, IPressureSustainingValvesInput, IPressureSustainingValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5817,131 +5823,7 @@ class IPressureSustainingValve(IWaterNetworkElement[IPressureSustainingValves, I
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureSustainingValvesInput(IPressureValvesInput, IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-class IPressureSustainingValvesResults(IPressureValvesResults, IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-class IPressureSustainingValveResults(IPressureValveResults, IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-class IPressureSustainingValveInput(IPressureValveInput, IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	@property
-	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
-		Returns:
-			IValveCharacteristic: No Description
-		"""
-		pass
-
-	@property
-	def ValveType(self) -> int:
-		"""
-		Returns:
-			int: No Description
-		"""
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
-		pass
-
-	@ValveType.setter
-	def ValveType(self, valvetype: int) -> None:
-		pass
-
-class IPressureSustainingValveUnits(IPressureValveUnits, IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-class IPressureReducingValves(IWaterNetworkElements[IPressureReducingValves, IPressureReducingValve, IPressureReducingValveUnits, IPressureReducingValveInput, IPressureReducingValveResults, IPressureReducingValvesInput, IPressureReducingValvesResults], INetworkElements[IPressureReducingValves, IPressureReducingValve, IPressureReducingValveUnits, WaterNetworkElementType, IPressureReducingValveInput, IPressureReducingValveResults, IPressureReducingValvesInput, IPressureReducingValvesResults], IModelingElementsBase[IPressureReducingValves, IPressureReducingValve, WaterNetworkElementType], IElements[IPressureReducingValve], IElementManager):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-class IPressureReducingValve(IWaterNetworkElement[IPressureReducingValves, IPressureReducingValve, IPressureReducingValveUnits, IPressureReducingValveInput, IPressureReducingValveResults, IPressureReducingValvesInput, IPressureReducingValvesResults], INetworkElement[IPressureReducingValves, IPressureReducingValve, IPressureReducingValveUnits, WaterNetworkElementType, IPressureReducingValveInput, IPressureReducingValveResults, IPressureReducingValvesInput, IPressureReducingValvesResults], IModelingElementBase[IPressureReducingValves, IPressureReducingValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-class IPressureReducingValvesInput(IPressureValvesInput, IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IPressureSustainingValvesInput(IPressureValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5969,7 +5851,7 @@ class IPressureReducingValvesInput(IPressureValvesInput, IBaseValvesInput, IBase
 		"""
 		pass
 
-class IPressureReducingValvesResults(IPressureValvesResults, IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IPressureSustainingValvesResults(IPressureValvesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5981,7 +5863,7 @@ class IPressureReducingValvesResults(IPressureValvesResults, IBaseValvesResults,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureReducingValveResults(IPressureValveResults, IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IPressureSustainingValveResults(IPressureValveResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -5993,7 +5875,7 @@ class IPressureReducingValveResults(IPressureValveResults, IBaseValveResults, IB
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureReducingValveInput(IPressureValveInput, IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IPressureSustainingValveInput(IPressureValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6014,10 +5896,10 @@ class IPressureReducingValveInput(IPressureValveInput, IBaseValveInput, IBaseDir
 		pass
 
 	@property
-	def ValveType(self) -> int:
+	def ValveType(self) -> HammerValveType:
 		"""
 		Returns:
-			int: No Description
+			HammerValveType: No Description
 		"""
 		pass
 
@@ -6026,10 +5908,10 @@ class IPressureReducingValveInput(IPressureValveInput, IBaseValveInput, IBaseDir
 		pass
 
 	@ValveType.setter
-	def ValveType(self, valvetype: int) -> None:
+	def ValveType(self, valvetype: HammerValveType) -> None:
 		pass
 
-class IPressureReducingValveUnits(IPressureValveUnits, IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IPressureSustainingValveUnits(IPressureValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6041,7 +5923,7 @@ class IPressureReducingValveUnits(IPressureValveUnits, IBaseValveUnits, IBaseDir
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IValveLinearAreaChangeResults(IBaseValveResults, IBaseDirectedNodeResults, IElementResults, IWaterQualityResults):
+class IPressureReducingValves(IWaterNetworkElements[IPressureReducingValves, IPressureReducingValve, IPressureReducingValveUnits, IPressureReducingValveInput, IPressureReducingValveResults, IPressureReducingValvesInput, IPressureReducingValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6053,7 +5935,7 @@ class IValveLinearAreaChangeResults(IBaseValveResults, IBaseDirectedNodeResults,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IValvesLinearAreaChangeResults(IBaseValvesResults, IBaseDirectedNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IPressureReducingValve(IWaterNetworkElement[IPressureReducingValves, IPressureReducingValve, IPressureReducingValveUnits, IPressureReducingValveInput, IPressureReducingValveResults, IPressureReducingValvesInput, IPressureReducingValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6065,7 +5947,131 @@ class IValvesLinearAreaChangeResults(IBaseValvesResults, IBaseDirectedNodesResul
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IValveLinearAreaChangeInput(IBaseValveInput, IBaseDirectedNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput):
+class IPressureReducingValvesInput(IPressureValvesInput):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def ValveCharacteristics(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	def ValveTypes(self) -> Dict[int,int]:
+		"""Method Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+class IPressureReducingValvesResults(IPressureValvesResults):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+class IPressureReducingValveResults(IPressureValveResults):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+class IPressureReducingValveInput(IPressureValveInput):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@property
+	def ValveCharacteristics(self) -> IValveCharacteristic:
+		"""
+		Returns:
+			IValveCharacteristic: No Description
+		"""
+		pass
+
+	@property
+	def ValveType(self) -> HammerValveType:
+		"""
+		Returns:
+			HammerValveType: No Description
+		"""
+		pass
+
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
+	@ValveType.setter
+	def ValveType(self, valvetype: HammerValveType) -> None:
+		pass
+
+class IPressureReducingValveUnits(IPressureValveUnits):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+class IValveLinearAreaChangeResults(IBaseValveResults):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+class IValvesLinearAreaChangeResults(IBaseValvesResults):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+class IValveLinearAreaChangeInput(IBaseValveInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6101,7 +6107,7 @@ class IValveLinearAreaChangeInput(IBaseValveInput, IBaseDirectedNodeInput, IPhys
 	def DischargeCoefficient(self, dischargecoefficient: float) -> None:
 		pass
 
-class IValvesLinearAreaChangeInput(IBaseValvesInput, IBaseDirectedNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IPhysicalNodeElementsInput):
+class IValvesLinearAreaChangeInput(IBaseValvesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6155,7 +6161,7 @@ class IValvesLinearAreaChangeInput(IBaseValvesInput, IBaseDirectedNodesInput, IP
 		"""
 		pass
 
-class IValveWithLinearAreaChange(IWaterNetworkElement[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, IValveWithLinearAreaChangeUnits, IValveLinearAreaChangeInput, IValveLinearAreaChangeResults, IValvesLinearAreaChangeInput, IValvesLinearAreaChangeResults], INetworkElement[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, IValveWithLinearAreaChangeUnits, WaterNetworkElementType, IValveLinearAreaChangeInput, IValveLinearAreaChangeResults, IValvesLinearAreaChangeInput, IValvesLinearAreaChangeResults], IModelingElementBase[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IValveWithLinearAreaChange(IWaterNetworkElement[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, IValveWithLinearAreaChangeUnits, IValveLinearAreaChangeInput, IValveLinearAreaChangeResults, IValvesLinearAreaChangeInput, IValvesLinearAreaChangeResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6167,7 +6173,7 @@ class IValveWithLinearAreaChange(IWaterNetworkElement[IValvesWithLinearAreaChang
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IValvesWithLinearAreaChange(IWaterNetworkElements[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, IValveWithLinearAreaChangeUnits, IValveLinearAreaChangeInput, IValveLinearAreaChangeResults, IValvesLinearAreaChangeInput, IValvesLinearAreaChangeResults], INetworkElements[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, IValveWithLinearAreaChangeUnits, WaterNetworkElementType, IValveLinearAreaChangeInput, IValveLinearAreaChangeResults, IValvesLinearAreaChangeInput, IValvesLinearAreaChangeResults], IModelingElementsBase[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, WaterNetworkElementType], IElements[IValveWithLinearAreaChange], IElementManager):
+class IValvesWithLinearAreaChange(IWaterNetworkElements[IValvesWithLinearAreaChange, IValveWithLinearAreaChange, IValveWithLinearAreaChangeUnits, IValveLinearAreaChangeInput, IValveLinearAreaChangeResults, IValvesLinearAreaChangeInput, IValvesLinearAreaChangeResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6179,7 +6185,7 @@ class IValvesWithLinearAreaChange(IWaterNetworkElements[IValvesWithLinearAreaCha
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IValveWithLinearAreaChangeUnits(IBaseValveUnits, IBaseDirectedNodeUnits, IElementResults, IWaterQualityResultsUnits, IElementUnits, IGeometryUnits):
+class IValveWithLinearAreaChangeUnits(IBaseValveUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6207,7 +6213,7 @@ class IValveWithLinearAreaChangeUnits(IBaseValveUnits, IBaseDirectedNodeUnits, I
 		"""
 		pass
 
-class IWaterNetworkElement(IElement, IEditLabeled, ILabeled):
+class IWaterNetworkElement(IElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6220,14 +6226,14 @@ class IWaterNetworkElement(IElement, IEditLabeled, ILabeled):
 		pass
 
 	@property
-	def WaterElementType(self) -> int:
+	def WaterElementType(self) -> WaterNetworkElementType:
 		"""
 		Returns:
-			int: No Description
+			WaterNetworkElementType: No Description
 		"""
 		pass
 
-class IWaterNetworkElements(INetworkElements[TElementManagerType, TElementType, TUnitsType, WaterNetworkElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementsBase[TElementManagerType, TElementType, WaterNetworkElementType], IElements[TElementType], IElementManager):
+class IWaterNetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], INetworkElements[TElementManagerType, TElementType, TUnitsType, WaterNetworkElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6239,7 +6245,7 @@ class IWaterNetworkElements(INetworkElements[TElementManagerType, TElementType, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IWaterNetworkElement(INetworkElement[TElementManagerType, TElementType, TUnitsType, WaterNetworkElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementBase[TElementManagerType, TElementType, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IWaterNetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], INetworkElement[TElementManagerType, TElementType, TUnitsType, WaterNetworkElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IWaterNetworkElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6251,7 +6257,7 @@ class IWaterNetworkElement(INetworkElement[TElementManagerType, TElementType, TU
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IWaterZoneableNetworkElementInput(IActiveElementInput, IElementInput):
+class IWaterZoneableNetworkElementInput(IActiveElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6275,7 +6281,7 @@ class IWaterZoneableNetworkElementInput(IActiveElementInput, IElementInput):
 	def Zone(self, zone: IZone) -> None:
 		pass
 
-class IWaterZoneableNetworkElementsInput(IActiveElementsInput, IElementsInput):
+class IWaterZoneableNetworkElementsInput(IActiveElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6345,7 +6351,7 @@ class IWaterQualityResults:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -6357,7 +6363,7 @@ class IWaterQualityResults:
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -6366,7 +6372,7 @@ class IWaterQualityResults:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -6378,7 +6384,7 @@ class IWaterQualityResults:
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -6387,7 +6393,7 @@ class IWaterQualityResults:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -6399,31 +6405,31 @@ class IWaterQualityResults:
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Ages(self) -> Nullable`1[]:
+	def Ages(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Traces(self) -> Nullable`1[]:
+	def Traces(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Concentrations(self) -> Nullable`1[]:
+	def Concentrations(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -6571,10 +6577,10 @@ class IWaterQualityNodeInput:
 		pass
 
 	@property
-	def ConstituentSourceType(self) -> int:
+	def ConstituentSourceType(self) -> ConstituentSourceType:
 		"""
 		Returns:
-			int: No Description
+			ConstituentSourceType: No Description
 		"""
 		pass
 
@@ -6591,7 +6597,7 @@ class IWaterQualityNodeInput:
 		pass
 
 	@ConstituentSourceType.setter
-	def ConstituentSourceType(self, constituentsourcetype: int) -> None:
+	def ConstituentSourceType(self, constituentsourcetype: ConstituentSourceType) -> None:
 		pass
 
 	@BaseConstituent.setter
@@ -6760,7 +6766,7 @@ class IWaterQualityResultsUnits(IElementUnits):
 		"""
 		pass
 
-class IWaterNetwork(INetwork[IWaterNetworkElement, WaterNetworkElementType], IDisposable):
+class IWaterNetwork(INetwork[IWaterNetworkElement, WaterNetworkElementType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7020,7 +7026,7 @@ class IWaterNetwork(INetwork[IWaterNetworkElement, WaterNetworkElementType], IDi
 		"""
 		pass
 
-class IPipes(IWaterNetworkElements[IPipes, IPipe, IPipeUnits, IPipeInput, IPipeResults, IPipesInput, IPipesResults], INetworkElements[IPipes, IPipe, IPipeUnits, WaterNetworkElementType, IPipeInput, IPipeResults, IPipesInput, IPipesResults], IModelingElementsBase[IPipes, IPipe, WaterNetworkElementType], IElements[IPipe], IElementManager):
+class IPipes(IWaterNetworkElements[IPipes, IPipe, IPipeUnits, IPipeInput, IPipeResults, IPipesInput, IPipesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7032,7 +7038,7 @@ class IPipes(IWaterNetworkElements[IPipes, IPipe, IPipeUnits, IPipeInput, IPipeR
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPipe(IWaterNetworkElement[IPipes, IPipe, IPipeUnits, IPipeInput, IPipeResults, IPipesInput, IPipesResults], INetworkElement[IPipes, IPipe, IPipeUnits, WaterNetworkElementType, IPipeInput, IPipeResults, IPipesInput, IPipesResults], IModelingElementBase[IPipes, IPipe, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IPipe(IWaterNetworkElement[IPipes, IPipe, IPipeUnits, IPipeInput, IPipeResults, IPipesInput, IPipesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7077,7 +7083,7 @@ class IHammerPipesResults:
 		"""
 		pass
 
-class IPipesResults(IBaseLinksResults, IElementsResults, IWaterQualityElementsResults, IHammerPipesResults):
+class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7275,11 +7281,11 @@ class IHammerPipeResults:
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHammerPipeResults):
+class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7296,7 +7302,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7308,7 +7314,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7317,7 +7323,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7329,7 +7335,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7338,7 +7344,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7350,7 +7356,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7359,7 +7365,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7371,7 +7377,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7380,7 +7386,7 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7392,51 +7398,51 @@ class IPipeResults(IBaseLinkResults, IElementResults, IWaterQualityResults, IHam
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Velocities(self) -> Nullable`1[]:
+	def Velocities(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Headlosses(self) -> Nullable`1[]:
+	def Headlosses(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def HeadlossGradients(self) -> Nullable`1[]:
+	def HeadlossGradients(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def CalculatedStatuses(self) -> Nullable`1[]:
+	def CalculatedStatuses(self) -> array(Union[int, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IPipeInput(IBaseLinkInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput):
+class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7457,10 +7463,10 @@ class IPipeInput(IBaseLinkInput, IActiveElementInput, IElementInput, IWaterZonea
 		pass
 
 	@property
-	def InitialStatus(self) -> int:
+	def InitialStatus(self) -> PipeStatusType:
 		"""
 		Returns:
-			int: No Description
+			PipeStatusType: No Description
 		"""
 		pass
 
@@ -7525,7 +7531,7 @@ class IPipeInput(IBaseLinkInput, IActiveElementInput, IElementInput, IWaterZonea
 		pass
 
 	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: int) -> None:
+	def InitialStatus(self, initialstatus: PipeStatusType) -> None:
 		pass
 
 	@Diameter.setter
@@ -7548,7 +7554,7 @@ class IPipeInput(IBaseLinkInput, IActiveElementInput, IElementInput, IWaterZonea
 	def SpecifyLocalMinorLoss(self, specifylocalminorloss: bool) -> None:
 		pass
 
-class IPipesInput(IBaseLinksInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput):
+class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7689,7 +7695,7 @@ class IPipesInput(IBaseLinksInput, IActiveElementsInput, IElementsInput, IWaterZ
 		"""
 		pass
 
-class IPipeUnits(IBaseLinkUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IPipeUnits(IBaseLinkUnits, IWaterQualityResultsUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7741,7 +7747,7 @@ class IPipeUnits(IBaseLinkUnits, IGeometryUnits, IElementUnits, IWaterQualityRes
 		"""
 		pass
 
-class ILateral(IWaterNetworkElement[ILaterals, ILateral, IBaseLinkUnits, ILateralInput, IBaseLinkResults, ILateralsInput, IBaseLinksResults], INetworkElement[ILaterals, ILateral, IBaseLinkUnits, WaterNetworkElementType, ILateralInput, IBaseLinkResults, ILateralsInput, IBaseLinksResults], IModelingElementBase[ILaterals, ILateral, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ILateral(IWaterNetworkElement[ILaterals, ILateral, IBaseLinkUnits, ILateralInput, IBaseLinkResults, ILateralsInput, IBaseLinksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7753,7 +7759,7 @@ class ILateral(IWaterNetworkElement[ILaterals, ILateral, IBaseLinkUnits, ILatera
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ILaterals(IWaterNetworkElements[ILaterals, ILateral, IBaseLinkUnits, ILateralInput, IBaseLinkResults, ILateralsInput, IBaseLinksResults], INetworkElements[ILaterals, ILateral, IBaseLinkUnits, WaterNetworkElementType, ILateralInput, IBaseLinkResults, ILateralsInput, IBaseLinksResults], IModelingElementsBase[ILaterals, ILateral, WaterNetworkElementType], IElements[ILateral], IElementManager):
+class ILaterals(IWaterNetworkElements[ILaterals, ILateral, IBaseLinkUnits, ILateralInput, IBaseLinkResults, ILateralsInput, IBaseLinksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7765,7 +7771,7 @@ class ILaterals(IWaterNetworkElements[ILaterals, ILateral, IBaseLinkUnits, ILate
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ILateralInput(IBaseLinkInput, IActiveElementInput, IElementInput):
+class ILateralInput(IBaseLinkInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7777,7 +7783,7 @@ class ILateralInput(IBaseLinkInput, IActiveElementInput, IElementInput):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ILateralsInput(IBaseLinksInput, IActiveElementsInput, IElementsInput):
+class ILateralsInput(IBaseLinksInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7789,7 +7795,7 @@ class ILateralsInput(IBaseLinksInput, IActiveElementsInput, IElementsInput):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IFireFlowNodesResults(IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IFireFlowNodesResults(IDemandNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7869,7 +7875,7 @@ class IFireFlowNodesResults(IDemandNodesResults, IBaseNodesResults, IElementsRes
 		"""
 		pass
 
-class IFireFlowNodeResults(IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IFireFlowNodeResults(IDemandNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7886,7 +7892,7 @@ class IFireFlowNodeResults(IDemandNodeResults, IBaseNodeResults, IElementResults
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7898,7 +7904,7 @@ class IFireFlowNodeResults(IDemandNodeResults, IBaseNodeResults, IElementResults
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7907,7 +7913,7 @@ class IFireFlowNodeResults(IDemandNodeResults, IBaseNodeResults, IElementResults
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -7919,27 +7925,27 @@ class IFireFlowNodeResults(IDemandNodeResults, IBaseNodeResults, IElementResults
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Demands(self) -> Nullable`1[]:
+	def Demands(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Pressures(self) -> Nullable`1[]:
+	def Pressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IFireFlowNodeInput(IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput, IWaterTraceableInput):
+class IFireFlowNodeInput(IDemandNodeInput, IWaterTraceableInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7951,7 +7957,7 @@ class IFireFlowNodeInput(IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementI
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IFireFlowNodesInput(IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IFireFlowNodesInput(IDemandNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7963,7 +7969,7 @@ class IFireFlowNodesInput(IDemandNodesInput, IBaseNodesInput, IPointNodesInput, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IFireFlowNodeUnits(IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IFireFlowNodeUnits(IDemandNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -7991,7 +7997,7 @@ class IFireFlowNodeUnits(IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElem
 		"""
 		pass
 
-class IJunctions(IWaterNetworkElements[IJunctions, IJunction, IJunctionUnits, IJunctionInput, IJunctionResults, IJunctionsInput, IJunctionsResults], INetworkElements[IJunctions, IJunction, IJunctionUnits, WaterNetworkElementType, IJunctionInput, IJunctionResults, IJunctionsInput, IJunctionsResults], IModelingElementsBase[IJunctions, IJunction, WaterNetworkElementType], IElements[IJunction], IElementManager):
+class IJunctions(IWaterNetworkElements[IJunctions, IJunction, IJunctionUnits, IJunctionInput, IJunctionResults, IJunctionsInput, IJunctionsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8003,7 +8009,7 @@ class IJunctions(IWaterNetworkElements[IJunctions, IJunction, IJunctionUnits, IJ
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IJunction(IWaterNetworkElement[IJunctions, IJunction, IJunctionUnits, IJunctionInput, IJunctionResults, IJunctionsInput, IJunctionsResults], INetworkElement[IJunctions, IJunction, IJunctionUnits, WaterNetworkElementType, IJunctionInput, IJunctionResults, IJunctionsInput, IJunctionsResults], IModelingElementBase[IJunctions, IJunction, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IJunction(IWaterNetworkElement[IJunctions, IJunction, IJunctionUnits, IJunctionInput, IJunctionResults, IJunctionsInput, IJunctionsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8015,7 +8021,7 @@ class IJunction(IWaterNetworkElement[IJunctions, IJunction, IJunctionUnits, IJun
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IJunctionsResults(IFireFlowNodesResults, IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IJunctionsResults(IFireFlowNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8027,7 +8033,7 @@ class IJunctionsResults(IFireFlowNodesResults, IDemandNodesResults, IBaseNodesRe
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IJunctionsInput(IFireFlowNodesInput, IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IJunctionsInput(IFireFlowNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8039,7 +8045,7 @@ class IJunctionsInput(IFireFlowNodesInput, IDemandNodesInput, IBaseNodesInput, I
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IJunctionInput(IFireFlowNodeInput, IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput, IWaterTraceableInput):
+class IJunctionInput(IFireFlowNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8051,7 +8057,7 @@ class IJunctionInput(IFireFlowNodeInput, IDemandNodeInput, IBaseNodeInput, IPhys
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IJunctionResults(IFireFlowNodeResults, IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IJunctionResults(IFireFlowNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8063,7 +8069,7 @@ class IJunctionResults(IFireFlowNodeResults, IDemandNodeResults, IBaseNodeResult
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IJunctionUnits(IFireFlowNodeUnits, IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IJunctionUnits(IFireFlowNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8075,7 +8081,7 @@ class IJunctionUnits(IFireFlowNodeUnits, IDemandNodeUnits, IBaseNodeUnits, IGeom
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrants(IWaterNetworkElements[IHydrants, IHydrant, IHydrantUnits, IHydrantInput, IHydrantResults, IHydrantsInput, IHydrantsResults], INetworkElements[IHydrants, IHydrant, IHydrantUnits, WaterNetworkElementType, IHydrantInput, IHydrantResults, IHydrantsInput, IHydrantsResults], IModelingElementsBase[IHydrants, IHydrant, WaterNetworkElementType], IElements[IHydrant], IElementManager):
+class IHydrants(IWaterNetworkElements[IHydrants, IHydrant, IHydrantUnits, IHydrantInput, IHydrantResults, IHydrantsInput, IHydrantsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8087,7 +8093,7 @@ class IHydrants(IWaterNetworkElements[IHydrants, IHydrant, IHydrantUnits, IHydra
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrant(IWaterNetworkElement[IHydrants, IHydrant, IHydrantUnits, IHydrantInput, IHydrantResults, IHydrantsInput, IHydrantsResults], INetworkElement[IHydrants, IHydrant, IHydrantUnits, WaterNetworkElementType, IHydrantInput, IHydrantResults, IHydrantsInput, IHydrantsResults], IModelingElementBase[IHydrants, IHydrant, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IHydrant(IWaterNetworkElement[IHydrants, IHydrant, IHydrantUnits, IHydrantInput, IHydrantResults, IHydrantsInput, IHydrantsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8099,7 +8105,7 @@ class IHydrant(IWaterNetworkElement[IHydrants, IHydrant, IHydrantUnits, IHydrant
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrantsResults(IFireFlowNodesResults, IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IHydrantsResults(IFireFlowNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8111,7 +8117,7 @@ class IHydrantsResults(IFireFlowNodesResults, IDemandNodesResults, IBaseNodesRes
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrantResults(IFireFlowNodeResults, IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IHydrantResults(IFireFlowNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8123,7 +8129,7 @@ class IHydrantResults(IFireFlowNodeResults, IDemandNodeResults, IBaseNodeResults
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrantsInput(IFireFlowNodesInput, IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IHydrantsInput(IFireFlowNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8135,7 +8141,7 @@ class IHydrantsInput(IFireFlowNodesInput, IDemandNodesInput, IBaseNodesInput, IP
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrantInput(IFireFlowNodeInput, IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput, IWaterTraceableInput):
+class IHydrantInput(IFireFlowNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8147,7 +8153,7 @@ class IHydrantInput(IFireFlowNodeInput, IDemandNodeInput, IBaseNodeInput, IPhysi
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydrantUnits(IFireFlowNodeUnits, IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IHydrantUnits(IFireFlowNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8159,7 +8165,7 @@ class IHydrantUnits(IFireFlowNodeUnits, IDemandNodeUnits, IBaseNodeUnits, IGeome
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IDemandNodeInput(IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IDemandNodeInput(IBaseNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8187,7 +8193,7 @@ class IDemandNodeInput(IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInpu
 		"""
 		pass
 
-class IDemandNodesInput(IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IDemandNodesInput(IBaseNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8199,7 +8205,7 @@ class IDemandNodesInput(IBaseNodesInput, IPointNodesInput, IActiveElementsInput,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IDemandNodesResults(IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IDemandNodesResults(IBaseNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8211,7 +8217,7 @@ class IDemandNodesResults(IBaseNodesResults, IElementsResults, IWaterQualityElem
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IDemandNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IDemandNodeResults(IBaseNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8223,7 +8229,7 @@ class IDemandNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IDemandNodeUnits(IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IDemandNodeUnits(IBaseNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8247,7 +8253,7 @@ class IDemandCollection(ICollectionElements[IDemands, IDemand, IDemandUnits]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IDemands(ICollection[IDemand], IEnumerable[IDemand], IEnumerable):
+class IDemands(ICollection[IDemand]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8339,7 +8345,7 @@ class IUnitLoadDemandCollection(ICollectionElements[IUnitLoadDemands, IUnitLoadD
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IUnitLoadDemands(ICollection[IUnitLoadDemand], IEnumerable[IUnitLoadDemand], IEnumerable):
+class IUnitLoadDemands(ICollection[IUnitLoadDemand]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8445,7 +8451,7 @@ class IUnitLoadDemandUnits(IElementUnits):
 		"""
 		pass
 
-class IConventionalTanksResults(IBaseTanksResults, IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IConventionalTanksResults(IBaseTanksResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8601,7 +8607,7 @@ class IConventionalTanksResults(IBaseTanksResults, IDemandNodesResults, IBaseNod
 		"""
 		pass
 
-class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IConventionalTankResults(IBaseTankResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -8618,7 +8624,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8630,7 +8636,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8639,7 +8645,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8651,7 +8657,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8660,7 +8666,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8672,7 +8678,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8681,7 +8687,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8693,7 +8699,7 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -8701,43 +8707,43 @@ class IConventionalTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeRe
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Levels(self) -> Nullable`1[]:
+	def Levels(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Volumes(self) -> Nullable`1[]:
+	def Volumes(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def PercentFulls(self) -> Nullable`1[]:
+	def PercentFulls(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def TankStatuses(self) -> Nullable`1[]:
+	def TankStatuses(self) -> array(Union[int, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IConventionalTanksInput(IBaseTanksInput, IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IConventionalTanksInput(IBaseTanksInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9022,7 +9028,7 @@ class IConventionalTanksInput(IBaseTanksInput, IDemandNodesInput, IBaseNodesInpu
 		"""
 		pass
 
-class IConventionalTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IConventionalTankInput(IBaseTankInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9035,10 +9041,10 @@ class IConventionalTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, I
 		pass
 
 	@property
-	def TankSection(self) -> int:
+	def TankSection(self) -> TankSectionType:
 		"""
 		Returns:
-			int: No Description
+			TankSectionType: No Description
 		"""
 		pass
 
@@ -9147,7 +9153,7 @@ class IConventionalTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, I
 		pass
 
 	@TankSection.setter
-	def TankSection(self, tanksection: int) -> None:
+	def TankSection(self, tanksection: TankSectionType) -> None:
 		pass
 
 	@ActiveVolumeFull.setter
@@ -9198,7 +9204,7 @@ class IConventionalTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, I
 	def InactiveVolume(self, inactivevolume: float) -> None:
 		pass
 
-class IConventionalTankUnits(IBaseTankUnits, IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IConventionalTankUnits(IBaseTankUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9246,7 +9252,7 @@ class ICrossSectionCurveCollection(ICollectionElements[ICrossSectionCurve, ICros
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ICrossSectionCurve(ICollection[ICrossSectionCurveElement], IEnumerable[ICrossSectionCurveElement], IEnumerable):
+class ICrossSectionCurve(ICollection[ICrossSectionCurveElement]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9326,7 +9332,7 @@ class ICrossSectionCurveUnits(IElementUnits):
 		"""
 		pass
 
-class ITanks(IWaterNetworkElements[ITanks, ITank, ITankUnits, ITankInput, ITankResults, ITanksInput, ITanksResults], INetworkElements[ITanks, ITank, ITankUnits, WaterNetworkElementType, ITankInput, ITankResults, ITanksInput, ITanksResults], IModelingElementsBase[ITanks, ITank, WaterNetworkElementType], IElements[ITank], IElementManager):
+class ITanks(IWaterNetworkElements[ITanks, ITank, ITankUnits, ITankInput, ITankResults, ITanksInput, ITanksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9338,7 +9344,7 @@ class ITanks(IWaterNetworkElements[ITanks, ITank, ITankUnits, ITankInput, ITankR
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITank(IWaterNetworkElement[ITanks, ITank, ITankUnits, ITankInput, ITankResults, ITanksInput, ITanksResults], INetworkElement[ITanks, ITank, ITankUnits, WaterNetworkElementType, ITankInput, ITankResults, ITanksInput, ITanksResults], IModelingElementBase[ITanks, ITank, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ITank(IWaterNetworkElement[ITanks, ITank, ITankUnits, ITankInput, ITankResults, ITanksInput, ITanksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9350,7 +9356,7 @@ class ITank(IWaterNetworkElement[ITanks, ITank, ITankUnits, ITankInput, ITankRes
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITanksResults(IConventionalTanksResults, IBaseTanksResults, IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class ITanksResults(IConventionalTanksResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9362,7 +9368,7 @@ class ITanksResults(IConventionalTanksResults, IBaseTanksResults, IDemandNodesRe
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITankResults(IConventionalTankResults, IBaseTankResults, IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class ITankResults(IConventionalTankResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9374,7 +9380,7 @@ class ITankResults(IConventionalTankResults, IBaseTankResults, IDemandNodeResult
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITanksInput(IConventionalTanksInput, IBaseTanksInput, IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class ITanksInput(IConventionalTanksInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9402,7 +9408,7 @@ class ITanksInput(IConventionalTanksInput, IBaseTanksInput, IDemandNodesInput, I
 		"""
 		pass
 
-class ITankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput, IWaterTraceableInput):
+class ITankInput(IConventionalTankInput, IWaterTraceableInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9423,10 +9429,10 @@ class ITankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, IBase
 		pass
 
 	@property
-	def ValveType(self) -> int:
+	def ValveType(self) -> HammerValveType:
 		"""
 		Returns:
-			int: No Description
+			HammerValveType: No Description
 		"""
 		pass
 
@@ -9435,10 +9441,10 @@ class ITankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, IBase
 		pass
 
 	@ValveType.setter
-	def ValveType(self, valvetype: int) -> None:
+	def ValveType(self, valvetype: HammerValveType) -> None:
 		pass
 
-class ITankUnits(IConventionalTankUnits, IBaseTankUnits, IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class ITankUnits(IConventionalTankUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9450,7 +9456,7 @@ class ITankUnits(IConventionalTankUnits, IBaseTankUnits, IDemandNodeUnits, IBase
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeTankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class ISurgeTankInput(IConventionalTankInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9487,10 +9493,10 @@ class ISurgeTankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, 
 		pass
 
 	@property
-	def SurgeTankType(self) -> int:
+	def SurgeTankType(self) -> SurgeTankTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			SurgeTankTypeEnum: No Description
 		"""
 		pass
 
@@ -9579,7 +9585,7 @@ class ISurgeTankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, 
 		pass
 
 	@SurgeTankType.setter
-	def SurgeTankType(self, surgetanktype: int) -> None:
+	def SurgeTankType(self, surgetanktype: SurgeTankTypeEnum) -> None:
 		pass
 
 	@HasCheckValve.setter
@@ -9618,7 +9624,7 @@ class ISurgeTankInput(IConventionalTankInput, IBaseTankInput, IDemandNodeInput, 
 	def ElevationTopOfTankBase(self, elevationtopoftankbase: float) -> None:
 		pass
 
-class ISurgeTanksInput(IConventionalTanksInput, IBaseTanksInput, IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class ISurgeTanksInput(IConventionalTanksInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9734,7 +9740,7 @@ class ISurgeTanksInput(IConventionalTanksInput, IBaseTanksInput, IDemandNodesInp
 		"""
 		pass
 
-class ISurgeTankResults(IConventionalTankResults, IBaseTankResults, IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class ISurgeTankResults(IConventionalTankResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9746,7 +9752,7 @@ class ISurgeTankResults(IConventionalTankResults, IBaseTankResults, IDemandNodeR
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeTanksResults(IConventionalTanksResults, IBaseTanksResults, IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class ISurgeTanksResults(IConventionalTanksResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9758,7 +9764,7 @@ class ISurgeTanksResults(IConventionalTanksResults, IBaseTanksResults, IDemandNo
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeTankUnits(IConventionalTankUnits, IBaseTankUnits, IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class ISurgeTankUnits(IConventionalTankUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9802,7 +9808,7 @@ class ISurgeTankUnits(IConventionalTankUnits, IBaseTankUnits, IDemandNodeUnits, 
 		"""
 		pass
 
-class ISurgeTanks(IWaterNetworkElements[ISurgeTanks, ISurgeTank, ISurgeTankUnits, ISurgeTankInput, ISurgeTankResults, ISurgeTanksInput, ISurgeTanksResults], INetworkElements[ISurgeTanks, ISurgeTank, ISurgeTankUnits, WaterNetworkElementType, ISurgeTankInput, ISurgeTankResults, ISurgeTanksInput, ISurgeTanksResults], IModelingElementsBase[ISurgeTanks, ISurgeTank, WaterNetworkElementType], IElements[ISurgeTank], IElementManager):
+class ISurgeTanks(IWaterNetworkElements[ISurgeTanks, ISurgeTank, ISurgeTankUnits, ISurgeTankInput, ISurgeTankResults, ISurgeTanksInput, ISurgeTanksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9814,7 +9820,7 @@ class ISurgeTanks(IWaterNetworkElements[ISurgeTanks, ISurgeTank, ISurgeTankUnits
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeTank(IWaterNetworkElement[ISurgeTanks, ISurgeTank, ISurgeTankUnits, ISurgeTankInput, ISurgeTankResults, ISurgeTanksInput, ISurgeTanksResults], INetworkElement[ISurgeTanks, ISurgeTank, ISurgeTankUnits, WaterNetworkElementType, ISurgeTankInput, ISurgeTankResults, ISurgeTanksInput, ISurgeTanksResults], IModelingElementBase[ISurgeTanks, ISurgeTank, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ISurgeTank(IWaterNetworkElement[ISurgeTanks, ISurgeTank, ISurgeTankUnits, ISurgeTankInput, ISurgeTankResults, ISurgeTanksInput, ISurgeTanksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9826,7 +9832,7 @@ class ISurgeTank(IWaterNetworkElement[ISurgeTanks, ISurgeTank, ISurgeTankUnits, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseTanksResults(IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IBaseTanksResults(IDemandNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9872,7 +9878,7 @@ class IBaseTanksResults(IDemandNodesResults, IBaseNodesResults, IElementsResults
 		"""
 		pass
 
-class IBaseTankResults(IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IBaseTankResults(IDemandNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9889,7 +9895,7 @@ class IBaseTankResults(IDemandNodeResults, IBaseNodeResults, IElementResults, IW
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -9901,19 +9907,19 @@ class IBaseTankResults(IDemandNodeResults, IBaseNodeResults, IElementResults, IW
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IBaseTankInput(IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IBaseTankInput(IDemandNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9925,7 +9931,7 @@ class IBaseTankInput(IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseTanksInput(IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IBaseTanksInput(IDemandNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9937,7 +9943,7 @@ class IBaseTanksInput(IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IAct
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseTankUnits(IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IBaseTankUnits(IDemandNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -9969,7 +9975,7 @@ class IVariableLevelCurveCollection(ICollectionElements[ILevelDiameters, ILevelD
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ILevelDiameters(ICollection[ILevelDiameter], IEnumerable[ILevelDiameter], IEnumerable):
+class ILevelDiameters(ICollection[ILevelDiameter]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -10057,7 +10063,7 @@ class IVariableLevelCurveUnits(IElementUnits):
 		"""
 		pass
 
-class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IHydroTankInput(IBaseTankInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -10174,18 +10180,18 @@ class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysica
 		pass
 
 	@property
-	def LevelType(self) -> int:
+	def LevelType(self) -> GasVesselLevelType:
 		"""
 		Returns:
-			int: No Description
+			GasVesselLevelType: No Description
 		"""
 		pass
 
 	@property
-	def HydroTankType(self) -> int:
+	def HydroTankType(self) -> HydroTankType:
 		"""
 		Returns:
-			int: No Description
+			HydroTankType: No Description
 		"""
 		pass
 
@@ -10230,18 +10236,18 @@ class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysica
 		pass
 
 	@property
-	def OperatingRangeType(self) -> int:
+	def OperatingRangeType(self) -> OperatingRangeTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			OperatingRangeTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def TankCalculationModel(self) -> int:
+	def TankCalculationModel(self) -> TankCalculationModel:
 		"""
 		Returns:
-			int: No Description
+			TankCalculationModel: No Description
 		"""
 		pass
 
@@ -10286,10 +10292,10 @@ class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysica
 		pass
 
 	@property
-	def AirFlowCalculationMethod(self) -> int:
+	def AirFlowCalculationMethod(self) -> AirFlowCalculationMethod:
 		"""
 		Returns:
-			int: No Description
+			AirFlowCalculationMethod: No Description
 		"""
 		pass
 
@@ -10346,11 +10352,11 @@ class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysica
 		pass
 
 	@LevelType.setter
-	def LevelType(self, leveltype: int) -> None:
+	def LevelType(self, leveltype: GasVesselLevelType) -> None:
 		pass
 
 	@HydroTankType.setter
-	def HydroTankType(self, hydrotanktype: int) -> None:
+	def HydroTankType(self, hydrotanktype: HydroTankType) -> None:
 		pass
 
 	@TankVolume.setter
@@ -10370,11 +10376,11 @@ class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysica
 		pass
 
 	@OperatingRangeType.setter
-	def OperatingRangeType(self, operatingrangetype: int) -> None:
+	def OperatingRangeType(self, operatingrangetype: OperatingRangeTypeEnum) -> None:
 		pass
 
 	@TankCalculationModel.setter
-	def TankCalculationModel(self, tankcalculationmodel: int) -> None:
+	def TankCalculationModel(self, tankcalculationmodel: TankCalculationModel) -> None:
 		pass
 
 	@TankInitialElevation.setter
@@ -10398,10 +10404,10 @@ class IHydroTankInput(IBaseTankInput, IDemandNodeInput, IBaseNodeInput, IPhysica
 		pass
 
 	@AirFlowCalculationMethod.setter
-	def AirFlowCalculationMethod(self, airflowcalculationmethod: int) -> None:
+	def AirFlowCalculationMethod(self, airflowcalculationmethod: AirFlowCalculationMethod) -> None:
 		pass
 
-class IHydroTanksInput(IBaseTanksInput, IDemandNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IHydroTanksInput(IBaseTanksInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -10629,7 +10635,7 @@ class IHydroTanksInput(IBaseTanksInput, IDemandNodesInput, IBaseNodesInput, IPoi
 		"""
 		pass
 
-class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IHydroTankResults(IBaseTankResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -10646,7 +10652,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10658,7 +10664,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10667,7 +10673,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10679,7 +10685,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10688,7 +10694,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10700,7 +10706,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10709,7 +10715,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10721,39 +10727,39 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedGasVolumes(self) -> Nullable`1[]:
+	def CalculatedGasVolumes(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def CalculatedPressures(self) -> Nullable`1[]:
+	def CalculatedPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def CalculatedLiquidVolumes(self) -> Nullable`1[]:
+	def CalculatedLiquidVolumes(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def CalculatedPercentFulls(self) -> Nullable`1[]:
+	def CalculatedPercentFulls(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -10761,7 +10767,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10769,7 +10775,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10777,7 +10783,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10785,7 +10791,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10793,7 +10799,7 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -10801,11 +10807,11 @@ class IHydroTankResults(IBaseTankResults, IDemandNodeResults, IBaseNodeResults, 
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-class IHydroTanksResults(IBaseTanksResults, IDemandNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IHydroTanksResults(IBaseTanksResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11001,7 +11007,7 @@ class IHydroTanksResults(IBaseTanksResults, IDemandNodesResults, IBaseNodesResul
 		"""
 		pass
 
-class IHydropneumaticTankUnits(IBaseTankUnits, IDemandNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IHydropneumaticTankUnits(IBaseTankUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11061,7 +11067,7 @@ class IHydropneumaticTankUnits(IBaseTankUnits, IDemandNodeUnits, IBaseNodeUnits,
 		"""
 		pass
 
-class IHydropneumaticTank(IWaterNetworkElement[IHydropneumaticTanks, IHydropneumaticTank, IHydropneumaticTankUnits, IHydroTankInput, IHydroTankResults, IHydroTanksInput, IHydroTanksResults], INetworkElement[IHydropneumaticTanks, IHydropneumaticTank, IHydropneumaticTankUnits, WaterNetworkElementType, IHydroTankInput, IHydroTankResults, IHydroTanksInput, IHydroTanksResults], IModelingElementBase[IHydropneumaticTanks, IHydropneumaticTank, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IHydropneumaticTank(IWaterNetworkElement[IHydropneumaticTanks, IHydropneumaticTank, IHydropneumaticTankUnits, IHydroTankInput, IHydroTankResults, IHydroTanksInput, IHydroTanksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11073,7 +11079,7 @@ class IHydropneumaticTank(IWaterNetworkElement[IHydropneumaticTanks, IHydropneum
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHydropneumaticTanks(IWaterNetworkElements[IHydropneumaticTanks, IHydropneumaticTank, IHydropneumaticTankUnits, IHydroTankInput, IHydroTankResults, IHydroTanksInput, IHydroTanksResults], INetworkElements[IHydropneumaticTanks, IHydropneumaticTank, IHydropneumaticTankUnits, WaterNetworkElementType, IHydroTankInput, IHydroTankResults, IHydroTanksInput, IHydroTanksResults], IModelingElementsBase[IHydropneumaticTanks, IHydropneumaticTank, WaterNetworkElementType], IElements[IHydropneumaticTank], IElementManager):
+class IHydropneumaticTanks(IWaterNetworkElements[IHydropneumaticTanks, IHydropneumaticTank, IHydropneumaticTankUnits, IHydroTankInput, IHydroTankResults, IHydroTanksInput, IHydroTanksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11085,7 +11091,7 @@ class IHydropneumaticTanks(IWaterNetworkElements[IHydropneumaticTanks, IHydropne
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHammerNodeInput(IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IHammerNodeInput(IBaseNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11097,7 +11103,7 @@ class IHammerNodeInput(IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInpu
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHammerNodesInput(IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IHammerNodesInput(IBaseNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11109,7 +11115,7 @@ class IHammerNodesInput(IBaseNodesInput, IPointNodesInput, IActiveElementsInput,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHammerNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IHammerNodeResults(IBaseNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11126,7 +11132,7 @@ class IHammerNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -11138,7 +11144,7 @@ class IHammerNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -11147,7 +11153,7 @@ class IHammerNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -11159,27 +11165,27 @@ class IHammerNodeResults(IBaseNodeResults, IElementResults, IWaterQualityResults
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Pressures(self) -> Nullable`1[]:
+	def Pressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def PressureHeads(self) -> Nullable`1[]:
+	def PressureHeads(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IHammerNodesResults(IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IHammerNodesResults(IBaseNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11259,7 +11265,7 @@ class IHammerNodesResults(IBaseNodesResults, IElementsResults, IWaterQualityElem
 		"""
 		pass
 
-class IHammerNodeUnits(IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IHammerNodeUnits(IBaseNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11299,7 +11305,7 @@ class IFlowPatternCollection(ICollectionElements[IFlowPatterns, IFlowPattern, IF
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IFlowPatterns(ICollection[IFlowPattern], IEnumerable[IFlowPattern], IEnumerable):
+class IFlowPatterns(ICollection[IFlowPattern]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11399,7 +11405,7 @@ class IHeadPatternCollection(ICollectionElements[IHeadPatterns, IHeadPattern, IH
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IHeadPatterns(ICollection[IHeadPattern], IEnumerable[IHeadPattern], IEnumerable):
+class IHeadPatterns(ICollection[IHeadPattern]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11487,7 +11493,7 @@ class IHeadPatternUnits(IElementUnits):
 		"""
 		pass
 
-class IPeriodicHeadFlowInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IPeriodicHeadFlowInput(IHammerNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11556,10 +11562,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElem
 		pass
 
 	@property
-	def TransientParameter(self) -> int:
+	def TransientParameter(self) -> TransientParameterType:
 		"""
 		Returns:
-			int: No Description
+			TransientParameterType: No Description
 		"""
 		pass
 
@@ -11608,10 +11614,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElem
 		pass
 
 	@TransientParameter.setter
-	def TransientParameter(self, transientparameter: int) -> None:
+	def TransientParameter(self, transientparameter: TransientParameterType) -> None:
 		pass
 
-class IPeriodicHeadFlowsInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IPeriodicHeadFlowsInput(IHammerNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11791,7 +11797,7 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInp
 		"""
 		pass
 
-class IPeriodicHeadFlowResults(IHammerNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IPeriodicHeadFlowResults(IHammerNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11808,7 +11814,7 @@ class IPeriodicHeadFlowResults(IHammerNodeResults, IBaseNodeResults, IElementRes
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -11820,19 +11826,19 @@ class IPeriodicHeadFlowResults(IHammerNodeResults, IBaseNodeResults, IElementRes
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedDischarges(self) -> Nullable`1[]:
+	def CalculatedDischarges(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IPeriodicHeadFlowsResults(IHammerNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IPeriodicHeadFlowsResults(IHammerNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11878,7 +11884,7 @@ class IPeriodicHeadFlowsResults(IHammerNodesResults, IBaseNodesResults, IElement
 		"""
 		pass
 
-class IPeriodicHeadFlowUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IPeriodicHeadFlowUnits(IHammerNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11922,7 +11928,7 @@ class IPeriodicHeadFlowUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, I
 		"""
 		pass
 
-class IPeriodicHeadFlows(IWaterNetworkElements[IPeriodicHeadFlows, IPeriodicHeadFlow, IPeriodicHeadFlowUnits, IPeriodicHeadFlowInput, IPeriodicHeadFlowResults, IPeriodicHeadFlowsInput, IPeriodicHeadFlowsResults], INetworkElements[IPeriodicHeadFlows, IPeriodicHeadFlow, IPeriodicHeadFlowUnits, WaterNetworkElementType, IPeriodicHeadFlowInput, IPeriodicHeadFlowResults, IPeriodicHeadFlowsInput, IPeriodicHeadFlowsResults], IModelingElementsBase[IPeriodicHeadFlows, IPeriodicHeadFlow, WaterNetworkElementType], IElements[IPeriodicHeadFlow], IElementManager):
+class IPeriodicHeadFlows(IWaterNetworkElements[IPeriodicHeadFlows, IPeriodicHeadFlow, IPeriodicHeadFlowUnits, IPeriodicHeadFlowInput, IPeriodicHeadFlowResults, IPeriodicHeadFlowsInput, IPeriodicHeadFlowsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11934,7 +11940,7 @@ class IPeriodicHeadFlows(IWaterNetworkElements[IPeriodicHeadFlows, IPeriodicHead
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPeriodicHeadFlow(IWaterNetworkElement[IPeriodicHeadFlows, IPeriodicHeadFlow, IPeriodicHeadFlowUnits, IPeriodicHeadFlowInput, IPeriodicHeadFlowResults, IPeriodicHeadFlowsInput, IPeriodicHeadFlowsResults], INetworkElement[IPeriodicHeadFlows, IPeriodicHeadFlow, IPeriodicHeadFlowUnits, WaterNetworkElementType, IPeriodicHeadFlowInput, IPeriodicHeadFlowResults, IPeriodicHeadFlowsInput, IPeriodicHeadFlowsResults], IModelingElementBase[IPeriodicHeadFlows, IPeriodicHeadFlow, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IPeriodicHeadFlow(IWaterNetworkElement[IPeriodicHeadFlows, IPeriodicHeadFlow, IPeriodicHeadFlowUnits, IPeriodicHeadFlowInput, IPeriodicHeadFlowResults, IPeriodicHeadFlowsInput, IPeriodicHeadFlowsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -11946,7 +11952,7 @@ class IPeriodicHeadFlow(IWaterNetworkElement[IPeriodicHeadFlows, IPeriodicHeadFl
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IAirValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IAirValveInput(IHammerNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12031,18 +12037,18 @@ class IAirValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput
 		pass
 
 	@property
-	def AirValveType(self) -> int:
+	def AirValveType(self) -> AirValveTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			AirValveTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def AirValveTransitionType(self) -> int:
+	def AirValveTransitionType(self) -> AirValveTransitionType:
 		"""
 		Returns:
-			int: No Description
+			AirValveTransitionType: No Description
 		"""
 		pass
 
@@ -12087,10 +12093,10 @@ class IAirValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput
 		pass
 
 	@property
-	def AirFlowCalculationMethod(self) -> int:
+	def AirFlowCalculationMethod(self) -> AirFlowCalculationMethod:
 		"""
 		Returns:
-			int: No Description
+			AirFlowCalculationMethod: No Description
 		"""
 		pass
 
@@ -12131,11 +12137,11 @@ class IAirValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput
 		pass
 
 	@AirValveType.setter
-	def AirValveType(self, airvalvetype: int) -> None:
+	def AirValveType(self, airvalvetype: AirValveTypeEnum) -> None:
 		pass
 
 	@AirValveTransitionType.setter
-	def AirValveTransitionType(self, airvalvetransitiontype: int) -> None:
+	def AirValveTransitionType(self, airvalvetransitiontype: AirValveTransitionType) -> None:
 		pass
 
 	@TimeToClose.setter
@@ -12159,10 +12165,10 @@ class IAirValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput
 		pass
 
 	@AirFlowCalculationMethod.setter
-	def AirFlowCalculationMethod(self, airflowcalculationmethod: int) -> None:
+	def AirFlowCalculationMethod(self, airflowcalculationmethod: AirFlowCalculationMethod) -> None:
 		pass
 
-class IAirValvesInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IAirValvesInput(IHammerNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12310,7 +12316,7 @@ class IAirValvesInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IAct
 		"""
 		pass
 
-class IAirValveResults(IHammerNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IAirValveResults(IHammerNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12322,7 +12328,7 @@ class IAirValveResults(IHammerNodeResults, IBaseNodeResults, IElementResults, IW
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IAirValvesResults(IHammerNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IAirValvesResults(IHammerNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12334,7 +12340,7 @@ class IAirValvesResults(IHammerNodesResults, IBaseNodesResults, IElementsResults
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IAirValveUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IAirValveUnits(IHammerNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12370,7 +12376,7 @@ class IAirValveUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementU
 		"""
 		pass
 
-class IAirValve(IWaterNetworkElement[IAirValves, IAirValve, IAirValveUnits, IAirValveInput, IAirValveResults, IAirValvesInput, IAirValvesResults], INetworkElement[IAirValves, IAirValve, IAirValveUnits, WaterNetworkElementType, IAirValveInput, IAirValveResults, IAirValvesInput, IAirValvesResults], IModelingElementBase[IAirValves, IAirValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IAirValve(IWaterNetworkElement[IAirValves, IAirValve, IAirValveUnits, IAirValveInput, IAirValveResults, IAirValvesInput, IAirValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12382,7 +12388,7 @@ class IAirValve(IWaterNetworkElement[IAirValves, IAirValve, IAirValveUnits, IAir
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IAirValves(IWaterNetworkElements[IAirValves, IAirValve, IAirValveUnits, IAirValveInput, IAirValveResults, IAirValvesInput, IAirValvesResults], INetworkElements[IAirValves, IAirValve, IAirValveUnits, WaterNetworkElementType, IAirValveInput, IAirValveResults, IAirValvesInput, IAirValvesResults], IModelingElementsBase[IAirValves, IAirValve, WaterNetworkElementType], IElements[IAirValve], IElementManager):
+class IAirValves(IWaterNetworkElements[IAirValves, IAirValve, IAirValveUnits, IAirValveInput, IAirValveResults, IAirValvesInput, IAirValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12394,7 +12400,7 @@ class IAirValves(IWaterNetworkElements[IAirValves, IAirValve, IAirValveUnits, IA
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class ISurgeValveInput(IHammerNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12503,42 +12509,42 @@ class ISurgeValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInp
 		pass
 
 	@property
-	def SavSrvType(self) -> int:
+	def SavSrvType(self) -> SAV_SRVTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			SAV_SRVTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def SavType(self) -> int:
+	def SavType(self) -> SAVValveTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			SAVValveTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def SavClosureTriggerType(self) -> int:
+	def SavClosureTriggerType(self) -> SavClosureTriggerEnum:
 		"""
 		Returns:
-			int: No Description
+			SavClosureTriggerEnum: No Description
 		"""
 		pass
 
 	@property
-	def SrvControlType(self) -> int:
+	def SrvControlType(self) -> SRVControlTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			SRVControlTypeEnum: No Description
 		"""
 		pass
 
 	@property
-	def SrvValveType(self) -> int:
+	def SrvValveType(self) -> SRVValveTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			SRVValveTypeEnum: No Description
 		"""
 		pass
 
@@ -12591,26 +12597,26 @@ class ISurgeValveInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInp
 		pass
 
 	@SavSrvType.setter
-	def SavSrvType(self, savsrvtype: int) -> None:
+	def SavSrvType(self, savsrvtype: SAV_SRVTypeEnum) -> None:
 		pass
 
 	@SavType.setter
-	def SavType(self, savtype: int) -> None:
+	def SavType(self, savtype: SAVValveTypeEnum) -> None:
 		pass
 
 	@SavClosureTriggerType.setter
-	def SavClosureTriggerType(self, savclosuretriggertype: int) -> None:
+	def SavClosureTriggerType(self, savclosuretriggertype: SavClosureTriggerEnum) -> None:
 		pass
 
 	@SrvControlType.setter
-	def SrvControlType(self, srvcontroltype: int) -> None:
+	def SrvControlType(self, srvcontroltype: SRVControlTypeEnum) -> None:
 		pass
 
 	@SrvValveType.setter
-	def SrvValveType(self, srvvalvetype: int) -> None:
+	def SrvValveType(self, srvvalvetype: SRVValveTypeEnum) -> None:
 		pass
 
-class ISurgeValvesInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class ISurgeValvesInput(IHammerNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12758,7 +12764,7 @@ class ISurgeValvesInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IA
 		"""
 		pass
 
-class ISurgeValveResults(IHammerNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class ISurgeValveResults(IHammerNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12770,7 +12776,7 @@ class ISurgeValveResults(IHammerNodeResults, IBaseNodeResults, IElementResults, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeValvesResults(IHammerNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class ISurgeValvesResults(IHammerNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12782,7 +12788,7 @@ class ISurgeValvesResults(IHammerNodesResults, IBaseNodesResults, IElementsResul
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeValveUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class ISurgeValveUnits(IHammerNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12826,7 +12832,7 @@ class ISurgeValveUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElemen
 		"""
 		pass
 
-class ISurgeValve(IWaterNetworkElement[ISurgeValves, ISurgeValve, ISurgeValveUnits, ISurgeValveInput, ISurgeValveResults, ISurgeValvesInput, ISurgeValvesResults], INetworkElement[ISurgeValves, ISurgeValve, ISurgeValveUnits, WaterNetworkElementType, ISurgeValveInput, ISurgeValveResults, ISurgeValvesInput, ISurgeValvesResults], IModelingElementBase[ISurgeValves, ISurgeValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ISurgeValve(IWaterNetworkElement[ISurgeValves, ISurgeValve, ISurgeValveUnits, ISurgeValveInput, ISurgeValveResults, ISurgeValvesInput, ISurgeValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12838,7 +12844,7 @@ class ISurgeValve(IWaterNetworkElement[ISurgeValves, ISurgeValve, ISurgeValveUni
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISurgeValves(IWaterNetworkElements[ISurgeValves, ISurgeValve, ISurgeValveUnits, ISurgeValveInput, ISurgeValveResults, ISurgeValvesInput, ISurgeValvesResults], INetworkElements[ISurgeValves, ISurgeValve, ISurgeValveUnits, WaterNetworkElementType, ISurgeValveInput, ISurgeValveResults, ISurgeValvesInput, ISurgeValvesResults], IModelingElementsBase[ISurgeValves, ISurgeValve, WaterNetworkElementType], IElements[ISurgeValve], IElementManager):
+class ISurgeValves(IWaterNetworkElements[ISurgeValves, ISurgeValve, ISurgeValveUnits, ISurgeValveInput, ISurgeValveResults, ISurgeValvesInput, ISurgeValvesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12850,7 +12856,7 @@ class ISurgeValves(IWaterNetworkElements[ISurgeValves, ISurgeValve, ISurgeValveU
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseOrificeNodeInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IBaseOrificeNodeInput(IHammerNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12886,7 +12892,7 @@ class IBaseOrificeNodeInput(IHammerNodeInput, IBaseNodeInput, IPhysicalNodeEleme
 	def OrificeFlow(self, orificeflow: float) -> None:
 		pass
 
-class IBaseOrificeNodesInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IBaseOrificeNodesInput(IHammerNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12914,7 +12920,7 @@ class IBaseOrificeNodesInput(IHammerNodesInput, IBaseNodesInput, IPointNodesInpu
 		"""
 		pass
 
-class IBaseOrificeNodeResults(IHammerNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IBaseOrificeNodeResults(IHammerNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12926,7 +12932,7 @@ class IBaseOrificeNodeResults(IHammerNodeResults, IBaseNodeResults, IElementResu
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseOrificeNodesResults(IHammerNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IBaseOrificeNodesResults(IHammerNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12938,7 +12944,7 @@ class IBaseOrificeNodesResults(IHammerNodesResults, IBaseNodesResults, IElements
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseOrificeNodeUnits(IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IBaseOrificeNodeUnits(IHammerNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -12970,7 +12976,7 @@ class IPressureHeadFlowCollection(ICollectionElements[IPressureHeadFlows, IPress
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPressureHeadFlows(ICollection[IPressureHeadFlow], IEnumerable[IPressureHeadFlow], IEnumerable):
+class IPressureHeadFlows(ICollection[IPressureHeadFlow]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13058,7 +13064,7 @@ class IPressureHeadFlowUnits(IElementUnits):
 		"""
 		pass
 
-class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput, IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13071,10 +13077,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput, IHammerNodeInput, I
 		pass
 
 	@property
-	def DischargeElementType(self) -> int:
+	def DischargeElementType(self) -> DischargeToAtmosphereTypeEnum:
 		"""
 		Returns:
-			int: No Description
+			DischargeToAtmosphereTypeEnum: No Description
 		"""
 		pass
 
@@ -13111,10 +13117,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput, IHammerNodeInput, I
 		pass
 
 	@property
-	def InitialStatus(self) -> int:
+	def InitialStatus(self) -> ValveTypeInitialStatusEnum:
 		"""
 		Returns:
-			int: No Description
+			ValveTypeInitialStatusEnum: No Description
 		"""
 		pass
 
@@ -13127,7 +13133,7 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput, IHammerNodeInput, I
 		pass
 
 	@DischargeElementType.setter
-	def DischargeElementType(self, dischargeelementtype: int) -> None:
+	def DischargeElementType(self, dischargeelementtype: DischargeToAtmosphereTypeEnum) -> None:
 		pass
 
 	@InitialGaseVolume.setter
@@ -13143,14 +13149,14 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput, IHammerNodeInput, I
 		pass
 
 	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: int) -> None:
+	def InitialStatus(self, initialstatus: ValveTypeInitialStatusEnum) -> None:
 		pass
 
 	@ReportPeriod.setter
 	def ReportPeriod(self, reportperiod: int) -> None:
 		pass
 
-class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput, IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13210,7 +13216,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput, IHammerNodesInput
 		"""
 		pass
 
-class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults, IHammerNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13227,7 +13233,7 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults, IHammerNodeResu
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -13239,19 +13245,19 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults, IHammerNodeResu
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def CalculatedDischarges(self) -> Nullable`1[]:
+	def CalculatedDischarges(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IDischargeToAtmosphereNodesResults(IBaseOrificeNodesResults, IHammerNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IDischargeToAtmosphereNodesResults(IBaseOrificeNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13297,7 +13303,7 @@ class IDischargeToAtmosphereNodesResults(IBaseOrificeNodesResults, IHammerNodesR
 		"""
 		pass
 
-class IDischargeToAtmosphereUnits(IBaseOrificeNodeUnits, IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IDischargeToAtmosphereUnits(IBaseOrificeNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13333,7 +13339,7 @@ class IDischargeToAtmosphereUnits(IBaseOrificeNodeUnits, IHammerNodeUnits, IBase
 		"""
 		pass
 
-class IDischargeToAtmosphere(IWaterNetworkElement[IDischargeToAtmospheres, IDischargeToAtmosphere, IDischargeToAtmosphereUnits, IDischargeToAtmosphereNodeInput, IDischargeToAtmosphereNodeResults, IDischargeToAtmosphereNodesInput, IDischargeToAtmosphereNodesResults], INetworkElement[IDischargeToAtmospheres, IDischargeToAtmosphere, IDischargeToAtmosphereUnits, WaterNetworkElementType, IDischargeToAtmosphereNodeInput, IDischargeToAtmosphereNodeResults, IDischargeToAtmosphereNodesInput, IDischargeToAtmosphereNodesResults], IModelingElementBase[IDischargeToAtmospheres, IDischargeToAtmosphere, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IDischargeToAtmosphere(IWaterNetworkElement[IDischargeToAtmospheres, IDischargeToAtmosphere, IDischargeToAtmosphereUnits, IDischargeToAtmosphereNodeInput, IDischargeToAtmosphereNodeResults, IDischargeToAtmosphereNodesInput, IDischargeToAtmosphereNodesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13345,7 +13351,7 @@ class IDischargeToAtmosphere(IWaterNetworkElement[IDischargeToAtmospheres, IDisc
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IDischargeToAtmospheres(IWaterNetworkElements[IDischargeToAtmospheres, IDischargeToAtmosphere, IDischargeToAtmosphereUnits, IDischargeToAtmosphereNodeInput, IDischargeToAtmosphereNodeResults, IDischargeToAtmosphereNodesInput, IDischargeToAtmosphereNodesResults], INetworkElements[IDischargeToAtmospheres, IDischargeToAtmosphere, IDischargeToAtmosphereUnits, WaterNetworkElementType, IDischargeToAtmosphereNodeInput, IDischargeToAtmosphereNodeResults, IDischargeToAtmosphereNodesInput, IDischargeToAtmosphereNodesResults], IModelingElementsBase[IDischargeToAtmospheres, IDischargeToAtmosphere, WaterNetworkElementType], IElements[IDischargeToAtmosphere], IElementManager):
+class IDischargeToAtmospheres(IWaterNetworkElements[IDischargeToAtmospheres, IDischargeToAtmosphere, IDischargeToAtmosphereUnits, IDischargeToAtmosphereNodeInput, IDischargeToAtmosphereNodeResults, IDischargeToAtmosphereNodesInput, IDischargeToAtmosphereNodesResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13357,7 +13363,7 @@ class IDischargeToAtmospheres(IWaterNetworkElements[IDischargeToAtmospheres, IDi
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IRuptureDiskInput(IBaseOrificeNodeInput, IHammerNodeInput, IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IRuptureDiskInput(IBaseOrificeNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13381,7 +13387,7 @@ class IRuptureDiskInput(IBaseOrificeNodeInput, IHammerNodeInput, IBaseNodeInput,
 	def PressureThreshold(self, pressurethreshold: float) -> None:
 		pass
 
-class IRuptureDisksInput(IBaseOrificeNodesInput, IHammerNodesInput, IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IRuptureDisksInput(IBaseOrificeNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13401,7 +13407,7 @@ class IRuptureDisksInput(IBaseOrificeNodesInput, IHammerNodesInput, IBaseNodesIn
 		"""
 		pass
 
-class IRuptureDiskResults(IBaseOrificeNodeResults, IHammerNodeResults, IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IRuptureDiskResults(IBaseOrificeNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13413,7 +13419,7 @@ class IRuptureDiskResults(IBaseOrificeNodeResults, IHammerNodeResults, IBaseNode
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IRuptureDisksResults(IBaseOrificeNodesResults, IHammerNodesResults, IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IRuptureDisksResults(IBaseOrificeNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13425,7 +13431,7 @@ class IRuptureDisksResults(IBaseOrificeNodesResults, IHammerNodesResults, IBaseN
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IRuptureDiskUnits(IBaseOrificeNodeUnits, IHammerNodeUnits, IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IRuptureDiskUnits(IBaseOrificeNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13437,7 +13443,7 @@ class IRuptureDiskUnits(IBaseOrificeNodeUnits, IHammerNodeUnits, IBaseNodeUnits,
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IRuptureDisk(IWaterNetworkElement[IRuptureDisks, IRuptureDisk, IRuptureDiskUnits, IRuptureDiskInput, IRuptureDiskResults, IRuptureDisksInput, IRuptureDisksResults], INetworkElement[IRuptureDisks, IRuptureDisk, IRuptureDiskUnits, WaterNetworkElementType, IRuptureDiskInput, IRuptureDiskResults, IRuptureDisksInput, IRuptureDisksResults], IModelingElementBase[IRuptureDisks, IRuptureDisk, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IRuptureDisk(IWaterNetworkElement[IRuptureDisks, IRuptureDisk, IRuptureDiskUnits, IRuptureDiskInput, IRuptureDiskResults, IRuptureDisksInput, IRuptureDisksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13449,7 +13455,7 @@ class IRuptureDisk(IWaterNetworkElement[IRuptureDisks, IRuptureDisk, IRuptureDis
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IRuptureDisks(IWaterNetworkElements[IRuptureDisks, IRuptureDisk, IRuptureDiskUnits, IRuptureDiskInput, IRuptureDiskResults, IRuptureDisksInput, IRuptureDisksResults], INetworkElements[IRuptureDisks, IRuptureDisk, IRuptureDiskUnits, WaterNetworkElementType, IRuptureDiskInput, IRuptureDiskResults, IRuptureDisksInput, IRuptureDisksResults], IModelingElementsBase[IRuptureDisks, IRuptureDisk, WaterNetworkElementType], IElements[IRuptureDisk], IElementManager):
+class IRuptureDisks(IWaterNetworkElements[IRuptureDisks, IRuptureDisk, IRuptureDiskUnits, IRuptureDiskInput, IRuptureDiskResults, IRuptureDisksInput, IRuptureDisksResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13507,7 +13513,7 @@ class IBaseNodesResults(IElementsResults, IWaterQualityElementsResults):
 		"""
 		pass
 
-class IPhysicalNodeElementInput(IPointNodeInput, IActiveElementInput, IElementInput):
+class IPhysicalNodeElementInput(IPointNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13531,7 +13537,7 @@ class IPhysicalNodeElementInput(IPointNodeInput, IActiveElementInput, IElementIn
 	def Elevation(self, elevation: float) -> None:
 		pass
 
-class IPhysicalNodeElementsInput(IPointNodesInput, IActiveElementsInput, IElementsInput):
+class IPhysicalNodeElementsInput(IPointNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13564,7 +13570,7 @@ class IPhysicalNodeElementsInput(IPointNodesInput, IActiveElementsInput, IElemen
 		"""
 		pass
 
-class IBaseNodeInput(IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
+class IBaseNodeInput(IPhysicalNodeElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13576,7 +13582,7 @@ class IBaseNodeInput(IPhysicalNodeElementInput, IPointNodeInput, IActiveElementI
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IBaseNodesInput(IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IBaseNodesInput(IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13605,7 +13611,7 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -13617,19 +13623,19 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def HydraulicGrades(self) -> Nullable`1[]:
+	def HydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IBaseNodeUnits(IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IBaseNodeUnits(IGeometryUnits, IWaterQualityResultsUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13689,7 +13695,7 @@ class IBaseNodeUnits(IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
 		"""
 		pass
 
-class IReservoirs(IWaterNetworkElements[IReservoirs, IReservoir, IReservoirUnits, IReservoirInput, IReservoirResults, IReservoirsInput, IReservoirsResults], INetworkElements[IReservoirs, IReservoir, IReservoirUnits, WaterNetworkElementType, IReservoirInput, IReservoirResults, IReservoirsInput, IReservoirsResults], IModelingElementsBase[IReservoirs, IReservoir, WaterNetworkElementType], IElements[IReservoir], IElementManager):
+class IReservoirs(IWaterNetworkElements[IReservoirs, IReservoir, IReservoirUnits, IReservoirInput, IReservoirResults, IReservoirsInput, IReservoirsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13701,7 +13707,7 @@ class IReservoirs(IWaterNetworkElements[IReservoirs, IReservoir, IReservoirUnits
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IReservoir(IWaterNetworkElement[IReservoirs, IReservoir, IReservoirUnits, IReservoirInput, IReservoirResults, IReservoirsInput, IReservoirsResults], INetworkElement[IReservoirs, IReservoir, IReservoirUnits, WaterNetworkElementType, IReservoirInput, IReservoirResults, IReservoirsInput, IReservoirsResults], IModelingElementBase[IReservoirs, IReservoir, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IReservoir(IWaterNetworkElement[IReservoirs, IReservoir, IReservoirUnits, IReservoirInput, IReservoirResults, IReservoirsInput, IReservoirsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13713,7 +13719,7 @@ class IReservoir(IWaterNetworkElement[IReservoirs, IReservoir, IReservoirUnits, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IReservoirsResults(IBaseNodesResults, IElementsResults, IWaterQualityElementsResults):
+class IReservoirsResults(IBaseNodesResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13759,7 +13765,7 @@ class IReservoirsResults(IBaseNodesResults, IElementsResults, IWaterQualityEleme
 		"""
 		pass
 
-class IReservoirResults(IBaseNodeResults, IElementResults, IWaterQualityResults):
+class IReservoirResults(IBaseNodeResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13776,7 +13782,7 @@ class IReservoirResults(IBaseNodeResults, IElementResults, IWaterQualityResults)
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -13788,19 +13794,19 @@ class IReservoirResults(IBaseNodeResults, IElementResults, IWaterQualityResults)
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-class IReservoirInput(IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput, IWaterZoneableNetworkElementInput, IWaterQualityElementInput, IWaterQualityNodeInput, IWaterTraceableInput):
+class IReservoirInput(IBaseNodeInput, IWaterTraceableInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13812,7 +13818,7 @@ class IReservoirInput(IBaseNodeInput, IPhysicalNodeElementInput, IPointNodeInput
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IReservoirsInput(IBaseNodesInput, IPointNodesInput, IActiveElementsInput, IElementsInput, IWaterZoneableNetworkElementsInput, IWaterQualityElementsInput, IWaterQualityNodesInput, IPhysicalNodeElementsInput):
+class IReservoirsInput(IBaseNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13824,7 +13830,7 @@ class IReservoirsInput(IBaseNodesInput, IPointNodesInput, IActiveElementsInput, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IReservoirUnits(IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQualityResultsUnits):
+class IReservoirUnits(IBaseNodeUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13844,7 +13850,7 @@ class IReservoirUnits(IBaseNodeUnits, IGeometryUnits, IElementUnits, IWaterQuali
 		"""
 		pass
 
-class ITapInput(IPointNodeInput, IActiveElementInput, IElementInput):
+class ITapInput(IPointNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13868,7 +13874,7 @@ class ITapInput(IPointNodeInput, IActiveElementInput, IElementInput):
 	def AssociatedElement(self, associatedelement: IPipe) -> None:
 		pass
 
-class ITapsInput(IPointNodesInput, IActiveElementsInput, IElementsInput):
+class ITapsInput(IPointNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13901,7 +13907,7 @@ class ITapsInput(IPointNodesInput, IActiveElementsInput, IElementsInput):
 		"""
 		pass
 
-class ITap(IWaterNetworkElement[ITaps, ITap, IGeometryUnits, ITapInput, IElementResults, ITapsInput, IElementsResults], INetworkElement[ITaps, ITap, IGeometryUnits, WaterNetworkElementType, ITapInput, IElementResults, ITapsInput, IElementsResults], IModelingElementBase[ITaps, ITap, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ITap(IWaterNetworkElement[ITaps, ITap, IGeometryUnits, ITapInput, IElementResults, ITapsInput, IElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13913,7 +13919,7 @@ class ITap(IWaterNetworkElement[ITaps, ITap, IGeometryUnits, ITapInput, IElement
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ITaps(IWaterNetworkElements[ITaps, ITap, IGeometryUnits, ITapInput, IElementResults, ITapsInput, IElementsResults], INetworkElements[ITaps, ITap, IGeometryUnits, WaterNetworkElementType, ITapInput, IElementResults, ITapsInput, IElementsResults], IModelingElementsBase[ITaps, ITap, WaterNetworkElementType], IElements[ITap], IElementManager):
+class ITaps(IWaterNetworkElements[ITaps, ITap, IGeometryUnits, ITapInput, IElementResults, ITapsInput, IElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13925,7 +13931,7 @@ class ITaps(IWaterNetworkElements[ITaps, ITap, IGeometryUnits, ITapInput, IEleme
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IIsolationValveElementInput(IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput):
+class IIsolationValveElementInput(IPhysicalNodeElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -13970,10 +13976,10 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput, IPointNodeInput, IA
 		pass
 
 	@property
-	def InitialStatus(self) -> int:
+	def InitialStatus(self) -> IsolationValveInitialSetting:
 		"""
 		Returns:
-			int: No Description
+			IsolationValveInitialSetting: No Description
 		"""
 		pass
 
@@ -14002,14 +14008,14 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput, IPointNodeInput, IA
 		pass
 
 	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: int) -> None:
+	def InitialStatus(self, initialstatus: IsolationValveInitialSetting) -> None:
 		pass
 
 	@InstallationYear.setter
 	def InstallationYear(self, installationyear: int) -> None:
 		pass
 
-class IIsolationValveElementsInput(IPointNodesInput, IActiveElementsInput, IElementsInput, IPhysicalNodeElementsInput):
+class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14164,7 +14170,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14176,7 +14182,7 @@ class IIsolatioNValveElementResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14185,7 +14191,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14197,7 +14203,7 @@ class IIsolatioNValveElementResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14206,7 +14212,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14218,7 +14224,7 @@ class IIsolatioNValveElementResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14227,7 +14233,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14239,7 +14245,7 @@ class IIsolatioNValveElementResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14248,7 +14254,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14260,39 +14266,39 @@ class IIsolatioNValveElementResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def HydraulicGrades(self) -> Nullable`1[]:
+	def HydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Pressures(self) -> Nullable`1[]:
+	def Pressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Flows(self) -> Nullable`1[]:
+	def Flows(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Velocities(self) -> Nullable`1[]:
+	def Velocities(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -14300,15 +14306,15 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def IsCloseds(self) -> Nullable`1[]:
+	def IsCloseds(self) -> array(Union[bool, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -14515,7 +14521,7 @@ class IIsolationValveElementsResults(IElementsResults):
 		"""
 		pass
 
-class IIsolationValveUnits(IGeometryUnits, IElementUnits):
+class IIsolationValveUnits(IGeometryUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14575,7 +14581,7 @@ class IIsolationValveUnits(IGeometryUnits, IElementUnits):
 		"""
 		pass
 
-class IIsolationValves(IWaterNetworkElements[IIsolationValves, IIsolationValve, IIsolationValveUnits, IIsolationValveElementInput, IIsolatioNValveElementResults, IIsolationValveElementsInput, IIsolationValveElementsResults], INetworkElements[IIsolationValves, IIsolationValve, IIsolationValveUnits, WaterNetworkElementType, IIsolationValveElementInput, IIsolatioNValveElementResults, IIsolationValveElementsInput, IIsolationValveElementsResults], IModelingElementsBase[IIsolationValves, IIsolationValve, WaterNetworkElementType], IElements[IIsolationValve], IElementManager):
+class IIsolationValves(IWaterNetworkElements[IIsolationValves, IIsolationValve, IIsolationValveUnits, IIsolationValveElementInput, IIsolatioNValveElementResults, IIsolationValveElementsInput, IIsolationValveElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14587,7 +14593,7 @@ class IIsolationValves(IWaterNetworkElements[IIsolationValves, IIsolationValve, 
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IIsolationValve(IWaterNetworkElement[IIsolationValves, IIsolationValve, IIsolationValveUnits, IIsolationValveElementInput, IIsolatioNValveElementResults, IIsolationValveElementsInput, IIsolationValveElementsResults], INetworkElement[IIsolationValves, IIsolationValve, IIsolationValveUnits, WaterNetworkElementType, IIsolationValveElementInput, IIsolatioNValveElementResults, IIsolationValveElementsInput, IIsolationValveElementsResults], IModelingElementBase[IIsolationValves, IIsolationValve, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IIsolationValve(IWaterNetworkElement[IIsolationValves, IIsolationValve, IIsolationValveUnits, IIsolationValveElementInput, IIsolatioNValveElementResults, IIsolationValveElementsInput, IIsolationValveElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14599,7 +14605,7 @@ class IIsolationValve(IWaterNetworkElement[IIsolationValves, IIsolationValve, II
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISpotElevationInput(IPointNodeInput, IActiveElementInput, IElementInput):
+class ISpotElevationInput(IPointNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14623,7 +14629,7 @@ class ISpotElevationInput(IPointNodeInput, IActiveElementInput, IElementInput):
 	def Elevation(self, elevation: float) -> None:
 		pass
 
-class ISpotElevationsInput(IPointNodesInput, IActiveElementsInput, IElementsInput):
+class ISpotElevationsInput(IPointNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14673,7 +14679,7 @@ class ISpotElevationResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14685,7 +14691,7 @@ class ISpotElevationResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14694,7 +14700,7 @@ class ISpotElevationResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -14706,23 +14712,23 @@ class ISpotElevationResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def EnhancedHydraulicGrades(self) -> Nullable`1[]:
+	def EnhancedHydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def EnhancedPressures(self) -> Nullable`1[]:
+	def EnhancedPressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -14806,7 +14812,7 @@ class ISpotElevationsResults(IElementsResults):
 		"""
 		pass
 
-class ISpotElevationUnits(IGeometryUnits, IElementUnits):
+class ISpotElevationUnits(IGeometryUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14842,7 +14848,7 @@ class ISpotElevationUnits(IGeometryUnits, IElementUnits):
 		"""
 		pass
 
-class ISpotElevation(IWaterNetworkElement[ISpotElevations, ISpotElevation, ISpotElevationUnits, ISpotElevationInput, ISpotElevationResults, ISpotElevationsInput, ISpotElevationsResults], INetworkElement[ISpotElevations, ISpotElevation, ISpotElevationUnits, WaterNetworkElementType, ISpotElevationInput, ISpotElevationResults, ISpotElevationsInput, ISpotElevationsResults], IModelingElementBase[ISpotElevations, ISpotElevation, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ISpotElevation(IWaterNetworkElement[ISpotElevations, ISpotElevation, ISpotElevationUnits, ISpotElevationInput, ISpotElevationResults, ISpotElevationsInput, ISpotElevationsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14854,7 +14860,7 @@ class ISpotElevation(IWaterNetworkElement[ISpotElevations, ISpotElevation, ISpot
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISpotElevations(IWaterNetworkElements[ISpotElevations, ISpotElevation, ISpotElevationUnits, ISpotElevationInput, ISpotElevationResults, ISpotElevationsInput, ISpotElevationsResults], INetworkElements[ISpotElevations, ISpotElevation, ISpotElevationUnits, WaterNetworkElementType, ISpotElevationInput, ISpotElevationResults, ISpotElevationsInput, ISpotElevationsResults], IModelingElementsBase[ISpotElevations, ISpotElevation, WaterNetworkElementType], IElements[ISpotElevation], IElementManager):
+class ISpotElevations(IWaterNetworkElements[ISpotElevations, ISpotElevation, ISpotElevationUnits, ISpotElevationInput, ISpotElevationResults, ISpotElevationsInput, ISpotElevationsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14866,7 +14872,7 @@ class ISpotElevations(IWaterNetworkElements[ISpotElevations, ISpotElevation, ISp
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ICustomerMeterInput(IPhysicalNodeElementInput, IPointNodeInput, IActiveElementInput, IElementInput):
+class ICustomerMeterInput(IPhysicalNodeElementInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -14962,7 +14968,7 @@ class ICustomerMeterInput(IPhysicalNodeElementInput, IPointNodeInput, IActiveEle
 	def NumberOfUnitDemands(self, numberofunitdemands: float) -> None:
 		pass
 
-class ICustomerMetersInput(IPointNodesInput, IActiveElementsInput, IElementsInput, IPhysicalNodeElementsInput):
+class ICustomerMetersInput(IPhysicalNodeElementsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15138,7 +15144,7 @@ class ICustomerMeterResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -15150,7 +15156,7 @@ class ICustomerMeterResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -15159,7 +15165,7 @@ class ICustomerMeterResults(IElementResults):
 		"""Method Description
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
@@ -15171,23 +15177,23 @@ class ICustomerMeterResults(IElementResults):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			Nullable`1: 
+			Nullable: 
 		"""
 		pass
 
-	def HydraulicGrades(self) -> Nullable`1[]:
+	def HydraulicGrades(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
-	def Pressures(self) -> Nullable`1[]:
+	def Pressures(self) -> array(Union[float, None]):
 		"""Method Description
 
 		Returns:
-			Nullable`1[]: 
+			array(): 
 		"""
 		pass
 
@@ -15271,7 +15277,7 @@ class ICustomerMetersResults(IElementsResults):
 		"""
 		pass
 
-class ICustomerMeterUnits(IGeometryUnits, IElementUnits):
+class ICustomerMeterUnits(IGeometryUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15307,7 +15313,7 @@ class ICustomerMeterUnits(IGeometryUnits, IElementUnits):
 		"""
 		pass
 
-class ICustomerMeter(IWaterNetworkElement[ICustomerMeters, ICustomerMeter, ICustomerMeterUnits, ICustomerMeterInput, ICustomerMeterResults, ICustomerMetersInput, ICustomerMetersResults], INetworkElement[ICustomerMeters, ICustomerMeter, ICustomerMeterUnits, WaterNetworkElementType, ICustomerMeterInput, ICustomerMeterResults, ICustomerMetersInput, ICustomerMetersResults], IModelingElementBase[ICustomerMeters, ICustomerMeter, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ICustomerMeter(IWaterNetworkElement[ICustomerMeters, ICustomerMeter, ICustomerMeterUnits, ICustomerMeterInput, ICustomerMeterResults, ICustomerMetersInput, ICustomerMetersResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15319,7 +15325,7 @@ class ICustomerMeter(IWaterNetworkElement[ICustomerMeters, ICustomerMeter, ICust
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ICustomerMeters(IWaterNetworkElements[ICustomerMeters, ICustomerMeter, ICustomerMeterUnits, ICustomerMeterInput, ICustomerMeterResults, ICustomerMetersInput, ICustomerMetersResults], INetworkElements[ICustomerMeters, ICustomerMeter, ICustomerMeterUnits, WaterNetworkElementType, ICustomerMeterInput, ICustomerMeterResults, ICustomerMetersInput, ICustomerMetersResults], IModelingElementsBase[ICustomerMeters, ICustomerMeter, WaterNetworkElementType], IElements[ICustomerMeter], IElementManager):
+class ICustomerMeters(IWaterNetworkElements[ICustomerMeters, ICustomerMeter, ICustomerMeterUnits, ICustomerMeterInput, ICustomerMeterResults, ICustomerMetersInput, ICustomerMetersResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15331,7 +15337,7 @@ class ICustomerMeters(IWaterNetworkElements[ICustomerMeters, ICustomerMeter, ICu
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISCADAElementInput(IPointNodeInput, IActiveElementInput, IElementInput):
+class ISCADAElementInput(IPointNodeInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15368,10 +15374,10 @@ class ISCADAElementInput(IPointNodeInput, IActiveElementInput, IElementInput):
 		pass
 
 	@property
-	def TargetAttribute(self) -> int:
+	def TargetAttribute(self) -> SCADATargetAttribute:
 		"""
 		Returns:
-			int: No Description
+			SCADATargetAttribute: No Description
 		"""
 		pass
 
@@ -15388,10 +15394,10 @@ class ISCADAElementInput(IPointNodeInput, IActiveElementInput, IElementInput):
 		pass
 
 	@TargetAttribute.setter
-	def TargetAttribute(self, targetattribute: int) -> None:
+	def TargetAttribute(self, targetattribute: SCADATargetAttribute) -> None:
 		pass
 
-class ISCADAElementsInput(IPointNodesInput, IActiveElementsInput, IElementsInput):
+class ISCADAElementsInput(IPointNodesInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15466,7 +15472,7 @@ class ISCADAElementsInput(IPointNodesInput, IActiveElementsInput, IElementsInput
 		"""
 		pass
 
-class ISCADAElement(IWaterNetworkElement[ISCADAElements, ISCADAElement, IGeometryUnits, ISCADAElementInput, IElementResults, ISCADAElementsInput, IElementsResults], INetworkElement[ISCADAElements, ISCADAElement, IGeometryUnits, WaterNetworkElementType, ISCADAElementInput, IElementResults, ISCADAElementsInput, IElementsResults], IModelingElementBase[ISCADAElements, ISCADAElement, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class ISCADAElement(IWaterNetworkElement[ISCADAElements, ISCADAElement, IGeometryUnits, ISCADAElementInput, IElementResults, ISCADAElementsInput, IElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15478,7 +15484,7 @@ class ISCADAElement(IWaterNetworkElement[ISCADAElements, ISCADAElement, IGeometr
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ISCADAElements(IWaterNetworkElements[ISCADAElements, ISCADAElement, IGeometryUnits, ISCADAElementInput, IElementResults, ISCADAElementsInput, IElementsResults], INetworkElements[ISCADAElements, ISCADAElement, IGeometryUnits, WaterNetworkElementType, ISCADAElementInput, IElementResults, ISCADAElementsInput, IElementsResults], IModelingElementsBase[ISCADAElements, ISCADAElement, WaterNetworkElementType], IElements[ISCADAElement], IElementManager):
+class ISCADAElements(IWaterNetworkElements[ISCADAElements, ISCADAElement, IGeometryUnits, ISCADAElementInput, IElementResults, ISCADAElementsInput, IElementsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15490,7 +15496,7 @@ class ISCADAElements(IWaterNetworkElements[ISCADAElements, ISCADAElement, IGeome
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStations(IWaterNetworkElements[IPumpStations, IPumpStation, IPumpStationUnits, IPumpStationInput, IPumpStationResults, IPumpStationsInput, IPumpStationsResults], INetworkElements[IPumpStations, IPumpStation, IPumpStationUnits, WaterNetworkElementType, IPumpStationInput, IPumpStationResults, IPumpStationsInput, IPumpStationsResults], IModelingElementsBase[IPumpStations, IPumpStation, WaterNetworkElementType], IElements[IPumpStation], IElementManager):
+class IPumpStations(IWaterNetworkElements[IPumpStations, IPumpStation, IPumpStationUnits, IPumpStationInput, IPumpStationResults, IPumpStationsInput, IPumpStationsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15502,7 +15508,7 @@ class IPumpStations(IWaterNetworkElements[IPumpStations, IPumpStation, IPumpStat
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStation(IWaterNetworkElement[IPumpStations, IPumpStation, IPumpStationUnits, IPumpStationInput, IPumpStationResults, IPumpStationsInput, IPumpStationsResults], INetworkElement[IPumpStations, IPumpStation, IPumpStationUnits, WaterNetworkElementType, IPumpStationInput, IPumpStationResults, IPumpStationsInput, IPumpStationsResults], IModelingElementBase[IPumpStations, IPumpStation, WaterNetworkElementType], IElement, IEditLabeled, ILabeled, IWaterNetworkElement):
+class IPumpStation(IWaterNetworkElement[IPumpStations, IPumpStation, IPumpStationUnits, IPumpStationInput, IPumpStationResults, IPumpStationsInput, IPumpStationsResults]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15514,7 +15520,7 @@ class IPumpStation(IWaterNetworkElement[IPumpStations, IPumpStation, IPumpStatio
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStationUnits(IGeometryUnits, IElementUnits):
+class IPumpStationUnits(IGeometryUnits):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15526,7 +15532,7 @@ class IPumpStationUnits(IGeometryUnits, IElementUnits):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStationsInput(IBasePolygonsInput, IActiveElementsInput, IElementsInput):
+class IPumpStationsInput(IBasePolygonsInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15538,7 +15544,7 @@ class IPumpStationsInput(IBasePolygonsInput, IActiveElementsInput, IElementsInpu
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStationsResults(IBasePolygonsResults, IElementsResults):
+class IPumpStationsResults(IBasePolygonsResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15550,7 +15556,7 @@ class IPumpStationsResults(IBasePolygonsResults, IElementsResults):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStationResults(IBasePolygonResults, IElementResults):
+class IPumpStationResults(IBasePolygonResults):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15562,7 +15568,7 @@ class IPumpStationResults(IBasePolygonResults, IElementResults):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStationInput(IBasePolygonInput, IActiveElementInput, IElementInput):
+class IPumpStationInput(IBasePolygonInput):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -15594,7 +15600,7 @@ class IPumpStationPumpIDsCollection(ICollectionElements[IPumpStationPumpIDs, IPu
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IPumpStationPumpIDs(ICollection[IPumpStationPumpID], IEnumerable[IPumpStationPumpID], IEnumerable):
+class IPumpStationPumpIDs(ICollection[IPumpStationPumpID]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed

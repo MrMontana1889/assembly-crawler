@@ -61,13 +61,13 @@ namespace AssemblyCrawler.Test
 
 
 			PythonPackageDefinition package = new PythonPackageDefinition("TestWriteStub");
-
-			PythonModuleDefinition stubFile = new PythonModuleDefinition(package, testType.Namespace, filePath);
-			IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(stubFile);
+			var assemblyDef = package.AddAssembly(testAssembly, Path.GetTempPath());
+			var module = assemblyDef.AddModule(testType.Namespace, filePath);
+			IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
 			Assert.IsNotNull(generator);
 
 			generator.GenerateTypeStub(testType);
-			stubFile.Write();
+			module.Write();
 		}
 		#endregion
 	}
