@@ -6,183 +6,214 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using AssemblyCrawler.Support.XmlDocumentMember;
 
 namespace AssemblyCrawler.Library
 {
-	public class PythonDocStringWriterLibrary
-	{
-		#region Constants
-		private string ArgsDocString = "Args:";
-		private string ReturnsDocString = "Returns:";
-		private string RaisesDocString = "Raises:";
-		#endregion
+    public class PythonDocStringWriterLibrary
+    {
+        #region Constants
+        public static string ArgsDocString = "Args:";
+        public static string ReturnsDocString = "Returns:";
+        public static string RaisesDocString = "Raises:";
+        public static string NoteDocString = "Note:";
+        public static string NoDescription = "No Description";
+        #endregion
 
-		#region Constructor
-		public PythonDocStringWriterLibrary(int indentLevel = 1, string description = "")
-		{
-			Description = description;
-			IndentLevel = indentLevel;
-			ExceptionNames = new List<KeyValuePair<string, string>>();
-			Args = new List<KeyValuePair<string, Type>>();
-			Attributes = new List<KeyValuePair<string, Type>>();
-			Returns = new List<KeyValuePair<string, Type>>();
-		}
-		#endregion
+        #region Constructor
+        public PythonDocStringWriterLibrary(Member member, int indentLevel = 1)
+        {
+            XmlMember = member;
+            IndentLevel = indentLevel;
+            ExceptionNames = new List<KeyValuePair<string, string>>();
+            Args = new List<KeyValuePair<string, Type>>();
+            Attributes = new List<KeyValuePair<string, Type>>();
+            Returns = new List<KeyValuePair<string, Type>>();
+        }
+        #endregion
 
-		#region Public Properties
-		public List<KeyValuePair<string, string>> ExceptionNames { get; }
-		public List<KeyValuePair<string, Type>> Args { get; }
+        
 
-		public List<KeyValuePair<string, Type>> Attributes { get; }
-		public List<KeyValuePair<string, Type>> Returns { get; }
+        #region Public Properties
+        public List<KeyValuePair<string, string>> ExceptionNames { get;  }
+        public List<KeyValuePair<string, Type>> Args { get;  }
 
-		#endregion
+        public List<KeyValuePair<string, Type>> Attributes { get;  }
+        public List<KeyValuePair<string, Type>> Returns { get;  }
 
-		#region Public Methods
+        #endregion
 
-		#endregion
+        #region Public Methods
 
-		#region Private Methods       
+        #endregion
 
-		private string GetIndentation()
-		{
-			var tabs = string.Empty;
-			for (int i = 0; i < IndentLevel; i++) tabs += Tab;
-			return tabs;
-		}
+        #region Private Methods       
 
-		#endregion
+        private string GetIndentation()
+        {
+            var tabs = string.Empty;
+            for (int i = 0; i < IndentLevel; i++) tabs += Tab;
+            return tabs;
+        }
 
-		#region Overrides
-		public override string ToString()
-		{
-			var indentation = GetIndentation();
-			var sb = new StringBuilder().Append(Tab).Append(DocStringStart);
+        #endregion
 
-			// Description
-			if (Description?.Length > 0)
-				sb.AppendLine(Description);
-
-			// Args
-			if (Args.Count > 0)
-			{
-				sb.AppendLine();
-				sb.Append(indentation).AppendLine(ArgsDocString);
-
-				foreach (var kvp in Args)
-					sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Value)}): {kvp.Key}");
-			}
+        #region Overrides
+        public override string ToString()
+        {
+            var indentation = GetIndentation();
+            var sb = new StringBuilder().Append(Tab).Append(DocStringStart);
 
 
-			// Returns            
-			//if (Returns.Count == 1)
-			//    sb.AppendLine($" {TypeConvertLibrary.ToPythonType(Returns[0].Value)}: {Returns[0].Key}");
+            // Description
+            // TODO: Figure out how to handle para
+            var description = XmlMember?.Summary.Content?.Trim() ?? "No Description";
 
-			if (Returns.Count > 0)
-			{
-				sb.AppendLine();
-				sb.Append(indentation).AppendLine(ReturnsDocString);
+            // TypeParam
+            if (XmlMember?.Typeparam?.Count > 0)
+            {
+                sb.Append(indentation).AppendLine(ArgsDocString);
+                foreach (var param in XmlMember.Typeparam)
+                {
+                    sb.Append(indentation).Append(Tab).Append(param.Name).Append(":").Append(param.Name);
+                }
+            }
 
-				foreach (var kvp in Returns)
-					sb.Append(indentation).Append(Tab).Append(TypeConvertLibrary.ToPythonType(kvp.Value)).Append(": ").AppendLine(kvp.Key);
-			}
-
-
-
-			// Exceptions
-			if (ExceptionNames.Count > 0)
-			{
-				sb.AppendLine();
-				sb.AppendLine();
-				sb.Append(indentation).AppendLine(RaisesDocString);
-
-				foreach (var kvp in ExceptionNames)
-					sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($": {kvp.Value}");
-			}
-
-			//sb.Append(Tab).Append(DocStringEnd);
-			//sb.Append(indentation).Append(Tab).Append(DocStringEnd);
-			//sb.Append(indentation);
-			//sb.Length -= 1;
-			//sb.Append(DocStringEnd);
-			sb.Append(indentation).Append(DocStringEnd);
-
-			return sb.ToString();
-		}
-		#endregion
-
-		#region Private Properties
-		private int IndentLevel { get; }
-		private string Description { get; }
-		private string DocStringStart => "\"\"\"";
-		private string DocStringEnd => "\"\"\"";
-		private string Tab => "\t";
-		#endregion
-	}
-
-	public class PythonPropertyDocStringWriterLibrary : PythonDocStringWriterLibrary
-	{
-		#region Constructor
-		public PythonPropertyDocStringWriterLibrary(Type type, string description, int indentLevel = 2)
-			: base(indentLevel)
-		{
-			Returns.Add(new KeyValuePair<string, Type>(description, type));
-		}
-		#endregion
-	}
-
-	public class PythonClassDocStringWriterLibrary : PythonDocStringWriterLibrary
-	{
-		#region Constructor
-		public PythonClassDocStringWriterLibrary(string description, int indentLevel = 1)
-			: base(indentLevel, description)
-		{
-		}
-		#endregion
-	}
-
-	public class PythonConstructorDocStringWriterLibrary : PythonDocStringWriterLibrary
-	{
-		#region Constructor
-		public PythonConstructorDocStringWriterLibrary(
-			string description,
-			List<KeyValuePair<string, Type>> arguments,
-			int indentLevel = 2)
-			: base(description: description, indentLevel: indentLevel)
-		{
-			Args.AddRange(arguments);
-		}
-		#endregion
-	}
+            sb.AppendLine(description);
 
 
-	public class PythonConstructorUnsupportedDocStringWriterLibrary : PythonDocStringWriterLibrary
-	{
-		#region Constructor
-		public PythonConstructorUnsupportedDocStringWriterLibrary(int indentLevel = 2)
-			: base(indentLevel, "Creating a new Instance of this class is not allowed")
-		{
-			ExceptionNames.Add(new KeyValuePair<string, string>("Exception", "if this class is instanciated"));
-		}
-		#endregion
-	}
+            // Args
+            if (Args.Count > 0)
+            {
+                sb.AppendLine();
 
-	public class PythonMethodDocStringWriterLibrary : PythonDocStringWriterLibrary
-	{
-		#region Constructor
-		public PythonMethodDocStringWriterLibrary(MethodInfo methodInfo, string description, int indentLevel = 2)
-			: base(indentLevel, description)
-		{
-			// Args
-			var paramsKvps = methodInfo.GetParameters().Select(p => new KeyValuePair<string, Type>(p.Name, p.ParameterType)).ToList();
-			Args.AddRange(paramsKvps);
+                sb.Append(indentation).AppendLine(ArgsDocString);
+                foreach (var kvp in Args)
+                {
+                    var param = XmlMember?.Param.Where(p => p.Name == kvp.Key)?.FirstOrDefault();
+                    sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Value)}): {param?.Text ?? kvp.Key}");
+                }
+            }
 
-			// Returns
-			var returnKvps = new List<KeyValuePair<string, Type>>();
-			returnKvps.Add(new KeyValuePair<string, Type>(methodInfo.ReturnParameter.Name, methodInfo.ReturnType));
-			Returns.AddRange(returnKvps);
-		}
-		#endregion
-	}
+            // Remarks / Nodes
+            if (!string.IsNullOrEmpty(XmlMember?.Remarks))
+            {
+                sb.AppendLine();
+                sb.Append(indentation).AppendLine(NoteDocString);
+                sb.Append(indentation).Append(Tab).AppendLine(XmlMember?.Remarks);
+            }
+
+
+            if (Returns.Count > 0)
+            {
+                sb.AppendLine();
+                sb.Append(indentation).AppendLine(ReturnsDocString);
+                var returnMessage = XmlMember?.Returns?.Content ?? string.Empty;
+                // TODO: Figure out how to handle TypeParamRef
+                
+                foreach (var kvp in Returns)
+                {
+                    sb.Append(indentation).Append(Tab).Append(TypeConvertLibrary.ToPythonType(kvp.Value)).Append(": ").AppendLine(returnMessage);
+                }
+            }
+
+
+
+            // Exceptions
+            if (ExceptionNames.Count > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine();
+                sb.Append(indentation).AppendLine(RaisesDocString);
+
+                var exceptionMessage = XmlMember?.Exception?.ToString();
+
+                foreach (var kvp in ExceptionNames)
+                {
+                    exceptionMessage = string.IsNullOrEmpty(exceptionMessage) ? kvp.Value : exceptionMessage;
+                    sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($": {exceptionMessage}");
+                }
+            }
+
+            sb.Append(indentation).Append(DocStringEnd);
+
+            return sb.ToString();
+        }
+        #endregion
+
+        #region Private Properties
+        private int IndentLevel { get; }
+        private Member XmlMember { get; }
+        private string DocStringStart => "\"\"\"";
+        private string DocStringEnd => "\"\"\"";
+        private string Tab => "\t";
+        #endregion
+    }
+
+    public class PythonPropertyDocStringWriterLibrary : PythonDocStringWriterLibrary
+    {
+        #region Constructor
+        public PythonPropertyDocStringWriterLibrary(Type type, Member member, int indentLevel = 2)
+            : base(member, indentLevel)
+        {
+            var info = member?.Summary.Content ?? NoDescription;
+            Returns.Add(new KeyValuePair<string, Type>(info, type));
+        }
+        #endregion
+    }
+
+    public class PythonClassDocStringWriterLibrary : PythonDocStringWriterLibrary
+    {
+        #region Constructor
+        public PythonClassDocStringWriterLibrary(Member member, int indentLevel = 1)
+            : base(member, indentLevel)
+        {
+        }
+        #endregion
+    }
+
+    public class PythonConstructorDocStringWriterLibrary : PythonDocStringWriterLibrary
+    {
+        #region Constructor
+        public PythonConstructorDocStringWriterLibrary(
+            Member member,
+            List<KeyValuePair<string, Type>> arguments,
+            int indentLevel = 2)
+            : base(member, indentLevel)
+        {
+            Args.AddRange(arguments);
+        }
+        #endregion
+    }
+
+
+    public class PythonConstructorUnsupportedDocStringWriterLibrary : PythonDocStringWriterLibrary
+    {
+        #region Constructor
+        public PythonConstructorUnsupportedDocStringWriterLibrary(int indentLevel = 2)
+            : base(new Member() {Summary = new Summary() { Content = "Creating a new Instance of this class is not allowed" } }, indentLevel)
+        {
+            ExceptionNames.Add(new KeyValuePair<string, string>("Exception", "if this class is instanciated"));
+        }
+        #endregion
+    }
+
+    public class PythonMethodDocStringWriterLibrary : PythonDocStringWriterLibrary
+    {
+        #region Constructor
+        public PythonMethodDocStringWriterLibrary(MethodInfo methodInfo, Member member, int indentLevel = 2)
+            : base(member, indentLevel)
+        {
+            // Args
+            var paramsKvps = methodInfo.GetParameters().Select(p => new KeyValuePair<string, Type>(p.Name, p.ParameterType)).ToList();
+            Args.AddRange(paramsKvps);
+
+            // Returns
+            var returnKvps = new List<KeyValuePair<string, Type>>();
+            returnKvps.Add(new KeyValuePair<string, Type>(methodInfo.ReturnType.Name, methodInfo.ReturnType));
+            Returns.AddRange(returnKvps);
+        }
+        #endregion
+    }
 
 }

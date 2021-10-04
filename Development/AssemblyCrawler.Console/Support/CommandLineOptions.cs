@@ -20,6 +20,12 @@ namespace AssemblyCrawler.Console.Support
 			get;
 			set;
 		}
+		[Option('x', "xmldoc", Required = false, HelpText = "Specify the xml documents to extract", Min = 1)]
+		public IEnumerable<string> XmlDocuments
+		{
+			get;
+			set;
+		}
 		[Option('o', "output", Required = true, HelpText = "Full path to generate the stub files")]
 		public string OutputPath
 		{

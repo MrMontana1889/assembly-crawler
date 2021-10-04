@@ -132,7 +132,7 @@ namespace AssemblyCrawler.Library
 				docString: docString,
 				isStatic: false,
 				indentLevel: indentLevel
-				);
+				); 
 		}
 
 		public static void WritePythonConstructorUnsupported(
@@ -238,11 +238,11 @@ namespace AssemblyCrawler.Library
 			if (isOverloaded)
 				classDef.Methods.AppendLine($"{indentation}{OVERLOAD}");
 
-			classDef.Methods.AppendLine($"{indentation}{method}");
+			classDef.Methods.AppendLine($"{indentation}{method}");			
 			classDef.Methods.AppendLine($"{indentation}{docString}");
 
 			if (exception?.Length > 0)
-				classDef.Methods.AppendLine($"{indentation}\t{exception}");
+				classDef.Methods.AppendLine($"{indentation}{TAB}{exception}");
 
 			classDef.Methods.AppendLine($"{indentation}{TAB}{PASS}");
 		}

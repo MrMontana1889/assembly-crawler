@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using AssemblyCrawler.Extensions;
 
 namespace AssemblyCrawler.Library
 {
@@ -13,6 +14,9 @@ namespace AssemblyCrawler.Library
 		#region Constructor
 		public TypeParserLibrary(Type type)
 		{
+			if (type == null)
+				throw new ArgumentNullException(nameof(type));
+
 			Type = type;
 
 			AllMethods = new List<MethodInfo>();
@@ -22,10 +26,6 @@ namespace AssemblyCrawler.Library
 			WriteOnlyProperties = new List<MethodInfo>();
 
 			StaticFields = new List<MethodInfo>();
-			//StaticNonOverloadedMethods = new List<MethodInfo>();
-			//StaticOverloadedMethods = new List<MethodInfo>();
-			//StaticReadOnlyProperties = new List<MethodInfo>();
-			//StaticWriteOnlyProperties = new List<MethodInfo>();
 
 			OperatorAddition = new List<MethodInfo>();
 			OperatorSubtraction = new List<MethodInfo>();
@@ -53,6 +53,11 @@ namespace AssemblyCrawler.Library
 		#region Public Methods
 		public TypeParserLibrary Parse()
 		{
+			// Member Info is used to extract information from xml document 
+            foreach (var member in Type.GetMembers())
+				MemberInfoMap.Add(member.XmlMemberName(), member);
+
+
 			// Methods
 			AllMethods = new List<MethodInfo>(Type.GetMethods());
 
@@ -199,6 +204,8 @@ namespace AssemblyCrawler.Library
 
 		public List<Type> GenericInterfaces { get; private set; }
 		public List<Type> NonGenericInterfaces { get; private set; }
+
+		public Dictionary<string, MemberInfo> MemberInfoMap { get; } = new Dictionary<string, MemberInfo>();
 		#endregion
 
 		#region Private Properties

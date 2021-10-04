@@ -14,7 +14,8 @@ namespace AssemblyCrawler
 		/// Public methods, properties and fields will then be processed.
 		/// </summary>
 		/// <param name="type">The type to crawl and generate stubs for</param>
-		void GenerateTypeStub(Type type);
+		/// <param name="xmlDocumentFileName">The full path and filename of the xml documentation.</param>
+		void GenerateTypeStub(Type type, string xmlDocumentFileName);
 	}
 
 	public interface IAssemblyCrawler
@@ -24,7 +25,8 @@ namespace AssemblyCrawler
 		/// and generates the stubs for those classes.
 		/// </summary>
 		/// <param name="assemblyFilename">The full path and filename of the assembly to crawl.</param>
+		/// <param name="xmlDocumentFileName">The full path and filename of the xml documentation.</param>
 		/// <param name="outputPath">The path where the stub files will be written</param>
-		void Crawl(PythonPackageDefinition package, string assemblyFilename, string outputPath);
+		void Crawl(PythonPackageDefinition package, string assemblyFilename, string xmlDocumentFileName, string outputPath);
 	}
 }
