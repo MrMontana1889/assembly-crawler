@@ -27,7 +27,7 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(PythonPackageDefinition package, string assemblyFilename, string outputPath)
+		public void Crawl(PythonPackageDefinition package, string assemblyFilename, string xmlDocumentFileName, string outputPath)
 		{
 			/*
 			 * First crawl the assembly and generate the interface tree using Barber.AutoDiagrammer.
@@ -102,11 +102,12 @@ namespace AssemblyCrawler
 						string pyiFilename = Path.Combine(outputPath, type.Key);
 						Console.WriteLine(pyiFilename);
 
-						PythonModuleDefinition stubFile = package.AddModule(type.Value.First().Namespace, pyiFilename);
+						PythonModuleDefinition stubFile = package.AddModule(type.Value.First()?.Namespace, pyiFilename);
 						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(stubFile);
 
 						foreach (Type t in type.Value)
-							generator.GenerateTypeStub(t);
+							if (t != null)
+								generator.GenerateTypeStub(t, xmlDocumentFileName);
 
 						stubFile.Write();
 					}

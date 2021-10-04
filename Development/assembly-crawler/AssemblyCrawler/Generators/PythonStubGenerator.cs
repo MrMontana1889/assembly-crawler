@@ -2,6 +2,9 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System;
+using System.Linq;
+using System.Reflection;
+using AssemblyCrawler.Extensions;
 using AssemblyCrawler.Library;
 using AssemblyCrawler.Support;
 
@@ -49,9 +52,15 @@ namespace AssemblyCrawler.Generators
 		#endregion
 
 		#region Public Methods
-		public void GenerateTypeStub(Type type)
+		public void GenerateTypeStub(Type type, string xmlDocumentFileName)
 		{
+			if (type == null)
+				throw new ArgumentNullException(nameof(type));
+
 			var typeParser = new TypeParserLibrary(type).Parse();
+			var xmlDocument = new XmlDocumentaitonParserLibrary(xmlDocumentFileName).Parse();
+
+			MemberInfo memberInfo = null;
 
 			if (type == typeof(Enum))
 			{
@@ -59,30 +68,42 @@ namespace AssemblyCrawler.Generators
 			}
 			else
 			{
-				PythonStubWriterLibrary.WritePythonClassDef(
+                var classDocStringWriter = new PythonClassDocStringWriterLibrary(
+                            member: xmlDocument?.GetMember(type as MemberInfo),
+                            indentLevel: 0);
+
+
+                PythonStubWriterLibrary.WritePythonClassDef(
 					Module,
 					type,
-					PythonStubWriterLibrary.BlankDocString,
+					classDocStringWriter.ToString(),
 					0);
 
 				#region Constructor
-
+				
 				PythonClassDefinition classDef = Module.GetClassDefinition(type.AssemblyQualifiedName, type.Name);
 
 				// Write Constructor
 				if (typeParser.IsInterface || typeParser.Type.IsAbstract)
+                {
 					PythonStubWriterLibrary.WritePythonConstructorUnsupported(classDef);
+                }
 
 				else if (typeParser.Type.IsClass)
 				{
-					var args = typeParser.GetConstructorArguments();
+					// TODO: Debugger never hit this locaiton.
+					var args= typeParser.GetConstructorArguments();
+					memberInfo = type.GetConstructor(new Type[] { });
+
+					var docStringWriter = new PythonConstructorDocStringWriterLibrary(
+							member:  xmlDocument?.GetMember(memberInfo),
+							arguments: args,
+							indentLevel:2);
+
 					PythonStubWriterLibrary.WritePythonConstructor(
 						classDef: classDef,
 						arguments: args,
-						docString: new PythonConstructorDocStringWriterLibrary(
-							description: "Constructor Description",
-							arguments: args,
-							indentLevel: 2).ToString(),
+						docString: docStringWriter?.ToString(),
 						indentLevel: 1);
 				}
 				#endregion
@@ -98,11 +119,8 @@ namespace AssemblyCrawler.Generators
 						methodName: typeParser.Name,
 						arguments: typeParser.GetMethodArguments(m),
 						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: "Method Description",
-							indentLevel: 2).ToString(),
-						isStatic: m.IsStatic,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
 						exception: String.Empty,
 						isOverloaded: true,
 						indentLevel: 1
@@ -117,10 +135,8 @@ namespace AssemblyCrawler.Generators
 						methodName: m.Name,
 						arguments: typeParser.GetMethodArguments(m),
 						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: "Method Description").ToString(),
-						isStatic: m.IsStatic,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
 						exception: String.Empty,
 						isOverloaded: false,
 						indentLevel: 1
@@ -129,260 +145,239 @@ namespace AssemblyCrawler.Generators
 
 				// Operators +
 				foreach (var m in typeParser.OperatorAddition)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefAddition,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryAddition).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators -
-				foreach (var m in typeParser.OperatorSubtraction)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefSubtraction,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummarySubtraction).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators *
-				foreach (var m in typeParser.OperatorMultiplication)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefMultiplication,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryMultiplication).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators /
-				foreach (var m in typeParser.OperatorDivision)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefDivision,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryDivision).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators %
-				foreach (var m in typeParser.OperatorModulo)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefModulo,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryModulo).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators ==
-				foreach (var m in typeParser.OperatorEquality)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefEquality,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryEquality).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators !=
-				foreach (var m in typeParser.OperatorInequality)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefInEquality,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryInEquality).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators >
-				foreach (var m in typeParser.OperatorGreaterThan)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefGreaterThan,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryGreaterThan).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators <
-				foreach (var m in typeParser.OperatorLessThan)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefLessThan,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryLessThan).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators >=
-				foreach (var m in typeParser.OperatorGreaterOrEqualTo)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefGreaterOrEqualTo,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryGreaterOrEqualTo).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators <=
-				foreach (var m in typeParser.OperatorLessOrEqualTo)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefLessOrEqualTo,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryLessOrEqualTo).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators &
-				foreach (var m in typeParser.OperatorBitwiseAnd)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefBitwiseAnd,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryBitwiseAnd).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators |
-				foreach (var m in typeParser.OperatorBitwiseOr)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefBitwisOr,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryBitwisOr).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				// Operators ^
-				foreach (var m in typeParser.OperatorBitwiseXor)
-				{
-					PythonStubWriterLibrary.WritePythonMethod(
-						classDef: classDef,
-						methodName: DefBitwiseXor,
-						arguments: typeParser.GetMethodArguments(m),
-						returnType: m.ReturnType,
-						docString: new PythonMethodDocStringWriterLibrary(
-							methodInfo: m,
-							description: DocStringSummaryBitwiseXor).ToString(),
-						isStatic: m.IsStatic,
-						exception: String.Empty,
-						isOverloaded: false,
-						indentLevel: 1
-						);
-				}
-				#endregion
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefAddition,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators -
+                foreach (var m in typeParser.OperatorSubtraction)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefSubtraction,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators *
+                foreach (var m in typeParser.OperatorMultiplication)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefMultiplication,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators /
+                foreach (var m in typeParser.OperatorDivision)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefDivision,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators %
+                foreach (var m in typeParser.OperatorModulo)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefModulo,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators ==
+                foreach (var m in typeParser.OperatorEquality)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefEquality,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators !=
+                foreach (var m in typeParser.OperatorInequality)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefInEquality,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators >
+                foreach (var m in typeParser.OperatorGreaterThan)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefGreaterThan,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators <
+                foreach (var m in typeParser.OperatorLessThan)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefLessThan,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators >=
+                foreach (var m in typeParser.OperatorGreaterOrEqualTo)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefGreaterOrEqualTo,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators <=
+                foreach (var m in typeParser.OperatorLessOrEqualTo)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefLessOrEqualTo,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators &
+                foreach (var m in typeParser.OperatorBitwiseAnd)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefBitwiseAnd,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators |
+                foreach (var m in typeParser.OperatorBitwiseOr)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefBitwisOr,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                // Operators ^
+                foreach (var m in typeParser.OperatorBitwiseXor)
+                {
+                    PythonStubWriterLibrary.WritePythonMethod(
+                        classDef: classDef,
+                        methodName: DefBitwiseXor,
+                        arguments: typeParser.GetMethodArguments(m),
+                        returnType: m.ReturnType,
+                        docString: NewPythonmethodDocStringWriterLibrary(xmlDocument, m)?.ToString(),
+                        isStatic: m.IsStatic,
+                        exception: String.Empty,
+                        isOverloaded: false,
+                        indentLevel: 1
+                        );
+                }
+                #endregion
 
-				#region Properties
-				// Write ReadOnly properties
-				foreach (var p in typeParser.ReadOnlyProperties)
+                #region Properties
+                // Write ReadOnly properties
+                foreach (var p in typeParser.ReadOnlyProperties)
+                {
+					var docStringWriter = new PythonPropertyDocStringWriterLibrary(
+							type: type,
+							member: xmlDocument?.GetMember(p as MemberInfo),
+							indentLevel: 2);
+
+
 					PythonStubWriterLibrary.WritePythonProperty(
 						classDef: classDef,
 						propertyName: typeParser.GetPropertyName(p),
 						returnType: p.ReturnType,
-						docString: new PythonPropertyDocStringWriterLibrary(
-							type: p.ReturnType,
-							description: "No Description").ToString(),
+						docString: docStringWriter?.ToString(),
 						isStatic: p.IsStatic,
 						indentLevel: 1
 						);
+                }
 
 				// Write WriteOnly properties
 				foreach (var p in typeParser.WriteOnlyProperties)
+                {
 					PythonStubWriterLibrary.WritePythonPropertySetter(
 						classDef: classDef,
 						propertyName: typeParser.GetPropertyName(p),
@@ -390,14 +385,27 @@ namespace AssemblyCrawler.Generators
 						isStatic: p.IsStatic,
 						indentLevel: 1
 						);
+                }
 
 				#endregion
 			}
 		}
-		#endregion
+        #endregion
 
-		#region Private Properties
-		private PythonModuleDefinition Module { get; }
+        #region Private Methods
+        private PythonMethodDocStringWriterLibrary NewPythonmethodDocStringWriterLibrary(XmlDocumentaitonParserLibrary xmlDocument, MethodInfo m)
+        {
+            return new PythonMethodDocStringWriterLibrary(
+                    methodInfo: m,
+                    member: xmlDocument?.GetMember(m),
+                    indentLevel: 2);
+        }
+
+
+        #endregion
+
+        #region Private Properties
+        private PythonModuleDefinition Module { get; }
 		#endregion
 	}
 }

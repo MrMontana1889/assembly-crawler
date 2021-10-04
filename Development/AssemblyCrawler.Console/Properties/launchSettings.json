@@ -9,23 +9,43 @@
     },
     "OpenFlows": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" -x \"\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
     },
     "TestAssemblyNET48": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -x \"\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
     },
     "OpenFlowsWater": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\OpenFlows.Water\""
     },
     "TestGenericAssembly": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestGenericAssembly\\Debug\\net48\\Test.TestGenericAssembly.dll\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\TestGenericAssembly\""
+      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestGenericAssembly\\Debug\\net48\\Test.TestGenericAssembly.dll\" -x \"\" -o \"C:\\Users\\kris\\AppData\\Local\\Temp\\Bentley\\TestGenericAssembly\""
     },
     "FullOpenFlows": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -o \"D:\\repos\\python\\assembly-crawler\""
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\python\\assembly-crawler\""
+    },
+    "WP_PF_OpenFlows": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.dll\"  -x \"\" -o \"D:\\Temp\\PythonStubGenerator\\OpenFlows\""
+    },
+    "WP_PF_OpenFlowsWater": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.Water.dll\" -x \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.Water.xml\" -o \"D:\\Temp\\PythonStubGenerator\\OpenFlowsWater\""
+    },
+    "WP_P4_OpenFlows": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\Development\\Perforce\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" -x \"\" -o \"C:\\Users\\Akshaya.Niraula\\AppData\\Local\\Temp\\PythonStubGenerator\\OpenFlows\""
+    },
+    "WP_P4_OpenFlowsWater": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\Development\\Perforce\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.Water.xml\" -o \"C:\\Users\\Akshaya.Niraula\\AppData\\Local\\Temp\\PythonStubGenerator\\OpenFlows.Water\""
+    },
+    "WP_TestAssemblyNET48": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\Development\\Python\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -x \"\" -o \"C:\\Users\\Akshaya.Niraula\\AppData\\Local\\Temp\\PythonStubGenerator\\TestAssemblyNET48\""
     }
   }
 }

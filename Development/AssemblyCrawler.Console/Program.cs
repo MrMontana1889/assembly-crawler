@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using AssemblyCrawler.Console.Support;
 using AssemblyCrawler.Support;
 using Barber.AutoDiagrammer.Support;
@@ -37,21 +38,29 @@ namespace AssemblyCrawler.Console
 		{
 			PythonPackageDefinition package = new PythonPackageDefinition("Package");
 
-			foreach (var assemblyFile in obj.Assemblies)
+			// make usre obj.Assemblies and obj.XML document are same size
+			if (obj.Assemblies.Count() != obj.XmlDocuments.Count())
+            {
+				WriteLine($"Error: Number of assemblies must match with number of xml documet files. Pass empty string if xml document is missing");
+				return;
+            }
+
+			var assemblyAndXmlDocPairs = obj.Assemblies.Zip(obj.XmlDocuments, (a, x) => new { Assembly = a, XmlDocument = x });
+			foreach (var pair in assemblyAndXmlDocPairs)
 			{
-				if (!File.Exists(assemblyFile))
+				if (!File.Exists(pair.Assembly))
 				{
-					WriteLine($"The assembly {assemblyFile} does not exist.");
+					WriteLine($"The assembly {pair.Assembly} does not exist.");
 					continue;
 				}
 
-				if (DotNetObject.IsValidDotNetAssembly(assemblyFile))
+				if (DotNetObject.IsValidDotNetAssembly(pair.Assembly))
 				{
 					if (!Directory.Exists(obj.OutputPath))
 						Directory.CreateDirectory(obj.OutputPath);
 
 					IAssemblyCrawler crawler = new AssemblyCrawler();
-					crawler.Crawl(package, assemblyFile, obj.OutputPath);
+					crawler.Crawl(package,pair.Assembly, pair.XmlDocument, obj.OutputPath);
 				}
 			}
 		}
