@@ -108,7 +108,7 @@ namespace AssemblyCrawler
 						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
 
 						foreach (Type t in type.Value)
-							generator.GenerateTypeStub(t);
+							generator.GenerateTypeStub(t, xmlDocumentFileName);
 					}
 				}
 			}
