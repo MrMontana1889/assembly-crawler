@@ -5,6 +5,7 @@ from datetime import datetime
 from array import array
 from OpenFlows.Enumerations import *
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
+from Haestad.Support.Support.Interfaces import IEditLabeled
 
 TElementType = TypeVar("TElementType", IElement)
 TElementManagerType = TypeVar("TElementManagerType", IModelingElementsBase)
@@ -27,7 +28,7 @@ class IElementManager:
 		pass
 
 	def ElementIDs(self) -> List[int]:
-		"""Method Description
+		"""The list of IDs for each element in the manager.
 
 		Returns:
 			List[int]: 
@@ -35,21 +36,22 @@ class IElementManager:
 		pass
 
 	def Exists(self, id: int) -> bool:
-		"""Method Description
+		"""Determines if the ID exists.
 
 		Args:
-			id(int): id
+			id(int): A valid ID of 0 or greater.
 
 		Returns:
-			bool: 
+			bool: True if the ID exists, otherwise false.
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IElementManager: 
 		"""
 		pass
 
@@ -66,7 +68,7 @@ class IElements(Generic[TElementType], IElementManager):
 		pass
 
 	def Elements(self) -> List[TElementType]:
-		"""Method Description
+		"""A list of all elements in the manager.
 
 		Returns:
 			List[TElementType]: 
@@ -74,14 +76,14 @@ class IElements(Generic[TElementType], IElementManager):
 		pass
 
 	def SelectElements(self, sorts: SortContextCollection, filters: FilterContextCollection) -> List[TElementType]:
-		"""Method Description
+		"""Selects a set of elements given the criteria.
 
 		Args:
-			sorts(SortContextCollection): sorts
-			filters(FilterContextCollection): filters
+			sorts(SortContextCollection): Sorts the list based on one or more fields in ascending or descending order
+			filters(FilterContextCollection): A list of filters against IFields or a provided SQL statement
 
 		Returns:
-			List[TElementType]: 
+			List[TElementType]: A list of elements that match the provided criteria.  If no elements found, returns an empty List
 		"""
 		pass
 
@@ -99,25 +101,28 @@ class IElement(IEditLabeled):
 
 	@property
 	def Id(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IElement: 
 		"""
 		pass
 
 	@property
 	def Notes(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IElement: 
 		"""
 		pass
 
 	@property
 	def ModelElementType(self) -> ModelElementType:
-		"""
+		"""No Description
+
 		Returns:
-			ModelElementType: No Description
+			IElement: 
 		"""
 		pass
 
@@ -151,9 +156,10 @@ class IElementInput:
 
 	@property
 	def InputFields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			IElementInput: 
 		"""
 		pass
 
@@ -183,9 +189,10 @@ class IElementResults:
 
 	@property
 	def ResultFields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			IElementResults: 
 		"""
 		pass
 
@@ -214,7 +221,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 		pass
 
 	def Delete(self) -> None:
-		"""Method Description
+		"""Deletes the modeling element from the data source.
 
 		Returns:
 			None: 
@@ -223,17 +230,19 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 
 	@property
 	def Manager(self) -> TElementManagerType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementManagerType: No Description
+			IModelingElementBase: 
 		"""
 		pass
 
 	@property
 	def ElementType(self) -> TElementTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			TElementTypeEnum: No Description
+			IModelingElementBase: 
 		"""
 		pass
 
@@ -251,19 +260,19 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 	@overload
 	def IModelingElementsBase(self, id: int) -> TElementType:
-		"""Method Description
+		"""Retrieves an element given the ID.
 
 		Args:
-			id(int): id
+			id(int): The non-0 ID of the element.
 
 		Returns:
-			TElementType: 
+			TElementType: A  non-null object representing the element of the given ID.  If the ID does not exist, returns null.
 		"""
 		pass
 
 	@overload
 	def IModelingElementsBase(self, label: str) -> TElementType:
-		"""Method Description
+		"""Returns the first element that matches the given label.  If not found, returns null.
 
 		Args:
 			label(str): label
@@ -274,37 +283,39 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 		pass
 
 	def Create(self) -> TElementType:
-		"""Method Description
+		"""Creates a new element and returns the object.
 
 		Returns:
-			TElementType: 
+			TElementType: Returns a non-null object with minimally initialized properties.
 		"""
 		pass
 
 	def Elements(self, label: str) -> List[TElementType]:
-		"""Method Description
+		"""Returns a list of elements with the given label.
 
 		Args:
-			label(str): label
+			label(str): Case-sensitive label to search for
 
 		Returns:
-			List[TElementType]: 
+			List[TElementType]: A non-null list containing 0 or more elements with the given label
 		"""
 		pass
 
 	@property
 	def ElementType(self) -> TElementTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			TElementTypeEnum: No Description
+			IModelingElementsBase: 
 		"""
 		pass
 
 	@property
 	def InputFields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			IModelingElementsBase: 
 		"""
 		pass
 
@@ -322,9 +333,10 @@ class IGeometryUnits(IElementUnits):
 
 	@property
 	def GeometryUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IGeometryUnits: 
 		"""
 		pass
 
@@ -342,9 +354,10 @@ class IScenarioOptions(Generic[TUnitsType], IElement):
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TUnitsType: No Description
+			IScenarioOptions: 
 		"""
 		pass
 
@@ -361,7 +374,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 		pass
 
 	def Create(self, parentID: int) -> TElementType:
-		"""Method Description
+		"""Creates a new scenario.  If parentID is non-0, creates a child of that ID.  Otherwise creates a base scenario
 
 		Args:
 			parentID(int): parentID
@@ -372,7 +385,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 		pass
 
 	def ChildrenOfElement(self, parentID: int) -> List[TElementType]:
-		"""Method Description
+		"""Returns a list of scenarios that have the given parent ID
 
 		Args:
 			parentID(int): parentID
@@ -383,7 +396,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 		pass
 
 	def BaseElements(self) -> List[TElementType]:
-		"""Method Description
+		"""Returns a list of base scenarios
 
 		Returns:
 			List[TElementType]: 
@@ -392,9 +405,10 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 	@property
 	def ActiveScenario(self) -> TElementType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementType: No Description
+			IScenarios: 
 		"""
 		pass
 
@@ -411,29 +425,30 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		pass
 
 	def TimeIndexToDateTime(self, timeStepIndex: int) -> datetime:
-		"""Method Description
+		"""Converts the time at the given time step to a DateTime taking into account
+            the start date and time in the scenario options.
 
 		Args:
-			timeStepIndex(int): timeStepIndex
+			timeStepIndex(int): Th time step index to use with TimeStepsInSeconds.
 
 		Returns:
-			datetime: 
+			datetime: The DateTime at the given time step index taking into account the start date/time of the simulation.
 		"""
 		pass
 
 	def TimeStepToDateTime(self, timeStepInSeconds: float) -> datetime:
-		"""Method Description
+		"""Converts the given time in seconds to a date-time.
 
 		Args:
-			timeStepInSeconds(float): timeStepInSeconds
+			timeStepInSeconds(float): The time step in seconds.
 
 		Returns:
-			datetime: 
+			datetime: A date-time object representing the time step taking into account the simulation start date and time.
 		"""
 		pass
 
 	def MakeCurrent(self) -> None:
-		"""Method Description
+		"""Makes this scenario the active scenario in the model.
 
 		Returns:
 			None: 
@@ -441,7 +456,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		pass
 
 	def Run(self) -> None:
-		"""Method Description
+		"""Runs the active solver for this scenario
 
 		Returns:
 			None: 
@@ -450,41 +465,46 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 	@property
 	def Options(self) -> TScenarioOptionsType:
-		"""
+		"""No Description
+
 		Returns:
-			TScenarioOptionsType: No Description
+			IScenario: 
 		"""
 		pass
 
 	@property
 	def TimeStepsInSeconds(self) -> array(float):
-		"""
+		"""No Description
+
 		Returns:
-			array(float): No Description
+			IScenario: 
 		"""
 		pass
 
 	@property
 	def HasResults(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IScenario: 
 		"""
 		pass
 
 	@property
 	def ActiveTimeStep(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IScenario: 
 		"""
 		pass
 
 	@property
 	def ParentScenario(self) -> IScenario:
-		"""
+		"""No Description
+
 		Returns:
-			IScenario: No Description
+			IScenario: 
 		"""
 		pass
 
@@ -510,7 +530,7 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 	@overload
 	def ISelectionSet(self, ids: List[int]) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -522,7 +542,7 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 	@overload
 	def ISelectionSet(self, elements: List[TNetworkElementType]) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			elements(List[TNetworkElementType]): elements
@@ -533,26 +553,27 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 		pass
 
 	def Get(self) -> List[int]:
-		"""Method Description
+		"""Gets the IDs in the selection set.
 
 		Returns:
-			List[int]: 
+			List[int]: A non-null list of IDs in the selection set.  May include deleted IDs.
 		"""
 		pass
 
 	def Elements(self) -> List[TNetworkElementType]:
-		"""Method Description
+		"""A list of elements representing each ID.
 
 		Returns:
-			List[TNetworkElementType]: 
+			List[TNetworkElementType]: A non-null list of elements representing each ID in the selection set.
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			ISelectionSet: 
 		"""
 		pass
 

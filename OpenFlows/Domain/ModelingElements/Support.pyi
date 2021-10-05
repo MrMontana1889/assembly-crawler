@@ -21,7 +21,7 @@ class IFieldInfo(INamable, ILabeled):
 		pass
 
 	def GetValue(self, id: int) -> TValueType:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -32,7 +32,7 @@ class IFieldInfo(INamable, ILabeled):
 		pass
 
 	def SetValue(self, id: int, value: TValueType) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -45,41 +45,46 @@ class IFieldInfo(INamable, ILabeled):
 
 	@property
 	def Field(self) -> IField:
-		"""
+		"""No Description
+
 		Returns:
-			IField: No Description
+			IFieldInfo: 
 		"""
 		pass
 
 	@property
 	def FieldType(self) -> DomainFieldType:
-		"""
+		"""No Description
+
 		Returns:
-			DomainFieldType: No Description
+			IFieldInfo: 
 		"""
 		pass
 
 	@property
 	def FieldDataType(self) -> FieldDataType:
-		"""
+		"""No Description
+
 		Returns:
-			FieldDataType: No Description
+			IFieldInfo: 
 		"""
 		pass
 
 	@property
 	def StorageUnit(self) -> Unit:
-		"""
+		"""No Description
+
 		Returns:
-			Unit: No Description
+			IFieldInfo: 
 		"""
 		pass
 
 	@property
 	def Unit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IFieldInfo: 
 		"""
 		pass
 
@@ -97,17 +102,19 @@ class INetworkFieldInfo(IFieldInfo):
 
 	@property
 	def AlternativeTypeName(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			INetworkFieldInfo: 
 		"""
 		pass
 
 	@property
 	def DomainElementTypeName(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			INetworkFieldInfo: 
 		"""
 		pass
 
@@ -124,7 +131,7 @@ class IUserNetworkfieldInfo(INetworkFieldInfo):
 		pass
 
 	def Delete(self) -> None:
-		"""Method Description
+		"""Deletes the user defined field from all supported element types.
 
 		Returns:
 			None: 
@@ -145,17 +152,19 @@ class IResultFieldInfo(IFieldInfo):
 
 	@property
 	def ResultRecordTypeName(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IResultFieldInfo: 
 		"""
 		pass
 
 	@property
 	def NumericalEngineTypeName(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IResultFieldInfo: 
 		"""
 		pass
 
@@ -173,9 +182,10 @@ class IComponentElementFieldInfo(IFieldInfo):
 
 	@property
 	def SupportElementTypeName(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IComponentElementFieldInfo: 
 		"""
 		pass
 
@@ -192,32 +202,33 @@ class IFieldManager:
 		pass
 
 	def FieldByName(self, name: str) -> IFieldInfo:
-		"""Method Description
+		"""Gets an IFieldInfo given the name.
 
 		Args:
-			name(str): name
+			name(str): The name of the field to return.
 
 		Returns:
-			IFieldInfo: 
+			IFieldInfo: A non-null IFieldInfo implementation if the name is found, otherwise null.
 		"""
 		pass
 
 	def FieldByLabel(self, label: str) -> IFieldInfo:
-		"""Method Description
+		"""Gets an IFieldINfo by label.
 
 		Args:
-			label(str): label
+			label(str): The label of the field to search for.  Exact match is used.
 
 		Returns:
-			IFieldInfo: 
+			IFieldInfo: A non-null IFieldInfo if found, otherwise null
 		"""
 		pass
 
 	@property
 	def FieldInfo(self) -> IReadOnlyCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IReadOnlyCollection: No Description
+			IFieldManager: 
 		"""
 		pass
 
@@ -235,65 +246,73 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def FieldType(self) -> UserFieldDataType:
-		"""
+		"""No Description
+
 		Returns:
-			UserFieldDataType: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def Name(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def Label(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def ElementType(self) -> TNetworkElementTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			TNetworkElementTypeEnum: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def SharedWith(self) -> List[TNetworkElementTypeEnum]:
-		"""
+		"""No Description
+
 		Returns:
-			List[TNetworkElementTypeEnum]: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def DefaultValue(self) -> TFieldType:
-		"""
+		"""No Description
+
 		Returns:
-			TFieldType: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def Category(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
 	@property
 	def JustLikeField(self) -> IFieldInfo:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldInfo: No Description
+			IUserFieldOptions: 
 		"""
 		pass
 
@@ -334,7 +353,7 @@ class IUserFieldManager(Generic[TNetworkElementType]):
 		pass
 
 	def NewFieldOptions(self) -> IUserFieldOptions:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			IUserFieldOptions: 
@@ -342,7 +361,7 @@ class IUserFieldManager(Generic[TNetworkElementType]):
 		pass
 
 	def CreateField(self, options: IUserFieldOptions) -> IUserNetworkfieldInfo:
-		"""Method Description
+		"""No Description
 
 		Args:
 			options(IUserFieldOptions): options

@@ -35,7 +35,7 @@ class IDomainModel:
 		pass
 
 	def IsQuerySelectionSet(self, id: int) -> bool:
-		"""Method Description
+		"""Determines if a selection set is query-based.
 
 		Args:
 			id(int): id
@@ -47,9 +47,10 @@ class IDomainModel:
 
 	@property
 	def DomainDataSet(self) -> IDomainDataSet:
-		"""
+		"""No Description
+
 		Returns:
-			IDomainDataSet: No Description
+			IDomainModel: 
 		"""
 		pass
 
@@ -67,49 +68,55 @@ class IModelInfo:
 
 	@property
 	def Filename(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Date(self) -> datetime:
-		"""
+		"""No Description
+
 		Returns:
-			datetime: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Title(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Company(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Engineer(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Notes(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
@@ -126,7 +133,8 @@ class IModelIOOperations:
 		pass
 
 	def Save(self) -> None:
-		"""Method Description
+		"""Saves the model from the temporary location back to the original location.
+            Only the SQLite database is copied.
 
 		Returns:
 			None: 
@@ -134,10 +142,10 @@ class IModelIOOperations:
 		pass
 
 	def SaveAs(self, filename: str) -> None:
-		"""Method Description
+		"""Saves the model to the specified location.
 
 		Args:
-			filename(str): filename
+			filename(str): The full path and filename of the project.
 
 		Returns:
 			None: 
@@ -145,7 +153,7 @@ class IModelIOOperations:
 		pass
 
 	def Close(self) -> None:
-		"""Method Description
+		"""Closes the model.
 
 		Returns:
 			None: 
@@ -166,7 +174,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@overload
 	def IModelScenarioManagement(self, scenarioID: int) -> None:
-		"""Method Description
+		"""Sets the scenario as active.
 
 		Args:
 			scenarioID(int): scenarioID
@@ -178,7 +186,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@overload
 	def IModelScenarioManagement(self, scenario: TScenarioType) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			scenario(TScenarioType): scenario
@@ -189,7 +197,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		pass
 
 	def RunActiveScenario(self) -> None:
-		"""Method Description
+		"""Calculates the active scenario using the current set of alternatives and calculation options assigned to the scenario
 
 		Returns:
 			None: 
@@ -198,17 +206,19 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@property
 	def Scenarios(self) -> TScenarioManagerType:
-		"""
+		"""No Description
+
 		Returns:
-			TScenarioManagerType: No Description
+			IModelScenarioManagement: 
 		"""
 		pass
 
 	@property
 	def ActiveScenario(self) -> TScenarioType:
-		"""
+		"""No Description
+
 		Returns:
-			TScenarioType: No Description
+			IModelScenarioManagement: 
 		"""
 		pass
 
@@ -225,7 +235,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TNetworkElementTypeEnum:
-		"""Method Description
+		"""Gets the element type of the given ID
 
 		Args:
 			id(int): id
@@ -236,7 +246,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def Elements(self, state: ElementStateType) -> List[TNetworkElementType]:
-		"""Method Description
+		"""Returns a list of all domain elements in the model.
 
 		Args:
 			state(ElementStateType): state
@@ -259,7 +269,7 @@ class IModelElementManager:
 		pass
 
 	def Element(self, id: int) -> IElement:
-		"""Method Description
+		"""Gets an element for the given iD.  Returns null if the id does not exist.
 
 		Args:
 			id(int): id
@@ -270,30 +280,30 @@ class IModelElementManager:
 		pass
 
 	def NetworkElements(self, label: str, useWildcard: bool) -> List[IElement]:
-		"""Method Description
+		"""Gets a list of domain elements that has the given label.
 
 		Args:
-			label(str): label
-			useWildcard(bool): useWildcard
+			label(str): The label to search for
+			useWildcard(bool): Specifies whether or not the label contains wildcards.  Defaults to false.
 
 		Returns:
-			List[IElement]: 
+			List[IElement]: A list of elements that use the label.  May be empty but never null.
 		"""
 		pass
 
 	def ModelElementType(self, id: int) -> ModelElementType:
-		"""Method Description
+		"""Gets the type of model element type of the id, if it exists.
 
 		Args:
-			id(int): id
+			id(int): The id of the element
 
 		Returns:
-			ModelElementType: 
+			ModelElementType: If the id does not exist, throws exception.  Otherwise, returns the model element type.
 		"""
 		pass
 
 	def Delete(self, id: int) -> bool:
-		"""Method Description
+		"""Deletes the element of the given id.
 
 		Args:
 			id(int): id
@@ -304,7 +314,7 @@ class IModelElementManager:
 		pass
 
 	def Exists(self, id: int) -> bool:
-		"""Method Description
+		"""Determines if the id is valid and it exists in the model.
 
 		Args:
 			id(int): id
@@ -315,43 +325,43 @@ class IModelElementManager:
 		pass
 
 	def IsLink(self, id: int) -> bool:
-		"""Method Description
+		"""Determines if the provided id is a link.
 
 		Args:
-			id(int): id
+			id(int): The ID of the element.
 
 		Returns:
-			bool: 
+			bool: True if the ID is a link, otherwise false
 		"""
 		pass
 
 	def IsNode(self, id: int) -> bool:
-		"""Method Description
+		"""Determines if the provided id is a node.
 
 		Args:
-			id(int): id
+			id(int): The ID of the element.
 
 		Returns:
-			bool: 
+			bool: True if the ID is a node, otherwise false.
 		"""
 		pass
 
 	def IsPolygon(self, id: int) -> bool:
-		"""Method Description
+		"""Determines if the provided is a polygon.
 
 		Args:
-			id(int): id
+			id(int): The ID of the element.
 
 		Returns:
-			bool: 
+			bool: True if the id is a polygon, otherwise false.
 		"""
 		pass
 
 	def NextNetworkElementLabel(self, domainElementType: int) -> str:
-		"""Method Description
+		"""Gets the next label for the element type.
 
 		Args:
-			domainElementType(int): domainElementType
+			domainElementType(int): The type of network element
 
 		Returns:
 			str: 
@@ -372,9 +382,10 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 
 	@property
 	def SelectionSets(self) -> TSelectionSetsType:
-		"""
+		"""No Description
+
 		Returns:
-			TSelectionSetsType: No Description
+			IModelSelectionSetManagement: 
 		"""
 		pass
 
@@ -391,7 +402,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 		pass
 
 	def NextNetworkElementLabel(self, domainElementType: TNetworkElementTypeEnum) -> str:
-		"""Method Description
+		"""No Description
 
 		Args:
 			domainElementType(TNetworkElementTypeEnum): domainElementType
@@ -403,33 +414,37 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Network(self) -> TNetworkType:
-		"""
+		"""No Description
+
 		Returns:
-			TNetworkType: No Description
+			IModel: 
 		"""
 		pass
 
 	@property
 	def Components(self) -> TModelComponentsType:
-		"""
+		"""No Description
+
 		Returns:
-			TModelComponentsType: No Description
+			IModel: 
 		"""
 		pass
 
 	@property
 	def ModelInfo(self) -> IModelInfo:
-		"""
+		"""No Description
+
 		Returns:
-			IModelInfo: No Description
+			IModel: 
 		"""
 		pass
 
 	@property
 	def UserFieldManager(self) -> IUserFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IUserFieldManager: No Description
+			IModel: 
 		"""
 		pass
 
@@ -447,20 +462,20 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 
 	@overload
 	def IOpenFlows(self, filename: str, openInPlace: bool) -> TModelType:
-		"""Method Description
+		"""Opens a model at the given location
 
 		Args:
-			filename(str): filename
-			openInPlace(bool): openInPlace
+			filename(str): The full path and filename ending in wtg.  The wtg and any support files are automatically copied to the temp folder.
+			openInPlace(bool): An option to open the specified project in its original location and not make a copy in the temp folder.
 
 		Returns:
-			TModelType: 
+			TModelType: A model object representing the data in the specified file.
 		"""
 		pass
 
 	@overload
 	def IOpenFlows(self, project: IProject) -> TModelType:
-		"""Method Description
+		"""that wrappers a Framework-managed IProject
 
 		Args:
 			project(IProject): project

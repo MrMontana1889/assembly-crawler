@@ -20,7 +20,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def Get(self) -> TCollectionType:
-		"""Method Description
+		"""Returns the collection data.
 
 		Returns:
 			TCollectionType: 
@@ -28,7 +28,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def Set(self, collection: TCollectionType) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			collection(TCollectionType): collection
@@ -39,30 +39,32 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def SelectElements(self, sorts: SortContextCollection, filters: FilterContextCollection) -> List[TElementType]:
-		"""Method Description
+		"""Applies a sort and/or filter against the collection and returns the matching elements.
 
 		Args:
-			sorts(SortContextCollection): sorts
-			filters(FilterContextCollection): filters
+			sorts(SortContextCollection): Sorts on a field in either ascending or descending order
+			filters(FilterContextCollection): Filters the collection on one or more fields
 
 		Returns:
-			List[TElementType]: 
+			List[TElementType]:  containing matching elements for the provided criteria.
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			ICollectionElements: 
 		"""
 		pass
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TUnitsType: No Description
+			ICollectionElements: 
 		"""
 		pass
 
@@ -91,7 +93,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def Add(self) -> TElementType:
-		"""Method Description
+		"""Creates a new item, adds it to the collection and returns the object.
 
 		Returns:
 			TElementType: 
@@ -99,10 +101,10 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def RemoveAt(self, index: int) -> None:
-		"""Method Description
+		"""Removes the System.Collections.Generic.IList`1 item at the specified index.
 
 		Args:
-			index(int): index
+			index(int): The zero-based index of the item to remove.
 
 		Returns:
 			None: 
@@ -110,7 +112,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def Remove(self, item: TElementType) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			item(TElementType): item
@@ -121,7 +123,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def Clear(self) -> None:
-		"""Method Description
+		"""Removes all items from the collection.
 
 		Returns:
 			None: 
@@ -130,25 +132,28 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 
 	@property
 	def Item(self) -> TElementType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementType: No Description
+			ICollection: 
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			ICollection: 
 		"""
 		pass
 
 	@property
 	def Fields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			ICollection: 
 		"""
 		pass
 

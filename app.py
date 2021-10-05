@@ -35,6 +35,23 @@ filename = "D:\\p4v\\Aspen\\Products\\WaterGEMS\\Development\\Runtime\\Samples\\
 wm = OpenFlowsWaterPython.OpenModel(filename)
 p = wm.Network.Pipes.Elements()[0]
 
+junction = wm.Network.Junctions.Elements()[0]
+print(junction.Label)
+
+wm.RunActiveScenario()
+print(junction.Results.Demand())
+
+demands = junction.Input.DemandCollection.Get()
+print(demands.Count)
+demands.Add(2.5, None)
+
+junction.Input.DemandCollection.Set(demands)
+print(junction.Input.DemandCollection.Count)
+
+wm.RunActiveScenario()
+
+print(junction.Results.Demand())
+
 print(f"Diameter: {p.Input.Diameter}")
 p.Input.Diameter = 1.0
 print(f"Diameter: {p.Input.Diameter}")

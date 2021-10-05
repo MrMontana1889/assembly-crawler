@@ -15,7 +15,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@overload
 	def ILicenseManager(self, product: ProductId, parentWindow: IntPtr) -> LicenseRunStatusEnum:
-		"""Method Description
+		"""Initializes the license for a given product type.
 
 		Args:
 			product(ProductId): product
@@ -28,7 +28,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@overload
 	def ILicenseManager(self, licensedFeatureSet: ILicensedFeatureSet) -> LicenseRunStatusEnum:
-		"""Method Description
+		"""Initializes the LicenseManager using the Framework-managed ILicensedFeatureSet
 
 		Args:
 			licensedFeatureSet(ILicensedFeatureSet): licensedFeatureSet
@@ -39,7 +39,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsInitialized(self) -> bool:
-		"""Method Description
+		"""Checks to see if the license is initialized.
 
 		Returns:
 			bool: 
@@ -47,7 +47,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def CheckLicenseState(self) -> None:
-		"""Method Description
+		"""Checks the state of the license.
 
 		Returns:
 			None: 
@@ -55,7 +55,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsLicenseValid(self) -> bool:
-		"""Method Description
+		"""Checks to see if the license is valid.
 
 		Returns:
 			bool: 
@@ -63,7 +63,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def GetLicenseStatus(self) -> LicenseStatus:
-		"""Method Description
+		"""Gets the current status of the license.
 
 		Returns:
 			LicenseStatus: 
@@ -72,9 +72,10 @@ class ILicenseManager(ILicenseProvider):
 
 	@property
 	def LicenseRunStatus(self) -> LicenseRunStatusEnum:
-		"""
+		"""No Description
+
 		Returns:
-			LicenseRunStatusEnum: No Description
+			ILicenseManager: 
 		"""
 		pass
 
