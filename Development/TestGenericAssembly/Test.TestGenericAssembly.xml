@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Test.TestGenericAssembly</name>
+    </assembly>
+    <members>
+        <member name="M:Test.TestGenericAssembly.IElementManager.ElementIDs">
+            <summary>
+            Get all the IDs
+            </summary>
+            <returns>List of element Ids</returns>
+        </member>
+        <member name="M:Test.TestGenericAssembly.IElementManager.Exists(System.Int32)">
+            <summary>
+            Evaulates if an id exists
+            </summary>
+            <param name="id">The id whose existance has to be checked</param>
+            <returns>True if found, otherwise false </returns>
+            <example>Here's an example.
+            var isInModel = WaterModel.Network.Pipes.Exists(420);
+            </example>
+        </member>
+        <member name="T:Test.TestGenericAssembly.IElement">
+            <summary>
+            The lowest level interface for element with <code>Id, Label and Notes</code>.
+            </summary>
+        </member>
+        <member name="P:Test.TestGenericAssembly.IElement.Id">
+            <summary>
+            Id of an element
+            </summary>
+        </member>
+        <member name="P:Test.TestGenericAssembly.IElement.Label">
+            <summary>
+            User friendly text for an element
+            </summary>
+        </member>
+        <member name="T:Test.TestGenericAssembly.IModelingElementBase`6">
+            <summary>
+            The lowest level interface for a modeling element.
+            </summary>
+            <typeparam name="TElementTypeManager"></typeparam>
+            <typeparam name="TElementType"></typeparam>
+            <typeparam name="TElementInputType"></typeparam>
+            <typeparam name="TElementResultsType"></typeparam>
+            <typeparam name="TElementsInputType"></typeparam>
+            <typeparam name="TElementsResultsType"></typeparam>
+        </member>
+        <member name="M:Test.TestGenericAssembly.IModelingElementBase`6.Delete">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Test.TestGenericAssembly.IModelingElementsBase`6">
+            <summary>
+            The lowest level interface for modeling elements.
+            <para>&#160;</para>
+            <see cref="T:Test.TestGenericAssembly.IModelingElementBase`6">IModelingElementBase for single element</see>
+            </summary>
+            <typeparam name="TElementTypeManager"></typeparam>
+            <typeparam name="TElementType"></typeparam>
+            <typeparam name="TElementInputType"></typeparam>
+            <typeparam name="TElementResultsType"></typeparam>
+            <typeparam name="TElementsInputType"></typeparam>
+            <typeparam name="TElementsResultsType"></typeparam>
+        </member>
+        <member name="T:Test.TestGenericAssembly.INetworkElement`6">
+            <summary>
+            The lowest level interface for a network element.
+            </summary>
+            <typeparam name="TElementTypeManager">A class inherited from <c>IEementManager</c> </typeparam>
+            <typeparam name="TElementType"></typeparam>
+            <typeparam name="TElementInputType"></typeparam>
+            <typeparam name="TElementResultsType"></typeparam>
+            <typeparam name="TElementsInputType"></typeparam>
+            <typeparam name="TElementsResultsType"></typeparam>
+        </member>
+        <member name="T:Test.TestGenericAssembly.INetworkElements`6">
+            <summary>
+            The lowest level interface for network elements.
+            <para>&#160;</para>
+            </summary>
+            <typeparam name="TElementTypeManager"></typeparam>
+            <typeparam name="TElementType"></typeparam>
+            <typeparam name="TElementInputType"></typeparam>
+            <typeparam name="TElementResultsType"></typeparam>
+            <typeparam name="TElementsInputType"></typeparam>
+            <typeparam name="TElementsResultsType"></typeparam>
+        </member>
+        <member name="T:Test.TestGenericAssembly.Links.IPipeInput">
+            <summary>
+            Contains commonly available inputs for a <c>Pipe</c>.
+            </summary>
+        </member>
+        <member name="T:Test.TestGenericAssembly.Links.IPipes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Test.TestGenericAssembly.Links.Pipe.Notes">
+            <summary>
+            Long text about the element goes here. 
+            If Id and Lable shows the doc string then they
+            came from base type
+            </summary>
+        </member>
+        <member name="M:Test.TestGenericAssembly.Links.Pipe.Delete">
+            <summary>
+            Delete a Pipe
+            </summary>
+            <exception cref="T:System.NotImplementedException">Throws not implemented exception</exception>
+            <permission cref="!:">Anyone user profile can delete</permission>
+            <remarks>No undo available</remarks>
+        </member>
+        <member name="M:Test.TestGenericAssembly.Links.Pipes.Element(System.Int32)">
+            <summary>
+            There is an overload method to this.
+            <see cref="M:Test.TestGenericAssembly.Links.Pipes.Element(System.String)"/>
+            which searched by Label
+            </summary>
+            <param name="id">Search Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Test.TestGenericAssembly.Links.Pipes.Element(System.String)">
+            <summary>
+            Find a pipe based on given <paramref name="label"/>.
+            </summary>
+            <param name="label">Wild card search is supported</param>
+            <returns><c>IPipe</c> if found, otherwise returns <c>null</c></returns>
+        </member>
+        <member name="M:TestGenericAssembly.TestEntry.GetElement">
+            <summary>
+            A static method to get an Element
+            </summary>
+            <returns></returns>		
+        </member>
+        <member name="T:TestGenericAssembly.TestEntry.NestedClass">
+            <summary>
+            This is a nested class, parent is TestEntry
+            </summary>
+        </member>
+        <member name="T:TestGenericAssembly.MultiCtorClass">
+            <summary>
+            An example class with multiple constructor
+            </summary>
+        </member>
+        <member name="M:TestGenericAssembly.MultiCtorClass.#ctor">
+            <summary>
+            Constructor with no parameters
+            </summary>
+        </member>
+        <member name="M:TestGenericAssembly.MultiCtorClass.#ctor(System.Int32)">
+            <summary>
+            You will need <paramref name="id"/> to create an instance
+            </summary>
+            <param name="id">Id of the element</param>
+        </member>
+        <member name="M:TestGenericAssembly.MultiCtorClass.#ctor(System.String)">
+            <summary>
+            You will need <paramref name="label"/> to create an instance
+            </summary>
+            <param name="label">Label of the element</param>
+        </member>
+        <member name="P:TestGenericAssembly.MultiCtorClass.Id">
+            <summary>
+            A read-only field for Id
+            </summary>
+        </member>
+        <member name="P:TestGenericAssembly.MultiCtorClass.Label">
+            <summary>
+            Read/Write Property
+            </summary>
+        </member>
+        <member name="M:TestGenericAssembly.MultiCtorClass.Contains(System.String,System.Int32@)">
+            <summary>
+            Method with out parameter
+            </summary>
+            <param name="label">Input label</param>
+            <param name="id">This Id will be inizalied</param>
+            <returns>True/False</returns>
+        </member>
+    </members>
+</doc>
