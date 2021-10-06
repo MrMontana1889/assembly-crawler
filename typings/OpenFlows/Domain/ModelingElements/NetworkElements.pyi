@@ -1,4 +1,5 @@
 from enum import Enum
+from array import array
 from OpenFlows.Domain.ModelingElements import IModelingElementBase, TElementManagerType, TElementType, TElementTypeEnum, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IElement, IGeometryUnits
 from typing import Generic, List, overload, Dict, TypeVar
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
