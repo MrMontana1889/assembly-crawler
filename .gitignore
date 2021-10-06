@@ -3,6 +3,9 @@
 ################################################################################
 
 /.vs
+/Output
+/.venv
+/Development/.vs
 /Development/assembly-crawler/AssemblyCrawler/bin/Debug/netstandard2.1
 /Development/assembly-crawler/.vs/assembly-crawler/v17
 /Development/assembly-crawler/AssemblyCrawler/obj
