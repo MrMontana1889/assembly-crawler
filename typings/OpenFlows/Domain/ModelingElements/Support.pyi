@@ -1,12 +1,19 @@
+from enum import Enum
 from OpenFlows.Units import IUnit
 from typing import Generic, List, TypeVar
-from enum import Enum
-from OpenFlows.Enumerations import *
+from Haestad.Support.Support.Interfaces import ILabeled, INamable
 
 TValueType = TypeVar("TValueType")
 TFieldType = TypeVar("TFieldType")
 TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum", Enum)
 TNetworkElementType = TypeVar("TNetworkElementType", Enum)
+
+class UserFieldDataType(Enum):
+	Integer = 1
+	Real = 2
+	LongText = 4
+	DateTime = 5
+	Boolean = 6
 
 class IFieldInfo(INamable, ILabeled):
 
@@ -131,7 +138,7 @@ class IUserNetworkfieldInfo(INetworkFieldInfo):
 		pass
 
 	def Delete(self) -> None:
-		"""Deletes the user defined field from all supported element types.
+		"""No Description
 
 		Returns:
 			None: 
@@ -202,24 +209,24 @@ class IFieldManager:
 		pass
 
 	def FieldByName(self, name: str) -> IFieldInfo:
-		"""Gets an IFieldInfo given the name.
+		"""No Description
 
 		Args:
-			name(str): The name of the field to return.
+			name(str): name
 
 		Returns:
-			IFieldInfo: A non-null IFieldInfo implementation if the name is found, otherwise null.
+			IFieldInfo: 
 		"""
 		pass
 
 	def FieldByLabel(self, label: str) -> IFieldInfo:
-		"""Gets an IFieldINfo by label.
+		"""No Description
 
 		Args:
-			label(str): The label of the field to search for.  Exact match is used.
+			label(str): label
 
 		Returns:
-			IFieldInfo: A non-null IFieldInfo if found, otherwise null
+			IFieldInfo: 
 		"""
 		pass
 

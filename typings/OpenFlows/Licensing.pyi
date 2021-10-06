@@ -1,5 +1,4 @@
 from typing import overload
-from OpenFlows.Enumerations import *
 
 class ILicenseManager(ILicenseProvider):
 
@@ -14,8 +13,8 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	@overload
-	def ILicenseManager(self, product: ProductId, parentWindow: IntPtr) -> LicenseRunStatusEnum:
-		"""Initializes the license for a given product type.
+	def Initialize(self, product: ProductId, parentWindow: IntPtr) -> LicenseRunStatusEnum:
+		"""No Description
 
 		Args:
 			product(ProductId): product
@@ -27,8 +26,8 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	@overload
-	def ILicenseManager(self, licensedFeatureSet: ILicensedFeatureSet) -> LicenseRunStatusEnum:
-		"""Initializes the LicenseManager using the Framework-managed ILicensedFeatureSet
+	def Initialize(self, licensedFeatureSet: ILicensedFeatureSet) -> LicenseRunStatusEnum:
+		"""No Description
 
 		Args:
 			licensedFeatureSet(ILicensedFeatureSet): licensedFeatureSet
@@ -39,7 +38,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsInitialized(self) -> bool:
-		"""Checks to see if the license is initialized.
+		"""No Description
 
 		Returns:
 			bool: 
@@ -47,7 +46,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def CheckLicenseState(self) -> None:
-		"""Checks the state of the license.
+		"""No Description
 
 		Returns:
 			None: 
@@ -55,7 +54,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsLicenseValid(self) -> bool:
-		"""Checks to see if the license is valid.
+		"""No Description
 
 		Returns:
 			bool: 
@@ -63,7 +62,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def GetLicenseStatus(self) -> LicenseStatus:
-		"""Gets the current status of the license.
+		"""No Description
 
 		Returns:
 			LicenseStatus: 
