@@ -2,9 +2,9 @@ from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, I
 from OpenFlows.Domain.ModelingElements import IElementUnits, IScenarioOptions
 from OpenFlows.Water.Domain.ModelingElements import IWaterSelectionSet
 from OpenFlows.Water.Domain.ModelingElements.Components import IPattern, IUnitDemandLoad
+from OpenFlows.Water.Domain import AdjustmentOperationType, CalculationType, DemandAdjustmentsType, UnitDemandAdjustmentType, RoughnessAdjustmentType
 from datetime import datetime
 from OpenFlows.Units import IUnit
-from OpenFlows.Water.Enumerations import *
 
 class IActiveDemandAdjustmentsCollection(ICollectionElements[IActiveDemandAdjustments, IActiveDemandAdjustment, IElementUnits]):
 
@@ -31,7 +31,7 @@ class IActiveDemandAdjustments(ICollection[IActiveDemandAdjustment]):
 		pass
 
 	def Add(self, scope: IWaterSelectionSet, demandPattern: IPattern, operation: AdjustmentOperationType, value: float) -> IActiveDemandAdjustment:
-		"""Adds a new demand adjustment and assigns the values.
+		"""No Description
 
 		Args:
 			scope(IWaterSelectionSet): scope
@@ -133,7 +133,7 @@ class IActiveRoughnessAdjustments(ICollection[IActiveRoughnessAdjustment]):
 		pass
 
 	def Add(self, scope: IWaterSelectionSet, operation: AdjustmentOperationType, value: float) -> IActiveRoughnessAdjustment:
-		"""Adds a new roughness adjustment.
+		"""No Description
 
 		Args:
 			scope(IWaterSelectionSet): scope
@@ -221,7 +221,7 @@ class IActiveUnitDemandAdjustments(ICollection[IActiveUnitDemandAdjustment]):
 		pass
 
 	def Add(self, scope: IWaterSelectionSet, unitDemandLoad: IUnitDemandLoad, operation: AdjustmentOperationType, value: float) -> IActiveUnitDemandAdjustment:
-		"""Add a new unit demand adjustment.
+		"""No Description
 
 		Args:
 			scope(IWaterSelectionSet): scope

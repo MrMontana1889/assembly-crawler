@@ -1,11 +1,11 @@
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType
 from OpenFlows.Units import IUnit
+from enum import Enum
 from datetime import datetime
+from typing import overload, Generic
 from OpenFlows.Domain.ModelingElements.Components import IComponentElements, IComponentElement, IModelComponents
-from typing import Generic
-from OpenFlows.Water.Enumerations import *
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement
+from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement, IPipe, IPump, IThrottleControlValve, IGeneralPurposeValve, IFlowControlValve, IPressureSustainingValve, IPressureBreakingValve, IPressureReducingValve, IReservoir, IJunction, IHydrant, ITank
 
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
@@ -33,7 +33,7 @@ class IAirFlowPressures(ICollection[IAirFlowPressure]):
 		pass
 
 	def Add(self, flow: float, pressure: float) -> IAirFlowPressure:
-		"""Adds a new row to the collection with the provided flow and pressure values.
+		"""No Description
 
 		Args:
 			flow(float): flow
@@ -156,6 +156,14 @@ class IAirFlowCurveUnits(IElementUnits):
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
+
+class ConditionComparisonOperator(Enum):
+	Equals = 0
+	GreaterThan = 1
+	GreaterThanEqual = 2
+	LessThan = 3
+	LessThanEQual = 4
+	NotEQual = 5
 
 class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterComponent):
 
@@ -1554,14 +1562,14 @@ class ICompositeConditions(ICollection[ICompositeCondition]):
 		pass
 
 	def Add(self, logicalOperator: LogicalOperatorEnum, condition: IControlCondition) -> ICompositeCondition:
-		"""Adds a condition to the collection
+		"""No Description
 
 		Args:
-			logicalOperator(LogicalOperatorEnum): If the first row, can be IF.  Otherwise, must be AND or OR.
-			condition(IControlCondition): The condition to use for the row.
+			logicalOperator(LogicalOperatorEnum): logicalOperator
+			condition(IControlCondition): condition
 
 		Returns:
-			ICompositeCondition: The composite condition created with the assigned parameters.
+			ICompositeCondition: 
 		"""
 		pass
 
@@ -2232,13 +2240,13 @@ class ICompositeActions(ICollection[ICompositeAction]):
 		pass
 
 	def Add(self, action: IControlAction) -> ICompositeAction:
-		"""Adds an action to the composite action collection.
+		"""No Description
 
 		Args:
-			action(IControlAction): The action to add.
+			action(IControlAction): action
 
 		Returns:
-			ICompositeAction: Represents the new row added to the collection
+			ICompositeAction: 
 		"""
 		pass
 
@@ -2253,6 +2261,630 @@ class ICompositeActionCollection(ICollectionElements[ICompositeActions, IComposi
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
+
+class ControlExtensionMethods:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, pipe: IPipe, attribute: ControlActionPipeAttribute, status: ControlActionPipeStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			pipe(IPipe): pipe
+			attribute(ControlActionPipeAttribute): attribute
+			status(ControlActionPipeStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, pump: IPump, attribute: PumpAttribute, value: float) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			pump(IPump): pump
+			attribute(PumpAttribute): attribute
+			value(float): value
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, pump: IPump, status: ControlActionPumpStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			pump(IPump): pump
+			status(ControlActionPumpStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, tcv: IThrottleControlValve, status: ControlActionTCVStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			tcv(IThrottleControlValve): tcv
+			status(ControlActionTCVStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, tcv: IThrottleControlValve, value: float) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			tcv(IThrottleControlValve): tcv
+			value(float): value
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, gpv: IGeneralPurposeValve, status: ControlActionGPVStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			gpv(IGeneralPurposeValve): gpv
+			status(ControlActionGPVStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, fcv: IFlowControlValve, status: ControlActionFCVStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			fcv(IFlowControlValve): fcv
+			status(ControlActionFCVStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, psv: IPressureSustainingValve, attribute: PressureValveAttribute, value: float) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			psv(IPressureSustainingValve): psv
+			attribute(PressureValveAttribute): attribute
+			value(float): value
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, pbv: IPressureBreakingValve, attribute: PressureValveAttribute, value: float) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			pbv(IPressureBreakingValve): pbv
+			attribute(PressureValveAttribute): attribute
+			value(float): value
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, prv: IPressureReducingValve, attribute: PressureValveAttribute, value: float) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			prv(IPressureReducingValve): prv
+			attribute(PressureValveAttribute): attribute
+			value(float): value
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, pbv: IPressureBreakingValve, status: ControlActionPressureValveStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			pbv(IPressureBreakingValve): pbv
+			status(ControlActionPressureValveStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateAction(actions: IControlActions, prv: IPressureReducingValve, status: ControlActionPressureValveStatus) -> IControlAction:
+		"""No Description
+
+		Args:
+			actions(IControlActions): actions
+			prv(IPressureReducingValve): prv
+			status(ControlActionPressureValveStatus): status
+
+		Returns:
+			IControlAction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, reservoir: IReservoir, attribute: NodeAttributeEnum, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			reservoir(IReservoir): reservoir
+			attribute(NodeAttributeEnum): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, junction: IJunction, attribute: NodeAttributeEnum, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			junction(IJunction): junction
+			attribute(NodeAttributeEnum): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, hydrant: IHydrant, attribute: NodeAttributeEnum, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			hydrant(IHydrant): hydrant
+			attribute(NodeAttributeEnum): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, tank: ITank, attribute: TankAttributeEnum, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			tank(ITank): tank
+			attribute(TankAttributeEnum): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, pump: IPump, attribute: PumpConditionAttribute, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			pump(IPump): pump
+			attribute(PumpConditionAttribute): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, pump: IPump, status: PumpStatus) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			pump(IPump): pump
+			status(PumpStatus): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, pipe: IPipe, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			pipe(IPipe): pipe
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, pipe: IPipe, status: PipeStatus) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			pipe(IPipe): pipe
+			status(PipeStatus): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, psv: IPressureSustainingValve, attribute: PressureValveConditionAttribute, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			psv(IPressureSustainingValve): psv
+			attribute(PressureValveConditionAttribute): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, psv: IPressureSustainingValve, status: ControlConditionValveStatus) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			psv(IPressureSustainingValve): psv
+			status(ControlConditionValveStatus): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, pbv: IPressureBreakingValve, attribute: PressureValveConditionAttribute, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			pbv(IPressureBreakingValve): pbv
+			attribute(PressureValveConditionAttribute): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, pbv: IPressureBreakingValve, status: ControlConditionValveStatus) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			pbv(IPressureBreakingValve): pbv
+			status(ControlConditionValveStatus): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, prv: IPressureReducingValve, attribute: PressureValveConditionAttribute, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			prv(IPressureReducingValve): prv
+			attribute(PressureValveConditionAttribute): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, prv: IPressureReducingValve, status: ControlConditionValveStatus) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			prv(IPressureReducingValve): prv
+			status(ControlConditionValveStatus): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, fcv: IFlowControlValve, attribute: FCVConditionAttribute, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			fcv(IFlowControlValve): fcv
+			attribute(FCVConditionAttribute): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, fcv: IFlowControlValve, status: FCVStatusEnum) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			fcv(IFlowControlValve): fcv
+			status(FCVStatusEnum): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, gpv: IGeneralPurposeValve, status: ControlConditionGPVStatusEnum) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			gpv(IGeneralPurposeValve): gpv
+			status(ControlConditionGPVStatusEnum): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, gpv: IGeneralPurposeValve, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			gpv(IGeneralPurposeValve): gpv
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, tcv: IThrottleControlValve, attribute: TCVConditionAttribute, op: ConditionComparisonOperator, value: float) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			tcv(IThrottleControlValve): tcv
+			attribute(TCVConditionAttribute): attribute
+			op(ConditionComparisonOperator): op
+			value(float): value
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CreateCondition(conditions: IControlConditions, tcv: IThrottleControlValve, status: TCVStatusEnum) -> IControlCondition:
+		"""No Description
+
+		Args:
+			conditions(IControlConditions): conditions
+			tcv(IThrottleControlValve): tcv
+			status(TCVStatusEnum): status
+
+		Returns:
+			IControlCondition: 
+		"""
+		pass
+
+	@staticmethod
+	def CreateControl(controls: IControls, controlStatement: str) -> IControl:
+		"""No Description
+
+		Args:
+			controls(IControls): controls
+			controlStatement(str): controlStatement
+
+		Returns:
+			IControl: 
+		"""
+		pass
+
+class PumpAttribute(Enum):
+	Setting = 1
+	TargetPressure = 2
+	TargetHead = 3
+
+class PressureValveAttribute(Enum):
+	HydraulicGrade = 0
+	Pressure = 2
+
+class PumpConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class PressureValveConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class FCVConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class TCVConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class SCADASignalExtensions:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@staticmethod
+	def CreateFormulaSignal(scadaSignals: ISCADASignals, label: str, signalLabel: str, formula: str) -> ISCADASignal:
+		"""No Description
+
+		Args:
+			scadaSignals(ISCADASignals): scadaSignals
+			label(str): label
+			signalLabel(str): signalLabel
+			formula(str): formula
+
+		Returns:
+			ISCADASignal: 
+		"""
+		pass
+
+	@staticmethod
+	def CreateSignal(scadaSignals: ISCADASignals, label: str, signalLabel: str) -> ISCADASignal:
+		"""No Description
+
+		Args:
+			scadaSignals(ISCADASignals): scadaSignals
+			label(str): label
+			signalLabel(str): signalLabel
+
+		Returns:
+			ISCADASignal: 
+		"""
+		pass
+
+class WaterComponentType(Enum):
+	Pattern = 50
+	PumpDefinition = 51
+	Constituent = 52
+	Zone = 53
+	Control = 54
+	ControlAction = 55
+	ControlCondition = 56
+	ControlSet = 59
+	PDD = 60
+	EnergyPrice = 61
+	UnitDemandLoad = 62
+	GPVHeadloss = 63
+	ValveCharacteristic = 66
+	AirFlowCurve = 68
+	MinorLoss = 101
+	UnitCarbonEmission = 202
+	PowerMeter = 203
+	MSXSetup = 220
+	SCADASignal = 257
+
+class SCADASignalTransformMethod(Enum):
+	Threshold = 0
+	Range = 1
+	Formula = 2
 
 class IWaterComponent(IElement):
 
@@ -2493,11 +3125,11 @@ class IPatternCurve(ICollection[IPatternCurveElement]):
 		pass
 
 	def Add(self, timeFromStart: float, multiplier: float) -> IPatternCurveElement:
-		"""Adds a new row to the collection using the parameter provided.
+		"""No Description
 
 		Args:
-			timeFromStart(float): The amount of time from the Start Time of the pattern to the time step point being defined.
-			multiplier(float): The multiplier value associated with the time step point.
+			timeFromStart(float): timeFromStart
+			multiplier(float): multiplier
 
 		Returns:
 			IPatternCurveElement: 
@@ -3080,7 +3712,7 @@ class IPumpCurve(ICollection[IPumpCurveElement]):
 		pass
 
 	def Add(self, flow: float, head: float) -> IPumpCurveElement:
-		"""Adds a new row to the pump curve.
+		"""No Description
 
 		Args:
 			flow(float): flow
@@ -3309,11 +3941,11 @@ class IFlowEfficiencyCurve(ICollection[IFlowEfficiencyCurveElement]):
 		pass
 
 	def Add(self, flow: float, efficiency: float) -> IFlowEfficiencyCurveElement:
-		"""Adds a new row to the pump efficiency curve
+		"""No Description
 
 		Args:
-			flow(float): The flow in display units
-			efficiency(float): The efficiency in display units
+			flow(float): flow
+			efficiency(float): efficiency
 
 		Returns:
 			IFlowEfficiencyCurveElement: 
@@ -3460,7 +4092,7 @@ class IFlowNPSHrCurve(ICollection[IFlowNPSHr]):
 		pass
 
 	def Add(self, flow: float, NPSHr: float) -> IFlowNPSHr:
-		"""Adds a new row to the colletion with the given data.
+		"""No Description
 
 		Args:
 			flow(float): flow
@@ -3611,7 +4243,7 @@ class ISpeedEfficiencyCurve(ICollection[ISpeedEfficiency]):
 		pass
 
 	def Add(self, speed: float, efficiency: float) -> ISpeedEfficiency:
-		"""Adds a new row to the collection with the given data.
+		"""No Description
 
 		Args:
 			speed(float): speed
@@ -4138,7 +4770,7 @@ class IGPVFlowHeadlossCurve(ICollection[IGPVFlowHeadloss]):
 		pass
 
 	def Add(self, flow: float, headloss: float) -> IGPVFlowHeadloss:
-		"""Adds a row to the collection with the given data.
+		"""No Description
 
 		Args:
 			flow(float): flow
@@ -4287,7 +4919,7 @@ class IRelativeClosureRelativeAreas(ICollection[IRelativeClosureRelativeArea]):
 		pass
 
 	def Add(self, relativeClosure: float, relativeArea: float) -> IRelativeClosureRelativeArea:
-		"""Adds a new row to the collection with the given data.
+		"""No Description
 
 		Args:
 			relativeClosure(float): relativeClosure
@@ -4424,15 +5056,13 @@ class IWaterModelSupport(IModelComponents[IWaterComponent, WaterComponentType]):
 		pass
 
 	def SCADASignals(self, dataSourceID: int) -> ISCADASignals:
-		"""Gets the SCADA signals for the given ID
-            Any new signals added in this instance will
-            automatically be associated with this id.
+		"""No Description
 
 		Args:
-			dataSourceID(int): A valid, non-zero SCADA data source ID
+			dataSourceID(int): dataSourceID
 
 		Returns:
-			ISCADASignals: If the dataSourceID is valid, returns the manager, otherwise null
+			ISCADASignals: 
 		"""
 		pass
 

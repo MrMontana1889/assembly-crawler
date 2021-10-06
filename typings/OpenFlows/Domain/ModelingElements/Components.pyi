@@ -1,7 +1,6 @@
 from typing import Generic, List, TypeVar
 from OpenFlows.Domain.ModelingElements import IElement, IModelingElementsBase, TElementManagerType, IElementUnits, IModelingElementBase
 from enum import Enum
-from OpenFlows.Enumerations import *
 
 TElementType = TypeVar("TElementType", IElement)
 TElementTypeEnum = TypeVar("TElementTypeEnum", Enum)
@@ -20,7 +19,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TElementTypeEnum:
-		"""Gets type of element for the given id.
+		"""No Description
 
 		Args:
 			id(int): id
@@ -31,7 +30,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		pass
 
 	def Elements(self) -> List[TElementType]:
-		"""Returns a list of all support elements in the model.
+		"""No Description
 
 		Returns:
 			List[TElementType]: 

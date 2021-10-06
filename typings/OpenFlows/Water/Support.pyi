@@ -1,5 +1,3 @@
-from OpenFlows.Water.Enumerations import *
-
 class IOpenFlowsWaterDefaults:
 
 	def __init__(self) -> None:
