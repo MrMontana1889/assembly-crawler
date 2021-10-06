@@ -35,7 +35,7 @@ namespace AssemblyCrawler.Test
 			PythonPackageDefinition package = new PythonPackageDefinition("OpenFlowsWater");
 
 			IAssemblyCrawler crawler = new AssemblyCrawler();
-			crawler.Crawl(package, testAssembly.Location, Path.GetTempPath());
+			crawler.Crawl(package, testAssembly.Location, String.Empty, Path.GetTempPath());
 		}
 
 
@@ -66,7 +66,7 @@ namespace AssemblyCrawler.Test
 			IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
 			Assert.IsNotNull(generator);
 
-			generator.GenerateTypeStub(testType);
+			generator.GenerateTypeStub(testType, string.Empty);
 			module.Write();
 		}
 		#endregion

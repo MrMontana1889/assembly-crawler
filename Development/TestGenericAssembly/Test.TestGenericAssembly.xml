@@ -109,7 +109,7 @@
             Delete a Pipe
             </summary>
             <exception cref="T:System.NotImplementedException">Throws not implemented exception</exception>
-            <permission cref="!:">Anyone user profile can delete</permission>
+            <permission cref="T:System.Security.Permissions.PermissionSetAttribute">No all user profile can delete</permission>
             <remarks>No undo available</remarks>
         </member>
         <member name="M:Test.TestGenericAssembly.Links.Pipes.Element(System.Int32)">
