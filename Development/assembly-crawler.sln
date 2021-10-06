@@ -15,7 +15,54 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Barber.AutoDiagrammer", "Ba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyCrawler.Console", "AssemblyCrawler.Console\AssemblyCrawler.Console.csproj", "{FF3F1322-663E-461E-9511-94F7C3D02700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGenericAssembly", "TestGenericAssembly\TestGenericAssembly.csproj", "{3A24FB1A-A862-488C-A6DE-B84D492E6A1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestGenericAssembly", "TestGenericAssembly\TestGenericAssembly.csproj", "{3A24FB1A-A862-488C-A6DE-B84D492E6A1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenFlows", "OpenFlows", "{90EBD72A-4203-40B8-9B4D-244CEDAFE184}"
+	ProjectSection(SolutionItems) = preProject
+		..\OpenFlows\__init__.py = ..\OpenFlows\__init__.py
+		..\OpenFlows\Analysis.pyi = ..\OpenFlows\Analysis.pyi
+		..\OpenFlows\Application.pyi = ..\OpenFlows\Application.pyi
+		..\OpenFlows\Enumerations.pyi = ..\OpenFlows\Enumerations.pyi
+		..\OpenFlows\Licensing.pyi = ..\OpenFlows\Licensing.pyi
+		..\OpenFlows\Units.pyi = ..\OpenFlows\Units.pyi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{E63A50A9-6628-40CB-860A-ADD011DA7E26}"
+	ProjectSection(SolutionItems) = preProject
+		..\OpenFlows\Domain\DataObjects.pyi = ..\OpenFlows\Domain\DataObjects.pyi
+		..\OpenFlows\Domain\ModelingElements.pyi = ..\OpenFlows\Domain\ModelingElements.pyi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Water", "Water", "{AE6752C8-4B7B-4D94-AE1E-5041E06CF255}"
+	ProjectSection(SolutionItems) = preProject
+		..\OpenFlows\Water\__init__.py = ..\OpenFlows\Water\__init__.py
+		..\OpenFlows\Water\Analysis.pyi = ..\OpenFlows\Water\Analysis.pyi
+		..\OpenFlows\Water\Domain.pyi = ..\OpenFlows\Water\Domain.pyi
+		..\OpenFlows\Water\Enumerations.pyi = ..\OpenFlows\Water\Enumerations.pyi
+		..\OpenFlows\Water\Python.pyi = ..\OpenFlows\Water\Python.pyi
+		..\OpenFlows\Water\Support.pyi = ..\OpenFlows\Water\Support.pyi
+		..\OpenFlows\Water\Units.pyi = ..\OpenFlows\Water\Units.pyi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelingElements", "ModelingElements", "{ABF6B5DD-1DA1-45EC-9E4C-45B928E9729C}"
+	ProjectSection(SolutionItems) = preProject
+		..\OpenFlows\Domain\ModelingElements\Collections.pyi = ..\OpenFlows\Domain\ModelingElements\Collections.pyi
+		..\OpenFlows\Domain\ModelingElements\Components.pyi = ..\OpenFlows\Domain\ModelingElements\Components.pyi
+		..\OpenFlows\Domain\ModelingElements\NetworkElements.pyi = ..\OpenFlows\Domain\ModelingElements\NetworkElements.pyi
+		..\OpenFlows\Domain\ModelingElements\Support.pyi = ..\OpenFlows\Domain\ModelingElements\Support.pyi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{D3D33ABD-9702-4438-B581-A25B1D8C913D}"
+	ProjectSection(SolutionItems) = preProject
+		..\OpenFlows\Water\Domain\ModelingElements.pyi = ..\OpenFlows\Water\Domain\ModelingElements.pyi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelingElements", "ModelingElements", "{93AB7F71-F60A-4A15-98D0-C5A86DDF29C2}"
+	ProjectSection(SolutionItems) = preProject
+		..\OpenFlows\Water\Domain\ModelingElements\CalculationOptions.pyi = ..\OpenFlows\Water\Domain\ModelingElements\CalculationOptions.pyi
+		..\OpenFlows\Water\Domain\ModelingElements\Components.pyi = ..\OpenFlows\Water\Domain\ModelingElements\Components.pyi
+		..\OpenFlows\Water\Domain\ModelingElements\NetworkElements.pyi = ..\OpenFlows\Water\Domain\ModelingElements\NetworkElements.pyi
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +101,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E63A50A9-6628-40CB-860A-ADD011DA7E26} = {90EBD72A-4203-40B8-9B4D-244CEDAFE184}
+		{AE6752C8-4B7B-4D94-AE1E-5041E06CF255} = {90EBD72A-4203-40B8-9B4D-244CEDAFE184}
+		{ABF6B5DD-1DA1-45EC-9E4C-45B928E9729C} = {E63A50A9-6628-40CB-860A-ADD011DA7E26}
+		{D3D33ABD-9702-4438-B581-A25B1D8C913D} = {AE6752C8-4B7B-4D94-AE1E-5041E06CF255}
+		{93AB7F71-F60A-4A15-98D0-C5A86DDF29C2} = {D3D33ABD-9702-4438-B581-A25B1D8C913D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7162B029-BDBD-4CA6-9519-AEB20C8DE30E}
