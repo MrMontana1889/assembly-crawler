@@ -133,6 +133,12 @@ namespace Barber.AutoDiagrammer.Support
             if (!t.IsClass && t.IsInterface)
                 return true;
 
+            if (t.IsEnum)
+                return true;
+
+            if (t.IsClass && t.IsPublic && t.IsAbstract)
+                return true;
+
             return false;
         }
         #endregion

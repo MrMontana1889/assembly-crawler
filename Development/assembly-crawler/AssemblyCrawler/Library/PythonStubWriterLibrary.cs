@@ -27,8 +27,32 @@ namespace AssemblyCrawler.Library
 		public static string OVERLOAD = "@overload";
 		public static string STATIC_METHOD = "@staticmethod";
 		public static string GENERIC = "Generic";
+		public const string EQUALS = "Equals";
+		public const string GETHASHCODE = "GetHashCode";
+		public const string GETTYPE = "GetType";
+		public const string TOSTRING = "ToString";
 
 		#endregion
+
+		public static void WritePythonEnumDef(
+			PythonModuleDefinition module,
+			Type enumType,
+			string docString,
+			int indentLevel = 0)
+		{
+			PythonClassDefinition classDef = module.AddClassDefinition(enumType.AssemblyQualifiedName, enumType.Name);
+
+			module.AddImportModule("enum").AddType("Enum");
+			classDef.ClassDefinition.AppendLine($"{CLASS} {enumType.Name}(Enum):");
+
+			var members = Enum.GetNames(enumType);
+			var values = Enum.GetValues(enumType);
+
+			for (int i = 0; i < members.Length; ++i)
+			{
+				classDef.ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {(int)values.GetValue(i)}");
+			}
+		}
 
 		public static void WritePythonClassDef(
 			PythonModuleDefinition module,
@@ -132,7 +156,7 @@ namespace AssemblyCrawler.Library
 				docString: docString,
 				isStatic: false,
 				indentLevel: indentLevel
-				); 
+				);
 		}
 
 		public static void WritePythonConstructorUnsupported(
@@ -176,6 +200,16 @@ namespace AssemblyCrawler.Library
 			bool isOverloaded = false,
 			int indentLevel = 1)
 		{
+
+			switch(methodName)
+			{
+				case EQUALS:
+				case GETHASHCODE:
+				case GETTYPE:
+				case TOSTRING:
+					return;
+			}
+
 			AddReferenceImports(classDef.Module, returnType);
 
 			// To handle generic type name better
@@ -238,7 +272,7 @@ namespace AssemblyCrawler.Library
 			if (isOverloaded)
 				classDef.Methods.AppendLine($"{indentation}{OVERLOAD}");
 
-			classDef.Methods.AppendLine($"{indentation}{method}");			
+			classDef.Methods.AppendLine($"{indentation}{method}");
 			classDef.Methods.AppendLine($"{indentation}{docString}");
 
 			if (exception?.Length > 0)
