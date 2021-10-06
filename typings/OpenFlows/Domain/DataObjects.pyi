@@ -1,11 +1,11 @@
 from datetime import datetime
 from typing import Generic, overload, List, TypeVar
-from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IModelingElementBase, IElement, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
+from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IModelingElementBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
 from enum import Enum
+from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
 from OpenFlows.Units import IModelUnits, TNetworkUnitsType, TComponentUnitsType, INetworkUnits, IComponentUnits
 from OpenFlows.Domain.ModelingElements.Components import IModelComponents
 from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
-from OpenFlows.Enumerations import *
 
 TScenarioManagerType = TypeVar("TScenarioManagerType", IModelingElementsBase)
 TScenarioType = TypeVar("TScenarioType", IModelingElementBase)
@@ -35,7 +35,7 @@ class IDomainModel:
 		pass
 
 	def IsQuerySelectionSet(self, id: int) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -47,9 +47,10 @@ class IDomainModel:
 
 	@property
 	def DomainDataSet(self) -> IDomainDataSet:
-		"""
+		"""No Description
+
 		Returns:
-			IDomainDataSet: No Description
+			IDomainModel: 
 		"""
 		pass
 
@@ -67,49 +68,55 @@ class IModelInfo:
 
 	@property
 	def Filename(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Date(self) -> datetime:
-		"""
+		"""No Description
+
 		Returns:
-			datetime: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Title(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Company(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Engineer(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
 	@property
 	def Notes(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IModelInfo: 
 		"""
 		pass
 
@@ -126,7 +133,7 @@ class IModelIOOperations:
 		pass
 
 	def Save(self) -> None:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			None: 
@@ -134,7 +141,7 @@ class IModelIOOperations:
 		pass
 
 	def SaveAs(self, filename: str) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			filename(str): filename
@@ -145,7 +152,7 @@ class IModelIOOperations:
 		pass
 
 	def Close(self) -> None:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			None: 
@@ -165,8 +172,8 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		pass
 
 	@overload
-	def IModelScenarioManagement(self, scenarioID: int) -> None:
-		"""Method Description
+	def SetActiveScenario(self, scenarioID: int) -> None:
+		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
@@ -177,8 +184,8 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		pass
 
 	@overload
-	def IModelScenarioManagement(self, scenario: TScenarioType) -> None:
-		"""Method Description
+	def SetActiveScenario(self, scenario: TScenarioType) -> None:
+		"""No Description
 
 		Args:
 			scenario(TScenarioType): scenario
@@ -189,7 +196,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		pass
 
 	def RunActiveScenario(self) -> None:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			None: 
@@ -198,17 +205,19 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@property
 	def Scenarios(self) -> TScenarioManagerType:
-		"""
+		"""No Description
+
 		Returns:
-			TScenarioManagerType: No Description
+			IModelScenarioManagement: 
 		"""
 		pass
 
 	@property
 	def ActiveScenario(self) -> TScenarioType:
-		"""
+		"""No Description
+
 		Returns:
-			TScenarioType: No Description
+			IModelScenarioManagement: 
 		"""
 		pass
 
@@ -225,7 +234,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TNetworkElementTypeEnum:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -236,7 +245,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def Elements(self, state: ElementStateType) -> List[TNetworkElementType]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			state(ElementStateType): state
@@ -259,7 +268,7 @@ class IModelElementManager:
 		pass
 
 	def Element(self, id: int) -> IElement:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -270,7 +279,7 @@ class IModelElementManager:
 		pass
 
 	def NetworkElements(self, label: str, useWildcard: bool) -> List[IElement]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			label(str): label
@@ -282,7 +291,7 @@ class IModelElementManager:
 		pass
 
 	def ModelElementType(self, id: int) -> ModelElementType:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -293,7 +302,7 @@ class IModelElementManager:
 		pass
 
 	def Delete(self, id: int) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -304,7 +313,7 @@ class IModelElementManager:
 		pass
 
 	def Exists(self, id: int) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -315,7 +324,7 @@ class IModelElementManager:
 		pass
 
 	def IsLink(self, id: int) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -326,7 +335,7 @@ class IModelElementManager:
 		pass
 
 	def IsNode(self, id: int) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -337,7 +346,7 @@ class IModelElementManager:
 		pass
 
 	def IsPolygon(self, id: int) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			id(int): id
@@ -348,7 +357,7 @@ class IModelElementManager:
 		pass
 
 	def NextNetworkElementLabel(self, domainElementType: int) -> str:
-		"""Method Description
+		"""No Description
 
 		Args:
 			domainElementType(int): domainElementType
@@ -372,9 +381,10 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 
 	@property
 	def SelectionSets(self) -> TSelectionSetsType:
-		"""
+		"""No Description
+
 		Returns:
-			TSelectionSetsType: No Description
+			IModelSelectionSetManagement: 
 		"""
 		pass
 
@@ -391,7 +401,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 		pass
 
 	def NextNetworkElementLabel(self, domainElementType: TNetworkElementTypeEnum) -> str:
-		"""Method Description
+		"""No Description
 
 		Args:
 			domainElementType(TNetworkElementTypeEnum): domainElementType
@@ -403,33 +413,37 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Network(self) -> TNetworkType:
-		"""
+		"""No Description
+
 		Returns:
-			TNetworkType: No Description
+			IModel: 
 		"""
 		pass
 
 	@property
 	def Components(self) -> TModelComponentsType:
-		"""
+		"""No Description
+
 		Returns:
-			TModelComponentsType: No Description
+			IModel: 
 		"""
 		pass
 
 	@property
 	def ModelInfo(self) -> IModelInfo:
-		"""
+		"""No Description
+
 		Returns:
-			IModelInfo: No Description
+			IModel: 
 		"""
 		pass
 
 	@property
 	def UserFieldManager(self) -> IUserFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IUserFieldManager: No Description
+			IModel: 
 		"""
 		pass
 
@@ -446,8 +460,8 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 		pass
 
 	@overload
-	def IOpenFlows(self, filename: str, openInPlace: bool) -> TModelType:
-		"""Method Description
+	def Open(self, filename: str, openInPlace: bool) -> TModelType:
+		"""No Description
 
 		Args:
 			filename(str): filename
@@ -459,8 +473,8 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 		pass
 
 	@overload
-	def IOpenFlows(self, project: IProject) -> TModelType:
-		"""Method Description
+	def Open(self, project: IProject) -> TModelType:
+		"""No Description
 
 		Args:
 			project(IProject): project

@@ -1,15 +1,19 @@
+from enum import Enum
 from OpenFlows.Domain.ModelingElements import IModelingElementBase, TElementManagerType, TElementType, TElementTypeEnum, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IElement, IGeometryUnits
 from typing import Generic, List, overload, Dict, TypeVar
-from enum import Enum
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 from OpenFlows.Units import IUnit
-from OpenFlows.Enumerations import *
 
 TUnitsType = TypeVar("TUnitsType", IElementUnits)
 TElementInputType = TypeVar("TElementInputType", IElementInput)
 TElementResultsType = TypeVar("TElementResultsType", IElementResults)
 TElementsInputType = TypeVar("TElementsInputType", IElementsInput)
 TElementsResultsType = TypeVar("TElementsResultsType", IElementsResults)
+
+class ElementStateType(Enum):
+	All = 0
+	Active = 1
+	Inactive = 2
 
 class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
@@ -25,33 +29,37 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 
 	@property
 	def GISIDs(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			INetworkElement: 
 		"""
 		pass
 
 	@property
 	def Input(self) -> TElementInputType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementInputType: No Description
+			INetworkElement: 
 		"""
 		pass
 
 	@property
 	def Results(self) -> TElementResultsType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementResultsType: No Description
+			INetworkElement: 
 		"""
 		pass
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TUnitsType: No Description
+			INetworkElement: 
 		"""
 		pass
 
@@ -72,7 +80,7 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 		pass
 
 	def Elements(self, state: ElementStateType) -> List[TElementType]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			state(ElementStateType): state
@@ -84,25 +92,28 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 
 	@property
 	def Results(self) -> TElementsResultsType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementsResultsType: No Description
+			INetworkElements: 
 		"""
 		pass
 
 	@property
 	def Input(self) -> TElementsInputType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementsInputType: No Description
+			INetworkElements: 
 		"""
 		pass
 
 	@property
 	def ResultFields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			INetworkElements: 
 		"""
 		pass
 
@@ -120,9 +131,10 @@ class IActiveElementInput(IElementInput):
 
 	@property
 	def IsActive(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IActiveElementInput: 
 		"""
 		pass
 
@@ -143,8 +155,8 @@ class IActiveElementsInput(IElementsInput):
 		pass
 
 	@overload
-	def IActiveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def IsActives(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -152,8 +164,8 @@ class IActiveElementsInput(IElementsInput):
 		pass
 
 	@overload
-	def IActiveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def IsActives(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -176,7 +188,7 @@ class IPointNodeInput(IActiveElementInput):
 		pass
 
 	def GetPoint(self) -> GeometryPoint:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			GeometryPoint: 
@@ -184,7 +196,7 @@ class IPointNodeInput(IActiveElementInput):
 		pass
 
 	def SetPoint(self, point: GeometryPoint) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			point(GeometryPoint): point
@@ -207,8 +219,8 @@ class IPointNodesInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IPointNodesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Geometries(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -216,8 +228,8 @@ class IPointNodesInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IPointNodesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Geometries(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -240,7 +252,7 @@ class IBaseLinkInput(IActiveElementInput):
 		pass
 
 	def GetPoints(self) -> List[GeometryPoint]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			List[GeometryPoint]: 
@@ -248,7 +260,7 @@ class IBaseLinkInput(IActiveElementInput):
 		pass
 
 	def SetPoints(self, points: List[GeometryPoint]) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			points(List[GeometryPoint]): points
@@ -260,33 +272,37 @@ class IBaseLinkInput(IActiveElementInput):
 
 	@property
 	def StartNode(self) -> IElement:
-		"""
+		"""No Description
+
 		Returns:
-			IElement: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
 	@property
 	def StopNode(self) -> IElement:
-		"""
+		"""No Description
+
 		Returns:
-			IElement: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
 	@property
 	def IsUserDefinedLength(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
 	@property
 	def Length(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseLinkInput: 
 		"""
 		pass
 
@@ -319,8 +335,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Geometries(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -328,8 +344,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Geometries(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -340,8 +356,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def StartNodes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -349,8 +365,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def StartNodes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -361,8 +377,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def StopNodes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -370,8 +386,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def StopNodes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -382,8 +398,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def IsUserDefinedLengths(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -391,8 +407,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def IsUserDefinedLengths(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -403,8 +419,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Lengths(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -412,8 +428,8 @@ class IBaseLinksInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBaseLinksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Lengths(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -461,9 +477,10 @@ class IBaseLinkUnits(IGeometryUnits):
 
 	@property
 	def LengthUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseLinkUnits: 
 		"""
 		pass
 
@@ -480,7 +497,7 @@ class IBasePolygonInput(IActiveElementInput):
 		pass
 
 	def GetRings(self) -> array():
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -488,7 +505,7 @@ class IBasePolygonInput(IActiveElementInput):
 		pass
 
 	def SetRings(self, rings: array()) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			rings(array()): rings
@@ -511,8 +528,8 @@ class IBasePolygonsInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBasePolygonsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Geometries(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -520,8 +537,8 @@ class IBasePolygonsInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IBasePolygonsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Geometries(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids

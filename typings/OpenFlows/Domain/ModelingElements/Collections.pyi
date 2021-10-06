@@ -1,7 +1,6 @@
 from typing import Generic, List, Iterator, TypeVar
 from OpenFlows.Domain.ModelingElements import IElementUnits
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
-from OpenFlows.Enumerations import *
 
 TCollectionType = TypeVar("TCollectionType", ICollection)
 TElementType = TypeVar("TElementType", ICollectionElement)
@@ -20,7 +19,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def Get(self) -> TCollectionType:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			TCollectionType: 
@@ -28,7 +27,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def Set(self, collection: TCollectionType) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			collection(TCollectionType): collection
@@ -39,7 +38,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def SelectElements(self, sorts: SortContextCollection, filters: FilterContextCollection) -> List[TElementType]:
-		"""Method Description
+		"""No Description
 
 		Args:
 			sorts(SortContextCollection): sorts
@@ -52,17 +51,19 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 	@property
 	def Count(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			ICollectionElements: 
 		"""
 		pass
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TUnitsType: No Description
+			ICollectionElements: 
 		"""
 		pass
 
@@ -91,7 +92,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def Add(self) -> TElementType:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			TElementType: 
@@ -99,7 +100,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def RemoveAt(self, index: int) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			index(int): index
@@ -110,7 +111,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def Remove(self, item: TElementType) -> bool:
-		"""Method Description
+		"""No Description
 
 		Args:
 			item(TElementType): item
@@ -121,7 +122,7 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		pass
 
 	def Clear(self) -> None:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			None: 
@@ -130,25 +131,28 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 
 	@property
 	def Item(self) -> TElementType:
-		"""
+		"""No Description
+
 		Returns:
-			TElementType: No Description
+			ICollection: 
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			ICollection: 
 		"""
 		pass
 
 	@property
 	def Fields(self) -> IFieldManager:
-		"""
+		"""No Description
+
 		Returns:
-			IFieldManager: No Description
+			ICollection: 
 		"""
 		pass
 

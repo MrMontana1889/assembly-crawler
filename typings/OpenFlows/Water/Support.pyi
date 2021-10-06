@@ -1,5 +1,3 @@
-from OpenFlows.Water.Enumerations import *
-
 class IOpenFlowsWaterDefaults:
 
 	def __init__(self) -> None:
@@ -14,17 +12,19 @@ class IOpenFlowsWaterDefaults:
 
 	@property
 	def DefaultIsActive(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IOpenFlowsWaterDefaults: 
 		"""
 		pass
 
 	@property
 	def UseElementLabeling(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IOpenFlowsWaterDefaults: 
 		"""
 		pass
 

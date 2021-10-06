@@ -1,6 +1,5 @@
 from typing import Generic, TypeVar
 from OpenFlows.Domain.ModelingElements import IScenario, IScenarios, IScenarioOptions, IElementUnits
-from OpenFlows.Enumerations import *
 
 TScenarioType = TypeVar("TScenarioType", IScenario)
 TScenarioManagerType = TypeVar("TScenarioManagerType", IScenarios)
@@ -20,7 +19,7 @@ class IAnalysisCalculator(Generic[TScenarioType, TScenarioManagerType, TScenario
 		pass
 
 	def Run(self, scenario: TScenarioType) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			scenario(TScenarioType): scenario

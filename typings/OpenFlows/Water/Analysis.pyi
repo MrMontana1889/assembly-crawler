@@ -1,7 +1,6 @@
 from OpenFlows.Analysis import IAnalysisCalculator
 from OpenFlows.Water.Domain.ModelingElements import IWaterScenario, IWaterScenarios
 from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
-from OpenFlows.Water.Enumerations import *
 
 class IScenarioEnergyCostCalculator(IAnalysisCalculator[IWaterScenario, IWaterScenarios, IWaterScenarioOptions, IWaterScenarioOptionsUnits]):
 
@@ -29,9 +28,10 @@ class IAnalysisTools:
 
 	@property
 	def ScenarioEnergyCostCalculator(self) -> IScenarioEnergyCostCalculator:
-		"""
+		"""No Description
+
 		Returns:
-			IScenarioEnergyCostCalculator: No Description
+			IAnalysisTools: 
 		"""
 		pass
 

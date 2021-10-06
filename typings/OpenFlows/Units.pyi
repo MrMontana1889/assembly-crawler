@@ -1,8 +1,18 @@
+from enum import Enum
 from typing import Generic, overload, TypeVar
-from OpenFlows.Enumerations import *
 
 TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
 TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
+
+class FormatCode(Enum):
+	Fixed = 0
+	General = 1
+	ScientificNotation = 2
+	Number = 3
+
+class UnitSystemType(Enum):
+	USCustomary = 0
+	SI = 1
 
 class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
@@ -18,9 +28,10 @@ class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@property
 	def Units(self) -> IUnits:
-		"""
+		"""No Description
+
 		Returns:
-			IUnits: No Description
+			IModelUnits: 
 		"""
 		pass
 
@@ -61,8 +72,8 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 		pass
 
 	@overload
-	def IUnits(self, value: float, unit: IUnit) -> str:
-		"""Method Description
+	def FormatValue(self, value: float, unit: IUnit) -> str:
+		"""No Description
 
 		Args:
 			value(float): value
@@ -74,8 +85,8 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 		pass
 
 	@overload
-	def IUnits(self, value: float, unit: IUnit, format: FormatCode, signficantDigits: int) -> str:
-		"""Method Description
+	def FormatValue(self, value: float, unit: IUnit, format: FormatCode, signficantDigits: int) -> str:
+		"""No Description
 
 		Args:
 			value(float): value
@@ -89,7 +100,7 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 		pass
 
 	def ConvertValue(self, value: float, fromUnit: Unit, toUnit: Unit) -> float:
-		"""Method Description
+		"""No Description
 
 		Args:
 			value(float): value
@@ -102,7 +113,7 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 		pass
 
 	def Reset(self, unitSystem: UnitSystemType) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			unitSystem(UnitSystemType): unitSystem
@@ -114,17 +125,19 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@property
 	def NetworkUnits(self) -> TNetworkUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TNetworkUnitsType: No Description
+			IUnits: 
 		"""
 		pass
 
 	@property
 	def ComponentUnits(self) -> TComponentUnitsType:
-		"""
+		"""No Description
+
 		Returns:
-			TComponentUnitsType: No Description
+			IUnits: 
 		"""
 		pass
 
@@ -141,8 +154,8 @@ class IUnit:
 		pass
 
 	@overload
-	def IUnit(self, value: float) -> str:
-		"""Method Description
+	def FormatValue(self, value: float) -> str:
+		"""No Description
 
 		Args:
 			value(float): value
@@ -153,8 +166,8 @@ class IUnit:
 		pass
 
 	@overload
-	def IUnit(self, value: float, format: FormatCode, significantDigits: int) -> str:
-		"""Method Description
+	def FormatValue(self, value: float, format: FormatCode, significantDigits: int) -> str:
+		"""No Description
 
 		Args:
 			value(float): value
@@ -167,7 +180,7 @@ class IUnit:
 		pass
 
 	def SetUnit(self, unit: Unit) -> None:
-		"""Method Description
+		"""No Description
 
 		Args:
 			unit(Unit): unit
@@ -178,7 +191,7 @@ class IUnit:
 		pass
 
 	def GetUnit(self) -> Unit:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Unit: 
@@ -186,7 +199,7 @@ class IUnit:
 		pass
 
 	def ConvertTo(self, value: float, unit: Unit) -> float:
-		"""Method Description
+		"""No Description
 
 		Args:
 			value(float): value
@@ -199,41 +212,46 @@ class IUnit:
 
 	@property
 	def Dimension(self) -> Dimension:
-		"""
+		"""No Description
+
 		Returns:
-			Dimension: No Description
+			IUnit: 
 		"""
 		pass
 
 	@property
 	def FormatCode(self) -> FormatCode:
-		"""
+		"""No Description
+
 		Returns:
-			FormatCode: No Description
+			IUnit: 
 		"""
 		pass
 
 	@property
 	def SignificantDigits(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IUnit: 
 		"""
 		pass
 
 	@property
 	def Label(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IUnit: 
 		"""
 		pass
 
 	@property
 	def ShortLabel(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IUnit: 
 		"""
 		pass
 

@@ -1,12 +1,14 @@
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
-from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve, ISCADASignal
+from OpenFlows.Water import OpenFlowsWater
+from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType
 from typing import overload, Dict, List, Union, Generic
 from array import array
 from OpenFlows.Units import IUnit
+from enum import Enum
+from OpenFlows.Water.Domain import ValveSettingType, TCVCoefficientType, PressureValvesettingType, ConstituentSourceType, PipeStatusType, TankSectionType
 from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput
 from OpenFlows.Domain.DataObjects import INetwork
-from OpenFlows.Water.Enumerations import *
 
 
 class IMinorLoss(ICollectionElement):
@@ -23,17 +25,19 @@ class IMinorLoss(ICollectionElement):
 
 	@property
 	def Quantity(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IMinorLoss: 
 		"""
 		pass
 
 	@property
 	def MinorLossCoefficient(self) -> IMinorLossCoefficient:
-		"""
+		"""No Description
+
 		Returns:
-			IMinorLossCoefficient: No Description
+			IMinorLoss: 
 		"""
 		pass
 
@@ -58,7 +62,7 @@ class IMinorLosses(ICollection[IMinorLoss]):
 		pass
 
 	def Add(self, quantity: int, minorLoss: IMinorLossCoefficient) -> IMinorLoss:
-		"""Method Description
+		"""No Description
 
 		Args:
 			quantity(int): quantity
@@ -106,8 +110,8 @@ class IBaseDirectedNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CannotDeliverFlowsOrHead(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -115,8 +119,8 @@ class IBaseDirectedNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CannotDeliverFlowsOrHead(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -127,8 +131,8 @@ class IBaseDirectedNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CannotDeliverFlowsOrHead(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -140,8 +144,8 @@ class IBaseDirectedNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def IsOpen(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -149,8 +153,8 @@ class IBaseDirectedNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def IsOpen(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -161,8 +165,8 @@ class IBaseDirectedNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def IsOpen(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -186,8 +190,8 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodeResults(self) -> Union[bool, None]:
-		"""Method Description
+	def CannotDeliverFlowOrHead(self) -> Union[bool, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -195,8 +199,8 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodeResults(self, timeStepIndex: int) -> Union[bool, None]:
-		"""Method Description
+	def CannotDeliverFlowOrHead(self, timeStepIndex: int) -> Union[bool, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -207,8 +211,8 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodeResults(self) -> Union[bool, None]:
-		"""Method Description
+	def IsOpen(self) -> Union[bool, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -216,8 +220,8 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	@overload
-	def IBaseDirectedNodeResults(self, timeStepIndex: int) -> Union[bool, None]:
-		"""Method Description
+	def IsOpen(self, timeStepIndex: int) -> Union[bool, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -228,7 +232,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	def CannotDeliverFlowsOrHeads(self) -> array(Union[bool, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -236,7 +240,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	def IsOpens(self) -> array(Union[bool, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -257,17 +261,19 @@ class IBaseDirectedNodeInput(IPhysicalNodeElementInput, IWaterZoneableNetworkEle
 
 	@property
 	def DownstreamLink(self) -> IElement:
-		"""
+		"""No Description
+
 		Returns:
-			IElement: No Description
+			IBaseDirectedNodeInput: 
 		"""
 		pass
 
 	@property
 	def InstallationYear(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IBaseDirectedNodeInput: 
 		"""
 		pass
 
@@ -292,8 +298,8 @@ class IBaseDirectedNodesInput(IWaterZoneableNetworkElementsInput, IWaterQualityE
 		pass
 
 	@overload
-	def IBaseDirectedNodesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InstallationYears(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -301,8 +307,8 @@ class IBaseDirectedNodesInput(IWaterZoneableNetworkElementsInput, IWaterQualityE
 		pass
 
 	@overload
-	def IBaseDirectedNodesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InstallationYears(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -326,9 +332,10 @@ class IBaseDirectedNodeUnits(IElementResults, IWaterQualityResultsUnits, IGeomet
 
 	@property
 	def ElevationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseDirectedNodeUnits: 
 		"""
 		pass
 
@@ -346,65 +353,73 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 
 	@property
 	def LocatedAtWye(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def CheckValvePipeWithWye(self) -> IPipe:
-		"""
+		"""No Description
+
 		Returns:
-			IPipe: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def FlowDirection(self) -> CheckValveFlowDirectionEnum:
-		"""
+		"""No Description
+
 		Returns:
-			CheckValveFlowDirectionEnum: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def InitialTypicalFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def ThresholdPressure(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def ClosureTime(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def OpenTime(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
 	@property
 	def AllowDisruptionOfOperation(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			ICheckValveElementInput: 
 		"""
 		pass
 
@@ -453,8 +468,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def LocatedAtWyes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -462,8 +477,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def LocatedAtWyes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -474,8 +489,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def FlowDirections(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -483,8 +498,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def FlowDirections(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -495,8 +510,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialTypicalFlows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -504,8 +519,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialTypicalFlows(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -516,8 +531,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def ThresholdPressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -525,8 +540,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def ThresholdPressures(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -537,8 +552,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def ClosureTimes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -546,8 +561,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def ClosureTimes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -558,8 +573,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def OpenTimes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -567,8 +582,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def OpenTimes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -579,8 +594,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def AllowDisruptionOfOperations(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -588,8 +603,8 @@ class ICheckValveElementsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def ICheckValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def AllowDisruptionOfOperations(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -612,8 +627,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -621,8 +636,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -633,8 +648,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def AbsoluteFlow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -642,8 +657,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def AbsoluteFlow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -654,8 +669,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -663,8 +678,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -675,8 +690,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -684,8 +699,8 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ICheckValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -696,7 +711,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -704,7 +719,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	def AbsoluteFlows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -712,7 +727,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	def Pressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -720,7 +735,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		pass
 
 	def HydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -740,8 +755,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -749,8 +764,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -761,42 +776,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ICheckValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ICheckValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ICheckValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -808,8 +789,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def AbsoluteFlows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -817,8 +798,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def AbsoluteFlows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -829,8 +810,42 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self, ids: List[int], timeSTepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def AbsoluteFlows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Pressures(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Pressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Pressures(self, ids: List[int], timeSTepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -842,8 +857,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -851,8 +866,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -863,8 +878,8 @@ class ICheckValveElementsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ICheckValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -889,25 +904,28 @@ class ICheckValveUnits(IBaseDirectedNodeUnits):
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICheckValveUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICheckValveUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICheckValveUnits: 
 		"""
 		pass
 
@@ -949,17 +967,19 @@ class IOrificeBetweenTwoPipesInput(IBaseDirectedNodeInput):
 
 	@property
 	def TypicalPressureDrop(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IOrificeBetweenTwoPipesInput: 
 		"""
 		pass
 
 	@property
 	def TypicalFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IOrificeBetweenTwoPipesInput: 
 		"""
 		pass
 
@@ -984,7 +1004,7 @@ class IOrificesBetweenTwoPipesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TypicalPressureDrops(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -992,7 +1012,7 @@ class IOrificesBetweenTwoPipesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TypicalFlows(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1012,8 +1032,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1021,8 +1041,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1033,8 +1053,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1042,8 +1062,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1054,8 +1074,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def FromHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1063,8 +1083,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def FromHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1075,8 +1095,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def ToHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1084,8 +1104,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def ToHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1096,8 +1116,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def FromPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1105,8 +1125,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def FromPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1117,8 +1137,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def ToPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1126,8 +1146,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def ToPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1138,8 +1158,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self) -> Union[float, None]:
-		"""Method Description
+	def AbsoluteFlow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -1147,8 +1167,8 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IOrificeBetweenTwoPipesResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def AbsoluteFlow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1159,7 +1179,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1167,7 +1187,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def Headlosses(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1175,7 +1195,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def FromHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1183,7 +1203,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def ToHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1191,7 +1211,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def FromPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1199,7 +1219,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def ToPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1207,7 +1227,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		pass
 
 	def AbsoluteFlows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -1227,8 +1247,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1236,8 +1256,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1248,42 +1268,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -1295,8 +1281,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Headloss(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1304,8 +1290,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headloss(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1316,42 +1302,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headloss(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -1363,8 +1315,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrade(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1372,8 +1324,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrade(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1384,42 +1336,8 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrade(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -1431,8 +1349,17 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def ToHydraulicGrade(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToHydraulicGrade(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -1443,8 +1370,101 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IOrificesBetweenTwoPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def ToHydraulicGrade(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressure(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressure(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressure(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressure(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressure(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressure(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AbsoluteFlow(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AbsoluteFlow(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -1456,7 +1476,7 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		pass
 
 	def AbsolueFlow(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1477,33 +1497,37 @@ class IOrificeBetweenTwoPipesUnits(IBaseDirectedNodeUnits):
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IOrificeBetweenTwoPipesUnits: 
 		"""
 		pass
 
 	@property
 	def HeadlossUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IOrificeBetweenTwoPipesUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IOrificeBetweenTwoPipesUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IOrificeBetweenTwoPipesUnits: 
 		"""
 		pass
 
@@ -1556,7 +1580,7 @@ class ITurbineFlowHeads(ICollection[ITurbineFlowHead]):
 		pass
 
 	def Add(self, flow: float, head: float) -> ITurbineFlowHead:
-		"""Method Description
+		"""No Description
 
 		Args:
 			flow(float): flow
@@ -1581,17 +1605,19 @@ class ITurbineFlowHead(ICollectionElement):
 
 	@property
 	def Flow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineFlowHead: 
 		"""
 		pass
 
 	@property
 	def Head(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineFlowHead: 
 		"""
 		pass
 
@@ -1617,17 +1643,19 @@ class ITurbineCurveUnits(IElementUnits):
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineCurveUnits: 
 		"""
 		pass
 
 	@property
 	def HeadUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineCurveUnits: 
 		"""
 		pass
 
@@ -1656,7 +1684,7 @@ class IElectricalTorques(ICollection[IElectricalTorque]):
 		pass
 
 	def Add(self, time: float, torque: float) -> IElectricalTorque:
-		"""Method Description
+		"""No Description
 
 		Args:
 			time(float): time
@@ -1681,17 +1709,19 @@ class IElectricalTorque(ICollectionElement):
 
 	@property
 	def Time(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IElectricalTorque: 
 		"""
 		pass
 
 	@property
 	def Torque(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IElectricalTorque: 
 		"""
 		pass
 
@@ -1717,17 +1747,19 @@ class IElectricalTorqueUnits(IElementUnits):
 
 	@property
 	def TimeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IElectricalTorqueUnits: 
 		"""
 		pass
 
 	@property
 	def TorqueUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IElectricalTorqueUnits: 
 		"""
 		pass
 
@@ -1745,121 +1777,136 @@ class ITurbineInput(IBaseDirectedNodeInput):
 
 	@property
 	def TimeDelayUntilValveOperates(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def TimeForValveToOperate(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def SphericalValveDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def TurbineEfficiency(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def MomentOfInertia(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def RotationalSpeed(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def GateOpeningPattern(self) -> IPattern:
-		"""
+		"""No Description
+
 		Returns:
-			IPattern: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def SpecificSpeed(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def TurbineInitialFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def TurbineInitialHead(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def OperatingCase(self) -> TurbineOperatingCaseEnum:
-		"""
+		"""No Description
+
 		Returns:
-			TurbineOperatingCaseEnum: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def ReportPeriod(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def TurbineInitialStatus(self) -> TurbineStatusEnum:
-		"""
+		"""No Description
+
 		Returns:
-			TurbineStatusEnum: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def TurbineCurveCollection(self) -> ITurbineCurveCollection:
-		"""
+		"""No Description
+
 		Returns:
-			ITurbineCurveCollection: No Description
+			ITurbineInput: 
 		"""
 		pass
 
 	@property
 	def ElectricalTorqueCollection(self) -> IElectricalTorqueCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IElectricalTorqueCollection: No Description
+			ITurbineInput: 
 		"""
 		pass
 
@@ -1928,7 +1975,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TimeDelayUntilValveOperates(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1936,7 +1983,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TimeForValveToOperate(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1944,7 +1991,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def SphericalValveDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1952,7 +1999,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TurbineEfficiency(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1960,7 +2007,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def MomentOfInertia(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1968,7 +2015,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def RotationalSpeed(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1976,7 +2023,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def GateOpeningPattern(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1984,7 +2031,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def SpecificSpeed(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1992,7 +2039,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TurbineInitialFlow(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2000,7 +2047,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TurbineInitialHead(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2008,7 +2055,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def OperatingCase(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2016,7 +2063,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def ReportPeriod(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2024,7 +2071,7 @@ class ITurbinesInput(IBaseDirectedNodesInput):
 		pass
 
 	def TurbineInitialStatus(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2044,8 +2091,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2053,8 +2100,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2065,8 +2112,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2074,8 +2121,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2086,8 +2133,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def FromHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2095,8 +2142,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def FromHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2107,8 +2154,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def ToHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2116,8 +2163,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def ToHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2128,8 +2175,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def FromPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2137,8 +2184,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def FromPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2149,8 +2196,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def ToPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2158,8 +2205,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def ToPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2170,8 +2217,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self) -> Union[float, None]:
-		"""Method Description
+	def AbsoluteFlow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2179,8 +2226,8 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def ITurbineResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def AbsoluteFlow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2191,7 +2238,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2199,7 +2246,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def Headlosses(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2207,7 +2254,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def FromHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2215,7 +2262,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def ToHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2223,7 +2270,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def FromPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2231,7 +2278,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def ToPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2239,7 +2286,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def AbsoluteFlows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -2247,7 +2294,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def MaximumTransientSpeed(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2255,7 +2302,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		pass
 
 	def MinimumTransientSpeed(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -2275,8 +2322,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2284,8 +2331,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2296,42 +2343,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2343,8 +2356,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2352,8 +2365,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2364,42 +2377,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2411,8 +2390,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2420,8 +2399,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2432,42 +2411,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2479,8 +2424,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def ToHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2488,8 +2433,8 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def ToHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2500,8 +2445,110 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def ITurbinesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def ToHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressures(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressures(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AbsoluteFlows(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AbsoluteFlows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AbsoluteFlows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2513,7 +2560,7 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	def MaximumTransientSpeeds(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2521,7 +2568,7 @@ class ITurbinesResults(IBaseDirectedNodesResults):
 		pass
 
 	def MinimumTransientSpeeds(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2542,65 +2589,73 @@ class ITurbineUnits(IBaseDirectedNodeUnits):
 
 	@property
 	def TimeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def EfficiencyUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def InertiaUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def RotationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
 	@property
 	def HeadlossUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ITurbineUnits: 
 		"""
 		pass
 
@@ -2628,6 +2683,10 @@ class ITurbines(IWaterNetworkElements[ITurbines, ITurbine, ITurbineUnits, ITurbi
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+class VSPBFixedHeadType(Enum):
+	HydraulicGrade = 0
+	Pressure = 1
+
 class IBasePumpsResults(IBaseDirectedNodesResults):
 
 	def __init__(self) -> None:
@@ -2641,8 +2700,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedRelativeSpeedFactors(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2650,8 +2709,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedRelativeSpeedFactors(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2662,42 +2721,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedRelativeSpeedFactors(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2709,8 +2734,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def SuctionHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2718,8 +2743,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def SuctionHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2730,42 +2755,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def SuctionHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2777,8 +2768,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def DischargeHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2786,8 +2777,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def DischargeHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2798,42 +2789,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def DischargeHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2845,8 +2802,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def SuctionPressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2854,8 +2811,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def SuctionPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2866,42 +2823,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def SuctionPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2913,8 +2836,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def DischargePressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2922,8 +2845,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def DischargePressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -2934,42 +2857,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def DischargePressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -2981,8 +2870,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -2990,8 +2879,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3002,8 +2891,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -3015,8 +2904,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def PumpHeads(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3024,8 +2913,8 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PumpHeads(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3036,8 +2925,178 @@ class IBasePumpsResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBasePumpsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PumpHeads(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AvailableNPSHs(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AvailableNPSHs(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def AvailableNPSHs(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def RequiredNPSHs(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def RequiredNPSHs(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def RequiredNPSHs(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def PumpExceedsOperatingRanges(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def PumpExceedsOperatingRanges(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def PumpExceedsOperatingRanges(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def PumpStatuses(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def PumpStatuses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def PumpStatuses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def WirePower(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def WirePower(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def WirePower(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -3061,8 +3120,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedRelativeSpeedFactor(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3070,8 +3129,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedRelativeSpeedFactor(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3082,8 +3141,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def SuctionHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3091,8 +3150,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def SuctionHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3103,8 +3162,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def DischargeHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3112,8 +3171,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def DischargeHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3124,8 +3183,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def SuctionPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3133,8 +3192,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def SuctionPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3145,8 +3204,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def DischargePressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3154,8 +3213,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def DischargePressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3166,8 +3225,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3175,8 +3234,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3187,8 +3246,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def PumpHead(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3196,8 +3255,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def PumpHead(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3208,8 +3267,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def AvailableNPSH(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3217,8 +3276,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def AvailableNPSH(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3229,8 +3288,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def RequiredNPSH(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3238,8 +3297,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def RequiredNPSH(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3250,8 +3309,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[bool, None]:
-		"""Method Description
+	def PumpExceedsOperatingRange(self) -> Union[bool, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3259,8 +3318,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[bool, None]:
-		"""Method Description
+	def PumpExceedsOperatingRange(self, timeStepIndex: int) -> Union[bool, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3271,8 +3330,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[PumpStatusEnum, None]:
-		"""Method Description
+	def CalculatedPumpStatus(self) -> Union[PumpStatusEnum, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3280,8 +3339,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[PumpStatusEnum, None]:
-		"""Method Description
+	def CalculatedPumpStatus(self, timeStepIndex: int) -> Union[PumpStatusEnum, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3292,8 +3351,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self) -> Union[float, None]:
-		"""Method Description
+	def WirePower(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -3301,8 +3360,8 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBasePumpResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def WirePower(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3313,7 +3372,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def CalculatedRelativeSpeedFactors(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3321,7 +3380,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def SuctionHyraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3329,7 +3388,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def DischargeHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3337,7 +3396,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def SuctionPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3345,7 +3404,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def DischargePressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3353,7 +3412,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3361,7 +3420,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def PumpHeads(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3369,7 +3428,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def AvailableNPSHs(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3377,7 +3436,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def RequiredNPSHs(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3385,7 +3444,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def PumpExceedsOperatingRanges(self) -> array(Union[bool, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3393,7 +3452,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def CalculatedPumpStatuses(self) -> array(Union[PumpStatusEnum, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3401,7 +3460,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		pass
 
 	def WirePowers(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -3422,17 +3481,19 @@ class IBasePumpInput(IBaseDirectedNodeInput):
 
 	@property
 	def InitialRelativeSpeedFactor(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBasePumpInput: 
 		"""
 		pass
 
 	@property
 	def InitialStatus(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IBasePumpInput: 
 		"""
 		pass
 
@@ -3457,8 +3518,8 @@ class IBasePumpsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBasePumpsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialRelativeSpeedFactors(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3466,8 +3527,8 @@ class IBasePumpsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBasePumpsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialRelativeSpeedFactors(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -3478,8 +3539,8 @@ class IBasePumpsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBasePumpsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialStatus(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3487,8 +3548,8 @@ class IBasePumpsInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBasePumpsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialStatus(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -3512,57 +3573,64 @@ class IBasePumpUnits(IBaseDirectedNodeUnits):
 
 	@property
 	def RelativeSpeedFactorUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
 	@property
 	def HeadUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
 	@property
 	def NPSHUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
 	@property
 	def PowerUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBasePumpUnits: 
 		"""
 		pass
 
@@ -3640,9 +3708,10 @@ class IPumpInput(IBasePumpInput):
 
 	@property
 	def PumpDefinition(self) -> IPumpDefinition:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpDefinition: No Description
+			IPumpInput: 
 		"""
 		pass
 
@@ -3699,7 +3768,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def PumpDefinitions(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3707,7 +3776,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def ControlNodes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3715,7 +3784,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def TargetHydraulicGrades(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3723,7 +3792,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def MaximumRelativeSpeedFactors(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3731,7 +3800,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def NumberOfLagPumps(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3739,7 +3808,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def ControlNodeOnSuctionSide(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3747,7 +3816,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def TargetFlows(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3755,7 +3824,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def TargetPressures(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3763,7 +3832,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def VSPBTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3771,7 +3840,7 @@ class IVSPBsInput(IBasePumpsInput):
 		pass
 
 	def VSPBFixedHeadTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3792,81 +3861,91 @@ class IVSPBInput(IBasePumpInput):
 
 	@property
 	def PumpDefinition(self) -> IPumpDefinition:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpDefinition: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
-	def ControlNode(self) -> IWaterNetworkElement:
-		"""
+	def ControlNode(self) -> IWaterElement:
+		"""No Description
+
 		Returns:
-			IWaterNetworkElement: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def TargetHydraulicGrade(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def MaximumRelativeSpeedFactor(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def NumberOfLagPumps(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def ControlNodeOnSuctionSide(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def TargetFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def TargetPressure(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def VSPBType(self) -> VSPBType:
-		"""
+		"""No Description
+
 		Returns:
-			VSPBType: No Description
+			IVSPBInput: 
 		"""
 		pass
 
 	@property
 	def VSPBFixedHeadType(self) -> VSPBFixedHeadType:
-		"""
+		"""No Description
+
 		Returns:
-			VSPBFixedHeadType: No Description
+			IVSPBInput: 
 		"""
 		pass
 
@@ -3875,7 +3954,7 @@ class IVSPBInput(IBasePumpInput):
 		pass
 
 	@ControlNode.setter
-	def ControlNode(self, controlnode: IWaterNetworkElement) -> None:
+	def ControlNode(self, controlnode: IWaterElement) -> None:
 		pass
 
 	@TargetHydraulicGrade.setter
@@ -3923,8 +4002,8 @@ class IVSPBsResults(IBasePumpsResults):
 		pass
 
 	@overload
-	def IVSPBsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def LeadPumpFlows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3932,8 +4011,8 @@ class IVSPBsResults(IBasePumpsResults):
 		pass
 
 	@overload
-	def IVSPBsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def LeadPumpFlows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3944,8 +4023,8 @@ class IVSPBsResults(IBasePumpsResults):
 		pass
 
 	@overload
-	def IVSPBsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def LeadPumpFlows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -3957,8 +4036,8 @@ class IVSPBsResults(IBasePumpsResults):
 		pass
 
 	@overload
-	def IVSPBsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def NumberOfRunningLagPumps(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -3966,8 +4045,8 @@ class IVSPBsResults(IBasePumpsResults):
 		pass
 
 	@overload
-	def IVSPBsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def NumberOfRunningLagPumps(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -3978,8 +4057,8 @@ class IVSPBsResults(IBasePumpsResults):
 		pass
 
 	@overload
-	def IVSPBsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def NumberOfRunningLagPumps(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4003,8 +4082,8 @@ class IVSPBResults(IBasePumpResults):
 		pass
 
 	@overload
-	def IVSPBResults(self) -> Union[float, None]:
-		"""Method Description
+	def LeadPumpFlow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4012,8 +4091,8 @@ class IVSPBResults(IBasePumpResults):
 		pass
 
 	@overload
-	def IVSPBResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def LeadPumpFlow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4024,8 +4103,8 @@ class IVSPBResults(IBasePumpResults):
 		pass
 
 	@overload
-	def IVSPBResults(self) -> Union[float, None]:
-		"""Method Description
+	def NumberOfRunningLagPumps(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4033,8 +4112,8 @@ class IVSPBResults(IBasePumpResults):
 		pass
 
 	@overload
-	def IVSPBResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def NumberOfRunningLagPumps(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4045,7 +4124,7 @@ class IVSPBResults(IBasePumpResults):
 		pass
 
 	def LoadPumpFlows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4053,7 +4132,7 @@ class IVSPBResults(IBasePumpResults):
 		pass
 
 	def NumberRunningLagPumps(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4085,8 +4164,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4094,8 +4173,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4106,42 +4185,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4153,8 +4198,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4162,8 +4207,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4174,42 +4219,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4221,8 +4232,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4230,8 +4241,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4242,42 +4253,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4289,8 +4266,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def PressureLosses(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4298,8 +4275,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PressureLosses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4310,42 +4287,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PressureLosses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4357,8 +4300,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4366,8 +4309,8 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4378,8 +4321,144 @@ class IBaseValvesResults(IBaseDirectedNodesResults):
 		pass
 
 	@overload
-	def IBaseValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def FromHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressures(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def FromPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressures(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def ToPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Status(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Status(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Status(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4403,8 +4482,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4412,8 +4491,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4424,8 +4503,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def Velocity(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4433,8 +4512,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Velocity(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4445,8 +4524,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4454,8 +4533,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4466,8 +4545,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def PressureLoss(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4475,8 +4554,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def PressureLoss(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4487,8 +4566,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def FromHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4496,8 +4575,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def FromHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4508,8 +4587,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def ToHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4517,8 +4596,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def ToHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4529,8 +4608,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def FromPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4538,8 +4617,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def FromPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4550,8 +4629,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def ToPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4559,8 +4638,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def ToPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4571,8 +4650,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self) -> Union[int, None]:
-		"""Method Description
+	def CalculatedStatus(self) -> Union[int, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4580,8 +4659,8 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	@overload
-	def IBaseValveResults(self, timeStepIndex: int) -> Union[int, None]:
-		"""Method Description
+	def CalculatedStatus(self, timeStepIndex: int) -> Union[int, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4592,7 +4671,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4600,7 +4679,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def Velocities(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4608,7 +4687,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def Headlosses(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4616,7 +4695,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def PressureLosses(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4624,7 +4703,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def FromHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4632,7 +4711,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def ToHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4640,7 +4719,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def FromPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4648,7 +4727,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def ToPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4656,7 +4735,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		pass
 
 	def CalculatedStatuses(self) -> array(Union[int, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -4677,49 +4756,55 @@ class IBaseValveInput(IBaseDirectedNodeInput):
 
 	@property
 	def InitialStatus(self) -> ValveSettingType:
-		"""
+		"""No Description
+
 		Returns:
-			ValveSettingType: No Description
+			IBaseValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseValveInput: 
 		"""
 		pass
 
 	@property
 	def MinorLossCoefficientCollection(self) -> IMinorLossCoefficientCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IMinorLossCoefficientCollection: No Description
+			IBaseValveInput: 
 		"""
 		pass
 
 	@property
 	def LocalMinorLossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseValveInput: 
 		"""
 		pass
 
 	@property
 	def SpecifyLocalMinorLoss(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IBaseValveInput: 
 		"""
 		pass
 
 	@property
 	def DerivedMinorLossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseValveInput: 
 		"""
 		pass
 
@@ -4752,8 +4837,8 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBaseValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialStatus(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4761,8 +4846,8 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBaseValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialStatus(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4773,8 +4858,8 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBaseValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Diameters(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4782,8 +4867,8 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	@overload
-	def IBaseValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Diameters(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4794,7 +4879,7 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	def LocalMinorLossCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4802,7 +4887,7 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	def SpecifyLocalMinorLoss(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4810,7 +4895,7 @@ class IBaseValvesInput(IBaseDirectedNodesInput):
 		pass
 
 	def DerivedMinorLossCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4831,57 +4916,64 @@ class IBaseValveUnits(IBaseDirectedNodeUnits):
 
 	@property
 	def ValveDiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
 	@property
 	def VelocityUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
 	@property
 	def HeadlossUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
 	@property
 	def PressureLossUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseValveUnits: 
 		"""
 		pass
 
@@ -4922,8 +5014,8 @@ class IFlowControlValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IFlowControlValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedFlowSettings(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -4931,8 +5023,8 @@ class IFlowControlValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IFlowControlValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedFlowSettings(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4943,8 +5035,8 @@ class IFlowControlValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IFlowControlValvesResults(self, ids: List[int], timeStepInde: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedFlowSettings(self, ids: List[int], timeStepInde: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -4968,8 +5060,8 @@ class IFlowControlValveResults(IBaseValveResults):
 		pass
 
 	@overload
-	def IFlowControlValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedFlowSetting(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -4977,8 +5069,8 @@ class IFlowControlValveResults(IBaseValveResults):
 		pass
 
 	@overload
-	def IFlowControlValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedFlowSetting(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -4989,7 +5081,7 @@ class IFlowControlValveResults(IBaseValveResults):
 		pass
 
 	def CalculatedFlowSettings(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -5009,8 +5101,8 @@ class IFlowControlValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IFlowControlValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialFlowSettings(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5018,8 +5110,8 @@ class IFlowControlValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IFlowControlValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialFlowSettings(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5030,7 +5122,7 @@ class IFlowControlValvesInput(IBaseValvesInput):
 		pass
 
 	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5038,7 +5130,7 @@ class IFlowControlValvesInput(IBaseValvesInput):
 		pass
 
 	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5059,25 +5151,28 @@ class IFlowControlValveInput(IBaseValveInput):
 
 	@property
 	def InitialFlowSetting(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IFlowControlValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristic: No Description
+			IFlowControlValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveType(self) -> HammerValveType:
-		"""
+		"""No Description
+
 		Returns:
-			HammerValveType: No Description
+			IFlowControlValveInput: 
 		"""
 		pass
 
@@ -5107,9 +5202,10 @@ class IFlowControlValveUnits(IBaseValveUnits):
 
 	@property
 	def InitialFlowSettingUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IFlowControlValveUnits: 
 		"""
 		pass
 
@@ -5150,8 +5246,8 @@ class IThrottleControlValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IThrottleControlValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Settings(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5159,8 +5255,8 @@ class IThrottleControlValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IThrottleControlValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Settings(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -5171,8 +5267,8 @@ class IThrottleControlValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IThrottleControlValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Settings(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5196,8 +5292,8 @@ class IThrottleControlValveResults(IBaseValveResults):
 		pass
 
 	@overload
-	def IThrottleControlValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedSetting(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -5205,8 +5301,8 @@ class IThrottleControlValveResults(IBaseValveResults):
 		pass
 
 	@overload
-	def IThrottleControlValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedSetting(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -5217,7 +5313,7 @@ class IThrottleControlValveResults(IBaseValveResults):
 		pass
 
 	def CalculatedSettings(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -5238,33 +5334,37 @@ class IThrottleControlValveInput(IBaseValveInput):
 
 	@property
 	def TCVCoefficientType(self) -> TCVCoefficientType:
-		"""
+		"""No Description
+
 		Returns:
-			TCVCoefficientType: No Description
+			IThrottleControlValveInput: 
 		"""
 		pass
 
 	@property
 	def InitialCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IThrottleControlValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristic: No Description
+			IThrottleControlValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveType(self) -> HammerValveType:
-		"""
+		"""No Description
+
 		Returns:
-			HammerValveType: No Description
+			IThrottleControlValveInput: 
 		"""
 		pass
 
@@ -5297,8 +5397,8 @@ class IThrottleControlValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IThrottleControlValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def TCVCoefficientTypes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5306,8 +5406,8 @@ class IThrottleControlValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IThrottleControlValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def TCVCoefficientTypes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5318,8 +5418,8 @@ class IThrottleControlValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IThrottleControlValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialCoefficients(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5327,8 +5427,8 @@ class IThrottleControlValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IThrottleControlValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialCoefficients(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5339,7 +5439,7 @@ class IThrottleControlValvesInput(IBaseValvesInput):
 		pass
 
 	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5347,7 +5447,7 @@ class IThrottleControlValvesInput(IBaseValvesInput):
 		pass
 
 	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5368,9 +5468,10 @@ class IThrottleControlValveUnits(IBaseValveUnits):
 
 	@property
 	def CoefficientUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IThrottleControlValveUnits: 
 		"""
 		pass
 
@@ -5411,7 +5512,7 @@ class IGeneralPurposeValvesInput(IBaseValvesInput):
 		pass
 
 	def GPVHeadlossCurves(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5419,7 +5520,7 @@ class IGeneralPurposeValvesInput(IBaseValvesInput):
 		pass
 
 	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5427,7 +5528,7 @@ class IGeneralPurposeValvesInput(IBaseValvesInput):
 		pass
 
 	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5472,25 +5573,28 @@ class IGeneralPurposeValveInput(IBaseValveInput):
 
 	@property
 	def GPVHeadlossCurve(self) -> IGPVHeadlossCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IGPVHeadlossCurve: No Description
+			IGeneralPurposeValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristic: No Description
+			IGeneralPurposeValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveType(self) -> HammerValveType:
-		"""
+		"""No Description
+
 		Returns:
-			HammerValveType: No Description
+			IGeneralPurposeValveInput: 
 		"""
 		pass
 
@@ -5531,8 +5635,8 @@ class IPressureValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IPressureValvesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedSettings(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5540,8 +5644,8 @@ class IPressureValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IPressureValvesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedSettings(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -5552,8 +5656,8 @@ class IPressureValvesResults(IBaseValvesResults):
 		pass
 
 	@overload
-	def IPressureValvesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedSettings(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5577,8 +5681,8 @@ class IPressureValveResults(IBaseValveResults):
 		pass
 
 	@overload
-	def IPressureValveResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedSetting(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -5586,8 +5690,8 @@ class IPressureValveResults(IBaseValveResults):
 		pass
 
 	@overload
-	def IPressureValveResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedSetting(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -5598,7 +5702,7 @@ class IPressureValveResults(IBaseValveResults):
 		pass
 
 	def CalculatedSettings(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -5619,17 +5723,19 @@ class IPressureValveInput(IBaseValveInput):
 
 	@property
 	def PressureValveSetting(self) -> PressureValvesettingType:
-		"""
+		"""No Description
+
 		Returns:
-			PressureValvesettingType: No Description
+			IPressureValveInput: 
 		"""
 		pass
 
 	@property
 	def InitialSetting(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPressureValveInput: 
 		"""
 		pass
 
@@ -5654,8 +5760,8 @@ class IPressureValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IPressureValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def PressureValveSettings(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5663,8 +5769,8 @@ class IPressureValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IPressureValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def PressureValveSettings(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5675,8 +5781,8 @@ class IPressureValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IPressureValvesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialSettings(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5684,8 +5790,8 @@ class IPressureValvesInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IPressureValvesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialSettings(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -5709,9 +5815,10 @@ class IPressureValveUnits(IBaseValveUnits):
 
 	@property
 	def SettingUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPressureValveUnits: 
 		"""
 		pass
 
@@ -5836,7 +5943,7 @@ class IPressureSustainingValvesInput(IPressureValvesInput):
 		pass
 
 	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5844,7 +5951,7 @@ class IPressureSustainingValvesInput(IPressureValvesInput):
 		pass
 
 	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5889,17 +5996,19 @@ class IPressureSustainingValveInput(IPressureValveInput):
 
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristic: No Description
+			IPressureSustainingValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveType(self) -> HammerValveType:
-		"""
+		"""No Description
+
 		Returns:
-			HammerValveType: No Description
+			IPressureSustainingValveInput: 
 		"""
 		pass
 
@@ -5960,7 +6069,7 @@ class IPressureReducingValvesInput(IPressureValvesInput):
 		pass
 
 	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -5968,7 +6077,7 @@ class IPressureReducingValvesInput(IPressureValvesInput):
 		pass
 
 	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6013,17 +6122,19 @@ class IPressureReducingValveInput(IPressureValveInput):
 
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristic: No Description
+			IPressureReducingValveInput: 
 		"""
 		pass
 
 	@property
 	def ValveType(self) -> HammerValveType:
-		"""
+		"""No Description
+
 		Returns:
-			HammerValveType: No Description
+			IPressureReducingValveInput: 
 		"""
 		pass
 
@@ -6085,17 +6196,19 @@ class IValveLinearAreaChangeInput(IBaseValveInput):
 
 	@property
 	def TimeToClose(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IValveLinearAreaChangeInput: 
 		"""
 		pass
 
 	@property
 	def DischargeCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IValveLinearAreaChangeInput: 
 		"""
 		pass
 
@@ -6120,8 +6233,8 @@ class IValvesLinearAreaChangeInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IValvesLinearAreaChangeInput(self) -> Dict[int,int]:
-		"""Method Description
+	def TimeToClose(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6129,8 +6242,8 @@ class IValvesLinearAreaChangeInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IValvesLinearAreaChangeInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def TimeToClose(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6141,8 +6254,8 @@ class IValvesLinearAreaChangeInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IValvesLinearAreaChangeInput(self) -> Dict[int,int]:
-		"""Method Description
+	def DischargeCoefficients(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6150,8 +6263,8 @@ class IValvesLinearAreaChangeInput(IBaseValvesInput):
 		pass
 
 	@overload
-	def IValvesLinearAreaChangeInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def DischargeCoefficients(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6199,21 +6312,340 @@ class IValveWithLinearAreaChangeUnits(IBaseValveUnits):
 
 	@property
 	def DischargeCoefficientUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IValveWithLinearAreaChangeUnits: 
 		"""
 		pass
 
 	@property
 	def TimeToCloseUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IValveWithLinearAreaChangeUnits: 
 		"""
 		pass
 
-class IWaterNetworkElement(IElement):
+class WaterNetworkElementType(Enum):
+	SCADAElement = 23
+	Lateral = 24
+	Tap = 26
+	Tank = 52
+	Hydrant = 54
+	Junction = 55
+	Reservoir = 56
+	FCV = 60
+	TCV = 61
+	GPV = 62
+	PRV = 64
+	PSV = 65
+	PBV = 66
+	Pump = 68
+	Pipe = 69
+	SpotElevation = 70
+	IsolationValve = 71
+	VSPB = 72
+	CustomerMeter = 73
+	Turbine = 300
+	AirValve = 301
+	HydropneumaticTank = 302
+	SurgeValve = 303
+	DischargeToAtmosphere = 305
+	RuptureDisk = 306
+	OrificeBetweenTwoPipes = 307
+	SurgeTank = 308
+	CheckValve = 309
+	ValveWithLinearAreaChange = 310
+	PeriodicHeadFlow = 321
+	PumpStation = 700
+
+class DomainElementExtensions:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@staticmethod
+	@overload
+	def Create(pipes: IPipes, label: str, startNode: IElement, stopNode: IElement, points: List[GeometryPoint]) -> IPipe:
+		"""No Description
+
+		Args:
+			pipes(IPipes): pipes
+			label(str): label
+			startNode(IElement): startNode
+			stopNode(IElement): stopNode
+			points(List[GeometryPoint]): points
+
+		Returns:
+			IPipe: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(laterals: ILaterals, label: str, startNode: IElement, stopNode: IElement, points: List[GeometryPoint]) -> ILateral:
+		"""No Description
+
+		Args:
+			laterals(ILaterals): laterals
+			label(str): label
+			startNode(IElement): startNode
+			stopNode(IElement): stopNode
+			points(List[GeometryPoint]): points
+
+		Returns:
+			ILateral: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(junctions: IJunctions, label: str, point: GeometryPoint) -> IJunction:
+		"""No Description
+
+		Args:
+			junctions(IJunctions): junctions
+			label(str): label
+			point(GeometryPoint): point
+
+		Returns:
+			IJunction: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(hydrants: IHydrants, label: str, point: GeometryPoint) -> IHydrant:
+		"""No Description
+
+		Args:
+			hydrants(IHydrants): hydrants
+			label(str): label
+			point(GeometryPoint): point
+
+		Returns:
+			IHydrant: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(tanks: ITanks, label: str, point: GeometryPoint) -> ITank:
+		"""No Description
+
+		Args:
+			tanks(ITanks): tanks
+			label(str): label
+			point(GeometryPoint): point
+
+		Returns:
+			ITank: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(reservoirs: IReservoirs, label: str, point: GeometryPoint) -> IReservoir:
+		"""No Description
+
+		Args:
+			reservoirs(IReservoirs): reservoirs
+			label(str): label
+			point(GeometryPoint): point
+
+		Returns:
+			IReservoir: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(taps: ITaps, label: str, point: GeometryPoint, associatedElement: IPipe) -> ITap:
+		"""No Description
+
+		Args:
+			taps(ITaps): taps
+			label(str): label
+			point(GeometryPoint): point
+			associatedElement(IPipe): associatedElement
+
+		Returns:
+			ITap: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(pumps: IPumps, label: str, point: GeometryPoint, downstreamLink: IElement) -> IPump:
+		"""No Description
+
+		Args:
+			pumps(IPumps): pumps
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IPump: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(pumpStations: IPumpStations, label: str, rings: array()) -> IPumpStation:
+		"""No Description
+
+		Args:
+			pumpStations(IPumpStations): pumpStations
+			label(str): label
+			rings(array()): rings
+
+		Returns:
+			IPumpStation: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IFlowControlValves, label: str, point: GeometryPoint, downstreamLink: IElement) -> IFlowControlValve:
+		"""No Description
+
+		Args:
+			valves(IFlowControlValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IFlowControlValve: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IGeneralPurposeValves, label: str, point: GeometryPoint, downstreamLink: IElement) -> IGeneralPurposeValve:
+		"""No Description
+
+		Args:
+			valves(IGeneralPurposeValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IGeneralPurposeValve: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IPressureBreakingValves, label: str, point: GeometryPoint, downstreamLink: IElement) -> IPressureBreakingValve:
+		"""No Description
+
+		Args:
+			valves(IPressureBreakingValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IPressureBreakingValve: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IPressureReducingValves, label: str, point: GeometryPoint, downstreamLink: IElement) -> IPressureReducingValve:
+		"""No Description
+
+		Args:
+			valves(IPressureReducingValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IPressureReducingValve: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IPressureSustainingValves, label: str, point: GeometryPoint, downstreamLink: IElement) -> IPressureSustainingValve:
+		"""No Description
+
+		Args:
+			valves(IPressureSustainingValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IPressureSustainingValve: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IThrottleControlValves, label: str, point: GeometryPoint, downstreamLink: IElement) -> IThrottleControlValve:
+		"""No Description
+
+		Args:
+			valves(IThrottleControlValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			downstreamLink(IElement): downstreamLink
+
+		Returns:
+			IThrottleControlValve: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(scadaElements: ISCADAElements, label: str, point: GeometryPoint, targetElement: IWaterElement, scadaTargetAttribute: SCADATargetAttribute, realTimeSignal: ISCADASignal, historicalSignal: ISCADASignal) -> ISCADAElement:
+		"""No Description
+
+		Args:
+			scadaElements(ISCADAElements): scadaElements
+			label(str): label
+			point(GeometryPoint): point
+			targetElement(IWaterElement): targetElement
+			scadaTargetAttribute(SCADATargetAttribute): scadaTargetAttribute
+			realTimeSignal(ISCADASignal): realTimeSignal
+			historicalSignal(ISCADASignal): historicalSignal
+
+		Returns:
+			ISCADAElement: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Create(valves: IIsolationValves, label: str, point: GeometryPoint, pipe: IPipe) -> IIsolationValve:
+		"""No Description
+
+		Args:
+			valves(IIsolationValves): valves
+			label(str): label
+			point(GeometryPoint): point
+			pipe(IPipe): pipe
+
+		Returns:
+			IIsolationValve: 
+		"""
+		pass
+
+class IWaterElement(IElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6227,9 +6659,10 @@ class IWaterNetworkElement(IElement):
 
 	@property
 	def WaterElementType(self) -> WaterNetworkElementType:
-		"""
+		"""No Description
+
 		Returns:
-			WaterNetworkElementType: No Description
+			IWaterElement: 
 		"""
 		pass
 
@@ -6245,7 +6678,7 @@ class IWaterNetworkElements(Generic[TElementManagerType, TElementType, TUnitsTyp
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class IWaterNetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], INetworkElement[TElementManagerType, TElementType, TUnitsType, WaterNetworkElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IWaterNetworkElement):
+class IWaterNetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], INetworkElement[TElementManagerType, TElementType, TUnitsType, WaterNetworkElementType, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IWaterElement):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6271,9 +6704,10 @@ class IWaterZoneableNetworkElementInput(IActiveElementInput):
 
 	@property
 	def Zone(self) -> IZone:
-		"""
+		"""No Description
+
 		Returns:
-			IZone: No Description
+			IWaterZoneableNetworkElementInput: 
 		"""
 		pass
 
@@ -6294,8 +6728,8 @@ class IWaterZoneableNetworkElementsInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IWaterZoneableNetworkElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Zones(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6303,8 +6737,8 @@ class IWaterZoneableNetworkElementsInput(IActiveElementsInput):
 		pass
 
 	@overload
-	def IWaterZoneableNetworkElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Zones(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6327,7 +6761,7 @@ class IWaterTraceableInput:
 		pass
 
 	def MakeActiveTraceElement(self) -> None:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			None: 
@@ -6347,8 +6781,8 @@ class IWaterQualityResults:
 		pass
 
 	@overload
-	def IWaterQualityResults(self) -> Union[float, None]:
-		"""Method Description
+	def Age(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -6356,8 +6790,8 @@ class IWaterQualityResults:
 		pass
 
 	@overload
-	def IWaterQualityResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Age(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -6368,8 +6802,8 @@ class IWaterQualityResults:
 		pass
 
 	@overload
-	def IWaterQualityResults(self) -> Union[float, None]:
-		"""Method Description
+	def Trace(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -6377,8 +6811,8 @@ class IWaterQualityResults:
 		pass
 
 	@overload
-	def IWaterQualityResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Trace(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -6389,8 +6823,8 @@ class IWaterQualityResults:
 		pass
 
 	@overload
-	def IWaterQualityResults(self) -> Union[float, None]:
-		"""Method Description
+	def Concentration(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -6398,8 +6832,8 @@ class IWaterQualityResults:
 		pass
 
 	@overload
-	def IWaterQualityResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Concentration(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -6410,7 +6844,7 @@ class IWaterQualityResults:
 		pass
 
 	def Ages(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -6418,7 +6852,7 @@ class IWaterQualityResults:
 		pass
 
 	def Traces(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -6426,7 +6860,7 @@ class IWaterQualityResults:
 		pass
 
 	def Concentrations(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -6446,8 +6880,8 @@ class IWaterQualityElementsInput:
 		pass
 
 	@overload
-	def IWaterQualityElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialAge(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6455,8 +6889,8 @@ class IWaterQualityElementsInput:
 		pass
 
 	@overload
-	def IWaterQualityElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialAge(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6467,8 +6901,8 @@ class IWaterQualityElementsInput:
 		pass
 
 	@overload
-	def IWaterQualityElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialTrace(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6476,8 +6910,8 @@ class IWaterQualityElementsInput:
 		pass
 
 	@overload
-	def IWaterQualityElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialTrace(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6488,8 +6922,8 @@ class IWaterQualityElementsInput:
 		pass
 
 	@overload
-	def IWaterQualityElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialConcentration(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6497,8 +6931,8 @@ class IWaterQualityElementsInput:
 		pass
 
 	@overload
-	def IWaterQualityElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialConcentration(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6522,25 +6956,28 @@ class IWaterQualityElementInput:
 
 	@property
 	def InitialAge(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IWaterQualityElementInput: 
 		"""
 		pass
 
 	@property
 	def InitialConcentration(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IWaterQualityElementInput: 
 		"""
 		pass
 
 	@property
 	def InitialTrace(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IWaterQualityElementInput: 
 		"""
 		pass
 
@@ -6570,25 +7007,28 @@ class IWaterQualityNodeInput:
 
 	@property
 	def IsConstituentSource(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IWaterQualityNodeInput: 
 		"""
 		pass
 
 	@property
 	def ConstituentSourceType(self) -> ConstituentSourceType:
-		"""
+		"""No Description
+
 		Returns:
-			ConstituentSourceType: No Description
+			IWaterQualityNodeInput: 
 		"""
 		pass
 
 	@property
 	def BaseConstituent(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IWaterQualityNodeInput: 
 		"""
 		pass
 
@@ -6629,8 +7069,8 @@ class IWaterQualityElementsResults:
 		pass
 
 	@overload
-	def IWaterQualityElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Ages(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6638,8 +7078,8 @@ class IWaterQualityElementsResults:
 		pass
 
 	@overload
-	def IWaterQualityElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Ages(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -6650,42 +7090,8 @@ class IWaterQualityElementsResults:
 		pass
 
 	@overload
-	def IWaterQualityElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IWaterQualityElementsResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IWaterQualityElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IWaterQualityElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Ages(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6697,8 +7103,8 @@ class IWaterQualityElementsResults:
 		pass
 
 	@overload
-	def IWaterQualityElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Traces(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -6706,8 +7112,8 @@ class IWaterQualityElementsResults:
 		pass
 
 	@overload
-	def IWaterQualityElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Traces(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -6718,8 +7124,42 @@ class IWaterQualityElementsResults:
 		pass
 
 	@overload
-	def IWaterQualityElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Traces(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Concentrations(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Concentrations(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Concentrations(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -6744,29 +7184,32 @@ class IWaterQualityResultsUnits(IElementUnits):
 
 	@property
 	def AgeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IWaterQualityResultsUnits: 
 		"""
 		pass
 
 	@property
 	def TraceUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IWaterQualityResultsUnits: 
 		"""
 		pass
 
 	@property
 	def ConcentrationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IWaterQualityResultsUnits: 
 		"""
 		pass
 
-class IWaterNetwork(INetwork[IWaterNetworkElement, WaterNetworkElementType]):
+class IWaterNetwork(INetwork[IWaterElement, WaterNetworkElementType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -6780,249 +7223,280 @@ class IWaterNetwork(INetwork[IWaterNetworkElement, WaterNetworkElementType]):
 
 	@property
 	def Pipes(self) -> IPipes:
-		"""
+		"""No Description
+
 		Returns:
-			IPipes: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Laterals(self) -> ILaterals:
-		"""
+		"""No Description
+
 		Returns:
-			ILaterals: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Junctions(self) -> IJunctions:
-		"""
+		"""No Description
+
 		Returns:
-			IJunctions: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Hydrants(self) -> IHydrants:
-		"""
+		"""No Description
+
 		Returns:
-			IHydrants: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Tanks(self) -> ITanks:
-		"""
+		"""No Description
+
 		Returns:
-			ITanks: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Reservoirs(self) -> IReservoirs:
-		"""
+		"""No Description
+
 		Returns:
-			IReservoirs: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Taps(self) -> ITaps:
-		"""
+		"""No Description
+
 		Returns:
-			ITaps: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def CustomerMeters(self) -> ICustomerMeters:
-		"""
+		"""No Description
+
 		Returns:
-			ICustomerMeters: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Pumps(self) -> IPumps:
-		"""
+		"""No Description
+
 		Returns:
-			IPumps: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def VSPBs(self) -> IVariableSpeedPumpBatterys:
-		"""
+		"""No Description
+
 		Returns:
-			IVariableSpeedPumpBatterys: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def PumpStations(self) -> IPumpStations:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpStations: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def SCADAElements(self) -> ISCADAElements:
-		"""
+		"""No Description
+
 		Returns:
-			ISCADAElements: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def PRVs(self) -> IPressureReducingValves:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureReducingValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def PBVs(self) -> IPressureBreakingValves:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureBreakingValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def PSVs(self) -> IPressureSustainingValves:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureSustainingValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def TCVs(self) -> IThrottleControlValves:
-		"""
+		"""No Description
+
 		Returns:
-			IThrottleControlValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def FCVs(self) -> IFlowControlValves:
-		"""
+		"""No Description
+
 		Returns:
-			IFlowControlValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def GPVs(self) -> IGeneralPurposeValves:
-		"""
+		"""No Description
+
 		Returns:
-			IGeneralPurposeValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def IsolationValves(self) -> IIsolationValves:
-		"""
+		"""No Description
+
 		Returns:
-			IIsolationValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def CheckValves(self) -> ICheckValves:
-		"""
+		"""No Description
+
 		Returns:
-			ICheckValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def SpotElevations(self) -> ISpotElevations:
-		"""
+		"""No Description
+
 		Returns:
-			ISpotElevations: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def ValvesWithLinearAreaChange(self) -> IValvesWithLinearAreaChange:
-		"""
+		"""No Description
+
 		Returns:
-			IValvesWithLinearAreaChange: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def PeriodicHeadFlows(self) -> IPeriodicHeadFlows:
-		"""
+		"""No Description
+
 		Returns:
-			IPeriodicHeadFlows: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def AirValves(self) -> IAirValves:
-		"""
+		"""No Description
+
 		Returns:
-			IAirValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def OrificesBetweenTwoPipes(self) -> IOrificesBetweenTwoPipes:
-		"""
+		"""No Description
+
 		Returns:
-			IOrificesBetweenTwoPipes: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def SurgeValves(self) -> ISurgeValves:
-		"""
+		"""No Description
+
 		Returns:
-			ISurgeValves: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def DischargeToAtmospheres(self) -> IDischargeToAtmospheres:
-		"""
+		"""No Description
+
 		Returns:
-			IDischargeToAtmospheres: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def RuptureDisks(self) -> IRuptureDisks:
-		"""
+		"""No Description
+
 		Returns:
-			IRuptureDisks: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def Turbines(self) -> ITurbines:
-		"""
+		"""No Description
+
 		Returns:
-			ITurbines: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def SurgeTanks(self) -> ISurgeTanks:
-		"""
+		"""No Description
+
 		Returns:
-			ISurgeTanks: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
 	@property
 	def HydropneumaticTanks(self) -> IHydropneumaticTanks:
-		"""
+		"""No Description
+
 		Returns:
-			IHydropneumaticTanks: No Description
+			IWaterNetwork: 
 		"""
 		pass
 
@@ -7063,8 +7537,8 @@ class IHammerPipesResults:
 		pass
 
 	@overload
-	def IHammerPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def MaximumHeads(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7072,8 +7546,8 @@ class IHammerPipesResults:
 		pass
 
 	@overload
-	def IHammerPipesResults(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def MaximumHeads(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7096,8 +7570,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7105,8 +7579,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7117,42 +7591,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IPipesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7164,8 +7604,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7173,8 +7613,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7185,42 +7625,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IPipesResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7232,8 +7638,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7241,8 +7647,8 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7253,8 +7659,76 @@ class IPipesResults(IBaseLinksResults, IWaterQualityElementsResults, IHammerPipe
 		pass
 
 	@overload
-	def IPipesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Headlosses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def HeadlossGradients(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def HeadlossGradients(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def HeadlossGradients(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Statuses(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Statuses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def Statuses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7278,7 +7752,7 @@ class IHammerPipeResults:
 		pass
 
 	def MaximumHead(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7298,8 +7772,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7307,8 +7781,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7319,8 +7793,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self) -> Union[float, None]:
-		"""Method Description
+	def Velocity(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7328,8 +7802,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Velocity(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7340,8 +7814,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7349,8 +7823,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Headloss(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7361,8 +7835,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self) -> Union[float, None]:
-		"""Method Description
+	def HeadlossGradient(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7370,8 +7844,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def HeadlossGradient(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7382,8 +7856,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self) -> Union[int, None]:
-		"""Method Description
+	def CalculatedStatus(self) -> Union[int, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7391,8 +7865,8 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	@overload
-	def IPipeResults(self, timeStepIndex: int) -> Union[int, None]:
-		"""Method Description
+	def CalculatedStatus(self, timeStepIndex: int) -> Union[int, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7403,7 +7877,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7411,7 +7885,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	def Velocities(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7419,7 +7893,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	def Headlosses(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7427,7 +7901,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	def HeadlossGradients(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7435,7 +7909,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		pass
 
 	def CalculatedStatuses(self) -> array(Union[int, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7456,73 +7930,82 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 
 	@property
 	def InstallationYear(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def InitialStatus(self) -> PipeStatusType:
-		"""
+		"""No Description
+
 		Returns:
-			PipeStatusType: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def Diameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def Material(self) -> str:
-		"""
+		"""No Description
+
 		Returns:
-			str: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def FrictionCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def MinorLossCoefficientCollection(self) -> IMinorLossCoefficientCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IMinorLossCoefficientCollection: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def LocalMinorLossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def SpecifyLocalMinorLoss(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IPipeInput: 
 		"""
 		pass
 
 	@property
 	def DerivedMinorLossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPipeInput: 
 		"""
 		pass
 
@@ -7567,8 +8050,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InstallationYears(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7576,8 +8059,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InstallationYears(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7588,8 +8071,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def PipeStatuses(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7597,8 +8080,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def PipeStatuses(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7609,8 +8092,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Diameters(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7618,8 +8101,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Diameters(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7630,8 +8113,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Materials(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7639,8 +8122,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Materials(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7651,8 +8134,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self) -> Dict[int,int]:
-		"""Method Description
+	def FrictionCoefficients(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7660,8 +8143,8 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	@overload
-	def IPipesInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def FrictionCoefficients(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7672,7 +8155,7 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	def LocalMinorLossCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7680,7 +8163,7 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	def SpecifyLocalMinorLoss(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7688,7 +8171,7 @@ class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
 		pass
 
 	def DerivedMinorLossCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7709,41 +8192,46 @@ class IPipeUnits(IBaseLinkUnits, IWaterQualityResultsUnits):
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPipeUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPipeUnits: 
 		"""
 		pass
 
 	@property
 	def VelocityUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPipeUnits: 
 		"""
 		pass
 
 	@property
 	def HeadlossUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPipeUnits: 
 		"""
 		pass
 
 	@property
 	def HeadlossGradientUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPipeUnits: 
 		"""
 		pass
 
@@ -7808,8 +8296,8 @@ class IFireFlowNodesResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IFireFlowNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Demands(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7817,8 +8305,8 @@ class IFireFlowNodesResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IFireFlowNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Demands(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7829,8 +8317,8 @@ class IFireFlowNodesResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IFireFlowNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Demands(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7842,8 +8330,8 @@ class IFireFlowNodesResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IFireFlowNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -7851,8 +8339,8 @@ class IFireFlowNodesResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IFireFlowNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7863,8 +8351,8 @@ class IFireFlowNodesResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IFireFlowNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -7888,8 +8376,8 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		pass
 
 	@overload
-	def IFireFlowNodeResults(self) -> Union[float, None]:
-		"""Method Description
+	def Demand(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7897,8 +8385,8 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		pass
 
 	@overload
-	def IFireFlowNodeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Demand(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7909,8 +8397,8 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		pass
 
 	@overload
-	def IFireFlowNodeResults(self) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -7918,8 +8406,8 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		pass
 
 	@overload
-	def IFireFlowNodeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -7930,7 +8418,7 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		pass
 
 	def Demands(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7938,7 +8426,7 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		pass
 
 	def Pressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -7983,17 +8471,19 @@ class IFireFlowNodeUnits(IDemandNodeUnits):
 
 	@property
 	def DemandUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IFireFlowNodeUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IFireFlowNodeUnits: 
 		"""
 		pass
 
@@ -8179,17 +8669,19 @@ class IDemandNodeInput(IBaseNodeInput):
 
 	@property
 	def DemandCollection(self) -> IDemandCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IDemandCollection: No Description
+			IDemandNodeInput: 
 		"""
 		pass
 
 	@property
 	def UnitDemandLoadCollection(self) -> IUnitLoadDemandCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IUnitLoadDemandCollection: No Description
+			IDemandNodeInput: 
 		"""
 		pass
 
@@ -8266,7 +8758,7 @@ class IDemands(ICollection[IDemand]):
 		pass
 
 	def Add(self, flow: float, pattern: IPattern) -> IDemand:
-		"""Method Description
+		"""No Description
 
 		Args:
 			flow(float): flow
@@ -8291,17 +8783,19 @@ class IDemand(ICollectionElement):
 
 	@property
 	def BaseFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IDemand: 
 		"""
 		pass
 
 	@property
 	def DemandPattern(self) -> IPattern:
-		"""
+		"""No Description
+
 		Returns:
-			IPattern: No Description
+			IDemand: 
 		"""
 		pass
 
@@ -8327,9 +8821,10 @@ class IDemandUnits(IElementUnits):
 
 	@property
 	def BaseFlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IDemandUnits: 
 		"""
 		pass
 
@@ -8358,7 +8853,7 @@ class IUnitLoadDemands(ICollection[IUnitLoadDemand]):
 		pass
 
 	def Add(self, unitDemandLoad: IUnitDemandLoad, numberOfLoadingUnits: float, unitDemandBaseFlow: float, unitDemandPattern: IPattern) -> IUnitLoadDemand:
-		"""Method Description
+		"""No Description
 
 		Args:
 			unitDemandLoad(IUnitDemandLoad): unitDemandLoad
@@ -8385,33 +8880,37 @@ class IUnitLoadDemand(ICollectionElement):
 
 	@property
 	def UnitDemandLoad(self) -> IUnitDemandLoad:
-		"""
+		"""No Description
+
 		Returns:
-			IUnitDemandLoad: No Description
+			IUnitLoadDemand: 
 		"""
 		pass
 
 	@property
 	def NumberOfLoadingUnits(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IUnitLoadDemand: 
 		"""
 		pass
 
 	@property
 	def UnitDemandBaseFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IUnitLoadDemand: 
 		"""
 		pass
 
 	@property
 	def UnitDemandPattern(self) -> IPattern:
-		"""
+		"""No Description
+
 		Returns:
-			IPattern: No Description
+			IUnitLoadDemand: 
 		"""
 		pass
 
@@ -8445,9 +8944,10 @@ class IUnitLoadDemandUnits(IElementUnits):
 
 	@property
 	def UnitDemandBaseFlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IUnitLoadDemandUnits: 
 		"""
 		pass
 
@@ -8464,8 +8964,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Levels(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8473,8 +8973,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Levels(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8485,42 +8985,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IConventionalTanksResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IConventionalTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IConventionalTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Levels(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8532,8 +8998,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Volumes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8541,8 +9007,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Volumes(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8553,8 +9019,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Volumes(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8566,8 +9032,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def PercentFulls(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8575,8 +9041,8 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PercentFulls(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8587,8 +9053,42 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IConventionalTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PercentFulls(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def TankStatuses(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def TankStatuses(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def TankStatuses(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8600,7 +9100,7 @@ class IConventionalTanksResults(IBaseTanksResults):
 		pass
 
 	def VolumeFulls(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8620,8 +9120,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def Level(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -8629,8 +9129,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Level(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8641,8 +9141,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def Volume(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -8650,8 +9150,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Volume(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8662,8 +9162,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def PercentFull(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -8671,8 +9171,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def PercentFull(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8683,8 +9183,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self) -> Union[int, None]:
-		"""Method Description
+	def TankStatus(self) -> Union[int, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -8692,8 +9192,8 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IConventionalTankResults(self, timeStepIndex: int) -> Union[int, None]:
-		"""Method Description
+	def TankStatus(self, timeStepIndex: int) -> Union[int, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -8704,7 +9204,7 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	def VolumeFull(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -8712,7 +9212,7 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	def Levels(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -8720,7 +9220,7 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	def Volumes(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -8728,7 +9228,7 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	def PercentFulls(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -8736,7 +9236,7 @@ class IConventionalTankResults(IBaseTankResults):
 		pass
 
 	def TankStatuses(self) -> array(Union[int, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -8756,8 +9256,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def TankSection(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8765,8 +9265,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def TankSection(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8777,8 +9277,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def ActiveVolumeFull(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8786,8 +9286,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def ActiveVolumeFull(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8798,8 +9298,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Diameter(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8807,8 +9307,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Diameter(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8819,8 +9319,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def AverageArea(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8828,8 +9328,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def AverageArea(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8840,8 +9340,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def BaseElevation(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8849,8 +9349,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def BaseElevation(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8861,8 +9361,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def MinimumLevel(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8870,8 +9370,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def MinimumLevel(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8882,8 +9382,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialLevel(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8891,8 +9391,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialLevel(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8903,8 +9403,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def MaximumLevel(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8912,8 +9412,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def MaximumLevel(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8924,8 +9424,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def UseHighAlarm(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8933,8 +9433,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def UseHighAlarm(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8945,8 +9445,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def HighAlarmLevel(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8954,8 +9454,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def HighAlarmLevel(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8966,8 +9466,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def UseLowAlarm(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8975,8 +9475,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def UseLowAlarm(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -8987,8 +9487,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def LowAlarmLevel(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -8996,8 +9496,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def LowAlarmLevel(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -9008,8 +9508,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InactiveVolume(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9017,8 +9517,8 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
-	def IConventionalTanksInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InactiveVolume(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -9042,113 +9542,127 @@ class IConventionalTankInput(IBaseTankInput):
 
 	@property
 	def TankSection(self) -> TankSectionType:
-		"""
+		"""No Description
+
 		Returns:
-			TankSectionType: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def ActiveVolumeFull(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def CrossSectionCurve(self) -> ICrossSectionCurveCollection:
-		"""
+		"""No Description
+
 		Returns:
-			ICrossSectionCurveCollection: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def Diameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def AverageArea(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def BaseElevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def MinimumLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def InitialLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def MaximumLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def UseHighAlarm(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def HighAlarmLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def UseLowAlarm(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def LowAlarmLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
 	@property
 	def InactiveVolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IConventionalTankInput: 
 		"""
 		pass
 
@@ -9218,25 +9732,28 @@ class IConventionalTankUnits(IBaseTankUnits):
 
 	@property
 	def LevelUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IConventionalTankUnits: 
 		"""
 		pass
 
 	@property
 	def VolumeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IConventionalTankUnits: 
 		"""
 		pass
 
 	@property
 	def PercentFullUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IConventionalTankUnits: 
 		"""
 		pass
 
@@ -9265,7 +9782,7 @@ class ICrossSectionCurve(ICollection[ICrossSectionCurveElement]):
 		pass
 
 	def Add(self, depthRatio: float, volumeRatio: float) -> ICrossSectionCurveElement:
-		"""Method Description
+		"""No Description
 
 		Args:
 			depthRatio(float): depthRatio
@@ -9290,17 +9807,19 @@ class ICrossSectionCurveElement(ICollectionElement):
 
 	@property
 	def DepthRatio(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICrossSectionCurveElement: 
 		"""
 		pass
 
 	@property
 	def VolumeRatio(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICrossSectionCurveElement: 
 		"""
 		pass
 
@@ -9326,9 +9845,10 @@ class ICrossSectionCurveUnits(IElementUnits):
 
 	@property
 	def RatioUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICrossSectionCurveUnits: 
 		"""
 		pass
 
@@ -9393,7 +9913,7 @@ class ITanksInput(IConventionalTanksInput):
 		pass
 
 	def ValveCharacteristics(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9401,7 +9921,7 @@ class ITanksInput(IConventionalTanksInput):
 		pass
 
 	def ValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9422,17 +9942,19 @@ class ITankInput(IConventionalTankInput, IWaterTraceableInput):
 
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
-		"""
+		"""No Description
+
 		Returns:
-			IValveCharacteristic: No Description
+			ITankInput: 
 		"""
 		pass
 
 	@property
 	def ValveType(self) -> HammerValveType:
-		"""
+		"""No Description
+
 		Returns:
-			HammerValveType: No Description
+			ITankInput: 
 		"""
 		pass
 
@@ -9470,105 +9992,118 @@ class ISurgeTankInput(IConventionalTankInput):
 
 	@property
 	def TankOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def RatioOfLosses(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def HeadlossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def SurgeTankType(self) -> SurgeTankTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			SurgeTankTypeEnum: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def HasCheckValve(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def WeirCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def WeirLength(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def InternalRiserDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def InternalRiserTopElevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def JunctionElevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def DiameterExternalRiser(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def ElevationOrificeFromInternalRiserInTank(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
 	@property
 	def ElevationTopOfTankBase(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeTankInput: 
 		"""
 		pass
 
@@ -9637,7 +10172,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def TankOrificeDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9645,7 +10180,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def RatioOfLosses(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9653,7 +10188,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def HeadlossCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9661,7 +10196,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def SurgeTankType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9669,7 +10204,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def HasCheckValve(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9677,7 +10212,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def WeirCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9685,7 +10220,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def WeirLength(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9693,7 +10228,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def InternalRiserDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9701,7 +10236,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def InternalRiserTopElevation(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9709,7 +10244,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def JunctionElevation(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9717,7 +10252,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def DiameterExternalRiser(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9725,7 +10260,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def ElevationOrificeFromInternalRiserInTank(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9733,7 +10268,7 @@ class ISurgeTanksInput(IConventionalTanksInput):
 		pass
 
 	def ElevationTopOfTankBase(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9778,33 +10313,37 @@ class ISurgeTankUnits(IConventionalTankUnits):
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeTankUnits: 
 		"""
 		pass
 
 	@property
 	def RatioUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeTankUnits: 
 		"""
 		pass
 
 	@property
 	def WeirCoefficientUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeTankUnits: 
 		"""
 		pass
 
 	@property
 	def LengthUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeTankUnits: 
 		"""
 		pass
 
@@ -9845,8 +10384,8 @@ class IBaseTanksResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IBaseTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -9854,8 +10393,8 @@ class IBaseTanksResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IBaseTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -9866,8 +10405,8 @@ class IBaseTanksResults(IDemandNodesResults):
 		pass
 
 	@overload
-	def IBaseTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -9891,8 +10430,8 @@ class IBaseTankResults(IDemandNodeResults):
 		pass
 
 	@overload
-	def IBaseTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -9900,8 +10439,8 @@ class IBaseTankResults(IDemandNodeResults):
 		pass
 
 	@overload
-	def IBaseTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -9912,7 +10451,7 @@ class IBaseTankResults(IDemandNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -9957,9 +10496,10 @@ class IBaseTankUnits(IDemandNodeUnits):
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseTankUnits: 
 		"""
 		pass
 
@@ -9988,7 +10528,7 @@ class ILevelDiameters(ICollection[ILevelDiameter]):
 		pass
 
 	def Add(self, liquidLevel: float, diameter: float) -> ILevelDiameter:
-		"""Method Description
+		"""No Description
 
 		Args:
 			liquidLevel(float): liquidLevel
@@ -10013,17 +10553,19 @@ class ILevelDiameter(ICollectionElement):
 
 	@property
 	def LiquidLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ILevelDiameter: 
 		"""
 		pass
 
 	@property
 	def EquivalentDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ILevelDiameter: 
 		"""
 		pass
 
@@ -10049,17 +10591,19 @@ class IVariableLevelCurveUnits(IElementUnits):
 
 	@property
 	def LevelUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IVariableLevelCurveUnits: 
 		"""
 		pass
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IVariableLevelCurveUnits: 
 		"""
 		pass
 
@@ -10077,225 +10621,253 @@ class IHydroTankInput(IBaseTankInput):
 
 	@property
 	def InitialVolumeOfGas(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankInletOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def RatioOfLosses(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def GasLawExponent(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def HasBladder(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def GasPresetPressure(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def MeanLiquidElevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def AirInflowOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def AirOutflowOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def DippingTubeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def CompressionChamberVolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TopElevationDippingTube(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def BottomElevationDippingTube(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def LevelType(self) -> GasVesselLevelType:
-		"""
+		"""No Description
+
 		Returns:
-			GasVesselLevelType: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def HydroTankType(self) -> HydroTankType:
-		"""
+		"""No Description
+
 		Returns:
-			HydroTankType: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def VariableLevelCurve(self) -> IVariableLevelCurveCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IVariableLevelCurveCollection: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankVolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def InflowMinorLossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankBaseElevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TreatAsJunction(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def OperatingRangeType(self) -> OperatingRangeTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			OperatingRangeTypeEnum: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankCalculationModel(self) -> TankCalculationModel:
-		"""
+		"""No Description
+
 		Returns:
-			TankCalculationModel: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankInitialElevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankInitialLevel(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def TankInitialLiquidVolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def AirInflowOrificeAirFlowCurve(self) -> IAirFlowCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurve: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def AirOutflowOrificeAirFlowCurve(self) -> IAirFlowCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurve: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
 	@property
 	def AirFlowCalculationMethod(self) -> AirFlowCalculationMethod:
-		"""
+		"""No Description
+
 		Returns:
-			AirFlowCalculationMethod: No Description
+			IHydroTankInput: 
 		"""
 		pass
 
@@ -10420,7 +10992,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def InitialVolumeOfGas(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10428,7 +11000,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankInletOrificeDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10436,7 +11008,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def RatioOfLosses(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10444,7 +11016,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def GasLawExponent(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10452,7 +11024,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def HasBladder(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10460,7 +11032,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def GasPresetPressure(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10468,7 +11040,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def MeanLiquidElevation(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10476,7 +11048,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def AirInflowOrificeDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10484,7 +11056,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def AirOutflowOrificeDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10492,7 +11064,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def DippingTubeDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10500,7 +11072,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def CompressionChamberVolume(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10508,7 +11080,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TopElevationDippingTube(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10516,7 +11088,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def BottomElevationDippingTube(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10524,7 +11096,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def LevelType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10532,7 +11104,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def HydroTankType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10540,7 +11112,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankVolume(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10548,7 +11120,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def InflowMinorLossCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10556,7 +11128,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankBaseElevation(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10564,7 +11136,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TreatAsJunction(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10572,7 +11144,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def OperatingRangeType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10580,7 +11152,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankCalculationModel(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10588,7 +11160,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankInitialElevation(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10596,7 +11168,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankInitialLevel(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10604,7 +11176,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def TankInitialLiquidVolume(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10612,7 +11184,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def AirInflowOrificeAirFlowCurve(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10620,7 +11192,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def AirOutflowOrificeAirFlowCurve(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10628,7 +11200,7 @@ class IHydroTanksInput(IBaseTanksInput):
 		pass
 
 	def AirFlowCalculationMethod(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10648,8 +11220,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedGasVolume(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10657,8 +11229,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedGasVolume(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10669,8 +11241,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10678,8 +11250,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10690,8 +11262,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedLiquidVolume(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10699,8 +11271,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedLiquidVolume(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10711,8 +11283,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedPercentFull(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10720,8 +11292,8 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	@overload
-	def IHydroTankResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedPercentFull(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10732,7 +11304,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def CalculatedGasVolumes(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -10740,7 +11312,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def CalculatedPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -10748,7 +11320,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def CalculatedLiquidVolumes(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -10756,7 +11328,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def CalculatedPercentFulls(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -10764,7 +11336,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def MaximumTransientGasPressure(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10772,7 +11344,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def MinimumTransientGasPressure(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10780,7 +11352,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def MaximumTransientGasVolume(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10788,7 +11360,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def MinimumTransientGasVolume(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10796,7 +11368,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def MaximumTransientWaterLevel(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10804,7 +11376,7 @@ class IHydroTankResults(IBaseTankResults):
 		pass
 
 	def MinimumTransientWaterLevel(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -10824,8 +11396,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedGasVolumes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10833,8 +11405,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedGasVolumes(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10845,42 +11417,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			ids(List[int]): ids
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IHydroTanksResults(self) -> Dict[int,int]:
-		"""Method Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IHydroTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
-
-		Args:
-			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	@overload
-	def IHydroTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedGasVolumes(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -10892,8 +11430,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedPressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10901,8 +11439,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10913,8 +11451,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -10926,8 +11464,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedLiquidVolumes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10935,8 +11473,8 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedLiquidVolumes(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -10947,8 +11485,42 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	@overload
-	def IHydroTanksResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedLiquidVolumes(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			ids(List[int]): ids
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def CalculatedPercentFulls(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def CalculatedPercentFulls(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
+
+		Args:
+			timeStepIndex(int): timeStepIndex
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
+	@overload
+	def CalculatedPercentFulls(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -10960,7 +11532,7 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	def MaximumTransientGasPressures(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10968,7 +11540,7 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	def MinimumTransientGasPressures(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10976,7 +11548,7 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	def MaximumTransientGasVolumes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10984,7 +11556,7 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	def MinimumTransientGasVolumes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -10992,7 +11564,7 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	def MaximumTransientWaterLevels(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11000,7 +11572,7 @@ class IHydroTanksResults(IBaseTanksResults):
 		pass
 
 	def MinimumTransientWaterLevels(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11021,49 +11593,55 @@ class IHydropneumaticTankUnits(IBaseTankUnits):
 
 	@property
 	def VolumeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHydropneumaticTankUnits: 
 		"""
 		pass
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHydropneumaticTankUnits: 
 		"""
 		pass
 
 	@property
 	def GasExponentUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHydropneumaticTankUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHydropneumaticTankUnits: 
 		"""
 		pass
 
 	@property
 	def LengthUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHydropneumaticTankUnits: 
 		"""
 		pass
 
 	@property
 	def PercentUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHydropneumaticTankUnits: 
 		"""
 		pass
 
@@ -11090,6 +11668,32 @@ class IHydropneumaticTanks(IWaterNetworkElements[IHydropneumaticTanks, IHydropne
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
+
+class SCADATargetAttribute(Enum):
+	UnAssigned = 0
+	RelativeClosure = -300
+	ConstituentConcentration = -299
+	PressureNodeDemand = -297
+	ValveStatus = -58
+	PumpStatus = -57
+	PipeStatus = -56
+	TankLevel = -55
+	Pressure = -54
+	HydraulicGrade = -53
+	PumpSetting = -52
+	PressureValveSetting = -51
+	TCValveSetting = -50
+	FCValveSetting = -49
+	PressureOut = -48
+	PressureIn = -47
+	HydraulicGradeOut = -46
+	HydraulicGradeIn = -45
+	Discharge = -44
+	WirePower = -43
+
+class TransientParameterType(Enum):
+	Head = 0
+	Flow = 1
 
 class IHammerNodeInput(IBaseNodeInput):
 
@@ -11128,8 +11732,8 @@ class IHammerNodeResults(IBaseNodeResults):
 		pass
 
 	@overload
-	def IHammerNodeResults(self) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -11137,8 +11741,8 @@ class IHammerNodeResults(IBaseNodeResults):
 		pass
 
 	@overload
-	def IHammerNodeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -11149,8 +11753,8 @@ class IHammerNodeResults(IBaseNodeResults):
 		pass
 
 	@overload
-	def IHammerNodeResults(self) -> Union[float, None]:
-		"""Method Description
+	def PressureHead(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -11158,8 +11762,8 @@ class IHammerNodeResults(IBaseNodeResults):
 		pass
 
 	@overload
-	def IHammerNodeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def PressureHead(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -11170,7 +11774,7 @@ class IHammerNodeResults(IBaseNodeResults):
 		pass
 
 	def Pressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -11178,7 +11782,7 @@ class IHammerNodeResults(IBaseNodeResults):
 		pass
 
 	def PressureHeads(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -11198,8 +11802,8 @@ class IHammerNodesResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IHammerNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11207,8 +11811,8 @@ class IHammerNodesResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IHammerNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -11219,8 +11823,8 @@ class IHammerNodesResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IHammerNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11232,8 +11836,8 @@ class IHammerNodesResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IHammerNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def PressureHeads(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11241,8 +11845,8 @@ class IHammerNodesResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IHammerNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PressureHeads(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -11253,8 +11857,8 @@ class IHammerNodesResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IHammerNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def PressureHeads(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11279,17 +11883,19 @@ class IHammerNodeUnits(IBaseNodeUnits):
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHammerNodeUnits: 
 		"""
 		pass
 
 	@property
 	def PressureHeadUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHammerNodeUnits: 
 		"""
 		pass
 
@@ -11318,7 +11924,7 @@ class IFlowPatterns(ICollection[IFlowPattern]):
 		pass
 
 	def Add(self, time: float, flow: float) -> IFlowPattern:
-		"""Method Description
+		"""No Description
 
 		Args:
 			time(float): time
@@ -11343,17 +11949,19 @@ class IFlowPattern(ICollectionElement):
 
 	@property
 	def Time(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IFlowPattern: 
 		"""
 		pass
 
 	@property
 	def Flow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IFlowPattern: 
 		"""
 		pass
 
@@ -11379,17 +11987,19 @@ class IFlowPatternUnits(IElementUnits):
 
 	@property
 	def TimeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IFlowPatternUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IFlowPatternUnits: 
 		"""
 		pass
 
@@ -11418,7 +12028,7 @@ class IHeadPatterns(ICollection[IHeadPattern]):
 		pass
 
 	def Add(self, time: float, head: float) -> IHeadPattern:
-		"""Method Description
+		"""No Description
 
 		Args:
 			time(float): time
@@ -11443,17 +12053,19 @@ class IHeadPattern(ICollectionElement):
 
 	@property
 	def Time(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHeadPattern: 
 		"""
 		pass
 
 	@property
 	def Head(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IHeadPattern: 
 		"""
 		pass
 
@@ -11479,17 +12091,19 @@ class IHeadPatternUnits(IElementUnits):
 
 	@property
 	def TimeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHeadPatternUnits: 
 		"""
 		pass
 
 	@property
 	def HeadUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IHeadPatternUnits: 
 		"""
 		pass
 
@@ -11507,81 +12121,91 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 
 	@property
 	def Sinusoidal(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def HeadMeanValue(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def HeadAmplitude(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def Phase(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def Period(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def FlowMeanValue(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def FlowAmplitude(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def TransientParameter(self) -> TransientParameterType:
-		"""
+		"""No Description
+
 		Returns:
-			TransientParameterType: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def FlowPatternCollection(self) -> IFlowPatternCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IFlowPatternCollection: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
 	@property
 	def HeadPatternCollection(self) -> IHeadPatternCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IHeadPatternCollection: No Description
+			IPeriodicHeadFlowInput: 
 		"""
 		pass
 
@@ -11630,8 +12254,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Sinusoidals(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11639,8 +12263,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Sinusoidals(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11651,8 +12275,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def HeadMeanValues(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11660,8 +12284,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def HeadMeanValues(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11672,8 +12296,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def HeadAmplitudes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11681,8 +12305,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def HeadAmplitudes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11693,8 +12317,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Phases(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11702,8 +12326,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Phases(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11714,8 +12338,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Periods(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11723,8 +12347,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Periods(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11735,8 +12359,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def FlowMeanValues(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11744,8 +12368,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def FlowMeanValues(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11756,8 +12380,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def FlowAmplitudes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11765,8 +12389,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def FlowAmplitudes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11777,8 +12401,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def TransientParameters(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11786,8 +12410,8 @@ class IPeriodicHeadFlowsInput(IHammerNodesInput):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def TransientParameters(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11810,8 +12434,8 @@ class IPeriodicHeadFlowResults(IHammerNodeResults):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedDischarge(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -11819,8 +12443,8 @@ class IPeriodicHeadFlowResults(IHammerNodeResults):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedDischarge(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -11831,7 +12455,7 @@ class IPeriodicHeadFlowResults(IHammerNodeResults):
 		pass
 
 	def CalculatedDischarges(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -11851,8 +12475,8 @@ class IPeriodicHeadFlowsResults(IHammerNodesResults):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedDischarges(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -11860,8 +12484,8 @@ class IPeriodicHeadFlowsResults(IHammerNodesResults):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedDischarges(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -11872,8 +12496,8 @@ class IPeriodicHeadFlowsResults(IHammerNodesResults):
 		pass
 
 	@overload
-	def IPeriodicHeadFlowsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedDischarges(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -11898,33 +12522,37 @@ class IPeriodicHeadFlowUnits(IHammerNodeUnits):
 
 	@property
 	def LengthUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPeriodicHeadFlowUnits: 
 		"""
 		pass
 
 	@property
 	def AngleUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPeriodicHeadFlowUnits: 
 		"""
 		pass
 
 	@property
 	def PeriodUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPeriodicHeadFlowUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPeriodicHeadFlowUnits: 
 		"""
 		pass
 
@@ -11966,137 +12594,154 @@ class IAirValveInput(IHammerNodeInput):
 
 	@property
 	def InitialAirvolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def SmallAirOutflowOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def TransitionVolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def LargeAirOutflowOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def AirInflowOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def AirOutflowOrificeDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def TransitionPressure(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def SmallAirFlowCurve(self) -> IAirFlowCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurve: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def LargeAirFlowCurve(self) -> IAirFlowCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurve: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def AirValveType(self) -> AirValveTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			AirValveTypeEnum: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def AirValveTransitionType(self) -> AirValveTransitionType:
-		"""
+		"""No Description
+
 		Returns:
-			AirValveTransitionType: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def TimeToClose(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def ReportPeriod(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def TreatAirValveAsJunction(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def InflowOrificeAirFlowCurve(self) -> IAirFlowCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurve: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def OutflowOrificeAirFlowCurve(self) -> IAirFlowCurve:
-		"""
+		"""No Description
+
 		Returns:
-			IAirFlowCurve: No Description
+			IAirValveInput: 
 		"""
 		pass
 
 	@property
 	def AirFlowCalculationMethod(self) -> AirFlowCalculationMethod:
-		"""
+		"""No Description
+
 		Returns:
-			AirFlowCalculationMethod: No Description
+			IAirValveInput: 
 		"""
 		pass
 
@@ -12181,7 +12826,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def InitialAirVolumes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12189,7 +12834,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def SmallAirOutflowOrificeDiameters(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12197,7 +12842,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def TransitionVolumes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12205,7 +12850,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def LargeAirOutflowOrificeDiameters(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12213,7 +12858,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def AirInflowOrificeDiameters(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12221,7 +12866,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def AirOutflowOrificeDiameters(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12229,7 +12874,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def TransitionPressures(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12237,7 +12882,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def SmallAirflowCurves(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12245,7 +12890,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def LargeAirFlowCurves(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12253,7 +12898,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def AirValveTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12261,7 +12906,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def AirValveTransitionTypes(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12269,7 +12914,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def TimeToClose(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12277,7 +12922,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def ReportPeriods(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12285,7 +12930,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def TreatAirValvesAsJunctions(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12293,7 +12938,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def InflowOrificeAirFlowCurves(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12301,7 +12946,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def OutflowOrificeAirFlowCurves(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12309,7 +12954,7 @@ class IAirValvesInput(IHammerNodesInput):
 		pass
 
 	def AirFlowCalculationMethods(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12354,25 +12999,28 @@ class IAirValveUnits(IHammerNodeUnits):
 
 	@property
 	def VolumeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IAirValveUnits: 
 		"""
 		pass
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IAirValveUnits: 
 		"""
 		pass
 
 	@property
 	def TimeTocloseUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IAirValveUnits: 
 		"""
 		pass
 
@@ -12414,137 +13062,154 @@ class ISurgeValveInput(IHammerNodeInput):
 
 	@property
 	def SavDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SavThresholdPressure(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def TimeForSAVToOpen(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def TimeSAVStaysFullyOpen(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def TimeForSAVToClose(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SavDischargeCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SrvDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SrvThresholdPressure(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SrvSpringConstant(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def TimeForSRVToOpen(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def TimeForSRVToClose(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SrvDischargeCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SavSrvType(self) -> SAV_SRVTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			SAV_SRVTypeEnum: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SavType(self) -> SAVValveTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			SAVValveTypeEnum: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SavClosureTriggerType(self) -> SavClosureTriggerEnum:
-		"""
+		"""No Description
+
 		Returns:
-			SavClosureTriggerEnum: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SrvControlType(self) -> SRVControlTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			SRVControlTypeEnum: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
 	@property
 	def SrvValveType(self) -> SRVValveTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			SRVValveTypeEnum: No Description
+			ISurgeValveInput: 
 		"""
 		pass
 
@@ -12629,7 +13294,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SavDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12637,7 +13302,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SavThresholdPressure(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12645,7 +13310,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def TimeForSAVToOpen(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12653,7 +13318,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def TimeSAVStaysFullyOpen(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12661,7 +13326,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def TimeForSAVToClose(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12669,7 +13334,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SavDischargeCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12677,7 +13342,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SrvDiameter(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12685,7 +13350,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SrvThresholdPressure(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12693,7 +13358,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SrvSpringConstant(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12701,7 +13366,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def TimeForSRVToOpen(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12709,7 +13374,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def TimeForSRVToClose(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12717,7 +13382,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SrvDischargeCoefficient(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12725,7 +13390,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SavSrvType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12733,7 +13398,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SavType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12741,7 +13406,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SavClosureTriggerType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12749,7 +13414,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SrvControlType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12757,7 +13422,7 @@ class ISurgeValvesInput(IHammerNodesInput):
 		pass
 
 	def SRVValveType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12802,33 +13467,37 @@ class ISurgeValveUnits(IHammerNodeUnits):
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeValveUnits: 
 		"""
 		pass
 
 	@property
 	def TimeOpenUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeValveUnits: 
 		"""
 		pass
 
 	@property
 	def DischargeCoefficient(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeValveUnits: 
 		"""
 		pass
 
 	@property
 	def SpringConstantUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISurgeValveUnits: 
 		"""
 		pass
 
@@ -12870,17 +13539,19 @@ class IBaseOrificeNodeInput(IHammerNodeInput):
 
 	@property
 	def OrificePressureDrop(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseOrificeNodeInput: 
 		"""
 		pass
 
 	@property
 	def OrificeFlow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IBaseOrificeNodeInput: 
 		"""
 		pass
 
@@ -12905,7 +13576,7 @@ class IBaseOrificeNodesInput(IHammerNodesInput):
 		pass
 
 	def OrificePressureDrop(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12913,7 +13584,7 @@ class IBaseOrificeNodesInput(IHammerNodesInput):
 		pass
 
 	def OrificeFlow(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -12958,9 +13629,10 @@ class IBaseOrificeNodeUnits(IHammerNodeUnits):
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseOrificeNodeUnits: 
 		"""
 		pass
 
@@ -12989,7 +13661,7 @@ class IPressureHeadFlows(ICollection[IPressureHeadFlow]):
 		pass
 
 	def Add(self, pressureHead: float, flow: float) -> IPressureHeadFlow:
-		"""Method Description
+		"""No Description
 
 		Args:
 			pressureHead(float): pressureHead
@@ -13014,17 +13686,19 @@ class IPressureHeadFlow(ICollectionElement):
 
 	@property
 	def PressureHead(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPressureHeadFlow: 
 		"""
 		pass
 
 	@property
 	def Flow(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPressureHeadFlow: 
 		"""
 		pass
 
@@ -13050,17 +13724,19 @@ class IPressureHeadFlowUnits(IElementUnits):
 
 	@property
 	def PressureHeadUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPressureHeadFlowUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IPressureHeadFlowUnits: 
 		"""
 		pass
 
@@ -13078,57 +13754,64 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 
 	@property
 	def DischargeElementType(self) -> DischargeToAtmosphereTypeEnum:
-		"""
+		"""No Description
+
 		Returns:
-			DischargeToAtmosphereTypeEnum: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
 	@property
 	def InitialGaseVolume(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
 	@property
 	def TimeToStartOperating(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
 	@property
 	def TimeToFullyOpenOrClose(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
 	@property
 	def PressureHeadFlowCollection(self) -> IPressureHeadFlowCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IPressureHeadFlowCollection: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
 	@property
 	def InitialStatus(self) -> ValveTypeInitialStatusEnum:
-		"""
+		"""No Description
+
 		Returns:
-			ValveTypeInitialStatusEnum: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
 	@property
 	def ReportPeriod(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IDischargeToAtmosphereNodeInput: 
 		"""
 		pass
 
@@ -13169,7 +13852,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 		pass
 
 	def DischargeElementType(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13177,7 +13860,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 		pass
 
 	def InitialGasVolume(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13185,7 +13868,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 		pass
 
 	def TimeToStartOpening(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13193,7 +13876,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 		pass
 
 	def TimeToFullyOpenOrClose(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13201,7 +13884,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 		pass
 
 	def InitialStatus(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13209,7 +13892,7 @@ class IDischargeToAtmosphereNodesInput(IBaseOrificeNodesInput):
 		pass
 
 	def ReportPeriod(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13229,8 +13912,8 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults):
 		pass
 
 	@overload
-	def IDischargeToAtmosphereNodeResults(self) -> Union[float, None]:
-		"""Method Description
+	def CalculatedDischarge(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -13238,8 +13921,8 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults):
 		pass
 
 	@overload
-	def IDischargeToAtmosphereNodeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def CalculatedDischarge(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -13250,7 +13933,7 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults):
 		pass
 
 	def CalculatedDischarges(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -13270,8 +13953,8 @@ class IDischargeToAtmosphereNodesResults(IBaseOrificeNodesResults):
 		pass
 
 	@overload
-	def IDischargeToAtmosphereNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedDischarge(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13279,8 +13962,8 @@ class IDischargeToAtmosphereNodesResults(IBaseOrificeNodesResults):
 		pass
 
 	@overload
-	def IDischargeToAtmosphereNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedDischarge(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -13291,8 +13974,8 @@ class IDischargeToAtmosphereNodesResults(IBaseOrificeNodesResults):
 		pass
 
 	@overload
-	def IDischargeToAtmosphereNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def CalculatedDischarge(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -13317,25 +14000,28 @@ class IDischargeToAtmosphereUnits(IBaseOrificeNodeUnits):
 
 	@property
 	def VolumeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IDischargeToAtmosphereUnits: 
 		"""
 		pass
 
 	@property
 	def TimeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IDischargeToAtmosphereUnits: 
 		"""
 		pass
 
 	@property
 	def DischargeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IDischargeToAtmosphereUnits: 
 		"""
 		pass
 
@@ -13377,9 +14063,10 @@ class IRuptureDiskInput(IBaseOrificeNodeInput):
 
 	@property
 	def PressureThreshold(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IRuptureDiskInput: 
 		"""
 		pass
 
@@ -13400,7 +14087,7 @@ class IRuptureDisksInput(IBaseOrificeNodesInput):
 		pass
 
 	def PressureThreshold(self) -> Dict[int,int]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13480,8 +14167,8 @@ class IBaseNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseNodesResults(self) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13489,8 +14176,8 @@ class IBaseNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseNodesResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -13501,8 +14188,8 @@ class IBaseNodesResults(IElementsResults, IWaterQualityElementsResults):
 		pass
 
 	@overload
-	def IBaseNodesResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -13527,9 +14214,10 @@ class IPhysicalNodeElementInput(IPointNodeInput):
 
 	@property
 	def Elevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IPhysicalNodeElementInput: 
 		"""
 		pass
 
@@ -13550,8 +14238,8 @@ class IPhysicalNodeElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def IPhysicalNodeElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Elevations(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13559,8 +14247,8 @@ class IPhysicalNodeElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def IPhysicalNodeElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Elevations(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -13607,8 +14295,8 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	@overload
-	def IBaseNodeResults(self) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -13616,8 +14304,8 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	@overload
-	def IBaseNodeResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -13628,7 +14316,7 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 		pass
 
 	def HydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -13649,49 +14337,55 @@ class IBaseNodeUnits(IGeometryUnits, IWaterQualityResultsUnits):
 
 	@property
 	def ElevationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseNodeUnits: 
 		"""
 		pass
 
 	@property
 	def InitialAgeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseNodeUnits: 
 		"""
 		pass
 
 	@property
 	def InitialConcentrationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseNodeUnits: 
 		"""
 		pass
 
 	@property
 	def InitialTraceUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseNodeUnits: 
 		"""
 		pass
 
 	@property
 	def BaseConcentrationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseNodeUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IBaseNodeUnits: 
 		"""
 		pass
 
@@ -13732,8 +14426,8 @@ class IReservoirsResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IReservoirsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13741,8 +14435,8 @@ class IReservoirsResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IReservoirsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -13753,8 +14447,8 @@ class IReservoirsResults(IBaseNodesResults):
 		pass
 
 	@overload
-	def IReservoirsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -13778,8 +14472,8 @@ class IReservoirResults(IBaseNodeResults):
 		pass
 
 	@overload
-	def IReservoirResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -13787,8 +14481,8 @@ class IReservoirResults(IBaseNodeResults):
 		pass
 
 	@overload
-	def IReservoirResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -13799,7 +14493,7 @@ class IReservoirResults(IBaseNodeResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -13844,9 +14538,10 @@ class IReservoirUnits(IBaseNodeUnits):
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IReservoirUnits: 
 		"""
 		pass
 
@@ -13864,9 +14559,10 @@ class ITapInput(IPointNodeInput):
 
 	@property
 	def AssociatedElement(self) -> IPipe:
-		"""
+		"""No Description
+
 		Returns:
-			IPipe: No Description
+			ITapInput: 
 		"""
 		pass
 
@@ -13887,8 +14583,8 @@ class ITapsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ITapsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def AssociatedElements(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -13896,8 +14592,8 @@ class ITapsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ITapsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def AssociatedElements(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -13945,49 +14641,55 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 
 	@property
 	def ReferencedPipe(self) -> IPipe:
-		"""
+		"""No Description
+
 		Returns:
-			IPipe: No Description
+			IIsolationValveElementInput: 
 		"""
 		pass
 
 	@property
 	def ValveDiameter(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IIsolationValveElementInput: 
 		"""
 		pass
 
 	@property
 	def MinorLossCoefficient(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			IIsolationValveElementInput: 
 		"""
 		pass
 
 	@property
 	def IsOperable(self) -> bool:
-		"""
+		"""No Description
+
 		Returns:
-			bool: No Description
+			IIsolationValveElementInput: 
 		"""
 		pass
 
 	@property
 	def InitialStatus(self) -> IsolationValveInitialSetting:
-		"""
+		"""No Description
+
 		Returns:
-			IsolationValveInitialSetting: No Description
+			IIsolationValveElementInput: 
 		"""
 		pass
 
 	@property
 	def InstallationYear(self) -> int:
-		"""
+		"""No Description
+
 		Returns:
-			int: No Description
+			IIsolationValveElementInput: 
 		"""
 		pass
 
@@ -14028,8 +14730,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def ReferencedPipes(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14037,8 +14739,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def ReferencedPipes(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14049,8 +14751,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def ValveDiameters(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14058,8 +14760,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def ValveDiameters(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14070,8 +14772,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def MinorLossCoefficients(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14079,8 +14781,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def MinorLossCoefficients(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14091,8 +14793,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def IsOperables(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14100,8 +14802,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def IsOperables(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14112,8 +14814,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InitialStatuses(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14121,8 +14823,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InitialStatuses(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14133,8 +14835,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def InstallationYears(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14142,8 +14844,8 @@ class IIsolationValveElementsInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def IIsolationValveElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def InstallationYears(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14166,8 +14868,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14175,8 +14877,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14187,8 +14889,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14196,8 +14898,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14208,8 +14910,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def Flow(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14217,8 +14919,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Flow(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14229,8 +14931,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self) -> Union[float, None]:
-		"""Method Description
+	def Velocity(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14238,8 +14940,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Velocity(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14250,8 +14952,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self) -> Union[bool, None]:
-		"""Method Description
+	def IsClosed(self) -> Union[bool, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14259,8 +14961,8 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	@overload
-	def IIsolatioNValveElementResults(self, timeStepIndex: int) -> Union[bool, None]:
-		"""Method Description
+	def IsClosed(self, timeStepIndex: int) -> Union[bool, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14271,7 +14973,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	def HydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14279,7 +14981,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	def Pressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14287,7 +14989,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	def Flows(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14295,7 +14997,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	def Velocities(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14303,7 +15005,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	def DistanceFromEndPoint(self) -> Union[float, None]:
-		"""Method Description
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14311,7 +15013,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		pass
 
 	def IsCloseds(self) -> array(Union[bool, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14331,8 +15033,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14340,8 +15042,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14352,8 +15054,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14365,8 +15067,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14374,8 +15076,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14386,8 +15088,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14399,8 +15101,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14408,8 +15110,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14420,8 +15122,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Flows(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14433,8 +15135,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14442,8 +15144,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14454,8 +15156,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Velocities(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14467,8 +15169,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def DistanceFromEndPoints(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14476,8 +15178,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def DistanceFromEndPoints(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14488,8 +15190,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def IsCloseds(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14497,8 +15199,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def IsCloseds(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14509,8 +15211,8 @@ class IIsolationValveElementsResults(IElementsResults):
 		pass
 
 	@overload
-	def IIsolationValveElementsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def IsCloseds(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14535,49 +15237,55 @@ class IIsolationValveUnits(IGeometryUnits):
 
 	@property
 	def DiameterUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IIsolationValveUnits: 
 		"""
 		pass
 
 	@property
 	def CoefficientUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IIsolationValveUnits: 
 		"""
 		pass
 
 	@property
 	def ElevationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IIsolationValveUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IIsolationValveUnits: 
 		"""
 		pass
 
 	@property
 	def FlowUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IIsolationValveUnits: 
 		"""
 		pass
 
 	@property
 	def VelocityUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			IIsolationValveUnits: 
 		"""
 		pass
 
@@ -14619,9 +15327,10 @@ class ISpotElevationInput(IPointNodeInput):
 
 	@property
 	def Elevation(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ISpotElevationInput: 
 		"""
 		pass
 
@@ -14642,8 +15351,8 @@ class ISpotElevationsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISpotElevationsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def Elevations(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14651,8 +15360,8 @@ class ISpotElevationsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISpotElevationsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def Elevations(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14675,8 +15384,8 @@ class ISpotElevationResults(IElementResults):
 		pass
 
 	@overload
-	def ISpotElevationResults(self) -> Union[float, None]:
-		"""Method Description
+	def EnhancedHydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14684,8 +15393,8 @@ class ISpotElevationResults(IElementResults):
 		pass
 
 	@overload
-	def ISpotElevationResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def EnhancedHydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14696,8 +15405,8 @@ class ISpotElevationResults(IElementResults):
 		pass
 
 	@overload
-	def ISpotElevationResults(self) -> Union[float, None]:
-		"""Method Description
+	def EnhancedPressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -14705,8 +15414,8 @@ class ISpotElevationResults(IElementResults):
 		pass
 
 	@overload
-	def ISpotElevationResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def EnhancedPressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14717,7 +15426,7 @@ class ISpotElevationResults(IElementResults):
 		pass
 
 	def EnhancedHydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14725,7 +15434,7 @@ class ISpotElevationResults(IElementResults):
 		pass
 
 	def EnhancedPressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -14745,8 +15454,8 @@ class ISpotElevationsResults(IElementsResults):
 		pass
 
 	@overload
-	def ISpotElevationsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def EnhancedHydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14754,8 +15463,8 @@ class ISpotElevationsResults(IElementsResults):
 		pass
 
 	@overload
-	def ISpotElevationsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def EnhancedHydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14766,8 +15475,8 @@ class ISpotElevationsResults(IElementsResults):
 		pass
 
 	@overload
-	def ISpotElevationsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def EnhancedHydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14779,8 +15488,8 @@ class ISpotElevationsResults(IElementsResults):
 		pass
 
 	@overload
-	def ISpotElevationsResults(self) -> Dict[int,int]:
-		"""Method Description
+	def EnhancedPressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14788,8 +15497,8 @@ class ISpotElevationsResults(IElementsResults):
 		pass
 
 	@overload
-	def ISpotElevationsResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def EnhancedPressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -14800,8 +15509,8 @@ class ISpotElevationsResults(IElementsResults):
 		pass
 
 	@overload
-	def ISpotElevationsResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def EnhancedPressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -14826,25 +15535,28 @@ class ISpotElevationUnits(IGeometryUnits):
 
 	@property
 	def ElevationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISpotElevationUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISpotElevationUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ISpotElevationUnits: 
 		"""
 		pass
 
@@ -14886,57 +15598,64 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 
 	@property
 	def DemandPattern(self) -> IPattern:
-		"""
+		"""No Description
+
 		Returns:
-			IPattern: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
 	@property
 	def BaseDemand(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
 	@property
 	def StartDemandDistribution(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
 	@property
-	def AssociatedElement(self) -> IWaterNetworkElement:
-		"""
+	def AssociatedElement(self) -> IWaterElement:
+		"""No Description
+
 		Returns:
-			IWaterNetworkElement: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
 	@property
 	def UnitDemand(self) -> IUnitDemandLoad:
-		"""
+		"""No Description
+
 		Returns:
-			IUnitDemandLoad: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
 	@property
 	def UnitDemandPattern(self) -> IPattern:
-		"""
+		"""No Description
+
 		Returns:
-			IPattern: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
 	@property
 	def NumberOfUnitDemands(self) -> float:
-		"""
+		"""No Description
+
 		Returns:
-			float: No Description
+			ICustomerMeterInput: 
 		"""
 		pass
 
@@ -14953,7 +15672,7 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		pass
 
 	@AssociatedElement.setter
-	def AssociatedElement(self, associatedelement: IWaterNetworkElement) -> None:
+	def AssociatedElement(self, associatedelement: IWaterElement) -> None:
 		pass
 
 	@UnitDemand.setter
@@ -14981,8 +15700,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def DemandPatterns(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -14990,8 +15709,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def DemandPatterns(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15002,8 +15721,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def BaseDemands(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15011,8 +15730,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def BaseDemands(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15023,8 +15742,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def StartDemandDistributions(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15032,8 +15751,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def StartDemandDistributions(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15044,8 +15763,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def AssociatedElements(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15053,8 +15772,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def AssociatedElements(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15065,8 +15784,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def UnitDemands(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15074,8 +15793,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def UnitDemands(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15086,8 +15805,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def UnitDemandPatterns(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15095,8 +15814,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def UnitDemandPatterns(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15107,8 +15826,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self) -> Dict[int,int]:
-		"""Method Description
+	def NumberOfUnitDemands(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15116,8 +15835,8 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 		pass
 
 	@overload
-	def ICustomerMetersInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def NumberOfUnitDemands(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15140,8 +15859,8 @@ class ICustomerMeterResults(IElementResults):
 		pass
 
 	@overload
-	def ICustomerMeterResults(self) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -15149,8 +15868,8 @@ class ICustomerMeterResults(IElementResults):
 		pass
 
 	@overload
-	def ICustomerMeterResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def HydraulicGrade(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -15161,8 +15880,8 @@ class ICustomerMeterResults(IElementResults):
 		pass
 
 	@overload
-	def ICustomerMeterResults(self) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self) -> Union[float, None]:
+		"""No Description
 
 		Returns:
 			Nullable: 
@@ -15170,8 +15889,8 @@ class ICustomerMeterResults(IElementResults):
 		pass
 
 	@overload
-	def ICustomerMeterResults(self, timeStepIndex: int) -> Union[float, None]:
-		"""Method Description
+	def Pressure(self, timeStepIndex: int) -> Union[float, None]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -15182,7 +15901,7 @@ class ICustomerMeterResults(IElementResults):
 		pass
 
 	def HydraulicGrades(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -15190,7 +15909,7 @@ class ICustomerMeterResults(IElementResults):
 		pass
 
 	def Pressures(self) -> array(Union[float, None]):
-		"""Method Description
+		"""No Description
 
 		Returns:
 			array(): 
@@ -15210,8 +15929,8 @@ class ICustomerMetersResults(IElementsResults):
 		pass
 
 	@overload
-	def ICustomerMetersResults(self) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15219,8 +15938,8 @@ class ICustomerMetersResults(IElementsResults):
 		pass
 
 	@overload
-	def ICustomerMetersResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -15231,8 +15950,8 @@ class ICustomerMetersResults(IElementsResults):
 		pass
 
 	@overload
-	def ICustomerMetersResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def HydraulicGrades(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15244,8 +15963,8 @@ class ICustomerMetersResults(IElementsResults):
 		pass
 
 	@overload
-	def ICustomerMetersResults(self) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15253,8 +15972,8 @@ class ICustomerMetersResults(IElementsResults):
 		pass
 
 	@overload
-	def ICustomerMetersResults(self, timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			timeStepIndex(int): timeStepIndex
@@ -15265,8 +15984,8 @@ class ICustomerMetersResults(IElementsResults):
 		pass
 
 	@overload
-	def ICustomerMetersResults(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
-		"""Method Description
+	def Pressures(self, ids: List[int], timeStepIndex: int) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15291,25 +16010,28 @@ class ICustomerMeterUnits(IGeometryUnits):
 
 	@property
 	def ElevationUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICustomerMeterUnits: 
 		"""
 		pass
 
 	@property
 	def HydraulicGradeUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICustomerMeterUnits: 
 		"""
 		pass
 
 	@property
 	def PressureUnit(self) -> IUnit:
-		"""
+		"""No Description
+
 		Returns:
-			IUnit: No Description
+			ICustomerMeterUnits: 
 		"""
 		pass
 
@@ -15350,39 +16072,43 @@ class ISCADAElementInput(IPointNodeInput):
 		pass
 
 	@property
-	def TargetElement(self) -> IWaterNetworkElement:
-		"""
+	def TargetElement(self) -> IWaterElement:
+		"""No Description
+
 		Returns:
-			IWaterNetworkElement: No Description
+			ISCADAElementInput: 
 		"""
 		pass
 
 	@property
 	def RealtimeSignal(self) -> ISCADASignal:
-		"""
+		"""No Description
+
 		Returns:
-			ISCADASignal: No Description
+			ISCADAElementInput: 
 		"""
 		pass
 
 	@property
 	def HistoricalSignal(self) -> ISCADASignal:
-		"""
+		"""No Description
+
 		Returns:
-			ISCADASignal: No Description
+			ISCADAElementInput: 
 		"""
 		pass
 
 	@property
 	def TargetAttribute(self) -> SCADATargetAttribute:
-		"""
+		"""No Description
+
 		Returns:
-			SCADATargetAttribute: No Description
+			ISCADAElementInput: 
 		"""
 		pass
 
 	@TargetElement.setter
-	def TargetElement(self, targetelement: IWaterNetworkElement) -> None:
+	def TargetElement(self, targetelement: IWaterElement) -> None:
 		pass
 
 	@RealtimeSignal.setter
@@ -15410,8 +16136,8 @@ class ISCADAElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISCADAElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def TargetElements(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15419,8 +16145,8 @@ class ISCADAElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISCADAElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def TargetElements(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15431,8 +16157,8 @@ class ISCADAElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISCADAElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def RealtimeSignals(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15440,8 +16166,8 @@ class ISCADAElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISCADAElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def RealtimeSignals(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15452,8 +16178,8 @@ class ISCADAElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISCADAElementsInput(self) -> Dict[int,int]:
-		"""Method Description
+	def HistoricalSignals(self) -> Dict[int,int]:
+		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -15461,8 +16187,8 @@ class ISCADAElementsInput(IPointNodesInput):
 		pass
 
 	@overload
-	def ISCADAElementsInput(self, ids: List[int]) -> Dict[int,int]:
-		"""Method Description
+	def HistoricalSignals(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
 
 		Args:
 			ids(List[int]): ids
@@ -15582,9 +16308,10 @@ class IPumpStationInput(IBasePolygonInput):
 
 	@property
 	def Pumps(self) -> IPumpStationPumpIDsCollection:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpStationPumpIDsCollection: No Description
+			IPumpStationInput: 
 		"""
 		pass
 
@@ -15613,7 +16340,7 @@ class IPumpStationPumpIDs(ICollection[IPumpStationPumpID]):
 		pass
 
 	def Add(self, pump: IPump, pumpDefinition: IPumpDefinition) -> IPumpStationPumpID:
-		"""Method Description
+		"""No Description
 
 		Args:
 			pump(IPump): pump
@@ -15638,17 +16365,19 @@ class IPumpStationPumpID(ICollectionElement):
 
 	@property
 	def Pump(self) -> IElement:
-		"""
+		"""No Description
+
 		Returns:
-			IElement: No Description
+			IPumpStationPumpID: 
 		"""
 		pass
 
 	@property
 	def PumpDefinition(self) -> IPumpDefinition:
-		"""
+		"""No Description
+
 		Returns:
-			IPumpDefinition: No Description
+			IPumpStationPumpID: 
 		"""
 		pass
 
