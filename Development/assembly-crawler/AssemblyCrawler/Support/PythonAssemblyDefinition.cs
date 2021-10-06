@@ -23,50 +23,6 @@ namespace AssemblyCrawler.Support
 		#region Public Methods
 		public void Write()
 		{
-			string location = Assembly.Location;
-			if (!string.IsNullOrEmpty(location))
-			{
-				string assemblyNamespace = Path.GetFileNameWithoutExtension(location);
-
-				var tokens = assemblyNamespace.Split(Type.Delimiter);
-				assemblyNamespace = string.Join(Path.DirectorySeparatorChar.ToString(), tokens);
-
-				string path = Path.Combine(OutputPath, assemblyNamespace);
-				string filename = "Enumerations.pyi";
-				filename = Path.Combine(path, filename);
-
-				using (FileStream fileStream = new FileStream(filename, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
-				{
-					using (StreamWriter sw = new StreamWriter(fileStream, Encoding.ASCII))
-					{
-						sw.WriteLine("from enum import Enum");
-						sw.WriteLine();
-
-						foreach (var enumType in Enumerations)
-						{
-							sw.WriteLine($"class {enumType.Name}(Enum):");
-
-							var memberNames = Enum.GetNames(enumType);
-							var memberValues = Enum.GetValues(enumType);
-
-							for (int i = 0; i < memberNames.Length; ++i)
-							{
-								string member = memberNames[i];
-								int value = (int)memberValues.GetValue(i);
-
-								sw.WriteLine($"\t{member} = {value}");
-							}
-							sw.WriteLine();
-						}
-					}
-				}
-
-				foreach (var mod in Modules)
-				{
-					mod.AddImportModule(assemblyNamespace.Replace(Path.DirectorySeparatorChar, Type.Delimiter) + Type.Delimiter + "Enumerations").AddType("*");
-				}
-			}
-
 			foreach (var module in Modules)
 				module.Write();
 		}
