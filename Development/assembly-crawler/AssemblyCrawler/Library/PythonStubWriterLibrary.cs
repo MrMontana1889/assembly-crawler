@@ -1,6 +1,7 @@
 ﻿// PythonStubWriterLibrary.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -144,7 +145,7 @@ namespace AssemblyCrawler.Library
 
 		public static void WritePythonConstructor(
 			PythonClassDefinition classDef,
-			List<KeyValuePair<string, Type>> arguments,
+			List<KeyValuePair<string, KeyValuePair<Type, object>>> arguments,
 			string docString,
 			int indentLevel = 1)
 		{
@@ -168,7 +169,7 @@ namespace AssemblyCrawler.Library
 			WritePythonMethod(
 				classDef: classDef,
 				methodName: INIT,
-				arguments: new List<KeyValuePair<string, Type>>(),
+				arguments: new List<KeyValuePair<string, KeyValuePair<Type, object>>>(),
 				returnType: typeof(void),
 				docString: docString,
 				isStatic: false,
@@ -192,7 +193,7 @@ namespace AssemblyCrawler.Library
 		public static void WritePythonMethod(
 			PythonClassDefinition classDef,
 			string methodName,
-			List<KeyValuePair<string, Type>> arguments,
+			List<KeyValuePair<string, KeyValuePair<Type, object>>> arguments,
 			Type returnType,
 			string docString,
 			bool isStatic,
@@ -201,7 +202,7 @@ namespace AssemblyCrawler.Library
 			int indentLevel = 1)
 		{
 
-			switch(methodName)
+			switch (methodName)
 			{
 				case EQUALS:
 				case GETHASHCODE:
@@ -223,10 +224,18 @@ namespace AssemblyCrawler.Library
 			for (int i = 0; i < arguments.Count; i++)
 			{
 				var pair = arguments[i];
-				pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value)}");
+				if (pair.Value.Value == null)
+					pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value.Key)}");
+				else
+				{
+					if (pair.Value.Key.IsEnum)
+						pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value.Key)} = {pair.Value.Key.Name}.{pair.Value.Value}");
+					else
+						pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value.Key)} = {pair.Value.Value}");
+				}
 
-				TypeConvertLibrary.AddImportForPythonType(classDef.Module, pair.Value);
-				classDef.Module.AddGenericArgumentType(pair.Value);
+				TypeConvertLibrary.AddImportForPythonType(classDef.Module, pair.Value.Key);
+				classDef.Module.AddGenericArgumentType(pair.Value.Key);
 			}
 
 			var pythonArguments = string.Join(", ", pythonArgumentList);
