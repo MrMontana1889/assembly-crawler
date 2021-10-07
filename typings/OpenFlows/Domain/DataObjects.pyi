@@ -244,7 +244,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		"""
 		pass
 
-	def Elements(self, state: ElementStateType) -> List[TNetworkElementType]:
+	def Elements(self, state: ElementStateType = ElementStateType.All) -> List[TNetworkElementType]:
 		"""No Description
 
 		Args:
@@ -278,7 +278,7 @@ class IModelElementManager:
 		"""
 		pass
 
-	def NetworkElements(self, label: str, useWildcard: bool) -> List[IElement]:
+	def NetworkElements(self, label: str, useWildcard: bool = False) -> List[IElement]:
 		"""No Description
 
 		Args:
@@ -460,7 +460,7 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 		pass
 
 	@overload
-	def Open(self, filename: str, openInPlace: bool) -> TModelType:
+	def Open(self, filename: str, openInPlace: bool = False) -> TModelType:
 		"""No Description
 
 		Args:

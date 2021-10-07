@@ -11,7 +11,7 @@ print("Start")
 OpenFlowsWater.StartSession(WaterProductLicenseType.WaterGEMS)
 
 filename = "D:\\p4\\Glacier\\Products\\WaterGEMS\\Development\\Runtime\\Samples\\Example1.wtg"
-wm = OpenFlowsWater.Open(filename, False)
+wm = OpenFlowsWater.Open(filename)
 
 wm.RunActiveScenario()
 

@@ -1,5 +1,4 @@
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
-from OpenFlows.Water import OpenFlowsWater
 from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType
 from typing import overload, Dict, List, Union, Generic
@@ -6612,7 +6611,7 @@ class DomainElementExtensions:
 
 	@staticmethod
 	@overload
-	def Create(scadaElements: ISCADAElements, label: str, point: GeometryPoint, targetElement: IWaterElement, scadaTargetAttribute: SCADATargetAttribute, realTimeSignal: ISCADASignal, historicalSignal: ISCADASignal) -> ISCADAElement:
+	def Create(scadaElements: ISCADAElements, label: str, point: GeometryPoint, targetElement: IWaterElement, scadaTargetAttribute: SCADATargetAttribute = SCADATargetAttribute.UnAssigned, realTimeSignal: ISCADASignal, historicalSignal: ISCADASignal) -> ISCADAElement:
 		"""No Description
 
 		Args:
