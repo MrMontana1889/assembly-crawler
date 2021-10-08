@@ -47,6 +47,10 @@
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\Development\\Python\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -x \"\" -o \"C:\\Users\\Akshaya.Niraula\\AppData\\Local\\Temp\\PythonStubGenerator\\TestAssemblyNET48\""
     },
+    "WP_H.Domain": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\Development\\Perforce\\Aspen\\Components\\Haestad.Domain\\Assemblies\\_LastKnownGood\\Haestad.Domain.dll\" -x \"\" -o \"C:\\Users\\Akshaya.Niraula\\AppData\\Local\\Temp\\PythonStubGenerator\\H.Domain\""
+    },
     "Office_FullOpenFlows": {
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.xml\" \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.xml\" -o \"D:\\repos\\assembly-crawler\""

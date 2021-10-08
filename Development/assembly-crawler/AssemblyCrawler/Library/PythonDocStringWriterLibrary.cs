@@ -90,8 +90,11 @@ namespace AssemblyCrawler.Library
                 sb.Append(indentation).AppendLine(ArgsDocString);
                 foreach (var kvp in Args)
                 {
+                    var argsName = kvp.Key;
+                    var argType = kvp.Value.Key;
+
                     var param = XmlMember?.Param.Where(p => p.Name == kvp.Key)?.FirstOrDefault();
-                    sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Value.Key)}): {param?.Text ?? kvp.Key}");
+                    sb.Append(indentation).Append(Tab).Append(argsName).AppendLine($"({TypeConvertLibrary.ToPythonType(argType)}): {param?.Text ?? argsName}");
                 }
             }
 

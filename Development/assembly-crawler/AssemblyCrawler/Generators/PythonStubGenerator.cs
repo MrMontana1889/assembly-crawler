@@ -98,7 +98,7 @@ namespace AssemblyCrawler.Generators
                     // TODO: Debugger never hit this locaiton.
                     foreach (var ctor in typeParser.Constructors)
                     {
-                        var args = typeParser.GetConstructorArgements(ctor);
+                        var args = typeParser.GetConstructorArguments(ctor);
 
                         var docStringWriter = new PythonConstructorDocStringWriterLibrary(
                             member: xmlDocument?.GetMember(ctor),

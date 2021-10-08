@@ -137,9 +137,10 @@ namespace AssemblyCrawler.Test
             var typeParser = new TypeParserLibrary(testEntryType).Parse();
             Assert.IsNotNull(typeParser);
 
+            // TODO
             var ctorIdLabel = typeParser.Constructors.Find(c => c.GetParameters().Where(p=>p.Name == "id" || p.Name == "label").Any());
             var ctorIdLabelMember = XmlDocumentParserLib.GetMember(ctorIdLabel);
-            var ctroIdLabelDocString = new PythonConstructorDocStringWriterLibrary(ctorIdLabelMember, typeParser.GetConstructorArgements(ctorIdLabel), 2);
+            //var ctroIdLabelDocString = new PythonConstructorDocStringWriterLibrary(ctorIdLabelMember, typeParser.GetConstructorArgements(ctorIdLabel), 2);
 
             // TODO double check the returned doctring with default value in the arguments
 
