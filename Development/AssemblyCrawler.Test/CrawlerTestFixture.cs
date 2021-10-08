@@ -35,7 +35,7 @@ namespace AssemblyCrawler.Test
 			PythonPackageDefinition package = new PythonPackageDefinition("OpenFlowsWater");
 
 			IAssemblyCrawler crawler = new AssemblyCrawler();
-			crawler.Crawl(package, testAssembly.Location, String.Empty, Path.GetTempPath());
+			crawler.Crawl(package, testAssembly.Location, string.Empty, Path.GetTempPath());
 		}
 
 

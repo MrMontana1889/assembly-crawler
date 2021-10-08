@@ -12,29 +12,28 @@ namespace AssemblyCrawler.Console.Support
 		NET,
 	}
 
-	public class CommandLineOptions
+	public class CommandLineOptions : IAssemblyFileOptions, IConfigFileOptions
 	{
-		[Option('a', "assemblies", Required = true, HelpText = "Specify the assemblies to crawl", Min = 1)]
 		public IEnumerable<string> Assemblies
 		{
 			get;
 			set;
 		}
-		[Option('x', "xmldoc", Required = false, HelpText = "Specify the xml documents to extract", Min = 1)]
 		public IEnumerable<string> XmlDocuments
 		{
 			get;
 			set;
 		}
-		[Option('o', "output", Required = true, HelpText = "Full path to generate the stub files")]
 		public string OutputPath
 		{
 			get;
 			set;
 		}
 
+		public string ConfigFile { get; set; }
+
 		[Option('t', "StubType", Required = false, HelpText = "Specify the type of stub.  Python is default.")]
-		public StubType SubType
+		public StubType StubType
 		{
 			get;
 			set;

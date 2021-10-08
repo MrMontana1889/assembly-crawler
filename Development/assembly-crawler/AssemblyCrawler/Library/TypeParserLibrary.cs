@@ -175,10 +175,12 @@ namespace AssemblyCrawler.Library
 		//	return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
 		//}
 
-		public List<KeyValuePair<string, Type>> GetMethodArguments(MethodInfo method)
+		public List<KeyValuePair<string, KeyValuePair<Type, object>>> GetMethodArguments(MethodInfo method)
 		{
+			string methodName = method.Name;
 			var parameters = new List<ParameterInfo>(method.GetParameters());
-			return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
+			return parameters.Select(p => new KeyValuePair<string, KeyValuePair<Type, object>>(p.Name ?? "", 
+				new KeyValuePair<Type, object>(p.ParameterType, p.HasDefaultValue ? p.DefaultValue : null))).ToList();
 		}
 		public List<KeyValuePair<string, Type>>GetConstructorArgements(ConstructorInfo constructorInfo)
         {

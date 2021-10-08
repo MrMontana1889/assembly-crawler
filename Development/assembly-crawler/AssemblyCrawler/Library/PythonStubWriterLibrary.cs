@@ -1,6 +1,7 @@
 ﻿// PythonStubWriterLibrary.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,8 +28,32 @@ namespace AssemblyCrawler.Library
 		public static string OVERLOAD = "@overload";
 		public static string STATIC_METHOD = "@staticmethod";
 		public static string GENERIC = "Generic";
+		public const string EQUALS = "Equals";
+		public const string GETHASHCODE = "GetHashCode";
+		public const string GETTYPE = "GetType";
+		public const string TOSTRING = "ToString";
 
 		#endregion
+
+		public static void WritePythonEnumDef(
+			PythonModuleDefinition module,
+			Type enumType,
+			string docString,
+			int indentLevel = 0)
+		{
+			PythonClassDefinition classDef = module.AddClassDefinition(enumType.AssemblyQualifiedName, enumType.Name);
+
+			module.AddImportModule("enum").AddType("Enum");
+			classDef.ClassDefinition.AppendLine($"{CLASS} {enumType.Name}(Enum):");
+
+			var members = Enum.GetNames(enumType);
+			var values = Enum.GetValues(enumType);
+
+			for (int i = 0; i < members.Length; ++i)
+			{
+				classDef.ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {(int)values.GetValue(i)}");
+			}
+		}
 
 		public static void WritePythonClassDef(
 			PythonModuleDefinition module,
@@ -120,7 +145,7 @@ namespace AssemblyCrawler.Library
 
 		public static void WritePythonConstructor(
 			PythonClassDefinition classDef,
-			List<KeyValuePair<string, Type>> arguments,
+			List<KeyValuePair<string, KeyValuePair<Type, object>>> arguments,
 			string docString,
 			bool isOverloaded,
 			int indentLevel = 1)
@@ -134,7 +159,7 @@ namespace AssemblyCrawler.Library
 				isStatic: false,
 				isOverloaded: isOverloaded,
 				indentLevel: indentLevel
-				); 
+				);
 		}
 
 		public static void WritePythonConstructorUnsupported(
@@ -146,7 +171,7 @@ namespace AssemblyCrawler.Library
 			WritePythonMethod(
 				classDef: classDef,
 				methodName: INIT,
-				arguments: new List<KeyValuePair<string, Type>>(),
+				arguments: new List<KeyValuePair<string, KeyValuePair<Type, object>>>(),
 				returnType: typeof(void),
 				docString: docString,
 				isStatic: false,
@@ -170,7 +195,7 @@ namespace AssemblyCrawler.Library
 		public static void WritePythonMethod(
 			PythonClassDefinition classDef,
 			string methodName,
-			List<KeyValuePair<string, Type>> arguments,
+			List<KeyValuePair<string, KeyValuePair<Type, object>>> arguments,
 			Type returnType,
 			string docString,
 			bool isStatic,
@@ -178,6 +203,16 @@ namespace AssemblyCrawler.Library
 			bool isOverloaded = false,
 			int indentLevel = 1)
 		{
+
+			switch (methodName)
+			{
+				case EQUALS:
+				case GETHASHCODE:
+				case GETTYPE:
+				case TOSTRING:
+					return;
+			}
+
 			AddReferenceImports(classDef.Module, returnType);
 
 			// To handle generic type name better
@@ -191,10 +226,18 @@ namespace AssemblyCrawler.Library
 			for (int i = 0; i < arguments.Count; i++)
 			{
 				var pair = arguments[i];
-				pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value)}");
+				if (pair.Value.Value == null)
+					pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value.Key)}");
+				else
+				{
+					if (pair.Value.Key.IsEnum)
+						pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value.Key)} = {pair.Value.Key.Name}.{pair.Value.Value}");
+					else
+						pythonArgumentList.Add($"{pair.Key}: {TypeConvertLibrary.ToPythonType(pair.Value.Key)} = {pair.Value.Value}");
+				}
 
-				TypeConvertLibrary.AddImportForPythonType(classDef.Module, pair.Value);
-				classDef.Module.AddGenericArgumentType(pair.Value);
+				TypeConvertLibrary.AddImportForPythonType(classDef.Module, pair.Value.Key);
+				classDef.Module.AddGenericArgumentType(pair.Value.Key);
 			}
 
 			var pythonArguments = string.Join(", ", pythonArgumentList);
@@ -240,7 +283,7 @@ namespace AssemblyCrawler.Library
 			if (isOverloaded)
 				classDef.Methods.AppendLine($"{indentation}{OVERLOAD}");
 
-			classDef.Methods.AppendLine($"{indentation}{method}");			
+			classDef.Methods.AppendLine($"{indentation}{method}");
 			classDef.Methods.AppendLine($"{indentation}{docString}");
 
 			if (exception?.Length > 0)
