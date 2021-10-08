@@ -190,7 +190,9 @@ namespace AssemblyCrawler.Library
 					p.Name ?? "", 
 					new KeyValuePair<Type, object>(
 						p.ParameterType, 
-						null))).ToList();
+						p.HasDefaultValue
+							? p.DefaultValue
+							: null))).ToList();
 		}
 
 		public string GetPropertyName(MethodInfo methodInfo) => methodInfo.Name.Substring(4);
