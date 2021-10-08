@@ -1,6 +1,8 @@
 ﻿// TestEntry.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
+using System.Collections.Generic;
+using System.Drawing;
 using Test.TestGenericAssembly;
 using Test.TestGenericAssembly.Links;
 
@@ -22,12 +24,19 @@ namespace TestGenericAssembly
 			return new Pipes();
 		}
 
+		public static IPipes GetPipes(List<int> Ids)
+        {
+			return new Pipes();
+        }
+
+		// TODO: Need to support nested Types
+
 		/// <summary>
 		/// This is a nested class, parent is TestEntry
 		/// </summary>
 		public class NestedClass
 		{
-
+			public static Size Size => new Size(100, 100);
 		}
 	}
 
@@ -36,29 +45,29 @@ namespace TestGenericAssembly
 	/// </summary>
 	public class MultiCtorClass
     {
+		public static string STATIC_STRING = "STATIC_STRING";
+
 		/// <summary>
 		/// Constructor with no parameters
 		/// </summary>
-        public MultiCtorClass()
+		public MultiCtorClass()
         {
         }
 
-		/// <summary>
-		/// You will need <paramref name="id"/> to create an instance
-		/// </summary>
-		/// <param name="id">Id of the element</param>
-        public MultiCtorClass(int id):base()
+        /// <summary>
+        /// You will need <paramref name="id"/> to create an instance
+        /// </summary>
+        /// <param name="id">Id of the element</param>
+        /// <param name="label">Default value is Default</param>
+        public MultiCtorClass(int id, string label ="Default"):base()
         {
 			Id = id;
+			Label = label;
         }
 
-		/// <summary>
-		/// You will need <paramref name="label"/> to create an instance
-		/// </summary>
-		/// <param name="label">Label of the element</param>
-		public MultiCtorClass(string label):base()
+        public MultiCtorClass(Numbers numbers):base()
         {
-			Label = label;
+			Numbers = numbers;
         }
 
 		/// <summary>
@@ -71,16 +80,32 @@ namespace TestGenericAssembly
 		/// </summary>
 		public string Label { get; set; }
 
-		/// <summary>
-		/// Method with out parameter
-		/// </summary>
-		/// <param name="label">Input label</param>
-		/// <param name="id">This Id will be inizalied</param>
-		/// <returns>True/False</returns>
-		public bool Contains(string label, out int id)
+        /// <summary>
+        /// Method with out parameter
+        /// </summary>
+        /// <param name="label">Input label</param>
+        /// <param name="id">This Id will be inizalied</param>
+        /// <param name="one"></param>
+        /// <returns>True/False</returns>
+        public bool Contains(string label, out int id, string one = "one")
         {
 			id = 1;
 			return string.IsNullOrEmpty(label);
         }
+
+		public Numbers Numbers { get; }
+    }
+
+	/// <summary>
+	/// Enum of numbers
+	/// </summary>
+	public enum Numbers
+    {
+		Zero=0,
+		/// <summary>
+		/// One 1
+		/// </summary>
+		One=1,
+		Two=2
     }
 }

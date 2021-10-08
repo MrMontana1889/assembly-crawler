@@ -2,6 +2,7 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AssemblyCrawler.Extensions;
@@ -92,19 +93,22 @@ namespace AssemblyCrawler.Generators
                 else if (typeParser.Type.IsClass)
                 {
                     // TODO: Debugger never hit this locaiton.
-                    var args = typeParser.GetConstructorArguments();
-                    var memberInfo = type.GetConstructor(new Type[] { });
+                    foreach (var ctor in typeParser.Constructors)
+                    {
+                        var args = typeParser.GetConstructorArgements(ctor);
 
-                    var docStringWriter = new PythonConstructorDocStringWriterLibrary(
-                            member: xmlDocument?.GetMember(memberInfo),
+                        var docStringWriter = new PythonConstructorDocStringWriterLibrary(
+                            member: xmlDocument?.GetMember(ctor),
                             arguments: args,
                             indentLevel: 2);
 
-                    PythonStubWriterLibrary.WritePythonConstructor(
-                        classDef: classDef,
-                        arguments: args,
-                        docString: docStringWriter?.ToString(),
-                        indentLevel: 1);
+                        PythonStubWriterLibrary.WritePythonConstructor(
+                            classDef: classDef,
+                            arguments: args,
+                            docString: docStringWriter?.ToString(),
+                            isOverloaded: typeParser.Constructors.Count>1,
+                            indentLevel: 1);
+                    }                    
                 }
                 #endregion
 

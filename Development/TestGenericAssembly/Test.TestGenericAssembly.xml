@@ -149,17 +149,12 @@
             Constructor with no parameters
             </summary>
         </member>
-        <member name="M:TestGenericAssembly.MultiCtorClass.#ctor(System.Int32)">
+        <member name="M:TestGenericAssembly.MultiCtorClass.#ctor(System.Int32,System.String)">
             <summary>
             You will need <paramref name="id"/> to create an instance
             </summary>
             <param name="id">Id of the element</param>
-        </member>
-        <member name="M:TestGenericAssembly.MultiCtorClass.#ctor(System.String)">
-            <summary>
-            You will need <paramref name="label"/> to create an instance
-            </summary>
-            <param name="label">Label of the element</param>
+            <param name="label">Default value is Default</param>
         </member>
         <member name="P:TestGenericAssembly.MultiCtorClass.Id">
             <summary>
@@ -171,13 +166,24 @@
             Read/Write Property
             </summary>
         </member>
-        <member name="M:TestGenericAssembly.MultiCtorClass.Contains(System.String,System.Int32@)">
+        <member name="M:TestGenericAssembly.MultiCtorClass.Contains(System.String,System.Int32@,System.String)">
             <summary>
             Method with out parameter
             </summary>
             <param name="label">Input label</param>
             <param name="id">This Id will be inizalied</param>
+            <param name="one"></param>
             <returns>True/False</returns>
+        </member>
+        <member name="T:TestGenericAssembly.Numbers">
+            <summary>
+            Enum of numbers
+            </summary>
+        </member>
+        <member name="F:TestGenericAssembly.Numbers.One">
+            <summary>
+            One 1
+            </summary>
         </member>
     </members>
 </doc>

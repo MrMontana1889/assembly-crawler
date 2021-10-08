@@ -11,6 +11,9 @@ using Test.TestGenericAssembly;
 using AssemblyCrawler.Generators;
 using AssemblyCrawler.Library;
 using AssemblyCrawler.Extensions;
+using TestGenericAssembly;
+using System.Linq;
+using System;
 
 namespace AssemblyCrawler.Test
 {
@@ -31,18 +34,58 @@ namespace AssemblyCrawler.Test
 
         #region Tests
         [Test]
-        public void TestIElementManager()
+        public void TestTypeParser()
         {
             var testIElementManagerType = typeof(IElementManager);
-
             var typeParser = new TypeParserLibrary(testIElementManagerType).Parse();
             Assert.IsNotNull(typeParser);
 
+            Assert.IsTrue(typeParser.IsInterface);
+            Assert.IsTrue(typeParser.GenericInterfaces.Count == 0);
+            Assert.IsTrue(typeParser.NonGenericInterfaces.Count == 0);
             Assert.IsTrue(typeParser.AllMethods.Count == 3);
             Assert.IsTrue(typeParser.MemberInfoMap.Count == 4);
             Assert.IsTrue(typeParser.ReadOnlyProperties.Count == 1);
             Assert.IsTrue(typeParser.SimpleMethods.Count == 2);
             Assert.IsTrue(typeParser.WriteOnlyProperties.Count == 0);
+            Assert.IsTrue(typeParser.GetPropertyName(typeParser.ReadOnlyProperties[0]) == "Count");
+
+            // test for static members
+            typeParser = new TypeParserLibrary(typeof(TestEntry)).Parse();
+            Assert.IsNotNull(typeParser);
+            Assert.IsTrue(typeParser.AllMethods.Where(m => m.IsStatic).Count() == 3);
+            Assert.IsTrue(typeParser.OverloadedMethods.Count == 2);
+
+            // test for nested Type(class)
+            Assert.IsTrue(typeParser.MemberInfoMap.Where(m => (m.Value is Type)).Count() == 1);
+
+            // TODO: Need to test members of nested Types
+            // TODO: Need to test operators
+
+            //// TODO: Test on overloaded/non-overloaded constructors
+            //// constructor arguments
+            typeParser = new TypeParserLibrary(typeof(MultiCtorClass)).Parse();
+            Assert.IsTrue(typeParser.StaticFields.Count == 1);
+            Assert.IsTrue(typeParser.Constructors.Count == 3);
+
+
+            // Method Arguments
+            var containsMethod = typeParser.AllMethods.Where(m => m.Name == "Contains").FirstOrDefault();
+            var methodArgs = typeParser.GetMethodArguments(containsMethod);
+            Assert.IsTrue(methodArgs.Count == 3);
+            Assert.IsTrue(methodArgs.Where(m => m.Key == "label").Count() == 1);
+            Assert.IsTrue(methodArgs.Where(m => m.Key == "id").Count() == 1);
+            Assert.IsTrue(methodArgs.Where(m => m.Key == "one").Count() == 1);
+        }
+
+
+        [Test]
+        public void TestIElementManager_XmlDocContent()
+        {
+            var testIElementManagerType = typeof(IElementManager);
+
+            var typeParser = new TypeParserLibrary(testIElementManagerType).Parse();
+            Assert.IsNotNull(typeParser);
 
 
             Assert.NotNull(XmlDocumentParserLib);
@@ -86,6 +129,21 @@ namespace AssemblyCrawler.Test
 
         }
 
+        [Test]
+        public void TestTestEntryClass_XmlDocContent()
+        {
+            var testEntryType = typeof(MultiCtorClass);
+
+            var typeParser = new TypeParserLibrary(testEntryType).Parse();
+            Assert.IsNotNull(typeParser);
+
+            var ctorIdLabel = typeParser.Constructors.Find(c => c.GetParameters().Where(p=>p.Name == "id" || p.Name == "label").Any());
+            var ctorIdLabelMember = XmlDocumentParserLib.GetMember(ctorIdLabel);
+            var ctroIdLabelDocString = new PythonConstructorDocStringWriterLibrary(ctorIdLabelMember, typeParser.GetConstructorArgements(ctorIdLabel), 2);
+
+            // TODO double check the returned doctring with default value in the arguments
+
+        }
         #endregion
 
         #region Private Properties
