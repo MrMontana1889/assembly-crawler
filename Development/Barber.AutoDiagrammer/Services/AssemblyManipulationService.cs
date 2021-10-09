@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Barber.AutoDiagrammer.GraphBits;
 using Barber.AutoDiagrammer.Models;
+using Barber.AutoDiagrammer.Support;
 
 namespace Barber.AutoDiagrammer.Services
 {
@@ -122,14 +122,14 @@ namespace Barber.AutoDiagrammer.Services
 		}
 
 
-		public Task LoadNameSpacesAndTypes(String assemblyFileName)
+		public Task LoadNameSpacesAndTypes(String assemblyFileName, ITypeFilter typeFilter)
 		{
 			Task task = Task.Factory.StartNew(() =>
 			{
 
 				try
 				{
-					treeValues = treeCreator.ScanAssemblyAndCreateTree(assemblyFileName);
+					treeValues = treeCreator.ScanAssemblyAndCreateTree(assemblyFileName, typeFilter);
 					return treeValues;
 				}
 				catch (Exception ex)
@@ -140,11 +140,11 @@ namespace Barber.AutoDiagrammer.Services
 			});
 			return task;
 		}
-		public void LoadNameSpacesAndTypesAsync(String assemblyFileName)
+		public void LoadNameSpacesAndTypesAsync(String assemblyFileName, ITypeFilter typeFilter)
 		{
 			try
 			{
-				treeValues = treeCreator.ScanAssemblyAndCreateTree(assemblyFileName);
+				treeValues = treeCreator.ScanAssemblyAndCreateTree(assemblyFileName, typeFilter);
 			}
 			catch (Exception ex)
 			{

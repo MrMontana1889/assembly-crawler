@@ -26,7 +26,7 @@ namespace AssemblyCrawler.Library
             XmlMember = member;
             IndentLevel = indentLevel;
             ExceptionNames = new List<KeyValuePair<string, string>>();
-            Args = new List<KeyValuePair<string, Type>>();
+            Args = new List<KeyValuePair<string, KeyValuePair<Type, object>>>();
             Attributes = new List<KeyValuePair<string, Type>>();
             Returns = new List<KeyValuePair<string, Type>>();
         }
@@ -36,7 +36,7 @@ namespace AssemblyCrawler.Library
 
         #region Public Properties
         public List<KeyValuePair<string, string>> ExceptionNames { get;  }
-        public List<KeyValuePair<string, Type>> Args { get;  }
+        public List<KeyValuePair<string, KeyValuePair<Type, object>>> Args { get;  }
 
         public List<KeyValuePair<string, Type>> Attributes { get;  }
         public List<KeyValuePair<string, Type>> Returns { get;  }
@@ -91,7 +91,7 @@ namespace AssemblyCrawler.Library
                 foreach (var kvp in Args)
                 {
                     var param = XmlMember?.Param.Where(p => p.Name == kvp.Key)?.FirstOrDefault();
-                    sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Value)}): {param?.Text ?? kvp.Key}");
+                    sb.Append(indentation).Append(Tab).Append(kvp.Key).AppendLine($"({TypeConvertLibrary.ToPythonType(kvp.Value.Key)}): {param?.Text ?? kvp.Key}");
                 }
             }
 
@@ -177,7 +177,7 @@ namespace AssemblyCrawler.Library
         #region Constructor
         public PythonConstructorDocStringWriterLibrary(
             Member member,
-            List<KeyValuePair<string, Type>> arguments,
+            List<KeyValuePair<string, KeyValuePair<Type, object>>> arguments,
             int indentLevel = 2)
             : base(member, indentLevel)
         {
@@ -205,7 +205,8 @@ namespace AssemblyCrawler.Library
             : base(member, indentLevel)
         {
             // Args
-            var paramsKvps = methodInfo.GetParameters().Select(p => new KeyValuePair<string, Type>(p.Name, p.ParameterType)).ToList();
+            var paramsKvps = methodInfo.GetParameters().Select(p => new KeyValuePair<string, KeyValuePair<Type, object>>(p.Name, 
+                new KeyValuePair<Type, object>(p.ParameterType, p.HasDefaultValue ? p.DefaultValue : null))).ToList();
             Args.AddRange(paramsKvps);
 
             // Returns

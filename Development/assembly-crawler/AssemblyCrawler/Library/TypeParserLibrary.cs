@@ -155,19 +155,22 @@ namespace AssemblyCrawler.Library
 			return this;
 		}
 
-		public List<KeyValuePair<string, Type>> GetConstructorArguments()
+		public List<KeyValuePair<string, KeyValuePair<Type, object>>> GetConstructorArguments()
 		{
 			var parameters = new List<ParameterInfo>();
 			foreach (var c in Type.GetConstructors())
 				parameters.AddRange(new List<ParameterInfo>(c.GetParameters()));
 
-			return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
+			return parameters.Select(p => new KeyValuePair<string, KeyValuePair<Type, object>>(p.Name ?? "", 
+				new KeyValuePair<Type, object>(p.ParameterType, p.HasDefaultValue ? p.DefaultValue : null) )).ToList();
 		}
 
-		public List<KeyValuePair<string, Type>> GetMethodArguments(MethodInfo method)
+		public List<KeyValuePair<string, KeyValuePair<Type, object>>> GetMethodArguments(MethodInfo method)
 		{
+			string methodName = method.Name;
 			var parameters = new List<ParameterInfo>(method.GetParameters());
-			return parameters.Select(p => new KeyValuePair<string, Type>(p.Name ?? "", p.ParameterType)).ToList();
+			return parameters.Select(p => new KeyValuePair<string, KeyValuePair<Type, object>>(p.Name ?? "", 
+				new KeyValuePair<Type, object>(p.ParameterType, p.HasDefaultValue ? p.DefaultValue : null))).ToList();
 		}
 
 		public string GetPropertyName(MethodInfo methodInfo) => methodInfo.Name.Substring(4);

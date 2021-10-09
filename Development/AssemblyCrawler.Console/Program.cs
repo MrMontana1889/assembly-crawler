@@ -36,35 +36,42 @@ namespace AssemblyCrawler.Console
 
 		private static void RunOptions(CommandLineOptions obj)
 		{
-			PythonPackageDefinition package = new PythonPackageDefinition("Package");
-
-			// make usre obj.Assemblies and obj.XML document are same size
-			if (obj.Assemblies.Count() != obj.XmlDocuments.Count())
-            {
-				WriteLine($"Error: Number of assemblies must match with number of xml documet files. Pass empty string if xml document is missing");
-				return;
-            }
-
-			var assemblyAndXmlDocPairs = obj.Assemblies.Zip(obj.XmlDocuments, (a, x) => new { Assembly = a, XmlDocument = x });
-			foreach (var pair in assemblyAndXmlDocPairs)
+			if (obj.ConfigFile == null)
 			{
-				if (!File.Exists(pair.Assembly))
+				PythonPackageDefinition package = new PythonPackageDefinition("Package");
+
+				// make usre obj.Assemblies and obj.XML document are same size
+				if (obj.Assemblies.Count() != obj.XmlDocuments.Count())
 				{
-					WriteLine($"The assembly {pair.Assembly} does not exist.");
-					continue;
+					WriteLine($"Error: Number of assemblies must match with number of xml documet files. Pass empty string if xml document is missing");
+					return;
 				}
 
-				if (DotNetObject.IsValidDotNetAssembly(pair.Assembly))
+				var assemblyAndXmlDocPairs = obj.Assemblies.Zip(obj.XmlDocuments, (a, x) => new { Assembly = a, XmlDocument = x });
+				foreach (var pair in assemblyAndXmlDocPairs)
 				{
-					if (!Directory.Exists(obj.OutputPath))
-						Directory.CreateDirectory(obj.OutputPath);
+					if (!File.Exists(pair.Assembly))
+					{
+						WriteLine($"The assembly {pair.Assembly} does not exist.");
+						continue;
+					}
 
-					IAssemblyCrawler crawler = new AssemblyCrawler();
-					crawler.Crawl(package,pair.Assembly, pair.XmlDocument, obj.OutputPath);
+					if (DotNetObject.IsValidDotNetAssembly(pair.Assembly))
+					{
+						if (!Directory.Exists(obj.OutputPath))
+							Directory.CreateDirectory(obj.OutputPath);
+
+						IAssemblyCrawler crawler = new AssemblyCrawler();
+						crawler.Crawl(package, pair.Assembly, pair.XmlDocument, obj.OutputPath, new InterfacesOnlyTypeFilter());
+					}
 				}
+
+				package.Write();
 			}
-
-			package.Write();
+			else
+			{
+				// Using a config file.
+			}
 		}
 		#endregion
 	}
