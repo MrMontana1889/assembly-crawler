@@ -27,7 +27,8 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(PythonPackageDefinition package, string assemblyFilename, string xmlDocumentFileName, string outputPath)
+		public void Crawl(PythonPackageDefinition package, string assemblyFilename, 
+			string xmlDocumentFileName, string outputPath, ITypeFilter typeFilter)
 		{
 			/*
 			 * First crawl the assembly and generate the interface tree using Barber.AutoDiagrammer.
@@ -53,7 +54,7 @@ namespace AssemblyCrawler
 				SimpleTreeLayoutParametersEx settings = (SimpleTreeLayoutParametersEx)SettingsViewModel.Instance.LayoutParameters;
 				settings.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.LeftToRight;
 
-				AssemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename);
+				AssemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename, typeFilter);
 
 				if (AssemblyManipulationService.TreeValues.Count == 1)
 				{

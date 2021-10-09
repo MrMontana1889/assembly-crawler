@@ -2,22 +2,22 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace AssemblyCrawler.Support.Config
 {
+	[XmlType("Namespace")]
 	public class ConfigNamespace
 	{
 		#region Constructor
-		public ConfigNamespace(string name, ClassType classType)
+		public ConfigNamespace()
 		{
-			Name = name;
-			ClassType = classType;
 		}
 		#endregion
 
 		#region Public Properties
-		public string Name { get; }
-		public ClassType ClassType { get; }
+		public string Name { get; set; }
+		public ClassType ClassType { get; set; }
 		public List<ConfigClass> Classes { get; } = new List<ConfigClass>();
 		#endregion
 	}

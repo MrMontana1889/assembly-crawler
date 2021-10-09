@@ -3,25 +3,27 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace AssemblyCrawler.Support.Config
 {
+	[XmlType("Assembly")]
 	public class ConfigAssembly
 	{
 		#region Constructor
-		public ConfigAssembly(string folder, string name, string xmlDoc)
+		public ConfigAssembly()
 		{
-			Folder = folder;
-			Name = name;
-			XmlDoc = xmlDoc;
+
 		}
 		#endregion
 
 		#region Public Properties
-		public string Folder { get; }
-		public string Name { get; }
-		public string XmlDoc { get; }
+		public string Folder { get; set; }
+		public string Name { get; set; }
+		public string XmlDoc { get; set; }
+		[XmlIgnore]
 		public string AssemblyName => Path.Combine(Folder, Name);
+		[XmlIgnore]
 		public string XmlDocument => Path.Combine(Folder, XmlDoc);
 		public List<ConfigNamespace> Namespaces { get; } = new List<ConfigNamespace>();
 		#endregion

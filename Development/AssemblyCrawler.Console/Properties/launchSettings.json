@@ -25,7 +25,7 @@
     },
     "FullOpenFlows": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\assembly-crawler\""
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\python\\typings\""
     },
     "WP_PF_OpenFlows": {
       "commandName": "Project",
@@ -54,6 +54,10 @@
     "Office_FullOpenFlows": {
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.xml\" \"D:\\p4v\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.xml\" -o \"D:\\repos\\assembly-crawler\""
+    },
+    "OpenFlowsAPI-Waters-Stubs": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\OpenFlowsAPI-water-stubs\\typings\""
     }
   }
 }

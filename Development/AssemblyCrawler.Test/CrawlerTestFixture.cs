@@ -9,6 +9,7 @@ using System.Text;
 using AssemblyCrawler.Generators;
 using AssemblyCrawler.Library;
 using AssemblyCrawler.Support;
+using Barber.AutoDiagrammer.Support;
 using NUnit.Framework;
 using TestAssemblyNET48.Water;
 using TestAssemblyNET48.Water.Domain.ModelingObjects.NetworkElements;
@@ -35,7 +36,7 @@ namespace AssemblyCrawler.Test
 			PythonPackageDefinition package = new PythonPackageDefinition("OpenFlowsWater");
 
 			IAssemblyCrawler crawler = new AssemblyCrawler();
-			crawler.Crawl(package, testAssembly.Location, string.Empty, Path.GetTempPath());
+			crawler.Crawl(package, testAssembly.Location, string.Empty, Path.GetTempPath(), new InterfacesOnlyTypeFilter());
 		}
 
 

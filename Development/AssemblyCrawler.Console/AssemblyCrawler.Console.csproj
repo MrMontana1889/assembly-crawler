@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\assembly-crawler\AssemblyCrawler\AssemblyCrawler.csproj" />
+    <ProjectReference Include="..\AssemblyCrawler.Xml\AssemblyCrawler.Xml.csproj" />
     <ProjectReference Include="..\Barber.AutoDiagrammer\Barber.AutoDiagrammer.csproj" />
   </ItemGroup>
 

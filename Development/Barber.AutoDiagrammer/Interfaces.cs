@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Barber.AutoDiagrammer.GraphBits;
 using Barber.AutoDiagrammer.Models;
+using Barber.AutoDiagrammer.Support;
 
 namespace Barber.AutoDiagrammer
 {
@@ -15,13 +16,13 @@ namespace Barber.AutoDiagrammer
 		GraphResults CreateGraph();
 		void ReInitialise();
 		void CalculateSelectedTreeValues();
-		Task LoadNameSpacesAndTypes(string assemblyFileName);
+		Task LoadNameSpacesAndTypes(string assemblyFileName, ITypeFilter typeFilter);
 
-		void LoadNameSpacesAndTypesAsync(string assemblyFileName);
+		void LoadNameSpacesAndTypesAsync(string assemblyFileName, ITypeFilter typeFilter);
 	}
 
 	public interface ITreeCreator
 	{
-		List<AssemblyTreeViewModel> ScanAssemblyAndCreateTree(string assemblyFileName);
+		List<AssemblyTreeViewModel> ScanAssemblyAndCreateTree(string assemblyFileName, ITypeFilter typeFitler);
 	}
 }
