@@ -1,8 +1,8 @@
+from Haestad.Support.Support import INamable, ILabeled
 from typing import overload, List, Dict
 from enum import Enum
 from datetime import datetime
 from array import array
-from Haestad.Support.Support import ILabeled
 
 class CurrencyBasedUnit(INamable):
 

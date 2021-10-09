@@ -1674,6 +1674,27 @@ class ILabeled:
 		"""
 		pass
 
+class INamable:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			INamable: 
+		"""
+		pass
+
 class SortContextCollection(List, ICloneable):
 
 	def __init__(self, capacity: int, c: SortContextCollection, a: array(ISortContext)) -> None:
