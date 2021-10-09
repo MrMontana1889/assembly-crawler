@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import Generic, overload, TypeVar
+from Haestad.Support.Units import Unit, Dimension
 
 TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
 TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)

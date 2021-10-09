@@ -8,19 +8,19 @@ namespace AssemblyCrawler.Console.Support
 {
 	public interface IAssemblyFileOptions
 	{
-		[Option('a', "assemblies", SetName = "AssemblyFile", Required = true, HelpText = "Specify the assemblies to crawl", Min = 1)]
+		[Option('a', "assemblies", SetName = "AssemblyFile", Min = 1, HelpText = "Specify the assemblies to crawl")]
 		IEnumerable<string> Assemblies { get; set; }
 
-		[Option('x', "xmldoc", SetName = "AssemblyFile", Required = false, HelpText = "Specify the xml documents to extract", Min = 1)]
+		[Option('x', "xmldoc", SetName = "AssemblyFile", Min = 1, HelpText = "Specify the xml documents to extract")]
 		IEnumerable<string> XmlDocuments { get; set; }
 
-		[Option('o', "output", SetName = "AssemblyFile", Required = true, HelpText = "Full path to generate the stub files")]
+		[Option('o', "output", SetName = "AssemblyFile", HelpText = "Full path to generate the stub files")]
 		string OutputPath { get; set; }
 	}
 
 	public interface IConfigFileOptions
 	{
-		[Option('c', "config", SetName = "ConfigFile", Required = true, HelpText = "Specify the full path and filename of the options file.")]
+		[Option('c', "config", SetName = "ConfigFile", HelpText = "Specify the full path and filename of the options file.")]
 		string ConfigFile { get; set; }
 	}
 }

@@ -1,6 +1,7 @@
 from enum import Enum
 from Haestad.Support.Support import ILabeled, IField, FieldDataType
 from Haestad.Domain import DomainFieldType
+from Haestad.Support.Units import Unit
 from OpenFlows.Units import IUnit
 from typing import Generic, List, TypeVar
 

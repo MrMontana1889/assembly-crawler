@@ -27,7 +27,7 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(PythonPackageDefinition package, string assemblyFilename, 
+		public void Crawl(PythonPackageDefinition package, string assemblyFilename,
 			string xmlDocumentFileName, string outputPath, ITypeFilter typeFilter)
 		{
 			/*
@@ -40,7 +40,7 @@ namespace AssemblyCrawler
 			 * interfaces, in order, to write to that file.
 			*/
 
-			if (DotNetObject.IsValidDotNetAssembly(assemblyFilename))
+			if (assemblyFilename.StartsWith("System") || DotNetObject.IsValidDotNetAssembly(assemblyFilename))
 			{
 				// Valid.  Continue.
 
@@ -64,8 +64,26 @@ namespace AssemblyCrawler
 
 					var graphResults = AssemblyManipulationService.CreateGraph();
 
-					AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
-					Assembly assembly = Assembly.Load(assemblyName);
+					Assembly assembly = null;
+					if (!assemblyFilename.Contains("System"))
+					{
+						AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
+						assembly = Assembly.Load(assemblyName);
+					}
+					else
+					{
+						switch (assemblyFilename)
+						{
+							case "System":
+								assembly = Assembly.GetAssembly(typeof(Type));
+								break;
+							default:
+								return;
+						}
+					}
+
+					if (assembly == null)
+						return;
 
 					var assemblyDef = package.AddAssembly(assembly, outputPath);
 
@@ -84,9 +102,19 @@ namespace AssemblyCrawler
 						else
 							Array.Resize(ref tokens, tokens.Length - 1);
 
-						string path = Path.Combine(outputPath, string.Join(@"\", tokens));
+						string joinedFilename = string.Join(@"\", tokens);
+						if (IsInvalidFilename(joinedFilename, Path.GetInvalidPathChars()))
+							continue;
+
+						if (joinedFilename == "std")
+							continue;
+
+						string path = Path.Combine(outputPath, joinedFilename);
 						if (!Directory.Exists(path))
 							Directory.CreateDirectory(path);
+
+						if (filename == "std")
+							continue;
 
 						filename += ".pyi";
 
@@ -99,7 +127,7 @@ namespace AssemblyCrawler
 						typeMap[filename].Add(t);
 					}
 
-					 
+
 					foreach (KeyValuePair<string, List<Type>> type in typeMap)
 					{
 						string pyiFilename = Path.Combine(outputPath, type.Key);
@@ -113,6 +141,14 @@ namespace AssemblyCrawler
 					}
 				}
 			}
+		}
+
+		private bool IsInvalidFilename(string joinedFilename, char[] invalidChars)
+		{
+			foreach (var c in invalidChars)
+				if (joinedFilename.Contains(c.ToString()))
+					return true;
+			return false;
 		}
 		#endregion
 

@@ -39,7 +39,7 @@ namespace AssemblyCrawler.Test
 
 			if (DotNetObject.IsValidDotNetAssembly(testAssembly.Location))
 			{
-				var treeTask = assemblyManipulationService.LoadNameSpacesAndTypes(testAssembly.Location, new InterfacesOnlyTypeFilter());
+				var treeTask = assemblyManipulationService.LoadNameSpacesAndTypes(testAssembly.Location, new InterfacesOnlyTypeFilter(false));
 				bool finishedOk = treeTask.Wait(10000);
 				Assert.IsTrue(finishedOk);
 
@@ -58,7 +58,7 @@ namespace AssemblyCrawler.Test
 
 			if (DotNetObject.IsValidDotNetAssembly(testAssembly.Location))
 			{
-				assemblyManipulationService.LoadNameSpacesAndTypesAsync(testAssembly.Location, new InterfacesOnlyTypeFilter());
+				assemblyManipulationService.LoadNameSpacesAndTypesAsync(testAssembly.Location, new InterfacesOnlyTypeFilter(false));
 
 				var treeValues = assemblyManipulationService.TreeValues;
 				Assert.IsTrue(treeValues.Count > 0);
@@ -90,7 +90,7 @@ namespace AssemblyCrawler.Test
 			string openFlowsAssemblyFilename = Path.Combine(sourcePath, "OpenFlows.dll");
 			Assert.IsTrue(DotNetObject.IsValidDotNetAssembly(openFlowsAssemblyFilename));
 
-			assemblyManipulationService.LoadNameSpacesAndTypesAsync(openFlowsAssemblyFilename, new InterfacesOnlyTypeFilter());
+			assemblyManipulationService.LoadNameSpacesAndTypesAsync(openFlowsAssemblyFilename, new InterfacesOnlyTypeFilter(false));
 
 			Assert.IsNotNull(assemblyManipulationService.TreeValues, "TreeValues is null");
 			Assert.AreEqual(1, assemblyManipulationService.TreeValues.Count);
@@ -121,7 +121,7 @@ namespace AssemblyCrawler.Test
 			string openFlowsAssemblyFilename = Path.Combine(sourcePath, "OpenFlows.Water.dll");
 			Assert.IsTrue(DotNetObject.IsValidDotNetAssembly(openFlowsAssemblyFilename));
 
-			assemblyManipulationService.LoadNameSpacesAndTypesAsync(openFlowsAssemblyFilename, new InterfacesOnlyTypeFilter());
+			assemblyManipulationService.LoadNameSpacesAndTypesAsync(openFlowsAssemblyFilename, new InterfacesOnlyTypeFilter(false));
 
 			Assert.IsNotNull(assemblyManipulationService.TreeValues, "TreeValues is null");
 			Assert.AreEqual(1, assemblyManipulationService.TreeValues.Count);

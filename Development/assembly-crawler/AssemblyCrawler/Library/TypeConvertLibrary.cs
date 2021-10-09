@@ -2,6 +2,7 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AssemblyCrawler.Support;
@@ -15,6 +16,10 @@ namespace AssemblyCrawler.Library
 
 		public static string ToPythonType(Type type)
 		{
+			if (type.IsByRef)
+				if (type.HasElementType)
+					type = type.GetElementType();
+
 			if (type == typeof(void)) return "None";
 			if (type == typeof(Enum)) return "Enum";
 
@@ -24,7 +29,7 @@ namespace AssemblyCrawler.Library
 				if (typeName == "Double")
 					return $"array(float)";
 
-				return "array()";
+				return $"array({ToPythonType(type.GetElementType())})";
 			}
 
 			if (type.IsGenericType)
@@ -58,6 +63,15 @@ namespace AssemblyCrawler.Library
 
 				// TODO: Predicate, Action, Converter, ReadOnlyCollection, Comparison
 			}
+			else
+			{
+				if (type == typeof(IDictionary))
+					return "Dict";
+				else if (type == typeof(ArrayList) || type == typeof(IList))
+					return "List";
+				else if (type == typeof(IEnumerable))
+					return "Iterator";
+			}
 
 
 			return ToPythonPrimitiveType(type);
@@ -77,6 +91,8 @@ namespace AssemblyCrawler.Library
 				module.AddImportModule("enum").AddType("Enum");
 			else if (pythonType == "datetime")
 				module.AddImportModule("datetime").AddType("datetime");
+			else if (pythonType.StartsWith("array"))
+				module.AddImportModule("array").AddType("array");
 			else if (pythonType == PythonStubWriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length))
 			{
 				// One of the types being written to the package.
@@ -150,6 +166,12 @@ namespace AssemblyCrawler.Library
 			if (type.IsEnum)
 				return type.Name;
 
+			if (type.IsByRef)
+			{
+				if (type.HasElementType)
+					type = type.GetElementType();
+			}
+
 			switch (Type.GetTypeCode(type))
 			{
 				case TypeCode.Byte:
@@ -181,6 +203,10 @@ namespace AssemblyCrawler.Library
 				//	return "Any"; // must have "from typing import Any"
 
 				default:
+
+					if (type.Name == "Object")
+						return "object";
+
 					return PythonStubWriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length);
 
 			}

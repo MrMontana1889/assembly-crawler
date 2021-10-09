@@ -31,8 +31,8 @@ namespace Barber.AutoDiagrammer.Support
             //check to see if the class lives in a namespace
             if (t.Namespace != null && !string.IsNullOrEmpty(t.Namespace))
             {
-                if (t.Namespace.StartsWith("Haestad"))
-                    return false;       // Ignore all types in haestad assemblies
+                if (t.Namespace.StartsWith("System"))
+                    return false;       // Ignore all types in system assemblies
             }
 
             if (!t.IsClass && t.IsInterface)

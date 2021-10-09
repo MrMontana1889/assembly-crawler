@@ -13,9 +13,9 @@ namespace Barber.AutoDiagrammer.Support
     public class InterfacesOnlyTypeFilter : ITypeFilter
 	{
 		#region Constructor
-		public InterfacesOnlyTypeFilter()
+		public InterfacesOnlyTypeFilter(bool overrideHaestadNamespace)
 		{
-
+            OverrideHaestadNamespace = overrideHaestadNamespace;
 		}
 		#endregion
 
@@ -35,7 +35,7 @@ namespace Barber.AutoDiagrammer.Support
                 if (t.Namespace.StartsWith("System"))
                     return false;
 
-                if (t.Namespace.StartsWith("Haestad"))
+                if (!OverrideHaestadNamespace && t.Namespace.StartsWith("Haestad"))
                     return false;       // Ignore all types in haestad assemblies
             }
 
@@ -50,6 +50,10 @@ namespace Barber.AutoDiagrammer.Support
 
             return false;
         }
+		#endregion
+
+		#region Private Properties
+        private bool OverrideHaestadNamespace { get; }
         #endregion
     }
 }

@@ -54,6 +54,10 @@
     "OpenFlowsAPI-Waters-Stubs": {
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\OpenFlowsAPI-water-stubs\\typings\""
+    },
+    "Config-crawler": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"D:\\repos\\assembly-crawler\\OpenFlows.config\""
     }
   }
 }
