@@ -6,18 +6,18 @@ using System.Xml.Serialization;
 
 namespace AssemblyCrawler.Support.Config
 {
-	[XmlRoot]
+	[XmlType("Package")]
 	public class ConfigPackage
 	{
 		#region Constructor
-		public ConfigPackage(string outputPath)
+		public ConfigPackage()
 		{
-			OutputPath = outputPath;
+			
 		}
 		#endregion
 
 		#region Public Properties
-		public string OutputPath { get; }
+		public string OutputPath { get; set; }
 		public List<ConfigAssembly> Assemblies { get; } = new List<ConfigAssembly>();
 		#endregion
 	}
