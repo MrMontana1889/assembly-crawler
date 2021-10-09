@@ -25,7 +25,7 @@ namespace Barber.AutoDiagrammer.Services
     public class TreeCreator : ITreeCreator
     {
         #region ITreeCreator Members
-        public List<AssemblyTreeViewModel> ScanAssemblyAndCreateTree(string assemblyFileName)
+        public List<AssemblyTreeViewModel> ScanAssemblyAndCreateTree(string assemblyFileName, ITypeFilter typeFilter)
         {
             AppDomain childDomain = BuildChildDomain(AppDomain.CurrentDomain, assemblyFileName);
 
@@ -58,7 +58,7 @@ namespace Barber.AutoDiagrammer.Services
                         SettingsViewModel.Instance.IncludePropertyTypesAsAssociations,
                         SettingsViewModel.Instance.IncludeFieldTypesAsAssociations,
                         SettingsViewModel.Instance.IncludeMethodArgumentAsAssociations);
-                    tree = loader.ScanAssemblyAndCreateTree();
+                    tree = loader.ScanAssemblyAndCreateTree(typeFilter);
                 }
 
                 return tree;
@@ -158,14 +158,14 @@ namespace Barber.AutoDiagrammer.Services
 
         #region Private/Internal Methods
         [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
-        internal List<AssemblyTreeViewModel> ScanAssemblyAndCreateTree()
+        internal List<AssemblyTreeViewModel> ScanAssemblyAndCreateTree(ITypeFilter typeFilter)
         {
             AppDomain curDomain = AppDomain.CurrentDomain;
 
             try
             {
                 AppDomain.CurrentDomain.AssemblyResolve += ReflectionOnlyResolveEventHandler;
-                List<AssemblyTreeViewModel> tree = GroupAndCreateTree(assemblyFileName);
+                List<AssemblyTreeViewModel> tree = GroupAndCreateTree(assemblyFileName, typeFilter);
                 return tree;
             }
             finally
@@ -203,7 +203,7 @@ namespace Barber.AutoDiagrammer.Services
         }
 
 
-        private List<AssemblyTreeViewModel> GroupAndCreateTree(String assemblyFileName)
+        private List<AssemblyTreeViewModel> GroupAndCreateTree(string assemblyFileName, ITypeFilter typeFilter)
         {
 
 
@@ -211,7 +211,7 @@ namespace Barber.AutoDiagrammer.Services
             List<AssemblyTreeViewModel> tree = new List<AssemblyTreeViewModel>();
 
             var groupedTypes = from t in assembly.GetTypes()
-                               where DotNetObject.IsWantedForDiagramType(t)
+                               where typeFilter.IncludeType(t)
                                group t by t.Namespace into g
                                select new { NameSpace = g.Key, Types = g };
 
