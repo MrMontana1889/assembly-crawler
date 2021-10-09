@@ -11,13 +11,9 @@ clr.AddReference('OpenFlows.Water')
 
 # Import the OpenFlowsWater module
 from OpenFlows.Water import OpenFlowsWater, WaterProductLicenseType
-from Haestad.Support.Support import GeometryPoint
-from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import DomainElementExtensions
 
 print("Initializing session of OpenFlows.Water...")
 OpenFlowsWater.StartSession(WaterProductLicenseType.WaterGEMS)
-
 
 print("Opening model...")
 projectFilename1:str = r'D:\p4\Glacier\Products\WaterGEMS\Development\Runtime\Samples\Example1.wtg'
