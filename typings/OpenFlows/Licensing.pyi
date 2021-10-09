@@ -1,3 +1,4 @@
+from Haestad.LicensingFacade import ILicenseProvider, LicenseRunStatusEnum, ProductId, LicenseStatus
 from typing import overload
 
 class ILicenseManager(ILicenseProvider):

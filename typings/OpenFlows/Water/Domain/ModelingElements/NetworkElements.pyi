@@ -6,6 +6,7 @@ from array import array
 from OpenFlows.Units import IUnit
 from enum import Enum
 from OpenFlows.Water.Domain import ValveSettingType, TCVCoefficientType, PressureValvesettingType, ConstituentSourceType, PipeStatusType, TankSectionType
+from Haestad.Support.Support import GeometryPoint
 from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput
 from OpenFlows.Domain.DataObjects import INetwork
 
@@ -234,7 +235,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -242,7 +243,7 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -713,7 +714,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -721,7 +722,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -729,7 +730,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -737,7 +738,7 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1181,7 +1182,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1189,7 +1190,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1197,7 +1198,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1205,7 +1206,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1213,7 +1214,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1221,7 +1222,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -1229,7 +1230,7 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2240,7 +2241,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2248,7 +2249,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2256,7 +2257,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2264,7 +2265,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2272,7 +2273,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2280,7 +2281,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -2288,7 +2289,7 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3374,7 +3375,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3382,7 +3383,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3390,7 +3391,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3398,7 +3399,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3406,7 +3407,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3414,7 +3415,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3422,7 +3423,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3430,7 +3431,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3438,7 +3439,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3446,7 +3447,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3454,7 +3455,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -3462,7 +3463,7 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4126,7 +4127,7 @@ class IVSPBResults(IBasePumpResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4134,7 +4135,7 @@ class IVSPBResults(IBasePumpResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4673,7 +4674,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4681,7 +4682,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4689,7 +4690,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4697,7 +4698,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4705,7 +4706,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4713,7 +4714,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4721,7 +4722,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4729,7 +4730,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -4737,7 +4738,7 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -5083,7 +5084,7 @@ class IFlowControlValveResults(IBaseValveResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -5315,7 +5316,7 @@ class IThrottleControlValveResults(IBaseValveResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -5704,7 +5705,7 @@ class IPressureValveResults(IBaseValveResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -6500,13 +6501,13 @@ class DomainElementExtensions:
 
 	@staticmethod
 	@overload
-	def Create(pumpStations: IPumpStations, label: str, rings: array()) -> IPumpStation:
+	def Create(pumpStations: IPumpStations, label: str, rings: array(array(GeometryPoint))) -> IPumpStation:
 		"""No Description
 
 		Args:
 			pumpStations(IPumpStations): pumpStations
 			label(str): label
-			rings(array()): rings
+			rings(array(array(GeometryPoint))): rings
 
 		Returns:
 			IPumpStation: 
@@ -6846,7 +6847,7 @@ class IWaterQualityResults:
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -6854,7 +6855,7 @@ class IWaterQualityResults:
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -6862,7 +6863,7 @@ class IWaterQualityResults:
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -7879,7 +7880,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -7887,7 +7888,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -7895,7 +7896,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -7903,7 +7904,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -7911,7 +7912,7 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -8420,7 +8421,7 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -8428,7 +8429,7 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -9214,7 +9215,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -9222,7 +9223,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -9230,7 +9231,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -9238,7 +9239,7 @@ class IConventionalTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -10453,7 +10454,7 @@ class IBaseTankResults(IDemandNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -11306,7 +11307,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -11314,7 +11315,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -11322,7 +11323,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -11330,7 +11331,7 @@ class IHydroTankResults(IBaseTankResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -11776,7 +11777,7 @@ class IHammerNodeResults(IBaseNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -11784,7 +11785,7 @@ class IHammerNodeResults(IBaseNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -12457,7 +12458,7 @@ class IPeriodicHeadFlowResults(IHammerNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -13935,7 +13936,7 @@ class IDischargeToAtmosphereNodeResults(IBaseOrificeNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -14318,7 +14319,7 @@ class IBaseNodeResults(IElementResults, IWaterQualityResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -14495,7 +14496,7 @@ class IReservoirResults(IBaseNodeResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -14975,7 +14976,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -14983,7 +14984,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -14991,7 +14992,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -14999,7 +15000,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -15015,7 +15016,7 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -15428,7 +15429,7 @@ class ISpotElevationResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -15436,7 +15437,7 @@ class ISpotElevationResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -15903,7 +15904,7 @@ class ICustomerMeterResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 
@@ -15911,7 +15912,7 @@ class ICustomerMeterResults(IElementResults):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(Nullable): 
 		"""
 		pass
 

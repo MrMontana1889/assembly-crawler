@@ -1,7 +1,8 @@
 from enum import Enum
+from Haestad.Support.Support import ILabeled, IField, FieldDataType
+from Haestad.Domain import DomainFieldType
 from OpenFlows.Units import IUnit
 from typing import Generic, List, TypeVar
-from Haestad.Support.Support.Interfaces import ILabeled, INamable
 
 TValueType = TypeVar("TValueType")
 TFieldType = TypeVar("TFieldType")

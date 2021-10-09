@@ -1,9 +1,10 @@
 from enum import Enum
 from typing import List, Generic, overload, TypeVar
+from Haestad.Support.Support import SortContextCollection, FilterContextCollection, IEditLabeled
+from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 from OpenFlows.Units import IUnit
 from datetime import datetime
 from array import array
-from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 
 TElementType = TypeVar("TElementType", IElement)
 TElementManagerType = TypeVar("TElementManagerType", IModelingElementsBase)

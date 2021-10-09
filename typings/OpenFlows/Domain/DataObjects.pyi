@@ -1,3 +1,4 @@
+from Haestad.Domain import IDomainDataSet
 from datetime import datetime
 from typing import Generic, overload, List, TypeVar
 from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IModelingElementBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
