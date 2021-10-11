@@ -42,7 +42,7 @@ namespace AssemblyCrawler.Console
 		{
 			if (obj.ConfigFile == null)
 			{
-				PythonPackageDefinition package = new PythonPackageDefinition("Package");
+				PythonPackage package = new PythonPackage("Package");
 
 				// make usre obj.Assemblies and obj.XML document are same size
 				if (obj.Assemblies.Count() != obj.XmlDocuments.Count())
@@ -82,7 +82,7 @@ namespace AssemblyCrawler.Console
 					if (!Directory.Exists(pkg.OutputPath))
 						Directory.CreateDirectory(pkg.OutputPath);      // Make sure the output path exists.
 
-					PythonPackageDefinition package = new PythonPackageDefinition("Package");
+					PythonPackage package = new PythonPackage("Package");
 
 					// System assemblies should be processed first
 					foreach (var assembly in pkg.SystemAssemblies)

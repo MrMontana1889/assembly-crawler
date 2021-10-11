@@ -1,7 +1,7 @@
-from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
 from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve
+from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
+from typing import overload, Dict, List, Generic
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType
-from typing import overload, Dict, List, Union, Generic
 from array import array
 from OpenFlows.Units import IUnit
 from enum import Enum
@@ -10,6 +10,69 @@ from Haestad.Support.Support import GeometryPoint
 from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput
 from OpenFlows.Domain.DataObjects import INetwork
 
+
+class VSPBFixedHeadType(Enum):
+	HydraulicGrade = 0
+	Pressure = 1
+
+class WaterNetworkElementType(Enum):
+	SCADAElement = 23
+	Lateral = 24
+	Tap = 26
+	Tank = 52
+	Hydrant = 54
+	Junction = 55
+	Reservoir = 56
+	FCV = 60
+	TCV = 61
+	GPV = 62
+	PRV = 64
+	PSV = 65
+	PBV = 66
+	Pump = 68
+	Pipe = 69
+	SpotElevation = 70
+	IsolationValve = 71
+	VSPB = 72
+	CustomerMeter = 73
+	Turbine = 300
+	AirValve = 301
+	HydropneumaticTank = 302
+	SurgeValve = 303
+	DischargeToAtmosphere = 305
+	RuptureDisk = 306
+	OrificeBetweenTwoPipes = 307
+	SurgeTank = 308
+	CheckValve = 309
+	ValveWithLinearAreaChange = 310
+	PeriodicHeadFlow = 321
+	PumpStation = 700
+
+class SCADATargetAttribute(Enum):
+	UnAssigned = 0
+	RelativeClosure = -300
+	ConstituentConcentration = -299
+	PressureNodeDemand = -297
+	ValveStatus = -58
+	PumpStatus = -57
+	PipeStatus = -56
+	TankLevel = -55
+	Pressure = -54
+	HydraulicGrade = -53
+	PumpSetting = -52
+	PressureValveSetting = -51
+	TCValveSetting = -50
+	FCValveSetting = -49
+	PressureOut = -48
+	PressureIn = -47
+	HydraulicGradeOut = -46
+	HydraulicGradeIn = -45
+	Discharge = -44
+	WirePower = -43
+
+class TransientParameterType(Enum):
+	Head = 0
+	Flow = 1
 
 class IMinorLoss(ICollectionElement):
 
@@ -32,6 +95,10 @@ class IMinorLoss(ICollectionElement):
 		"""
 		pass
 
+	@Quantity.setter
+	def Quantity(self, quantity: int) -> None:
+		pass
+
 	@property
 	def MinorLossCoefficient(self) -> IMinorLossCoefficient:
 		"""No Description
@@ -39,10 +106,6 @@ class IMinorLoss(ICollectionElement):
 		Returns:
 			IMinorLoss: 
 		"""
-		pass
-
-	@Quantity.setter
-	def Quantity(self, quantity: int) -> None:
 		pass
 
 	@MinorLossCoefficient.setter
@@ -61,12 +124,22 @@ class IMinorLosses(ICollection[IMinorLoss]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, quantity: int, minorLoss: IMinorLossCoefficient) -> IMinorLoss:
 		"""No Description
 
 		Args:
 			quantity(int): quantity
 			minorLoss(IMinorLossCoefficient): minorLoss
+
+		Returns:
+			IMinorLoss: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IMinorLoss:
+		"""No Description
 
 		Returns:
 			IMinorLoss: 
@@ -210,6 +283,14 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 		"""
 		pass
 
+	def CannotDeliverFlowsOrHeads(self) -> array(Union[bool, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def IsOpen(self) -> Union[bool, None]:
 		"""No Description
@@ -228,14 +309,6 @@ class IBaseDirectedNodeResults(IElementResults, IWaterQualityResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def CannotDeliverFlowsOrHeads(self) -> array(Union[bool, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -268,6 +341,10 @@ class IBaseDirectedNodeInput(IPhysicalNodeElementInput, IWaterZoneableNetworkEle
 		"""
 		pass
 
+	@DownstreamLink.setter
+	def DownstreamLink(self, downstreamlink: IElement) -> None:
+		pass
+
 	@property
 	def InstallationYear(self) -> int:
 		"""No Description
@@ -275,10 +352,6 @@ class IBaseDirectedNodeInput(IPhysicalNodeElementInput, IWaterZoneableNetworkEle
 		Returns:
 			IBaseDirectedNodeInput: 
 		"""
-		pass
-
-	@DownstreamLink.setter
-	def DownstreamLink(self, downstreamlink: IElement) -> None:
 		pass
 
 	@InstallationYear.setter
@@ -360,6 +433,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@LocatedAtWye.setter
+	def LocatedAtWye(self, locatedatwye: bool) -> None:
+		pass
+
 	@property
 	def CheckValvePipeWithWye(self) -> IPipe:
 		"""No Description
@@ -367,6 +444,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		Returns:
 			ICheckValveElementInput: 
 		"""
+		pass
+
+	@CheckValvePipeWithWye.setter
+	def CheckValvePipeWithWye(self, checkvalvepipewithwye: IPipe) -> None:
 		pass
 
 	@property
@@ -378,6 +459,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@FlowDirection.setter
+	def FlowDirection(self, flowdirection: CheckValveFlowDirectionEnum) -> None:
+		pass
+
 	@property
 	def InitialTypicalFlow(self) -> float:
 		"""No Description
@@ -385,6 +470,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		Returns:
 			ICheckValveElementInput: 
 		"""
+		pass
+
+	@InitialTypicalFlow.setter
+	def InitialTypicalFlow(self, initialtypicalflow: float) -> None:
 		pass
 
 	@property
@@ -396,6 +485,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@ThresholdPressure.setter
+	def ThresholdPressure(self, thresholdpressure: float) -> None:
+		pass
+
 	@property
 	def ClosureTime(self) -> float:
 		"""No Description
@@ -403,6 +496,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		Returns:
 			ICheckValveElementInput: 
 		"""
+		pass
+
+	@ClosureTime.setter
+	def ClosureTime(self, closuretime: float) -> None:
 		pass
 
 	@property
@@ -414,6 +511,10 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@OpenTime.setter
+	def OpenTime(self, opentime: float) -> None:
+		pass
+
 	@property
 	def AllowDisruptionOfOperation(self) -> bool:
 		"""No Description
@@ -421,34 +522,6 @@ class ICheckValveElementInput(IBaseDirectedNodeInput):
 		Returns:
 			ICheckValveElementInput: 
 		"""
-		pass
-
-	@LocatedAtWye.setter
-	def LocatedAtWye(self, locatedatwye: bool) -> None:
-		pass
-
-	@CheckValvePipeWithWye.setter
-	def CheckValvePipeWithWye(self, checkvalvepipewithwye: IPipe) -> None:
-		pass
-
-	@FlowDirection.setter
-	def FlowDirection(self, flowdirection: CheckValveFlowDirectionEnum) -> None:
-		pass
-
-	@InitialTypicalFlow.setter
-	def InitialTypicalFlow(self, initialtypicalflow: float) -> None:
-		pass
-
-	@ThresholdPressure.setter
-	def ThresholdPressure(self, thresholdpressure: float) -> None:
-		pass
-
-	@ClosureTime.setter
-	def ClosureTime(self, closuretime: float) -> None:
-		pass
-
-	@OpenTime.setter
-	def OpenTime(self, opentime: float) -> None:
 		pass
 
 	@AllowDisruptionOfOperation.setter
@@ -647,6 +720,14 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def AbsoluteFlow(self) -> Union[float, None]:
 		"""No Description
@@ -665,6 +746,14 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def AbsoluteFlows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -689,6 +778,14 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def Pressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def HydraulicGrade(self) -> Union[float, None]:
 		"""No Description
@@ -707,30 +804,6 @@ class ICheckValveElementResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def AbsoluteFlows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Pressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -974,6 +1047,10 @@ class IOrificeBetweenTwoPipesInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@TypicalPressureDrop.setter
+	def TypicalPressureDrop(self, typicalpressuredrop: float) -> None:
+		pass
+
 	@property
 	def TypicalFlow(self) -> float:
 		"""No Description
@@ -981,10 +1058,6 @@ class IOrificeBetweenTwoPipesInput(IBaseDirectedNodeInput):
 		Returns:
 			IOrificeBetweenTwoPipesInput: 
 		"""
-		pass
-
-	@TypicalPressureDrop.setter
-	def TypicalPressureDrop(self, typicalpressuredrop: float) -> None:
 		pass
 
 	@TypicalFlow.setter
@@ -1052,6 +1125,14 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Headloss(self) -> Union[float, None]:
 		"""No Description
@@ -1070,6 +1151,14 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Headlosses(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -1094,6 +1183,14 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def FromHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def ToHydraulicGrade(self) -> Union[float, None]:
 		"""No Description
@@ -1112,6 +1209,14 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def ToHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -1136,6 +1241,14 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def FromPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def ToPressure(self) -> Union[float, None]:
 		"""No Description
@@ -1157,6 +1270,14 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def ToPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def AbsoluteFlow(self) -> Union[float, None]:
 		"""No Description
@@ -1175,54 +1296,6 @@ class IOrificeBetweenTwoPipesResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Headlosses(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def FromHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def ToHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def FromPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def ToPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -1450,6 +1523,14 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		"""
 		pass
 
+	def AbsolueFlow(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
+		pass
+
 	@overload
 	def AbsoluteFlow(self, timeStepIndex: int) -> Dict[int,int]:
 		"""No Description
@@ -1469,14 +1550,6 @@ class IOrificesBetweenTwoPipesResults(IBaseDirectedNodesResults):
 		Args:
 			ids(List[int]): ids
 			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
-	def AbsolueFlow(self) -> Dict[int,int]:
-		"""No Description
 
 		Returns:
 			Dict[int,int]: 
@@ -1579,12 +1652,22 @@ class ITurbineFlowHeads(ICollection[ITurbineFlowHead]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, head: float) -> ITurbineFlowHead:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			head(float): head
+
+		Returns:
+			ITurbineFlowHead: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> ITurbineFlowHead:
+		"""No Description
 
 		Returns:
 			ITurbineFlowHead: 
@@ -1612,6 +1695,10 @@ class ITurbineFlowHead(ICollectionElement):
 		"""
 		pass
 
+	@Flow.setter
+	def Flow(self, flow: float) -> None:
+		pass
+
 	@property
 	def Head(self) -> float:
 		"""No Description
@@ -1619,10 +1706,6 @@ class ITurbineFlowHead(ICollectionElement):
 		Returns:
 			ITurbineFlowHead: 
 		"""
-		pass
-
-	@Flow.setter
-	def Flow(self, flow: float) -> None:
 		pass
 
 	@Head.setter
@@ -1683,12 +1766,22 @@ class IElectricalTorques(ICollection[IElectricalTorque]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, time: float, torque: float) -> IElectricalTorque:
 		"""No Description
 
 		Args:
 			time(float): time
 			torque(float): torque
+
+		Returns:
+			IElectricalTorque: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IElectricalTorque:
+		"""No Description
 
 		Returns:
 			IElectricalTorque: 
@@ -1716,6 +1809,10 @@ class IElectricalTorque(ICollectionElement):
 		"""
 		pass
 
+	@Time.setter
+	def Time(self, time: float) -> None:
+		pass
+
 	@property
 	def Torque(self) -> float:
 		"""No Description
@@ -1723,10 +1820,6 @@ class IElectricalTorque(ICollectionElement):
 		Returns:
 			IElectricalTorque: 
 		"""
-		pass
-
-	@Time.setter
-	def Time(self, time: float) -> None:
 		pass
 
 	@Torque.setter
@@ -1784,6 +1877,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@TimeDelayUntilValveOperates.setter
+	def TimeDelayUntilValveOperates(self, timedelayuntilvalveoperates: float) -> None:
+		pass
+
 	@property
 	def TimeForValveToOperate(self) -> float:
 		"""No Description
@@ -1791,6 +1888,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
+		pass
+
+	@TimeForValveToOperate.setter
+	def TimeForValveToOperate(self, timeforvalvetooperate: float) -> None:
 		pass
 
 	@property
@@ -1802,6 +1903,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@SphericalValveDiameter.setter
+	def SphericalValveDiameter(self, sphericalvalvediameter: float) -> None:
+		pass
+
 	@property
 	def TurbineEfficiency(self) -> float:
 		"""No Description
@@ -1809,6 +1914,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
+		pass
+
+	@TurbineEfficiency.setter
+	def TurbineEfficiency(self, turbineefficiency: float) -> None:
 		pass
 
 	@property
@@ -1820,6 +1929,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@MomentOfInertia.setter
+	def MomentOfInertia(self, momentofinertia: float) -> None:
+		pass
+
 	@property
 	def RotationalSpeed(self) -> float:
 		"""No Description
@@ -1827,6 +1940,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
+		pass
+
+	@RotationalSpeed.setter
+	def RotationalSpeed(self, rotationalspeed: float) -> None:
 		pass
 
 	@property
@@ -1838,6 +1955,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@GateOpeningPattern.setter
+	def GateOpeningPattern(self, gateopeningpattern: IPattern) -> None:
+		pass
+
 	@property
 	def SpecificSpeed(self) -> float:
 		"""No Description
@@ -1845,6 +1966,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
+		pass
+
+	@SpecificSpeed.setter
+	def SpecificSpeed(self, specificspeed: float) -> None:
 		pass
 
 	@property
@@ -1856,6 +1981,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@TurbineInitialFlow.setter
+	def TurbineInitialFlow(self, turbineinitialflow: float) -> None:
+		pass
+
 	@property
 	def TurbineInitialHead(self) -> float:
 		"""No Description
@@ -1863,6 +1992,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
+		pass
+
+	@TurbineInitialHead.setter
+	def TurbineInitialHead(self, turbineinitialhead: float) -> None:
 		pass
 
 	@property
@@ -1874,6 +2007,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@OperatingCase.setter
+	def OperatingCase(self, operatingcase: TurbineOperatingCaseEnum) -> None:
+		pass
+
 	@property
 	def ReportPeriod(self) -> int:
 		"""No Description
@@ -1883,6 +2020,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@ReportPeriod.setter
+	def ReportPeriod(self, reportperiod: int) -> None:
+		pass
+
 	@property
 	def TurbineInitialStatus(self) -> TurbineStatusEnum:
 		"""No Description
@@ -1890,6 +2031,10 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
+		pass
+
+	@TurbineInitialStatus.setter
+	def TurbineInitialStatus(self, turbineinitialstatus: TurbineStatusEnum) -> None:
 		pass
 
 	@property
@@ -1908,58 +2053,6 @@ class ITurbineInput(IBaseDirectedNodeInput):
 		Returns:
 			ITurbineInput: 
 		"""
-		pass
-
-	@TimeDelayUntilValveOperates.setter
-	def TimeDelayUntilValveOperates(self, timedelayuntilvalveoperates: float) -> None:
-		pass
-
-	@TimeForValveToOperate.setter
-	def TimeForValveToOperate(self, timeforvalvetooperate: float) -> None:
-		pass
-
-	@SphericalValveDiameter.setter
-	def SphericalValveDiameter(self, sphericalvalvediameter: float) -> None:
-		pass
-
-	@TurbineEfficiency.setter
-	def TurbineEfficiency(self, turbineefficiency: float) -> None:
-		pass
-
-	@MomentOfInertia.setter
-	def MomentOfInertia(self, momentofinertia: float) -> None:
-		pass
-
-	@RotationalSpeed.setter
-	def RotationalSpeed(self, rotationalspeed: float) -> None:
-		pass
-
-	@GateOpeningPattern.setter
-	def GateOpeningPattern(self, gateopeningpattern: IPattern) -> None:
-		pass
-
-	@SpecificSpeed.setter
-	def SpecificSpeed(self, specificspeed: float) -> None:
-		pass
-
-	@TurbineInitialFlow.setter
-	def TurbineInitialFlow(self, turbineinitialflow: float) -> None:
-		pass
-
-	@TurbineInitialHead.setter
-	def TurbineInitialHead(self, turbineinitialhead: float) -> None:
-		pass
-
-	@OperatingCase.setter
-	def OperatingCase(self, operatingcase: TurbineOperatingCaseEnum) -> None:
-		pass
-
-	@ReportPeriod.setter
-	def ReportPeriod(self, reportperiod: int) -> None:
-		pass
-
-	@TurbineInitialStatus.setter
-	def TurbineInitialStatus(self, turbineinitialstatus: TurbineStatusEnum) -> None:
 		pass
 
 class ITurbinesInput(IBaseDirectedNodesInput):
@@ -2111,6 +2204,14 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Headloss(self) -> Union[float, None]:
 		"""No Description
@@ -2129,6 +2230,14 @@ class ITurbineResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Headlosses(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -2153,6 +2262,14 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def FromHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def ToHydraulicGrade(self) -> Union[float, None]:
 		"""No Description
@@ -2171,6 +2288,14 @@ class ITurbineResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def ToHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -2195,6 +2320,14 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def FromPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def ToPressure(self) -> Union[float, None]:
 		"""No Description
@@ -2216,6 +2349,14 @@ class ITurbineResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def ToPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def AbsoluteFlow(self) -> Union[float, None]:
 		"""No Description
@@ -2234,54 +2375,6 @@ class ITurbineResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Headlosses(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def FromHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def ToHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def FromPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def ToPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -2682,10 +2775,6 @@ class ITurbines(IWaterNetworkElements[ITurbines, ITurbine, ITurbineUnits, ITurbi
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
-
-class VSPBFixedHeadType(Enum):
-	HydraulicGrade = 0
-	Pressure = 1
 
 class IBasePumpsResults(IBaseDirectedNodesResults):
 
@@ -3140,6 +3229,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def CalculatedRelativeSpeedFactors(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def SuctionHydraulicGrade(self) -> Union[float, None]:
 		"""No Description
@@ -3158,6 +3255,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def SuctionHyraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -3182,6 +3287,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def DischargeHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def SuctionPressure(self) -> Union[float, None]:
 		"""No Description
@@ -3200,6 +3313,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def SuctionPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -3224,6 +3345,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def DischargePressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Flow(self) -> Union[float, None]:
 		"""No Description
@@ -3242,6 +3371,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -3266,6 +3403,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def PumpHeads(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def AvailableNPSH(self) -> Union[float, None]:
 		"""No Description
@@ -3284,6 +3429,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def AvailableNPSHs(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -3308,6 +3461,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def RequiredNPSHs(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def PumpExceedsOperatingRange(self) -> Union[bool, None]:
 		"""No Description
@@ -3326,6 +3487,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def PumpExceedsOperatingRanges(self) -> array(Union[bool, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -3350,6 +3519,14 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def CalculatedPumpStatuses(self) -> array(Union[PumpStatusEnum, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def WirePower(self) -> Union[float, None]:
 		"""No Description
@@ -3368,94 +3545,6 @@ class IBasePumpResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def CalculatedRelativeSpeedFactors(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def SuctionHyraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def DischargeHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def SuctionPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def DischargePressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def PumpHeads(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def AvailableNPSHs(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def RequiredNPSHs(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def PumpExceedsOperatingRanges(self) -> array(Union[bool, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def CalculatedPumpStatuses(self) -> array(Union[PumpStatusEnum, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -3488,6 +3577,10 @@ class IBasePumpInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@InitialRelativeSpeedFactor.setter
+	def InitialRelativeSpeedFactor(self, initialrelativespeedfactor: float) -> None:
+		pass
+
 	@property
 	def InitialStatus(self) -> int:
 		"""No Description
@@ -3495,10 +3588,6 @@ class IBasePumpInput(IBaseDirectedNodeInput):
 		Returns:
 			IBasePumpInput: 
 		"""
-		pass
-
-	@InitialRelativeSpeedFactor.setter
-	def InitialRelativeSpeedFactor(self, initialrelativespeedfactor: float) -> None:
 		pass
 
 	@InitialStatus.setter
@@ -3868,6 +3957,10 @@ class IVSPBInput(IBasePumpInput):
 		"""
 		pass
 
+	@PumpDefinition.setter
+	def PumpDefinition(self, pumpdefinition: IPumpDefinition) -> None:
+		pass
+
 	@property
 	def ControlNode(self) -> IWaterElement:
 		"""No Description
@@ -3875,6 +3968,10 @@ class IVSPBInput(IBasePumpInput):
 		Returns:
 			IVSPBInput: 
 		"""
+		pass
+
+	@ControlNode.setter
+	def ControlNode(self, controlnode: IWaterElement) -> None:
 		pass
 
 	@property
@@ -3886,6 +3983,10 @@ class IVSPBInput(IBasePumpInput):
 		"""
 		pass
 
+	@TargetHydraulicGrade.setter
+	def TargetHydraulicGrade(self, targethydraulicgrade: float) -> None:
+		pass
+
 	@property
 	def MaximumRelativeSpeedFactor(self) -> float:
 		"""No Description
@@ -3893,6 +3994,10 @@ class IVSPBInput(IBasePumpInput):
 		Returns:
 			IVSPBInput: 
 		"""
+		pass
+
+	@MaximumRelativeSpeedFactor.setter
+	def MaximumRelativeSpeedFactor(self, maximumrelativespeedfactor: float) -> None:
 		pass
 
 	@property
@@ -3904,6 +4009,10 @@ class IVSPBInput(IBasePumpInput):
 		"""
 		pass
 
+	@NumberOfLagPumps.setter
+	def NumberOfLagPumps(self, numberoflagpumps: int) -> None:
+		pass
+
 	@property
 	def ControlNodeOnSuctionSide(self) -> bool:
 		"""No Description
@@ -3911,6 +4020,10 @@ class IVSPBInput(IBasePumpInput):
 		Returns:
 			IVSPBInput: 
 		"""
+		pass
+
+	@ControlNodeOnSuctionSide.setter
+	def ControlNodeOnSuctionSide(self, controlnodeonsuctionside: bool) -> None:
 		pass
 
 	@property
@@ -3922,6 +4035,10 @@ class IVSPBInput(IBasePumpInput):
 		"""
 		pass
 
+	@TargetFlow.setter
+	def TargetFlow(self, targetflow: float) -> None:
+		pass
+
 	@property
 	def TargetPressure(self) -> float:
 		"""No Description
@@ -3929,6 +4046,10 @@ class IVSPBInput(IBasePumpInput):
 		Returns:
 			IVSPBInput: 
 		"""
+		pass
+
+	@TargetPressure.setter
+	def TargetPressure(self, targetpressure: float) -> None:
 		pass
 
 	@property
@@ -3940,6 +4061,10 @@ class IVSPBInput(IBasePumpInput):
 		"""
 		pass
 
+	@VSPBType.setter
+	def VSPBType(self, vspbtype: VSPBType) -> None:
+		pass
+
 	@property
 	def VSPBFixedHeadType(self) -> VSPBFixedHeadType:
 		"""No Description
@@ -3947,42 +4072,6 @@ class IVSPBInput(IBasePumpInput):
 		Returns:
 			IVSPBInput: 
 		"""
-		pass
-
-	@PumpDefinition.setter
-	def PumpDefinition(self, pumpdefinition: IPumpDefinition) -> None:
-		pass
-
-	@ControlNode.setter
-	def ControlNode(self, controlnode: IWaterElement) -> None:
-		pass
-
-	@TargetHydraulicGrade.setter
-	def TargetHydraulicGrade(self, targethydraulicgrade: float) -> None:
-		pass
-
-	@MaximumRelativeSpeedFactor.setter
-	def MaximumRelativeSpeedFactor(self, maximumrelativespeedfactor: float) -> None:
-		pass
-
-	@NumberOfLagPumps.setter
-	def NumberOfLagPumps(self, numberoflagpumps: int) -> None:
-		pass
-
-	@ControlNodeOnSuctionSide.setter
-	def ControlNodeOnSuctionSide(self, controlnodeonsuctionside: bool) -> None:
-		pass
-
-	@TargetFlow.setter
-	def TargetFlow(self, targetflow: float) -> None:
-		pass
-
-	@TargetPressure.setter
-	def TargetPressure(self, targetpressure: float) -> None:
-		pass
-
-	@VSPBType.setter
-	def VSPBType(self, vspbtype: VSPBType) -> None:
 		pass
 
 	@VSPBFixedHeadType.setter
@@ -4102,6 +4191,14 @@ class IVSPBResults(IBasePumpResults):
 		"""
 		pass
 
+	def LoadPumpFlows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def NumberOfRunningLagPumps(self) -> Union[float, None]:
 		"""No Description
@@ -4120,14 +4217,6 @@ class IVSPBResults(IBasePumpResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def LoadPumpFlows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -4502,6 +4591,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Velocity(self) -> Union[float, None]:
 		"""No Description
@@ -4520,6 +4617,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Velocities(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -4544,6 +4649,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def Headlosses(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def PressureLoss(self) -> Union[float, None]:
 		"""No Description
@@ -4562,6 +4675,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def PressureLosses(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -4586,6 +4707,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def FromHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def ToHydraulicGrade(self) -> Union[float, None]:
 		"""No Description
@@ -4604,6 +4733,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def ToHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -4628,6 +4765,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def FromPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def ToPressure(self) -> Union[float, None]:
 		"""No Description
@@ -4649,6 +4794,14 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 		"""
 		pass
 
+	def ToPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def CalculatedStatus(self) -> Union[int, None]:
 		"""No Description
@@ -4667,70 +4820,6 @@ class IBaseValveResults(IBaseDirectedNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Velocities(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Headlosses(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def PressureLosses(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def FromHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def ToHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def FromPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def ToPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -4763,6 +4852,10 @@ class IBaseValveInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@InitialStatus.setter
+	def InitialStatus(self, initialstatus: ValveSettingType) -> None:
+		pass
+
 	@property
 	def ValveDiameter(self) -> float:
 		"""No Description
@@ -4770,6 +4863,10 @@ class IBaseValveInput(IBaseDirectedNodeInput):
 		Returns:
 			IBaseValveInput: 
 		"""
+		pass
+
+	@ValveDiameter.setter
+	def ValveDiameter(self, valvediameter: float) -> None:
 		pass
 
 	@property
@@ -4790,6 +4887,10 @@ class IBaseValveInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@LocalMinorLossCoefficient.setter
+	def LocalMinorLossCoefficient(self, localminorlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def SpecifyLocalMinorLoss(self) -> bool:
 		"""No Description
@@ -4799,6 +4900,10 @@ class IBaseValveInput(IBaseDirectedNodeInput):
 		"""
 		pass
 
+	@SpecifyLocalMinorLoss.setter
+	def SpecifyLocalMinorLoss(self, specifylocalminorloss: bool) -> None:
+		pass
+
 	@property
 	def DerivedMinorLossCoefficient(self) -> float:
 		"""No Description
@@ -4806,22 +4911,6 @@ class IBaseValveInput(IBaseDirectedNodeInput):
 		Returns:
 			IBaseValveInput: 
 		"""
-		pass
-
-	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: ValveSettingType) -> None:
-		pass
-
-	@ValveDiameter.setter
-	def ValveDiameter(self, valvediameter: float) -> None:
-		pass
-
-	@LocalMinorLossCoefficient.setter
-	def LocalMinorLossCoefficient(self, localminorlosscoefficient: float) -> None:
-		pass
-
-	@SpecifyLocalMinorLoss.setter
-	def SpecifyLocalMinorLoss(self, specifylocalminorloss: bool) -> None:
 		pass
 
 class IBaseValvesInput(IBaseDirectedNodesInput):
@@ -5158,6 +5247,10 @@ class IFlowControlValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@InitialFlowSetting.setter
+	def InitialFlowSetting(self, initialflowsetting: float) -> None:
+		pass
+
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
 		"""No Description
@@ -5167,6 +5260,10 @@ class IFlowControlValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
 	@property
 	def ValveType(self) -> HammerValveType:
 		"""No Description
@@ -5174,14 +5271,6 @@ class IFlowControlValveInput(IBaseValveInput):
 		Returns:
 			IFlowControlValveInput: 
 		"""
-		pass
-
-	@InitialFlowSetting.setter
-	def InitialFlowSetting(self, initialflowsetting: float) -> None:
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
 		pass
 
 	@ValveType.setter
@@ -5341,6 +5430,10 @@ class IThrottleControlValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@TCVCoefficientType.setter
+	def TCVCoefficientType(self, tcvcoefficienttype: TCVCoefficientType) -> None:
+		pass
+
 	@property
 	def InitialCoefficient(self) -> float:
 		"""No Description
@@ -5348,6 +5441,10 @@ class IThrottleControlValveInput(IBaseValveInput):
 		Returns:
 			IThrottleControlValveInput: 
 		"""
+		pass
+
+	@InitialCoefficient.setter
+	def InitialCoefficient(self, initialcoefficient: float) -> None:
 		pass
 
 	@property
@@ -5359,6 +5456,10 @@ class IThrottleControlValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
 	@property
 	def ValveType(self) -> HammerValveType:
 		"""No Description
@@ -5366,18 +5467,6 @@ class IThrottleControlValveInput(IBaseValveInput):
 		Returns:
 			IThrottleControlValveInput: 
 		"""
-		pass
-
-	@TCVCoefficientType.setter
-	def TCVCoefficientType(self, tcvcoefficienttype: TCVCoefficientType) -> None:
-		pass
-
-	@InitialCoefficient.setter
-	def InitialCoefficient(self, initialcoefficient: float) -> None:
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
 		pass
 
 	@ValveType.setter
@@ -5580,6 +5669,10 @@ class IGeneralPurposeValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@GPVHeadlossCurve.setter
+	def GPVHeadlossCurve(self, gpvheadlosscurve: IGPVHeadlossCurve) -> None:
+		pass
+
 	@property
 	def ValveCharacteristics(self) -> IValveCharacteristic:
 		"""No Description
@@ -5589,6 +5682,10 @@ class IGeneralPurposeValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
 	@property
 	def ValveType(self) -> HammerValveType:
 		"""No Description
@@ -5596,14 +5693,6 @@ class IGeneralPurposeValveInput(IBaseValveInput):
 		Returns:
 			IGeneralPurposeValveInput: 
 		"""
-		pass
-
-	@GPVHeadlossCurve.setter
-	def GPVHeadlossCurve(self, gpvheadlosscurve: IGPVHeadlossCurve) -> None:
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
 		pass
 
 	@ValveType.setter
@@ -5730,6 +5819,10 @@ class IPressureValveInput(IBaseValveInput):
 		"""
 		pass
 
+	@PressureValveSetting.setter
+	def PressureValveSetting(self, pressurevalvesetting: PressureValvesettingType) -> None:
+		pass
+
 	@property
 	def InitialSetting(self) -> float:
 		"""No Description
@@ -5737,10 +5830,6 @@ class IPressureValveInput(IBaseValveInput):
 		Returns:
 			IPressureValveInput: 
 		"""
-		pass
-
-	@PressureValveSetting.setter
-	def PressureValveSetting(self, pressurevalvesetting: PressureValvesettingType) -> None:
 		pass
 
 	@InitialSetting.setter
@@ -6003,6 +6092,10 @@ class IPressureSustainingValveInput(IPressureValveInput):
 		"""
 		pass
 
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
 	@property
 	def ValveType(self) -> HammerValveType:
 		"""No Description
@@ -6010,10 +6103,6 @@ class IPressureSustainingValveInput(IPressureValveInput):
 		Returns:
 			IPressureSustainingValveInput: 
 		"""
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
 		pass
 
 	@ValveType.setter
@@ -6129,6 +6218,10 @@ class IPressureReducingValveInput(IPressureValveInput):
 		"""
 		pass
 
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
 	@property
 	def ValveType(self) -> HammerValveType:
 		"""No Description
@@ -6136,10 +6229,6 @@ class IPressureReducingValveInput(IPressureValveInput):
 		Returns:
 			IPressureReducingValveInput: 
 		"""
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
 		pass
 
 	@ValveType.setter
@@ -6203,6 +6292,10 @@ class IValveLinearAreaChangeInput(IBaseValveInput):
 		"""
 		pass
 
+	@TimeToClose.setter
+	def TimeToClose(self, timetoclose: float) -> None:
+		pass
+
 	@property
 	def DischargeCoefficient(self) -> float:
 		"""No Description
@@ -6210,10 +6303,6 @@ class IValveLinearAreaChangeInput(IBaseValveInput):
 		Returns:
 			IValveLinearAreaChangeInput: 
 		"""
-		pass
-
-	@TimeToClose.setter
-	def TimeToClose(self, timetoclose: float) -> None:
 		pass
 
 	@DischargeCoefficient.setter
@@ -6327,39 +6416,6 @@ class IValveWithLinearAreaChangeUnits(IBaseValveUnits):
 			IValveWithLinearAreaChangeUnits: 
 		"""
 		pass
-
-class WaterNetworkElementType(Enum):
-	SCADAElement = 23
-	Lateral = 24
-	Tap = 26
-	Tank = 52
-	Hydrant = 54
-	Junction = 55
-	Reservoir = 56
-	FCV = 60
-	TCV = 61
-	GPV = 62
-	PRV = 64
-	PSV = 65
-	PBV = 66
-	Pump = 68
-	Pipe = 69
-	SpotElevation = 70
-	IsolationValve = 71
-	VSPB = 72
-	CustomerMeter = 73
-	Turbine = 300
-	AirValve = 301
-	HydropneumaticTank = 302
-	SurgeValve = 303
-	DischargeToAtmosphere = 305
-	RuptureDisk = 306
-	OrificeBetweenTwoPipes = 307
-	SurgeTank = 308
-	CheckValve = 309
-	ValveWithLinearAreaChange = 310
-	PeriodicHeadFlow = 321
-	PumpStation = 700
 
 class DomainElementExtensions:
 
@@ -6612,7 +6668,7 @@ class DomainElementExtensions:
 
 	@staticmethod
 	@overload
-	def Create(scadaElements: ISCADAElements, label: str, point: GeometryPoint, targetElement: IWaterElement, scadaTargetAttribute: SCADATargetAttribute = SCADATargetAttribute.UnAssigned, realTimeSignal: ISCADASignal, historicalSignal: ISCADASignal) -> ISCADAElement:
+	def Create(scadaElements: ISCADAElements, label: str, point: GeometryPoint, targetElement: IWaterElement = None, scadaTargetAttribute: SCADATargetAttribute = SCADATargetAttribute.UnAssigned, realTimeSignal: ISCADASignal = None, historicalSignal: ISCADASignal = None) -> ISCADAElement:
 		"""No Description
 
 		Args:
@@ -6801,6 +6857,14 @@ class IWaterQualityResults:
 		"""
 		pass
 
+	def Ages(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Trace(self) -> Union[float, None]:
 		"""No Description
@@ -6822,6 +6886,14 @@ class IWaterQualityResults:
 		"""
 		pass
 
+	def Traces(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Concentration(self) -> Union[float, None]:
 		"""No Description
@@ -6840,22 +6912,6 @@ class IWaterQualityResults:
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Ages(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Traces(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -6963,6 +7019,10 @@ class IWaterQualityElementInput:
 		"""
 		pass
 
+	@InitialAge.setter
+	def InitialAge(self, initialage: float) -> None:
+		pass
+
 	@property
 	def InitialConcentration(self) -> float:
 		"""No Description
@@ -6972,6 +7032,10 @@ class IWaterQualityElementInput:
 		"""
 		pass
 
+	@InitialConcentration.setter
+	def InitialConcentration(self, initialconcentration: float) -> None:
+		pass
+
 	@property
 	def InitialTrace(self) -> float:
 		"""No Description
@@ -6979,14 +7043,6 @@ class IWaterQualityElementInput:
 		Returns:
 			IWaterQualityElementInput: 
 		"""
-		pass
-
-	@InitialAge.setter
-	def InitialAge(self, initialage: float) -> None:
-		pass
-
-	@InitialConcentration.setter
-	def InitialConcentration(self, initialconcentration: float) -> None:
 		pass
 
 	@InitialTrace.setter
@@ -7014,6 +7070,10 @@ class IWaterQualityNodeInput:
 		"""
 		pass
 
+	@IsConstituentSource.setter
+	def IsConstituentSource(self, isconstituentsource: bool) -> None:
+		pass
+
 	@property
 	def ConstituentSourceType(self) -> ConstituentSourceType:
 		"""No Description
@@ -7023,6 +7083,10 @@ class IWaterQualityNodeInput:
 		"""
 		pass
 
+	@ConstituentSourceType.setter
+	def ConstituentSourceType(self, constituentsourcetype: ConstituentSourceType) -> None:
+		pass
+
 	@property
 	def BaseConstituent(self) -> float:
 		"""No Description
@@ -7030,14 +7094,6 @@ class IWaterQualityNodeInput:
 		Returns:
 			IWaterQualityNodeInput: 
 		"""
-		pass
-
-	@IsConstituentSource.setter
-	def IsConstituentSource(self, isconstituentsource: bool) -> None:
-		pass
-
-	@ConstituentSourceType.setter
-	def ConstituentSourceType(self, constituentsourcetype: ConstituentSourceType) -> None:
 		pass
 
 	@BaseConstituent.setter
@@ -7792,6 +7848,14 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""
 		pass
 
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Velocity(self) -> Union[float, None]:
 		"""No Description
@@ -7810,6 +7874,14 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Velocities(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -7834,6 +7906,14 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""
 		pass
 
+	def Headlosses(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def HeadlossGradient(self) -> Union[float, None]:
 		"""No Description
@@ -7855,6 +7935,14 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 		"""
 		pass
 
+	def HeadlossGradients(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def CalculatedStatus(self) -> Union[int, None]:
 		"""No Description
@@ -7873,38 +7961,6 @@ class IPipeResults(IBaseLinkResults, IWaterQualityResults, IHammerPipeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Velocities(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Headlosses(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def HeadlossGradients(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -7937,6 +7993,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		"""
 		pass
 
+	@InstallationYear.setter
+	def InstallationYear(self, installationyear: int) -> None:
+		pass
+
 	@property
 	def InitialStatus(self) -> PipeStatusType:
 		"""No Description
@@ -7944,6 +8004,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		Returns:
 			IPipeInput: 
 		"""
+		pass
+
+	@InitialStatus.setter
+	def InitialStatus(self, initialstatus: PipeStatusType) -> None:
 		pass
 
 	@property
@@ -7955,6 +8019,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		"""
 		pass
 
+	@Diameter.setter
+	def Diameter(self, diameter: float) -> None:
+		pass
+
 	@property
 	def Material(self) -> str:
 		"""No Description
@@ -7964,6 +8032,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		"""
 		pass
 
+	@Material.setter
+	def Material(self, material: str) -> None:
+		pass
+
 	@property
 	def FrictionCoefficient(self) -> float:
 		"""No Description
@@ -7971,6 +8043,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		Returns:
 			IPipeInput: 
 		"""
+		pass
+
+	@FrictionCoefficient.setter
+	def FrictionCoefficient(self, frictioncoefficient: float) -> None:
 		pass
 
 	@property
@@ -7991,6 +8067,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		"""
 		pass
 
+	@LocalMinorLossCoefficient.setter
+	def LocalMinorLossCoefficient(self, localminorlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def SpecifyLocalMinorLoss(self) -> bool:
 		"""No Description
@@ -8000,6 +8080,10 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		"""
 		pass
 
+	@SpecifyLocalMinorLoss.setter
+	def SpecifyLocalMinorLoss(self, specifylocalminorloss: bool) -> None:
+		pass
+
 	@property
 	def DerivedMinorLossCoefficient(self) -> float:
 		"""No Description
@@ -8007,34 +8091,6 @@ class IPipeInput(IBaseLinkInput, IWaterZoneableNetworkElementInput):
 		Returns:
 			IPipeInput: 
 		"""
-		pass
-
-	@InstallationYear.setter
-	def InstallationYear(self, installationyear: int) -> None:
-		pass
-
-	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: PipeStatusType) -> None:
-		pass
-
-	@Diameter.setter
-	def Diameter(self, diameter: float) -> None:
-		pass
-
-	@Material.setter
-	def Material(self, material: str) -> None:
-		pass
-
-	@FrictionCoefficient.setter
-	def FrictionCoefficient(self, frictioncoefficient: float) -> None:
-		pass
-
-	@LocalMinorLossCoefficient.setter
-	def LocalMinorLossCoefficient(self, localminorlosscoefficient: float) -> None:
-		pass
-
-	@SpecifyLocalMinorLoss.setter
-	def SpecifyLocalMinorLoss(self, specifylocalminorloss: bool) -> None:
 		pass
 
 class IPipesInput(IBaseLinksInput, IWaterZoneableNetworkElementsInput):
@@ -8396,6 +8452,14 @@ class IFireFlowNodeResults(IDemandNodeResults):
 		"""
 		pass
 
+	def Demands(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Pressure(self) -> Union[float, None]:
 		"""No Description
@@ -8414,14 +8478,6 @@ class IFireFlowNodeResults(IDemandNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Demands(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -8757,12 +8813,22 @@ class IDemands(ICollection[IDemand]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, pattern: IPattern) -> IDemand:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			pattern(IPattern): pattern
+
+		Returns:
+			IDemand: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IDemand:
+		"""No Description
 
 		Returns:
 			IDemand: 
@@ -8790,6 +8856,10 @@ class IDemand(ICollectionElement):
 		"""
 		pass
 
+	@BaseFlow.setter
+	def BaseFlow(self, baseflow: float) -> None:
+		pass
+
 	@property
 	def DemandPattern(self) -> IPattern:
 		"""No Description
@@ -8797,10 +8867,6 @@ class IDemand(ICollectionElement):
 		Returns:
 			IDemand: 
 		"""
-		pass
-
-	@BaseFlow.setter
-	def BaseFlow(self, baseflow: float) -> None:
 		pass
 
 	@DemandPattern.setter
@@ -8852,6 +8918,7 @@ class IUnitLoadDemands(ICollection[IUnitLoadDemand]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, unitDemandLoad: IUnitDemandLoad, numberOfLoadingUnits: float, unitDemandBaseFlow: float, unitDemandPattern: IPattern) -> IUnitLoadDemand:
 		"""No Description
 
@@ -8860,6 +8927,15 @@ class IUnitLoadDemands(ICollection[IUnitLoadDemand]):
 			numberOfLoadingUnits(float): numberOfLoadingUnits
 			unitDemandBaseFlow(float): unitDemandBaseFlow
 			unitDemandPattern(IPattern): unitDemandPattern
+
+		Returns:
+			IUnitLoadDemand: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IUnitLoadDemand:
+		"""No Description
 
 		Returns:
 			IUnitLoadDemand: 
@@ -8887,6 +8963,10 @@ class IUnitLoadDemand(ICollectionElement):
 		"""
 		pass
 
+	@UnitDemandLoad.setter
+	def UnitDemandLoad(self, unitdemandload: IUnitDemandLoad) -> None:
+		pass
+
 	@property
 	def NumberOfLoadingUnits(self) -> float:
 		"""No Description
@@ -8894,6 +8974,10 @@ class IUnitLoadDemand(ICollectionElement):
 		Returns:
 			IUnitLoadDemand: 
 		"""
+		pass
+
+	@NumberOfLoadingUnits.setter
+	def NumberOfLoadingUnits(self, numberofloadingunits: float) -> None:
 		pass
 
 	@property
@@ -8905,6 +8989,10 @@ class IUnitLoadDemand(ICollectionElement):
 		"""
 		pass
 
+	@UnitDemandBaseFlow.setter
+	def UnitDemandBaseFlow(self, unitdemandbaseflow: float) -> None:
+		pass
+
 	@property
 	def UnitDemandPattern(self) -> IPattern:
 		"""No Description
@@ -8912,18 +9000,6 @@ class IUnitLoadDemand(ICollectionElement):
 		Returns:
 			IUnitLoadDemand: 
 		"""
-		pass
-
-	@UnitDemandLoad.setter
-	def UnitDemandLoad(self, unitdemandload: IUnitDemandLoad) -> None:
-		pass
-
-	@NumberOfLoadingUnits.setter
-	def NumberOfLoadingUnits(self, numberofloadingunits: float) -> None:
-		pass
-
-	@UnitDemandBaseFlow.setter
-	def UnitDemandBaseFlow(self, unitdemandbaseflow: float) -> None:
 		pass
 
 	@UnitDemandPattern.setter
@@ -8961,6 +9037,14 @@ class IConventionalTanksResults(IBaseTanksResults):
 			Exception: if this class is instanciated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def VolumeFulls(self) -> Dict[int,int]:
+		"""No Description
+
+		Returns:
+			Dict[int,int]: 
+		"""
 		pass
 
 	@overload
@@ -9099,14 +9183,6 @@ class IConventionalTanksResults(IBaseTanksResults):
 		"""
 		pass
 
-	def VolumeFulls(self) -> Dict[int,int]:
-		"""No Description
-
-		Returns:
-			Dict[int,int]: 
-		"""
-		pass
-
 class IConventionalTankResults(IBaseTankResults):
 
 	def __init__(self) -> None:
@@ -9117,6 +9193,14 @@ class IConventionalTankResults(IBaseTankResults):
 			Exception: if this class is instanciated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def VolumeFull(self) -> Union[float, None]:
+		"""No Description
+
+		Returns:
+			Nullable: 
+		"""
 		pass
 
 	@overload
@@ -9137,6 +9221,14 @@ class IConventionalTankResults(IBaseTankResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Levels(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -9161,6 +9253,14 @@ class IConventionalTankResults(IBaseTankResults):
 		"""
 		pass
 
+	def Volumes(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def PercentFull(self) -> Union[float, None]:
 		"""No Description
@@ -9182,6 +9282,14 @@ class IConventionalTankResults(IBaseTankResults):
 		"""
 		pass
 
+	def PercentFulls(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def TankStatus(self) -> Union[int, None]:
 		"""No Description
@@ -9200,38 +9308,6 @@ class IConventionalTankResults(IBaseTankResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def VolumeFull(self) -> Union[float, None]:
-		"""No Description
-
-		Returns:
-			Nullable: 
-		"""
-		pass
-
-	def Levels(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Volumes(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def PercentFulls(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -9549,6 +9625,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@TankSection.setter
+	def TankSection(self, tanksection: TankSectionType) -> None:
+		pass
+
 	@property
 	def ActiveVolumeFull(self) -> float:
 		"""No Description
@@ -9556,6 +9636,10 @@ class IConventionalTankInput(IBaseTankInput):
 		Returns:
 			IConventionalTankInput: 
 		"""
+		pass
+
+	@ActiveVolumeFull.setter
+	def ActiveVolumeFull(self, activevolumefull: float) -> None:
 		pass
 
 	@property
@@ -9576,6 +9660,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@Diameter.setter
+	def Diameter(self, diameter: float) -> None:
+		pass
+
 	@property
 	def AverageArea(self) -> float:
 		"""No Description
@@ -9583,6 +9671,10 @@ class IConventionalTankInput(IBaseTankInput):
 		Returns:
 			IConventionalTankInput: 
 		"""
+		pass
+
+	@AverageArea.setter
+	def AverageArea(self, averagearea: float) -> None:
 		pass
 
 	@property
@@ -9594,6 +9686,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@BaseElevation.setter
+	def BaseElevation(self, baseelevation: float) -> None:
+		pass
+
 	@property
 	def MinimumLevel(self) -> float:
 		"""No Description
@@ -9601,6 +9697,10 @@ class IConventionalTankInput(IBaseTankInput):
 		Returns:
 			IConventionalTankInput: 
 		"""
+		pass
+
+	@MinimumLevel.setter
+	def MinimumLevel(self, minimumlevel: float) -> None:
 		pass
 
 	@property
@@ -9612,6 +9712,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@InitialLevel.setter
+	def InitialLevel(self, initiallevel: float) -> None:
+		pass
+
 	@property
 	def MaximumLevel(self) -> float:
 		"""No Description
@@ -9619,6 +9723,10 @@ class IConventionalTankInput(IBaseTankInput):
 		Returns:
 			IConventionalTankInput: 
 		"""
+		pass
+
+	@MaximumLevel.setter
+	def MaximumLevel(self, maximumlevel: float) -> None:
 		pass
 
 	@property
@@ -9630,6 +9738,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@UseHighAlarm.setter
+	def UseHighAlarm(self, usehighalarm: bool) -> None:
+		pass
+
 	@property
 	def HighAlarmLevel(self) -> float:
 		"""No Description
@@ -9637,6 +9749,10 @@ class IConventionalTankInput(IBaseTankInput):
 		Returns:
 			IConventionalTankInput: 
 		"""
+		pass
+
+	@HighAlarmLevel.setter
+	def HighAlarmLevel(self, highalarmlevel: float) -> None:
 		pass
 
 	@property
@@ -9648,6 +9764,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@UseLowAlarm.setter
+	def UseLowAlarm(self, uselowalarm: bool) -> None:
+		pass
+
 	@property
 	def LowAlarmLevel(self) -> float:
 		"""No Description
@@ -9657,6 +9777,10 @@ class IConventionalTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@LowAlarmLevel.setter
+	def LowAlarmLevel(self, lowalarmlevel: float) -> None:
+		pass
+
 	@property
 	def InactiveVolume(self) -> float:
 		"""No Description
@@ -9664,54 +9788,6 @@ class IConventionalTankInput(IBaseTankInput):
 		Returns:
 			IConventionalTankInput: 
 		"""
-		pass
-
-	@TankSection.setter
-	def TankSection(self, tanksection: TankSectionType) -> None:
-		pass
-
-	@ActiveVolumeFull.setter
-	def ActiveVolumeFull(self, activevolumefull: float) -> None:
-		pass
-
-	@Diameter.setter
-	def Diameter(self, diameter: float) -> None:
-		pass
-
-	@AverageArea.setter
-	def AverageArea(self, averagearea: float) -> None:
-		pass
-
-	@BaseElevation.setter
-	def BaseElevation(self, baseelevation: float) -> None:
-		pass
-
-	@MinimumLevel.setter
-	def MinimumLevel(self, minimumlevel: float) -> None:
-		pass
-
-	@InitialLevel.setter
-	def InitialLevel(self, initiallevel: float) -> None:
-		pass
-
-	@MaximumLevel.setter
-	def MaximumLevel(self, maximumlevel: float) -> None:
-		pass
-
-	@UseHighAlarm.setter
-	def UseHighAlarm(self, usehighalarm: bool) -> None:
-		pass
-
-	@HighAlarmLevel.setter
-	def HighAlarmLevel(self, highalarmlevel: float) -> None:
-		pass
-
-	@UseLowAlarm.setter
-	def UseLowAlarm(self, uselowalarm: bool) -> None:
-		pass
-
-	@LowAlarmLevel.setter
-	def LowAlarmLevel(self, lowalarmlevel: float) -> None:
 		pass
 
 	@InactiveVolume.setter
@@ -9781,12 +9857,22 @@ class ICrossSectionCurve(ICollection[ICrossSectionCurveElement]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, depthRatio: float, volumeRatio: float) -> ICrossSectionCurveElement:
 		"""No Description
 
 		Args:
 			depthRatio(float): depthRatio
 			volumeRatio(float): volumeRatio
+
+		Returns:
+			ICrossSectionCurveElement: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> ICrossSectionCurveElement:
+		"""No Description
 
 		Returns:
 			ICrossSectionCurveElement: 
@@ -9814,6 +9900,10 @@ class ICrossSectionCurveElement(ICollectionElement):
 		"""
 		pass
 
+	@DepthRatio.setter
+	def DepthRatio(self, depthratio: float) -> None:
+		pass
+
 	@property
 	def VolumeRatio(self) -> float:
 		"""No Description
@@ -9821,10 +9911,6 @@ class ICrossSectionCurveElement(ICollectionElement):
 		Returns:
 			ICrossSectionCurveElement: 
 		"""
-		pass
-
-	@DepthRatio.setter
-	def DepthRatio(self, depthratio: float) -> None:
 		pass
 
 	@VolumeRatio.setter
@@ -9949,6 +10035,10 @@ class ITankInput(IConventionalTankInput, IWaterTraceableInput):
 		"""
 		pass
 
+	@ValveCharacteristics.setter
+	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
+		pass
+
 	@property
 	def ValveType(self) -> HammerValveType:
 		"""No Description
@@ -9956,10 +10046,6 @@ class ITankInput(IConventionalTankInput, IWaterTraceableInput):
 		Returns:
 			ITankInput: 
 		"""
-		pass
-
-	@ValveCharacteristics.setter
-	def ValveCharacteristics(self, valvecharacteristics: IValveCharacteristic) -> None:
 		pass
 
 	@ValveType.setter
@@ -9999,6 +10085,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@TankOrificeDiameter.setter
+	def TankOrificeDiameter(self, tankorificediameter: float) -> None:
+		pass
+
 	@property
 	def RatioOfLosses(self) -> float:
 		"""No Description
@@ -10006,6 +10096,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		Returns:
 			ISurgeTankInput: 
 		"""
+		pass
+
+	@RatioOfLosses.setter
+	def RatioOfLosses(self, ratiooflosses: float) -> None:
 		pass
 
 	@property
@@ -10017,6 +10111,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@HeadlossCoefficient.setter
+	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def SurgeTankType(self) -> SurgeTankTypeEnum:
 		"""No Description
@@ -10024,6 +10122,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		Returns:
 			ISurgeTankInput: 
 		"""
+		pass
+
+	@SurgeTankType.setter
+	def SurgeTankType(self, surgetanktype: SurgeTankTypeEnum) -> None:
 		pass
 
 	@property
@@ -10035,6 +10137,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@HasCheckValve.setter
+	def HasCheckValve(self, hascheckvalve: bool) -> None:
+		pass
+
 	@property
 	def WeirCoefficient(self) -> float:
 		"""No Description
@@ -10042,6 +10148,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		Returns:
 			ISurgeTankInput: 
 		"""
+		pass
+
+	@WeirCoefficient.setter
+	def WeirCoefficient(self, weircoefficient: float) -> None:
 		pass
 
 	@property
@@ -10053,6 +10163,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@WeirLength.setter
+	def WeirLength(self, weirlength: float) -> None:
+		pass
+
 	@property
 	def InternalRiserDiameter(self) -> float:
 		"""No Description
@@ -10060,6 +10174,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		Returns:
 			ISurgeTankInput: 
 		"""
+		pass
+
+	@InternalRiserDiameter.setter
+	def InternalRiserDiameter(self, internalriserdiameter: float) -> None:
 		pass
 
 	@property
@@ -10071,6 +10189,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@InternalRiserTopElevation.setter
+	def InternalRiserTopElevation(self, internalrisertopelevation: float) -> None:
+		pass
+
 	@property
 	def JunctionElevation(self) -> float:
 		"""No Description
@@ -10078,6 +10200,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		Returns:
 			ISurgeTankInput: 
 		"""
+		pass
+
+	@JunctionElevation.setter
+	def JunctionElevation(self, junctionelevation: float) -> None:
 		pass
 
 	@property
@@ -10089,6 +10215,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@DiameterExternalRiser.setter
+	def DiameterExternalRiser(self, diameterexternalriser: float) -> None:
+		pass
+
 	@property
 	def ElevationOrificeFromInternalRiserInTank(self) -> float:
 		"""No Description
@@ -10098,6 +10228,10 @@ class ISurgeTankInput(IConventionalTankInput):
 		"""
 		pass
 
+	@ElevationOrificeFromInternalRiserInTank.setter
+	def ElevationOrificeFromInternalRiserInTank(self, elevationorificefrominternalriserintank: float) -> None:
+		pass
+
 	@property
 	def ElevationTopOfTankBase(self) -> float:
 		"""No Description
@@ -10105,54 +10239,6 @@ class ISurgeTankInput(IConventionalTankInput):
 		Returns:
 			ISurgeTankInput: 
 		"""
-		pass
-
-	@TankOrificeDiameter.setter
-	def TankOrificeDiameter(self, tankorificediameter: float) -> None:
-		pass
-
-	@RatioOfLosses.setter
-	def RatioOfLosses(self, ratiooflosses: float) -> None:
-		pass
-
-	@HeadlossCoefficient.setter
-	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
-		pass
-
-	@SurgeTankType.setter
-	def SurgeTankType(self, surgetanktype: SurgeTankTypeEnum) -> None:
-		pass
-
-	@HasCheckValve.setter
-	def HasCheckValve(self, hascheckvalve: bool) -> None:
-		pass
-
-	@WeirCoefficient.setter
-	def WeirCoefficient(self, weircoefficient: float) -> None:
-		pass
-
-	@WeirLength.setter
-	def WeirLength(self, weirlength: float) -> None:
-		pass
-
-	@InternalRiserDiameter.setter
-	def InternalRiserDiameter(self, internalriserdiameter: float) -> None:
-		pass
-
-	@InternalRiserTopElevation.setter
-	def InternalRiserTopElevation(self, internalrisertopelevation: float) -> None:
-		pass
-
-	@JunctionElevation.setter
-	def JunctionElevation(self, junctionelevation: float) -> None:
-		pass
-
-	@DiameterExternalRiser.setter
-	def DiameterExternalRiser(self, diameterexternalriser: float) -> None:
-		pass
-
-	@ElevationOrificeFromInternalRiserInTank.setter
-	def ElevationOrificeFromInternalRiserInTank(self, elevationorificefrominternalriserintank: float) -> None:
 		pass
 
 	@ElevationTopOfTankBase.setter
@@ -10527,12 +10613,22 @@ class ILevelDiameters(ICollection[ILevelDiameter]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, liquidLevel: float, diameter: float) -> ILevelDiameter:
 		"""No Description
 
 		Args:
 			liquidLevel(float): liquidLevel
 			diameter(float): diameter
+
+		Returns:
+			ILevelDiameter: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> ILevelDiameter:
+		"""No Description
 
 		Returns:
 			ILevelDiameter: 
@@ -10560,6 +10656,10 @@ class ILevelDiameter(ICollectionElement):
 		"""
 		pass
 
+	@LiquidLevel.setter
+	def LiquidLevel(self, liquidlevel: float) -> None:
+		pass
+
 	@property
 	def EquivalentDiameter(self) -> float:
 		"""No Description
@@ -10567,10 +10667,6 @@ class ILevelDiameter(ICollectionElement):
 		Returns:
 			ILevelDiameter: 
 		"""
-		pass
-
-	@LiquidLevel.setter
-	def LiquidLevel(self, liquidlevel: float) -> None:
 		pass
 
 	@EquivalentDiameter.setter
@@ -10628,6 +10724,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@InitialVolumeOfGas.setter
+	def InitialVolumeOfGas(self, initialvolumeofgas: float) -> None:
+		pass
+
 	@property
 	def TankInletOrificeDiameter(self) -> float:
 		"""No Description
@@ -10635,6 +10735,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@TankInletOrificeDiameter.setter
+	def TankInletOrificeDiameter(self, tankinletorificediameter: float) -> None:
 		pass
 
 	@property
@@ -10646,6 +10750,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@RatioOfLosses.setter
+	def RatioOfLosses(self, ratiooflosses: float) -> None:
+		pass
+
 	@property
 	def GasLawExponent(self) -> float:
 		"""No Description
@@ -10653,6 +10761,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@GasLawExponent.setter
+	def GasLawExponent(self, gaslawexponent: float) -> None:
 		pass
 
 	@property
@@ -10664,6 +10776,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@HasBladder.setter
+	def HasBladder(self, hasbladder: bool) -> None:
+		pass
+
 	@property
 	def GasPresetPressure(self) -> float:
 		"""No Description
@@ -10671,6 +10787,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@GasPresetPressure.setter
+	def GasPresetPressure(self, gaspresetpressure: float) -> None:
 		pass
 
 	@property
@@ -10682,6 +10802,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@MeanLiquidElevation.setter
+	def MeanLiquidElevation(self, meanliquidelevation: float) -> None:
+		pass
+
 	@property
 	def AirInflowOrificeDiameter(self) -> float:
 		"""No Description
@@ -10689,6 +10813,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@AirInflowOrificeDiameter.setter
+	def AirInflowOrificeDiameter(self, airinfloworificediameter: float) -> None:
 		pass
 
 	@property
@@ -10700,6 +10828,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@AirOutflowOrificeDiameter.setter
+	def AirOutflowOrificeDiameter(self, airoutfloworificediameter: float) -> None:
+		pass
+
 	@property
 	def DippingTubeDiameter(self) -> float:
 		"""No Description
@@ -10707,6 +10839,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@DippingTubeDiameter.setter
+	def DippingTubeDiameter(self, dippingtubediameter: float) -> None:
 		pass
 
 	@property
@@ -10718,6 +10854,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@CompressionChamberVolume.setter
+	def CompressionChamberVolume(self, compressionchambervolume: float) -> None:
+		pass
+
 	@property
 	def TopElevationDippingTube(self) -> float:
 		"""No Description
@@ -10725,6 +10865,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@TopElevationDippingTube.setter
+	def TopElevationDippingTube(self, topelevationdippingtube: float) -> None:
 		pass
 
 	@property
@@ -10736,6 +10880,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@BottomElevationDippingTube.setter
+	def BottomElevationDippingTube(self, bottomelevationdippingtube: float) -> None:
+		pass
+
 	@property
 	def LevelType(self) -> GasVesselLevelType:
 		"""No Description
@@ -10745,6 +10893,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@LevelType.setter
+	def LevelType(self, leveltype: GasVesselLevelType) -> None:
+		pass
+
 	@property
 	def HydroTankType(self) -> HydroTankType:
 		"""No Description
@@ -10752,6 +10904,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@HydroTankType.setter
+	def HydroTankType(self, hydrotanktype: HydroTankType) -> None:
 		pass
 
 	@property
@@ -10772,6 +10928,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@TankVolume.setter
+	def TankVolume(self, tankvolume: float) -> None:
+		pass
+
 	@property
 	def InflowMinorLossCoefficient(self) -> float:
 		"""No Description
@@ -10779,6 +10939,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@InflowMinorLossCoefficient.setter
+	def InflowMinorLossCoefficient(self, inflowminorlosscoefficient: float) -> None:
 		pass
 
 	@property
@@ -10790,6 +10954,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@TankBaseElevation.setter
+	def TankBaseElevation(self, tankbaseelevation: float) -> None:
+		pass
+
 	@property
 	def TreatAsJunction(self) -> bool:
 		"""No Description
@@ -10797,6 +10965,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@TreatAsJunction.setter
+	def TreatAsJunction(self, treatasjunction: bool) -> None:
 		pass
 
 	@property
@@ -10808,6 +10980,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@OperatingRangeType.setter
+	def OperatingRangeType(self, operatingrangetype: OperatingRangeTypeEnum) -> None:
+		pass
+
 	@property
 	def TankCalculationModel(self) -> TankCalculationModel:
 		"""No Description
@@ -10815,6 +10991,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@TankCalculationModel.setter
+	def TankCalculationModel(self, tankcalculationmodel: TankCalculationModel) -> None:
 		pass
 
 	@property
@@ -10826,6 +11006,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@TankInitialElevation.setter
+	def TankInitialElevation(self, tankinitialelevation: float) -> None:
+		pass
+
 	@property
 	def TankInitialLevel(self) -> float:
 		"""No Description
@@ -10833,6 +11017,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@TankInitialLevel.setter
+	def TankInitialLevel(self, tankinitiallevel: float) -> None:
 		pass
 
 	@property
@@ -10844,6 +11032,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@TankInitialLiquidVolume.setter
+	def TankInitialLiquidVolume(self, tankinitialliquidvolume: float) -> None:
+		pass
+
 	@property
 	def AirInflowOrificeAirFlowCurve(self) -> IAirFlowCurve:
 		"""No Description
@@ -10851,6 +11043,10 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
+		pass
+
+	@AirInflowOrificeAirFlowCurve.setter
+	def AirInflowOrificeAirFlowCurve(self, airinfloworificeairflowcurve: IAirFlowCurve) -> None:
 		pass
 
 	@property
@@ -10862,6 +11058,10 @@ class IHydroTankInput(IBaseTankInput):
 		"""
 		pass
 
+	@AirOutflowOrificeAirFlowCurve.setter
+	def AirOutflowOrificeAirFlowCurve(self, airoutfloworificeairflowcurve: IAirFlowCurve) -> None:
+		pass
+
 	@property
 	def AirFlowCalculationMethod(self) -> AirFlowCalculationMethod:
 		"""No Description
@@ -10869,110 +11069,6 @@ class IHydroTankInput(IBaseTankInput):
 		Returns:
 			IHydroTankInput: 
 		"""
-		pass
-
-	@InitialVolumeOfGas.setter
-	def InitialVolumeOfGas(self, initialvolumeofgas: float) -> None:
-		pass
-
-	@TankInletOrificeDiameter.setter
-	def TankInletOrificeDiameter(self, tankinletorificediameter: float) -> None:
-		pass
-
-	@RatioOfLosses.setter
-	def RatioOfLosses(self, ratiooflosses: float) -> None:
-		pass
-
-	@GasLawExponent.setter
-	def GasLawExponent(self, gaslawexponent: float) -> None:
-		pass
-
-	@HasBladder.setter
-	def HasBladder(self, hasbladder: bool) -> None:
-		pass
-
-	@GasPresetPressure.setter
-	def GasPresetPressure(self, gaspresetpressure: float) -> None:
-		pass
-
-	@MeanLiquidElevation.setter
-	def MeanLiquidElevation(self, meanliquidelevation: float) -> None:
-		pass
-
-	@AirInflowOrificeDiameter.setter
-	def AirInflowOrificeDiameter(self, airinfloworificediameter: float) -> None:
-		pass
-
-	@AirOutflowOrificeDiameter.setter
-	def AirOutflowOrificeDiameter(self, airoutfloworificediameter: float) -> None:
-		pass
-
-	@DippingTubeDiameter.setter
-	def DippingTubeDiameter(self, dippingtubediameter: float) -> None:
-		pass
-
-	@CompressionChamberVolume.setter
-	def CompressionChamberVolume(self, compressionchambervolume: float) -> None:
-		pass
-
-	@TopElevationDippingTube.setter
-	def TopElevationDippingTube(self, topelevationdippingtube: float) -> None:
-		pass
-
-	@BottomElevationDippingTube.setter
-	def BottomElevationDippingTube(self, bottomelevationdippingtube: float) -> None:
-		pass
-
-	@LevelType.setter
-	def LevelType(self, leveltype: GasVesselLevelType) -> None:
-		pass
-
-	@HydroTankType.setter
-	def HydroTankType(self, hydrotanktype: HydroTankType) -> None:
-		pass
-
-	@TankVolume.setter
-	def TankVolume(self, tankvolume: float) -> None:
-		pass
-
-	@InflowMinorLossCoefficient.setter
-	def InflowMinorLossCoefficient(self, inflowminorlosscoefficient: float) -> None:
-		pass
-
-	@TankBaseElevation.setter
-	def TankBaseElevation(self, tankbaseelevation: float) -> None:
-		pass
-
-	@TreatAsJunction.setter
-	def TreatAsJunction(self, treatasjunction: bool) -> None:
-		pass
-
-	@OperatingRangeType.setter
-	def OperatingRangeType(self, operatingrangetype: OperatingRangeTypeEnum) -> None:
-		pass
-
-	@TankCalculationModel.setter
-	def TankCalculationModel(self, tankcalculationmodel: TankCalculationModel) -> None:
-		pass
-
-	@TankInitialElevation.setter
-	def TankInitialElevation(self, tankinitialelevation: float) -> None:
-		pass
-
-	@TankInitialLevel.setter
-	def TankInitialLevel(self, tankinitiallevel: float) -> None:
-		pass
-
-	@TankInitialLiquidVolume.setter
-	def TankInitialLiquidVolume(self, tankinitialliquidvolume: float) -> None:
-		pass
-
-	@AirInflowOrificeAirFlowCurve.setter
-	def AirInflowOrificeAirFlowCurve(self, airinfloworificeairflowcurve: IAirFlowCurve) -> None:
-		pass
-
-	@AirOutflowOrificeAirFlowCurve.setter
-	def AirOutflowOrificeAirFlowCurve(self, airoutfloworificeairflowcurve: IAirFlowCurve) -> None:
 		pass
 
 	@AirFlowCalculationMethod.setter
@@ -11240,6 +11336,14 @@ class IHydroTankResults(IBaseTankResults):
 		"""
 		pass
 
+	def CalculatedGasVolumes(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def CalculatedPressure(self) -> Union[float, None]:
 		"""No Description
@@ -11258,6 +11362,14 @@ class IHydroTankResults(IBaseTankResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def CalculatedPressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -11282,6 +11394,14 @@ class IHydroTankResults(IBaseTankResults):
 		"""
 		pass
 
+	def CalculatedLiquidVolumes(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def CalculatedPercentFull(self) -> Union[float, None]:
 		"""No Description
@@ -11300,30 +11420,6 @@ class IHydroTankResults(IBaseTankResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def CalculatedGasVolumes(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def CalculatedPressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def CalculatedLiquidVolumes(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -11669,32 +11765,6 @@ class IHydropneumaticTanks(IWaterNetworkElements[IHydropneumaticTanks, IHydropne
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class SCADATargetAttribute(Enum):
-	UnAssigned = 0
-	RelativeClosure = -300
-	ConstituentConcentration = -299
-	PressureNodeDemand = -297
-	ValveStatus = -58
-	PumpStatus = -57
-	PipeStatus = -56
-	TankLevel = -55
-	Pressure = -54
-	HydraulicGrade = -53
-	PumpSetting = -52
-	PressureValveSetting = -51
-	TCValveSetting = -50
-	FCValveSetting = -49
-	PressureOut = -48
-	PressureIn = -47
-	HydraulicGradeOut = -46
-	HydraulicGradeIn = -45
-	Discharge = -44
-	WirePower = -43
-
-class TransientParameterType(Enum):
-	Head = 0
-	Flow = 1
-
 class IHammerNodeInput(IBaseNodeInput):
 
 	def __init__(self) -> None:
@@ -11752,6 +11822,14 @@ class IHammerNodeResults(IBaseNodeResults):
 		"""
 		pass
 
+	def Pressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def PressureHead(self) -> Union[float, None]:
 		"""No Description
@@ -11770,14 +11848,6 @@ class IHammerNodeResults(IBaseNodeResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def Pressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -11923,12 +11993,22 @@ class IFlowPatterns(ICollection[IFlowPattern]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, time: float, flow: float) -> IFlowPattern:
 		"""No Description
 
 		Args:
 			time(float): time
 			flow(float): flow
+
+		Returns:
+			IFlowPattern: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IFlowPattern:
+		"""No Description
 
 		Returns:
 			IFlowPattern: 
@@ -11956,6 +12036,10 @@ class IFlowPattern(ICollectionElement):
 		"""
 		pass
 
+	@Time.setter
+	def Time(self, time: float) -> None:
+		pass
+
 	@property
 	def Flow(self) -> float:
 		"""No Description
@@ -11963,10 +12047,6 @@ class IFlowPattern(ICollectionElement):
 		Returns:
 			IFlowPattern: 
 		"""
-		pass
-
-	@Time.setter
-	def Time(self, time: float) -> None:
 		pass
 
 	@Flow.setter
@@ -12027,12 +12107,22 @@ class IHeadPatterns(ICollection[IHeadPattern]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, time: float, head: float) -> IHeadPattern:
 		"""No Description
 
 		Args:
 			time(float): time
 			head(float): head
+
+		Returns:
+			IHeadPattern: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IHeadPattern:
+		"""No Description
 
 		Returns:
 			IHeadPattern: 
@@ -12060,6 +12150,10 @@ class IHeadPattern(ICollectionElement):
 		"""
 		pass
 
+	@Time.setter
+	def Time(self, time: float) -> None:
+		pass
+
 	@property
 	def Head(self) -> float:
 		"""No Description
@@ -12067,10 +12161,6 @@ class IHeadPattern(ICollectionElement):
 		Returns:
 			IHeadPattern: 
 		"""
-		pass
-
-	@Time.setter
-	def Time(self, time: float) -> None:
 		pass
 
 	@Head.setter
@@ -12128,6 +12218,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		"""
 		pass
 
+	@Sinusoidal.setter
+	def Sinusoidal(self, sinusoidal: bool) -> None:
+		pass
+
 	@property
 	def HeadMeanValue(self) -> float:
 		"""No Description
@@ -12135,6 +12229,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		Returns:
 			IPeriodicHeadFlowInput: 
 		"""
+		pass
+
+	@HeadMeanValue.setter
+	def HeadMeanValue(self, headmeanvalue: float) -> None:
 		pass
 
 	@property
@@ -12146,6 +12244,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		"""
 		pass
 
+	@HeadAmplitude.setter
+	def HeadAmplitude(self, headamplitude: float) -> None:
+		pass
+
 	@property
 	def Phase(self) -> float:
 		"""No Description
@@ -12153,6 +12255,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		Returns:
 			IPeriodicHeadFlowInput: 
 		"""
+		pass
+
+	@Phase.setter
+	def Phase(self, phase: float) -> None:
 		pass
 
 	@property
@@ -12164,6 +12270,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		"""
 		pass
 
+	@Period.setter
+	def Period(self, period: float) -> None:
+		pass
+
 	@property
 	def FlowMeanValue(self) -> float:
 		"""No Description
@@ -12171,6 +12281,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		Returns:
 			IPeriodicHeadFlowInput: 
 		"""
+		pass
+
+	@FlowMeanValue.setter
+	def FlowMeanValue(self, flowmeanvalue: float) -> None:
 		pass
 
 	@property
@@ -12182,6 +12296,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		"""
 		pass
 
+	@FlowAmplitude.setter
+	def FlowAmplitude(self, flowamplitude: float) -> None:
+		pass
+
 	@property
 	def TransientParameter(self) -> TransientParameterType:
 		"""No Description
@@ -12189,6 +12307,10 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		Returns:
 			IPeriodicHeadFlowInput: 
 		"""
+		pass
+
+	@TransientParameter.setter
+	def TransientParameter(self, transientparameter: TransientParameterType) -> None:
 		pass
 
 	@property
@@ -12207,38 +12329,6 @@ class IPeriodicHeadFlowInput(IHammerNodeInput):
 		Returns:
 			IPeriodicHeadFlowInput: 
 		"""
-		pass
-
-	@Sinusoidal.setter
-	def Sinusoidal(self, sinusoidal: bool) -> None:
-		pass
-
-	@HeadMeanValue.setter
-	def HeadMeanValue(self, headmeanvalue: float) -> None:
-		pass
-
-	@HeadAmplitude.setter
-	def HeadAmplitude(self, headamplitude: float) -> None:
-		pass
-
-	@Phase.setter
-	def Phase(self, phase: float) -> None:
-		pass
-
-	@Period.setter
-	def Period(self, period: float) -> None:
-		pass
-
-	@FlowMeanValue.setter
-	def FlowMeanValue(self, flowmeanvalue: float) -> None:
-		pass
-
-	@FlowAmplitude.setter
-	def FlowAmplitude(self, flowamplitude: float) -> None:
-		pass
-
-	@TransientParameter.setter
-	def TransientParameter(self, transientparameter: TransientParameterType) -> None:
 		pass
 
 class IPeriodicHeadFlowsInput(IHammerNodesInput):
@@ -12601,6 +12691,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@InitialAirvolume.setter
+	def InitialAirvolume(self, initialairvolume: float) -> None:
+		pass
+
 	@property
 	def SmallAirOutflowOrificeDiameter(self) -> float:
 		"""No Description
@@ -12608,6 +12702,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@SmallAirOutflowOrificeDiameter.setter
+	def SmallAirOutflowOrificeDiameter(self, smallairoutfloworificediameter: float) -> None:
 		pass
 
 	@property
@@ -12619,6 +12717,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@TransitionVolume.setter
+	def TransitionVolume(self, transitionvolume: float) -> None:
+		pass
+
 	@property
 	def LargeAirOutflowOrificeDiameter(self) -> float:
 		"""No Description
@@ -12626,6 +12728,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@LargeAirOutflowOrificeDiameter.setter
+	def LargeAirOutflowOrificeDiameter(self, largeairoutfloworificediameter: float) -> None:
 		pass
 
 	@property
@@ -12637,6 +12743,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@AirInflowOrificeDiameter.setter
+	def AirInflowOrificeDiameter(self, airinfloworificediameter: float) -> None:
+		pass
+
 	@property
 	def AirOutflowOrificeDiameter(self) -> float:
 		"""No Description
@@ -12644,6 +12754,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@AirOutflowOrificeDiameter.setter
+	def AirOutflowOrificeDiameter(self, airoutfloworificediameter: float) -> None:
 		pass
 
 	@property
@@ -12655,6 +12769,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@TransitionPressure.setter
+	def TransitionPressure(self, transitionpressure: float) -> None:
+		pass
+
 	@property
 	def SmallAirFlowCurve(self) -> IAirFlowCurve:
 		"""No Description
@@ -12662,6 +12780,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@SmallAirFlowCurve.setter
+	def SmallAirFlowCurve(self, smallairflowcurve: IAirFlowCurve) -> None:
 		pass
 
 	@property
@@ -12673,6 +12795,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@LargeAirFlowCurve.setter
+	def LargeAirFlowCurve(self, largeairflowcurve: IAirFlowCurve) -> None:
+		pass
+
 	@property
 	def AirValveType(self) -> AirValveTypeEnum:
 		"""No Description
@@ -12680,6 +12806,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@AirValveType.setter
+	def AirValveType(self, airvalvetype: AirValveTypeEnum) -> None:
 		pass
 
 	@property
@@ -12691,6 +12821,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@AirValveTransitionType.setter
+	def AirValveTransitionType(self, airvalvetransitiontype: AirValveTransitionType) -> None:
+		pass
+
 	@property
 	def TimeToClose(self) -> float:
 		"""No Description
@@ -12698,6 +12832,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@TimeToClose.setter
+	def TimeToClose(self, timetoclose: float) -> None:
 		pass
 
 	@property
@@ -12709,6 +12847,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@ReportPeriod.setter
+	def ReportPeriod(self, reportperiod: int) -> None:
+		pass
+
 	@property
 	def TreatAirValveAsJunction(self) -> bool:
 		"""No Description
@@ -12716,6 +12858,10 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
+		pass
+
+	@TreatAirValveAsJunction.setter
+	def TreatAirValveAsJunction(self, treatairvalveasjunction: bool) -> None:
 		pass
 
 	@property
@@ -12727,6 +12873,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@InflowOrificeAirFlowCurve.setter
+	def InflowOrificeAirFlowCurve(self, infloworificeairflowcurve: IAirFlowCurve) -> None:
+		pass
+
 	@property
 	def OutflowOrificeAirFlowCurve(self) -> IAirFlowCurve:
 		"""No Description
@@ -12736,6 +12886,10 @@ class IAirValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@OutflowOrificeAirFlowCurve.setter
+	def OutflowOrificeAirFlowCurve(self, outfloworificeairflowcurve: IAirFlowCurve) -> None:
+		pass
+
 	@property
 	def AirFlowCalculationMethod(self) -> AirFlowCalculationMethod:
 		"""No Description
@@ -12743,70 +12897,6 @@ class IAirValveInput(IHammerNodeInput):
 		Returns:
 			IAirValveInput: 
 		"""
-		pass
-
-	@InitialAirvolume.setter
-	def InitialAirvolume(self, initialairvolume: float) -> None:
-		pass
-
-	@SmallAirOutflowOrificeDiameter.setter
-	def SmallAirOutflowOrificeDiameter(self, smallairoutfloworificediameter: float) -> None:
-		pass
-
-	@TransitionVolume.setter
-	def TransitionVolume(self, transitionvolume: float) -> None:
-		pass
-
-	@LargeAirOutflowOrificeDiameter.setter
-	def LargeAirOutflowOrificeDiameter(self, largeairoutfloworificediameter: float) -> None:
-		pass
-
-	@AirInflowOrificeDiameter.setter
-	def AirInflowOrificeDiameter(self, airinfloworificediameter: float) -> None:
-		pass
-
-	@AirOutflowOrificeDiameter.setter
-	def AirOutflowOrificeDiameter(self, airoutfloworificediameter: float) -> None:
-		pass
-
-	@TransitionPressure.setter
-	def TransitionPressure(self, transitionpressure: float) -> None:
-		pass
-
-	@SmallAirFlowCurve.setter
-	def SmallAirFlowCurve(self, smallairflowcurve: IAirFlowCurve) -> None:
-		pass
-
-	@LargeAirFlowCurve.setter
-	def LargeAirFlowCurve(self, largeairflowcurve: IAirFlowCurve) -> None:
-		pass
-
-	@AirValveType.setter
-	def AirValveType(self, airvalvetype: AirValveTypeEnum) -> None:
-		pass
-
-	@AirValveTransitionType.setter
-	def AirValveTransitionType(self, airvalvetransitiontype: AirValveTransitionType) -> None:
-		pass
-
-	@TimeToClose.setter
-	def TimeToClose(self, timetoclose: float) -> None:
-		pass
-
-	@ReportPeriod.setter
-	def ReportPeriod(self, reportperiod: int) -> None:
-		pass
-
-	@TreatAirValveAsJunction.setter
-	def TreatAirValveAsJunction(self, treatairvalveasjunction: bool) -> None:
-		pass
-
-	@InflowOrificeAirFlowCurve.setter
-	def InflowOrificeAirFlowCurve(self, infloworificeairflowcurve: IAirFlowCurve) -> None:
-		pass
-
-	@OutflowOrificeAirFlowCurve.setter
-	def OutflowOrificeAirFlowCurve(self, outfloworificeairflowcurve: IAirFlowCurve) -> None:
 		pass
 
 	@AirFlowCalculationMethod.setter
@@ -13069,6 +13159,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@SavDiameter.setter
+	def SavDiameter(self, savdiameter: float) -> None:
+		pass
+
 	@property
 	def SavThresholdPressure(self) -> float:
 		"""No Description
@@ -13076,6 +13170,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@SavThresholdPressure.setter
+	def SavThresholdPressure(self, savthresholdpressure: float) -> None:
 		pass
 
 	@property
@@ -13087,6 +13185,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@TimeForSAVToOpen.setter
+	def TimeForSAVToOpen(self, timeforsavtoopen: float) -> None:
+		pass
+
 	@property
 	def TimeSAVStaysFullyOpen(self) -> float:
 		"""No Description
@@ -13094,6 +13196,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@TimeSAVStaysFullyOpen.setter
+	def TimeSAVStaysFullyOpen(self, timesavstaysfullyopen: float) -> None:
 		pass
 
 	@property
@@ -13105,6 +13211,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@TimeForSAVToClose.setter
+	def TimeForSAVToClose(self, timeforsavtoclose: float) -> None:
+		pass
+
 	@property
 	def SavDischargeCoefficient(self) -> float:
 		"""No Description
@@ -13112,6 +13222,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@SavDischargeCoefficient.setter
+	def SavDischargeCoefficient(self, savdischargecoefficient: float) -> None:
 		pass
 
 	@property
@@ -13123,6 +13237,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@SrvDiameter.setter
+	def SrvDiameter(self, srvdiameter: float) -> None:
+		pass
+
 	@property
 	def SrvThresholdPressure(self) -> float:
 		"""No Description
@@ -13130,6 +13248,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@SrvThresholdPressure.setter
+	def SrvThresholdPressure(self, srvthresholdpressure: float) -> None:
 		pass
 
 	@property
@@ -13141,6 +13263,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@SrvSpringConstant.setter
+	def SrvSpringConstant(self, srvspringconstant: float) -> None:
+		pass
+
 	@property
 	def TimeForSRVToOpen(self) -> float:
 		"""No Description
@@ -13148,6 +13274,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@TimeForSRVToOpen.setter
+	def TimeForSRVToOpen(self, timeforsrvtoopen: float) -> None:
 		pass
 
 	@property
@@ -13159,6 +13289,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@TimeForSRVToClose.setter
+	def TimeForSRVToClose(self, timeforsrvtoclose: float) -> None:
+		pass
+
 	@property
 	def SrvDischargeCoefficient(self) -> float:
 		"""No Description
@@ -13166,6 +13300,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@SrvDischargeCoefficient.setter
+	def SrvDischargeCoefficient(self, srvdischargecoefficient: float) -> None:
 		pass
 
 	@property
@@ -13177,6 +13315,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@SavSrvType.setter
+	def SavSrvType(self, savsrvtype: SAV_SRVTypeEnum) -> None:
+		pass
+
 	@property
 	def SavType(self) -> SAVValveTypeEnum:
 		"""No Description
@@ -13184,6 +13326,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
+		pass
+
+	@SavType.setter
+	def SavType(self, savtype: SAVValveTypeEnum) -> None:
 		pass
 
 	@property
@@ -13195,6 +13341,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@SavClosureTriggerType.setter
+	def SavClosureTriggerType(self, savclosuretriggertype: SavClosureTriggerEnum) -> None:
+		pass
+
 	@property
 	def SrvControlType(self) -> SRVControlTypeEnum:
 		"""No Description
@@ -13204,6 +13354,10 @@ class ISurgeValveInput(IHammerNodeInput):
 		"""
 		pass
 
+	@SrvControlType.setter
+	def SrvControlType(self, srvcontroltype: SRVControlTypeEnum) -> None:
+		pass
+
 	@property
 	def SrvValveType(self) -> SRVValveTypeEnum:
 		"""No Description
@@ -13211,70 +13365,6 @@ class ISurgeValveInput(IHammerNodeInput):
 		Returns:
 			ISurgeValveInput: 
 		"""
-		pass
-
-	@SavDiameter.setter
-	def SavDiameter(self, savdiameter: float) -> None:
-		pass
-
-	@SavThresholdPressure.setter
-	def SavThresholdPressure(self, savthresholdpressure: float) -> None:
-		pass
-
-	@TimeForSAVToOpen.setter
-	def TimeForSAVToOpen(self, timeforsavtoopen: float) -> None:
-		pass
-
-	@TimeSAVStaysFullyOpen.setter
-	def TimeSAVStaysFullyOpen(self, timesavstaysfullyopen: float) -> None:
-		pass
-
-	@TimeForSAVToClose.setter
-	def TimeForSAVToClose(self, timeforsavtoclose: float) -> None:
-		pass
-
-	@SavDischargeCoefficient.setter
-	def SavDischargeCoefficient(self, savdischargecoefficient: float) -> None:
-		pass
-
-	@SrvDiameter.setter
-	def SrvDiameter(self, srvdiameter: float) -> None:
-		pass
-
-	@SrvThresholdPressure.setter
-	def SrvThresholdPressure(self, srvthresholdpressure: float) -> None:
-		pass
-
-	@SrvSpringConstant.setter
-	def SrvSpringConstant(self, srvspringconstant: float) -> None:
-		pass
-
-	@TimeForSRVToOpen.setter
-	def TimeForSRVToOpen(self, timeforsrvtoopen: float) -> None:
-		pass
-
-	@TimeForSRVToClose.setter
-	def TimeForSRVToClose(self, timeforsrvtoclose: float) -> None:
-		pass
-
-	@SrvDischargeCoefficient.setter
-	def SrvDischargeCoefficient(self, srvdischargecoefficient: float) -> None:
-		pass
-
-	@SavSrvType.setter
-	def SavSrvType(self, savsrvtype: SAV_SRVTypeEnum) -> None:
-		pass
-
-	@SavType.setter
-	def SavType(self, savtype: SAVValveTypeEnum) -> None:
-		pass
-
-	@SavClosureTriggerType.setter
-	def SavClosureTriggerType(self, savclosuretriggertype: SavClosureTriggerEnum) -> None:
-		pass
-
-	@SrvControlType.setter
-	def SrvControlType(self, srvcontroltype: SRVControlTypeEnum) -> None:
 		pass
 
 	@SrvValveType.setter
@@ -13546,6 +13636,10 @@ class IBaseOrificeNodeInput(IHammerNodeInput):
 		"""
 		pass
 
+	@OrificePressureDrop.setter
+	def OrificePressureDrop(self, orificepressuredrop: float) -> None:
+		pass
+
 	@property
 	def OrificeFlow(self) -> float:
 		"""No Description
@@ -13553,10 +13647,6 @@ class IBaseOrificeNodeInput(IHammerNodeInput):
 		Returns:
 			IBaseOrificeNodeInput: 
 		"""
-		pass
-
-	@OrificePressureDrop.setter
-	def OrificePressureDrop(self, orificepressuredrop: float) -> None:
 		pass
 
 	@OrificeFlow.setter
@@ -13660,12 +13750,22 @@ class IPressureHeadFlows(ICollection[IPressureHeadFlow]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, pressureHead: float, flow: float) -> IPressureHeadFlow:
 		"""No Description
 
 		Args:
 			pressureHead(float): pressureHead
 			flow(float): flow
+
+		Returns:
+			IPressureHeadFlow: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IPressureHeadFlow:
+		"""No Description
 
 		Returns:
 			IPressureHeadFlow: 
@@ -13693,6 +13793,10 @@ class IPressureHeadFlow(ICollectionElement):
 		"""
 		pass
 
+	@PressureHead.setter
+	def PressureHead(self, pressurehead: float) -> None:
+		pass
+
 	@property
 	def Flow(self) -> float:
 		"""No Description
@@ -13700,10 +13804,6 @@ class IPressureHeadFlow(ICollectionElement):
 		Returns:
 			IPressureHeadFlow: 
 		"""
-		pass
-
-	@PressureHead.setter
-	def PressureHead(self, pressurehead: float) -> None:
 		pass
 
 	@Flow.setter
@@ -13761,6 +13861,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 		"""
 		pass
 
+	@DischargeElementType.setter
+	def DischargeElementType(self, dischargeelementtype: DischargeToAtmosphereTypeEnum) -> None:
+		pass
+
 	@property
 	def InitialGaseVolume(self) -> float:
 		"""No Description
@@ -13768,6 +13872,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 		Returns:
 			IDischargeToAtmosphereNodeInput: 
 		"""
+		pass
+
+	@InitialGaseVolume.setter
+	def InitialGaseVolume(self, initialgasevolume: float) -> None:
 		pass
 
 	@property
@@ -13779,6 +13887,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 		"""
 		pass
 
+	@TimeToStartOperating.setter
+	def TimeToStartOperating(self, timetostartoperating: float) -> None:
+		pass
+
 	@property
 	def TimeToFullyOpenOrClose(self) -> float:
 		"""No Description
@@ -13786,6 +13898,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 		Returns:
 			IDischargeToAtmosphereNodeInput: 
 		"""
+		pass
+
+	@TimeToFullyOpenOrClose.setter
+	def TimeToFullyOpenOrClose(self, timetofullyopenorclose: float) -> None:
 		pass
 
 	@property
@@ -13806,6 +13922,10 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 		"""
 		pass
 
+	@InitialStatus.setter
+	def InitialStatus(self, initialstatus: ValveTypeInitialStatusEnum) -> None:
+		pass
+
 	@property
 	def ReportPeriod(self) -> int:
 		"""No Description
@@ -13813,26 +13933,6 @@ class IDischargeToAtmosphereNodeInput(IBaseOrificeNodeInput):
 		Returns:
 			IDischargeToAtmosphereNodeInput: 
 		"""
-		pass
-
-	@DischargeElementType.setter
-	def DischargeElementType(self, dischargeelementtype: DischargeToAtmosphereTypeEnum) -> None:
-		pass
-
-	@InitialGaseVolume.setter
-	def InitialGaseVolume(self, initialgasevolume: float) -> None:
-		pass
-
-	@TimeToStartOperating.setter
-	def TimeToStartOperating(self, timetostartoperating: float) -> None:
-		pass
-
-	@TimeToFullyOpenOrClose.setter
-	def TimeToFullyOpenOrClose(self, timetofullyopenorclose: float) -> None:
-		pass
-
-	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: ValveTypeInitialStatusEnum) -> None:
 		pass
 
 	@ReportPeriod.setter
@@ -14648,6 +14748,10 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@ReferencedPipe.setter
+	def ReferencedPipe(self, referencedpipe: IPipe) -> None:
+		pass
+
 	@property
 	def ValveDiameter(self) -> float:
 		"""No Description
@@ -14655,6 +14759,10 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 		Returns:
 			IIsolationValveElementInput: 
 		"""
+		pass
+
+	@ValveDiameter.setter
+	def ValveDiameter(self, valvediameter: float) -> None:
 		pass
 
 	@property
@@ -14666,6 +14774,10 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@MinorLossCoefficient.setter
+	def MinorLossCoefficient(self, minorlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def IsOperable(self) -> bool:
 		"""No Description
@@ -14673,6 +14785,10 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 		Returns:
 			IIsolationValveElementInput: 
 		"""
+		pass
+
+	@IsOperable.setter
+	def IsOperable(self, isoperable: bool) -> None:
 		pass
 
 	@property
@@ -14684,6 +14800,10 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@InitialStatus.setter
+	def InitialStatus(self, initialstatus: IsolationValveInitialSetting) -> None:
+		pass
+
 	@property
 	def InstallationYear(self) -> int:
 		"""No Description
@@ -14691,26 +14811,6 @@ class IIsolationValveElementInput(IPhysicalNodeElementInput):
 		Returns:
 			IIsolationValveElementInput: 
 		"""
-		pass
-
-	@ReferencedPipe.setter
-	def ReferencedPipe(self, referencedpipe: IPipe) -> None:
-		pass
-
-	@ValveDiameter.setter
-	def ValveDiameter(self, valvediameter: float) -> None:
-		pass
-
-	@MinorLossCoefficient.setter
-	def MinorLossCoefficient(self, minorlosscoefficient: float) -> None:
-		pass
-
-	@IsOperable.setter
-	def IsOperable(self, isoperable: bool) -> None:
-		pass
-
-	@InitialStatus.setter
-	def InitialStatus(self, initialstatus: IsolationValveInitialSetting) -> None:
 		pass
 
 	@InstallationYear.setter
@@ -14888,6 +14988,14 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""
 		pass
 
+	def HydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Pressure(self) -> Union[float, None]:
 		"""No Description
@@ -14906,6 +15014,14 @@ class IIsolatioNValveElementResults(IElementResults):
 
 		Returns:
 			Nullable: 
+		"""
+		pass
+
+	def Pressures(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
 		"""
 		pass
 
@@ -14930,6 +15046,14 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""
 		pass
 
+	def Flows(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Velocity(self) -> Union[float, None]:
 		"""No Description
@@ -14951,6 +15075,22 @@ class IIsolatioNValveElementResults(IElementResults):
 		"""
 		pass
 
+	def Velocities(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
+	def DistanceFromEndPoint(self) -> Union[float, None]:
+		"""No Description
+
+		Returns:
+			Nullable: 
+		"""
+		pass
+
 	@overload
 	def IsClosed(self) -> Union[bool, None]:
 		"""No Description
@@ -14966,46 +15106,6 @@ class IIsolatioNValveElementResults(IElementResults):
 
 		Args:
 			timeStepIndex(int): timeStepIndex
-
-		Returns:
-			Nullable: 
-		"""
-		pass
-
-	def HydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Pressures(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Flows(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def Velocities(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
-		"""
-		pass
-
-	def DistanceFromEndPoint(self) -> Union[float, None]:
-		"""No Description
 
 		Returns:
 			Nullable: 
@@ -15404,6 +15504,14 @@ class ISpotElevationResults(IElementResults):
 		"""
 		pass
 
+	def EnhancedHydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def EnhancedPressure(self) -> Union[float, None]:
 		"""No Description
@@ -15422,14 +15530,6 @@ class ISpotElevationResults(IElementResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def EnhancedHydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -15605,6 +15705,10 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@DemandPattern.setter
+	def DemandPattern(self, demandpattern: IPattern) -> None:
+		pass
+
 	@property
 	def BaseDemand(self) -> float:
 		"""No Description
@@ -15612,6 +15716,10 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		Returns:
 			ICustomerMeterInput: 
 		"""
+		pass
+
+	@BaseDemand.setter
+	def BaseDemand(self, basedemand: float) -> None:
 		pass
 
 	@property
@@ -15623,6 +15731,10 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@StartDemandDistribution.setter
+	def StartDemandDistribution(self, startdemanddistribution: float) -> None:
+		pass
+
 	@property
 	def AssociatedElement(self) -> IWaterElement:
 		"""No Description
@@ -15630,6 +15742,10 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		Returns:
 			ICustomerMeterInput: 
 		"""
+		pass
+
+	@AssociatedElement.setter
+	def AssociatedElement(self, associatedelement: IWaterElement) -> None:
 		pass
 
 	@property
@@ -15641,6 +15757,10 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@UnitDemand.setter
+	def UnitDemand(self, unitdemand: IUnitDemandLoad) -> None:
+		pass
+
 	@property
 	def UnitDemandPattern(self) -> IPattern:
 		"""No Description
@@ -15650,6 +15770,10 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		"""
 		pass
 
+	@UnitDemandPattern.setter
+	def UnitDemandPattern(self, unitdemandpattern: IPattern) -> None:
+		pass
+
 	@property
 	def NumberOfUnitDemands(self) -> float:
 		"""No Description
@@ -15657,30 +15781,6 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 		Returns:
 			ICustomerMeterInput: 
 		"""
-		pass
-
-	@DemandPattern.setter
-	def DemandPattern(self, demandpattern: IPattern) -> None:
-		pass
-
-	@BaseDemand.setter
-	def BaseDemand(self, basedemand: float) -> None:
-		pass
-
-	@StartDemandDistribution.setter
-	def StartDemandDistribution(self, startdemanddistribution: float) -> None:
-		pass
-
-	@AssociatedElement.setter
-	def AssociatedElement(self, associatedelement: IWaterElement) -> None:
-		pass
-
-	@UnitDemand.setter
-	def UnitDemand(self, unitdemand: IUnitDemandLoad) -> None:
-		pass
-
-	@UnitDemandPattern.setter
-	def UnitDemandPattern(self, unitdemandpattern: IPattern) -> None:
 		pass
 
 	@NumberOfUnitDemands.setter
@@ -15879,6 +15979,14 @@ class ICustomerMeterResults(IElementResults):
 		"""
 		pass
 
+	def HydraulicGrades(self) -> array(Union[float, None]):
+		"""No Description
+
+		Returns:
+			array(Nullable): 
+		"""
+		pass
+
 	@overload
 	def Pressure(self) -> Union[float, None]:
 		"""No Description
@@ -15897,14 +16005,6 @@ class ICustomerMeterResults(IElementResults):
 
 		Returns:
 			Nullable: 
-		"""
-		pass
-
-	def HydraulicGrades(self) -> array(Union[float, None]):
-		"""No Description
-
-		Returns:
-			array(Nullable): 
 		"""
 		pass
 
@@ -16080,6 +16180,10 @@ class ISCADAElementInput(IPointNodeInput):
 		"""
 		pass
 
+	@TargetElement.setter
+	def TargetElement(self, targetelement: IWaterElement) -> None:
+		pass
+
 	@property
 	def RealtimeSignal(self) -> ISCADASignal:
 		"""No Description
@@ -16087,6 +16191,10 @@ class ISCADAElementInput(IPointNodeInput):
 		Returns:
 			ISCADAElementInput: 
 		"""
+		pass
+
+	@RealtimeSignal.setter
+	def RealtimeSignal(self, realtimesignal: ISCADASignal) -> None:
 		pass
 
 	@property
@@ -16098,6 +16206,10 @@ class ISCADAElementInput(IPointNodeInput):
 		"""
 		pass
 
+	@HistoricalSignal.setter
+	def HistoricalSignal(self, historicalsignal: ISCADASignal) -> None:
+		pass
+
 	@property
 	def TargetAttribute(self) -> SCADATargetAttribute:
 		"""No Description
@@ -16105,18 +16217,6 @@ class ISCADAElementInput(IPointNodeInput):
 		Returns:
 			ISCADAElementInput: 
 		"""
-		pass
-
-	@TargetElement.setter
-	def TargetElement(self, targetelement: IWaterElement) -> None:
-		pass
-
-	@RealtimeSignal.setter
-	def RealtimeSignal(self, realtimesignal: ISCADASignal) -> None:
-		pass
-
-	@HistoricalSignal.setter
-	def HistoricalSignal(self, historicalsignal: ISCADASignal) -> None:
 		pass
 
 	@TargetAttribute.setter
@@ -16339,12 +16439,22 @@ class IPumpStationPumpIDs(ICollection[IPumpStationPumpID]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, pump: IPump, pumpDefinition: IPumpDefinition) -> IPumpStationPumpID:
 		"""No Description
 
 		Args:
 			pump(IPump): pump
 			pumpDefinition(IPumpDefinition): pumpDefinition
+
+		Returns:
+			IPumpStationPumpID: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IPumpStationPumpID:
+		"""No Description
 
 		Returns:
 			IPumpStationPumpID: 
@@ -16372,6 +16482,10 @@ class IPumpStationPumpID(ICollectionElement):
 		"""
 		pass
 
+	@Pump.setter
+	def Pump(self, pump: IElement) -> None:
+		pass
+
 	@property
 	def PumpDefinition(self) -> IPumpDefinition:
 		"""No Description
@@ -16379,10 +16493,6 @@ class IPumpStationPumpID(ICollectionElement):
 		Returns:
 			IPumpStationPumpID: 
 		"""
-		pass
-
-	@Pump.setter
-	def Pump(self, pump: IElement) -> None:
 		pass
 
 	@PumpDefinition.setter

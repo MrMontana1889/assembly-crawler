@@ -10,10 +10,10 @@ namespace AssemblyCrawler.Support
 	/// Contains a list of modules that make up the package
 	/// The modules can span multiple assemblies
 	/// </summary>
-	public class PythonPackageDefinition
+	public class PythonPackage
 	{
 		#region Constructor
-		public PythonPackageDefinition(string name)
+		public PythonPackage(string name)
 		{
 			PackageName = name;
 		}
@@ -25,17 +25,17 @@ namespace AssemblyCrawler.Support
 			foreach (var assembly in Assemblies)
 				assembly.Write();
 		}
-		public PythonAssemblyDefinition AddAssembly(Assembly assembly, string outputPath)
+		public PythonAssembly AddAssembly(Assembly assembly, string outputPath)
 		{
 			if (Assemblies.Find(a => a.Assembly.FullName == assembly.FullName) == null)
-				Assemblies.Add(new PythonAssemblyDefinition(this, assembly, outputPath));
+				Assemblies.Add(new PythonAssembly(this, assembly, outputPath));
 			return Assemblies.Find(a => a.Assembly.FullName == assembly.FullName);
 		}
 		#endregion
 
 		#region Public Properties
 		public string PackageName { get; }
-		public List<PythonAssemblyDefinition> Assemblies { get; } = new List<PythonAssemblyDefinition>();
+		public List<PythonAssembly> Assemblies { get; } = new List<PythonAssembly>();
 		#endregion
 	}
 }

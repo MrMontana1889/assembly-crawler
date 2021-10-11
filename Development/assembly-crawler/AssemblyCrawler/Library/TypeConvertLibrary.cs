@@ -76,7 +76,7 @@ namespace AssemblyCrawler.Library
 
 			return ToPythonPrimitiveType(type);
 		}
-		public static void AddImportForPythonType(PythonModuleDefinition module, Type type)
+		public static void AddImportForPythonType(PythonModule module, Type type)
 		{
 			string pythonType = ToPythonType(type);
 			if (pythonType.StartsWith("List"))
@@ -93,7 +93,7 @@ namespace AssemblyCrawler.Library
 				module.AddImportModule("datetime").AddType("datetime");
 			else if (pythonType.StartsWith("array"))
 				module.AddImportModule("array").AddType("array");
-			else if (pythonType == PythonStubWriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length))
+			else if (pythonType == WriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length))
 			{
 				// One of the types being written to the package.
 				// Need to find the module where the type is located so it can be imported
@@ -106,7 +106,7 @@ namespace AssemblyCrawler.Library
 						{
 							if (mod.Filename != module.Filename)
 							{
-								var classD = mod.ClassDefinitions.Find(c => c.ClassName == type.Name);
+								var classD = mod.Classes.Find(c => c.ClassName == type.Name);
 								if (classD != null)
 									module.AddImportModule(type.Namespace).AddType(pythonType);
 							}
@@ -157,11 +157,7 @@ namespace AssemblyCrawler.Library
 				}
 			}
 		}
-		#endregion
-
-		#region Private Static Methdos
-
-		private static string ToPythonPrimitiveType(Type type)
+		public static string ToPythonPrimitiveType(Type type)
 		{
 			if (type.IsEnum)
 				return type.Name;
@@ -207,7 +203,7 @@ namespace AssemblyCrawler.Library
 					if (type.Name == "Object")
 						return "object";
 
-					return PythonStubWriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length);
+					return WriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length);
 
 			}
 		}

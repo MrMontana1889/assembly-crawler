@@ -1,4 +1,4 @@
-from Haestad.LicensingFacade import ILicenseProvider, LicenseRunStatusEnum, ProductId, LicenseStatus
+from Haestad.LicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider
 from typing import overload
 
 class ILicenseManager(ILicenseProvider):
@@ -11,6 +11,14 @@ class ILicenseManager(ILicenseProvider):
 			Exception: if this class is instanciated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def IsInitialized(self) -> bool:
+		"""No Description
+
+		Returns:
+			bool: 
+		"""
 		pass
 
 	@overload
@@ -35,14 +43,6 @@ class ILicenseManager(ILicenseProvider):
 
 		Returns:
 			LicenseRunStatusEnum: 
-		"""
-		pass
-
-	def IsInitialized(self) -> bool:
-		"""No Description
-
-		Returns:
-			bool: 
 		"""
 		pass
 

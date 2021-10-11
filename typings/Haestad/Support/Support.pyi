@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, overload, Dict
+from typing import overload, List, Dict
 from array import array
 
 class DictionaryEntryExStringType(Enum):
@@ -127,15 +127,124 @@ class LockType(Enum):
 	Optimistic = 1
 	Pessimistic = 2
 
+class HaestadDocumentSpecificationType(Enum):
+	Local = 0
+	ProjectWise = 1
+	Multifile = 2
+	Invalid = 3
+	PWCS = 4
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class CompareType(Enum):
+	IncreasingX = 0
+	IncreasingY = 1
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class CompareType(Enum):
+	IncreasingX = 0
+	IncreasingY = 1
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
 class FieldCollection(List, ICloneable):
 
-	def __init__(self, capacity: int, c: FieldCollection, a: array(IField)) -> None:
+	@overload
+	def __init__(self) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(FieldCollection): c
 			a(array(IField)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(FieldCollection): c
+			a(array(IField)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: FieldCollection) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(FieldCollection): c
+			a(array(IField)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: array(IField)) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(FieldCollection): c
+			a(array(IField)): a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: FieldCollection) -> FieldCollection:
+		"""No Description
+
+		Args:
+			list(FieldCollection): list
+
+		Returns:
+			FieldCollection: 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: FieldCollection) -> FieldCollection:
+		"""No Description
+
+		Args:
+			list(FieldCollection): list
+
+		Returns:
+			FieldCollection: 
 		"""
 		pass
 
@@ -161,54 +270,6 @@ class FieldCollection(List, ICloneable):
 
 		Returns:
 			None: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: FieldCollection) -> int:
-		"""No Description
-
-		Args:
-			x(FieldCollection): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: array(IField)) -> int:
-		"""No Description
-
-		Args:
-			x(array(IField)): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@staticmethod
-	def Synchronized(list: FieldCollection) -> FieldCollection:
-		"""No Description
-
-		Args:
-			list(FieldCollection): list
-
-		Returns:
-			FieldCollection: 
-		"""
-		pass
-
-	@staticmethod
-	def ReadOnly(list: FieldCollection) -> FieldCollection:
-		"""No Description
-
-		Args:
-			list(FieldCollection): list
-
-		Returns:
-			FieldCollection: 
 		"""
 		pass
 
@@ -303,6 +364,30 @@ class FieldCollection(List, ICloneable):
 		"""
 		pass
 
+	@overload
+	def AddRange(self, x: FieldCollection) -> int:
+		"""No Description
+
+		Args:
+			x(FieldCollection): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array(IField)) -> int:
+		"""No Description
+
+		Args:
+			x(array(IField)): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
 	def TrimToSize(self) -> None:
 		"""No Description
 
@@ -347,6 +432,10 @@ class FieldCollection(List, ICloneable):
 		"""
 		pass
 
+	@Item.setter
+	def Item(self, item: IField) -> None:
+		pass
+
 	@property
 	def IsFixedSize(self) -> bool:
 		"""No Description
@@ -374,23 +463,77 @@ class FieldCollection(List, ICloneable):
 		"""
 		pass
 
-	@Item.setter
-	def Item(self, item: int) -> None:
-		pass
-
 	@Capacity.setter
 	def Capacity(self, capacity: int) -> None:
 		pass
 
 class FilterContextCollection(List, ICloneable):
 
-	def __init__(self, capacity: int, c: FilterContextCollection, a: array(IFilterContext)) -> None:
+	@overload
+	def __init__(self) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(FilterContextCollection): c
 			a(array(IFilterContext)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(FilterContextCollection): c
+			a(array(IFilterContext)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: FilterContextCollection) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(FilterContextCollection): c
+			a(array(IFilterContext)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: array(IFilterContext)) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(FilterContextCollection): c
+			a(array(IFilterContext)): a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: FilterContextCollection) -> FilterContextCollection:
+		"""No Description
+
+		Args:
+			list(FilterContextCollection): list
+
+		Returns:
+			FilterContextCollection: 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: FilterContextCollection) -> FilterContextCollection:
+		"""No Description
+
+		Args:
+			list(FilterContextCollection): list
+
+		Returns:
+			FilterContextCollection: 
 		"""
 		pass
 
@@ -442,54 +585,6 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns:
 			int: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: FilterContextCollection) -> int:
-		"""No Description
-
-		Args:
-			x(FilterContextCollection): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: array(IFilterContext)) -> int:
-		"""No Description
-
-		Args:
-			x(array(IFilterContext)): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@staticmethod
-	def Synchronized(list: FilterContextCollection) -> FilterContextCollection:
-		"""No Description
-
-		Args:
-			list(FilterContextCollection): list
-
-		Returns:
-			FilterContextCollection: 
-		"""
-		pass
-
-	@staticmethod
-	def ReadOnly(list: FilterContextCollection) -> FilterContextCollection:
-		"""No Description
-
-		Args:
-			list(FilterContextCollection): list
-
-		Returns:
-			FilterContextCollection: 
 		"""
 		pass
 
@@ -573,6 +668,30 @@ class FilterContextCollection(List, ICloneable):
 		"""
 		pass
 
+	@overload
+	def AddRange(self, x: FilterContextCollection) -> int:
+		"""No Description
+
+		Args:
+			x(FilterContextCollection): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array(IFilterContext)) -> int:
+		"""No Description
+
+		Args:
+			x(array(IFilterContext)): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
 	def TrimToSize(self) -> None:
 		"""No Description
 
@@ -590,6 +709,10 @@ class FilterContextCollection(List, ICloneable):
 		"""
 		pass
 
+	@AdditionalFilterSQL.setter
+	def AdditionalFilterSQL(self, additionalfiltersql: str) -> None:
+		pass
+
 	@property
 	def AdditionalFilterStringToFieldsMap(self) -> Dict:
 		"""No Description
@@ -597,6 +720,10 @@ class FilterContextCollection(List, ICloneable):
 		Returns:
 			FilterContextCollection: 
 		"""
+		pass
+
+	@AdditionalFilterStringToFieldsMap.setter
+	def AdditionalFilterStringToFieldsMap(self, additionalfilterstringtofieldsmap: Dict) -> None:
 		pass
 
 	@property
@@ -608,6 +735,10 @@ class FilterContextCollection(List, ICloneable):
 		"""
 		pass
 
+	@IdsToFilter.setter
+	def IdsToFilter(self, idstofilter: HmIDCollection) -> None:
+		pass
+
 	@property
 	def UseSmartLabels(self) -> bool:
 		"""No Description
@@ -615,6 +746,10 @@ class FilterContextCollection(List, ICloneable):
 		Returns:
 			FilterContextCollection: 
 		"""
+		pass
+
+	@UseSmartLabels.setter
+	def UseSmartLabels(self, usesmartlabels: bool) -> None:
 		pass
 
 	@property
@@ -633,6 +768,10 @@ class FilterContextCollection(List, ICloneable):
 		Returns:
 			FilterContextCollection: 
 		"""
+		pass
+
+	@SelectNOTElementIDs.setter
+	def SelectNOTElementIDs(self, selectnotelementids: bool) -> None:
 		pass
 
 	@property
@@ -671,6 +810,10 @@ class FilterContextCollection(List, ICloneable):
 		"""
 		pass
 
+	@Item.setter
+	def Item(self, item: IFilterContext) -> None:
+		pass
+
 	@property
 	def IsFixedSize(self) -> bool:
 		"""No Description
@@ -698,35 +841,20 @@ class FilterContextCollection(List, ICloneable):
 		"""
 		pass
 
-	@AdditionalFilterSQL.setter
-	def AdditionalFilterSQL(self, additionalfiltersql: str) -> None:
-		pass
-
-	@AdditionalFilterStringToFieldsMap.setter
-	def AdditionalFilterStringToFieldsMap(self, additionalfilterstringtofieldsmap: Dict) -> None:
-		pass
-
-	@IdsToFilter.setter
-	def IdsToFilter(self, idstofilter: HmIDCollection) -> None:
-		pass
-
-	@UseSmartLabels.setter
-	def UseSmartLabels(self, usesmartlabels: bool) -> None:
-		pass
-
-	@SelectNOTElementIDs.setter
-	def SelectNOTElementIDs(self, selectnotelementids: bool) -> None:
-		pass
-
-	@Item.setter
-	def Item(self, item: int) -> None:
-		pass
-
 	@Capacity.setter
 	def Capacity(self, capacity: int) -> None:
 		pass
 
 class GeometryPoint:
+
+	def __init__(self, x: float, y: float) -> None:
+		"""No Description
+
+		Args:
+			x(float): x
+			y(float): y
+		"""
+		pass
 
 	def MoveBy(self, x: float, y: float) -> None:
 		"""No Description
@@ -816,36 +944,60 @@ class GeometryPoint:
 		"""
 		pass
 
+	@staticmethod
+	def op_Addition(left: GeometryPoint, right: GeometryPoint) -> GeometryPoint:
+		"""No Description
+
+		Args:
+			left(GeometryPoint): left
+			right(GeometryPoint): right
+
+		Returns:
+			GeometryPoint: 
+		"""
+		pass
+
+	@staticmethod
+	def op_Equality(point1: GeometryPoint, point2: GeometryPoint) -> bool:
+		"""No Description
+
+		Args:
+			point1(GeometryPoint): point1
+			point2(GeometryPoint): point2
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@staticmethod
+	def op_Inequality(point1: GeometryPoint, point2: GeometryPoint) -> bool:
+		"""No Description
+
+		Args:
+			point1(GeometryPoint): point1
+			point2(GeometryPoint): point2
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@staticmethod
+	def op_Subtraction(left: GeometryPoint, right: GeometryPoint) -> GeometryPoint:
+		"""No Description
+
+		Args:
+			left(GeometryPoint): left
+			right(GeometryPoint): right
+
+		Returns:
+			GeometryPoint: 
+		"""
+		pass
+
 	@property
 	def X(self) -> float:
-		"""No Description
-
-		Returns:
-			GeometryPoint: 
-		"""
-		pass
-
-	@property
-	def Y(self) -> float:
-		"""No Description
-
-		Returns:
-			GeometryPoint: 
-		"""
-		pass
-
-	@property
-	def IsEmpty(self) -> bool:
-		"""No Description
-
-		Returns:
-			GeometryPoint: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Empty() -> GeometryPoint:
 		"""No Description
 
 		Returns:
@@ -857,11 +1009,50 @@ class GeometryPoint:
 	def X(self, x: float) -> None:
 		pass
 
+	@property
+	def Y(self) -> float:
+		"""No Description
+
+		Returns:
+			GeometryPoint: 
+		"""
+		pass
+
 	@Y.setter
 	def Y(self, y: float) -> None:
 		pass
 
+	@property
+	def IsEmpty(self) -> bool:
+		"""No Description
+
+		Returns:
+			GeometryPoint: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Empty() -> GeometryPoint:
+		"""No Description
+
+		Returns:
+			GeometryPoint: 
+		"""
+		pass
+
 class GeometryRectangle:
+
+	def __init__(self, x: float, y: float, width: float, height: float) -> None:
+		"""No Description
+
+		Args:
+			x(float): x
+			y(float): y
+			width(float): width
+			height(float): height
+		"""
+		pass
 
 	@overload
 	def Contains(self, point: GeometryPoint) -> bool:
@@ -986,6 +1177,32 @@ class GeometryRectangle:
 		"""
 		pass
 
+	@staticmethod
+	def op_Equality(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> bool:
+		"""No Description
+
+		Args:
+			rectangle1(GeometryRectangle): rectangle1
+			rectangle2(GeometryRectangle): rectangle2
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@staticmethod
+	def op_Inequality(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> bool:
+		"""No Description
+
+		Args:
+			rectangle1(GeometryRectangle): rectangle1
+			rectangle2(GeometryRectangle): rectangle2
+
+		Returns:
+			bool: 
+		"""
+		pass
+
 	@property
 	def X(self) -> float:
 		"""No Description
@@ -993,6 +1210,10 @@ class GeometryRectangle:
 		Returns:
 			GeometryRectangle: 
 		"""
+		pass
+
+	@X.setter
+	def X(self, x: float) -> None:
 		pass
 
 	@property
@@ -1004,6 +1225,10 @@ class GeometryRectangle:
 		"""
 		pass
 
+	@Y.setter
+	def Y(self, y: float) -> None:
+		pass
+
 	@property
 	def Width(self) -> float:
 		"""No Description
@@ -1013,6 +1238,10 @@ class GeometryRectangle:
 		"""
 		pass
 
+	@Width.setter
+	def Width(self, width: float) -> None:
+		pass
+
 	@property
 	def Height(self) -> float:
 		"""No Description
@@ -1020,6 +1249,10 @@ class GeometryRectangle:
 		Returns:
 			GeometryRectangle: 
 		"""
+		pass
+
+	@Height.setter
+	def Height(self, height: float) -> None:
 		pass
 
 	@property
@@ -1076,8 +1309,8 @@ class GeometryRectangle:
 		"""
 		pass
 
-	@property
 	@staticmethod
+	@property
 	def Empty() -> GeometryRectangle:
 		"""No Description
 
@@ -1086,38 +1319,73 @@ class GeometryRectangle:
 		"""
 		pass
 
-	@X.setter
-	def X(self, x: float) -> None:
-		pass
-
-	@Y.setter
-	def Y(self, y: float) -> None:
-		pass
-
-	@Width.setter
-	def Width(self, width: float) -> None:
-		pass
-
-	@Height.setter
-	def Height(self, height: float) -> None:
-		pass
-
-class HaestadDocumentSpecificationType(Enum):
-	Local = 0
-	ProjectWise = 1
-	Multifile = 2
-	Invalid = 3
-	PWCS = 4
-
 class HmIDCollection(List, ICloneable):
 
-	def __init__(self, capacity: int, c: HmIDCollection, a: array(int)) -> None:
+	@overload
+	def __init__(self) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(HmIDCollection): c
 			a(array(int)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(HmIDCollection): c
+			a(array(int)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: HmIDCollection) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(HmIDCollection): c
+			a(array(int)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: array(int)) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(HmIDCollection): c
+			a(array(int)): a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: HmIDCollection) -> HmIDCollection:
+		"""No Description
+
+		Args:
+			list(HmIDCollection): list
+
+		Returns:
+			HmIDCollection: 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: HmIDCollection) -> HmIDCollection:
+		"""No Description
+
+		Args:
+			list(HmIDCollection): list
+
+		Returns:
+			HmIDCollection: 
 		"""
 		pass
 
@@ -1158,54 +1426,6 @@ class HmIDCollection(List, ICloneable):
 
 		Returns:
 			None: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: HmIDCollection) -> int:
-		"""No Description
-
-		Args:
-			x(HmIDCollection): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: array(int)) -> int:
-		"""No Description
-
-		Args:
-			x(array(int)): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@staticmethod
-	def Synchronized(list: HmIDCollection) -> HmIDCollection:
-		"""No Description
-
-		Args:
-			list(HmIDCollection): list
-
-		Returns:
-			HmIDCollection: 
-		"""
-		pass
-
-	@staticmethod
-	def ReadOnly(list: HmIDCollection) -> HmIDCollection:
-		"""No Description
-
-		Args:
-			list(HmIDCollection): list
-
-		Returns:
-			HmIDCollection: 
 		"""
 		pass
 
@@ -1300,6 +1520,30 @@ class HmIDCollection(List, ICloneable):
 		"""
 		pass
 
+	@overload
+	def AddRange(self, x: HmIDCollection) -> int:
+		"""No Description
+
+		Args:
+			x(HmIDCollection): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array(int)) -> int:
+		"""No Description
+
+		Args:
+			x(array(int)): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
 	def TrimToSize(self) -> None:
 		"""No Description
 
@@ -1368,6 +1612,10 @@ class HmIDCollection(List, ICloneable):
 		"""
 		pass
 
+	@Item.setter
+	def Item(self, item: int) -> None:
+		pass
+
 	@property
 	def IsFixedSize(self) -> bool:
 		"""No Description
@@ -1395,10 +1643,6 @@ class HmIDCollection(List, ICloneable):
 		"""
 		pass
 
-	@Item.setter
-	def Item(self, item: int) -> None:
-		pass
-
 	@Capacity.setter
 	def Capacity(self, capacity: int) -> None:
 		pass
@@ -1413,6 +1657,17 @@ class IField:
 			Exception: if this class is instanciated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def GetValue(self, id: int) -> object:
+		"""No Description
+
+		Args:
+			id(int): id
+
+		Returns:
+			object: 
+		"""
 		pass
 
 	@overload
@@ -1433,17 +1688,6 @@ class IField:
 
 		Returns:
 			Dict: 
-		"""
-		pass
-
-	def GetValue(self, id: int) -> object:
-		"""No Description
-
-		Args:
-			id(int): id
-
-		Returns:
-			object: 
 		"""
 		pass
 
@@ -1474,6 +1718,10 @@ class IField:
 		"""
 		pass
 
+	@Label.setter
+	def Label(self, label: str) -> None:
+		pass
+
 	@property
 	def Notes(self) -> str:
 		"""No Description
@@ -1481,6 +1729,10 @@ class IField:
 		Returns:
 			IField: 
 		"""
+		pass
+
+	@Notes.setter
+	def Notes(self, notes: str) -> None:
 		pass
 
 	@property
@@ -1492,6 +1744,10 @@ class IField:
 		"""
 		pass
 
+	@Category.setter
+	def Category(self, category: str) -> None:
+		pass
+
 	@property
 	def FieldDataType(self) -> FieldDataType:
 		"""No Description
@@ -1499,18 +1755,6 @@ class IField:
 		Returns:
 			IField: 
 		"""
-		pass
-
-	@Label.setter
-	def Label(self, label: str) -> None:
-		pass
-
-	@Notes.setter
-	def Notes(self, notes: str) -> None:
-		pass
-
-	@Category.setter
-	def Category(self, category: str) -> None:
 		pass
 
 class IFilterContext:
@@ -1534,6 +1778,10 @@ class IFilterContext:
 		"""
 		pass
 
+	@Field.setter
+	def Field(self, field: IField) -> None:
+		pass
+
 	@property
 	def ComparisonOperator(self) -> ComparisonOperator:
 		"""No Description
@@ -1541,6 +1789,10 @@ class IFilterContext:
 		Returns:
 			IFilterContext: 
 		"""
+		pass
+
+	@ComparisonOperator.setter
+	def ComparisonOperator(self, comparisonoperator: ComparisonOperator) -> None:
 		pass
 
 	@property
@@ -1552,6 +1804,10 @@ class IFilterContext:
 		"""
 		pass
 
+	@Value.setter
+	def Value(self, value: object) -> None:
+		pass
+
 	@property
 	def AlternativeID(self) -> int:
 		"""No Description
@@ -1559,18 +1815,6 @@ class IFilterContext:
 		Returns:
 			IFilterContext: 
 		"""
-		pass
-
-	@Field.setter
-	def Field(self, field: IField) -> None:
-		pass
-
-	@ComparisonOperator.setter
-	def ComparisonOperator(self, comparisonoperator: ComparisonOperator) -> None:
-		pass
-
-	@Value.setter
-	def Value(self, value: object) -> None:
 		pass
 
 	@AlternativeID.setter
@@ -1598,6 +1842,10 @@ class ISortContext:
 		"""
 		pass
 
+	@Field.setter
+	def Field(self, field: IField) -> None:
+		pass
+
 	@property
 	def SortOrder(self) -> SortOrder:
 		"""No Description
@@ -1607,6 +1855,10 @@ class ISortContext:
 		"""
 		pass
 
+	@SortOrder.setter
+	def SortOrder(self, sortorder: SortOrder) -> None:
+		pass
+
 	@property
 	def AlternativeID(self) -> int:
 		"""No Description
@@ -1614,14 +1866,6 @@ class ISortContext:
 		Returns:
 			ISortContext: 
 		"""
-		pass
-
-	@Field.setter
-	def Field(self, field: IField) -> None:
-		pass
-
-	@SortOrder.setter
-	def SortOrder(self, sortorder: SortOrder) -> None:
 		pass
 
 	@AlternativeID.setter
@@ -1697,13 +1941,71 @@ class INamable:
 
 class SortContextCollection(List, ICloneable):
 
-	def __init__(self, capacity: int, c: SortContextCollection, a: array(ISortContext)) -> None:
+	@overload
+	def __init__(self) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(SortContextCollection): c
 			a(array(ISortContext)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(SortContextCollection): c
+			a(array(ISortContext)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: SortContextCollection) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(SortContextCollection): c
+			a(array(ISortContext)): a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: array(ISortContext)) -> None:
+		"""No Description
+
+		Args:
+			capacity(int): capacity
+			c(SortContextCollection): c
+			a(array(ISortContext)): a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: SortContextCollection) -> SortContextCollection:
+		"""No Description
+
+		Args:
+			list(SortContextCollection): list
+
+		Returns:
+			SortContextCollection: 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: SortContextCollection) -> SortContextCollection:
+		"""No Description
+
+		Args:
+			list(SortContextCollection): list
+
+		Returns:
+			SortContextCollection: 
 		"""
 		pass
 
@@ -1769,54 +2071,6 @@ class SortContextCollection(List, ICloneable):
 
 		Returns:
 			int: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: SortContextCollection) -> int:
-		"""No Description
-
-		Args:
-			x(SortContextCollection): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@overload
-	def AddRange(self, x: array(ISortContext)) -> int:
-		"""No Description
-
-		Args:
-			x(array(ISortContext)): x
-
-		Returns:
-			int: 
-		"""
-		pass
-
-	@staticmethod
-	def Synchronized(list: SortContextCollection) -> SortContextCollection:
-		"""No Description
-
-		Args:
-			list(SortContextCollection): list
-
-		Returns:
-			SortContextCollection: 
-		"""
-		pass
-
-	@staticmethod
-	def ReadOnly(list: SortContextCollection) -> SortContextCollection:
-		"""No Description
-
-		Args:
-			list(SortContextCollection): list
-
-		Returns:
-			SortContextCollection: 
 		"""
 		pass
 
@@ -1900,6 +2154,30 @@ class SortContextCollection(List, ICloneable):
 		"""
 		pass
 
+	@overload
+	def AddRange(self, x: SortContextCollection) -> int:
+		"""No Description
+
+		Args:
+			x(SortContextCollection): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array(ISortContext)) -> int:
+		"""No Description
+
+		Args:
+			x(array(ISortContext)): x
+
+		Returns:
+			int: 
+		"""
+		pass
+
 	def TrimToSize(self) -> None:
 		"""No Description
 
@@ -1915,6 +2193,10 @@ class SortContextCollection(List, ICloneable):
 		Returns:
 			SortContextCollection: 
 		"""
+		pass
+
+	@UseSmartLabels.setter
+	def UseSmartLabels(self, usesmartlabels: bool) -> None:
 		pass
 
 	@property
@@ -1953,6 +2235,10 @@ class SortContextCollection(List, ICloneable):
 		"""
 		pass
 
+	@Item.setter
+	def Item(self, item: ISortContext) -> None:
+		pass
+
 	@property
 	def IsFixedSize(self) -> bool:
 		"""No Description
@@ -1980,59 +2266,7 @@ class SortContextCollection(List, ICloneable):
 		"""
 		pass
 
-	@UseSmartLabels.setter
-	def UseSmartLabels(self, usesmartlabels: bool) -> None:
-		pass
-
-	@Item.setter
-	def Item(self, item: int) -> None:
-		pass
-
 	@Capacity.setter
 	def Capacity(self, capacity: int) -> None:
 		pass
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class CompareType(Enum):
-	IncreasingX = 0
-	IncreasingY = 1
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class CompareType(Enum):
-	IncreasingX = 0
-	IncreasingY = 1
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
 

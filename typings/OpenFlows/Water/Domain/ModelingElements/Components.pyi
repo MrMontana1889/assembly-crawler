@@ -1,13 +1,72 @@
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
-from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType
+from typing import overload, Generic
 from OpenFlows.Units import IUnit
+from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType
 from enum import Enum
 from datetime import datetime
-from typing import overload, Generic
 from OpenFlows.Domain.ModelingElements.Components import IComponentElements, IComponentElement, IModelComponents
 from Haestad.Support.Units import PopulationUnit, AreaUnit
 from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement, IPipe, IPump, IThrottleControlValve, IGeneralPurposeValve, IFlowControlValve, IPressureSustainingValve, IPressureBreakingValve, IPressureReducingValve, IReservoir, IJunction, IHydrant, ITank
 
+
+class ConditionComparisonOperator(Enum):
+	Equals = 0
+	GreaterThan = 1
+	GreaterThanEqual = 2
+	LessThan = 3
+	LessThanEQual = 4
+	NotEQual = 5
+
+class PumpAttribute(Enum):
+	Setting = 1
+	TargetPressure = 2
+	TargetHead = 3
+
+class PressureValveAttribute(Enum):
+	HydraulicGrade = 0
+	Pressure = 2
+
+class PumpConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class PressureValveConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class FCVConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class TCVConditionAttribute(Enum):
+	Discharge = 0
+	Setting = 1
+
+class WaterComponentType(Enum):
+	Pattern = 50
+	PumpDefinition = 51
+	Constituent = 52
+	Zone = 53
+	Control = 54
+	ControlAction = 55
+	ControlCondition = 56
+	ControlSet = 59
+	PDD = 60
+	EnergyPrice = 61
+	UnitDemandLoad = 62
+	GPVHeadloss = 63
+	ValveCharacteristic = 66
+	AirFlowCurve = 68
+	MinorLoss = 101
+	UnitCarbonEmission = 202
+	PowerMeter = 203
+	MSXSetup = 220
+	SCADASignal = 257
+
+class SCADASignalTransformMethod(Enum):
+	Threshold = 0
+	Range = 1
+	Formula = 2
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
 
@@ -33,12 +92,22 @@ class IAirFlowPressures(ICollection[IAirFlowPressure]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, pressure: float) -> IAirFlowPressure:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			pressure(float): pressure
+
+		Returns:
+			IAirFlowPressure: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IAirFlowPressure:
+		"""No Description
 
 		Returns:
 			IAirFlowPressure: 
@@ -66,6 +135,10 @@ class IAirFlowPressure(ICollectionElement):
 		"""
 		pass
 
+	@Flow.setter
+	def Flow(self, flow: float) -> None:
+		pass
+
 	@property
 	def Pressure(self) -> float:
 		"""No Description
@@ -73,10 +146,6 @@ class IAirFlowPressure(ICollectionElement):
 		Returns:
 			IAirFlowPressure: 
 		"""
-		pass
-
-	@Flow.setter
-	def Flow(self, flow: float) -> None:
 		pass
 
 	@Pressure.setter
@@ -158,14 +227,6 @@ class IAirFlowCurveUnits(IElementUnits):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-class ConditionComparisonOperator(Enum):
-	Equals = 0
-	GreaterThan = 1
-	GreaterThanEqual = 2
-	LessThan = 3
-	LessThanEQual = 4
-	NotEQual = 5
-
 class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterComponent):
 
 	def __init__(self) -> None:
@@ -187,6 +248,10 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterCo
 		"""
 		pass
 
+	@ControlType.setter
+	def ControlType(self, controltype: ControlTypeEnum) -> None:
+		pass
+
 	@property
 	def Condition(self) -> IControlCondition:
 		"""No Description
@@ -196,6 +261,10 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterCo
 		"""
 		pass
 
+	@Condition.setter
+	def Condition(self, condition: IControlCondition) -> None:
+		pass
+
 	@property
 	def Action(self) -> IControlAction:
 		"""No Description
@@ -203,6 +272,10 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterCo
 		Returns:
 			IControl: 
 		"""
+		pass
+
+	@Action.setter
+	def Action(self, action: IControlAction) -> None:
 		pass
 
 	@property
@@ -223,6 +296,10 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterCo
 		"""
 		pass
 
+	@DefineDescription.setter
+	def DefineDescription(self, definedescription: bool) -> None:
+		pass
+
 	@property
 	def Description(self) -> str:
 		"""No Description
@@ -232,6 +309,10 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterCo
 		"""
 		pass
 
+	@Description.setter
+	def Description(self, description: str) -> None:
+		pass
+
 	@property
 	def Summary(self) -> str:
 		"""No Description
@@ -239,26 +320,6 @@ class IControl(IWaterComponentBase[IControls, IControl, IElementUnits], IWaterCo
 		Returns:
 			IControl: 
 		"""
-		pass
-
-	@ControlType.setter
-	def ControlType(self, controltype: ControlTypeEnum) -> None:
-		pass
-
-	@Condition.setter
-	def Condition(self, condition: IControlCondition) -> None:
-		pass
-
-	@Action.setter
-	def Action(self, action: IControlAction) -> None:
-		pass
-
-	@DefineDescription.setter
-	def DefineDescription(self, definedescription: bool) -> None:
-		pass
-
-	@Description.setter
-	def Description(self, description: str) -> None:
 		pass
 
 class ILogicalControl:
@@ -291,6 +352,10 @@ class ILogicalControl:
 		"""
 		pass
 
+	@HasPriority.setter
+	def HasPriority(self, haspriority: bool) -> None:
+		pass
+
 	@property
 	def Priority(self) -> ControlPriorityEnum:
 		"""No Description
@@ -298,6 +363,10 @@ class ILogicalControl:
 		Returns:
 			ILogicalControl: 
 		"""
+		pass
+
+	@Priority.setter
+	def Priority(self, priority: ControlPriorityEnum) -> None:
 		pass
 
 	@property
@@ -309,6 +378,10 @@ class ILogicalControl:
 		"""
 		pass
 
+	@HasElse.setter
+	def HasElse(self, haselse: bool) -> None:
+		pass
+
 	@property
 	def ElseAction(self) -> IControlAction:
 		"""No Description
@@ -316,18 +389,6 @@ class ILogicalControl:
 		Returns:
 			ILogicalControl: 
 		"""
-		pass
-
-	@HasPriority.setter
-	def HasPriority(self, haspriority: bool) -> None:
-		pass
-
-	@Priority.setter
-	def Priority(self, priority: ControlPriorityEnum) -> None:
-		pass
-
-	@HasElse.setter
-	def HasElse(self, haselse: bool) -> None:
 		pass
 
 	@ElseAction.setter
@@ -367,6 +428,10 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		"""
 		pass
 
+	@ConditionType.setter
+	def ConditionType(self, conditiontype: ConditionTypeEnum) -> None:
+		pass
+
 	@property
 	def SimpleConditionType(self) -> SimpleConditionType:
 		"""No Description
@@ -374,6 +439,10 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		Returns:
 			IControlCondition: 
 		"""
+		pass
+
+	@SimpleConditionType.setter
+	def SimpleConditionType(self, simpleconditiontype: SimpleConditionType) -> None:
 		pass
 
 	@property
@@ -430,6 +499,10 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		"""
 		pass
 
+	@IsUserDefinedDescriptionFormat.setter
+	def IsUserDefinedDescriptionFormat(self, isuserdefineddescriptionformat: bool) -> None:
+		pass
+
 	@property
 	def Description(self) -> str:
 		"""No Description
@@ -439,6 +512,10 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		"""
 		pass
 
+	@Description.setter
+	def Description(self, description: str) -> None:
+		pass
+
 	@property
 	def Summary(self) -> str:
 		"""No Description
@@ -446,22 +523,6 @@ class IControlCondition(IWaterComponentBase[IControlConditions, IControlConditio
 		Returns:
 			IControlCondition: 
 		"""
-		pass
-
-	@ConditionType.setter
-	def ConditionType(self, conditiontype: ConditionTypeEnum) -> None:
-		pass
-
-	@SimpleConditionType.setter
-	def SimpleConditionType(self, simpleconditiontype: SimpleConditionType) -> None:
-		pass
-
-	@IsUserDefinedDescriptionFormat.setter
-	def IsUserDefinedDescriptionFormat(self, isuserdefineddescriptionformat: bool) -> None:
-		pass
-
-	@Description.setter
-	def Description(self, description: str) -> None:
 		pass
 
 class IControlSimpleConditionInput:
@@ -526,6 +587,10 @@ class IElementControlConditionInput(IControlSimpleConditionInput):
 		Returns:
 			IElementControlConditionInput: 
 		"""
+		pass
+
+	@Element.setter
+	def Element(self, element: IWaterElement) -> None:
 		pass
 
 	@property
@@ -618,10 +683,6 @@ class IElementControlConditionInput(IControlSimpleConditionInput):
 		"""
 		pass
 
-	@Element.setter
-	def Element(self, element: IWaterElement) -> None:
-		pass
-
 class IElementConditionInput:
 
 	def __init__(self) -> None:
@@ -664,6 +725,10 @@ class INodeConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@NodeAttribute.setter
+	def NodeAttribute(self, nodeattribute: NodeAttributeEnum) -> None:
+		pass
+
 	@property
 	def Demand(self) -> float:
 		"""No Description
@@ -671,6 +736,10 @@ class INodeConditionInput(IElementConditionInput):
 		Returns:
 			INodeConditionInput: 
 		"""
+		pass
+
+	@Demand.setter
+	def Demand(self, demand: float) -> None:
 		pass
 
 	@property
@@ -682,6 +751,10 @@ class INodeConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HydraulicGrade.setter
+	def HydraulicGrade(self, hydraulicgrade: float) -> None:
+		pass
+
 	@property
 	def Pressure(self) -> float:
 		"""No Description
@@ -689,18 +762,6 @@ class INodeConditionInput(IElementConditionInput):
 		Returns:
 			INodeConditionInput: 
 		"""
-		pass
-
-	@NodeAttribute.setter
-	def NodeAttribute(self, nodeattribute: NodeAttributeEnum) -> None:
-		pass
-
-	@Demand.setter
-	def Demand(self, demand: float) -> None:
-		pass
-
-	@HydraulicGrade.setter
-	def HydraulicGrade(self, hydraulicgrade: float) -> None:
 		pass
 
 	@Pressure.setter
@@ -728,6 +789,10 @@ class ITankConditionInput:
 		"""
 		pass
 
+	@TankAttribute.setter
+	def TankAttribute(self, tankattribute: TankAttributeEnum) -> None:
+		pass
+
 	@property
 	def Demand(self) -> float:
 		"""No Description
@@ -735,6 +800,10 @@ class ITankConditionInput:
 		Returns:
 			ITankConditionInput: 
 		"""
+		pass
+
+	@Demand.setter
+	def Demand(self, demand: float) -> None:
 		pass
 
 	@property
@@ -746,6 +815,10 @@ class ITankConditionInput:
 		"""
 		pass
 
+	@HydraulicGrade.setter
+	def HydraulicGrade(self, hydraulicgrade: float) -> None:
+		pass
+
 	@property
 	def Pressure(self) -> float:
 		"""No Description
@@ -753,6 +826,10 @@ class ITankConditionInput:
 		Returns:
 			ITankConditionInput: 
 		"""
+		pass
+
+	@Pressure.setter
+	def Pressure(self, pressure: float) -> None:
 		pass
 
 	@property
@@ -764,6 +841,10 @@ class ITankConditionInput:
 		"""
 		pass
 
+	@Level.setter
+	def Level(self, level: float) -> None:
+		pass
+
 	@property
 	def TimeToDrain(self) -> float:
 		"""No Description
@@ -771,6 +852,10 @@ class ITankConditionInput:
 		Returns:
 			ITankConditionInput: 
 		"""
+		pass
+
+	@TimeToDrain.setter
+	def TimeToDrain(self, timetodrain: float) -> None:
 		pass
 
 	@property
@@ -782,6 +867,10 @@ class ITankConditionInput:
 		"""
 		pass
 
+	@TimeToFill.setter
+	def TimeToFill(self, timetofill: float) -> None:
+		pass
+
 	@property
 	def PercentFull(self) -> float:
 		"""No Description
@@ -789,34 +878,6 @@ class ITankConditionInput:
 		Returns:
 			ITankConditionInput: 
 		"""
-		pass
-
-	@TankAttribute.setter
-	def TankAttribute(self, tankattribute: TankAttributeEnum) -> None:
-		pass
-
-	@Demand.setter
-	def Demand(self, demand: float) -> None:
-		pass
-
-	@HydraulicGrade.setter
-	def HydraulicGrade(self, hydraulicgrade: float) -> None:
-		pass
-
-	@Pressure.setter
-	def Pressure(self, pressure: float) -> None:
-		pass
-
-	@Level.setter
-	def Level(self, level: float) -> None:
-		pass
-
-	@TimeToDrain.setter
-	def TimeToDrain(self, timetodrain: float) -> None:
-		pass
-
-	@TimeToFill.setter
-	def TimeToFill(self, timetofill: float) -> None:
 		pass
 
 	@PercentFull.setter
@@ -844,6 +905,10 @@ class IPumpConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@PumpAttribute.setter
+	def PumpAttribute(self, pumpattribute: ControlConditionPumpAttribute) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -851,6 +916,10 @@ class IPumpConditionInput(IElementConditionInput):
 		Returns:
 			IPumpConditionInput: 
 		"""
+		pass
+
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@property
@@ -862,6 +931,10 @@ class IPumpConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@PumpSetting.setter
+	def PumpSetting(self, pumpsetting: float) -> None:
+		pass
+
 	@property
 	def PumpStatus(self) -> PumpStatus:
 		"""No Description
@@ -869,18 +942,6 @@ class IPumpConditionInput(IElementConditionInput):
 		Returns:
 			IPumpConditionInput: 
 		"""
-		pass
-
-	@PumpAttribute.setter
-	def PumpAttribute(self, pumpattribute: ControlConditionPumpAttribute) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
-		pass
-
-	@PumpSetting.setter
-	def PumpSetting(self, pumpsetting: float) -> None:
 		pass
 
 	@PumpStatus.setter
@@ -908,6 +969,10 @@ class IPipeConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@PipeAttribute.setter
+	def PipeAttribute(self, pipeattribute: ControlConditionPipeAttribute) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -917,6 +982,10 @@ class IPipeConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
+		pass
+
 	@property
 	def PipeStatus(self) -> PipeStatus:
 		"""No Description
@@ -924,14 +993,6 @@ class IPipeConditionInput(IElementConditionInput):
 		Returns:
 			IPipeConditionInput: 
 		"""
-		pass
-
-	@PipeAttribute.setter
-	def PipeAttribute(self, pipeattribute: ControlConditionPipeAttribute) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@PipeStatus.setter
@@ -959,6 +1020,10 @@ class IPressureValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@PressureValveAttribute.setter
+	def PressureValveAttribute(self, pressurevalveattribute: ControlConditionPressureValveAttributeEnum) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -966,6 +1031,10 @@ class IPressureValveConditionInput(IElementConditionInput):
 		Returns:
 			IPressureValveConditionInput: 
 		"""
+		pass
+
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@property
@@ -977,6 +1046,10 @@ class IPressureValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HeadlossCoefficient.setter
+	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def ValveStatus(self) -> ControlConditionValveStatus:
 		"""No Description
@@ -984,18 +1057,6 @@ class IPressureValveConditionInput(IElementConditionInput):
 		Returns:
 			IPressureValveConditionInput: 
 		"""
-		pass
-
-	@PressureValveAttribute.setter
-	def PressureValveAttribute(self, pressurevalveattribute: ControlConditionPressureValveAttributeEnum) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
-		pass
-
-	@HeadlossCoefficient.setter
-	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
 		pass
 
 	@ValveStatus.setter
@@ -1023,6 +1084,10 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@FCVAttribute.setter
+	def FCVAttribute(self, fcvattribute: ControlConditionFCVAttributeEnum) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -1030,6 +1095,10 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		Returns:
 			IFlowControLValveConditionInput: 
 		"""
+		pass
+
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@property
@@ -1041,6 +1110,10 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HeadlossCoefficient.setter
+	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def FCVStatus(self) -> FCVStatusEnum:
 		"""No Description
@@ -1048,18 +1121,6 @@ class IFlowControLValveConditionInput(IElementConditionInput):
 		Returns:
 			IFlowControLValveConditionInput: 
 		"""
-		pass
-
-	@FCVAttribute.setter
-	def FCVAttribute(self, fcvattribute: ControlConditionFCVAttributeEnum) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
-		pass
-
-	@HeadlossCoefficient.setter
-	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
 		pass
 
 	@FCVStatus.setter
@@ -1087,6 +1148,10 @@ class IGeneralPurposeValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@GPVAttribute.setter
+	def GPVAttribute(self, gpvattribute: ControlConditionGPVAttributeEnum) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -1096,6 +1161,10 @@ class IGeneralPurposeValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
+		pass
+
 	@property
 	def GPVStatus(self) -> ControlConditionGPVStatusEnum:
 		"""No Description
@@ -1103,14 +1172,6 @@ class IGeneralPurposeValveConditionInput(IElementConditionInput):
 		Returns:
 			IGeneralPurposeValveConditionInput: 
 		"""
-		pass
-
-	@GPVAttribute.setter
-	def GPVAttribute(self, gpvattribute: ControlConditionGPVAttributeEnum) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@GPVStatus.setter
@@ -1138,6 +1199,10 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@TCVAttribute.setter
+	def TCVAttribute(self, tcvattribute: ControlConditionTCVAttributeEnum) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -1145,6 +1210,10 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		Returns:
 			IThrottleControlValveConditionInput: 
 		"""
+		pass
+
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@property
@@ -1156,6 +1225,10 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HeadlossCoefficient.setter
+	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
+		pass
+
 	@property
 	def TCVStatus(self) -> TCVStatusEnum:
 		"""No Description
@@ -1163,18 +1236,6 @@ class IThrottleControlValveConditionInput(IElementConditionInput):
 		Returns:
 			IThrottleControlValveConditionInput: 
 		"""
-		pass
-
-	@TCVAttribute.setter
-	def TCVAttribute(self, tcvattribute: ControlConditionTCVAttributeEnum) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
-		pass
-
-	@HeadlossCoefficient.setter
-	def HeadlossCoefficient(self, headlosscoefficient: float) -> None:
 		pass
 
 	@TCVStatus.setter
@@ -1202,6 +1263,10 @@ class IHydroTankConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HydroTankAttribute.setter
+	def HydroTankAttribute(self, hydrotankattribute: HydroTankAttributeEnum) -> None:
+		pass
+
 	@property
 	def HydraulicGrade(self) -> float:
 		"""No Description
@@ -1211,6 +1276,10 @@ class IHydroTankConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HydraulicGrade.setter
+	def HydraulicGrade(self, hydraulicgrade: float) -> None:
+		pass
+
 	@property
 	def Pressure(self) -> float:
 		"""No Description
@@ -1218,14 +1287,6 @@ class IHydroTankConditionInput(IElementConditionInput):
 		Returns:
 			IHydroTankConditionInput: 
 		"""
-		pass
-
-	@HydroTankAttribute.setter
-	def HydroTankAttribute(self, hydrotankattribute: HydroTankAttributeEnum) -> None:
-		pass
-
-	@HydraulicGrade.setter
-	def HydraulicGrade(self, hydraulicgrade: float) -> None:
 		pass
 
 	@Pressure.setter
@@ -1253,6 +1314,10 @@ class ISurgeTankConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@SurgeTankAttribute.setter
+	def SurgeTankAttribute(self, surgetankattribute: SurgeTankAttributeEnum) -> None:
+		pass
+
 	@property
 	def Demand(self) -> float:
 		"""No Description
@@ -1260,6 +1325,10 @@ class ISurgeTankConditionInput(IElementConditionInput):
 		Returns:
 			ISurgeTankConditionInput: 
 		"""
+		pass
+
+	@Demand.setter
+	def Demand(self, demand: float) -> None:
 		pass
 
 	@property
@@ -1271,6 +1340,10 @@ class ISurgeTankConditionInput(IElementConditionInput):
 		"""
 		pass
 
+	@HydraulicGrade.setter
+	def HydraulicGrade(self, hydraulicgrade: float) -> None:
+		pass
+
 	@property
 	def Pressure(self) -> float:
 		"""No Description
@@ -1278,18 +1351,6 @@ class ISurgeTankConditionInput(IElementConditionInput):
 		Returns:
 			ISurgeTankConditionInput: 
 		"""
-		pass
-
-	@SurgeTankAttribute.setter
-	def SurgeTankAttribute(self, surgetankattribute: SurgeTankAttributeEnum) -> None:
-		pass
-
-	@Demand.setter
-	def Demand(self, demand: float) -> None:
-		pass
-
-	@HydraulicGrade.setter
-	def HydraulicGrade(self, hydraulicgrade: float) -> None:
 		pass
 
 	@Pressure.setter
@@ -1533,6 +1594,10 @@ class ICompositeCondition(ICollectionElement):
 		"""
 		pass
 
+	@LogicalOperator.setter
+	def LogicalOperator(self, logicaloperator: LogicalOperatorEnum) -> None:
+		pass
+
 	@property
 	def Condition(self) -> IControlCondition:
 		"""No Description
@@ -1540,10 +1605,6 @@ class ICompositeCondition(ICollectionElement):
 		Returns:
 			ICompositeCondition: 
 		"""
-		pass
-
-	@LogicalOperator.setter
-	def LogicalOperator(self, logicaloperator: LogicalOperatorEnum) -> None:
 		pass
 
 	@Condition.setter
@@ -1562,12 +1623,22 @@ class ICompositeConditions(ICollection[ICompositeCondition]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, logicalOperator: LogicalOperatorEnum, condition: IControlCondition) -> ICompositeCondition:
 		"""No Description
 
 		Args:
 			logicalOperator(LogicalOperatorEnum): logicalOperator
 			condition(IControlCondition): condition
+
+		Returns:
+			ICompositeCondition: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> ICompositeCondition:
+		"""No Description
 
 		Returns:
 			ICompositeCondition: 
@@ -1607,6 +1678,10 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		"""
 		pass
 
+	@ActionType.setter
+	def ActionType(self, actiontype: ControlActionTypeEnum) -> None:
+		pass
+
 	@property
 	def Element(self) -> IWaterElement:
 		"""No Description
@@ -1614,6 +1689,10 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		Returns:
 			IControlAction: 
 		"""
+		pass
+
+	@Element.setter
+	def Element(self, element: IWaterElement) -> None:
 		pass
 
 	@property
@@ -1688,6 +1767,10 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		"""
 		pass
 
+	@DefineDescription.setter
+	def DefineDescription(self, definedescription: bool) -> None:
+		pass
+
 	@property
 	def Description(self) -> str:
 		"""No Description
@@ -1697,6 +1780,10 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		"""
 		pass
 
+	@Description.setter
+	def Description(self, description: str) -> None:
+		pass
+
 	@property
 	def Summary(self) -> str:
 		"""No Description
@@ -1704,22 +1791,6 @@ class IControlAction(IWaterComponentBase[IControlActions, IControlAction, IContr
 		Returns:
 			IControlAction: 
 		"""
-		pass
-
-	@ActionType.setter
-	def ActionType(self, actiontype: ControlActionTypeEnum) -> None:
-		pass
-
-	@Element.setter
-	def Element(self, element: IWaterElement) -> None:
-		pass
-
-	@DefineDescription.setter
-	def DefineDescription(self, definedescription: bool) -> None:
-		pass
-
-	@Description.setter
-	def Description(self, description: str) -> None:
 		pass
 
 class IElementActionInput:
@@ -1773,6 +1844,10 @@ class IPipeActionInput(IElementActionInput):
 		"""
 		pass
 
+	@PipeAttribute.setter
+	def PipeAttribute(self, pipeattribute: ControlActionPipeAttribute) -> None:
+		pass
+
 	@property
 	def PipeStatus(self) -> ControlActionPipeStatus:
 		"""No Description
@@ -1780,10 +1855,6 @@ class IPipeActionInput(IElementActionInput):
 		Returns:
 			IPipeActionInput: 
 		"""
-		pass
-
-	@PipeAttribute.setter
-	def PipeAttribute(self, pipeattribute: ControlActionPipeAttribute) -> None:
 		pass
 
 	@PipeStatus.setter
@@ -1820,6 +1891,10 @@ class IPumpActionInput(IElementActionInput):
 		"""
 		pass
 
+	@PumpAttribute.setter
+	def PumpAttribute(self, pumpattribute: ControlActionPumpAttribute) -> None:
+		pass
+
 	@property
 	def PumpStatus(self) -> ControlActionPumpStatus:
 		"""No Description
@@ -1827,6 +1902,10 @@ class IPumpActionInput(IElementActionInput):
 		Returns:
 			IPumpActionInput: 
 		"""
+		pass
+
+	@PumpStatus.setter
+	def PumpStatus(self, pumpstatus: ControlActionPumpStatus) -> None:
 		pass
 
 	@property
@@ -1838,6 +1917,10 @@ class IPumpActionInput(IElementActionInput):
 		"""
 		pass
 
+	@RelativeSpeedFactor.setter
+	def RelativeSpeedFactor(self, relativespeedfactor: float) -> None:
+		pass
+
 	@property
 	def TargetPressure(self) -> float:
 		"""No Description
@@ -1847,6 +1930,10 @@ class IPumpActionInput(IElementActionInput):
 		"""
 		pass
 
+	@TargetPressure.setter
+	def TargetPressure(self, targetpressure: float) -> None:
+		pass
+
 	@property
 	def TargetHead(self) -> float:
 		"""No Description
@@ -1854,22 +1941,6 @@ class IPumpActionInput(IElementActionInput):
 		Returns:
 			IPumpActionInput: 
 		"""
-		pass
-
-	@PumpAttribute.setter
-	def PumpAttribute(self, pumpattribute: ControlActionPumpAttribute) -> None:
-		pass
-
-	@PumpStatus.setter
-	def PumpStatus(self, pumpstatus: ControlActionPumpStatus) -> None:
-		pass
-
-	@RelativeSpeedFactor.setter
-	def RelativeSpeedFactor(self, relativespeedfactor: float) -> None:
-		pass
-
-	@TargetPressure.setter
-	def TargetPressure(self, targetpressure: float) -> None:
 		pass
 
 	@TargetHead.setter
@@ -1906,6 +1977,10 @@ class IThrottleControlValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@TCVAttribute.setter
+	def TCVAttribute(self, tcvattribute: ControlActionTCVAttribute) -> None:
+		pass
+
 	@property
 	def TCVStatus(self) -> ControlActionTCVStatus:
 		"""No Description
@@ -1915,6 +1990,10 @@ class IThrottleControlValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@TCVStatus.setter
+	def TCVStatus(self, tcvstatus: ControlActionTCVStatus) -> None:
+		pass
+
 	@property
 	def HeadlossCoefficient(self) -> float:
 		"""No Description
@@ -1922,14 +2001,6 @@ class IThrottleControlValveActionInput(IElementActionInput):
 		Returns:
 			IThrottleControlValveActionInput: 
 		"""
-		pass
-
-	@TCVAttribute.setter
-	def TCVAttribute(self, tcvattribute: ControlActionTCVAttribute) -> None:
-		pass
-
-	@TCVStatus.setter
-	def TCVStatus(self, tcvstatus: ControlActionTCVStatus) -> None:
 		pass
 
 	@HeadlossCoefficient.setter
@@ -1966,6 +2037,10 @@ class IGeneralPurposeValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@GPVAttribute.setter
+	def GPVAttribute(self, gpvattribute: ControlActionGPVAttribute) -> None:
+		pass
+
 	@property
 	def GPVStatus(self) -> ControlActionGPVStatus:
 		"""No Description
@@ -1973,10 +2048,6 @@ class IGeneralPurposeValveActionInput(IElementActionInput):
 		Returns:
 			IGeneralPurposeValveActionInput: 
 		"""
-		pass
-
-	@GPVAttribute.setter
-	def GPVAttribute(self, gpvattribute: ControlActionGPVAttribute) -> None:
 		pass
 
 	@GPVStatus.setter
@@ -2013,6 +2084,10 @@ class IFlowControlValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@FCVAttribute.setter
+	def FCVAttribute(self, fcvattribute: ControlActionFCVAttribute) -> None:
+		pass
+
 	@property
 	def Discharge(self) -> float:
 		"""No Description
@@ -2022,6 +2097,10 @@ class IFlowControlValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@Discharge.setter
+	def Discharge(self, discharge: float) -> None:
+		pass
+
 	@property
 	def FCVStatus(self) -> ControlActionFCVStatus:
 		"""No Description
@@ -2029,14 +2108,6 @@ class IFlowControlValveActionInput(IElementActionInput):
 		Returns:
 			IFlowControlValveActionInput: 
 		"""
-		pass
-
-	@FCVAttribute.setter
-	def FCVAttribute(self, fcvattribute: ControlActionFCVAttribute) -> None:
-		pass
-
-	@Discharge.setter
-	def Discharge(self, discharge: float) -> None:
 		pass
 
 	@FCVStatus.setter
@@ -2073,6 +2144,10 @@ class IPressureValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@PressureValveAttribute.setter
+	def PressureValveAttribute(self, pressurevalveattribute: ControlActionPressureValveAttribute) -> None:
+		pass
+
 	@property
 	def HydraulicGrade(self) -> float:
 		"""No Description
@@ -2080,6 +2155,10 @@ class IPressureValveActionInput(IElementActionInput):
 		Returns:
 			IPressureValveActionInput: 
 		"""
+		pass
+
+	@HydraulicGrade.setter
+	def HydraulicGrade(self, hydraulicgrade: float) -> None:
 		pass
 
 	@property
@@ -2091,6 +2170,10 @@ class IPressureValveActionInput(IElementActionInput):
 		"""
 		pass
 
+	@Pressure.setter
+	def Pressure(self, pressure: float) -> None:
+		pass
+
 	@property
 	def PressureValveStatus(self) -> ControlActionPressureValveStatus:
 		"""No Description
@@ -2098,18 +2181,6 @@ class IPressureValveActionInput(IElementActionInput):
 		Returns:
 			IPressureValveActionInput: 
 		"""
-		pass
-
-	@PressureValveAttribute.setter
-	def PressureValveAttribute(self, pressurevalveattribute: ControlActionPressureValveAttribute) -> None:
-		pass
-
-	@HydraulicGrade.setter
-	def HydraulicGrade(self, hydraulicgrade: float) -> None:
-		pass
-
-	@Pressure.setter
-	def Pressure(self, pressure: float) -> None:
 		pass
 
 	@PressureValveStatus.setter
@@ -2240,11 +2311,21 @@ class ICompositeActions(ICollection[ICompositeAction]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, action: IControlAction) -> ICompositeAction:
 		"""No Description
 
 		Args:
 			action(IControlAction): action
+
+		Returns:
+			ICompositeAction: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> ICompositeAction:
+		"""No Description
 
 		Returns:
 			ICompositeAction: 
@@ -2795,31 +2876,6 @@ class ControlExtensionMethods:
 		"""
 		pass
 
-class PumpAttribute(Enum):
-	Setting = 1
-	TargetPressure = 2
-	TargetHead = 3
-
-class PressureValveAttribute(Enum):
-	HydraulicGrade = 0
-	Pressure = 2
-
-class PumpConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
-
-class PressureValveConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
-
-class FCVConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
-
-class TCVConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
-
 class SCADASignalExtensions:
 
 	def __init__(self) -> None:
@@ -2860,32 +2916,6 @@ class SCADASignalExtensions:
 			ISCADASignal: 
 		"""
 		pass
-
-class WaterComponentType(Enum):
-	Pattern = 50
-	PumpDefinition = 51
-	Constituent = 52
-	Zone = 53
-	Control = 54
-	ControlAction = 55
-	ControlCondition = 56
-	ControlSet = 59
-	PDD = 60
-	EnergyPrice = 61
-	UnitDemandLoad = 62
-	GPVHeadloss = 63
-	ValveCharacteristic = 66
-	AirFlowCurve = 68
-	MinorLoss = 101
-	UnitCarbonEmission = 202
-	PowerMeter = 203
-	MSXSetup = 220
-	SCADASignal = 257
-
-class SCADASignalTransformMethod(Enum):
-	Threshold = 0
-	Range = 1
-	Formula = 2
 
 class IWaterComponent(IElement):
 
@@ -2977,6 +3007,10 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits]):
 		"""
 		pass
 
+	@PatternCategory.setter
+	def PatternCategory(self, patterncategory: PatternCategory) -> None:
+		pass
+
 	@property
 	def PatternFormat(self) -> PatternFormat:
 		"""No Description
@@ -2984,6 +3018,10 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits]):
 		Returns:
 			IPattern: 
 		"""
+		pass
+
+	@PatternFormat.setter
+	def PatternFormat(self, patternformat: PatternFormat) -> None:
 		pass
 
 	@property
@@ -2995,6 +3033,10 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits]):
 		"""
 		pass
 
+	@PatternStartTime.setter
+	def PatternStartTime(self, patternstarttime: datetime) -> None:
+		pass
+
 	@property
 	def PatternStartingMultiplier(self) -> float:
 		"""No Description
@@ -3002,6 +3044,10 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits]):
 		Returns:
 			IPattern: 
 		"""
+		pass
+
+	@PatternStartingMultiplier.setter
+	def PatternStartingMultiplier(self, patternstartingmultiplier: float) -> None:
 		pass
 
 	@property
@@ -3029,22 +3075,6 @@ class IPattern(IWaterComponentBase[IPatterns, IPattern, IPatternUnits]):
 		Returns:
 			IPattern: 
 		"""
-		pass
-
-	@PatternCategory.setter
-	def PatternCategory(self, patterncategory: PatternCategory) -> None:
-		pass
-
-	@PatternFormat.setter
-	def PatternFormat(self, patternformat: PatternFormat) -> None:
-		pass
-
-	@PatternStartTime.setter
-	def PatternStartTime(self, patternstarttime: datetime) -> None:
-		pass
-
-	@PatternStartingMultiplier.setter
-	def PatternStartingMultiplier(self, patternstartingmultiplier: float) -> None:
 		pass
 
 class IPatternUnits(IPatternMultiplierUnits):
@@ -3125,12 +3155,22 @@ class IPatternCurve(ICollection[IPatternCurveElement]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, timeFromStart: float, multiplier: float) -> IPatternCurveElement:
 		"""No Description
 
 		Args:
 			timeFromStart(float): timeFromStart
 			multiplier(float): multiplier
+
+		Returns:
+			IPatternCurveElement: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IPatternCurveElement:
+		"""No Description
 
 		Returns:
 			IPatternCurveElement: 
@@ -3158,6 +3198,10 @@ class IPatternCurveElement(ICollectionElement):
 		"""
 		pass
 
+	@TimeFromStart.setter
+	def TimeFromStart(self, timefromstart: float) -> None:
+		pass
+
 	@property
 	def Multiplier(self) -> float:
 		"""No Description
@@ -3165,10 +3209,6 @@ class IPatternCurveElement(ICollectionElement):
 		Returns:
 			IPatternCurveElement: 
 		"""
-		pass
-
-	@TimeFromStart.setter
-	def TimeFromStart(self, timefromstart: float) -> None:
 		pass
 
 	@Multiplier.setter
@@ -3196,6 +3236,10 @@ class IDailyMultipliers:
 		"""
 		pass
 
+	@Sunday.setter
+	def Sunday(self, sunday: float) -> None:
+		pass
+
 	@property
 	def Monday(self) -> float:
 		"""No Description
@@ -3203,6 +3247,10 @@ class IDailyMultipliers:
 		Returns:
 			IDailyMultipliers: 
 		"""
+		pass
+
+	@Monday.setter
+	def Monday(self, monday: float) -> None:
 		pass
 
 	@property
@@ -3214,6 +3262,10 @@ class IDailyMultipliers:
 		"""
 		pass
 
+	@Tuesday.setter
+	def Tuesday(self, tuesday: float) -> None:
+		pass
+
 	@property
 	def Wednesday(self) -> float:
 		"""No Description
@@ -3221,6 +3273,10 @@ class IDailyMultipliers:
 		Returns:
 			IDailyMultipliers: 
 		"""
+		pass
+
+	@Wednesday.setter
+	def Wednesday(self, wednesday: float) -> None:
 		pass
 
 	@property
@@ -3232,6 +3288,10 @@ class IDailyMultipliers:
 		"""
 		pass
 
+	@Thursday.setter
+	def Thursday(self, thursday: float) -> None:
+		pass
+
 	@property
 	def Friday(self) -> float:
 		"""No Description
@@ -3241,6 +3301,10 @@ class IDailyMultipliers:
 		"""
 		pass
 
+	@Friday.setter
+	def Friday(self, friday: float) -> None:
+		pass
+
 	@property
 	def Saturday(self) -> float:
 		"""No Description
@@ -3248,30 +3312,6 @@ class IDailyMultipliers:
 		Returns:
 			IDailyMultipliers: 
 		"""
-		pass
-
-	@Sunday.setter
-	def Sunday(self, sunday: float) -> None:
-		pass
-
-	@Monday.setter
-	def Monday(self, monday: float) -> None:
-		pass
-
-	@Tuesday.setter
-	def Tuesday(self, tuesday: float) -> None:
-		pass
-
-	@Wednesday.setter
-	def Wednesday(self, wednesday: float) -> None:
-		pass
-
-	@Thursday.setter
-	def Thursday(self, thursday: float) -> None:
-		pass
-
-	@Friday.setter
-	def Friday(self, friday: float) -> None:
 		pass
 
 	@Saturday.setter
@@ -3299,6 +3339,10 @@ class IMonthlyMultipliers:
 		"""
 		pass
 
+	@January.setter
+	def January(self, january: float) -> None:
+		pass
+
 	@property
 	def February(self) -> float:
 		"""No Description
@@ -3306,6 +3350,10 @@ class IMonthlyMultipliers:
 		Returns:
 			IMonthlyMultipliers: 
 		"""
+		pass
+
+	@February.setter
+	def February(self, february: float) -> None:
 		pass
 
 	@property
@@ -3317,6 +3365,10 @@ class IMonthlyMultipliers:
 		"""
 		pass
 
+	@March.setter
+	def March(self, march: float) -> None:
+		pass
+
 	@property
 	def April(self) -> float:
 		"""No Description
@@ -3324,6 +3376,10 @@ class IMonthlyMultipliers:
 		Returns:
 			IMonthlyMultipliers: 
 		"""
+		pass
+
+	@April.setter
+	def April(self, april: float) -> None:
 		pass
 
 	@property
@@ -3335,6 +3391,10 @@ class IMonthlyMultipliers:
 		"""
 		pass
 
+	@May.setter
+	def May(self, may: float) -> None:
+		pass
+
 	@property
 	def June(self) -> float:
 		"""No Description
@@ -3342,6 +3402,10 @@ class IMonthlyMultipliers:
 		Returns:
 			IMonthlyMultipliers: 
 		"""
+		pass
+
+	@June.setter
+	def June(self, june: float) -> None:
 		pass
 
 	@property
@@ -3353,6 +3417,10 @@ class IMonthlyMultipliers:
 		"""
 		pass
 
+	@July.setter
+	def July(self, july: float) -> None:
+		pass
+
 	@property
 	def August(self) -> float:
 		"""No Description
@@ -3360,6 +3428,10 @@ class IMonthlyMultipliers:
 		Returns:
 			IMonthlyMultipliers: 
 		"""
+		pass
+
+	@August.setter
+	def August(self, august: float) -> None:
 		pass
 
 	@property
@@ -3371,6 +3443,10 @@ class IMonthlyMultipliers:
 		"""
 		pass
 
+	@September.setter
+	def September(self, september: float) -> None:
+		pass
+
 	@property
 	def October(self) -> float:
 		"""No Description
@@ -3378,6 +3454,10 @@ class IMonthlyMultipliers:
 		Returns:
 			IMonthlyMultipliers: 
 		"""
+		pass
+
+	@October.setter
+	def October(self, october: float) -> None:
 		pass
 
 	@property
@@ -3389,6 +3469,10 @@ class IMonthlyMultipliers:
 		"""
 		pass
 
+	@November.setter
+	def November(self, november: float) -> None:
+		pass
+
 	@property
 	def December(self) -> float:
 		"""No Description
@@ -3396,50 +3480,6 @@ class IMonthlyMultipliers:
 		Returns:
 			IMonthlyMultipliers: 
 		"""
-		pass
-
-	@January.setter
-	def January(self, january: float) -> None:
-		pass
-
-	@February.setter
-	def February(self, february: float) -> None:
-		pass
-
-	@March.setter
-	def March(self, march: float) -> None:
-		pass
-
-	@April.setter
-	def April(self, april: float) -> None:
-		pass
-
-	@May.setter
-	def May(self, may: float) -> None:
-		pass
-
-	@June.setter
-	def June(self, june: float) -> None:
-		pass
-
-	@July.setter
-	def July(self, july: float) -> None:
-		pass
-
-	@August.setter
-	def August(self, august: float) -> None:
-		pass
-
-	@September.setter
-	def September(self, september: float) -> None:
-		pass
-
-	@October.setter
-	def October(self, october: float) -> None:
-		pass
-
-	@November.setter
-	def November(self, november: float) -> None:
 		pass
 
 	@December.setter
@@ -3584,6 +3624,10 @@ class IPumpDefinitionHead:
 		"""
 		pass
 
+	@PumpDefinitionType.setter
+	def PumpDefinitionType(self, pumpdefinitiontype: PumpDefinitionType) -> None:
+		pass
+
 	@property
 	def ConstantPower(self) -> float:
 		"""No Description
@@ -3591,6 +3635,10 @@ class IPumpDefinitionHead:
 		Returns:
 			IPumpDefinitionHead: 
 		"""
+		pass
+
+	@ConstantPower.setter
+	def ConstantPower(self, constantpower: float) -> None:
 		pass
 
 	@property
@@ -3602,6 +3650,10 @@ class IPumpDefinitionHead:
 		"""
 		pass
 
+	@DesignFlow.setter
+	def DesignFlow(self, designflow: float) -> None:
+		pass
+
 	@property
 	def DesignHead(self) -> float:
 		"""No Description
@@ -3609,6 +3661,10 @@ class IPumpDefinitionHead:
 		Returns:
 			IPumpDefinitionHead: 
 		"""
+		pass
+
+	@DesignHead.setter
+	def DesignHead(self, designhead: float) -> None:
 		pass
 
 	@property
@@ -3620,6 +3676,10 @@ class IPumpDefinitionHead:
 		"""
 		pass
 
+	@ShutoffHead.setter
+	def ShutoffHead(self, shutoffhead: float) -> None:
+		pass
+
 	@property
 	def MaxOperatingHead(self) -> float:
 		"""No Description
@@ -3627,6 +3687,10 @@ class IPumpDefinitionHead:
 		Returns:
 			IPumpDefinitionHead: 
 		"""
+		pass
+
+	@MaxOperatingHead.setter
+	def MaxOperatingHead(self, maxoperatinghead: float) -> None:
 		pass
 
 	@property
@@ -3638,6 +3702,10 @@ class IPumpDefinitionHead:
 		"""
 		pass
 
+	@MaxOperatingFlow.setter
+	def MaxOperatingFlow(self, maxoperatingflow: float) -> None:
+		pass
+
 	@property
 	def MaxExtendedFlow(self) -> float:
 		"""No Description
@@ -3647,6 +3715,10 @@ class IPumpDefinitionHead:
 		"""
 		pass
 
+	@MaxExtendedFlow.setter
+	def MaxExtendedFlow(self, maxextendedflow: float) -> None:
+		pass
+
 	@property
 	def PumpCurve(self) -> IPumpCurveCollection:
 		"""No Description
@@ -3654,38 +3726,6 @@ class IPumpDefinitionHead:
 		Returns:
 			IPumpDefinitionHead: 
 		"""
-		pass
-
-	@PumpDefinitionType.setter
-	def PumpDefinitionType(self, pumpdefinitiontype: PumpDefinitionType) -> None:
-		pass
-
-	@ConstantPower.setter
-	def ConstantPower(self, constantpower: float) -> None:
-		pass
-
-	@DesignFlow.setter
-	def DesignFlow(self, designflow: float) -> None:
-		pass
-
-	@DesignHead.setter
-	def DesignHead(self, designhead: float) -> None:
-		pass
-
-	@ShutoffHead.setter
-	def ShutoffHead(self, shutoffhead: float) -> None:
-		pass
-
-	@MaxOperatingHead.setter
-	def MaxOperatingHead(self, maxoperatinghead: float) -> None:
-		pass
-
-	@MaxOperatingFlow.setter
-	def MaxOperatingFlow(self, maxoperatingflow: float) -> None:
-		pass
-
-	@MaxExtendedFlow.setter
-	def MaxExtendedFlow(self, maxextendedflow: float) -> None:
 		pass
 
 class IPumpCurveCollection(ICollectionElements[IPumpCurve, IPumpCurveElement, IPumpCurveUnits]):
@@ -3712,12 +3752,22 @@ class IPumpCurve(ICollection[IPumpCurveElement]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, head: float) -> IPumpCurveElement:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			head(float): head
+
+		Returns:
+			IPumpCurveElement: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IPumpCurveElement:
+		"""No Description
 
 		Returns:
 			IPumpCurveElement: 
@@ -3745,6 +3795,10 @@ class IPumpCurveElement(ICollectionElement):
 		"""
 		pass
 
+	@Flow.setter
+	def Flow(self, flow: float) -> None:
+		pass
+
 	@property
 	def Head(self) -> float:
 		"""No Description
@@ -3752,10 +3806,6 @@ class IPumpCurveElement(ICollectionElement):
 		Returns:
 			IPumpCurveElement: 
 		"""
-		pass
-
-	@Flow.setter
-	def Flow(self, flow: float) -> None:
 		pass
 
 	@Head.setter
@@ -3813,6 +3863,10 @@ class IPumpDefinitionEfficiency:
 		"""
 		pass
 
+	@PumpEfficiencyType.setter
+	def PumpEfficiencyType(self, pumpefficiencytype: PumpEfficiencyTypeEnum) -> None:
+		pass
+
 	@property
 	def BEPFlow(self) -> float:
 		"""No Description
@@ -3820,6 +3874,10 @@ class IPumpDefinitionEfficiency:
 		Returns:
 			IPumpDefinitionEfficiency: 
 		"""
+		pass
+
+	@BEPFlow.setter
+	def BEPFlow(self, bepflow: float) -> None:
 		pass
 
 	@property
@@ -3831,6 +3889,10 @@ class IPumpDefinitionEfficiency:
 		"""
 		pass
 
+	@BEPEfficiency.setter
+	def BEPEfficiency(self, bepefficiency: float) -> None:
+		pass
+
 	@property
 	def DefineBEPMaximumFlow(self) -> bool:
 		"""No Description
@@ -3838,6 +3900,10 @@ class IPumpDefinitionEfficiency:
 		Returns:
 			IPumpDefinitionEfficiency: 
 		"""
+		pass
+
+	@DefineBEPMaximumFlow.setter
+	def DefineBEPMaximumFlow(self, definebepmaximumflow: bool) -> None:
 		pass
 
 	@property
@@ -3849,6 +3915,10 @@ class IPumpDefinitionEfficiency:
 		"""
 		pass
 
+	@UserDefinedBEPMaximumFlow.setter
+	def UserDefinedBEPMaximumFlow(self, userdefinedbepmaximumflow: float) -> None:
+		pass
+
 	@property
 	def ConstantEfficiency(self) -> float:
 		"""No Description
@@ -3858,6 +3928,10 @@ class IPumpDefinitionEfficiency:
 		"""
 		pass
 
+	@ConstantEfficiency.setter
+	def ConstantEfficiency(self, constantefficiency: float) -> None:
+		pass
+
 	@property
 	def FlowEfficiencyCurve(self) -> IFlowEfficiencyCollection:
 		"""No Description
@@ -3865,30 +3939,6 @@ class IPumpDefinitionEfficiency:
 		Returns:
 			IPumpDefinitionEfficiency: 
 		"""
-		pass
-
-	@PumpEfficiencyType.setter
-	def PumpEfficiencyType(self, pumpefficiencytype: PumpEfficiencyTypeEnum) -> None:
-		pass
-
-	@BEPFlow.setter
-	def BEPFlow(self, bepflow: float) -> None:
-		pass
-
-	@BEPEfficiency.setter
-	def BEPEfficiency(self, bepefficiency: float) -> None:
-		pass
-
-	@DefineBEPMaximumFlow.setter
-	def DefineBEPMaximumFlow(self, definebepmaximumflow: bool) -> None:
-		pass
-
-	@UserDefinedBEPMaximumFlow.setter
-	def UserDefinedBEPMaximumFlow(self, userdefinedbepmaximumflow: float) -> None:
-		pass
-
-	@ConstantEfficiency.setter
-	def ConstantEfficiency(self, constantefficiency: float) -> None:
 		pass
 
 class IFlowEfficiencyCurveElement(ICollectionElement):
@@ -3912,6 +3962,10 @@ class IFlowEfficiencyCurveElement(ICollectionElement):
 		"""
 		pass
 
+	@Flow.setter
+	def Flow(self, flow: float) -> None:
+		pass
+
 	@property
 	def Efficiency(self) -> float:
 		"""No Description
@@ -3919,10 +3973,6 @@ class IFlowEfficiencyCurveElement(ICollectionElement):
 		Returns:
 			IFlowEfficiencyCurveElement: 
 		"""
-		pass
-
-	@Flow.setter
-	def Flow(self, flow: float) -> None:
 		pass
 
 	@Efficiency.setter
@@ -3941,12 +3991,22 @@ class IFlowEfficiencyCurve(ICollection[IFlowEfficiencyCurveElement]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, efficiency: float) -> IFlowEfficiencyCurveElement:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			efficiency(float): efficiency
+
+		Returns:
+			IFlowEfficiencyCurveElement: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IFlowEfficiencyCurveElement:
+		"""No Description
 
 		Returns:
 			IFlowEfficiencyCurveElement: 
@@ -4016,6 +4076,10 @@ class IPumpDefinitionNPSH:
 		"""
 		pass
 
+	@UseNPSHCurve.setter
+	def UseNPSHCurve(self, usenpshcurve: bool) -> None:
+		pass
+
 	@property
 	def NPSHCurveSafetyFactor(self) -> float:
 		"""No Description
@@ -4025,6 +4089,10 @@ class IPumpDefinitionNPSH:
 		"""
 		pass
 
+	@NPSHCurveSafetyFactor.setter
+	def NPSHCurveSafetyFactor(self, npshcurvesafetyfactor: float) -> None:
+		pass
+
 	@property
 	def NPSHCurve(self) -> INPSHCurveCollection:
 		"""No Description
@@ -4032,14 +4100,6 @@ class IPumpDefinitionNPSH:
 		Returns:
 			IPumpDefinitionNPSH: 
 		"""
-		pass
-
-	@UseNPSHCurve.setter
-	def UseNPSHCurve(self, usenpshcurve: bool) -> None:
-		pass
-
-	@NPSHCurveSafetyFactor.setter
-	def NPSHCurveSafetyFactor(self, npshcurvesafetyfactor: float) -> None:
 		pass
 
 class IFlowNPSHr(ICollectionElement):
@@ -4063,6 +4123,10 @@ class IFlowNPSHr(ICollectionElement):
 		"""
 		pass
 
+	@Flow.setter
+	def Flow(self, flow: float) -> None:
+		pass
+
 	@property
 	def NPSHr(self) -> float:
 		"""No Description
@@ -4070,10 +4134,6 @@ class IFlowNPSHr(ICollectionElement):
 		Returns:
 			IFlowNPSHr: 
 		"""
-		pass
-
-	@Flow.setter
-	def Flow(self, flow: float) -> None:
 		pass
 
 	@NPSHr.setter
@@ -4092,12 +4152,22 @@ class IFlowNPSHrCurve(ICollection[IFlowNPSHr]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, NPSHr: float) -> IFlowNPSHr:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			NPSHr(float): NPSHr
+
+		Returns:
+			IFlowNPSHr: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IFlowNPSHr:
+		"""No Description
 
 		Returns:
 			IFlowNPSHr: 
@@ -4167,6 +4237,10 @@ class IPumpDefinitionMotor:
 		"""
 		pass
 
+	@IsVariableSpeedDrive.setter
+	def IsVariableSpeedDrive(self, isvariablespeeddrive: bool) -> None:
+		pass
+
 	@property
 	def MotorEfficiency(self) -> float:
 		"""No Description
@@ -4176,6 +4250,10 @@ class IPumpDefinitionMotor:
 		"""
 		pass
 
+	@MotorEfficiency.setter
+	def MotorEfficiency(self, motorefficiency: float) -> None:
+		pass
+
 	@property
 	def SpeedEfficiencyCurve(self) -> ISpeedEfficiencyCurveCollection:
 		"""No Description
@@ -4183,14 +4261,6 @@ class IPumpDefinitionMotor:
 		Returns:
 			IPumpDefinitionMotor: 
 		"""
-		pass
-
-	@IsVariableSpeedDrive.setter
-	def IsVariableSpeedDrive(self, isvariablespeeddrive: bool) -> None:
-		pass
-
-	@MotorEfficiency.setter
-	def MotorEfficiency(self, motorefficiency: float) -> None:
 		pass
 
 class ISpeedEfficiency(ICollectionElement):
@@ -4214,6 +4284,10 @@ class ISpeedEfficiency(ICollectionElement):
 		"""
 		pass
 
+	@Speed.setter
+	def Speed(self, speed: float) -> None:
+		pass
+
 	@property
 	def Efficiency(self) -> float:
 		"""No Description
@@ -4221,10 +4295,6 @@ class ISpeedEfficiency(ICollectionElement):
 		Returns:
 			ISpeedEfficiency: 
 		"""
-		pass
-
-	@Speed.setter
-	def Speed(self, speed: float) -> None:
 		pass
 
 	@Efficiency.setter
@@ -4243,12 +4313,22 @@ class ISpeedEfficiencyCurve(ICollection[ISpeedEfficiency]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, speed: float, efficiency: float) -> ISpeedEfficiency:
 		"""No Description
 
 		Args:
 			speed(float): speed
 			efficiency(float): efficiency
+
+		Returns:
+			ISpeedEfficiency: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> ISpeedEfficiency:
+		"""No Description
 
 		Returns:
 			ISpeedEfficiency: 
@@ -4318,6 +4398,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		"""
 		pass
 
+	@Diffusivity.setter
+	def Diffusivity(self, diffusivity: float) -> None:
+		pass
+
 	@property
 	def HasUnlimitedConcentration(self) -> bool:
 		"""No Description
@@ -4325,6 +4409,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		Returns:
 			IConstituent: 
 		"""
+		pass
+
+	@HasUnlimitedConcentration.setter
+	def HasUnlimitedConcentration(self, hasunlimitedconcentration: bool) -> None:
 		pass
 
 	@property
@@ -4336,6 +4424,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		"""
 		pass
 
+	@ConcentrationLimit.setter
+	def ConcentrationLimit(self, concentrationlimit: float) -> None:
+		pass
+
 	@property
 	def BulkReactionOrder(self) -> int:
 		"""No Description
@@ -4343,6 +4435,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		Returns:
 			IConstituent: 
 		"""
+		pass
+
+	@BulkReactionOrder.setter
+	def BulkReactionOrder(self, bulkreactionorder: int) -> None:
 		pass
 
 	@property
@@ -4354,6 +4450,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		"""
 		pass
 
+	@BulkReactionRate.setter
+	def BulkReactionRate(self, bulkreactionrate: float) -> None:
+		pass
+
 	@property
 	def IsRoughnessCorrelated(self) -> bool:
 		"""No Description
@@ -4361,6 +4461,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		Returns:
 			IConstituent: 
 		"""
+		pass
+
+	@IsRoughnessCorrelated.setter
+	def IsRoughnessCorrelated(self, isroughnesscorrelated: bool) -> None:
 		pass
 
 	@property
@@ -4372,6 +4476,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		"""
 		pass
 
+	@RoughnessCorrelationFactor.setter
+	def RoughnessCorrelationFactor(self, roughnesscorrelationfactor: float) -> None:
+		pass
+
 	@property
 	def WallReactionOrder(self) -> WallReactionOrder:
 		"""No Description
@@ -4379,6 +4487,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		Returns:
 			IConstituent: 
 		"""
+		pass
+
+	@WallReactionOrder.setter
+	def WallReactionOrder(self, wallreactionorder: WallReactionOrder) -> None:
 		pass
 
 	@property
@@ -4390,6 +4502,10 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		"""
 		pass
 
+	@ZeroOrderWallReactionRate.setter
+	def ZeroOrderWallReactionRate(self, zeroorderwallreactionrate: float) -> None:
+		pass
+
 	@property
 	def FirstOrderWallReactionRate(self) -> float:
 		"""No Description
@@ -4397,42 +4513,6 @@ class IConstituent(IWaterComponentBase[IConstituents, IConstituent, IConstituent
 		Returns:
 			IConstituent: 
 		"""
-		pass
-
-	@Diffusivity.setter
-	def Diffusivity(self, diffusivity: float) -> None:
-		pass
-
-	@HasUnlimitedConcentration.setter
-	def HasUnlimitedConcentration(self, hasunlimitedconcentration: bool) -> None:
-		pass
-
-	@ConcentrationLimit.setter
-	def ConcentrationLimit(self, concentrationlimit: float) -> None:
-		pass
-
-	@BulkReactionOrder.setter
-	def BulkReactionOrder(self, bulkreactionorder: int) -> None:
-		pass
-
-	@BulkReactionRate.setter
-	def BulkReactionRate(self, bulkreactionrate: float) -> None:
-		pass
-
-	@IsRoughnessCorrelated.setter
-	def IsRoughnessCorrelated(self, isroughnesscorrelated: bool) -> None:
-		pass
-
-	@RoughnessCorrelationFactor.setter
-	def RoughnessCorrelationFactor(self, roughnesscorrelationfactor: float) -> None:
-		pass
-
-	@WallReactionOrder.setter
-	def WallReactionOrder(self, wallreactionorder: WallReactionOrder) -> None:
-		pass
-
-	@ZeroOrderWallReactionRate.setter
-	def ZeroOrderWallReactionRate(self, zeroorderwallreactionrate: float) -> None:
 		pass
 
 	@FirstOrderWallReactionRate.setter
@@ -4484,6 +4564,10 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		"""
 		pass
 
+	@UnitDemand.setter
+	def UnitDemand(self, unitdemand: float) -> None:
+		pass
+
 	@property
 	def UnitDemandType(self) -> UnitDemandLoadTypeEnum:
 		"""No Description
@@ -4491,6 +4575,10 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		Returns:
 			IUnitDemandLoad: 
 		"""
+		pass
+
+	@UnitDemandType.setter
+	def UnitDemandType(self, unitdemandtype: UnitDemandLoadTypeEnum) -> None:
 		pass
 
 	@property
@@ -4502,6 +4590,10 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		"""
 		pass
 
+	@PopulationUnit.setter
+	def PopulationUnit(self, populationunit: PopulationUnit) -> None:
+		pass
+
 	@property
 	def AreaUnit(self) -> AreaUnit:
 		"""No Description
@@ -4509,6 +4601,10 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		Returns:
 			IUnitDemandLoad: 
 		"""
+		pass
+
+	@AreaUnit.setter
+	def AreaUnit(self, areaunit: AreaUnit) -> None:
 		pass
 
 	@property
@@ -4520,6 +4616,10 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		"""
 		pass
 
+	@CountUnit.setter
+	def CountUnit(self, countunit: str) -> None:
+		pass
+
 	@property
 	def ReportPopulationEquivalent(self) -> bool:
 		"""No Description
@@ -4529,6 +4629,10 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		"""
 		pass
 
+	@ReportPopulationEquivalent.setter
+	def ReportPopulationEquivalent(self, reportpopulationequivalent: bool) -> None:
+		pass
+
 	@property
 	def PopulationEquivalent(self) -> float:
 		"""No Description
@@ -4536,30 +4640,6 @@ class IUnitDemandLoad(IWaterComponentBase[IUnitDemandLoads, IUnitDemandLoad, IUn
 		Returns:
 			IUnitDemandLoad: 
 		"""
-		pass
-
-	@UnitDemand.setter
-	def UnitDemand(self, unitdemand: float) -> None:
-		pass
-
-	@UnitDemandType.setter
-	def UnitDemandType(self, unitdemandtype: UnitDemandLoadTypeEnum) -> None:
-		pass
-
-	@PopulationUnit.setter
-	def PopulationUnit(self, populationunit: PopulationUnit) -> None:
-		pass
-
-	@AreaUnit.setter
-	def AreaUnit(self, areaunit: AreaUnit) -> None:
-		pass
-
-	@CountUnit.setter
-	def CountUnit(self, countunit: str) -> None:
-		pass
-
-	@ReportPopulationEquivalent.setter
-	def ReportPopulationEquivalent(self, reportpopulationequivalent: bool) -> None:
 		pass
 
 	@PopulationEquivalent.setter
@@ -4620,6 +4700,10 @@ class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnit
 		"""
 		pass
 
+	@SignalLabel.setter
+	def SignalLabel(self, signallabel: str) -> None:
+		pass
+
 	@property
 	def IsDerived(self) -> bool:
 		"""No Description
@@ -4627,6 +4711,10 @@ class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnit
 		Returns:
 			ISCADASignal: 
 		"""
+		pass
+
+	@IsDerived.setter
+	def IsDerived(self, isderived: bool) -> None:
 		pass
 
 	@property
@@ -4638,6 +4726,10 @@ class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnit
 		"""
 		pass
 
+	@Formula.setter
+	def Formula(self, formula: str) -> None:
+		pass
+
 	@property
 	def TransformMethod(self) -> SCADASignalTransformMethod:
 		"""No Description
@@ -4645,18 +4737,6 @@ class ISCADASignal(IWaterComponentBase[ISCADASignals, ISCADASignal, IElementUnit
 		Returns:
 			ISCADASignal: 
 		"""
-		pass
-
-	@SignalLabel.setter
-	def SignalLabel(self, signallabel: str) -> None:
-		pass
-
-	@IsDerived.setter
-	def IsDerived(self, isderived: bool) -> None:
-		pass
-
-	@Formula.setter
-	def Formula(self, formula: str) -> None:
 		pass
 
 	@TransformMethod.setter
@@ -4741,6 +4821,10 @@ class IGPVFlowHeadloss(ICollectionElement):
 		"""
 		pass
 
+	@Flow.setter
+	def Flow(self, flow: float) -> None:
+		pass
+
 	@property
 	def Headloss(self) -> float:
 		"""No Description
@@ -4748,10 +4832,6 @@ class IGPVFlowHeadloss(ICollectionElement):
 		Returns:
 			IGPVFlowHeadloss: 
 		"""
-		pass
-
-	@Flow.setter
-	def Flow(self, flow: float) -> None:
 		pass
 
 	@Headloss.setter
@@ -4770,12 +4850,22 @@ class IGPVFlowHeadlossCurve(ICollection[IGPVFlowHeadloss]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, flow: float, headloss: float) -> IGPVFlowHeadloss:
 		"""No Description
 
 		Args:
 			flow(float): flow
 			headloss(float): headloss
+
+		Returns:
+			IGPVFlowHeadloss: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IGPVFlowHeadloss:
+		"""No Description
 
 		Returns:
 			IGPVFlowHeadloss: 
@@ -4890,6 +4980,10 @@ class IRelativeClosureRelativeArea(ICollectionElement):
 		"""
 		pass
 
+	@RelativeClosure.setter
+	def RelativeClosure(self, relativeclosure: float) -> None:
+		pass
+
 	@property
 	def RelativeArea(self) -> float:
 		"""No Description
@@ -4897,10 +4991,6 @@ class IRelativeClosureRelativeArea(ICollectionElement):
 		Returns:
 			IRelativeClosureRelativeArea: 
 		"""
-		pass
-
-	@RelativeClosure.setter
-	def RelativeClosure(self, relativeclosure: float) -> None:
 		pass
 
 	@RelativeArea.setter
@@ -4919,12 +5009,22 @@ class IRelativeClosureRelativeAreas(ICollection[IRelativeClosureRelativeArea]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Add(self, relativeClosure: float, relativeArea: float) -> IRelativeClosureRelativeArea:
 		"""No Description
 
 		Args:
 			relativeClosure(float): relativeClosure
 			relativeArea(float): relativeArea
+
+		Returns:
+			IRelativeClosureRelativeArea: 
+		"""
+		pass
+
+	@overload
+	def Add(self) -> IRelativeClosureRelativeArea:
+		"""No Description
 
 		Returns:
 			IRelativeClosureRelativeArea: 
@@ -5006,6 +5106,10 @@ class IMinorLossCoefficient(IWaterComponentBase[IMinorLossCoefficients, IMinorLo
 		"""
 		pass
 
+	@MinorLossType.setter
+	def MinorLossType(self, minorlosstype: MinorLossTypeEnum) -> None:
+		pass
+
 	@property
 	def MinorLoss(self) -> float:
 		"""No Description
@@ -5013,10 +5117,6 @@ class IMinorLossCoefficient(IWaterComponentBase[IMinorLossCoefficients, IMinorLo
 		Returns:
 			IMinorLossCoefficient: 
 		"""
-		pass
-
-	@MinorLossType.setter
-	def MinorLossType(self, minorlosstype: MinorLossTypeEnum) -> None:
 		pass
 
 	@MinorLoss.setter

@@ -10,10 +10,10 @@ using AssemblyCrawler.Library;
 namespace AssemblyCrawler.Support
 {
 	[DebuggerDisplay("{TypeVarName} : {Constraints}")]
-	public class TypeVarDefinition
+	public class PythonTypeVar
 	{
 		#region Constructor
-		public TypeVarDefinition(string name, params Type[] constraints)
+		public PythonTypeVar(string name, params Type[] constraints)
 		{
 			TypeVarName = name;
 
@@ -40,7 +40,7 @@ namespace AssemblyCrawler.Support
 			{
 				List<string> constraintNames = new List<string>();
 				foreach (var t in Constraints)
-					constraintNames.Add(PythonStubWriterLibrary.CorrectClassName(t.Name, t.GetGenericArguments().Length));
+					constraintNames.Add(WriterLibrary.CorrectClassName(t.Name, t.GetGenericArguments().Length));
 
 				if (constraintNames.Count > 0)
 					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\", {string.Join(",", constraintNames)})");

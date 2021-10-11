@@ -1,6 +1,7 @@
 from enum import Enum
 from typing import overload, Dict
 from datetime import datetime
+from Haestad.LicensingFacade import LicenseRunStatusEnum
 
 class LicenseRunStatusEnum(Enum):
 	OK = 1001
@@ -109,58 +110,6 @@ class ILicense:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	@overload
-	def StartFeatureTracking(self, featureID: Guid, featureUserDataMap: Dict[str,str], instanceID: int) -> bool:
-		"""No Description
-
-		Args:
-			featureID(Guid): featureID
-			featureUserDataMap(Dict[str,str]): featureUserDataMap
-			instanceID(int): instanceID
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	@overload
-	def StartFeatureTracking(self, featureID: Guid, instanceID: int) -> bool:
-		"""No Description
-
-		Args:
-			featureID(Guid): featureID
-			instanceID(int): instanceID
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	@overload
-	def FeatureTrackingMark(self, featureID: Guid, featureUserDataKeyValMap: Dict[str,str]) -> bool:
-		"""No Description
-
-		Args:
-			featureID(Guid): featureID
-			featureUserDataKeyValMap(Dict[str,str]): featureUserDataKeyValMap
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	@overload
-	def FeatureTrackingMark(self, featureID: Guid) -> bool:
-		"""No Description
-
-		Args:
-			featureID(Guid): featureID
-
-		Returns:
-			bool: 
-		"""
-		pass
-
 	def Initialize(self) -> bool:
 		"""No Description
 
@@ -193,11 +142,63 @@ class ILicense:
 		"""
 		pass
 
+	@overload
+	def StartFeatureTracking(self, featureID: Guid, featureUserDataMap: Dict[str,str], instanceID: int) -> bool:
+		"""No Description
+
+		Args:
+			featureID(Guid): featureID
+			featureUserDataMap(Dict[str,str]): featureUserDataMap
+			instanceID(int): instanceID
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@overload
+	def StartFeatureTracking(self, featureID: Guid, instanceID: int) -> bool:
+		"""No Description
+
+		Args:
+			featureID(Guid): featureID
+			instanceID(int): instanceID
+
+		Returns:
+			bool: 
+		"""
+		pass
+
 	def StopFeatureTracking(self, instanceID: int) -> bool:
 		"""No Description
 
 		Args:
 			instanceID(int): instanceID
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@overload
+	def FeatureTrackingMark(self, featureID: Guid, featureUserDataKeyValMap: Dict[str,str]) -> bool:
+		"""No Description
+
+		Args:
+			featureID(Guid): featureID
+			featureUserDataKeyValMap(Dict[str,str]): featureUserDataKeyValMap
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@overload
+	def FeatureTrackingMark(self, featureID: Guid) -> bool:
+		"""No Description
+
+		Args:
+			featureID(Guid): featureID
 
 		Returns:
 			bool: 
@@ -364,6 +365,10 @@ class ILicense:
 		"""
 		pass
 
+	@IsSUDAEnabled.setter
+	def IsSUDAEnabled(self, issudaenabled: bool) -> None:
+		pass
+
 	@property
 	def IsMicroStationEnabled(self) -> bool:
 		"""No Description
@@ -463,6 +468,10 @@ class ILicense:
 		"""
 		pass
 
+	@DefaultFeatureString.setter
+	def DefaultFeatureString(self, defaultfeaturestring: str) -> None:
+		pass
+
 	@property
 	def IsCheckedOutLicense(self) -> bool:
 		"""No Description
@@ -488,14 +497,6 @@ class ILicense:
 		Returns:
 			ILicense: 
 		"""
-		pass
-
-	@IsSUDAEnabled.setter
-	def IsSUDAEnabled(self, issudaenabled: bool) -> None:
-		pass
-
-	@DefaultFeatureString.setter
-	def DefaultFeatureString(self, defaultfeaturestring: str) -> None:
 		pass
 
 class ILicenseProvider:
