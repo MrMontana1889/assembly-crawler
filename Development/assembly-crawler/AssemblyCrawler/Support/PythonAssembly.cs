@@ -7,10 +7,10 @@ using System.Reflection;
 
 namespace AssemblyCrawler.Support
 {
-	public class PythonAssemblyDefinition
+	public class PythonAssembly
 	{
 		#region Constructor
-		public PythonAssemblyDefinition(PythonPackageDefinition package, Assembly assembly, string outputPath)
+		public PythonAssembly(PythonPackage package, Assembly assembly, string outputPath)
 		{
 			Package = package;
 			Assembly = assembly;
@@ -24,13 +24,13 @@ namespace AssemblyCrawler.Support
 			foreach (var module in Modules)
 				module.Write();
 		}
-		public PythonModuleDefinition AddModule(string moduleNamespace, string filename)
+		public PythonModule AddModule(string moduleNamespace, string filename, string xmlFilename)
 		{
 			if (Modules.Find(m => m.Filename == filename) == null)
-				Modules.Add(new PythonModuleDefinition(this, moduleNamespace, filename));
+				Modules.Add(new PythonModule(this, moduleNamespace, filename, xmlFilename));
 			return GetModule(filename);
 		}
-		public PythonModuleDefinition GetModule(string filename)
+		public PythonModule GetModule(string filename)
 		{
 			return Modules.Find(m => m.Filename == filename);
 		}
@@ -42,9 +42,9 @@ namespace AssemblyCrawler.Support
 		#endregion
 
 		#region Public Properties
-		public List<PythonModuleDefinition> Modules { get; } = new List<PythonModuleDefinition>();
+		public List<PythonModule> Modules { get; } = new List<PythonModule>();
 		public List<Type> Enumerations { get; } = new List<Type>();
-		public PythonPackageDefinition Package { get; }
+		public PythonPackage Package { get; }
 		public Assembly Assembly { get; }
 		public string OutputPath { get; }
 		#endregion

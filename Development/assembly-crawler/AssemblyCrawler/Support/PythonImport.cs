@@ -7,11 +7,11 @@ using System.IO;
 
 namespace AssemblyCrawler.Support
 {
-	[DebuggerDisplay("{MOdule} : {PythonTypes}")]
-	public class ImportDefinition
+	[DebuggerDisplay("{Module} : {PythonTypes}")]
+	public class PythonImport
 	{
 		#region Constructor
-		public ImportDefinition(string module)
+		public PythonImport(string module)
 		{
 			Module = module;
 		}

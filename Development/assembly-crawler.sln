@@ -69,7 +69,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Haestad", "Haestad", "{D8C7D92D-DA08-4365-B87F-CE3C5B9AAD79}"
 	ProjectSection(SolutionItems) = preProject
 		..\typings\Haestad\Domain.pyi = ..\typings\Haestad\Domain.pyi
-		..\typings\Haestad\Licensing.pyi = ..\typings\Haestad\Licensing.pyi
 		..\typings\Haestad\LicensingFacade.pyi = ..\typings\Haestad\LicensingFacade.pyi
 	EndProjectSection
 EndProject

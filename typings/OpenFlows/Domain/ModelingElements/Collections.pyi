@@ -1,11 +1,10 @@
-from typing import Generic, List, Iterator, TypeVar
-from OpenFlows.Domain.ModelingElements import IElementUnits
+from OpenFlows.Domain.ModelingElements import TUnitsType, IElementUnits
+from typing import List, Generic, Iterator, TypeVar
 from Haestad.Support.Support import SortContextCollection, FilterContextCollection
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 
 TCollectionType = TypeVar("TCollectionType", ICollection)
 TElementType = TypeVar("TElementType", ICollectionElement)
-TUnitsType = TypeVar("TUnitsType", IElementUnits)
 
 class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
@@ -139,6 +138,10 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		"""
 		pass
 
+	@Item.setter
+	def Item(self, item: TElementType) -> None:
+		pass
+
 	@property
 	def Count(self) -> int:
 		"""No Description
@@ -155,9 +158,5 @@ class ICollection(Generic[TElementType], IEnumerable[TElementType]):
 		Returns:
 			ICollection: 
 		"""
-		pass
-
-	@Item.setter
-	def Item(self, item: int) -> None:
 		pass
 

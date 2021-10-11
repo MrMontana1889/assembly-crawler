@@ -3,8 +3,8 @@ from typing import List, Generic, overload, TypeVar
 from Haestad.Support.Support import SortContextCollection, FilterContextCollection, IEditLabeled
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 from OpenFlows.Units import IUnit
-from datetime import datetime
 from array import array
+from datetime import datetime
 
 TElementType = TypeVar("TElementType", IElement)
 TElementManagerType = TypeVar("TElementManagerType", IModelingElementsBase)
@@ -128,6 +128,10 @@ class IElement(IEditLabeled):
 		"""
 		pass
 
+	@Notes.setter
+	def Notes(self, notes: str) -> None:
+		pass
+
 	@property
 	def ModelElementType(self) -> ModelElementType:
 		"""No Description
@@ -135,10 +139,6 @@ class IElement(IEditLabeled):
 		Returns:
 			IElement: 
 		"""
-		pass
-
-	@Notes.setter
-	def Notes(self, notes: str) -> None:
 		pass
 
 class IElementUnits:
@@ -269,6 +269,14 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	def Create(self) -> TElementType:
+		"""No Description
+
+		Returns:
+			TElementType: 
+		"""
+		pass
+
 	@overload
 	def Element(self, id: int) -> TElementType:
 		"""No Description
@@ -293,19 +301,21 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 		"""
 		pass
 
-	def Create(self) -> TElementType:
-		"""No Description
-
-		Returns:
-			TElementType: 
-		"""
-		pass
-
+	@overload
 	def Elements(self, label: str) -> List[TElementType]:
 		"""No Description
 
 		Args:
 			label(str): label
+
+		Returns:
+			List[TElementType]: 
+		"""
+		pass
+
+	@overload
+	def Elements(self) -> List[TElementType]:
+		"""No Description
 
 		Returns:
 			List[TElementType]: 
@@ -384,6 +394,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Create(self, parentID: int) -> TElementType:
 		"""No Description
 
@@ -411,6 +422,15 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 		Returns:
 			List[TElementType]: 
+		"""
+		pass
+
+	@overload
+	def Create(self) -> TElementType:
+		"""No Description
+
+		Returns:
+			TElementType: 
 		"""
 		pass
 
@@ -509,6 +529,10 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		"""
 		pass
 
+	@ActiveTimeStep.setter
+	def ActiveTimeStep(self, activetimestep: int) -> None:
+		pass
+
 	@property
 	def ParentScenario(self) -> IScenario:
 		"""No Description
@@ -516,10 +540,6 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		Returns:
 			IScenario: 
 		"""
-		pass
-
-	@ActiveTimeStep.setter
-	def ActiveTimeStep(self, activetimestep: int) -> None:
 		pass
 
 	@ParentScenario.setter
@@ -536,6 +556,22 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 			Exception: if this class is instanciated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def Get(self) -> List[int]:
+		"""No Description
+
+		Returns:
+			List[int]: 
+		"""
+		pass
+
+	def Elements(self) -> List[TNetworkElementType]:
+		"""No Description
+
+		Returns:
+			List[TNetworkElementType]: 
+		"""
 		pass
 
 	@overload
@@ -559,22 +595,6 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 		Returns:
 			None: 
-		"""
-		pass
-
-	def Get(self) -> List[int]:
-		"""No Description
-
-		Returns:
-			List[int]: 
-		"""
-		pass
-
-	def Elements(self) -> List[TNetworkElementType]:
-		"""No Description
-
-		Returns:
-			List[TNetworkElementType]: 
 		"""
 		pass
 

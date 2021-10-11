@@ -1,13 +1,13 @@
 from enum import Enum
-from Haestad.Support.Support import INamable, ILabeled, IField, FieldDataType
+from Haestad.Support.Support import IField, FieldDataType, INamable, ILabeled
 from Haestad.Domain import DomainFieldType
 from Haestad.Support.Units import Unit
 from OpenFlows.Units import IUnit
-from typing import Generic, List, TypeVar
+from typing import List, Generic, TypeVar
 
 TValueType = TypeVar("TValueType")
-TFieldType = TypeVar("TFieldType")
 TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum", Enum)
+TFieldType = TypeVar("TFieldType")
 TNetworkElementType = TypeVar("TNetworkElementType", Enum)
 
 class UserFieldDataType(Enum):
@@ -271,6 +271,10 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		"""
 		pass
 
+	@Name.setter
+	def Name(self, name: str) -> None:
+		pass
+
 	@property
 	def Label(self) -> str:
 		"""No Description
@@ -280,6 +284,10 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		"""
 		pass
 
+	@Label.setter
+	def Label(self, label: str) -> None:
+		pass
+
 	@property
 	def ElementType(self) -> TNetworkElementTypeEnum:
 		"""No Description
@@ -287,6 +295,10 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		Returns:
 			IUserFieldOptions: 
 		"""
+		pass
+
+	@ElementType.setter
+	def ElementType(self, elementtype: TNetworkElementTypeEnum) -> None:
 		pass
 
 	@property
@@ -307,6 +319,10 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		"""
 		pass
 
+	@DefaultValue.setter
+	def DefaultValue(self, defaultvalue: TFieldType) -> None:
+		pass
+
 	@property
 	def Category(self) -> str:
 		"""No Description
@@ -316,6 +332,10 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		"""
 		pass
 
+	@Category.setter
+	def Category(self, category: str) -> None:
+		pass
+
 	@property
 	def JustLikeField(self) -> IFieldInfo:
 		"""No Description
@@ -323,26 +343,6 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 		Returns:
 			IUserFieldOptions: 
 		"""
-		pass
-
-	@Name.setter
-	def Name(self, name: str) -> None:
-		pass
-
-	@Label.setter
-	def Label(self, label: str) -> None:
-		pass
-
-	@ElementType.setter
-	def ElementType(self, elementtype: TNetworkElementTypeEnum) -> None:
-		pass
-
-	@DefaultValue.setter
-	def DefaultValue(self, defaultvalue: TFieldType) -> None:
-		pass
-
-	@Category.setter
-	def Category(self, category: str) -> None:
 		pass
 
 	@JustLikeField.setter

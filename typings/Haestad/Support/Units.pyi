@@ -1,1648 +1,8 @@
 from Haestad.Support.Support import INamable, ILabeled
-from typing import overload, List, Dict
+from typing import List, overload, Dict
 from enum import Enum
 from datetime import datetime
 from array import array
-
-class CurrencyBasedUnit(INamable):
-
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
-		"""No Description
-
-		Args:
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			adouble(float): adouble
-			aintEnumValue(int): aintEnumValue
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			adouble(float): adouble
-			aintEnumValue(int): aintEnumValue
-			bentleyName(str): bentleyName
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			aiunitconverter(IUnitConverter): aiunitconverter
-			aintEnumValue(int): aintEnumValue
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			aiunitconverter(IUnitConverter): aiunitconverter
-			aintEnumValue(int): aintEnumValue
-			bentleyName(str): bentleyName
-		"""
-		pass
-
-	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ConversionFactor(self, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToSerializedString(self) -> str:
-		"""No Description
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def EnumValue(self) -> int:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def BentleyName(self) -> str:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-	@property
-	def UnitSystem(self) -> UnitSystem:
-		"""No Description
-
-		Returns:
-			CurrencyBasedUnit: 
-		"""
-		pass
-
-class WeirCoefficientParameterized(INamable):
-
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int, bentleyName: str) -> None:
-		"""No Description
-
-		Args:
-			name(str): name
-			dimension(Dimension): dimension
-			aunitsystem(UnitSystem): aunitsystem
-			converter(WeirCoefficientParameterizedUnitConverter): converter
-			enumVal(int): enumVal
-			name(str): name
-			dimension(Dimension): dimension
-			aunitsystem(UnitSystem): aunitsystem
-			converter(WeirCoefficientParameterizedUnitConverter): converter
-			enumVal(int): enumVal
-			bentleyName(str): bentleyName
-		"""
-		pass
-
-	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ConversionFactor(self, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToSerializedString(self) -> str:
-		"""No Description
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	def KExp(self) -> float:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def EnumValue(self) -> int:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def BentleyName(self) -> str:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@property
-	def UnitSystem(self) -> UnitSystem:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterized: 
-		"""
-		pass
-
-	@KExp.setter
-	def KExp(self, kexp: float) -> None:
-		pass
-
-class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
-
-	def __init__(self, unitSystem: UnitSystemIndex) -> None:
-		"""No Description
-
-		Args:
-			unitSystem(UnitSystemIndex): unitSystem
-		"""
-		pass
-
-	def FromBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	@property
-	def KExp(self) -> float:
-		"""No Description
-
-		Returns:
-			WeirCoefficientParameterizedUnitConverter: 
-		"""
-		pass
-
-	@KExp.setter
-	def KExp(self, kexp: float) -> None:
-		pass
-
-class InfiltrationPerUnitDepthUnit(INamable):
-
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int, bentleyName: str) -> None:
-		"""No Description
-
-		Args:
-			name(str): name
-			dimension(Dimension): dimension
-			aunitsystem(UnitSystem): aunitsystem
-			converter(InfiltrationPerUnitDepthConverter): converter
-			enumVal(int): enumVal
-			name(str): name
-			dimension(Dimension): dimension
-			aunitsystem(UnitSystem): aunitsystem
-			converter(InfiltrationPerUnitDepthConverter): converter
-			enumVal(int): enumVal
-			bentleyName(str): bentleyName
-		"""
-		pass
-
-	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ConversionFactor(self, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToSerializedString(self) -> str:
-		"""No Description
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	def KExp(self) -> float:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def EnumValue(self) -> int:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def BentleyName(self) -> str:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@property
-	def UnitSystem(self) -> UnitSystem:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthUnit: 
-		"""
-		pass
-
-	@KExp.setter
-	def KExp(self, kexp: float) -> None:
-		pass
-
-class InfiltrationPerUnitDepthConverter(IUnitConverter):
-
-	def __init__(self, infiltrationUnit: UnitIndex, depthUnit: UnitIndex) -> None:
-		"""No Description
-
-		Args:
-			infiltrationUnit(UnitIndex): infiltrationUnit
-			depthUnit(UnitIndex): depthUnit
-		"""
-		pass
-
-	def FromBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	@property
-	def KExp(self) -> float:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthConverter: 
-		"""
-		pass
-
-	@property
-	def BaseInfiltrationUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthConverter: 
-		"""
-		pass
-
-	@property
-	def BaseDepthUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthConverter: 
-		"""
-		pass
-
-	@property
-	def DepthUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthConverter: 
-		"""
-		pass
-
-	@property
-	def InfiltrationUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			InfiltrationPerUnitDepthConverter: 
-		"""
-		pass
-
-	@KExp.setter
-	def KExp(self, kexp: float) -> None:
-		pass
-
-class DrainageCoefficientUnit(INamable):
-
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int, bentleyName: str) -> None:
-		"""No Description
-
-		Args:
-			name(str): name
-			dimension(Dimension): dimension
-			aunitsystem(UnitSystem): aunitsystem
-			converter(DrainageCoefficientUnitConverter): converter
-			enumVal(int): enumVal
-			name(str): name
-			dimension(Dimension): dimension
-			aunitsystem(UnitSystem): aunitsystem
-			converter(DrainageCoefficientUnitConverter): converter
-			enumVal(int): enumVal
-			bentleyName(str): bentleyName
-		"""
-		pass
-
-	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ConversionFactor(self, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToSerializedString(self) -> str:
-		"""No Description
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	def KExp(self) -> float:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def EnumValue(self) -> int:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def BentleyName(self) -> str:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@property
-	def UnitSystem(self) -> UnitSystem:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnit: 
-		"""
-		pass
-
-	@KExp.setter
-	def KExp(self, kexp: float) -> None:
-		pass
-
-class DrainageCoefficientUnitConverter(IUnitConverter):
-
-	def __init__(self, infiltrationUnit: UnitIndex) -> None:
-		"""No Description
-
-		Args:
-			infiltrationUnit(UnitIndex): infiltrationUnit
-		"""
-		pass
-
-	def FromBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	@property
-	def KExp(self) -> float:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnitConverter: 
-		"""
-		pass
-
-	@property
-	def BaseInfiltrationUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnitConverter: 
-		"""
-		pass
-
-	@property
-	def InfiltrationUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			DrainageCoefficientUnitConverter: 
-		"""
-		pass
-
-	@KExp.setter
-	def KExp(self, kexp: float) -> None:
-		pass
-
-class Dimension(INamable):
-
-	def __init__(self, astringName: str, aintEnumValue: int, astringName: str, aintEnumValue: int, bentleyName: str) -> None:
-		"""No Description
-
-		Args:
-			astringName(str): astringName
-			aintEnumValue(int): aintEnumValue
-			astringName(str): astringName
-			aintEnumValue(int): aintEnumValue
-			bentleyName(str): bentleyName
-		"""
-		pass
-
-	@staticmethod
-	@overload
-	def FromEnum(aint: int) -> Dimension:
-		"""No Description
-
-		Args:
-			aint(int): aint
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@staticmethod
-	@overload
-	def FromEnum(dimension: DimensionType) -> Dimension:
-		"""No Description
-
-		Args:
-			dimension(DimensionType): dimension
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@staticmethod
-	@overload
-	def Convert(adouble: float, dimensionType: DimensionType, aintFromUnit: int, aintToUnit: int) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			dimensionType(DimensionType): dimensionType
-			aintFromUnit(int): aintFromUnit
-			aintToUnit(int): aintToUnit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	@overload
-	def Convert(self, adouble: float, aintFromUnit: int, aintToUnit: int) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aintFromUnit(int): aintFromUnit
-			aintToUnit(int): aintToUnit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	@staticmethod
-	def FromIndex(aindex: DimensionIndex) -> Dimension:
-		"""No Description
-
-		Args:
-			aindex(DimensionIndex): aindex
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@staticmethod
-	def FromName(asNameDimension: str) -> Dimension:
-		"""No Description
-
-		Args:
-			asNameDimension(str): asNameDimension
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	def AvailableUnitsSortedEx(self, currentUnit: int) -> List:
-		"""No Description
-
-		Args:
-			currentUnit(int): currentUnit
-
-		Returns:
-			List: 
-		"""
-		pass
-
-	def UnitFromEnum(self, aiEnumValue: int) -> Unit:
-		"""No Description
-
-		Args:
-			aiEnumValue(int): aiEnumValue
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Angle() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Area() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Concentration() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Currency() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CurrencyPerEnergy() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CurrencyPerLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Diffusivity() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ElectricalFrequency() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def EmitterCoefficient() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Energy() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def EnergyPerPower() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Flow() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FlowDensityPerArea() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FlowDensityPerCapita() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Length() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Mass() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MassPerEnergy() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MassRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def None() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NthOrderBulkReactionRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Percent() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Population() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PopulationDensityPerArea() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Pressure() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Power() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def RainfallIntensity() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ReactionRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def RotationalFrequency() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Scale() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Slope() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SpecificWeight() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SurfaceReactionRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Temperature() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Time() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Unitless() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Velocity() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Volume() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WeirCoefficient() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ZeroOrderSurfaceReactionRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DiameterLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MassPerArea() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Inertia() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CurrencyPerPower() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CostPerUnitVolume() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def EnergyPerUnitVolume() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Torque() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SpringConstant() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Force() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Density() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DischargePerPressureDrop() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VolumePerLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SideWeirCoefficient() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationPerUnitDepth() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PressurePerLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MassPerLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerPressure() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DynamicViscosity() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CalorificValue() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WeirCoefficientParameterized() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SnowMeltCoefficient() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def BreakRate() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ValveOpenCloseRateCoefficient() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DrainCoefficientUnit() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NumberPerVolumeUnit() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NumberPerAreaUnit() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MolesPerVolumeUnit() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MolesPerAreaUnit() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ValveOpenCloseRateCoefficientPerFlow() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FlowPerUnitLength() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Acceleration() -> Dimension:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def AvailableUnitsSorted(self) -> List:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def EnumValue(self) -> int:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def BentleyName(self) -> str:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	@property
-	def Units(self) -> ISet:
-		"""No Description
-
-		Returns:
-			Dimension: 
-		"""
-		pass
 
 class DimensionType(Enum):
 	Dimensionless = 0
@@ -2295,6259 +655,6 @@ class FlowPerUnitLengthUnit(Enum):
 	CubicMetersPerKilometerPerSecond = 6
 	LitersPerMeterPerSecond = 7
 
-class IUnitConverter:
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def FromBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-class NumericConversionHandler:
-
-	def __init__(self, aunitStorage: Unit, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			aunitStorage(Unit): aunitStorage
-			anf(NumericFormatter): anf
-		"""
-		pass
-
-	def DependsOn(self, anf: NumericFormatter) -> bool:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	def StorageDoubleFromViewDouble(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def StorageDoubleFromViewString(self, astring: str) -> float:
-		"""No Description
-
-		Args:
-			astring(str): astring
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def StorageToViewFactor(self) -> float:
-		"""No Description
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ViewDoubleFromStorageDouble(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ViewStringFromStorageDouble(self, adouble: float) -> str:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	def Formatter(self) -> NumericFormatter:
-		"""No Description
-
-		Returns:
-			NumericConversionHandler: 
-		"""
-		pass
-
-	@property
-	def StorageUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			NumericConversionHandler: 
-		"""
-		pass
-
-class BaseDateTimeDelegate(ICloneable, ISerializable):
-
-	def __init__(self, object: object, method: IntPtr) -> None:
-		"""No Description
-
-		Args:
-			object(object): object
-			method(IntPtr): method
-		"""
-		pass
-
-	def Invoke(self) -> datetime:
-		"""No Description
-
-		Returns:
-			datetime: 
-		"""
-		pass
-
-	def BeginInvoke(self, callback: AsyncCallback, object: object) -> IAsyncResult:
-		"""No Description
-
-		Args:
-			callback(AsyncCallback): callback
-			object(object): object
-
-		Returns:
-			IAsyncResult: 
-		"""
-		pass
-
-	def EndInvoke(self, result: IAsyncResult) -> datetime:
-		"""No Description
-
-		Args:
-			result(IAsyncResult): result
-
-		Returns:
-			datetime: 
-		"""
-		pass
-
-	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-		"""No Description
-
-		Args:
-			info(SerializationInfo): info
-			context(StreamingContext): context
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def GetInvocationList(self) -> array(Delegate):
-		"""No Description
-
-		Returns:
-			array(Delegate): 
-		"""
-		pass
-
-	def DynamicInvoke(self, args: array(object)) -> object:
-		"""No Description
-
-		Args:
-			args(array(object)): args
-
-		Returns:
-			object: 
-		"""
-		pass
-
-	def Clone(self) -> object:
-		"""No Description
-
-		Returns:
-			object: 
-		"""
-		pass
-
-	@property
-	def Method(self) -> MethodInfo:
-		"""No Description
-
-		Returns:
-			BaseDateTimeDelegate: 
-		"""
-		pass
-
-	@property
-	def Target(self) -> object:
-		"""No Description
-
-		Returns:
-			BaseDateTimeDelegate: 
-		"""
-		pass
-
-class NumberFormatInfoLibrary:
-
-	def __init__(self) -> None:
-		"""No Description
-		"""
-		pass
-
-	@property
-	def CurrentNumberFormatInfo(self) -> NumberFormatInfo:
-		"""No Description
-
-		Returns:
-			NumberFormatInfoLibrary: 
-		"""
-		pass
-
-	@property
-	def CurrentCultureInfo(self) -> CultureInfo:
-		"""No Description
-
-		Returns:
-			NumberFormatInfoLibrary: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Current() -> NumberFormatInfoLibrary:
-		"""No Description
-
-		Returns:
-			NumberFormatInfoLibrary: 
-		"""
-		pass
-
-class NumericFormatter(INamable, IMementoable, ILabeled):
-
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aboolIsStandardFormatter: bool, astringLabel: str, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
-		"""No Description
-
-		Args:
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
-			astringLabel(str): astringLabel
-			aintId(int): aintId
-			asName(str): asName
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			aintId(int): aintId
-			asName(str): asName
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
-			astringLabel(str): astringLabel
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
-			astringLabel(str): astringLabel
-		"""
-		pass
-
-	def add_DecimalDigitsChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_DecimalDigitsChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_DisplayUnitChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_DisplayUnitChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_FormatCodeChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_FormatCodeChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def CreateMemento(self) -> IMemento:
-		"""No Description
-
-		Returns:
-			IMemento: 
-		"""
-		pass
-
-	def DoubleFromDoubleUnit(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def DoubleUnitFromDouble(self, aunit: Unit, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def DoubleUnitFromString(self, aunit: Unit, astring: str) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-			astring(str): astring
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def InitializeDefaultsFrom(self, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def InitializeFrom(self, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def ResetDefault(self, aunitsystem: UnitSystem) -> None:
-		"""No Description
-
-		Args:
-			aunitsystem(UnitSystem): aunitsystem
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def SetMemento(self, aimemento: IMemento) -> bool:
-		"""No Description
-
-		Args:
-			aimemento(IMemento): aimemento
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	def StringFromDoubleUnit(self, adouble: float, aunit: Unit) -> str:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	def DecimalDigits(self) -> int:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def DisplayUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def DisplayUnitLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def FormatCode(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def NumericFormatterId(self) -> int:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def IsStandardFormatter(self) -> bool:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def Places(self) -> int:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def DateTimeFormatForBinding(self) -> int:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@property
-	def XmlDisplayUnit(self) -> str:
-		"""No Description
-
-		Returns:
-			NumericFormatter: 
-		"""
-		pass
-
-	@DecimalDigits.setter
-	def DecimalDigits(self, decimaldigits: int) -> None:
-		pass
-
-	@DisplayUnit.setter
-	def DisplayUnit(self, displayunit: Unit) -> None:
-		pass
-
-	@FormatCode.setter
-	def FormatCode(self, formatcode: str) -> None:
-		pass
-
-	@Name.setter
-	def Name(self, name: str) -> None:
-		pass
-
-	@NumericFormatterId.setter
-	def NumericFormatterId(self, numericformatterid: int) -> None:
-		pass
-
-	@Places.setter
-	def Places(self, places: int) -> None:
-		pass
-
-	@DateTimeFormatForBinding.setter
-	def DateTimeFormatForBinding(self, datetimeformatforbinding: int) -> None:
-		pass
-
-	@XmlDisplayUnit.setter
-	def XmlDisplayUnit(self, xmldisplayunit: str) -> None:
-		pass
-
-class StationFormatter(INamable, IMementoable, ILabeled):
-
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
-		"""No Description
-
-		Args:
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aintId(int): aintId
-			asName(str): asName
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-		"""
-		pass
-
-	def DoubleUnitFromString(self, aunit: Unit, astring: str) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-			astring(str): astring
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def InitializeFrom(self, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def StringFromDoubleUnit(self, adouble: float, aunit: Unit) -> str:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	def add_DecimalDigitsChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_DecimalDigitsChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_DisplayUnitChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_DisplayUnitChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_FormatCodeChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_FormatCodeChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def CreateMemento(self) -> IMemento:
-		"""No Description
-
-		Returns:
-			IMemento: 
-		"""
-		pass
-
-	def DoubleFromDoubleUnit(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def DoubleUnitFromDouble(self, aunit: Unit, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def InitializeDefaultsFrom(self, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def ResetDefault(self, aunitsystem: UnitSystem) -> None:
-		"""No Description
-
-		Args:
-			aunitsystem(UnitSystem): aunitsystem
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def SetMemento(self, aimemento: IMemento) -> bool:
-		"""No Description
-
-		Args:
-			aimemento(IMemento): aimemento
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	@property
-	def Places(self) -> int:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def DecimalDigits(self) -> int:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def DisplayUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def DisplayUnitLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def FormatCode(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def NumericFormatterId(self) -> int:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def IsStandardFormatter(self) -> bool:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def DateTimeFormatForBinding(self) -> int:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@property
-	def XmlDisplayUnit(self) -> str:
-		"""No Description
-
-		Returns:
-			StationFormatter: 
-		"""
-		pass
-
-	@Places.setter
-	def Places(self, places: int) -> None:
-		pass
-
-	@DecimalDigits.setter
-	def DecimalDigits(self, decimaldigits: int) -> None:
-		pass
-
-	@DisplayUnit.setter
-	def DisplayUnit(self, displayunit: Unit) -> None:
-		pass
-
-	@FormatCode.setter
-	def FormatCode(self, formatcode: str) -> None:
-		pass
-
-	@Name.setter
-	def Name(self, name: str) -> None:
-		pass
-
-	@NumericFormatterId.setter
-	def NumericFormatterId(self, numericformatterid: int) -> None:
-		pass
-
-	@DateTimeFormatForBinding.setter
-	def DateTimeFormatForBinding(self, datetimeformatforbinding: int) -> None:
-		pass
-
-	@XmlDisplayUnit.setter
-	def XmlDisplayUnit(self, xmldisplayunit: str) -> None:
-		pass
-
-class DateTimeFormatter(INamable, IMementoable, ILabeled):
-
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, baseDateTimeDelegate: BaseDateTimeDelegate, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
-		"""No Description
-
-		Args:
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
-			aintId(int): aintId
-			asName(str): asName
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
-			aintId(int): aintId
-			asName(str): asName
-			aunit(Unit): aunit
-			asFormatCode(str): asFormatCode
-			aintDecimalDigits(int): aintDecimalDigits
-			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
-			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
-			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
-		"""
-		pass
-
-	def DoubleUnitFromString(self, aunit: Unit, astring: str) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-			astring(str): astring
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def InitializeFrom(self, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def StringFromDoubleUnit(self, adouble: float, aunit: Unit) -> str:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	def SetDateTimeFormat(self, dateTimeFormat: DateTimeFormats) -> None:
-		"""No Description
-
-		Args:
-			dateTimeFormat(DateTimeFormats): dateTimeFormat
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def SetDateTimeFormatString(self, formatString: str, formatIncludesDate: bool, formatIncludesTime: bool) -> None:
-		"""No Description
-
-		Args:
-			formatString(str): formatString
-			formatIncludesDate(bool): formatIncludesDate
-			formatIncludesTime(bool): formatIncludesTime
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_DecimalDigitsChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_DecimalDigitsChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_DisplayUnitChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_DisplayUnitChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_FormatCodeChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_FormatCodeChanged(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def CreateMemento(self) -> IMemento:
-		"""No Description
-
-		Returns:
-			IMemento: 
-		"""
-		pass
-
-	def DoubleFromDoubleUnit(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def DoubleUnitFromDouble(self, aunit: Unit, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def InitializeDefaultsFrom(self, anf: NumericFormatter) -> None:
-		"""No Description
-
-		Args:
-			anf(NumericFormatter): anf
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def ResetDefault(self, aunitsystem: UnitSystem) -> None:
-		"""No Description
-
-		Args:
-			aunitsystem(UnitSystem): aunitsystem
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def SetMemento(self, aimemento: IMemento) -> bool:
-		"""No Description
-
-		Args:
-			aimemento(IMemento): aimemento
-
-		Returns:
-			bool: 
-		"""
-		pass
-
-	@property
-	def DateTimeFormatString(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def FullDateTimeFormatString(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def DateTimeFormatForBinding(self) -> int:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def DateTimeFormat(self) -> DateTimeFormats:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def HasUnitToDisplay(self) -> bool:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def FormatCode(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def DecimalDigits(self) -> int:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def DisplayUnit(self) -> Unit:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def DisplayUnitLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def NumericFormatterId(self) -> int:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def IsStandardFormatter(self) -> bool:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def Places(self) -> int:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@property
-	def XmlDisplayUnit(self) -> str:
-		"""No Description
-
-		Returns:
-			DateTimeFormatter: 
-		"""
-		pass
-
-	@DateTimeFormatForBinding.setter
-	def DateTimeFormatForBinding(self, datetimeformatforbinding: int) -> None:
-		pass
-
-	@DateTimeFormat.setter
-	def DateTimeFormat(self, datetimeformat: DateTimeFormats) -> None:
-		pass
-
-	@FormatCode.setter
-	def FormatCode(self, formatcode: str) -> None:
-		pass
-
-	@DecimalDigits.setter
-	def DecimalDigits(self, decimaldigits: int) -> None:
-		pass
-
-	@DisplayUnit.setter
-	def DisplayUnit(self, displayunit: Unit) -> None:
-		pass
-
-	@Name.setter
-	def Name(self, name: str) -> None:
-		pass
-
-	@NumericFormatterId.setter
-	def NumericFormatterId(self, numericformatterid: int) -> None:
-		pass
-
-	@Places.setter
-	def Places(self, places: int) -> None:
-		pass
-
-	@XmlDisplayUnit.setter
-	def XmlDisplayUnit(self, xmldisplayunit: str) -> None:
-		pass
-
-class Unit(INamable):
-
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
-		"""No Description
-
-		Args:
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			adouble(float): adouble
-			aintEnumValue(int): aintEnumValue
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			adouble(float): adouble
-			aintEnumValue(int): aintEnumValue
-			bentleyName(str): bentleyName
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			aiunitconverter(IUnitConverter): aiunitconverter
-			aintEnumValue(int): aintEnumValue
-			astringName(str): astringName
-			adimension(Dimension): adimension
-			aunitsystem(UnitSystem): aunitsystem
-			aiunitconverter(IUnitConverter): aiunitconverter
-			aintEnumValue(int): aintEnumValue
-			bentleyName(str): bentleyName
-		"""
-		pass
-
-	@staticmethod
-	def FromDimensionEnum(adimension: Dimension, aint: int) -> Unit:
-		"""No Description
-
-		Args:
-			adimension(Dimension): adimension
-			aint(int): aint
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@staticmethod
-	def FromDimensionName(adimension: Dimension, asNameUnit: str) -> Unit:
-		"""No Description
-
-		Args:
-			adimension(Dimension): adimension
-			asNameUnit(str): asNameUnit
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@staticmethod
-	def FromLabel(adimension: Dimension, aUnitLabel: str) -> Unit:
-		"""No Description
-
-		Args:
-			adimension(Dimension): adimension
-			aUnitLabel(str): aUnitLabel
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@staticmethod
-	def FromIndex(aindex: UnitIndex) -> Unit:
-		"""No Description
-
-		Args:
-			aindex(UnitIndex): aindex
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@staticmethod
-	def FromSerializedString(astring: str) -> Unit:
-		"""No Description
-
-		Args:
-			astring(str): astring
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ConversionFactor(self, aunit: Unit) -> float:
-		"""No Description
-
-		Args:
-			aunit(Unit): aunit
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToSerializedString(self) -> str:
-		"""No Description
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerKiloPascal() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerCubicFeetPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerCubicFeetPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerCubicMeterPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerCubicMeterPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerLiterPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerLiterPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerGalPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerGalPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MetersPerSquareSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FeetPerSquareSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DrainCoeffInchesPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DrainCoeffMMPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilligramsPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilligramsPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilligramsPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MolesPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliMolesPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NumbersPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandNumbersPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionNumbersPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MolesPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MolesPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MolesPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliMolesPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliMolesPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliMolesPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NumbersPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NumbersPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NumbersPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandNumbersPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandNumbersPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandNumbersPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionNumbersPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionNumbersPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionNumbersPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerMilePerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerKilometerPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def QuadFootPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerFootPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerMilePerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def QuadMetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerKilometerPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerMetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def Dimension(self) -> Dimension:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def EnumValue(self) -> int:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def BentleyName(self) -> str:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	def UnitSystem(self) -> UnitSystem:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandLiters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def TonnesPerMegaJoule() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def TonnesPerYear() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def UnitlessPercent() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def UnitlessUnit() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def USSurveyFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityCentimetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityCentimetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityCentimetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityFeetPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityFeetPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityFeetPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityInchesPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityInchesPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityInchesPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityKilometersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityKnot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityKnotInternational() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityMetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityMetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityMetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VelocityMilePerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def VerticalPerHorizontal() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Watts() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WeirCoefficientSi() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WeirCoefficientUs() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Yards() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Years() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchMiles() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootMiles() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimeterMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimeterKilometers() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MeterMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MeterKilometers() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimeterMiles() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerAcre() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerHectare() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerKiloWatt() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerHorsepower() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerCubicCentimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerLiters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerCubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerCubicInches() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerImpGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerCubicFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerCubicYards() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerAcreInches() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerAcreFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerMillionGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerThousandGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerThousandLiters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerMillionLiters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NewtonSquareMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramSquareMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloWattHourPerMillionGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloWattHourPerMillionLiters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloWattHourPerCubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloWattHourPerCubicFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NewtonMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundPerInch() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NewtonPerMillimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundForce() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloPoundForce() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Newton() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloNewton() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SlugPerCubicFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundPerCubicFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramPerCubicMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CfsPerSquareRootFooH20() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CmsPerSquareRootMeterH20() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LPerSecPerSquareRootKpa() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GpmPerSquareRootPsi() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Pascals() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def HektoPascals() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaPascals() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliBars() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SideWeirCoefficientSi() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SideWeirCoefficientUs() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchesPerHourPerFeetToKexp() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CentimeterPerHourPerMeterToKexp() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Kelvin() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Tons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaWatts() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GigaWatts() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaJoules() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GigaJoules() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WattSeconds() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaWattHours() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GigaWattHours() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PascalsPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def BarsPerKilometer() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PSIPerFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PSIPerInch() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerMillimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerPascals() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerBars() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerMeterPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundSecondPerSquareFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def JoulesPerCubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloJoulesPerCubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaJoulesPerCubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloWattHoursPerCubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WeirCoefficientParameterizedSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def WeirCoefficientParameterizedUS() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimetersPerHourPerDegreeCelsius() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchesPerHourPerDegreeFahrenheit() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def BreaksPerYrPerKm() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def BreaksPerYrPerMi() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def BreaksPerYrPer1000Ft() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def BreaksPerYrPer100Mi() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerMeterH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPerSecondPerFtH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerSquareCentimeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloJoules() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Kilometers() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloNewtonsPerCubicMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloPascals() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KiloWattHours() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilowattHoursPerKilowatt() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Kilowatts() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Liters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerCapitaPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerDayPerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerMinutePerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerSecondPerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerHectaresPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerHectaresPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerSquareKilometerPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def LitersPerSquareMeterPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaLitersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MegaLitersPerDayPerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MeterHorizontalPerMeterVertical() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MeterPerKilometer() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MeterPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Meters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MetersPerCm() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MetersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MeterVerticalPerMeterHorizontal() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Mfeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MGD() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MGDPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MGDImperial() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MGDImperialPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerLiterNPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerLiterNPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSquareFeetPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSquareMeterPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MicrogramsPerSquareMeterPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Miles() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Millifeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Milligram() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilligramsPerLiter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilligramsPerLiterNPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilligramsPerLiterNPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerSquareFeetPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerSquareMeterPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliGramsPerSquareMeterPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimeterHorizontalPerMeterVertical() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimeterPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Millimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliMetersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MilliMetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillimeterVerticalPerMeterHorizontal() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionLiters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def MillionLitersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Milliseconds() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Minutes() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NewtonsPerCubicMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def NewtonsPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def OneOverSlope() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def None() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PartsPerBillion() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PartsPerBillionNPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PartsPerBillionNPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PartsPerMillion() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PartsPerMillionNPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PartsPerMillionNPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Passenger() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentPercent() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PercentSlope() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Person() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PersonsPerAcre() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PersonsPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PersonsPerSquareKilometer() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PersonsPerHectares() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PersonsPerSquareMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PersonsPerSquareMile() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Pounds() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsForcePerCubicFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerCubicFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerCubicFootNPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerCubicFootNPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerKilowattHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerMillionGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerMillionGallonsNPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerMillionGallonsNPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerSquareFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PoundsPerSquareInch() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def PSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Resident() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def RPM() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Seconds() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareCentimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareFeetPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareInches() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareKilometers() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareMetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareMiles() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareMillimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def SquareYards() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Stokes() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Student() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ThousandCapita() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreFeetPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreFeetPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreFeetPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreInches() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreInchPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AcreInchPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Acres() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AngleDegrees() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AngleMinutes() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AngleQuadrants() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AngleRadians() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AngleRevolutions() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def AngleSeconds() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Atmospheres() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Bars() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Capita() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Celsius() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CentimeterPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Centimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CentimetersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CentimetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CentimetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Centistokes() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFM() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFMPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFS() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFSPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFSPerAcres() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFSPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CFSPerSquareMiles() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicCentimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerDayPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerMinutePerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicFeetPerSecondPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicInches() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerDayPerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerHourPerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerMinutePerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerSecondPerMetersOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerHectaresPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerSquareKilometerPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicMetersPerSquareMeterPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def CubicYards() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Customer() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Days() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Decimeters() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Dollars() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerMeter() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def DollarsPerKiloWattHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Employee() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Fahrenheit() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Feet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FeetOfH2O() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FeetPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FeetPerInch() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootHorizontalPerFootVertical() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootPer1000Feet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootPerFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootPerMile() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootPoundals() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def FootVerticalPerFootHorizontal() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Gallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerDayPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerMinutePerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GallonsPerSecondPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPD() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPDPerAcres() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPDPerCapita() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPDPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPDPerSquareMile() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPM() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPMPerAcres() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPMPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPMPerSquareFeet() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GPMPerSquareMile() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Gram() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GramsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GramsPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GramsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def GramsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Guest() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Hectares() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Hertz() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def HorizontalPerVertical() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Horsepower() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Hours() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def HundredCapita() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImperialGallonsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImperialGallonsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImperialGallonsPerSecond() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImpGallons() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImperialGallonsPerDayPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImperialGallonsPerMinutePerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def ImperialGallonsPerSecondPerPSI() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Inches() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchesPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchesPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchesPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InchPerFoot() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateCentimetersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateCentimetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateCentimetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateInchesPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateInchesPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateInchesPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateMillimetersPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateMillimetersPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def InfiltrationRateMillimetersPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Joules() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Kilograms() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerDay() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerKilowattHour() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def KilogramsPerMinute() -> Unit:
-		"""No Description
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-class UnitConversionManager:
-
-	def __init__(self) -> None:
-		"""No Description
-		"""
-		pass
-
-	def AvailableDimensions(self) -> List:
-		"""No Description
-
-		Returns:
-			List: 
-		"""
-		pass
-
-	def DimensionAt(self, adimensionindex: DimensionIndex) -> Dimension:
-		"""No Description
-
-		Args:
-			adimensionindex(DimensionIndex): adimensionindex
-
-		Returns:
-			Dimension: 
-		"""
-		pass
-
-	def UnitIndexFor(self, unit: Unit) -> UnitIndex:
-		"""No Description
-
-		Args:
-			unit(Unit): unit
-
-		Returns:
-			UnitIndex: 
-		"""
-		pass
-
-	def UnitAt(self, aunitindex: UnitIndex) -> Unit:
-		"""No Description
-
-		Args:
-			aunitindex(UnitIndex): aunitindex
-
-		Returns:
-			Unit: 
-		"""
-		pass
-
-	def UnitSystemAt(self, aunitsystemindex: UnitSystemIndex) -> UnitSystem:
-		"""No Description
-
-		Args:
-			aunitsystemindex(UnitSystemIndex): aunitsystemindex
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Current() -> UnitConversionManager:
-		"""No Description
-
-		Returns:
-			UnitConversionManager: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def EmitterExponent() -> float:
-		"""No Description
-
-		Returns:
-			UnitConversionManager: 
-		"""
-		pass
-
-	@EmitterExponent.setter
-	@staticmethod
-	def EmitterExponent(self, emitterexponent: float) -> None:
-		pass
-
-class UnitSystem(INamable):
-
-	def __init__(self, astringName: str) -> None:
-		"""No Description
-
-		Args:
-			astringName(str): astringName
-		"""
-		pass
-
-	@staticmethod
-	def FromSerializedString(astring: str) -> UnitSystem:
-		"""No Description
-
-		Args:
-			astring(str): astring
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	def ToSerializedString(self) -> str:
-		"""No Description
-
-		Returns:
-			str: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def None() -> UnitSystem:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Si() -> UnitSystem:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def UsCustomary() -> UnitSystem:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	@staticmethod
-	def Both() -> UnitSystem:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	def LabelKey(self) -> str:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-	@property
-	def ShortLabel(self) -> str:
-		"""No Description
-
-		Returns:
-			UnitSystem: 
-		"""
-		pass
-
-class ConversionException(ISerializable, _Exception):
-
-	def __init__(self, asMessage: str) -> None:
-		"""No Description
-
-		Args:
-			asMessage(str): asMessage
-		"""
-		pass
-
-	def GetBaseException(self) -> Exception:
-		"""No Description
-
-		Returns:
-			Exception: 
-		"""
-		pass
-
-	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
-		"""No Description
-
-		Args:
-			info(SerializationInfo): info
-			context(StreamingContext): context
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	@property
-	def Data(self) -> Dict:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def InnerException(self) -> Exception:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def TargetSite(self) -> MethodBase:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def StackTrace(self) -> str:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def HelpLink(self) -> str:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def Source(self) -> str:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def HResult(self) -> int:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@property
-	def Message(self) -> str:
-		"""No Description
-
-		Returns:
-			ConversionException: 
-		"""
-		pass
-
-	@HelpLink.setter
-	def HelpLink(self, helplink: str) -> None:
-		pass
-
-	@Source.setter
-	def Source(self, source: str) -> None:
-		pass
-
-class FactorConverter(IUnitConverter):
-
-	def __init__(self, adouble: float) -> None:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-		"""
-		pass
-
-	def FromBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
-	def ToBaseUnit(self, adouble: float) -> float:
-		"""No Description
-
-		Args:
-			adouble(float): adouble
-
-		Returns:
-			float: 
-		"""
-		pass
-
 class DimensionIndex(Enum):
 	None = 0
 	Angle = 1
@@ -9064,6 +1171,8627 @@ class UnitSystemIndex(Enum):
 	UsCustomary = 2
 	Both = 3
 
+class CurrencyBasedUnit(INamable):
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ConversionFactor(self, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToSerializedString(self) -> str:
+		"""No Description
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def EnumValue(self) -> int:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def BentleyName(self) -> str:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+	@property
+	def UnitSystem(self) -> UnitSystem:
+		"""No Description
+
+		Returns:
+			CurrencyBasedUnit: 
+		"""
+		pass
+
+class WeirCoefficientParameterized(INamable):
+
+	@overload
+	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int) -> None:
+		"""No Description
+
+		Args:
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(WeirCoefficientParameterizedUnitConverter): converter
+			enumVal(int): enumVal
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(WeirCoefficientParameterizedUnitConverter): converter
+			enumVal(int): enumVal
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(WeirCoefficientParameterizedUnitConverter): converter
+			enumVal(int): enumVal
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(WeirCoefficientParameterizedUnitConverter): converter
+			enumVal(int): enumVal
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ConversionFactor(self, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToSerializedString(self) -> str:
+		"""No Description
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@property
+	def KExp(self) -> float:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@KExp.setter
+	def KExp(self, kexp: float) -> None:
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def EnumValue(self) -> int:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def BentleyName(self) -> str:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+	@property
+	def UnitSystem(self) -> UnitSystem:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterized: 
+		"""
+		pass
+
+class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
+
+	def __init__(self, unitSystem: UnitSystemIndex) -> None:
+		"""No Description
+
+		Args:
+			unitSystem(UnitSystemIndex): unitSystem
+		"""
+		pass
+
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@property
+	def KExp(self) -> float:
+		"""No Description
+
+		Returns:
+			WeirCoefficientParameterizedUnitConverter: 
+		"""
+		pass
+
+	@KExp.setter
+	def KExp(self, kexp: float) -> None:
+		pass
+
+class InfiltrationPerUnitDepthUnit(INamable):
+
+	@overload
+	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int) -> None:
+		"""No Description
+
+		Args:
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(InfiltrationPerUnitDepthConverter): converter
+			enumVal(int): enumVal
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(InfiltrationPerUnitDepthConverter): converter
+			enumVal(int): enumVal
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(InfiltrationPerUnitDepthConverter): converter
+			enumVal(int): enumVal
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(InfiltrationPerUnitDepthConverter): converter
+			enumVal(int): enumVal
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ConversionFactor(self, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToSerializedString(self) -> str:
+		"""No Description
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@property
+	def KExp(self) -> float:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@KExp.setter
+	def KExp(self, kexp: float) -> None:
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def EnumValue(self) -> int:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def BentleyName(self) -> str:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+	@property
+	def UnitSystem(self) -> UnitSystem:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthUnit: 
+		"""
+		pass
+
+class InfiltrationPerUnitDepthConverter(IUnitConverter):
+
+	def __init__(self, infiltrationUnit: UnitIndex, depthUnit: UnitIndex) -> None:
+		"""No Description
+
+		Args:
+			infiltrationUnit(UnitIndex): infiltrationUnit
+			depthUnit(UnitIndex): depthUnit
+		"""
+		pass
+
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@property
+	def KExp(self) -> float:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthConverter: 
+		"""
+		pass
+
+	@KExp.setter
+	def KExp(self, kexp: float) -> None:
+		pass
+
+	@property
+	def BaseInfiltrationUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthConverter: 
+		"""
+		pass
+
+	@property
+	def BaseDepthUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthConverter: 
+		"""
+		pass
+
+	@property
+	def DepthUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthConverter: 
+		"""
+		pass
+
+	@property
+	def InfiltrationUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			InfiltrationPerUnitDepthConverter: 
+		"""
+		pass
+
+class DrainageCoefficientUnit(INamable):
+
+	@overload
+	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int) -> None:
+		"""No Description
+
+		Args:
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(DrainageCoefficientUnitConverter): converter
+			enumVal(int): enumVal
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(DrainageCoefficientUnitConverter): converter
+			enumVal(int): enumVal
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(DrainageCoefficientUnitConverter): converter
+			enumVal(int): enumVal
+			name(str): name
+			dimension(Dimension): dimension
+			aunitsystem(UnitSystem): aunitsystem
+			converter(DrainageCoefficientUnitConverter): converter
+			enumVal(int): enumVal
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ConversionFactor(self, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToSerializedString(self) -> str:
+		"""No Description
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@property
+	def KExp(self) -> float:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@KExp.setter
+	def KExp(self, kexp: float) -> None:
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def EnumValue(self) -> int:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def BentleyName(self) -> str:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+	@property
+	def UnitSystem(self) -> UnitSystem:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnit: 
+		"""
+		pass
+
+class DrainageCoefficientUnitConverter(IUnitConverter):
+
+	def __init__(self, infiltrationUnit: UnitIndex) -> None:
+		"""No Description
+
+		Args:
+			infiltrationUnit(UnitIndex): infiltrationUnit
+		"""
+		pass
+
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@property
+	def KExp(self) -> float:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnitConverter: 
+		"""
+		pass
+
+	@KExp.setter
+	def KExp(self, kexp: float) -> None:
+		pass
+
+	@property
+	def BaseInfiltrationUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnitConverter: 
+		"""
+		pass
+
+	@property
+	def InfiltrationUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			DrainageCoefficientUnitConverter: 
+		"""
+		pass
+
+class Dimension(INamable):
+
+	@overload
+	def __init__(self, astringName: str, aintEnumValue: int) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, aintEnumValue: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@staticmethod
+	def FromIndex(aindex: DimensionIndex) -> Dimension:
+		"""No Description
+
+		Args:
+			aindex(DimensionIndex): aindex
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def FromEnum(aint: int) -> Dimension:
+		"""No Description
+
+		Args:
+			aint(int): aint
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def FromEnum(dimension: DimensionType) -> Dimension:
+		"""No Description
+
+		Args:
+			dimension(DimensionType): dimension
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	def FromName(asNameDimension: str) -> Dimension:
+		"""No Description
+
+		Args:
+			asNameDimension(str): asNameDimension
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def Convert(adouble: float, dimensionType: DimensionType, aintFromUnit: int, aintToUnit: int) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			dimensionType(DimensionType): dimensionType
+			aintFromUnit(int): aintFromUnit
+			aintToUnit(int): aintToUnit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def AvailableUnitsSortedEx(self, currentUnit: int) -> List:
+		"""No Description
+
+		Args:
+			currentUnit(int): currentUnit
+
+		Returns:
+			List: 
+		"""
+		pass
+
+	@overload
+	def Convert(self, adouble: float, aintFromUnit: int, aintToUnit: int) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aintFromUnit(int): aintFromUnit
+			aintToUnit(int): aintToUnit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def UnitFromEnum(self, aiEnumValue: int) -> Unit:
+		"""No Description
+
+		Args:
+			aiEnumValue(int): aiEnumValue
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Angle() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Area() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Concentration() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Currency() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CurrencyPerEnergy() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CurrencyPerLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Diffusivity() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ElectricalFrequency() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def EmitterCoefficient() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Energy() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def EnergyPerPower() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Flow() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FlowDensityPerArea() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FlowDensityPerCapita() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Length() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Mass() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MassPerEnergy() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MassRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def _None() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NthOrderBulkReactionRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Percent() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Population() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PopulationDensityPerArea() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Pressure() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Power() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def RainfallIntensity() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ReactionRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def RotationalFrequency() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Scale() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Slope() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SpecificWeight() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SurfaceReactionRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Temperature() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Time() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Unitless() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Velocity() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Volume() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WeirCoefficient() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ZeroOrderSurfaceReactionRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DiameterLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MassPerArea() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Inertia() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CurrencyPerPower() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CostPerUnitVolume() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def EnergyPerUnitVolume() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Torque() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SpringConstant() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Force() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Density() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DischargePerPressureDrop() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VolumePerLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SideWeirCoefficient() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationPerUnitDepth() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PressurePerLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MassPerLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerPressure() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DynamicViscosity() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CalorificValue() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WeirCoefficientParameterized() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SnowMeltCoefficient() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def BreakRate() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ValveOpenCloseRateCoefficient() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DrainCoefficientUnit() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NumberPerVolumeUnit() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NumberPerAreaUnit() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MolesPerVolumeUnit() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MolesPerAreaUnit() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ValveOpenCloseRateCoefficientPerFlow() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FlowPerUnitLength() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Acceleration() -> Dimension:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def AvailableUnitsSorted(self) -> List:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def EnumValue(self) -> int:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def BentleyName(self) -> str:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	@property
+	def Units(self) -> ISet:
+		"""No Description
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+class IUnitConverter:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises:
+			Exception: if this class is instanciated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+class NumericConversionHandler:
+
+	def __init__(self, aunitStorage: Unit, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			aunitStorage(Unit): aunitStorage
+			anf(NumericFormatter): anf
+		"""
+		pass
+
+	def DependsOn(self, anf: NumericFormatter) -> bool:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	def StorageDoubleFromViewDouble(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def StorageDoubleFromViewString(self, astring: str) -> float:
+		"""No Description
+
+		Args:
+			astring(str): astring
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def StorageToViewFactor(self) -> float:
+		"""No Description
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ViewDoubleFromStorageDouble(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ViewStringFromStorageDouble(self, adouble: float) -> str:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@property
+	def Formatter(self) -> NumericFormatter:
+		"""No Description
+
+		Returns:
+			NumericConversionHandler: 
+		"""
+		pass
+
+	@property
+	def StorageUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			NumericConversionHandler: 
+		"""
+		pass
+
+class BaseDateTimeDelegate(ICloneable, ISerializable):
+
+	def __init__(self, object: object, method: IntPtr) -> None:
+		"""No Description
+
+		Args:
+			object(object): object
+			method(IntPtr): method
+		"""
+		pass
+
+	def Invoke(self) -> datetime:
+		"""No Description
+
+		Returns:
+			datetime: 
+		"""
+		pass
+
+	def BeginInvoke(self, callback: AsyncCallback, object: object) -> IAsyncResult:
+		"""No Description
+
+		Args:
+			callback(AsyncCallback): callback
+			object(object): object
+
+		Returns:
+			IAsyncResult: 
+		"""
+		pass
+
+	def EndInvoke(self, result: IAsyncResult) -> datetime:
+		"""No Description
+
+		Args:
+			result(IAsyncResult): result
+
+		Returns:
+			datetime: 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args:
+			info(SerializationInfo): info
+			context(StreamingContext): context
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def GetInvocationList(self) -> array(Delegate):
+		"""No Description
+
+		Returns:
+			array(Delegate): 
+		"""
+		pass
+
+	def DynamicInvoke(self, args: array(object)) -> object:
+		"""No Description
+
+		Args:
+			args(array(object)): args
+
+		Returns:
+			object: 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns:
+			object: 
+		"""
+		pass
+
+	@property
+	def Method(self) -> MethodInfo:
+		"""No Description
+
+		Returns:
+			BaseDateTimeDelegate: 
+		"""
+		pass
+
+	@property
+	def Target(self) -> object:
+		"""No Description
+
+		Returns:
+			BaseDateTimeDelegate: 
+		"""
+		pass
+
+class NumberFormatInfoLibrary:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@property
+	def CurrentNumberFormatInfo(self) -> NumberFormatInfo:
+		"""No Description
+
+		Returns:
+			NumberFormatInfoLibrary: 
+		"""
+		pass
+
+	@property
+	def CurrentCultureInfo(self) -> CultureInfo:
+		"""No Description
+
+		Returns:
+			NumberFormatInfoLibrary: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Current() -> NumberFormatInfoLibrary:
+		"""No Description
+
+		Returns:
+			NumberFormatInfoLibrary: 
+		"""
+		pass
+
+class NumericFormatter(INamable, IMementoable, ILabeled):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aboolIsStandardFormatter(bool): aboolIsStandardFormatter
+			astringLabel(str): astringLabel
+		"""
+		pass
+
+	def add_DecimalDigitsChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_DecimalDigitsChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_DisplayUnitChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_DisplayUnitChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_FormatCodeChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_FormatCodeChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def CreateMemento(self) -> IMemento:
+		"""No Description
+
+		Returns:
+			IMemento: 
+		"""
+		pass
+
+	def DoubleFromDoubleUnit(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def DoubleUnitFromDouble(self, aunit: Unit, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def DoubleUnitFromString(self, aunit: Unit, astring: str) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+			astring(str): astring
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def InitializeDefaultsFrom(self, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def InitializeFrom(self, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def ResetDefault(self, aunitsystem: UnitSystem) -> None:
+		"""No Description
+
+		Args:
+			aunitsystem(UnitSystem): aunitsystem
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def SetMemento(self, aimemento: IMemento) -> bool:
+		"""No Description
+
+		Args:
+			aimemento(IMemento): aimemento
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	def StringFromDoubleUnit(self, adouble: float, aunit: Unit) -> str:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@property
+	def DecimalDigits(self) -> int:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@DecimalDigits.setter
+	def DecimalDigits(self, decimaldigits: int) -> None:
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@property
+	def DisplayUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@DisplayUnit.setter
+	def DisplayUnit(self, displayunit: Unit) -> None:
+		pass
+
+	@property
+	def DisplayUnitLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@property
+	def FormatCode(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@FormatCode.setter
+	def FormatCode(self, formatcode: str) -> None:
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@Name.setter
+	def Name(self, name: str) -> None:
+		pass
+
+	@property
+	def NumericFormatterId(self) -> int:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@NumericFormatterId.setter
+	def NumericFormatterId(self, numericformatterid: int) -> None:
+		pass
+
+	@property
+	def IsStandardFormatter(self) -> bool:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@property
+	def Places(self) -> int:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@Places.setter
+	def Places(self, places: int) -> None:
+		pass
+
+	@property
+	def DateTimeFormatForBinding(self) -> int:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@DateTimeFormatForBinding.setter
+	def DateTimeFormatForBinding(self, datetimeformatforbinding: int) -> None:
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@property
+	def XmlDisplayUnit(self) -> str:
+		"""No Description
+
+		Returns:
+			NumericFormatter: 
+		"""
+		pass
+
+	@XmlDisplayUnit.setter
+	def XmlDisplayUnit(self, xmldisplayunit: str) -> None:
+		pass
+
+class StationFormatter(INamable, IMementoable, ILabeled):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+		"""
+		pass
+
+	def DoubleUnitFromString(self, aunit: Unit, astring: str) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+			astring(str): astring
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def InitializeFrom(self, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def StringFromDoubleUnit(self, adouble: float, aunit: Unit) -> str:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	def add_DecimalDigitsChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_DecimalDigitsChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_DisplayUnitChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_DisplayUnitChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_FormatCodeChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_FormatCodeChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def CreateMemento(self) -> IMemento:
+		"""No Description
+
+		Returns:
+			IMemento: 
+		"""
+		pass
+
+	def DoubleFromDoubleUnit(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def DoubleUnitFromDouble(self, aunit: Unit, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def InitializeDefaultsFrom(self, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def ResetDefault(self, aunitsystem: UnitSystem) -> None:
+		"""No Description
+
+		Args:
+			aunitsystem(UnitSystem): aunitsystem
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def SetMemento(self, aimemento: IMemento) -> bool:
+		"""No Description
+
+		Args:
+			aimemento(IMemento): aimemento
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@property
+	def Places(self) -> int:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@Places.setter
+	def Places(self, places: int) -> None:
+		pass
+
+	@property
+	def DecimalDigits(self) -> int:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@DecimalDigits.setter
+	def DecimalDigits(self, decimaldigits: int) -> None:
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@property
+	def DisplayUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@DisplayUnit.setter
+	def DisplayUnit(self, displayunit: Unit) -> None:
+		pass
+
+	@property
+	def DisplayUnitLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@property
+	def FormatCode(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@FormatCode.setter
+	def FormatCode(self, formatcode: str) -> None:
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@Name.setter
+	def Name(self, name: str) -> None:
+		pass
+
+	@property
+	def NumericFormatterId(self) -> int:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@NumericFormatterId.setter
+	def NumericFormatterId(self, numericformatterid: int) -> None:
+		pass
+
+	@property
+	def IsStandardFormatter(self) -> bool:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@property
+	def DateTimeFormatForBinding(self) -> int:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@DateTimeFormatForBinding.setter
+	def DateTimeFormatForBinding(self, datetimeformatforbinding: int) -> None:
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@property
+	def XmlDisplayUnit(self) -> str:
+		"""No Description
+
+		Returns:
+			StationFormatter: 
+		"""
+		pass
+
+	@XmlDisplayUnit.setter
+	def XmlDisplayUnit(self, xmldisplayunit: str) -> None:
+		pass
+
+class DateTimeFormatter(INamable, IMementoable, ILabeled):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+		"""
+		pass
+
+	@overload
+	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
+		"""No Description
+
+		Args:
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+			aintId(int): aintId
+			asName(str): asName
+			aunit(Unit): aunit
+			asFormatCode(str): asFormatCode
+			aintDecimalDigits(int): aintDecimalDigits
+			aunitDisplayDefaultSi(Unit): aunitDisplayDefaultSi
+			aunitDisplayDefaultUs(Unit): aunitDisplayDefaultUs
+			baseDateTimeDelegate(BaseDateTimeDelegate): baseDateTimeDelegate
+		"""
+		pass
+
+	def DoubleUnitFromString(self, aunit: Unit, astring: str) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+			astring(str): astring
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def InitializeFrom(self, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def StringFromDoubleUnit(self, adouble: float, aunit: Unit) -> str:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	def SetDateTimeFormat(self, dateTimeFormat: DateTimeFormats) -> None:
+		"""No Description
+
+		Args:
+			dateTimeFormat(DateTimeFormats): dateTimeFormat
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def SetDateTimeFormatString(self, formatString: str, formatIncludesDate: bool, formatIncludesTime: bool) -> None:
+		"""No Description
+
+		Args:
+			formatString(str): formatString
+			formatIncludesDate(bool): formatIncludesDate
+			formatIncludesTime(bool): formatIncludesTime
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_DecimalDigitsChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_DecimalDigitsChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_DisplayUnitChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_DisplayUnitChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def add_FormatCodeChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def remove_FormatCodeChanged(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args:
+			value(EventHandler): value
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def CreateMemento(self) -> IMemento:
+		"""No Description
+
+		Returns:
+			IMemento: 
+		"""
+		pass
+
+	def DoubleFromDoubleUnit(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def DoubleUnitFromDouble(self, aunit: Unit, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def InitializeDefaultsFrom(self, anf: NumericFormatter) -> None:
+		"""No Description
+
+		Args:
+			anf(NumericFormatter): anf
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def ResetDefault(self, aunitsystem: UnitSystem) -> None:
+		"""No Description
+
+		Args:
+			aunitsystem(UnitSystem): aunitsystem
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	def SetMemento(self, aimemento: IMemento) -> bool:
+		"""No Description
+
+		Args:
+			aimemento(IMemento): aimemento
+
+		Returns:
+			bool: 
+		"""
+		pass
+
+	@property
+	def DateTimeFormatString(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def FullDateTimeFormatString(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def DateTimeFormatForBinding(self) -> int:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@DateTimeFormatForBinding.setter
+	def DateTimeFormatForBinding(self, datetimeformatforbinding: int) -> None:
+		pass
+
+	@property
+	def DateTimeFormat(self) -> DateTimeFormats:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@DateTimeFormat.setter
+	def DateTimeFormat(self, datetimeformat: DateTimeFormats) -> None:
+		pass
+
+	@property
+	def HasUnitToDisplay(self) -> bool:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def FormatCode(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@FormatCode.setter
+	def FormatCode(self, formatcode: str) -> None:
+		pass
+
+	@property
+	def DecimalDigits(self) -> int:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@DecimalDigits.setter
+	def DecimalDigits(self, decimaldigits: int) -> None:
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def DisplayUnit(self) -> Unit:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@DisplayUnit.setter
+	def DisplayUnit(self, displayunit: Unit) -> None:
+		pass
+
+	@property
+	def DisplayUnitLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@Name.setter
+	def Name(self, name: str) -> None:
+		pass
+
+	@property
+	def NumericFormatterId(self) -> int:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@NumericFormatterId.setter
+	def NumericFormatterId(self, numericformatterid: int) -> None:
+		pass
+
+	@property
+	def IsStandardFormatter(self) -> bool:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def Places(self) -> int:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@Places.setter
+	def Places(self, places: int) -> None:
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@property
+	def XmlDisplayUnit(self) -> str:
+		"""No Description
+
+		Returns:
+			DateTimeFormatter: 
+		"""
+		pass
+
+	@XmlDisplayUnit.setter
+	def XmlDisplayUnit(self, xmldisplayunit: str) -> None:
+		pass
+
+class Unit(INamable):
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@overload
+	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			adouble(float): adouble
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			astringName(str): astringName
+			adimension(Dimension): adimension
+			aunitsystem(UnitSystem): aunitsystem
+			aiunitconverter(IUnitConverter): aiunitconverter
+			aintEnumValue(int): aintEnumValue
+			bentleyName(str): bentleyName
+		"""
+		pass
+
+	@staticmethod
+	def FromDimensionEnum(adimension: Dimension, aint: int) -> Unit:
+		"""No Description
+
+		Args:
+			adimension(Dimension): adimension
+			aint(int): aint
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	def FromDimensionName(adimension: Dimension, asNameUnit: str) -> Unit:
+		"""No Description
+
+		Args:
+			adimension(Dimension): adimension
+			asNameUnit(str): asNameUnit
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	def FromLabel(adimension: Dimension, aUnitLabel: str) -> Unit:
+		"""No Description
+
+		Args:
+			adimension(Dimension): adimension
+			aUnitLabel(str): aUnitLabel
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	def FromIndex(aindex: UnitIndex) -> Unit:
+		"""No Description
+
+		Args:
+			aindex(UnitIndex): aindex
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	def FromSerializedString(astring: str) -> Unit:
+		"""No Description
+
+		Args:
+			astring(str): astring
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	def ConvertFrom(self, adouble: float, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ConversionFactor(self, aunit: Unit) -> float:
+		"""No Description
+
+		Args:
+			aunit(Unit): aunit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToSerializedString(self) -> str:
+		"""No Description
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreFeetPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreFeetPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreFeetPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreInches() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreInchPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AcreInchPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Acres() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AngleDegrees() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AngleMinutes() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AngleQuadrants() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AngleRadians() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AngleRevolutions() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def AngleSeconds() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Atmospheres() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Bars() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Capita() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Celsius() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CentimeterPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Centimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CentimetersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CentimetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CentimetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Centistokes() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFM() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFMPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFS() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFSPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFSPerAcres() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFSPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CFSPerSquareMiles() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicCentimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerDayPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerMinutePerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerSecondPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicInches() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerDayPerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerHourPerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerMinutePerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerSecondPerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerHectaresPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerSquareKilometerPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerSquareMeterPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicYards() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Customer() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Days() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Decimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Dollars() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerKiloWattHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Employee() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Fahrenheit() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Feet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FeetOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FeetPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FeetPerInch() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootHorizontalPerFootVertical() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootPer1000Feet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootPerFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootPerMile() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootPoundals() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootVerticalPerFootHorizontal() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Gallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerDayPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerMinutePerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerSecondPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPD() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPDPerAcres() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPDPerCapita() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPDPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPDPerSquareMile() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPM() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPMPerAcres() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPMPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPMPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GPMPerSquareMile() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Gram() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GramsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GramsPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GramsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GramsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Guest() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Hectares() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Hertz() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def HorizontalPerVertical() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Horsepower() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Hours() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def HundredCapita() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImperialGallonsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImperialGallonsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImperialGallonsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImpGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImperialGallonsPerDayPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImperialGallonsPerMinutePerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ImperialGallonsPerSecondPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Inches() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchesPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchesPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchesPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchPerFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateCentimetersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateCentimetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateCentimetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateInchesPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateInchesPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateInchesPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateMillimetersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateMillimetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InfiltrationRateMillimetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Joules() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Kilograms() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerKilowattHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloJoules() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Kilometers() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloNewtonsPerCubicMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloPascals() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloWattHours() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilowattHoursPerKilowatt() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Kilowatts() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Liters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerCapitaPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerDayPerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerMinutePerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerSecondPerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerHectaresPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerHectaresPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerSquareKilometerPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerSquareMeterPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaLitersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaLitersPerDayPerMetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MeterHorizontalPerMeterVertical() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MeterPerKilometer() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MeterPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Meters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MetersPerCm() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MetersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MeterVerticalPerMeterHorizontal() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Mfeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MGD() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MGDPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MGDImperial() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MGDImperialPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerLiterNPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerLiterNPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSquareFeetPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSquareMeterPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSquareMeterPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Miles() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Millifeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Milligram() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilligramsPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilligramsPerLiterNPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilligramsPerLiterNPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerSquareFeetPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerSquareMeterPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliGramsPerSquareMeterPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimeterHorizontalPerMeterVertical() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimeterPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Millimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimetersOfH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliMetersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliMetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimeterVerticalPerMeterHorizontal() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionLiters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionLitersPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Milliseconds() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Minutes() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NewtonsPerCubicMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NewtonsPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def OneOverSlope() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def _None() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PartsPerBillion() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PartsPerBillionNPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PartsPerBillionNPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PartsPerMillion() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PartsPerMillionNPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PartsPerMillionNPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Passenger() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPercent() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentSlope() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Person() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PersonsPerAcre() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PersonsPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PersonsPerSquareKilometer() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PersonsPerHectares() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PersonsPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PersonsPerSquareMile() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Pounds() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsForcePerCubicFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerCubicFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerCubicFootNPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerCubicFootNPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerKilowattHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerMillionGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerMillionGallonsNPerDay() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerMillionGallonsNPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerSquareFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerSquareInch() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Resident() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def RPM() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Seconds() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareCentimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareFeetPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareInches() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareKilometers() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareMetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareMiles() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareMillimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SquareYards() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Stokes() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Student() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandCapita() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandLiters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def TonnesPerMegaJoule() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def TonnesPerYear() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def UnitlessPercent() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def UnitlessUnit() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def USSurveyFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityCentimetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityCentimetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityCentimetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityFeetPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityFeetPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityFeetPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityInchesPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityInchesPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityInchesPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityKilometersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityKnot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityKnotInternational() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityMetersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityMetersPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityMetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VelocityMilePerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def VerticalPerHorizontal() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Watts() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WeirCoefficientSi() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WeirCoefficientUs() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Yards() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Years() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchMiles() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootMiles() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FootFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimeterMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimeterKilometers() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MeterMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MeterKilometers() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimeterMiles() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerAcre() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerHectare() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerKiloWatt() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerHorsepower() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerCubicCentimeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerLiters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerCubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerCubicInches() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerImpGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerCubicFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerCubicYards() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerAcreInches() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerAcreFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerMillionGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerThousandGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerThousandLiters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DollarsPerMillionLiters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NewtonSquareMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramSquareMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloWattHourPerMillionGallons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloWattHourPerMillionLiters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloWattHourPerCubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloWattHourPerCubicFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NewtonMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundPerInch() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NewtonPerMillimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundForce() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloPoundForce() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Newton() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloNewton() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SlugPerCubicFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundPerCubicFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramPerCubicMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CfsPerSquareRootFooH20() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CmsPerSquareRootMeterH20() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LPerSecPerSquareRootKpa() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GpmPerSquareRootPsi() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Pascals() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def HektoPascals() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaPascals() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliBars() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SideWeirCoefficientSi() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def SideWeirCoefficientUs() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchesPerHourPerFeetToKexp() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CentimeterPerHourPerMeterToKexp() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Kelvin() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Tons() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaWatts() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GigaWatts() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaJoules() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GigaJoules() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WattSeconds() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaWattHours() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GigaWattHours() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PascalsPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def BarsPerKilometer() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PSIPerFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PSIPerInch() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundsPerFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerMillimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerPascals() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerBars() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KilogramsPerMeterPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PoundSecondPerSquareFoot() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def JoulesPerCubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloJoulesPerCubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MegaJoulesPerCubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def KiloWattHoursPerCubicMeters() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WeirCoefficientParameterizedSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def WeirCoefficientParameterizedUS() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillimetersPerHourPerDegreeCelsius() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def InchesPerHourPerDegreeFahrenheit() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def BreaksPerYrPerKm() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def BreaksPerYrPerMi() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def BreaksPerYrPer1000Ft() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def BreaksPerYrPer100Mi() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerMeterH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerFtH2O() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerKiloPascal() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerPSI() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerCubicFeetPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerCubicFeetPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerCubicMeterPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerCubicMeterPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerLiterPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerLiterPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerGalPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PercentPerSecondPerGalPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MetersPerSquareSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def FeetPerSquareSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DrainCoeffInchesPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def DrainCoeffMMPerHour() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilligramsPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilligramsPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilligramsPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MicrogramsPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MolesPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliMolesPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NumbersPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandNumbersPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionNumbersPerLiter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MolesPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MolesPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MolesPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliMolesPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliMolesPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MilliMolesPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NumbersPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NumbersPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def NumbersPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandNumbersPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandNumbersPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def ThousandNumbersPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionNumbersPerSquareMeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionNumbersPerSquareCentimeter() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def MillionNumbersPerSquareFeet() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicFeetPerMilePerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerKilometerPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def QuadFootPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerFootPerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def GallonsPerMilePerMinute() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def QuadMetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def CubicMetersPerKilometerPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def LitersPerMetersPerSecond() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def Dimension(self) -> Dimension:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def EnumValue(self) -> int:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def BentleyName(self) -> str:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@property
+	def UnitSystem(self) -> UnitSystem:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+class UnitConversionManager:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def AvailableDimensions(self) -> List:
+		"""No Description
+
+		Returns:
+			List: 
+		"""
+		pass
+
+	def DimensionAt(self, adimensionindex: DimensionIndex) -> Dimension:
+		"""No Description
+
+		Args:
+			adimensionindex(DimensionIndex): adimensionindex
+
+		Returns:
+			Dimension: 
+		"""
+		pass
+
+	def UnitIndexFor(self, unit: Unit) -> UnitIndex:
+		"""No Description
+
+		Args:
+			unit(Unit): unit
+
+		Returns:
+			UnitIndex: 
+		"""
+		pass
+
+	def UnitAt(self, aunitindex: UnitIndex) -> Unit:
+		"""No Description
+
+		Args:
+			aunitindex(UnitIndex): aunitindex
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	def UnitSystemAt(self, aunitsystemindex: UnitSystemIndex) -> UnitSystem:
+		"""No Description
+
+		Args:
+			aunitsystemindex(UnitSystemIndex): aunitsystemindex
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Current() -> UnitConversionManager:
+		"""No Description
+
+		Returns:
+			UnitConversionManager: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def EmitterExponent() -> float:
+		"""No Description
+
+		Returns:
+			UnitConversionManager: 
+		"""
+		pass
+
+	@EmitterExponent.setter
+	@staticmethod
+	def EmitterExponent(self, emitterexponent: float) -> None:
+		pass
+
+class UnitSystem(INamable):
+
+	def __init__(self, astringName: str) -> None:
+		"""No Description
+
+		Args:
+			astringName(str): astringName
+		"""
+		pass
+
+	@staticmethod
+	def FromSerializedString(astring: str) -> UnitSystem:
+		"""No Description
+
+		Args:
+			astring(str): astring
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	def ToSerializedString(self) -> str:
+		"""No Description
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def _None() -> UnitSystem:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Si() -> UnitSystem:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def UsCustomary() -> UnitSystem:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def Both() -> UnitSystem:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@property
+	def LabelKey(self) -> str:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+	@property
+	def ShortLabel(self) -> str:
+		"""No Description
+
+		Returns:
+			UnitSystem: 
+		"""
+		pass
+
+class ConversionException(ISerializable, _Exception):
+
+	def __init__(self, asMessage: str) -> None:
+		"""No Description
+
+		Args:
+			asMessage(str): asMessage
+		"""
+		pass
+
+	def GetBaseException(self) -> Exception:
+		"""No Description
+
+		Returns:
+			Exception: 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args:
+			info(SerializationInfo): info
+			context(StreamingContext): context
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	@property
+	def Message(self) -> str:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@property
+	def Data(self) -> Dict:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@property
+	def InnerException(self) -> Exception:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@property
+	def TargetSite(self) -> MethodBase:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@property
+	def StackTrace(self) -> str:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@property
+	def HelpLink(self) -> str:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@HelpLink.setter
+	def HelpLink(self, helplink: str) -> None:
+		pass
+
+	@property
+	def Source(self) -> str:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@Source.setter
+	def Source(self, source: str) -> None:
+		pass
+
+	@property
+	def HResult(self) -> int:
+		"""No Description
+
+		Returns:
+			ConversionException: 
+		"""
+		pass
+
+	@HResult.setter
+	def HResult(self, hresult: int) -> None:
+		pass
+
+class FactorConverter(IUnitConverter):
+
+	def __init__(self, adouble: float) -> None:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+		"""
+		pass
+
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
 class BaseUnitConverter(IUnitConverter):
 
 	def __init__(self) -> None:
@@ -9100,6 +9828,7 @@ class DegreesFahrenheitConverter(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def FromBaseUnit(self, adoubleCelsius: float) -> float:
 		"""No Description
 
@@ -9111,11 +9840,36 @@ class DegreesFahrenheitConverter(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def ToBaseUnit(self, adoubleFahrenheit: float) -> float:
 		"""No Description
 
 		Args:
 			adoubleFahrenheit(float): adoubleFahrenheit
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
 
 		Returns:
 			float: 
@@ -9129,6 +9883,7 @@ class KelvinConverter(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def FromBaseUnit(self, adoubleCelsius: float) -> float:
 		"""No Description
 
@@ -9140,11 +9895,36 @@ class KelvinConverter(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def ToBaseUnit(self, adoubleKelvin: float) -> float:
 		"""No Description
 
 		Args:
 			adoubleKelvin(float): adoubleKelvin
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
 
 		Returns:
 			float: 
@@ -9190,6 +9970,7 @@ class EmitterCoefficientConverterUS(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def FromBaseUnit(self, aDouble: float) -> float:
 		"""No Description
 
@@ -9201,11 +9982,36 @@ class EmitterCoefficientConverterUS(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def ToBaseUnit(self, aDouble: float) -> float:
 		"""No Description
 
 		Args:
 			aDouble(float): aDouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
 
 		Returns:
 			float: 
@@ -9222,6 +10028,7 @@ class EmitterCoefficientConverterSI(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def FromBaseUnit(self, aDouble: float) -> float:
 		"""No Description
 
@@ -9233,11 +10040,36 @@ class EmitterCoefficientConverterSI(IUnitConverter):
 		"""
 		pass
 
+	@overload
 	def ToBaseUnit(self, aDouble: float) -> float:
 		"""No Description
 
 		Args:
 			aDouble(float): aDouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def FromBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
+
+		Returns:
+			float: 
+		"""
+		pass
+
+	@overload
+	def ToBaseUnit(self, adouble: float) -> float:
+		"""No Description
+
+		Args:
+			adouble(float): adouble
 
 		Returns:
 			float: 

@@ -18,8 +18,15 @@
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="Generators\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="Generators\**" />
     <None Remove="bin\**" />
+    <None Remove="Generators\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Library\PythonStubWriterLibrary.cs" />
   </ItemGroup>
 
   <ItemGroup>
