@@ -1,3 +1,5 @@
+from typing import overload
+
 class ApplicationManager(IApplicationManager):
 
 	def __init__(self) -> None:
@@ -39,6 +41,7 @@ class ApplicationManager(IApplicationManager):
 		"""
 		pass
 
+	@overload
 	def SetParentFormSurrogateDelegate(self, parentFormSurrogateDelegate: ParentFormSurrogateDelegate) -> None:
 		"""No Description
 
@@ -52,6 +55,18 @@ class ApplicationManager(IApplicationManager):
 
 	def Stop(self) -> None:
 		"""No Description
+
+		Returns:
+			None: 
+		"""
+		pass
+
+	@overload
+	def SetParentFormSurrogateDelegate(self, parentFormSurrgateDelegate: ParentFormSurrogateDelegate) -> None:
+		"""No Description
+
+		Args:
+			parentFormSurrgateDelegate(ParentFormSurrogateDelegate): parentFormSurrgateDelegate
 
 		Returns:
 			None: 
@@ -101,6 +116,10 @@ class ApplicationManager(IApplicationManager):
 		Returns:
 			ApplicationManager: 
 		"""
+		pass
+
+	@IsStarted.setter
+	def IsStarted(self, isstarted: bool) -> None:
 		pass
 
 class IParentFormSurrogate(IWin32Window, IUserInterface):

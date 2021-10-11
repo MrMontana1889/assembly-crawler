@@ -1,13 +1,8 @@
 ﻿// CrawlerTestFixture.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
-using AssemblyCrawler.Generators;
-using AssemblyCrawler.Library;
 using AssemblyCrawler.Support;
 using Barber.AutoDiagrammer.Support;
 using NUnit.Framework;
@@ -33,10 +28,10 @@ namespace AssemblyCrawler.Test
 			Assembly testAssembly = Assembly.GetAssembly(typeof(OpenFlowsWater));
 			Assert.IsNotNull(testAssembly);
 
-			PythonPackageDefinition package = new PythonPackageDefinition("OpenFlowsWater");
+			PythonPackage package = new PythonPackage("OpenFlowsWater");
 
 			IAssemblyCrawler crawler = new AssemblyCrawler();
-			crawler.Crawl(package, testAssembly.Location, string.Empty, Path.GetTempPath(), new InterfacesOnlyTypeFilter());
+			crawler.Crawl(package, testAssembly.Location, string.Empty, Path.GetTempPath(), new InterfacesOnlyTypeFilter(false));
 		}
 
 
@@ -61,13 +56,9 @@ namespace AssemblyCrawler.Test
 				File.Delete(filePath);
 
 
-			PythonPackageDefinition package = new PythonPackageDefinition("TestWriteStub");
+			PythonPackage package = new PythonPackage("TestWriteStub");
 			var assemblyDef = package.AddAssembly(testAssembly, Path.GetTempPath());
-			var module = assemblyDef.AddModule(testType.Namespace, filePath);
-			IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
-			Assert.IsNotNull(generator);
-
-			generator.GenerateTypeStub(testType, string.Empty);
+			var module = assemblyDef.AddModule(testType.Namespace, filePath, string.Empty);
 			module.Write();
 		}
 		#endregion

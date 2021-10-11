@@ -11,14 +11,15 @@ using AssemblyCrawler.Library;
 namespace AssemblyCrawler.Support
 {
 	[DebuggerDisplay("{ModuleNamespace} : {Filename}")]
-	public class PythonModuleDefinition : StubFileBase
+	public class PythonModule : StubFileBase
 	{
 		#region Constructor
-		public PythonModuleDefinition(PythonAssemblyDefinition assembly, string moduleNamespace, string filename)
+		public PythonModule(PythonAssembly assembly, string moduleNamespace, string filename, string xmlDocumentFilename)
 			: base(filename)
 		{
 			Assembly = assembly;
 			ModuleNamespace = moduleNamespace;
+			XmlDocument = new XmlDocumentaitonParserLibrary(xmlDocumentFilename).Parse();
 		}
 		#endregion
 
@@ -31,6 +32,9 @@ namespace AssemblyCrawler.Support
 				string typeName = arg.Name;
 				TypeConvertLibrary.AddImportForPythonType(this, arg);
 			}
+
+			foreach (var pythonClass in Classes)
+				pythonClass.Update();
 
 			using (FileStream fileStream = new FileStream(Filename, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
 			{
@@ -67,20 +71,26 @@ namespace AssemblyCrawler.Support
 						sw.WriteLine();
 					}
 
-					foreach (var pythonClass in ClassDefinitions)
+					var enums = Classes.FindAll(c => c.ClassType.IsEnum);
+					var pythonClasses = Classes.FindAll(c => !c.ClassType.IsEnum);
+
+					foreach (var pythonEnum in enums)
+						pythonEnum.Write(sw);
+
+					foreach (var pythonClass in pythonClasses)
 						pythonClass.Write(sw);
 				}
 			}
 		}
-		public ImportDefinition AddImportModule(string module)
+		public PythonImport AddImportModule(string module)
 		{
 			if (Imports.Find(m => m.Module == module) == null)
 			{
-				Imports.Add(new ImportDefinition(module));
+				Imports.Add(new PythonImport(module));
 			}
 			return GetImport(module);
 		}
-		public ImportDefinition GetImport(string module)
+		public PythonImport GetImport(string module)
 		{
 			return Imports.Find(m => m.Module == module);
 		}
@@ -94,29 +104,35 @@ namespace AssemblyCrawler.Support
 
 			return false;
 		}
-		public TypeVarDefinition AddTypeVar(string typeVarName, params Type[] constraints)
+		public PythonTypeVar AddTypeVar(string typeVarName, params Type[] constraints)
 		{
 			if (TypeVars.Find(tv => tv.TypeVarName == typeVarName) == null)
 			{
-				TypeVars.Add(new TypeVarDefinition(typeVarName, constraints));
+				TypeVars.Add(new PythonTypeVar(typeVarName, constraints));
 			}
 			return GetTypeVar(typeVarName);
 		}
-		public TypeVarDefinition GetTypeVar(string typeVarName)
+		public PythonTypeVar GetTypeVar(string typeVarName)
 		{
 			return TypeVars.Find(t => t.TypeVarName == typeVarName);
 		}
-		public PythonClassDefinition AddClassDefinition(string fullName, string className)
+		public PythonClass AddClassDefinition(Type classType)
 		{
+			string fullName = classType.FullName;
+			string className = classType.Name;
 			if (fullName == null) throw new InvalidOperationException($"{nameof(fullName)} parameter is null");
 
-			if (ClassDefinitions.Find(c => c.FullName == fullName && c.ClassName == className) == null)
-				ClassDefinitions.Add(new PythonClassDefinition(this, fullName, className));
-			return GetClassDefinition(fullName, className);
+			if (Classes.Find(c => c.FullName == fullName && c.ClassName == className) == null)
+				Classes.Add(new PythonClass(this, classType));
+			return GetPythonClass(fullName, className);
 		}
-		public PythonClassDefinition GetClassDefinition(string fullName, string className)
+		public PythonClass GetPythonClass(Type classType)
 		{
-			return ClassDefinitions.Find(c => c.FullName == fullName && c.ClassName == className);
+			return GetPythonClass(classType.FullName, classType.Name);
+		}
+		public PythonClass GetPythonClass(string fullName, string className)
+		{
+			return Classes.Find(c => c.FullName == fullName && c.ClassName == className);
 		}
 		public void AddGenericArgumentType(Type type)
 		{
@@ -135,12 +151,13 @@ namespace AssemblyCrawler.Support
 		#endregion
 
 		#region Public Properties
-		public List<ImportDefinition> Imports { get; } = new List<ImportDefinition>();
-		public List<PythonClassDefinition> ClassDefinitions { get; } = new List<PythonClassDefinition>();
-		public List<TypeVarDefinition> TypeVars { get; } = new List<TypeVarDefinition>();
-		public PythonAssemblyDefinition Assembly { get; }
+		public List<PythonImport> Imports { get; } = new List<PythonImport>();
+		public List<PythonClass> Classes { get; } = new List<PythonClass>();
+		public List<PythonTypeVar> TypeVars { get; } = new List<PythonTypeVar>();
+		public PythonAssembly Assembly { get; }
 		public string ModuleNamespace { get; }
 		public List<Type> GenericArgumentTypes { get; } = new List<Type>();
+		public XmlDocumentaitonParserLibrary XmlDocument { get; }
 		#endregion
 	}
 }

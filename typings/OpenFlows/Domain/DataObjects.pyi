@@ -1,16 +1,16 @@
+from Haestad.Domain import IDomainDataSet
 from datetime import datetime
-from typing import Generic, overload, List, TypeVar
-from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IModelingElementBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
-from enum import Enum
+from typing import overload, Generic, List, TypeVar
+from OpenFlows.Domain.ModelingElements import IModelingElementBase, IModelingElementsBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IScenarios, IScenario, IScenarioOptions, IElementUnits
+from OpenFlows.Domain.ModelingElements.Support import TNetworkElementTypeEnum, IUserFieldManager
 from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
+from enum import Enum
 from OpenFlows.Units import IModelUnits, TNetworkUnitsType, TComponentUnitsType, INetworkUnits, IComponentUnits
 from OpenFlows.Domain.ModelingElements.Components import IModelComponents
-from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
 
 TScenarioManagerType = TypeVar("TScenarioManagerType", IModelingElementsBase)
 TScenarioType = TypeVar("TScenarioType", IModelingElementBase)
 TNetworkElementType = TypeVar("TNetworkElementType", IElement)
-TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum", Enum)
 TSelectionSetsType = TypeVar("TSelectionSetsType", ISelectionSets)
 TSelectionSetElementType = TypeVar("TSelectionSetElementType", ISelectionSet)
 TSelectionSetNetworkElementType = TypeVar("TSelectionSetNetworkElementType", IElement)
@@ -400,11 +400,24 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def NextNetworkElementLabel(self, domainElementType: TNetworkElementTypeEnum) -> str:
 		"""No Description
 
 		Args:
 			domainElementType(TNetworkElementTypeEnum): domainElementType
+
+		Returns:
+			str: 
+		"""
+		pass
+
+	@overload
+	def NextNetworkElementLabel(self, domainElementType: int) -> str:
+		"""No Description
+
+		Args:
+			domainElementType(int): domainElementType
 
 		Returns:
 			str: 

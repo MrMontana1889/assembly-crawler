@@ -1,40 +1,53 @@
 import sys
+from typing import List
+
 import clr
+import pathlib
 
-print("Uses OpenFlows.Water.Python wrapper and the OpenFlowsWaterPythong class to start a session, open a model, do some stuff and end the sssion")
-
+# For python, you must append to the path the location of the OpenFlows assemblies.
+# This is typically the installation folder for WaterGEMS, the x64 folder in particular.
 sys.path.append('D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug')
-clr.AddReference('OpenFlows.Water.Python')
+clr.AddReference('OpenFlows.Water')
 
-from OpenFlows.Water.Python import OpenFlowsWaterPython
+# Import the OpenFlowsWater module
+from OpenFlows.Water import OpenFlowsWater, WaterProductLicenseType
 
-OpenFlowsWaterPython.StartWaterGEMSSession()
+print("Initializing session of OpenFlows.Water...")
+OpenFlowsWater.StartSession(WaterProductLicenseType.WaterGEMS)
 
-filename = "D:\\p4\\Glacier\\Products\\WaterGEMS\\Development\\Runtime\\Samples\\Example1.wtg"
-wm = OpenFlowsWaterPython.OpenModel(filename)
-p = wm.Network.Pipes.Elements()[0]
+print("Opening model...")
+projectFilename1:str = r'D:\p4\Glacier\Products\WaterGEMS\Development\Runtime\Samples\Example1.wtg'
+projectFilename2 = r'D:\p4\Glacier\Products\WaterGEMS\Development\Runtime\Samples\Example5.wtg'
+projectFilename3 = r'D:\p4\Glacier\Products\WaterGEMS\Development\Runtime\Samples\Example2.wtg'
 
-junction = wm.Network.Junctions.Elements()[0]
-print(junction.Label)
+OpenFlowsWater.SetMaxProjects(2)
 
-wm.RunActiveScenario()
-print(junction.Results.Demand())
+firstModel = OpenFlowsWater.Open(projectFilename1)
+print(f"Model successfully open ({pathlib.Path(projectFilename1).name}")
 
-demands = junction.Input.DemandCollection.Get()
-print(demands.Count)
-demands.Add(2.5, None)
+secondModel = OpenFlowsWater.Open(projectFilename2)
+filename = pathlib.Path(projectFilename2).name
 
-junction.Input.DemandCollection.Set(demands)
-print(junction.Input.DemandCollection.Count)
+print(f"Model successfully open ({filename}")
+print(f"{secondModel.ModelInfo.Filename}")
+print(f"Title: {secondModel.ModelInfo.Title}")
+print(f"Engineer: {secondModel.ModelInfo.Engineer}")
+print(f"Company: {secondModel.ModelInfo.Company}")
+print(f"Notes: {secondModel.ModelInfo.Notes}")
 
-wm.RunActiveScenario()
+secondModel.Scenarios.Elements()[0].MakeCurrent()
+print(f"Scenario {secondModel.ActiveScenario.Label} now current in {filename}")
 
-print(junction.Results.Demand())
+scenario = firstModel.Scenarios.Elements("Y2000 - Age Analysis")[0]
+print(f"Setting {scenario.Label} as the active scenario")
+firstModel.SetActiveScenario(scenario)
 
-wm.RunActiveScenario()
+print(f"Number of Pipes: {firstModel.Network.Pipes.Count}")
 
-print(f"Diameter: {p.Input.Diameter}")
-p.Input.Diameter = 1.0
-print(f"Diameter: {p.Input.Diameter}")
+tank = firstModel.Network.Tanks.Element("T-215")
+tank.Input.Elevation = 915.0
 
-OpenFlowsWaterPython.EndSession()
+print("Calculating model...")
+firstModel.RunActiveScenario()
+
+OpenFlowsWater.EndSession()

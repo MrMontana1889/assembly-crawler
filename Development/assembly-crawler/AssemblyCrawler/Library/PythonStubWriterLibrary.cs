@@ -51,8 +51,12 @@ namespace AssemblyCrawler.Library
 
 			for (int i = 0; i < members.Length; ++i)
 			{
-				classDef.ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {(int)values.GetValue(i)}");
+				try { classDef.ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {Convert.ToInt32(values.GetValue(i))}"); }
+				catch { classDef.ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {i}"); }
 			}
+
+			if (members.Length == 0)
+				classDef.ClassDefinition.AppendLine($"{GetIndentation(2)}pass");
 		}
 
 		public static void WritePythonClassDef(
@@ -106,7 +110,7 @@ namespace AssemblyCrawler.Library
 						&& interf != typeof(Enum))
 						continue;
 
-					interfaceNames.Add(interf.Name);
+					interfaceNames.Add(TypeConvertLibrary.ToPythonType(interf));
 
 					// Check to see if this type needs to be imported.
 					AddReferenceImports(module, interf);
@@ -242,7 +246,6 @@ namespace AssemblyCrawler.Library
 
 			var pythonArguments = string.Join(", ", pythonArgumentList);
 			pythonArguments = string.IsNullOrEmpty(pythonArguments) || isStatic ? pythonArguments : $", {pythonArguments}";
-
 
 			// return type
 			var returnTypeString = TypeConvertLibrary.ToPythonType(returnType);

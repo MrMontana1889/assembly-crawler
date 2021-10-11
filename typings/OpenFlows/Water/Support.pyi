@@ -19,6 +19,10 @@ class IOpenFlowsWaterDefaults:
 		"""
 		pass
 
+	@DefaultIsActive.setter
+	def DefaultIsActive(self, defaultisactive: bool) -> None:
+		pass
+
 	@property
 	def UseElementLabeling(self) -> bool:
 		"""No Description
@@ -26,10 +30,6 @@ class IOpenFlowsWaterDefaults:
 		Returns:
 			IOpenFlowsWaterDefaults: 
 		"""
-		pass
-
-	@DefaultIsActive.setter
-	def DefaultIsActive(self, defaultisactive: bool) -> None:
 		pass
 
 	@UseElementLabeling.setter
