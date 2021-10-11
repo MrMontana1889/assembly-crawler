@@ -2,11 +2,13 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace AssemblyCrawler.Support.Config
+namespace AssemblyCrawler.Xml.Config
 {
 	[XmlType("Namespace")]
+	[DebuggerDisplay("{Name} : {ClassType}")]
 	public class ConfigNamespace
 	{
 		#region Constructor

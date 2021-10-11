@@ -1,19 +1,18 @@
 ﻿// AssemblyCrawler.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-using System.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
-using AssemblyCrawler.Generators;
 using AssemblyCrawler.Support;
 using Barber.AutoDiagrammer;
+using Barber.AutoDiagrammer.GraphBits;
 using Barber.AutoDiagrammer.Models;
 using Barber.AutoDiagrammer.Services;
 using Barber.AutoDiagrammer.Support;
-using Barber.AutoDiagrammer.GraphBits;
 
 namespace AssemblyCrawler
 {
@@ -27,7 +26,7 @@ namespace AssemblyCrawler
 		#endregion
 
 		#region Public Methods
-		public void Crawl(PythonPackageDefinition package, string assemblyFilename, 
+		public void Crawl(PythonPackage package, string assemblyFilename,
 			string xmlDocumentFileName, string outputPath, ITypeFilter typeFilter)
 		{
 			/*
@@ -40,9 +39,11 @@ namespace AssemblyCrawler
 			 * interfaces, in order, to write to that file.
 			*/
 
-			if (DotNetObject.IsValidDotNetAssembly(assemblyFilename))
+			if (assemblyFilename.StartsWith("System") || DotNetObject.IsValidDotNetAssembly(assemblyFilename))
 			{
 				// Valid.  Continue.
+
+				IAssemblyManipulationService assemblyManipulationService = new AssemblyManipulationService();
 
 				SettingsViewModel.Instance.SetGraphObject(null);
 				SettingsViewModel.Instance.LayoutAlgorithmType = "Tree";
@@ -54,18 +55,37 @@ namespace AssemblyCrawler
 				SimpleTreeLayoutParametersEx settings = (SimpleTreeLayoutParametersEx)SettingsViewModel.Instance.LayoutParameters;
 				settings.Direction = GraphSharp.Algorithms.Layout.LayoutDirection.LeftToRight;
 
-				AssemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename, typeFilter);
+				assemblyManipulationService.LoadNameSpacesAndTypesAsync(assemblyFilename, typeFilter);
 
-				if (AssemblyManipulationService.TreeValues.Count == 1)
+				if (assemblyManipulationService.TreeValues.Count == 1)
 				{
 					// Loaded successfully.
-					AssemblyManipulationService.TreeValues[0].IsChecked = true;
-					RecursivelyAddItems(AssemblyManipulationService.TreeValues[0]);
+					assemblyManipulationService.TreeValues[0].IsChecked = true;
+					RecursivelyAddItems(assemblyManipulationService, assemblyManipulationService.TreeValues[0]);
 
-					var graphResults = AssemblyManipulationService.CreateGraph();
+					var graphResults = assemblyManipulationService.CreateGraph();
 
-					AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
-					Assembly assembly = Assembly.Load(assemblyName);
+					Assembly assembly = null;
+					if (!assemblyFilename.Contains("System"))
+					{
+						AssemblyName assemblyName = AssemblyName.GetAssemblyName(assemblyFilename);
+						assembly = Assembly.Load(assemblyName);
+					}
+					else
+					{
+						switch (assemblyFilename)
+						{
+							case "System":
+								assembly = Assembly.GetAssembly(typeof(Type));
+								break;
+							default:
+								Console.WriteLine($"{assemblyFilename} unknown.");
+								return;
+						}
+					}
+
+					if (assembly == null)
+						return;
 
 					var assemblyDef = package.AddAssembly(assembly, outputPath);
 
@@ -84,9 +104,19 @@ namespace AssemblyCrawler
 						else
 							Array.Resize(ref tokens, tokens.Length - 1);
 
-						string path = Path.Combine(outputPath, string.Join(@"\", tokens));
+						string joinedFilename = string.Join(@"\", tokens);
+						if (IsInvalidFilename(joinedFilename, Path.GetInvalidPathChars()))
+							continue;
+
+						if (joinedFilename == "std")
+							continue;
+
+						string path = Path.Combine(outputPath, joinedFilename);
 						if (!Directory.Exists(path))
 							Directory.CreateDirectory(path);
+
+						if (filename == "std")
+							continue;
 
 						filename += ".pyi";
 
@@ -99,34 +129,40 @@ namespace AssemblyCrawler
 						typeMap[filename].Add(t);
 					}
 
-					 
+
 					foreach (KeyValuePair<string, List<Type>> type in typeMap)
 					{
 						string pyiFilename = Path.Combine(outputPath, type.Key);
 						Console.WriteLine(pyiFilename);
 
-						PythonModuleDefinition module = assemblyDef.AddModule(type.Value.First().Namespace, pyiFilename);
-						IStubGenerator generator = GeneratorLibrary.NewPythonStubGenerator(module);
-
+						PythonModule module = assemblyDef.AddModule(type.Value.First().Namespace, pyiFilename, xmlDocumentFileName);
 						foreach (Type t in type.Value)
-							generator.GenerateTypeStub(t, xmlDocumentFileName);
+							module.AddClassDefinition(t);
 					}
 				}
 			}
 		}
+
+		private bool IsInvalidFilename(string joinedFilename, char[] invalidChars)
+		{
+			foreach (var c in invalidChars)
+				if (joinedFilename.Contains(c.ToString()))
+					return true;
+			return false;
+		}
 		#endregion
 
 		#region Private Methods
-		private void RecursivelyAddItems(AssemblyTreeViewModel model)
+		private void RecursivelyAddItems(IAssemblyManipulationService assemblyManipulationService, AssemblyTreeViewModel model)
 		{
 			if (model.NodeType != RepresentationType.Class)
 			{
 				foreach (var child in model.Children)
 				{
 					if (child.NodeType == RepresentationType.Class)
-						AssemblyManipulationService.SelectedTreeValues.Add(child);
+						assemblyManipulationService.SelectedTreeValues.Add(child);
 					else
-						RecursivelyAddItems(child);
+						RecursivelyAddItems(assemblyManipulationService, child);
 				}
 			}
 		}
@@ -140,10 +176,6 @@ namespace AssemblyCrawler
 
 			return newAppDomain;
 		}
-		#endregion
-
-		#region Private Properties
-		private IAssemblyManipulationService AssemblyManipulationService { get; } = new AssemblyManipulationService();
 		#endregion
 	}
 }

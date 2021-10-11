@@ -28,7 +28,7 @@ namespace AssemblyCrawler
 		/// <param name="assemblyFilename">The full path and filename of the assembly to crawl.</param>
 		/// <param name="xmlDocumentFileName">The full path and filename of the xml documentation.</param>
 		/// <param name="outputPath">The path where the stub files will be written</param>
-		void Crawl(PythonPackageDefinition package, string assemblyFilename, 
+		void Crawl(PythonPackage package, string assemblyFilename, 
 			string xmlDocumentFileName, string outputPath, ITypeFilter typeFilter);
 	}
 }

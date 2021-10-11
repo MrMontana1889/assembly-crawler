@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using AssemblyCrawler.Xml.Config;
 
 namespace Barber.AutoDiagrammer.Support
 {
@@ -14,9 +15,11 @@ namespace Barber.AutoDiagrammer.Support
 	public class NamespaceTypeFilter : ITypeFilter
 	{
 		#region Constructor
-		public NamespaceTypeFilter(List<string> namespaces)
+		public NamespaceTypeFilter(ClassType classType, string assemblyNamespace, List<Type> classes)
 		{
-			Namespaces = namespaces;
+			ClassType = classType;
+			AssemblyNamespace = assemblyNamespace;
+			Classes = classes;
 		}
 		#endregion
 
@@ -32,12 +35,44 @@ namespace Barber.AutoDiagrammer.Support
 
 			// Determine if the type is in one of the include namespaces
 			string typeNamespace = t.Namespace;
-			return Namespaces.Contains(typeNamespace);
+			string typeName = t.Name;
+			if (ClassType == ClassType.All)
+			{
+				// All types in the specified namespace are included.
+				return typeNamespace == AssemblyNamespace;
+			}
+			else if (ClassType == ClassType.ClassListOnly)
+			{
+				// Only consider the types specified for this namespace.
+				return typeNamespace == AssemblyNamespace &&
+					(Classes.Find(c => c.FullName == t.FullName) != null ||
+					t.IsEnum);
+			}
+			else if (ClassType == ClassType.InterfacesOnly)
+			{
+				bool isInterface = !t.IsClass && t.IsInterface;
+				if (Classes.Count > 0)
+				{
+					// Namespace must match and the type be in the list of classes
+					return (typeNamespace == AssemblyNamespace && (isInterface || t.IsEnum)) ||
+						Classes.Find(c => c.FullName == t.FullName) != null;
+				}
+				else
+				{
+					// No classes specified.  Make sure the type is in the namespace AND
+					// it is an interface and not a class.
+					return typeNamespace == AssemblyNamespace && (isInterface || t.IsEnum);
+				}
+			}
+
+			return false;
 		}
 		#endregion
 
 		#region Private Properties
-		private List<string> Namespaces { get; }
+		private ClassType ClassType { get; }
+		private string AssemblyNamespace { get; }
+		private List<Type> Classes { get; }
 		#endregion
 	}
 }

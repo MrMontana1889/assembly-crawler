@@ -25,7 +25,7 @@
     },
     "FullOpenFlows": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\python\\typings\""
+      "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\python\\assembly-crawler\\typings\""
     },
     "WP_PF_OpenFlows": {
       "commandName": "Project",
@@ -58,6 +58,14 @@
     "OpenFlowsAPI-Waters-Stubs": {
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\OpenFlowsAPI-water-stubs\\typings\""
+    },
+    "Config-crawler": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"D:\\repos\\assembly-crawler\\OpenFlows.config\""
+    },
+    "TestAssemblyNEt48_2": {
+      "commandName": "Project",
+      "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -x \"\" -o \"D:\\repos\\python\\Test\\typings\""
     }
   }
 }

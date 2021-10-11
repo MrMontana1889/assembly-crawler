@@ -1,5 +1,6 @@
 from enum import Enum
 from typing import Generic, overload, TypeVar
+from Haestad.Support.Units import Unit, Dimension
 
 TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
 TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
@@ -228,6 +229,10 @@ class IUnit:
 		"""
 		pass
 
+	@FormatCode.setter
+	def FormatCode(self, formatcode: FormatCode) -> None:
+		pass
+
 	@property
 	def SignificantDigits(self) -> int:
 		"""No Description
@@ -235,6 +240,10 @@ class IUnit:
 		Returns:
 			IUnit: 
 		"""
+		pass
+
+	@SignificantDigits.setter
+	def SignificantDigits(self, significantdigits: int) -> None:
 		pass
 
 	@property
@@ -253,13 +262,5 @@ class IUnit:
 		Returns:
 			IUnit: 
 		"""
-		pass
-
-	@FormatCode.setter
-	def FormatCode(self, formatcode: FormatCode) -> None:
-		pass
-
-	@SignificantDigits.setter
-	def SignificantDigits(self, significantdigits: int) -> None:
 		pass
 

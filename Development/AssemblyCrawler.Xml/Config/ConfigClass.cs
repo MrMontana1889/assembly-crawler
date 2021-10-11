@@ -1,12 +1,13 @@
 ﻿// ConfigClass.cs
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
-using System;
+using System.Diagnostics;
 using System.Xml.Serialization;
 
-namespace AssemblyCrawler.Support.Config
+namespace AssemblyCrawler.Xml.Config
 {
 	[XmlType("Class")]
+	[DebuggerDisplay("{Name}")]
 	public class ConfigClass
 	{
 		#region Constructor

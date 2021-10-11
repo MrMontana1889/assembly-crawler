@@ -1,10 +1,11 @@
 from enum import Enum
-from OpenFlows.Domain.ModelingElements import IModelingElementBase, TElementManagerType, TElementType, TElementTypeEnum, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IElement, IGeometryUnits
+from OpenFlows.Domain.ModelingElements import TUnitsType, IModelingElementBase, TElementManagerType, TElementType, TElementTypeEnum, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IElement, IGeometryUnits
 from typing import Generic, List, overload, Dict, TypeVar
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
+from Haestad.Support.Support import GeometryPoint
 from OpenFlows.Units import IUnit
+from array import array
 
-TUnitsType = TypeVar("TUnitsType", IElementUnits)
 TElementInputType = TypeVar("TElementInputType", IElementInput)
 TElementResultsType = TypeVar("TElementResultsType", IElementResults)
 TElementsInputType = TypeVar("TElementsInputType", IElementsInput)
@@ -36,6 +37,10 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 		"""
 		pass
 
+	@GISIDs.setter
+	def GISIDs(self, gisids: str) -> None:
+		pass
+
 	@property
 	def Input(self) -> TElementInputType:
 		"""No Description
@@ -63,10 +68,6 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 		"""
 		pass
 
-	@GISIDs.setter
-	def GISIDs(self, gisids: str) -> None:
-		pass
-
 class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementsBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
 	def __init__(self) -> None:
@@ -79,11 +80,33 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Elements(self, state: ElementStateType) -> List[TElementType]:
 		"""No Description
 
 		Args:
 			state(ElementStateType): state
+
+		Returns:
+			List[TElementType]: 
+		"""
+		pass
+
+	@overload
+	def Elements(self, label: str) -> List[TElementType]:
+		"""No Description
+
+		Args:
+			label(str): label
+
+		Returns:
+			List[TElementType]: 
+		"""
+		pass
+
+	@overload
+	def Elements(self) -> List[TElementType]:
+		"""No Description
 
 		Returns:
 			List[TElementType]: 
@@ -279,6 +302,10 @@ class IBaseLinkInput(IActiveElementInput):
 		"""
 		pass
 
+	@StartNode.setter
+	def StartNode(self, startnode: IElement) -> None:
+		pass
+
 	@property
 	def StopNode(self) -> IElement:
 		"""No Description
@@ -286,6 +313,10 @@ class IBaseLinkInput(IActiveElementInput):
 		Returns:
 			IBaseLinkInput: 
 		"""
+		pass
+
+	@StopNode.setter
+	def StopNode(self, stopnode: IElement) -> None:
 		pass
 
 	@property
@@ -297,6 +328,10 @@ class IBaseLinkInput(IActiveElementInput):
 		"""
 		pass
 
+	@IsUserDefinedLength.setter
+	def IsUserDefinedLength(self, isuserdefinedlength: bool) -> None:
+		pass
+
 	@property
 	def Length(self) -> float:
 		"""No Description
@@ -304,18 +339,6 @@ class IBaseLinkInput(IActiveElementInput):
 		Returns:
 			IBaseLinkInput: 
 		"""
-		pass
-
-	@StartNode.setter
-	def StartNode(self, startnode: IElement) -> None:
-		pass
-
-	@StopNode.setter
-	def StopNode(self, stopnode: IElement) -> None:
-		pass
-
-	@IsUserDefinedLength.setter
-	def IsUserDefinedLength(self, isuserdefinedlength: bool) -> None:
 		pass
 
 	@Length.setter
@@ -496,19 +519,19 @@ class IBasePolygonInput(IActiveElementInput):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetRings(self) -> array():
+	def GetRings(self) -> array(array(GeometryPoint)):
 		"""No Description
 
 		Returns:
-			array(): 
+			array(array(GeometryPoint)): 
 		"""
 		pass
 
-	def SetRings(self, rings: array()) -> None:
+	def SetRings(self, rings: array(array(GeometryPoint))) -> None:
 		"""No Description
 
 		Args:
-			rings(array()): rings
+			rings(array(array(GeometryPoint))): rings
 
 		Returns:
 			None: 

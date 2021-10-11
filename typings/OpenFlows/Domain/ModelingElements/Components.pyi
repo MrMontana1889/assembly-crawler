@@ -1,9 +1,8 @@
-from typing import Generic, List, TypeVar
-from OpenFlows.Domain.ModelingElements import IElement, IModelingElementsBase, TElementManagerType, IElementUnits, IModelingElementBase
+from OpenFlows.Domain.ModelingElements import TElementTypeEnum, IElement, IModelingElementsBase, TElementManagerType, IElementUnits, IModelingElementBase
+from typing import List, Generic, TypeVar
 from enum import Enum
 
 TElementType = TypeVar("TElementType", IElement)
-TElementTypeEnum = TypeVar("TElementTypeEnum", Enum)
 TUnitsType = TypeVar("TUnitsType", IElementUnits)
 
 class IModelComponents(Generic[TElementType, TElementTypeEnum]):

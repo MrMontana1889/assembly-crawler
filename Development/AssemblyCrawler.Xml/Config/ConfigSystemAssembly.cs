@@ -1,32 +1,23 @@
-﻿// ConfigAssembly.cs
-// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+﻿// ConfigSystemAssembly.cs
+// see LICENSE for details
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Xml.Serialization;
 
 namespace AssemblyCrawler.Xml.Config
 {
-	[XmlType("Assembly")]
+	[XmlType("SystemAssembly")]
 	[DebuggerDisplay("{AssemblyName}")]
-	public class ConfigAssembly
+	public class ConfigSystemAssembly
 	{
-		#region Constructor
-		public ConfigAssembly()
-		{
-
-		}
-		#endregion
-
 		#region Public Properties
-		public string Folder { get; set; }
 		public string Name { get; set; }
 		public string XmlDoc { get; set; } = "";
 		[XmlIgnore]
-		public string AssemblyName => Path.Combine(Folder, Name);
+		public string AssemblyName => Name;
 		[XmlIgnore]
-		public string XmlDocument => Path.Combine(Folder, XmlDoc);
+		public string XmlDocument => string.Empty;
 		public List<ConfigNamespace> Namespaces { get; } = new List<ConfigNamespace>();
 		#endregion
 	}

@@ -79,11 +79,11 @@ namespace AssemblyCrawler.Library
 
 			foreach (var method in AllMethods)
 			{
-				if (method.Name.StartsWith("get_"))
+				if (method.Name.StartsWith(GETTER_PREFIX))
 					ReadOnlyProperties.Add(method);
 
 
-				else if (method.Name.StartsWith("set_"))
+				else if (method.Name.StartsWith(SETTER_PREFIX))
 					WriteOnlyProperties.Add(method);
 
 				else if (OverloadedMethodsName.Contains(method.Name))
@@ -93,59 +93,59 @@ namespace AssemblyCrawler.Library
 					SimpleMethods.Add(method);
 
 				// +
-				else if (method.Name == "op_Addition")
+				else if (method.Name == OP_ADDITION)
 					OperatorAddition.Add(method);
 
 				// -
-				else if (method.Name == "op_Subtraction")
+				else if (method.Name == OP_SUBTRACTION)
 					OperatorSubtraction.Add(method);
 
 				// *
-				else if (method.Name == "op_Multiply")
+				else if (method.Name == OP_MULTIPLICATION)
 					OperatorMultiplication.Add(method);
 
 				// /
-				else if (method.Name == "op_Division")
+				else if (method.Name == OP_DIVISION)
 					OperatorDivision.Add(method);
 
 				// %
-				else if (method.Name == "op_Modulus")
+				else if (method.Name == OP_MODULUS)
 					OperatorModulo.Add(method);
 
 				// ==
-				else if (method.Name == "op_Equality")
+				else if (method.Name == OP_EQUALITY)
 					OperatorEquality.Add(method);
 
 				// !=
-				else if (method.Name == "op_Inequality")
+				else if (method.Name == OP_INEQUALITY)
 					OperatorInequality.Add(method);
 
 				// >
-				else if (method.Name == "op_GreaterThan")
+				else if (method.Name == OP_GREATERTHAN)
 					OperatorGreaterThan.Add(method);
 
 				// <
-				else if (method.Name == "op_LessThan")
+				else if (method.Name == OP_LESSTHAN)
 					OperatorLessThan.Add(method);
 
 				// >=
-				else if (method.Name == "op_GreaterThanOrEqual")
+				else if (method.Name == OP_GREATERTHANOREQUAL)
 					OperatorGreaterOrEqualTo.Add(method);
 
 				// <=
-				else if (method.Name == "op_LessThanOrEqual")
+				else if (method.Name == OP_LESSTHANOREQUAL)
 					OperatorLessOrEqualTo.Add(method);
 
 				// &
-				else if (method.Name == "op_BitwiseAnd")
+				else if (method.Name == OP_BITWISEAND)
 					OperatorBitwiseAnd.Add(method);
 
 				// |
-				else if (method.Name == "op_BitwiseOr")
+				else if (method.Name == OP_BITWISEOR)
 					OperatorBitwiseOr.Add(method);
 
 				// ^
-				else if (method.Name == "op_ExclusiveOr")
+				else if (method.Name == OP_EXCLUSIVEOR)
 					OperatorBitwiseXor.Add(method);
 
 			}
@@ -198,7 +198,6 @@ namespace AssemblyCrawler.Library
 		public string GetPropertyName(MethodInfo methodInfo) => methodInfo.Name.Substring(4);
 		#endregion
 
-
 		#region Public Properties
 		public Type Type { get; }
 		public string Name => Type.Name; // TODO: get rid of this
@@ -237,6 +236,25 @@ namespace AssemblyCrawler.Library
 
 		#region Private Properties
 		private List<string> OverloadedMethodsName { get; set; }
+		#endregion
+
+		#region Private Constants
+		private const string OP_ADDITION = "op_Addition";
+		private const string OP_SUBTRACTION = "op_Subtraction";
+		private const string OP_MULTIPLICATION = "op_Multiply";
+		private const string OP_DIVISION = "op_Division";
+		private const string OP_MODULUS = "op_Modulus";
+		private const string OP_EQUALITY = "op_Equality";
+		private const string OP_INEQUALITY = "op_Inequality";
+		private const string OP_GREATERTHAN = "op_GreaterThan";
+		private const string OP_LESSTHAN = "op_LessThan";
+		private const string OP_GREATERTHANOREQUAL = "op_GreaterThanOrEqual";
+		private const string OP_LESSTHANOREQUAL = "op_LessThanOrEqual";
+		private const string OP_BITWISEAND = "op_BitwiseAnd";
+		private const string OP_BITWISEOR = "op_BitwiseOr";
+		private const string OP_EXCLUSIVEOR = "op_ExclusiveOr";
+		private const string GETTER_PREFIX = "get_";
+		private const string SETTER_PREFIX = "set_";
 		#endregion
 	}
 }
