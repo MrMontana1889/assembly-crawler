@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import overload, List, Dict
+from typing import overload, List, Dict, Iterator
 from array import array
 
 class DictionaryEntryExStringType(Enum):
@@ -187,7 +187,7 @@ class FieldCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(FieldCollection): c
-			a(array(IField)): a
+			a(List[IField]): a
 		"""
 		pass
 
@@ -198,7 +198,7 @@ class FieldCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(FieldCollection): c
-			a(array(IField)): a
+			a(List[IField]): a
 		"""
 		pass
 
@@ -209,18 +209,18 @@ class FieldCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(FieldCollection): c
-			a(array(IField)): a
+			a(List[IField]): a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: array(IField)) -> None:
+	def __init__(self, a: List[IField]) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(FieldCollection): c
-			a(array(IField)): a
+			a(List[IField]): a
 		"""
 		pass
 
@@ -249,11 +249,11 @@ class FieldCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(IField)) -> None:
+	def CopyTo(self, array: List[IField]) -> None:
 		"""No Description
 
 		Args:
-			array(array(IField)): array
+			array(List[IField]): array
 
 		Returns:
 			None: 
@@ -261,11 +261,11 @@ class FieldCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(IField), start: int) -> None:
+	def CopyTo(self, array: List[IField], start: int) -> None:
 		"""No Description
 
 		Args:
-			array(array(IField)): array
+			array(List[IField]): array
 			start(int): start
 
 		Returns:
@@ -377,11 +377,11 @@ class FieldCollection(List, ICloneable):
 		pass
 
 	@overload
-	def AddRange(self, x: array(IField)) -> int:
+	def AddRange(self, x: List[IField]) -> int:
 		"""No Description
 
 		Args:
-			x(array(IField)): x
+			x(List[IField]): x
 
 		Returns:
 			int: 
@@ -476,7 +476,7 @@ class FilterContextCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(FilterContextCollection): c
-			a(array(IFilterContext)): a
+			a(List[IFilterContext]): a
 		"""
 		pass
 
@@ -487,7 +487,7 @@ class FilterContextCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(FilterContextCollection): c
-			a(array(IFilterContext)): a
+			a(List[IFilterContext]): a
 		"""
 		pass
 
@@ -498,18 +498,18 @@ class FilterContextCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(FilterContextCollection): c
-			a(array(IFilterContext)): a
+			a(List[IFilterContext]): a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: array(IFilterContext)) -> None:
+	def __init__(self, a: List[IFilterContext]) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(FilterContextCollection): c
-			a(array(IFilterContext)): a
+			a(List[IFilterContext]): a
 		"""
 		pass
 
@@ -538,11 +538,11 @@ class FilterContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(IFilterContext)) -> None:
+	def CopyTo(self, array: List[IFilterContext]) -> None:
 		"""No Description
 
 		Args:
-			array(array(IFilterContext)): array
+			array(List[IFilterContext]): array
 
 		Returns:
 			None: 
@@ -550,11 +550,11 @@ class FilterContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(IFilterContext), start: int) -> None:
+	def CopyTo(self, array: List[IFilterContext], start: int) -> None:
 		"""No Description
 
 		Args:
-			array(array(IFilterContext)): array
+			array(List[IFilterContext]): array
 			start(int): start
 
 		Returns:
@@ -681,11 +681,11 @@ class FilterContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def AddRange(self, x: array(IFilterContext)) -> int:
+	def AddRange(self, x: List[IFilterContext]) -> int:
 		"""No Description
 
 		Args:
-			x(array(IFilterContext)): x
+			x(List[IFilterContext]): x
 
 		Returns:
 			int: 
@@ -1328,7 +1328,7 @@ class HmIDCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(HmIDCollection): c
-			a(array(int)): a
+			a(array('i')): a
 		"""
 		pass
 
@@ -1339,7 +1339,7 @@ class HmIDCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(HmIDCollection): c
-			a(array(int)): a
+			a(array('i')): a
 		"""
 		pass
 
@@ -1350,18 +1350,18 @@ class HmIDCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(HmIDCollection): c
-			a(array(int)): a
+			a(array('i')): a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: array(int)) -> None:
+	def __init__(self, a: array('i')) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(HmIDCollection): c
-			a(array(int)): a
+			a(array('i')): a
 		"""
 		pass
 
@@ -1390,11 +1390,11 @@ class HmIDCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(int)) -> None:
+	def CopyTo(self, array: array('i')) -> None:
 		"""No Description
 
 		Args:
-			array(array(int)): array
+			array(array('i')): array
 
 		Returns:
 			None: 
@@ -1402,11 +1402,11 @@ class HmIDCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(int), start: int) -> None:
+	def CopyTo(self, array: array('i'), start: int) -> None:
 		"""No Description
 
 		Args:
-			array(array(int)): array
+			array(array('i')): array
 			start(int): start
 
 		Returns:
@@ -1415,11 +1415,11 @@ class HmIDCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(int), startInTarget: int, startInSource: int, length: int) -> None:
+	def CopyTo(self, array: array('i'), startInTarget: int, startInSource: int, length: int) -> None:
 		"""No Description
 
 		Args:
-			array(array(int)): array
+			array(array('i')): array
 			startInTarget(int): startInTarget
 			startInSource(int): startInSource
 			length(int): length
@@ -1533,11 +1533,11 @@ class HmIDCollection(List, ICloneable):
 		pass
 
 	@overload
-	def AddRange(self, x: array(int)) -> int:
+	def AddRange(self, x: array('i')) -> int:
 		"""No Description
 
 		Args:
-			x(array(int)): x
+			x(array('i')): x
 
 		Returns:
 			int: 
@@ -1568,11 +1568,11 @@ class HmIDCollection(List, ICloneable):
 		"""
 		pass
 
-	def ToArray(self) -> array(int):
+	def ToArray(self) -> array('i'):
 		"""No Description
 
 		Returns:
-			array(int): 
+			array('i'): 
 		"""
 		pass
 
@@ -1948,7 +1948,7 @@ class SortContextCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(SortContextCollection): c
-			a(array(ISortContext)): a
+			a(List[ISortContext]): a
 		"""
 		pass
 
@@ -1959,7 +1959,7 @@ class SortContextCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(SortContextCollection): c
-			a(array(ISortContext)): a
+			a(List[ISortContext]): a
 		"""
 		pass
 
@@ -1970,18 +1970,18 @@ class SortContextCollection(List, ICloneable):
 		Args:
 			capacity(int): capacity
 			c(SortContextCollection): c
-			a(array(ISortContext)): a
+			a(List[ISortContext]): a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: array(ISortContext)) -> None:
+	def __init__(self, a: List[ISortContext]) -> None:
 		"""No Description
 
 		Args:
 			capacity(int): capacity
 			c(SortContextCollection): c
-			a(array(ISortContext)): a
+			a(List[ISortContext]): a
 		"""
 		pass
 
@@ -2010,11 +2010,11 @@ class SortContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(ISortContext)) -> None:
+	def CopyTo(self, array: List[ISortContext]) -> None:
 		"""No Description
 
 		Args:
-			array(array(ISortContext)): array
+			array(List[ISortContext]): array
 
 		Returns:
 			None: 
@@ -2022,11 +2022,11 @@ class SortContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def CopyTo(self, array: array(ISortContext), start: int) -> None:
+	def CopyTo(self, array: List[ISortContext], start: int) -> None:
 		"""No Description
 
 		Args:
-			array(array(ISortContext)): array
+			array(List[ISortContext]): array
 			start(int): start
 
 		Returns:
@@ -2060,14 +2060,14 @@ class SortContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def Add(self, field: IField, sortOrder: SortOrder, enumLabels: array(str), enumValues: array(int)) -> int:
+	def Add(self, field: IField, sortOrder: SortOrder, enumLabels: array[str], enumValues: array('i')) -> int:
 		"""No Description
 
 		Args:
 			field(IField): field
 			sortOrder(SortOrder): sortOrder
-			enumLabels(array(str)): enumLabels
-			enumValues(array(int)): enumValues
+			enumLabels(array[str]): enumLabels
+			enumValues(array('i')): enumValues
 
 		Returns:
 			int: 
@@ -2167,11 +2167,11 @@ class SortContextCollection(List, ICloneable):
 		pass
 
 	@overload
-	def AddRange(self, x: array(ISortContext)) -> int:
+	def AddRange(self, x: List[ISortContext]) -> int:
 		"""No Description
 
 		Args:
-			x(array(ISortContext)): x
+			x(List[ISortContext]): x
 
 		Returns:
 			int: 
