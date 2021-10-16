@@ -27,9 +27,14 @@ namespace AssemblyCrawler.Library
 			{
 				var typeName = type.Name.Replace("[]", "");
 				if (typeName == "Double")
-					return $"array(float)";
+					return $"array(\'f\')";
+				if (typeName.StartsWith("Int"))
+					return $"array(\'i\')";
+				if (typeName == "String")
+					return $"array[str]";
 
-				return $"array({ToPythonType(type.GetElementType())})";
+				var elementType = ToPythonType(type.GetElementType());
+				return $"List[{elementType}]";
 			}
 
 			if (type.IsGenericType)

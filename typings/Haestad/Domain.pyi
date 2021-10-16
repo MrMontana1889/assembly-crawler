@@ -1,6 +1,6 @@
 from enum import Enum
 from typing import overload, List, Dict, Iterator, Generic, TypeVar
-from Haestad.Support.Support import FieldDataType, HmIDCollection, FieldCollection, IEditLabeled, IField, SortContextCollection, FilterContextCollection, GeometryPoint
+from Haestad.Support.Support import FieldDataType, HmIDCollection, FieldCollection, IEditLabeled, IField, SortContextCollection, FilterContextCollection, GeometryPoint, INamable, ILabeled
 from Haestad.Support.Units import UnitIndex, NumericFormatter, TimeUnit, Unit, UnitSystem
 from array import array
 from Haestad.LicensingFacade import ILicenseProvider
@@ -1461,23 +1461,23 @@ class IFieldType(IElementType):
 		"""
 		pass
 
-	def GetEnumeratedTypeMembers(self) -> array(IEnumeratedTypeMember):
+	def GetEnumeratedTypeMembers(self) -> List[IEnumeratedTypeMember]:
 		"""No Description
 
 		Returns:
-			array(IEnumeratedTypeMember): 
+			List[IEnumeratedTypeMember]: 
 		"""
 		pass
 
-	def SetEnumeratedTypeMembers(self, names: array(str), values: array(int)) -> array(IEnumeratedTypeMember):
+	def SetEnumeratedTypeMembers(self, names: array[str], values: array('i')) -> List[IEnumeratedTypeMember]:
 		"""No Description
 
 		Args:
-			names(array(str)): names
-			values(array(int)): values
+			names(array[str]): names
+			values(array('i')): values
 
 		Returns:
-			array(IEnumeratedTypeMember): 
+			List[IEnumeratedTypeMember]: 
 		"""
 		pass
 
@@ -1505,11 +1505,11 @@ class IFieldType(IElementType):
 		"""
 		pass
 
-	def GetSharedEnumeratedMembers(self) -> array(IEnumeratedTypeMember):
+	def GetSharedEnumeratedMembers(self) -> List[IEnumeratedTypeMember]:
 		"""No Description
 
 		Returns:
-			array(IEnumeratedTypeMember): 
+			List[IEnumeratedTypeMember]: 
 		"""
 		pass
 
@@ -2247,14 +2247,14 @@ class ISupportElementType(IModelingElementType):
 		pass
 
 	@overload
-	def AddFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array(str)) -> ISupportElementFieldType:
+	def AddFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array[str]) -> ISupportElementFieldType:
 		"""No Description
 
 		Args:
 			name(str): name
 			type(FieldDataType): type
 			enumFieldTypeID(int): enumFieldTypeID
-			sharedEnumMembers(array(str)): sharedEnumMembers
+			sharedEnumMembers(array[str]): sharedEnumMembers
 
 		Returns:
 			ISupportElementFieldType: 
@@ -2412,14 +2412,14 @@ class IAlternativeType(IModelingElementType):
 		pass
 
 	@overload
-	def AddFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array(str)) -> IDomainElementFieldType:
+	def AddFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array[str]) -> IDomainElementFieldType:
 		"""No Description
 
 		Args:
 			name(str): name
 			type(FieldDataType): type
 			enumFieldTypeID(int): enumFieldTypeID
-			sharedEnumMembers(array(str)): sharedEnumMembers
+			sharedEnumMembers(array[str]): sharedEnumMembers
 
 		Returns:
 			IDomainElementFieldType: 
@@ -3904,14 +3904,14 @@ class INumericalEngineType(IModelingElementType):
 		pass
 
 	@overload
-	def AddCalculationOptionsFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array(str)) -> IFieldType:
+	def AddCalculationOptionsFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array[str]) -> IFieldType:
 		"""No Description
 
 		Args:
 			name(str): name
 			type(FieldDataType): type
 			enumFieldTypeID(int): enumFieldTypeID
-			sharedEnumMembers(array(str)): sharedEnumMembers
+			sharedEnumMembers(array[str]): sharedEnumMembers
 
 		Returns:
 			IFieldType: 
@@ -3982,11 +3982,11 @@ class INumericalEngineType(IModelingElementType):
 		"""
 		pass
 
-	def MakeComposite(self, subNumericalEngineTypes: array(INumericalEngineType), defaultActiveNumericalEngineType: INumericalEngineType) -> None:
+	def MakeComposite(self, subNumericalEngineTypes: List[INumericalEngineType], defaultActiveNumericalEngineType: INumericalEngineType) -> None:
 		"""No Description
 
 		Args:
-			subNumericalEngineTypes(array(INumericalEngineType)): subNumericalEngineTypes
+			subNumericalEngineTypes(List[INumericalEngineType]): subNumericalEngineTypes
 			defaultActiveNumericalEngineType(INumericalEngineType): defaultActiveNumericalEngineType
 
 		Returns:
@@ -4796,12 +4796,12 @@ class IDomainDataSetSearch:
 		"""
 		pass
 
-	def GetElementIDsWithDuplicateLabels(self, modelingElementType: ModelingElementType, elementTypeIDs: array(int), ignoreBlanks: bool) -> HmIDCollection:
+	def GetElementIDsWithDuplicateLabels(self, modelingElementType: ModelingElementType, elementTypeIDs: array('i'), ignoreBlanks: bool) -> HmIDCollection:
 		"""No Description
 
 		Args:
 			modelingElementType(ModelingElementType): modelingElementType
-			elementTypeIDs(array(int)): elementTypeIDs
+			elementTypeIDs(array('i')): elementTypeIDs
 			ignoreBlanks(bool): ignoreBlanks
 
 		Returns:
@@ -4937,11 +4937,11 @@ class IChangeLogDataRowLoader:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def LoadDataRow(self, values: array(object)) -> None:
+	def LoadDataRow(self, values: List[object]) -> None:
 		"""No Description
 
 		Args:
-			values(array(object)): values
+			values(List[object]): values
 
 		Returns:
 			None: 
@@ -5300,13 +5300,13 @@ class IChangeLog:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def Archive(self, process: IProcessInProgressEx, changeLogDataTable: DataTable, orderedIDs: array(int), filteredIDs: HmIDCollection, filename: str, whereClause: str, append: bool = False) -> None:
+	def Archive(self, process: IProcessInProgressEx, changeLogDataTable: DataTable, orderedIDs: array('i'), filteredIDs: HmIDCollection, filename: str, whereClause: str, append: bool = False) -> None:
 		"""No Description
 
 		Args:
 			process(IProcessInProgressEx): process
 			changeLogDataTable(DataTable): changeLogDataTable
-			orderedIDs(array(int)): orderedIDs
+			orderedIDs(array('i')): orderedIDs
 			filteredIDs(HmIDCollection): filteredIDs
 			filename(str): filename
 			whereClause(str): whereClause
@@ -6603,11 +6603,11 @@ class IAlternativeRecord:
 		pass
 
 	@overload
-	def GetDataReader(self, fieldTypeNames: array(str)) -> IAlternativeRecordDataReader:
+	def GetDataReader(self, fieldTypeNames: array[str]) -> IAlternativeRecordDataReader:
 		"""No Description
 
 		Args:
-			fieldTypeNames(array(str)): fieldTypeNames
+			fieldTypeNames(array[str]): fieldTypeNames
 
 		Returns:
 			IAlternativeRecordDataReader: 
@@ -6836,23 +6836,23 @@ class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetPoints(self, domainElementID: int) -> array(GeometryPoint):
+	def GetPoints(self, domainElementID: int) -> List[GeometryPoint]:
 		"""No Description
 
 		Args:
 			domainElementID(int): domainElementID
 
 		Returns:
-			array(GeometryPoint): 
+			List[GeometryPoint]: 
 		"""
 		pass
 
-	def SetPoints(self, domainElementID: int, points: array(GeometryPoint)) -> None:
+	def SetPoints(self, domainElementID: int, points: List[GeometryPoint]) -> None:
 		"""No Description
 
 		Args:
 			domainElementID(int): domainElementID
-			points(array(GeometryPoint)): points
+			points(List[GeometryPoint]): points
 
 		Returns:
 			None: 
@@ -6871,23 +6871,23 @@ class IGeometryPolyline3DAlternativeRecord(IAlternativeRecord):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetPoints(self, domainElementID: int) -> array(GeometryPoint3D):
+	def GetPoints(self, domainElementID: int) -> List[GeometryPoint3D]:
 		"""No Description
 
 		Args:
 			domainElementID(int): domainElementID
 
 		Returns:
-			array(GeometryPoint3D): 
+			List[GeometryPoint3D]: 
 		"""
 		pass
 
-	def SetPoints(self, domainElementID: int, points3D: array(GeometryPoint3D)) -> None:
+	def SetPoints(self, domainElementID: int, points3D: List[GeometryPoint3D]) -> None:
 		"""No Description
 
 		Args:
 			domainElementID(int): domainElementID
-			points3D(array(GeometryPoint3D)): points3D
+			points3D(List[GeometryPoint3D]): points3D
 
 		Returns:
 			None: 
@@ -6906,23 +6906,23 @@ class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetRings(self, domainElementID: int) -> array(array(GeometryPoint)):
+	def GetRings(self, domainElementID: int) -> List[List[GeometryPoint]]:
 		"""No Description
 
 		Args:
 			domainElementID(int): domainElementID
 
 		Returns:
-			array(array(GeometryPoint)): 
+			List[List[GeometryPoint]]: 
 		"""
 		pass
 
-	def SetRings(self, domainElementID: int, rings: array(array(GeometryPoint))) -> None:
+	def SetRings(self, domainElementID: int, rings: List[List[GeometryPoint]]) -> None:
 		"""No Description
 
 		Args:
 			domainElementID(int): domainElementID
-			rings(array(array(GeometryPoint))): rings
+			rings(List[List[GeometryPoint]]): rings
 
 		Returns:
 			None: 
@@ -7447,14 +7447,14 @@ class IResultManager:
 		"""
 		pass
 
-	def TimeSteps(self, unit: TimeUnit) -> array(float):
+	def TimeSteps(self, unit: TimeUnit) -> array('f'):
 		"""No Description
 
 		Args:
 			unit(TimeUnit): unit
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -7893,14 +7893,14 @@ class IFieldStatistics:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetStatistics(self, statTypes: array(StatisticType)) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -7917,27 +7917,27 @@ class ISelectableFieldStatistics(IFieldStatistics):
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: array(StatisticType), filterContexts: FilterContextCollection) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: array(StatisticType)) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -7954,56 +7954,56 @@ class IResultFieldStatistics(ISelectableFieldStatistics):
 		pass
 
 	@overload
-	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: array(StatisticType), filterContexts: FilterContextCollection) -> array(float):
+	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
-	def GetStatisticsEstimate(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: array(StatisticType), filterContexts: FilterContextCollection) -> array(float):
+	def GetStatisticsEstimate(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: array(StatisticType), filterContexts: FilterContextCollection) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: array(StatisticType)) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -8020,72 +8020,72 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 		pass
 
 	@overload
-	def GetStatistics(self, elementID: int, scenarioID: int, statTypes: array(StatisticType)) -> array(float):
+	def GetStatistics(self, elementID: int, scenarioID: int, statTypes: List[StatisticType]) -> array('f'):
 		"""No Description
 
 		Args:
 			elementID(int): elementID
 			scenarioID(int): scenarioID
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: array(StatisticType), timeStepIndex: int, filterContexts: FilterContextCollection) -> array(float):
+	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			timeStepIndex(int): timeStepIndex
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: array(StatisticType), filterContexts: FilterContextCollection) -> array(float):
+	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: array(StatisticType), filterContexts: FilterContextCollection) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: array(StatisticType)) -> array(float):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
 		"""No Description
 
 		Args:
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -8574,14 +8574,14 @@ class IResultDataConnection:
 		"""
 		pass
 
-	def TimeStepsInSeconds(self, scenarioID: int) -> array(float):
+	def TimeStepsInSeconds(self, scenarioID: int) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -8607,18 +8607,18 @@ class IResultDataConnection:
 		"""
 		pass
 
-	def GetRunUserNotificationsSummary(self, scenarioID: int) -> array(IUserNotification):
+	def GetRunUserNotificationsSummary(self, scenarioID: int) -> List[IUserNotification]:
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 
 		Returns:
-			array(IUserNotification): 
+			List[IUserNotification]: 
 		"""
 		pass
 
-	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int) -> array(IUserNotification):
+	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int) -> List[IUserNotification]:
 		"""No Description
 
 		Args:
@@ -8626,11 +8626,11 @@ class IResultDataConnection:
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			array(IUserNotification): 
+			List[IUserNotification]: 
 		"""
 		pass
 
-	def GetUserNotifications(self, scenarioID: int, elementID: int, timeStepIndex: int) -> array(IUserNotification):
+	def GetUserNotifications(self, scenarioID: int, elementID: int, timeStepIndex: int) -> List[IUserNotification]:
 		"""No Description
 
 		Args:
@@ -8639,7 +8639,7 @@ class IResultDataConnection:
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			array(IUserNotification): 
+			List[IUserNotification]: 
 		"""
 		pass
 
@@ -8651,14 +8651,14 @@ class IResultDataConnection:
 		"""
 		pass
 
-	def ResultPathAndFileNamesFor(self, databasePathAndFileName: str) -> array(str):
+	def ResultPathAndFileNamesFor(self, databasePathAndFileName: str) -> array[str]:
 		"""No Description
 
 		Args:
 			databasePathAndFileName(str): databasePathAndFileName
 
 		Returns:
-			array(str): 
+			array[str]: 
 		"""
 		pass
 
@@ -8742,7 +8742,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 		"""
 		pass
 
-	def GetTimeStepsForSubnetworkID(self, scenarioID: int, subnetworkIndex: int) -> array(float):
+	def GetTimeStepsForSubnetworkID(self, scenarioID: int, subnetworkIndex: int) -> array('f'):
 		"""No Description
 
 		Args:
@@ -8750,12 +8750,12 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 			subnetworkIndex(int): subnetworkIndex
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
 	@overload
-	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int, pressureSubnetworkID: int) -> array(IUserNotification):
+	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int, pressureSubnetworkID: int) -> List[IUserNotification]:
 		"""No Description
 
 		Args:
@@ -8764,7 +8764,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 			pressureSubnetworkID(int): pressureSubnetworkID
 
 		Returns:
-			array(IUserNotification): 
+			List[IUserNotification]: 
 		"""
 		pass
 
@@ -8780,7 +8780,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 		pass
 
 	@overload
-	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int) -> array(IUserNotification):
+	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int) -> List[IUserNotification]:
 		"""No Description
 
 		Args:
@@ -8788,7 +8788,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 			timeStepIndex(int): timeStepIndex
 
 		Returns:
-			array(IUserNotification): 
+			List[IUserNotification]: 
 		"""
 		pass
 
@@ -8898,49 +8898,49 @@ class IResultRecordDataBroker:
 		"""
 		pass
 
-	def GetStatisticValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: array(StatisticType), timeStepIndex: int, filterContexts: FilterContextCollection) -> array(float):
+	def GetStatisticValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
 			fieldTypeName(str): fieldTypeName
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			timeStepIndex(int): timeStepIndex
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
-	def GetStatisticEstimateValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: array(StatisticType), timeStepIndex: int, filterContexts: FilterContextCollection) -> array(float):
+	def GetStatisticEstimateValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array('f'):
 		"""No Description
 
 		Args:
 			scenarioID(int): scenarioID
 			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
 			fieldTypeName(str): fieldTypeName
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 			timeStepIndex(int): timeStepIndex
 			filterContexts(FilterContextCollection): filterContexts
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
-	def GetStatisticValuesOverTime(self, elementID: int, scenarioID: int, fieldTypeName: str, statTypes: array(StatisticType)) -> array(float):
+	def GetStatisticValuesOverTime(self, elementID: int, scenarioID: int, fieldTypeName: str, statTypes: List[StatisticType]) -> array('f'):
 		"""No Description
 
 		Args:
 			elementID(int): elementID
 			scenarioID(int): scenarioID
 			fieldTypeName(str): fieldTypeName
-			statTypes(array(StatisticType)): statTypes
+			statTypes(List[StatisticType]): statTypes
 
 		Returns:
-			array(float): 
+			array('f'): 
 		"""
 		pass
 
@@ -9750,11 +9750,11 @@ class IEnumeratedField(IField):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetEnumeratedMembers(self) -> array(IEnumeratedMember):
+	def GetEnumeratedMembers(self) -> List[IEnumeratedMember]:
 		"""No Description
 
 		Returns:
-			array(IEnumeratedMember): 
+			List[IEnumeratedMember]: 
 		"""
 		pass
 
@@ -9988,23 +9988,23 @@ class IRealGeometryField(IField):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetGeometry(self, id: int) -> array(int):
+	def GetGeometry(self, id: int) -> List[int]:
 		"""No Description
 
 		Args:
 			id(int): id
 
 		Returns:
-			array(int): 
+			List[int]: 
 		"""
 		pass
 
-	def SetGeometry(self, id: int, bytes: array(int)) -> None:
+	def SetGeometry(self, id: int, bytes: List[int]) -> None:
 		"""No Description
 
 		Args:
 			id(int): id
-			bytes(array(int)): bytes
+			bytes(List[int]): bytes
 
 		Returns:
 			None: 
@@ -10135,23 +10135,23 @@ class IGeometryPolylineField(IUnitizedField):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetPoints(self, id: int) -> array(GeometryPoint):
+	def GetPoints(self, id: int) -> List[GeometryPoint]:
 		"""No Description
 
 		Args:
 			id(int): id
 
 		Returns:
-			array(GeometryPoint): 
+			List[GeometryPoint]: 
 		"""
 		pass
 
-	def SetPoints(self, id: int, points: array(GeometryPoint)) -> None:
+	def SetPoints(self, id: int, points: List[GeometryPoint]) -> None:
 		"""No Description
 
 		Args:
 			id(int): id
-			points(array(GeometryPoint)): points
+			points(List[GeometryPoint]): points
 
 		Returns:
 			None: 
@@ -10181,23 +10181,23 @@ class IGeometryPolyline3DField(IUnitizedField):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetPoints(self, id: int) -> array(GeometryPoint3D):
+	def GetPoints(self, id: int) -> List[GeometryPoint3D]:
 		"""No Description
 
 		Args:
 			id(int): id
 
 		Returns:
-			array(GeometryPoint3D): 
+			List[GeometryPoint3D]: 
 		"""
 		pass
 
-	def SetPoints(self, id: int, points3D: array(GeometryPoint3D)) -> None:
+	def SetPoints(self, id: int, points3D: List[GeometryPoint3D]) -> None:
 		"""No Description
 
 		Args:
 			id(int): id
-			points3D(array(GeometryPoint3D)): points3D
+			points3D(List[GeometryPoint3D]): points3D
 
 		Returns:
 			None: 
@@ -10261,23 +10261,23 @@ class IGeometryPolygonField(IUnitizedField):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetRings(self, id: int) -> array(array(GeometryPoint)):
+	def GetRings(self, id: int) -> List[List[GeometryPoint]]:
 		"""No Description
 
 		Args:
 			id(int): id
 
 		Returns:
-			array(array(GeometryPoint)): 
+			List[List[GeometryPoint]]: 
 		"""
 		pass
 
-	def SetRings(self, id: int, rings: array(array(GeometryPoint))) -> None:
+	def SetRings(self, id: int, rings: List[List[GeometryPoint]]) -> None:
 		"""No Description
 
 		Args:
 			id(int): id
-			rings(array(array(GeometryPoint))): rings
+			rings(List[List[GeometryPoint]]): rings
 
 		Returns:
 			None: 
@@ -10796,19 +10796,19 @@ class IEnumeratorDataAccessor:
 		"""
 		pass
 
-	def GetBlob(self, fieldIndex: int) -> array(int):
+	def GetBlob(self, fieldIndex: int) -> List[int]:
 		"""No Description
 
 		Args:
 			fieldIndex(int): fieldIndex
 
 		Returns:
-			array(int): 
+			List[int]: 
 		"""
 		pass
 
 	@property
-	def FieldTypes(self) -> array(IFieldType):
+	def FieldTypes(self) -> List[IFieldType]:
 		"""No Description
 
 		Returns:
@@ -10841,11 +10841,11 @@ class IAlternativeRecordEx:
 		pass
 
 	@overload
-	def GetDataReader(self, fieldTypeNames: array(str), filterContexts: FilterContextCollection, sortContexts: SortContextCollection) -> IDisposableEnumerable:
+	def GetDataReader(self, fieldTypeNames: array[str], filterContexts: FilterContextCollection, sortContexts: SortContextCollection) -> IDisposableEnumerable:
 		"""No Description
 
 		Args:
-			fieldTypeNames(array(str)): fieldTypeNames
+			fieldTypeNames(array[str]): fieldTypeNames
 			filterContexts(FilterContextCollection): filterContexts
 			sortContexts(SortContextCollection): sortContexts
 
@@ -10855,11 +10855,11 @@ class IAlternativeRecordEx:
 		pass
 
 	@overload
-	def GetDataReader(self, fieldTypeNames: array(str), domainElementTypeID: int) -> IAlternativeRecordDataReader:
+	def GetDataReader(self, fieldTypeNames: array[str], domainElementTypeID: int) -> IAlternativeRecordDataReader:
 		"""No Description
 
 		Args:
-			fieldTypeNames(array(str)): fieldTypeNames
+			fieldTypeNames(array[str]): fieldTypeNames
 			domainElementTypeID(int): domainElementTypeID
 
 		Returns:
@@ -11283,11 +11283,11 @@ class IBlobable:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetBytes(self) -> array(int):
+	def GetBytes(self) -> List[int]:
 		"""No Description
 
 		Returns:
-			array(int): 
+			List[int]: 
 		"""
 		pass
 

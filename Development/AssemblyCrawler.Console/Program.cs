@@ -79,6 +79,17 @@ namespace AssemblyCrawler.Console
 				ConfigPackage pkg = XmlHelper.DeserializeFromFile<ConfigPackage>(obj.ConfigFile);
 				if (pkg != null)
 				{
+					if (string.IsNullOrWhiteSpace(pkg.OutputPath))
+					{
+						WriteLine($"The output path was not specified.  This is a required attribute in the config file.");
+						return;
+					}
+					if (string.IsNullOrWhiteSpace(pkg.DefaultAssemblyFolder))
+					{
+						WriteLine($"the default assembly folder is not specified.  This is a required attribute in the config file.");
+						return;
+					}
+
 					if (!Directory.Exists(pkg.OutputPath))
 						Directory.CreateDirectory(pkg.OutputPath);      // Make sure the output path exists.
 
@@ -123,6 +134,10 @@ namespace AssemblyCrawler.Console
 
 					foreach (var assembly in pkg.Assemblies)
 					{
+						if (!string.IsNullOrWhiteSpace(pkg.DefaultAssemblyFolder) &&
+							string.IsNullOrWhiteSpace(assembly.Folder))
+							assembly.Folder = pkg.DefaultAssemblyFolder;
+
 						if (File.Exists(assembly.AssemblyName))
 						{
 							// The file exists.  Verify it is valid .NET assembly
@@ -139,7 +154,7 @@ namespace AssemblyCrawler.Console
 								 * the namespace are used.
 								*/
 
-								Assembly netAssembly = Assembly.ReflectionOnlyLoadFrom(assembly.AssemblyName);
+								Assembly netAssembly = Assembly.LoadFrom(assembly.AssemblyName);
 
 								if (assembly.Namespaces.Count == 0)
 								{
@@ -190,6 +205,10 @@ namespace AssemblyCrawler.Console
 									}
 								}
 							}
+						}
+						else
+						{
+							WriteLine($"The assembly {assembly.AssemblyName} was not found.");
 						}
 					}
 

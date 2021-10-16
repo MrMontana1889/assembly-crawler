@@ -20,6 +20,7 @@ namespace AssemblyCrawler.Xml.Config
 
 		#region Public Properties
 		public string OutputPath { get; set; }
+		public string DefaultAssemblyFolder { get; set; }
 		public List<ConfigAssembly> Assemblies { get; } = new List<ConfigAssembly>();
 		public List<ConfigSystemAssembly> SystemAssemblies { get; } = new List<ConfigSystemAssembly>();	
 		#endregion

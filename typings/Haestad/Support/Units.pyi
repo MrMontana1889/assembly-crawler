@@ -2,7 +2,6 @@ from Haestad.Support.Support import INamable, ILabeled
 from typing import List, overload, Dict
 from enum import Enum
 from datetime import datetime
-from array import array
 
 class DimensionType(Enum):
 	Dimensionless = 0
@@ -3156,19 +3155,19 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 		"""
 		pass
 
-	def GetInvocationList(self) -> array(Delegate):
+	def GetInvocationList(self) -> List[Delegate]:
 		"""No Description
 
 		Returns:
-			array(Delegate): 
+			List[Delegate]: 
 		"""
 		pass
 
-	def DynamicInvoke(self, args: array(object)) -> object:
+	def DynamicInvoke(self, args: List[object]) -> object:
 		"""No Description
 
 		Args:
-			args(array(object)): args
+			args(List[object]): args
 
 		Returns:
 			object: 
@@ -7217,6 +7216,16 @@ class Unit(INamable):
 	@staticmethod
 	@property
 	def PercentSlope() -> Unit:
+		"""No Description
+
+		Returns:
+			Unit: 
+		"""
+		pass
+
+	@staticmethod
+	@property
+	def PerMinute() -> Unit:
 		"""No Description
 
 		Returns:
