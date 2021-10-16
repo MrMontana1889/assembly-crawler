@@ -108,7 +108,7 @@ namespace AssemblyCrawler.Support
 				{
 					// Do we use array or List here?  Not 100% sure if List will be compatible since the return value will be an array
 					// But according to the docs for array, it only handls the basic value types, not objects.
-					returnTypeString = $"array({UNION}[{TypeConvertLibrary.ToPythonType(genericArguments[0])}, {NONETYPE}])";
+					returnTypeString = $"List[{UNION}[{TypeConvertLibrary.ToPythonType(genericArguments[0])}, {NONETYPE}]]";
 					Class.Module.AddImportModule($"{ARRAY}").AddType($"{ARRAY}");
 					Class.Module.AddImportModule($"{TYPING}").AddType($"{UNION}");
 				}

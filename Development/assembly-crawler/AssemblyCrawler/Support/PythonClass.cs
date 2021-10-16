@@ -52,6 +52,16 @@ namespace AssemblyCrawler.Support
 
 			if (!ClassType.IsEnum)
 			{
+				// Consider the parent interfaces as well as the constructor argument types.
+				foreach (var interf in ClassType.GetInterfaces())
+					TypeConvertLibrary.AddImportForPythonType(Module, interf);
+
+				foreach (var ctor in ClassType.GetConstructors())
+				{
+					foreach (var parameter in ctor.GetParameters())
+						TypeConvertLibrary.AddImportForPythonType(Module, parameter.ParameterType);
+				}
+
 				// Only update if NOT an Enum
 				foreach (var method in Methods)
 					method.Update();
