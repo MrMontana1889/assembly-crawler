@@ -13,11 +13,13 @@ namespace AssemblyCrawler.Library
     public class PythonDocStringWriterLibrary
     {
         #region Constants
-        public static string ArgsDocString = "Args:";
-        public static string ReturnsDocString = "Returns:";
-        public static string RaisesDocString = "Raises:";
-        public static string NoteDocString = "Note:";
+        public static string ArgsDocString = "Args";
+        public static string ReturnsDocString = "Returns";
+        public static string RaisesDocString = "Raises";
+        public static string NoteDocString = "Note";
         public static string NoDescription = "No Description";
+        public static string Separator = "--------";
+        public static string Colon = " : ";
         #endregion
 
         #region Constructor
@@ -73,9 +75,10 @@ namespace AssemblyCrawler.Library
             if (XmlMember?.Typeparam?.Count > 0)
             {
                 sb.Append(indentation).AppendLine(ArgsDocString);
+                sb.Append(indentation).AppendLine(Separator);
                 foreach (var param in XmlMember.Typeparam)
                 {
-                    sb.Append(indentation).Append(Tab).Append(param.Name).Append(":").Append(param.Name);
+                    sb.Append(indentation).Append(Tab).Append(param.Name).Append(Colon).Append(param.Name);
                 }
             }
 
@@ -88,13 +91,14 @@ namespace AssemblyCrawler.Library
                 sb.AppendLine();
 
                 sb.Append(indentation).AppendLine(ArgsDocString);
+                sb.Append(indentation).AppendLine(Separator);
                 foreach (var kvp in Args)
                 {
                     var argsName = kvp.Key;
                     var argType = kvp.Value.Key;
 
                     var param = XmlMember?.Param.Where(p => p.Name == kvp.Key)?.FirstOrDefault();
-                    sb.Append(indentation).Append(Tab).Append(argsName).AppendLine($"({TypeConvertLibrary.ToPythonType(argType)}): {param?.Text ?? argsName}");
+                    sb.Append(indentation).Append(Tab).Append(argsName).AppendLine($" (``{TypeConvertLibrary.ToPythonType(argType)}``){Colon} {param?.Text ?? argsName}");
                 }
             }
 
@@ -103,6 +107,7 @@ namespace AssemblyCrawler.Library
             {
                 sb.AppendLine();
                 sb.Append(indentation).AppendLine(NoteDocString);
+                sb.Append(indentation).AppendLine(Separator);
                 sb.Append(indentation).Append(Tab).AppendLine(XmlMember?.Remarks);
             }
 
@@ -111,12 +116,13 @@ namespace AssemblyCrawler.Library
             {
                 sb.AppendLine();
                 sb.Append(indentation).AppendLine(ReturnsDocString);
+                sb.Append(indentation).AppendLine(Separator);
                 var returnMessage = XmlMember?.Returns?.Content ?? string.Empty;
                 // TODO: Figure out how to handle TypeParamRef
                 
                 foreach (var kvp in Returns)
                 {
-                    sb.Append(indentation).Append(Tab).Append(TypeConvertLibrary.ToPythonType(kvp.Value)).Append(": ").AppendLine(returnMessage);
+                    sb.Append(indentation).Append(Tab).Append($"``{TypeConvertLibrary.ToPythonType(kvp.Value)}``").Append(Colon).AppendLine(returnMessage);
                 }
             }
 
@@ -128,6 +134,7 @@ namespace AssemblyCrawler.Library
                 sb.AppendLine();
                 sb.AppendLine();
                 sb.Append(indentation).AppendLine(RaisesDocString);
+                sb.Append(indentation).AppendLine(Separator);
 
                 var exceptionMessage = XmlMember?.Exception?.ToString();
 
@@ -196,7 +203,7 @@ namespace AssemblyCrawler.Library
         public PythonConstructorUnsupportedDocStringWriterLibrary(int indentLevel = 2)
             : base(new Member() {Summary = new Summary() { Content = "Creating a new Instance of this class is not allowed" } }, indentLevel)
         {
-            ExceptionNames.Add(new KeyValuePair<string, string>("Exception", "if this class is instanciated"));
+            ExceptionNames.Add(new KeyValuePair<string, string>("Exception", "if this class is instantiated"));
         }
         #endregion
     }

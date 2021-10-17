@@ -8,7 +8,6 @@ using AssemblyCrawler.Support.XmlDocumentMember;
 using NUnit.Framework;
 using AssemblyCrawler.Support;
 using Test.TestGenericAssembly;
-using AssemblyCrawler.Generators;
 using AssemblyCrawler.Library;
 using AssemblyCrawler.Extensions;
 using TestGenericAssembly;
