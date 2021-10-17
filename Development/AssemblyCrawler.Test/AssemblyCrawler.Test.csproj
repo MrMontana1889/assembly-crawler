@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Optimize>True</Optimize>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -29,6 +30,7 @@
     <ProjectReference Include="..\Barber.AutoDiagrammer\Barber.AutoDiagrammer.csproj" />
     <ProjectReference Include="..\TestAssemblyNET48\TestAssemblyNET48.csproj" />
     <ProjectReference Include="..\TestFixtureSupport\TestFixtureSupport.csproj" />
+    <ProjectReference Include="..\TestGenericAssembly\TestGenericAssembly.csproj" />
   </ItemGroup>
 
 </Project>

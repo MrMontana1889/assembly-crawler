@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Test.TestGenericAssembly.Links
 {
+	/// <summary>
+	/// Contains commonly available inputs for a <c>Pipe</c>.
+	/// </summary>
 	public interface IPipeInput : IElementInput
 	{
 
@@ -21,6 +24,10 @@ namespace Test.TestGenericAssembly.Links
 	{
 
 	}
+
+	/// <summary>
+	/// 
+	/// </summary>
 	public interface IPipes : IWaterNetworkElements<IPipes, IPipe, IPipeInput, IPipeResults, IPipesInput, IPipesResults>, IElementManager
 	{
 

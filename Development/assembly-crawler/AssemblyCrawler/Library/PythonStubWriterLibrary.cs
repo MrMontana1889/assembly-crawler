@@ -151,6 +151,7 @@ namespace AssemblyCrawler.Library
 			PythonClassDefinition classDef,
 			List<KeyValuePair<string, KeyValuePair<Type, object>>> arguments,
 			string docString,
+			bool isOverloaded,
 			int indentLevel = 1)
 		{
 			WritePythonMethod(
@@ -160,6 +161,7 @@ namespace AssemblyCrawler.Library
 				returnType: typeof(void),
 				docString: docString,
 				isStatic: false,
+				isOverloaded: isOverloaded,
 				indentLevel: indentLevel
 				);
 		}

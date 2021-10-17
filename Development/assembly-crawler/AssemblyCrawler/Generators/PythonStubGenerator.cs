@@ -2,6 +2,7 @@
 // Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AssemblyCrawler.Extensions;
@@ -92,24 +93,27 @@ namespace AssemblyCrawler.Generators
 					PythonStubWriterLibrary.WritePythonConstructorUnsupported(classDef);
 				}
 
-				else if (typeParser.Type.IsClass)
-				{
-					// TODO: Debugger never hit this locaiton.
-					var args = typeParser.GetConstructorArguments();
-					var memberInfo = type.GetConstructor(new Type[] { });
+                else if (typeParser.Type.IsClass)
+                {
+                    // TODO: Debugger never hit this locaiton.
+                    foreach (var ctor in typeParser.Constructors)
+                    {
+                        var args = typeParser.GetConstructorArguments(ctor);
 
-					var docStringWriter = new PythonConstructorDocStringWriterLibrary(
-							member: xmlDocument?.GetMember(memberInfo),
-							arguments: args,
-							indentLevel: 2);
+                        var docStringWriter = new PythonConstructorDocStringWriterLibrary(
+                            member: xmlDocument?.GetMember(ctor),
+                            arguments: args,
+                            indentLevel: 2);
 
-					PythonStubWriterLibrary.WritePythonConstructor(
-						classDef: classDef,
-						arguments: args,
-						docString: docStringWriter?.ToString(),
-						indentLevel: 1);
-				}
-				#endregion
+                        PythonStubWriterLibrary.WritePythonConstructor(
+                            classDef: classDef,
+                            arguments: args,
+                            docString: docStringWriter?.ToString(),
+                            isOverloaded: typeParser.Constructors.Count>1,
+                            indentLevel: 1);
+                    }                    
+                }
+                #endregion
 
 				#region Methods
 				// Overloaded methods
