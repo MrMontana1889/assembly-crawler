@@ -1,13 +1,14 @@
 from enum import Enum
-from typing import overload, List, Dict, Iterator, Generic, TypeVar
-from Haestad.Support.Support import FieldDataType, HmIDCollection, FieldCollection, IEditLabeled, IField, SortContextCollection, FilterContextCollection, GeometryPoint, INamable, ILabeled
+from System import TypeCode, ICloneable
+from typing import overload, List, Dict, Iterator, Generic
+from Haestad.Support.Support import FieldDataType, HmIDCollection, FieldCollection, IEditLabeled, IField, SortContextCollection, FilterContextCollection, GeometryPoint, IEditField, ILabeled
 from Haestad.Support.Units import UnitIndex, NumericFormatter, TimeUnit, Unit, UnitSystem
 from array import array
 from Haestad.LicensingFacade import ILicenseProvider
 from datetime import datetime
+from System.Collections.Generic import T
 from Haestad.Domain import IFieldManager
 
-T = TypeVar("T")
 
 class ModelingElementType(Enum):
 	All = 0
@@ -104,14 +105,7 @@ class DomainElementType(Enum):
 	IdahoPumpStation = 700
 	LIDElementManager = 701
 	Headwall = 800
-	Grid = 801
-	BoundaryConditionLine2D = 803
-	BoundaryPoint2D = 804
 	PropertyConnectionElementManager = 810
-	BaseSimplePolyline = 999
-	SurfacePoint = 1802
-	SurfacePolygon = 1900
-	SurfacePolyline = 2000
 	ConflictNode = 3000
 	CommunicationNode = 3001
 	ElectricalNode = 3002
@@ -131,18 +125,6 @@ class DomainElementType(Enum):
 	StormWaterNode = 3016
 	StormWaterSegment = 3017
 	ReferenceElement = 3018
-
-class DomainElementSubType(Enum):
-	TwoDPolygon_Building = 901
-	TwoDPolygon_VoidArea = 902
-	TwoDPolygon_AdjustmentArea = 903
-	TwoDPolygon_LandUse = 904
-	TwoDPolygon_RoadArea = 905
-	TwoDPolyline_Breakline = 1001
-	TwoDPolyline_RoadCenterline = 1002
-	TwoDPoint_ReportingPoint = 8020
-	TwoDPoint_SpotElevation = 8021
-	TwoDPoint_VoidPoint = 8022
 
 class AlternativeType(Enum):
 	HmiDataSetGeometryAlternative = 1
@@ -179,7 +161,6 @@ class AlternativeType(Enum):
 	HMIUserDefinedExtensionsAlternative = 100
 	ConflictAlternative = 1000
 	NetworkDataAlternative = 1001
-	SurfaceAlternative = 1003
 
 class SupportElementType(Enum):
 	CatalogPipeElementManager = 1
@@ -270,10 +251,6 @@ class SupportElementType(Enum):
 	DistrictMeterArea = 265
 	GasPipeType = 300
 	GasCustomer = 301
-	TwoDDataSource = 350
-	DigitalTerrainModel = 351
-	DigitalTerrainModelGroup = 352
-	LandCover = 353
 
 class DomainElementShapeType(Enum):
 	Point = 0
@@ -282,7 +259,6 @@ class DomainElementShapeType(Enum):
 	DirectedNode = 3
 	ReferenceNode = 4
 	Lateral = 5
-	SimplePolyline = 6
 
 class wkbByteOrder(Enum):
 	wkbXDR = 0
@@ -450,217 +426,15 @@ class Tag(Enum):
 class Tag(Enum):
 	Default = 0
 
-class AssemblyLibrary:
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	@staticmethod
-	def GetAssembly(assemblyName: str, domainPath: str) -> Assembly:
-		"""No Description
-
-		Args:
-			assemblyName(str): assemblyName
-			domainPath(str): domainPath
-
-		Returns:
-			Assembly: 
-		"""
-		pass
-
-	@staticmethod
-	def GetSolverAssembly(assemblyName: str, domainPath: str) -> Assembly:
-		"""No Description
-
-		Args:
-			assemblyName(str): assemblyName
-			domainPath(str): domainPath
-
-		Returns:
-			Assembly: 
-		"""
-		pass
-
-class EngineProgressAdapterBase(IProcessInProgress):
-
-	def __init__(self, numericalEngine: INumericalEngine) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def add_ProcessFailed(self, value: ExceptionEventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(ExceptionEventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_ProcessFailed(self, value: ExceptionEventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(ExceptionEventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_ProcessUpdated(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_ProcessUpdated(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_ProcessFinished(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_ProcessFinished(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def add_ProcessStarted(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def remove_ProcessStarted(self, value: EventHandler) -> None:
-		"""No Description
-
-		Args:
-			value(EventHandler): value
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def CancelProcess(self, sender: object, e: EventArgs) -> None:
-		"""No Description
-
-		Args:
-			sender(object): sender
-			e(EventArgs): e
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	@property
-	def AllowCancel(self) -> bool:
-		"""No Description
-
-		Returns:
-			EngineProgressAdapterBase: 
-		"""
-		pass
-
-	@property
-	def ProgressValue(self) -> int:
-		"""No Description
-
-		Returns:
-			EngineProgressAdapterBase: 
-		"""
-		pass
-
-	@ProgressValue.setter
-	def ProgressValue(self, progressvalue: int) -> None:
-		pass
-
-	@property
-	def ProgressDescription(self) -> str:
-		"""No Description
-
-		Returns:
-			EngineProgressAdapterBase: 
-		"""
-		pass
-
-	@ProgressDescription.setter
-	def ProgressDescription(self, progressdescription: str) -> None:
-		pass
-
-	@property
-	def Name(self) -> str:
-		"""No Description
-
-		Returns:
-			EngineProgressAdapterBase: 
-		"""
-		pass
-
-	@property
-	def Label(self) -> str:
-		"""No Description
-
-		Returns:
-			EngineProgressAdapterBase: 
-		"""
-		pass
-
 class IDataSource:
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -668,11 +442,13 @@ class IDataSource:
 	def AddDomainDataSetType(self, name: str) -> IDomainDataSetType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
@@ -680,11 +456,13 @@ class IDataSource:
 	def DomainDataSetType(self, id: int) -> IDomainDataSetType:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
@@ -692,73 +470,85 @@ class IDataSource:
 	def DomainDataSetType(self, name: str) -> IDomainDataSetType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
 	def GetDomainDataSetTypeID(self, name: str) -> int:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def SupportedDataSetTypes(self) -> DomainDataSetTypeCollection:
 		"""No Description
 
-		Returns:
-			DomainDataSetTypeCollection: 
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
 		"""
 		pass
 
 	def GetCurrentlyHiddenDomainDataSetTypes(self) -> DomainDataSetTypeCollection:
 		"""No Description
 
-		Returns:
-			DomainDataSetTypeCollection: 
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
 		"""
 		pass
 
 	def AddSubDomainDataSetType(self, name: str, parentDomainDataSetTypeID: int) -> IDomainDataSetType:
 		"""No Description
 
-		Args:
-			name(str): name
-			parentDomainDataSetTypeID(int): parentDomainDataSetTypeID
+		Args
+		--------
+			name (``str``) :  name
+			parentDomainDataSetTypeID (``int``) :  parentDomainDataSetTypeID
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
 	def SubDomainDataSetTypeExists(self, parentDomainDataSetTypeID: int, subDomainDataSetTypeName: str) -> bool:
 		"""No Description
 
-		Args:
-			parentDomainDataSetTypeID(int): parentDomainDataSetTypeID
-			subDomainDataSetTypeName(str): subDomainDataSetTypeName
+		Args
+		--------
+			parentDomainDataSetTypeID (``int``) :  parentDomainDataSetTypeID
+			subDomainDataSetTypeName (``str``) :  subDomainDataSetTypeName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def SupportedSubDataSetTypes(self, parentDomainDataSetTypeID: int) -> DomainDataSetTypeCollection:
 		"""No Description
 
-		Args:
-			parentDomainDataSetTypeID(int): parentDomainDataSetTypeID
+		Args
+		--------
+			parentDomainDataSetTypeID (``int``) :  parentDomainDataSetTypeID
 
-		Returns:
-			DomainDataSetTypeCollection: 
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
 		"""
 		pass
 
@@ -766,8 +556,9 @@ class IDataSource:
 	def DomainDataSetManager(self) -> IDomainDataSetManager:
 		"""No Description
 
-		Returns:
-			IDataSource: 
+		Returns
+		--------
+			``IDataSource`` : 
 		"""
 		pass
 
@@ -775,8 +566,9 @@ class IDataSource:
 	def ActiveDataSetTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IDataSource: 
+		Returns
+		--------
+			``IDataSource`` : 
 		"""
 		pass
 
@@ -790,8 +582,9 @@ class IDataSourceConnection:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -799,180 +592,207 @@ class IDataSourceConnection:
 	def Open(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Close(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def IsOpen(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IsDataSource(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def BeginSchemaEdit(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def LoadSchema(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def EndSchemaEdit(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Compact(self, context: CompactOperationContext) -> None:
 		"""No Description
 
-		Args:
-			context(CompactOperationContext): context
+		Args
+		--------
+			context (``CompactOperationContext``) :  context
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def UpdateCaches(self, context: CompactOperationContext) -> None:
 		"""No Description
 
-		Args:
-			context(CompactOperationContext): context
+		Args
+		--------
+			context (``CompactOperationContext``) :  context
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ComputeBoundingBox(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ExecuteSchemaUpdate(self, domainDataSetTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainDataSetTypeID(int): domainDataSetTypeID
+		Args
+		--------
+			domainDataSetTypeID (``int``) :  domainDataSetTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Flush(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ClearConnectionCaches(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Deactivate(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def CreateExtendedProperty(self, propertyName: str, type: FieldDataType, defaultValue: object) -> None:
 		"""No Description
 
-		Args:
-			propertyName(str): propertyName
-			type(FieldDataType): type
-			defaultValue(object): defaultValue
+		Args
+		--------
+			propertyName (``str``) :  propertyName
+			type (``FieldDataType``) :  type
+			defaultValue (``object``) :  defaultValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetExtendedPropertyValue(self, propertyName: str) -> object:
 		"""No Description
 
-		Args:
-			propertyName(str): propertyName
+		Args
+		--------
+			propertyName (``str``) :  propertyName
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def SetExtendedPropertyValue(self, propertyName: str, propertyValue: object) -> None:
 		"""No Description
 
-		Args:
-			propertyName(str): propertyName
-			propertyValue(object): propertyValue
+		Args
+		--------
+			propertyName (``str``) :  propertyName
+			propertyValue (``object``) :  propertyValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetConnectionProperty(self, key: ConnectionProperty, val: object) -> None:
 		"""No Description
 
-		Args:
-			key(ConnectionProperty): key
-			val(object): val
+		Args
+		--------
+			key (``ConnectionProperty``) :  key
+			val (``object``) :  val
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetConnectionProperty(self, key: ConnectionProperty) -> object:
 		"""No Description
 
-		Args:
-			key(ConnectionProperty): key
+		Args
+		--------
+			key (``ConnectionProperty``) :  key
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -980,8 +800,9 @@ class IDataSourceConnection:
 	def IsSchemaEditing(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDataSourceConnection: 
+		Returns
+		--------
+			``IDataSourceConnection`` : 
 		"""
 		pass
 
@@ -991,8 +812,9 @@ class ITransactionalConnection:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1000,24 +822,27 @@ class ITransactionalConnection:
 	def BeginTransaction(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def CommitTransaction(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RollbackTransaction(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1027,8 +852,9 @@ class IDataSourceMessaging:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1036,12 +862,14 @@ class IDataSourceMessaging:
 	def Initialize(self, questionHandler: IMessageQuestionHandler, progressIndicator: IProgressIndicator) -> None:
 		"""No Description
 
-		Args:
-			questionHandler(IMessageQuestionHandler): questionHandler
-			progressIndicator(IProgressIndicator): progressIndicator
+		Args
+		--------
+			questionHandler (``IMessageQuestionHandler``) :  questionHandler
+			progressIndicator (``IProgressIndicator``) :  progressIndicator
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1051,8 +879,9 @@ class IDataSourceSchemaUpdateResults:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1060,55 +889,64 @@ class IDataSourceSchemaUpdateResults:
 	def GetNewElementIdForOldElementId(self, elementTypeId: int, oldElementId: int) -> int:
 		"""No Description
 
-		Args:
-			elementTypeId(int): elementTypeId
-			oldElementId(int): oldElementId
+		Args
+		--------
+			elementTypeId (``int``) :  elementTypeId
+			oldElementId (``int``) :  oldElementId
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def GetUpdatedDomainFieldInformation(self, elementTypeId: int, oldFieldName: str) -> IUpdatedFieldInformation:
 		"""No Description
 
-		Args:
-			elementTypeId(int): elementTypeId
-			oldFieldName(str): oldFieldName
+		Args
+		--------
+			elementTypeId (``int``) :  elementTypeId
+			oldFieldName (``str``) :  oldFieldName
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
 	def GetUpdatedSupportFieldInformation(self, elementTypeId: int, oldFieldName: str) -> IUpdatedFieldInformation:
 		"""No Description
 
-		Args:
-			elementTypeId(int): elementTypeId
-			oldFieldName(str): oldFieldName
+		Args
+		--------
+			elementTypeId (``int``) :  elementTypeId
+			oldFieldName (``str``) :  oldFieldName
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
 	def GetOldDomainFieldNamesThatHaveChanged(self, elementTypeId: int) -> List[str]:
 		"""No Description
 
-		Args:
-			elementTypeId(int): elementTypeId
+		Args
+		--------
+			elementTypeId (``int``) :  elementTypeId
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def CreateSchemaStringMap(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1116,8 +954,9 @@ class IDataSourceSchemaUpdateResults:
 	def ElementIdsWereChanged(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDataSourceSchemaUpdateResults: 
+		Returns
+		--------
+			``IDataSourceSchemaUpdateResults`` : 
 		"""
 		pass
 
@@ -1125,8 +964,9 @@ class IDataSourceSchemaUpdateResults:
 	def HasFieldChanges(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDataSourceSchemaUpdateResults: 
+		Returns
+		--------
+			``IDataSourceSchemaUpdateResults`` : 
 		"""
 		pass
 
@@ -1136,8 +976,9 @@ class IElementType:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1146,8 +987,9 @@ class IElementType:
 	def Id(self) -> int:
 		"""No Description
 
-		Returns:
-			IElementType: 
+		Returns
+		--------
+			``IElementType`` : 
 		"""
 		pass
 
@@ -1155,8 +997,9 @@ class IElementType:
 	def Name(self) -> str:
 		"""No Description
 
-		Returns:
-			IElementType: 
+		Returns
+		--------
+			``IElementType`` : 
 		"""
 		pass
 
@@ -1164,8 +1007,9 @@ class IElementType:
 	def Label(self) -> str:
 		"""No Description
 
-		Returns:
-			IElementType: 
+		Returns
+		--------
+			``IElementType`` : 
 		"""
 		pass
 
@@ -1177,8 +1021,9 @@ class IElementType:
 	def Notes(self) -> str:
 		"""No Description
 
-		Returns:
-			IElementType: 
+		Returns
+		--------
+			``IElementType`` : 
 		"""
 		pass
 
@@ -1190,8 +1035,9 @@ class IElementType:
 	def IsStandardType(self) -> bool:
 		"""No Description
 
-		Returns:
-			IElementType: 
+		Returns
+		--------
+			``IElementType`` : 
 		"""
 		pass
 
@@ -1201,8 +1047,9 @@ class IElementTypeUpdatable:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1210,22 +1057,26 @@ class IElementTypeUpdatable:
 	def SetId(self, newId: int) -> None:
 		"""No Description
 
-		Args:
-			newId(int): newId
+		Args
+		--------
+			newId (``int``) :  newId
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetName(self, newName: str) -> None:
 		"""No Description
 
-		Args:
-			newName(str): newName
+		Args
+		--------
+			newName (``str``) :  newName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1235,8 +1086,9 @@ class IFieldType(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1245,8 +1097,9 @@ class IFieldType(IElementType):
 	def FieldDataType(self) -> FieldDataType:
 		"""No Description
 
-		Returns:
-			FieldDataType: 
+		Returns
+		--------
+			``FieldDataType`` : 
 		"""
 		pass
 
@@ -1254,11 +1107,13 @@ class IFieldType(IElementType):
 	def FieldDataType(self, type: FieldDataType) -> None:
 		"""No Description
 
-		Args:
-			type(FieldDataType): type
+		Args
+		--------
+			type (``FieldDataType``) :  type
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1266,8 +1121,9 @@ class IFieldType(IElementType):
 	def Type(self) -> Type:
 		"""No Description
 
-		Returns:
-			Type: 
+		Returns
+		--------
+			``Type`` : 
 		"""
 		pass
 
@@ -1275,11 +1131,13 @@ class IFieldType(IElementType):
 	def Type(self, type: Type) -> None:
 		"""No Description
 
-		Args:
-			type(Type): type
+		Args
+		--------
+			type (``Type``) :  type
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1287,8 +1145,9 @@ class IFieldType(IElementType):
 	def StorageUnit(self) -> UnitIndex:
 		"""No Description
 
-		Returns:
-			UnitIndex: 
+		Returns
+		--------
+			``UnitIndex`` : 
 		"""
 		pass
 
@@ -1296,11 +1155,13 @@ class IFieldType(IElementType):
 	def StorageUnit(self, unit: UnitIndex) -> None:
 		"""No Description
 
-		Args:
-			unit(UnitIndex): unit
+		Args
+		--------
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1308,8 +1169,9 @@ class IFieldType(IElementType):
 	def TextLength(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -1317,60 +1179,70 @@ class IFieldType(IElementType):
 	def TextLength(self, length: int) -> None:
 		"""No Description
 
-		Args:
-			length(int): length
+		Args
+		--------
+			length (``int``) :  length
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetReferenceElementType(self) -> IElementType:
 		"""No Description
 
-		Returns:
-			IElementType: 
+		Returns
+		--------
+			``IElementType`` : 
 		"""
 		pass
 
 	def SetReferenceElementType(self, elementType: IElementType) -> None:
 		"""No Description
 
-		Args:
-			elementType(IElementType): elementType
+		Args
+		--------
+			elementType (``IElementType``) :  elementType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetIsReadOnly(self, value: bool) -> None:
 		"""No Description
 
-		Args:
-			value(bool): value
+		Args
+		--------
+			value (``bool``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetReferenceCardinality(self) -> ReferenceCardinality:
 		"""No Description
 
-		Returns:
-			ReferenceCardinality: 
+		Returns
+		--------
+			``ReferenceCardinality`` : 
 		"""
 		pass
 
 	def SetReferenceCardinality(self, cardinality: ReferenceCardinality) -> None:
 		"""No Description
 
-		Args:
-			cardinality(ReferenceCardinality): cardinality
+		Args
+		--------
+			cardinality (``ReferenceCardinality``) :  cardinality
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1378,8 +1250,9 @@ class IFieldType(IElementType):
 	def DefaultValue(self) -> object:
 		"""No Description
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -1387,23 +1260,27 @@ class IFieldType(IElementType):
 	def DefaultValue(self, value: object) -> None:
 		"""No Description
 
-		Args:
-			value(object): value
+		Args
+		--------
+			value (``object``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def AddCollectionFieldType(self, name: str, type: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1411,11 +1288,13 @@ class IFieldType(IElementType):
 	def CollectionFieldType(self, fieldTypeId: int) -> IFieldType:
 		"""No Description
 
-		Args:
-			fieldTypeId(int): fieldTypeId
+		Args
+		--------
+			fieldTypeId (``int``) :  fieldTypeId
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1423,157 +1302,182 @@ class IFieldType(IElementType):
 	def CollectionFieldType(self, name: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def CollectionFieldTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def CollectionFieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def EnumeratedTypeMemberExists(self, value: int) -> bool:
 		"""No Description
 
-		Args:
-			value(int): value
+		Args
+		--------
+			value (``int``) :  value
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def GetEnumeratedTypeMembers(self) -> List[IEnumeratedTypeMember]:
 		"""No Description
 
-		Returns:
-			List[IEnumeratedTypeMember]: 
+		Returns
+		--------
+			``List[IEnumeratedTypeMember]`` : 
 		"""
 		pass
 
-	def SetEnumeratedTypeMembers(self, names: array[str], values: array('i')) -> List[IEnumeratedTypeMember]:
+	def SetEnumeratedTypeMembers(self, names: array[str], values: array[int]) -> List[IEnumeratedTypeMember]:
 		"""No Description
 
-		Args:
-			names(array[str]): names
-			values(array('i')): values
+		Args
+		--------
+			names (``array[str]``) :  names
+			values (``array[int]``) :  values
 
-		Returns:
-			List[IEnumeratedTypeMember]: 
+		Returns
+		--------
+			``List[IEnumeratedTypeMember]`` : 
 		"""
 		pass
 
 	def GetNumericalRange(self, minValue: float, maxValue: float) -> None:
 		"""No Description
 
-		Args:
-			minValue(float): minValue
-			maxValue(float): maxValue
+		Args
+		--------
+			minValue (``float``) :  minValue
+			maxValue (``float``) :  maxValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetNumericalRange(self, minValue: float, maxValue: float) -> None:
 		"""No Description
 
-		Args:
-			minValue(float): minValue
-			maxValue(float): maxValue
+		Args
+		--------
+			minValue (``float``) :  minValue
+			maxValue (``float``) :  maxValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetSharedEnumeratedMembers(self) -> List[IEnumeratedTypeMember]:
 		"""No Description
 
-		Returns:
-			List[IEnumeratedTypeMember]: 
+		Returns
+		--------
+			``List[IEnumeratedTypeMember]`` : 
 		"""
 		pass
 
 	def GetFilteringByProduct(self) -> List[str]:
 		"""No Description
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def SetFilteringByProduct(self, products: List[str]) -> None:
 		"""No Description
 
-		Args:
-			products(List[str]): products
+		Args
+		--------
+			products (``List[str]``) :  products
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetUniqueId(self) -> Guid:
 		"""No Description
 
-		Returns:
-			Guid: 
+		Returns
+		--------
+			``Guid`` : 
 		"""
 		pass
 
 	def SetUniqueId(self, uuid: Guid) -> None:
 		"""No Description
 
-		Args:
-			uuid(Guid): uuid
+		Args
+		--------
+			uuid (``Guid``) :  uuid
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetAssociatedAction(self, factoryClassName: str, methodName: str, parameters: Dict[str,str]) -> None:
 		"""No Description
 
-		Args:
-			factoryClassName(str): factoryClassName
-			methodName(str): methodName
-			parameters(Dict[str,str]): parameters
+		Args
+		--------
+			factoryClassName (``str``) :  factoryClassName
+			methodName (``str``) :  methodName
+			parameters (``Dict[str,str]``) :  parameters
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetAssociatedAction(self, factoryClassName: str, methodName: str, parameters: Dict[str,str]) -> None:
 		"""No Description
 
-		Args:
-			factoryClassName(str): factoryClassName
-			methodName(str): methodName
-			parameters(Dict[str,str]): parameters
+		Args
+		--------
+			factoryClassName (``str``) :  factoryClassName
+			methodName (``str``) :  methodName
+			parameters (``Dict[str,str]``) :  parameters
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1581,8 +1485,9 @@ class IFieldType(IElementType):
 	def Category(self) -> str:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1594,8 +1499,9 @@ class IFieldType(IElementType):
 	def IsEnumeratedMemberField(self) -> bool:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1603,8 +1509,9 @@ class IFieldType(IElementType):
 	def IsSharedEnumeratedMemberField(self) -> bool:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1612,8 +1519,9 @@ class IFieldType(IElementType):
 	def ParentEnumeratedTypeMember(self) -> IEnumeratedTypeMember:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1621,8 +1529,9 @@ class IFieldType(IElementType):
 	def IsCollectionMemberField(self) -> bool:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1630,8 +1539,9 @@ class IFieldType(IElementType):
 	def ParentCollectionFieldType(self) -> IFieldType:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1639,8 +1549,9 @@ class IFieldType(IElementType):
 	def IsReadOnly(self) -> bool:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1648,8 +1559,9 @@ class IFieldType(IElementType):
 	def IsSerializedAsBinary(self) -> bool:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1661,8 +1573,9 @@ class IFieldType(IElementType):
 	def OrderIndex(self) -> int:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1674,8 +1587,9 @@ class IFieldType(IElementType):
 	def NumericFormatterName(self) -> str:
 		"""No Description
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -1689,8 +1603,9 @@ class IFieldTypeEx:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1698,16 +1613,18 @@ class IFieldTypeEx:
 	def GetDomainDataSetType(self) -> IDomainDataSetType:
 		"""No Description
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
 	def GetSharedEnumeratedMemberFieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -1717,8 +1634,9 @@ class IFieldTypeUI:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1726,95 +1644,110 @@ class IFieldTypeUI:
 	def GetBlankIfReadOnly(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def SetBlankIfReadOnly(self, val: bool) -> None:
 		"""No Description
 
-		Args:
-			val(bool): val
+		Args
+		--------
+			val (``bool``) :  val
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetRefreshDependentsOnChange(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def SetRefreshDependentsOnChange(self, val: bool) -> None:
 		"""No Description
 
-		Args:
-			val(bool): val
+		Args
+		--------
+			val (``bool``) :  val
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetAssociatedElementTypes(self) -> List[IElementType]:
 		"""No Description
 
-		Returns:
-			List[IElementType]: 
+		Returns
+		--------
+			``List[IElementType]`` : 
 		"""
 		pass
 
 	def SetAssociatedElementTypes(self, elementTypes: List[IElementType]) -> None:
 		"""No Description
 
-		Args:
-			elementTypes(List[IElementType]): elementTypes
+		Args
+		--------
+			elementTypes (``List[IElementType]``) :  elementTypes
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetFilteringByNumericalEngineType(self) -> List[str]:
 		"""No Description
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def SetFilteringByNumericalEngineType(self, numericalEngineTypes: List[str]) -> None:
 		"""No Description
 
-		Args:
-			numericalEngineTypes(List[str]): numericalEngineTypes
+		Args
+		--------
+			numericalEngineTypes (``List[str]``) :  numericalEngineTypes
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetHideInPrototypes(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def SetHideInPrototypes(self, val: bool) -> None:
 		"""No Description
 
-		Args:
-			val(bool): val
+		Args
+		--------
+			val (``bool``) :  val
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1824,8 +1757,9 @@ class IFieldTypeInternal:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1833,11 +1767,13 @@ class IFieldTypeInternal:
 	def GetEnumeratedTypeMember(self, enumeratedTypeMemberID: int) -> IEnumeratedTypeMember:
 		"""No Description
 
-		Args:
-			enumeratedTypeMemberID(int): enumeratedTypeMemberID
+		Args
+		--------
+			enumeratedTypeMemberID (``int``) :  enumeratedTypeMemberID
 
-		Returns:
-			IEnumeratedTypeMember: 
+		Returns
+		--------
+			``IEnumeratedTypeMember`` : 
 		"""
 		pass
 
@@ -1847,8 +1783,9 @@ class IEnumeratedTypeMember(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1856,92 +1793,107 @@ class IEnumeratedTypeMember(IElementType):
 	def AddFieldType(self, name: str, type: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def AddCollectionFieldType(self, name: str, serializeAsBinary: bool) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			serializeAsBinary(bool): serializeAsBinary
+		Args
+		--------
+			name (``str``) :  name
+			serializeAsBinary (``bool``) :  serializeAsBinary
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def GetFieldTypeNamed(self, name: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def FieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def DeleteFieldType(self, attributeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			attributeTypeID(int): attributeTypeID
+		Args
+		--------
+			attributeTypeID (``int``) :  attributeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetFilteringByProduct(self) -> List[str]:
 		"""No Description
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def SetFilteringByProduct(self, products: List[str]) -> None:
 		"""No Description
 
-		Args:
-			products(List[str]): products
+		Args
+		--------
+			products (``List[str]``) :  products
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetFilteringByNumericalEngineType(self) -> List[str]:
 		"""No Description
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def SetFilteringByNumericalEngineType(self, numericalEngineTypeNames: List[str]) -> None:
 		"""No Description
 
-		Args:
-			numericalEngineTypeNames(List[str]): numericalEngineTypeNames
+		Args
+		--------
+			numericalEngineTypeNames (``List[str]``) :  numericalEngineTypeNames
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1949,8 +1901,9 @@ class IEnumeratedTypeMember(IElementType):
 	def ParentFieldType(self) -> IFieldType:
 		"""No Description
 
-		Returns:
-			IEnumeratedTypeMember: 
+		Returns
+		--------
+			``IEnumeratedTypeMember`` : 
 		"""
 		pass
 
@@ -1958,8 +1911,9 @@ class IEnumeratedTypeMember(IElementType):
 	def EnumerationValue(self) -> int:
 		"""No Description
 
-		Returns:
-			IEnumeratedTypeMember: 
+		Returns
+		--------
+			``IEnumeratedTypeMember`` : 
 		"""
 		pass
 
@@ -1969,8 +1923,9 @@ class IEnumeratedTypeMemberUpdatable:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1978,11 +1933,13 @@ class IEnumeratedTypeMemberUpdatable:
 	def RefactorSubEnumFieldTypeToNonEnumerated(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -1992,8 +1949,9 @@ class IModelingElementFieldType(IFieldType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2002,8 +1960,9 @@ class IModelingElementFieldType(IFieldType):
 	def ModelingElementType(self) -> ModelingElementType:
 		"""No Description
 
-		Returns:
-			IModelingElementFieldType: 
+		Returns
+		--------
+			``IModelingElementFieldType`` : 
 		"""
 		pass
 
@@ -2011,8 +1970,9 @@ class IModelingElementFieldType(IFieldType):
 	def ElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IModelingElementFieldType: 
+		Returns
+		--------
+			``IModelingElementFieldType`` : 
 		"""
 		pass
 
@@ -2022,8 +1982,9 @@ class ISupportElementFieldType(IFieldType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2032,8 +1993,9 @@ class ISupportElementFieldType(IFieldType):
 	def SupportElementType(self) -> ISupportElementType:
 		"""No Description
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
@@ -2041,8 +2003,9 @@ class ISupportElementFieldType(IFieldType):
 	def TableName(self) -> str:
 		"""No Description
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
@@ -2052,8 +2015,9 @@ class ICalculationOptionsFieldType(IFieldType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2062,8 +2026,9 @@ class ICalculationOptionsFieldType(IFieldType):
 	def NumericalEngineType(self) -> INumericalEngineType:
 		"""No Description
 
-		Returns:
-			ICalculationOptionsFieldType: 
+		Returns
+		--------
+			``ICalculationOptionsFieldType`` : 
 		"""
 		pass
 
@@ -2071,8 +2036,9 @@ class ICalculationOptionsFieldType(IFieldType):
 	def ShowInComputeCenter(self) -> bool:
 		"""No Description
 
-		Returns:
-			ICalculationOptionsFieldType: 
+		Returns
+		--------
+			``ICalculationOptionsFieldType`` : 
 		"""
 		pass
 
@@ -2086,8 +2052,9 @@ class IResultFieldType(IFieldType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2095,8 +2062,9 @@ class IResultFieldType(IFieldType):
 	def SupportedDomainElementTypeIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -2104,8 +2072,9 @@ class IResultFieldType(IFieldType):
 	def ResultRecordType(self) -> IResultRecordType:
 		"""No Description
 
-		Returns:
-			IResultFieldType: 
+		Returns
+		--------
+			``IResultFieldType`` : 
 		"""
 		pass
 
@@ -2113,8 +2082,9 @@ class IResultFieldType(IFieldType):
 	def IsTimeVariant(self) -> bool:
 		"""No Description
 
-		Returns:
-			IResultFieldType: 
+		Returns
+		--------
+			``IResultFieldType`` : 
 		"""
 		pass
 
@@ -2126,8 +2096,9 @@ class IResultFieldType(IFieldType):
 	def Expression(self) -> str:
 		"""No Description
 
-		Returns:
-			IResultFieldType: 
+		Returns
+		--------
+			``IResultFieldType`` : 
 		"""
 		pass
 
@@ -2139,8 +2110,9 @@ class IResultFieldType(IFieldType):
 	def ExpressionType(self) -> ExpressionType:
 		"""No Description
 
-		Returns:
-			IResultFieldType: 
+		Returns
+		--------
+			``IResultFieldType`` : 
 		"""
 		pass
 
@@ -2154,8 +2126,9 @@ class IDomainElementFieldType(IFieldType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2163,19 +2136,22 @@ class IDomainElementFieldType(IFieldType):
 	def TableName(self, domainElementTypeID: int) -> str:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def SupportedDomainElementTypeIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -2183,8 +2159,9 @@ class IDomainElementFieldType(IFieldType):
 	def AlternativeType(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			IDomainElementFieldType: 
+		Returns
+		--------
+			``IDomainElementFieldType`` : 
 		"""
 		pass
 
@@ -2194,8 +2171,9 @@ class ISystemRecordFieldType(IFieldType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2204,8 +2182,9 @@ class ISystemRecordFieldType(IFieldType):
 	def AlternativeType(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			ISystemRecordFieldType: 
+		Returns
+		--------
+			``ISystemRecordFieldType`` : 
 		"""
 		pass
 
@@ -2215,8 +2194,9 @@ class ISupportElementType(IModelingElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2225,24 +2205,28 @@ class ISupportElementType(IModelingElementType):
 	def AddFieldType(self, name: str, type: FieldDataType) -> ISupportElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
 	def AddCollectionFieldType(self, name: str, serializeAsBinary: bool) -> ISupportElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			serializeAsBinary(bool): serializeAsBinary
+		Args
+		--------
+			name (``str``) :  name
+			serializeAsBinary (``bool``) :  serializeAsBinary
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
@@ -2250,25 +2234,29 @@ class ISupportElementType(IModelingElementType):
 	def AddFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array[str]) -> ISupportElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
-			enumFieldTypeID(int): enumFieldTypeID
-			sharedEnumMembers(array[str]): sharedEnumMembers
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
+			enumFieldTypeID (``int``) :  enumFieldTypeID
+			sharedEnumMembers (``array[str]``) :  sharedEnumMembers
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
 	def DeleteFieldType(self, supportElementFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			supportElementFieldTypeID(int): supportElementFieldTypeID
+		Args
+		--------
+			supportElementFieldTypeID (``int``) :  supportElementFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2276,11 +2264,13 @@ class ISupportElementType(IModelingElementType):
 	def FieldType(self, fieldTypeId: int) -> ISupportElementFieldType:
 		"""No Description
 
-		Args:
-			fieldTypeId(int): fieldTypeId
+		Args
+		--------
+			fieldTypeId (``int``) :  fieldTypeId
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
@@ -2288,37 +2278,43 @@ class ISupportElementType(IModelingElementType):
 	def FieldType(self, name: str) -> ISupportElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			ISupportElementFieldType: 
+		Returns
+		--------
+			``ISupportElementFieldType`` : 
 		"""
 		pass
 
 	def GetAssociatedAction(self, factoryClassName: str, methodName: str, parameters: Dict[str,str]) -> None:
 		"""No Description
 
-		Args:
-			factoryClassName(str): factoryClassName
-			methodName(str): methodName
-			parameters(Dict[str,str]): parameters
+		Args
+		--------
+			factoryClassName (``str``) :  factoryClassName
+			methodName (``str``) :  methodName
+			parameters (``Dict[str,str]``) :  parameters
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetAssociatedAction(self, factoryClassName: str, methodName: str, parameters: Dict[str,str]) -> None:
 		"""No Description
 
-		Args:
-			factoryClassName(str): factoryClassName
-			methodName(str): methodName
-			parameters(Dict[str,str]): parameters
+		Args
+		--------
+			factoryClassName (``str``) :  factoryClassName
+			methodName (``str``) :  methodName
+			parameters (``Dict[str,str]``) :  parameters
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2328,8 +2324,9 @@ class ITreeElementType(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2337,8 +2334,9 @@ class ITreeElementType(IElementType):
 	def SubElementTypes(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -2346,8 +2344,9 @@ class ITreeElementType(IElementType):
 	def ParentID(self) -> int:
 		"""No Description
 
-		Returns:
-			ITreeElementType: 
+		Returns
+		--------
+			``ITreeElementType`` : 
 		"""
 		pass
 
@@ -2357,8 +2356,9 @@ class ITreeElementTypeUpdatable:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2366,11 +2366,13 @@ class ITreeElementTypeUpdatable:
 	def SetParentID(self, newParentID: int) -> None:
 		"""No Description
 
-		Args:
-			newParentID(int): newParentID
+		Args
+		--------
+			newParentID (``int``) :  newParentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2380,8 +2382,9 @@ class IAlternativeType(IModelingElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2390,24 +2393,28 @@ class IAlternativeType(IModelingElementType):
 	def AddFieldType(self, name: str, type: FieldDataType) -> IDomainElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IDomainElementFieldType: 
+		Returns
+		--------
+			``IDomainElementFieldType`` : 
 		"""
 		pass
 
 	def AddCollectionFieldType(self, name: str, serializeAsBinary: bool) -> IDomainElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			serializeAsBinary(bool): serializeAsBinary
+		Args
+		--------
+			name (``str``) :  name
+			serializeAsBinary (``bool``) :  serializeAsBinary
 
-		Returns:
-			IDomainElementFieldType: 
+		Returns
+		--------
+			``IDomainElementFieldType`` : 
 		"""
 		pass
 
@@ -2415,60 +2422,70 @@ class IAlternativeType(IModelingElementType):
 	def AddFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array[str]) -> IDomainElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
-			enumFieldTypeID(int): enumFieldTypeID
-			sharedEnumMembers(array[str]): sharedEnumMembers
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
+			enumFieldTypeID (``int``) :  enumFieldTypeID
+			sharedEnumMembers (``array[str]``) :  sharedEnumMembers
 
-		Returns:
-			IDomainElementFieldType: 
+		Returns
+		--------
+			``IDomainElementFieldType`` : 
 		"""
 		pass
 
 	def AddSystemRecordFieldType(self, name: str, type: FieldDataType) -> ISystemRecordFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			ISystemRecordFieldType: 
+		Returns
+		--------
+			``ISystemRecordFieldType`` : 
 		"""
 		pass
 
 	def AddSystemRecordCollectionFieldType(self, name: str, serializeAsBinary: bool) -> ISystemRecordFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			serializeAsBinary(bool): serializeAsBinary
+		Args
+		--------
+			name (``str``) :  name
+			serializeAsBinary (``bool``) :  serializeAsBinary
 
-		Returns:
-			ISystemRecordFieldType: 
+		Returns
+		--------
+			``ISystemRecordFieldType`` : 
 		"""
 		pass
 
 	def SystemRecordFieldTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def DeleteSystemRecordFieldType(self, systemRecordFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			systemRecordFieldTypeID(int): systemRecordFieldTypeID
+		Args
+		--------
+			systemRecordFieldTypeID (``int``) :  systemRecordFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2476,11 +2493,13 @@ class IAlternativeType(IModelingElementType):
 	def FieldType(self, name: str) -> IDomainElementFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IDomainElementFieldType: 
+		Returns
+		--------
+			``IDomainElementFieldType`` : 
 		"""
 		pass
 
@@ -2488,11 +2507,13 @@ class IAlternativeType(IModelingElementType):
 	def FieldType(self, attributeTypeId: int) -> IDomainElementFieldType:
 		"""No Description
 
-		Args:
-			attributeTypeId(int): attributeTypeId
+		Args
+		--------
+			attributeTypeId (``int``) :  attributeTypeId
 
-		Returns:
-			IDomainElementFieldType: 
+		Returns
+		--------
+			``IDomainElementFieldType`` : 
 		"""
 		pass
 
@@ -2500,11 +2521,13 @@ class IAlternativeType(IModelingElementType):
 	def SystemRecordFieldType(self, fieldTypeId: int) -> ISystemRecordFieldType:
 		"""No Description
 
-		Args:
-			fieldTypeId(int): fieldTypeId
+		Args
+		--------
+			fieldTypeId (``int``) :  fieldTypeId
 
-		Returns:
-			ISystemRecordFieldType: 
+		Returns
+		--------
+			``ISystemRecordFieldType`` : 
 		"""
 		pass
 
@@ -2512,19 +2535,22 @@ class IAlternativeType(IModelingElementType):
 	def SystemRecordFieldType(self, name: str) -> ISystemRecordFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			ISystemRecordFieldType: 
+		Returns
+		--------
+			``ISystemRecordFieldType`` : 
 		"""
 		pass
 
 	def SystemRecordFieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -2532,11 +2558,13 @@ class IAlternativeType(IModelingElementType):
 	def FieldTypes(self, domainElementTypeID: int) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -2544,39 +2572,45 @@ class IAlternativeType(IModelingElementType):
 	def FieldTypes(self, domainElementTypeID: int, excludeInherited: bool) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
-			excludeInherited(bool): excludeInherited
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
+			excludeInherited (``bool``) :  excludeInherited
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def DeleteFieldType(self, domainElementFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SupportedDomainElementTypeIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def DropObsoleteObjects(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2584,8 +2618,9 @@ class IAlternativeType(IModelingElementType):
 	def FieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -2595,8 +2630,9 @@ class IAlternativeTypeUI:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2604,19 +2640,22 @@ class IAlternativeTypeUI:
 	def GetHideInUI(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def SetHideInUI(self, value: bool) -> None:
 		"""No Description
 
-		Args:
-			value(bool): value
+		Args
+		--------
+			value (``bool``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2626,8 +2665,9 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2635,8 +2675,9 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def DomainElementShapeType(self) -> DomainElementShapeType:
 		"""No Description
 
-		Returns:
-			DomainElementShapeType: 
+		Returns
+		--------
+			``DomainElementShapeType`` : 
 		"""
 		pass
 
@@ -2644,11 +2685,13 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def AddFieldType(self, domainElementFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2656,12 +2699,14 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def AddFieldType(self, name: str, dataType: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			dataType(FieldDataType): dataType
+		Args
+		--------
+			name (``str``) :  name
+			dataType (``FieldDataType``) :  dataType
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -2669,11 +2714,13 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def SupportsFieldType(self, domainElementFieldTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -2681,12 +2728,14 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def SupportsFieldType(self, domainElementFieldTypeID: int, includeParentTypes: bool) -> bool:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
-			includeParentTypes(bool): includeParentTypes
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			includeParentTypes (``bool``) :  includeParentTypes
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -2694,11 +2743,13 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def SupportsResultFieldType(self, resultFieldTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			resultFieldTypeID(int): resultFieldTypeID
+		Args
+		--------
+			resultFieldTypeID (``int``) :  resultFieldTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -2706,69 +2757,81 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def SupportsResultFieldType(self, resultFieldTypeID: int, includeParentTypes: bool) -> bool:
 		"""No Description
 
-		Args:
-			resultFieldTypeID(int): resultFieldTypeID
-			includeParentTypes(bool): includeParentTypes
+		Args
+		--------
+			resultFieldTypeID (``int``) :  resultFieldTypeID
+			includeParentTypes (``bool``) :  includeParentTypes
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def DropFieldType(self, domainElementFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RefactorFieldTypeUp(self, domainElementFieldTypeID: int, parentElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
-			parentElementTypeID(int): parentElementTypeID
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			parentElementTypeID (``int``) :  parentElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RefactorFieldTypeDown(self, domainElementFieldTypeID: int, parentElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainElementFieldTypeID(int): domainElementFieldTypeID
-			parentElementTypeID(int): parentElementTypeID
+		Args
+		--------
+			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			parentElementTypeID (``int``) :  parentElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def AddResultFieldType(self, resultFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			resultFieldTypeID(int): resultFieldTypeID
+		Args
+		--------
+			resultFieldTypeID (``int``) :  resultFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def DropResultFieldType(self, resultFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			resultFieldTypeID(int): resultFieldTypeID
+		Args
+		--------
+			resultFieldTypeID (``int``) :  resultFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2776,11 +2839,13 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def FieldTypes(self, nonAlternativeFieldTypesOnly: bool) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			nonAlternativeFieldTypesOnly(bool): nonAlternativeFieldTypesOnly
+		Args
+		--------
+			nonAlternativeFieldTypesOnly (``bool``) :  nonAlternativeFieldTypesOnly
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -2788,11 +2853,13 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def FieldTypes(self, alternativeTypeID: int) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -2800,51 +2867,59 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def FieldTypes(self, alternativeTypeID: int, includeParentTypes: bool) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
-			includeParentTypes(bool): includeParentTypes
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
+			includeParentTypes (``bool``) :  includeParentTypes
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def SupportedAlternativeTypeIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def SupportsAlternativeType(self, alternativeTypeID: int, includeParentTypes: bool) -> bool:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
-			includeParentTypes(bool): includeParentTypes
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
+			includeParentTypes (``bool``) :  includeParentTypes
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def DeleteFieldType(self, fieldTypeId: int) -> None:
 		"""No Description
 
-		Args:
-			fieldTypeId(int): fieldTypeId
+		Args
+		--------
+			fieldTypeId (``int``) :  fieldTypeId
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SupportedResultRecordTypeNames(self) -> StringCollection:
 		"""No Description
 
-		Returns:
-			StringCollection: 
+		Returns
+		--------
+			``StringCollection`` : 
 		"""
 		pass
 
@@ -2852,8 +2927,9 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 	def FieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -2863,8 +2939,9 @@ class IDomainElementTypeEx:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2872,12 +2949,14 @@ class IDomainElementTypeEx:
 	def FieldTypeExists(self, name: str, includeHierarchy: bool) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
-			includeHierarchy(bool): includeHierarchy
+		Args
+		--------
+			name (``str``) :  name
+			includeHierarchy (``bool``) :  includeHierarchy
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -2887,8 +2966,9 @@ class IModelingElementTypeUI:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2897,8 +2977,9 @@ class IModelingElementTypeUI:
 	def OrderIndex(self) -> int:
 		"""No Description
 
-		Returns:
-			IModelingElementTypeUI: 
+		Returns
+		--------
+			``IModelingElementTypeUI`` : 
 		"""
 		pass
 
@@ -2912,8 +2993,9 @@ class IDomainDataSetType(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -2921,86 +3003,101 @@ class IDomainDataSetType(IElementType):
 	def AddFieldType(self, name: str, type: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def DeleteFieldType(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def FieldTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def FieldType(self, name: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def FieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def ModelingElementType(self, type: ModelingElementType) -> IStandardModelingElementType:
 		"""No Description
 
-		Args:
-			type(ModelingElementType): type
+		Args
+		--------
+			type (``ModelingElementType``) :  type
 
-		Returns:
-			IStandardModelingElementType: 
+		Returns
+		--------
+			``IStandardModelingElementType`` : 
 		"""
 		pass
 
 	def AddAlternativeType(self, name: str) -> IAlternativeType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IAlternativeType: 
+		Returns
+		--------
+			``IAlternativeType`` : 
 		"""
 		pass
 
 	def AddStandardAlternativeType(self, standardAlternativeTypeName: str) -> IAlternativeType:
 		"""No Description
 
-		Args:
-			standardAlternativeTypeName(str): standardAlternativeTypeName
+		Args
+		--------
+			standardAlternativeTypeName (``str``) :  standardAlternativeTypeName
 
-		Returns:
-			IAlternativeType: 
+		Returns
+		--------
+			``IAlternativeType`` : 
 		"""
 		pass
 
@@ -3008,11 +3105,13 @@ class IDomainDataSetType(IElementType):
 	def AlternativeTypeExists(self, alternativeTypeName: str) -> bool:
 		"""No Description
 
-		Args:
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -3020,11 +3119,13 @@ class IDomainDataSetType(IElementType):
 	def AlternativeTypeExists(self, alternativeTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -3032,11 +3133,13 @@ class IDomainDataSetType(IElementType):
 	def AlternativeType(self, alternativeTypeID: int) -> IAlternativeType:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			IAlternativeType: 
+		Returns
+		--------
+			``IAlternativeType`` : 
 		"""
 		pass
 
@@ -3044,30 +3147,35 @@ class IDomainDataSetType(IElementType):
 	def AlternativeType(self, alternativeTypeName: str) -> IAlternativeType:
 		"""No Description
 
-		Args:
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IAlternativeType: 
+		Returns
+		--------
+			``IAlternativeType`` : 
 		"""
 		pass
 
 	def DeleteAlternativeType(self, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def AlternativeTypes(self) -> AlternativeTypeCollection:
 		"""No Description
 
-		Returns:
-			AlternativeTypeCollection: 
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
 		"""
 		pass
 
@@ -3075,12 +3183,14 @@ class IDomainDataSetType(IElementType):
 	def AddDomainElementType(self, name: str, shapeType: DomainElementShapeType) -> IDomainElementType:
 		"""No Description
 
-		Args:
-			name(str): name
-			shapeType(DomainElementShapeType): shapeType
+		Args
+		--------
+			name (``str``) :  name
+			shapeType (``DomainElementShapeType``) :  shapeType
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
@@ -3088,13 +3198,15 @@ class IDomainDataSetType(IElementType):
 	def AddDomainElementType(self, name: str, shapeType: DomainElementShapeType, standardAlternativeTypesToSupport: StringCollection) -> IDomainElementType:
 		"""No Description
 
-		Args:
-			name(str): name
-			shapeType(DomainElementShapeType): shapeType
-			standardAlternativeTypesToSupport(StringCollection): standardAlternativeTypesToSupport
+		Args
+		--------
+			name (``str``) :  name
+			shapeType (``DomainElementShapeType``) :  shapeType
+			standardAlternativeTypesToSupport (``StringCollection``) :  standardAlternativeTypesToSupport
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
@@ -3102,13 +3214,15 @@ class IDomainDataSetType(IElementType):
 	def AddDomainElementType(self, name: str, shapeType: DomainElementShapeType, parentDomainElementTypeID: int) -> IDomainElementType:
 		"""No Description
 
-		Args:
-			name(str): name
-			shapeType(DomainElementShapeType): shapeType
-			parentDomainElementTypeID(int): parentDomainElementTypeID
+		Args
+		--------
+			name (``str``) :  name
+			shapeType (``DomainElementShapeType``) :  shapeType
+			parentDomainElementTypeID (``int``) :  parentDomainElementTypeID
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
@@ -3116,11 +3230,13 @@ class IDomainDataSetType(IElementType):
 	def DomainElementType(self, domainElementTypeID: int) -> IDomainElementType:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
@@ -3128,11 +3244,13 @@ class IDomainDataSetType(IElementType):
 	def DomainElementType(self, domainElementTypeName: str) -> IDomainElementType:
 		"""No Description
 
-		Args:
-			domainElementTypeName(str): domainElementTypeName
+		Args
+		--------
+			domainElementTypeName (``str``) :  domainElementTypeName
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
@@ -3140,11 +3258,13 @@ class IDomainDataSetType(IElementType):
 	def DomainElementTypeExists(self, domainElementTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -3152,22 +3272,26 @@ class IDomainDataSetType(IElementType):
 	def DomainElementTypeExists(self, domainElementTypeName: str) -> bool:
 		"""No Description
 
-		Args:
-			domainElementTypeName(str): domainElementTypeName
+		Args
+		--------
+			domainElementTypeName (``str``) :  domainElementTypeName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def DeleteDomainElementType(self, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -3175,8 +3299,9 @@ class IDomainDataSetType(IElementType):
 	def DomainElementTypes(self) -> DomainElementTypeCollection:
 		"""No Description
 
-		Returns:
-			DomainElementTypeCollection: 
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
 		"""
 		pass
 
@@ -3184,22 +3309,26 @@ class IDomainDataSetType(IElementType):
 	def DomainElementTypes(self, includeBaseTypes: bool) -> DomainElementTypeCollection:
 		"""No Description
 
-		Args:
-			includeBaseTypes(bool): includeBaseTypes
+		Args
+		--------
+			includeBaseTypes (``bool``) :  includeBaseTypes
 
-		Returns:
-			DomainElementTypeCollection: 
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
 		"""
 		pass
 
 	def AddSupportElementType(self, name: str) -> ISupportElementType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			ISupportElementType: 
+		Returns
+		--------
+			``ISupportElementType`` : 
 		"""
 		pass
 
@@ -3207,11 +3336,13 @@ class IDomainDataSetType(IElementType):
 	def SupportElementType(self, supportElementTypeID: int) -> ISupportElementType:
 		"""No Description
 
-		Args:
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			ISupportElementType: 
+		Returns
+		--------
+			``ISupportElementType`` : 
 		"""
 		pass
 
@@ -3219,11 +3350,13 @@ class IDomainDataSetType(IElementType):
 	def SupportElementType(self, supportElementTypeName: str) -> ISupportElementType:
 		"""No Description
 
-		Args:
-			supportElementTypeName(str): supportElementTypeName
+		Args
+		--------
+			supportElementTypeName (``str``) :  supportElementTypeName
 
-		Returns:
-			ISupportElementType: 
+		Returns
+		--------
+			``ISupportElementType`` : 
 		"""
 		pass
 
@@ -3231,11 +3364,13 @@ class IDomainDataSetType(IElementType):
 	def SupportElementTypeExists(self, supportElementTypeName: str) -> bool:
 		"""No Description
 
-		Args:
-			supportElementTypeName(str): supportElementTypeName
+		Args
+		--------
+			supportElementTypeName (``str``) :  supportElementTypeName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -3243,41 +3378,48 @@ class IDomainDataSetType(IElementType):
 	def SupportElementTypeExists(self, supportElementTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def DeleteSupportElementType(self, supportElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SupportElementTypes(self) -> SupportElementTypeCollection:
 		"""No Description
 
-		Returns:
-			SupportElementTypeCollection: 
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
 		"""
 		pass
 
 	def AddNumericalEngineType(self, name: str) -> INumericalEngineType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			INumericalEngineType: 
+		Returns
+		--------
+			``INumericalEngineType`` : 
 		"""
 		pass
 
@@ -3285,11 +3427,13 @@ class IDomainDataSetType(IElementType):
 	def NumericalEngineType(self, name: str) -> INumericalEngineType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			INumericalEngineType: 
+		Returns
+		--------
+			``INumericalEngineType`` : 
 		"""
 		pass
 
@@ -3297,11 +3441,13 @@ class IDomainDataSetType(IElementType):
 	def NumericalEngineType(self, numericalEngineTypeID: int) -> INumericalEngineType:
 		"""No Description
 
-		Args:
-			numericalEngineTypeID(int): numericalEngineTypeID
+		Args
+		--------
+			numericalEngineTypeID (``int``) :  numericalEngineTypeID
 
-		Returns:
-			INumericalEngineType: 
+		Returns
+		--------
+			``INumericalEngineType`` : 
 		"""
 		pass
 
@@ -3309,11 +3455,13 @@ class IDomainDataSetType(IElementType):
 	def NumericalEngineTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -3321,253 +3469,295 @@ class IDomainDataSetType(IElementType):
 	def NumericalEngineTypeExists(self, numericalEngineTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			numericalEngineTypeID(int): numericalEngineTypeID
+		Args
+		--------
+			numericalEngineTypeID (``int``) :  numericalEngineTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def DeleteNumericalEngineType(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def NumericalEngineTypes(self) -> NumericalEngineTypeCollection:
 		"""No Description
 
-		Returns:
-			NumericalEngineTypeCollection: 
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
 		"""
 		pass
 
 	def GetMainNumericalEngineTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def SetMainNumericalEngineTypeName(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def AddResultRecordType(self, name: str) -> IResultRecordType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IResultRecordType: 
+		Returns
+		--------
+			``IResultRecordType`` : 
 		"""
 		pass
 
 	def ResultRecordType(self, resultRecordTypeName: str) -> IResultRecordType:
 		"""No Description
 
-		Args:
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IResultRecordType: 
+		Returns
+		--------
+			``IResultRecordType`` : 
 		"""
 		pass
 
 	def ResultRecordTypeExists(self, resultRecordTypeName: str) -> bool:
 		"""No Description
 
-		Args:
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def ResultRecordTypes(self) -> ResultRecordTypeCollection:
 		"""No Description
 
-		Returns:
-			ResultRecordTypeCollection: 
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
 		"""
 		pass
 
 	def AddNumericFormatter(self, name: str) -> NumericFormatter:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			NumericFormatter: 
+		Returns
+		--------
+			``NumericFormatter`` : 
 		"""
 		pass
 
 	def NumericFormatter(self, name: str) -> NumericFormatter:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			NumericFormatter: 
+		Returns
+		--------
+			``NumericFormatter`` : 
 		"""
 		pass
 
 	def NumericFormatters(self) -> StringCollection:
 		"""No Description
 
-		Returns:
-			StringCollection: 
+		Returns
+		--------
+			``StringCollection`` : 
 		"""
 		pass
 
 	def AddStoredQuery(self, name: str, type: StoredQueryType, queryText: str) -> IStoredQuery:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(StoredQueryType): type
-			queryText(str): queryText
+		Args
+		--------
+			name (``str``) :  name
+			type (``StoredQueryType``) :  type
+			queryText (``str``) :  queryText
 
-		Returns:
-			IStoredQuery: 
+		Returns
+		--------
+			``IStoredQuery`` : 
 		"""
 		pass
 
 	def DeleteStoredQuery(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def StoredQuery(self, name: str) -> IStoredQuery:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IStoredQuery: 
+		Returns
+		--------
+			``IStoredQuery`` : 
 		"""
 		pass
 
 	def StoredQueryExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def StoredQueryNames(self) -> StringCollection:
 		"""No Description
 
-		Returns:
-			StringCollection: 
+		Returns
+		--------
+			``StringCollection`` : 
 		"""
 		pass
 
 	def GetSchemaVersion(self) -> Version:
 		"""No Description
 
-		Returns:
-			Version: 
+		Returns
+		--------
+			``Version`` : 
 		"""
 		pass
 
 	def SetSchemaVersion(self, version: Version) -> None:
 		"""No Description
 
-		Args:
-			version(Version): version
+		Args
+		--------
+			version (``Version``) :  version
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def AddProduct(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ProductExists(self, productName: str) -> bool:
 		"""No Description
 
-		Args:
-			productName(str): productName
+		Args
+		--------
+			productName (``str``) :  productName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Products(self) -> List[str]:
 		"""No Description
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def DeleteProduct(self, productName: str) -> None:
 		"""No Description
 
-		Args:
-			productName(str): productName
+		Args
+		--------
+			productName (``str``) :  productName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetMainTextResourceAssemblyName(self) -> str:
 		"""No Description
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def SetMainTextResourceAssemblyName(self, assemblyName: str) -> None:
 		"""No Description
 
-		Args:
-			assemblyName(str): assemblyName
+		Args
+		--------
+			assemblyName (``str``) :  assemblyName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -3575,8 +3765,9 @@ class IDomainDataSetType(IElementType):
 	def DataSource(self) -> IDataSource:
 		"""No Description
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
@@ -3584,8 +3775,9 @@ class IDomainDataSetType(IElementType):
 	def ParentDomainDataSetTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
@@ -3593,8 +3785,9 @@ class IDomainDataSetType(IElementType):
 	def CanBeHidden(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
@@ -3606,8 +3799,9 @@ class IDomainDataSetType(IElementType):
 	def ActiveProductFilter(self) -> str:
 		"""No Description
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
@@ -3621,8 +3815,9 @@ class IDomainDataSetTypeRefactoring:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -3630,12 +3825,14 @@ class IDomainDataSetTypeRefactoring:
 	def MoveFieldTypesBetweenAlternativeTypes(self, fieldTypes: FieldTypeCollection, targetAlternativeType: IAlternativeType) -> None:
 		"""No Description
 
-		Args:
-			fieldTypes(FieldTypeCollection): fieldTypes
-			targetAlternativeType(IAlternativeType): targetAlternativeType
+		Args
+		--------
+			fieldTypes (``FieldTypeCollection``) :  fieldTypes
+			targetAlternativeType (``IAlternativeType``) :  targetAlternativeType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -3645,8 +3842,9 @@ class IStoredQuery(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -3655,8 +3853,9 @@ class IStoredQuery(IElementType):
 	def QueryText(self) -> str:
 		"""No Description
 
-		Returns:
-			IStoredQuery: 
+		Returns
+		--------
+			``IStoredQuery`` : 
 		"""
 		pass
 
@@ -3668,8 +3867,9 @@ class IStoredQuery(IElementType):
 	def QueryType(self) -> StoredQueryType:
 		"""No Description
 
-		Returns:
-			IStoredQuery: 
+		Returns
+		--------
+			``IStoredQuery`` : 
 		"""
 		pass
 
@@ -3679,8 +3879,9 @@ class IModelingElementType(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -3689,11 +3890,13 @@ class IModelingElementType(IElementType):
 	def FieldType(self, fieldTypeId: int) -> IFieldType:
 		"""No Description
 
-		Args:
-			fieldTypeId(int): fieldTypeId
+		Args
+		--------
+			fieldTypeId (``int``) :  fieldTypeId
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -3701,30 +3904,35 @@ class IModelingElementType(IElementType):
 	def FieldType(self, name: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def FieldTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def FieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -3732,8 +3940,9 @@ class IModelingElementType(IElementType):
 	def DomainDataSetType(self) -> IDomainDataSetType:
 		"""No Description
 
-		Returns:
-			IModelingElementType: 
+		Returns
+		--------
+			``IModelingElementType`` : 
 		"""
 		pass
 
@@ -3743,8 +3952,9 @@ class IStandardModelingElementType(IModelingElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -3752,58 +3962,68 @@ class IStandardModelingElementType(IModelingElementType):
 	def AddModelingElementFieldType(self, fieldName: str, type: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			type(FieldDataType): type
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def AddModelingElementCollectionFieldType(self, fieldName: str, serializeAsBinary: bool) -> IFieldType:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			serializeAsBinary(bool): serializeAsBinary
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			serializeAsBinary (``bool``) :  serializeAsBinary
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def ModelingElementFieldTypeExists(self, fieldName: str, elementTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			elementTypeID(int): elementTypeID
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			elementTypeID (``int``) :  elementTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def ModelingElementFieldType(self, fieldName: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def ModelingElementFieldTypes(self, elementTypeID: int) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			elementTypeID(int): elementTypeID
+		Args
+		--------
+			elementTypeID (``int``) :  elementTypeID
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -3811,8 +4031,9 @@ class IStandardModelingElementType(IModelingElementType):
 	def ModelingElementType(self) -> ModelingElementType:
 		"""No Description
 
-		Returns:
-			IStandardModelingElementType: 
+		Returns
+		--------
+			``IStandardModelingElementType`` : 
 		"""
 		pass
 
@@ -3822,8 +4043,9 @@ class INumericalEngineType(IModelingElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -3831,62 +4053,72 @@ class INumericalEngineType(IModelingElementType):
 	def AddResultFieldType(self, resultFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			resultFieldTypeID(int): resultFieldTypeID
+		Args
+		--------
+			resultFieldTypeID (``int``) :  resultFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SupportedResultRecordTypeNames(self) -> StringCollection:
 		"""No Description
 
-		Returns:
-			StringCollection: 
+		Returns
+		--------
+			``StringCollection`` : 
 		"""
 		pass
 
 	def ResultFieldType(self, name: str, resultRecordTypeName: str) -> IResultFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			name (``str``) :  name
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IResultFieldType: 
+		Returns
+		--------
+			``IResultFieldType`` : 
 		"""
 		pass
 
 	def ResultFieldTypes(self, resultRecordTypeName: str, domainElementTypeID: int) -> FieldTypeCollection:
 		"""No Description
 
-		Args:
-			resultRecordTypeName(str): resultRecordTypeName
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			resultRecordTypeName (``str``) :  resultRecordTypeName
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def ScenarioResultFieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def DropResultFieldType(self, resultFieldTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			resultFieldTypeID(int): resultFieldTypeID
+		Args
+		--------
+			resultFieldTypeID (``int``) :  resultFieldTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -3894,12 +4126,14 @@ class INumericalEngineType(IModelingElementType):
 	def AddCalculationOptionsFieldType(self, name: str, type: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -3907,109 +4141,127 @@ class INumericalEngineType(IModelingElementType):
 	def AddCalculationOptionsFieldType(self, name: str, type: FieldDataType, enumFieldTypeID: int, sharedEnumMembers: array[str]) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
-			enumFieldTypeID(int): enumFieldTypeID
-			sharedEnumMembers(array[str]): sharedEnumMembers
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
+			enumFieldTypeID (``int``) :  enumFieldTypeID
+			sharedEnumMembers (``array[str]``) :  sharedEnumMembers
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def AddCalculationOptionsCollectionFieldType(self, name: str, serializeAsBinary: bool) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			serializeAsBinary(bool): serializeAsBinary
+		Args
+		--------
+			name (``str``) :  name
+			serializeAsBinary (``bool``) :  serializeAsBinary
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def CalculationOptionsFieldType(self, name: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def CalculationOptionsFieldTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def CalculationOptionsFieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
 	def DeleteCalculationOptionsFieldType(self, name: str) -> None:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SupportsFieldType(self, fieldTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			fieldTypeID(int): fieldTypeID
+		Args
+		--------
+			fieldTypeID (``int``) :  fieldTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def MakeComposite(self, subNumericalEngineTypes: List[INumericalEngineType], defaultActiveNumericalEngineType: INumericalEngineType) -> None:
 		"""No Description
 
-		Args:
-			subNumericalEngineTypes(List[INumericalEngineType]): subNumericalEngineTypes
-			defaultActiveNumericalEngineType(INumericalEngineType): defaultActiveNumericalEngineType
+		Args
+		--------
+			subNumericalEngineTypes (``List[INumericalEngineType]``) :  subNumericalEngineTypes
+			defaultActiveNumericalEngineType (``INumericalEngineType``) :  defaultActiveNumericalEngineType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetFilteringByProduct(self) -> List[str]:
 		"""No Description
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def SetFilteringByProduct(self, products: List[str]) -> None:
 		"""No Description
 
-		Args:
-			products(List[str]): products
+		Args
+		--------
+			products (``List[str]``) :  products
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -4017,8 +4269,9 @@ class INumericalEngineType(IModelingElementType):
 	def CalculationAssemblyName(self) -> str:
 		"""No Description
 
-		Returns:
-			INumericalEngineType: 
+		Returns
+		--------
+			``INumericalEngineType`` : 
 		"""
 		pass
 
@@ -4030,8 +4283,9 @@ class INumericalEngineType(IModelingElementType):
 	def CalculationClassName(self) -> str:
 		"""No Description
 
-		Returns:
-			INumericalEngineType: 
+		Returns
+		--------
+			``INumericalEngineType`` : 
 		"""
 		pass
 
@@ -4043,8 +4297,9 @@ class INumericalEngineType(IModelingElementType):
 	def IsComposite(self) -> bool:
 		"""No Description
 
-		Returns:
-			INumericalEngineType: 
+		Returns
+		--------
+			``INumericalEngineType`` : 
 		"""
 		pass
 
@@ -4054,8 +4309,9 @@ class IResultRecordType(IElementType):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4063,23 +4319,27 @@ class IResultRecordType(IElementType):
 	def AddFieldType(self, name: str, type: FieldDataType) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(FieldDataType): type
+		Args
+		--------
+			name (``str``) :  name
+			type (``FieldDataType``) :  type
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def DeleteFieldType(self, resultFieldTypeId: int) -> None:
 		"""No Description
 
-		Args:
-			resultFieldTypeId(int): resultFieldTypeId
+		Args
+		--------
+			resultFieldTypeId (``int``) :  resultFieldTypeId
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -4087,11 +4347,13 @@ class IResultRecordType(IElementType):
 	def FieldType(self, name: str) -> IFieldType:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
@@ -4099,30 +4361,35 @@ class IResultRecordType(IElementType):
 	def FieldType(self, fieldTypeId: int) -> IFieldType:
 		"""No Description
 
-		Args:
-			fieldTypeId(int): fieldTypeId
+		Args
+		--------
+			fieldTypeId (``int``) :  fieldTypeId
 
-		Returns:
-			IFieldType: 
+		Returns
+		--------
+			``IFieldType`` : 
 		"""
 		pass
 
 	def FieldTypeExists(self, name: str) -> bool:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def FieldTypes(self) -> FieldTypeCollection:
 		"""No Description
 
-		Returns:
-			FieldTypeCollection: 
+		Returns
+		--------
+			``FieldTypeCollection`` : 
 		"""
 		pass
 
@@ -4130,8 +4397,9 @@ class IResultRecordType(IElementType):
 	def DomainDataSetType(self) -> IDomainDataSetType:
 		"""No Description
 
-		Returns:
-			IResultRecordType: 
+		Returns
+		--------
+			``IResultRecordType`` : 
 		"""
 		pass
 
@@ -4141,8 +4409,9 @@ class IDomainDatabaseContext:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4150,24 +4419,27 @@ class IDomainDatabaseContext:
 	def CurrentDomainDataSet(self) -> IDomainDataSet:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
 	def CurrentDbConnection(self) -> DbConnection:
 		"""No Description
 
-		Returns:
-			DbConnection: 
+		Returns
+		--------
+			``DbConnection`` : 
 		"""
 		pass
 
 	def Flush(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -4177,8 +4449,9 @@ class IDomainDataSetManager:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4186,45 +4459,53 @@ class IDomainDataSetManager:
 	def AddDomainDataSet(self, domainDataSetTypeID: int, name: str) -> IDomainDataSet:
 		"""No Description
 
-		Args:
-			domainDataSetTypeID(int): domainDataSetTypeID
-			name(str): name
+		Args
+		--------
+			domainDataSetTypeID (``int``) :  domainDataSetTypeID
+			name (``str``) :  name
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
 	def DomainDataSet(self, domainDataSetID: int) -> IDomainDataSet:
 		"""No Description
 
-		Args:
-			domainDataSetID(int): domainDataSetID
+		Args
+		--------
+			domainDataSetID (``int``) :  domainDataSetID
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
 	def DomainDataSets(self, domainDataSetTypeID: int) -> DomainDataSetCollection:
 		"""No Description
 
-		Args:
-			domainDataSetTypeID(int): domainDataSetTypeID
+		Args
+		--------
+			domainDataSetTypeID (``int``) :  domainDataSetTypeID
 
-		Returns:
-			DomainDataSetCollection: 
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
 		"""
 		pass
 
 	def DeleteDomainDataSet(self, domainDataSetID: int) -> None:
 		"""No Description
 
-		Args:
-			domainDataSetID(int): domainDataSetID
+		Args
+		--------
+			domainDataSetID (``int``) :  domainDataSetID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -4232,8 +4513,9 @@ class IDomainDataSetManager:
 	def DataSource(self) -> IDataSource:
 		"""No Description
 
-		Returns:
-			IDomainDataSetManager: 
+		Returns
+		--------
+			``IDomainDataSetManager`` : 
 		"""
 		pass
 
@@ -4243,8 +4525,9 @@ class IDomainDataSet:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4252,101 +4535,118 @@ class IDomainDataSet:
 	def Exists(self, modelingElementID: int) -> bool:
 		"""No Description
 
-		Args:
-			modelingElementID(int): modelingElementID
+		Args
+		--------
+			modelingElementID (``int``) :  modelingElementID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def AlternativeTypeID(self, alternativeID: int) -> int:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def DomainElementTypeID(self, domainElementID: int) -> int:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def NumericalEngineTypeName(self, calculationOptionsID: int) -> str:
 		"""No Description
 
-		Args:
-			calculationOptionsID(int): calculationOptionsID
+		Args
+		--------
+			calculationOptionsID (``int``) :  calculationOptionsID
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def DomainElementTypeIDs(self) -> IHmIDToObjectDictionary:
 		"""No Description
 
-		Returns:
-			IHmIDToObjectDictionary: 
+		Returns
+		--------
+			``IHmIDToObjectDictionary`` : 
 		"""
 		pass
 
 	def SupportElementTypeID(self, supportElementID: int) -> int:
 		"""No Description
 
-		Args:
-			supportElementID(int): supportElementID
+		Args
+		--------
+			supportElementID (``int``) :  supportElementID
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def ModelingElementType(self, elementID: int) -> ModelingElementType:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			ModelingElementType: 
+		Returns
+		--------
+			``ModelingElementType`` : 
 		"""
 		pass
 
 	def NumericalEngine(self, numericalEngineType: str) -> INumericalEngine:
 		"""No Description
 
-		Args:
-			numericalEngineType(str): numericalEngineType
+		Args
+		--------
+			numericalEngineType (``str``) :  numericalEngineType
 
-		Returns:
-			INumericalEngine: 
+		Returns
+		--------
+			``INumericalEngine`` : 
 		"""
 		pass
 
 	def DomainDataSetType(self) -> IDomainDataSetType:
 		"""No Description
 
-		Returns:
-			IDomainDataSetType: 
+		Returns
+		--------
+			``IDomainDataSetType`` : 
 		"""
 		pass
 
 	def GeometryAlternativeManager(self) -> IAlternativeManager:
 		"""No Description
 
-		Returns:
-			IAlternativeManager: 
+		Returns
+		--------
+			``IAlternativeManager`` : 
 		"""
 		pass
 
@@ -4354,11 +4654,13 @@ class IDomainDataSet:
 	def AlternativeManager(self, alternativeTypeID: int) -> IAlternativeManager:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			IAlternativeManager: 
+		Returns
+		--------
+			``IAlternativeManager`` : 
 		"""
 		pass
 
@@ -4366,11 +4668,13 @@ class IDomainDataSet:
 	def AlternativeManager(self, alternativeTypeName: str) -> IAlternativeManager:
 		"""No Description
 
-		Args:
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IAlternativeManager: 
+		Returns
+		--------
+			``IAlternativeManager`` : 
 		"""
 		pass
 
@@ -4378,11 +4682,13 @@ class IDomainDataSet:
 	def DomainElementManager(self, domainElementTypeID: int) -> IDomainElementManager:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IDomainElementManager: 
+		Returns
+		--------
+			``IDomainElementManager`` : 
 		"""
 		pass
 
@@ -4390,11 +4696,13 @@ class IDomainDataSet:
 	def DomainElementManager(self, domainElementTypeName: str) -> IDomainElementManager:
 		"""No Description
 
-		Args:
-			domainElementTypeName(str): domainElementTypeName
+		Args
+		--------
+			domainElementTypeName (``str``) :  domainElementTypeName
 
-		Returns:
-			IDomainElementManager: 
+		Returns
+		--------
+			``IDomainElementManager`` : 
 		"""
 		pass
 
@@ -4402,11 +4710,13 @@ class IDomainDataSet:
 	def SupportElementManager(self, supportElementTypeID: int) -> ISupportElementManager:
 		"""No Description
 
-		Args:
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			ISupportElementManager: 
+		Returns
+		--------
+			``ISupportElementManager`` : 
 		"""
 		pass
 
@@ -4414,33 +4724,39 @@ class IDomainDataSet:
 	def SupportElementManager(self, supportElementTypeName: str) -> ISupportElementManager:
 		"""No Description
 
-		Args:
-			supportElementTypeName(str): supportElementTypeName
+		Args
+		--------
+			supportElementTypeName (``str``) :  supportElementTypeName
 
-		Returns:
-			ISupportElementManager: 
+		Returns
+		--------
+			``ISupportElementManager`` : 
 		"""
 		pass
 
 	def PrototypeSupportElementManager(self, supportElementTypeID: int) -> IPrototypeManager:
 		"""No Description
 
-		Args:
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			IPrototypeManager: 
+		Returns
+		--------
+			``IPrototypeManager`` : 
 		"""
 		pass
 
 	def PrototypeDomainElementManager(self, domainElementTypeID: int) -> IPrototypeDomainElementManager:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IPrototypeDomainElementManager: 
+		Returns
+		--------
+			``IPrototypeDomainElementManager`` : 
 		"""
 		pass
 
@@ -4448,8 +4764,9 @@ class IDomainDataSet:
 	def Id(self) -> int:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4457,8 +4774,9 @@ class IDomainDataSet:
 	def Guid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4466,8 +4784,9 @@ class IDomainDataSet:
 	def Label(self) -> str:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4479,8 +4798,9 @@ class IDomainDataSet:
 	def Notes(self) -> str:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4492,8 +4812,9 @@ class IDomainDataSet:
 	def DomainDataSetManager(self) -> IDomainDataSetManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4501,8 +4822,9 @@ class IDomainDataSet:
 	def FieldManager(self) -> IFieldManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4510,8 +4832,9 @@ class IDomainDataSet:
 	def ScenarioManager(self) -> IScenarioManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4519,8 +4842,9 @@ class IDomainDataSet:
 	def SelectionSetManager(self) -> ISelectionSetManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4528,8 +4852,9 @@ class IDomainDataSet:
 	def ProfileManager(self) -> ISelectionSetManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4537,8 +4862,9 @@ class IDomainDataSet:
 	def EmbeddedStickyObjectManager(self) -> IEmbeddedStickyObjectManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4546,8 +4872,9 @@ class IDomainDataSet:
 	def ChangeTrackingEnabled(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4559,8 +4886,9 @@ class IDomainDataSet:
 	def ChangeTrackingLocked(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4572,8 +4900,9 @@ class IDomainDataSet:
 	def ChangeTrackingPassword(self) -> str:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4585,8 +4914,9 @@ class IDomainDataSet:
 	def ChangeTrackingPromptOnOpen(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDomainDataSet: 
+		Returns
+		--------
+			``IDomainDataSet`` : 
 		"""
 		pass
 
@@ -4600,8 +4930,9 @@ class IDomainDataSetUnitPresentation(IDomainDataSet):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4610,8 +4941,9 @@ class IDomainDataSetUnitPresentation(IDomainDataSet):
 	def PresentationUnitManager(self) -> IPresentationUnitsManager:
 		"""No Description
 
-		Returns:
-			IDomainDataSetUnitPresentation: 
+		Returns
+		--------
+			``IDomainDataSetUnitPresentation`` : 
 		"""
 		pass
 
@@ -4621,8 +4953,9 @@ class IDomainDataSet2DModeling:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4631,8 +4964,9 @@ class IDomainDataSet2DModeling:
 	def HasRainfallInflowToNode(self) -> bool:
 		"""No Description
 
-		Returns:
-			IDomainDataSet2DModeling: 
+		Returns
+		--------
+			``IDomainDataSet2DModeling`` : 
 		"""
 		pass
 
@@ -4644,8 +4978,9 @@ class IDomainDataSet2DModeling:
 	def MeshSize(self) -> float:
 		"""No Description
 
-		Returns:
-			IDomainDataSet2DModeling: 
+		Returns
+		--------
+			``IDomainDataSet2DModeling`` : 
 		"""
 		pass
 
@@ -4659,8 +4994,9 @@ class IDomainDataSetUpdatable:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4668,19 +5004,22 @@ class IDomainDataSetUpdatable:
 	def LocalizeExistingLabels(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def SetGuid(self, guid: Guid) -> None:
 		"""No Description
 
-		Args:
-			guid(Guid): guid
+		Args
+		--------
+			guid (``Guid``) :  guid
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -4690,8 +5029,9 @@ class IDomainDataSetSearch:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4699,48 +5039,56 @@ class IDomainDataSetSearch:
 	def GetElementIDsForLabel(self, label: str, type: ModelingElementType, elementTypeID: int, useWildcards: bool) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			label(str): label
-			type(ModelingElementType): type
-			elementTypeID(int): elementTypeID
-			useWildcards(bool): useWildcards
+		Args
+		--------
+			label (``str``) :  label
+			type (``ModelingElementType``) :  type
+			elementTypeID (``int``) :  elementTypeID
+			useWildcards (``bool``) :  useWildcards
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def GetDomainElementIDsForLabel(self, label: str, useWildcards: bool) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			label(str): label
-			useWildcards(bool): useWildcards
+		Args
+		--------
+			label (``str``) :  label
+			useWildcards (``bool``) :  useWildcards
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def GetLabel(self, elementID: int) -> str:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def GetLabelForDomainElementID(self, domainElementID: int) -> str:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
@@ -4748,11 +5096,13 @@ class IDomainDataSetSearch:
 	def GetIncomingLinkIDsToNode(self, domainElementID: int) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -4760,13 +5110,15 @@ class IDomainDataSetSearch:
 	def GetIncomingLinkIDsToNode(self, domainElementID: int, alternativeID: int, domainElementTypeIDs: HmIDCollection) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -4774,11 +5126,13 @@ class IDomainDataSetSearch:
 	def GetOutcomingLinkIDsFromNode(self, domainElementID: int) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -4786,26 +5140,30 @@ class IDomainDataSetSearch:
 	def GetOutcomingLinkIDsFromNode(self, domainElementID: int, alternativeID: int, domainElementTypeIDs: HmIDCollection) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
-	def GetElementIDsWithDuplicateLabels(self, modelingElementType: ModelingElementType, elementTypeIDs: array('i'), ignoreBlanks: bool) -> HmIDCollection:
+	def GetElementIDsWithDuplicateLabels(self, modelingElementType: ModelingElementType, elementTypeIDs: array[int], ignoreBlanks: bool) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			modelingElementType(ModelingElementType): modelingElementType
-			elementTypeIDs(array('i')): elementTypeIDs
-			ignoreBlanks(bool): ignoreBlanks
+		Args
+		--------
+			modelingElementType (``ModelingElementType``) :  modelingElementType
+			elementTypeIDs (``array[int]``) :  elementTypeIDs
+			ignoreBlanks (``bool``) :  ignoreBlanks
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -4815,8 +5173,9 @@ class IDomainDataSetLog:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4825,8 +5184,9 @@ class IDomainDataSetLog:
 	def ChangeLogDatabase(self) -> IChangeLogDatabase:
 		"""No Description
 
-		Returns:
-			IDomainDataSetLog: 
+		Returns
+		--------
+			``IDomainDataSetLog`` : 
 		"""
 		pass
 
@@ -4834,8 +5194,9 @@ class IDomainDataSetLog:
 	def ChangeLog(self) -> IChangeLog:
 		"""No Description
 
-		Returns:
-			IDomainDataSetLog: 
+		Returns
+		--------
+			``IDomainDataSetLog`` : 
 		"""
 		pass
 
@@ -4845,8 +5206,9 @@ class IChangeLogDatabase:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4854,36 +5216,41 @@ class IChangeLogDatabase:
 	def ArchiveChangeLog(self, process: IProcessInProgressEx, filteredIDs: HmIDCollection) -> None:
 		"""No Description
 
-		Args:
-			process(IProcessInProgressEx): process
-			filteredIDs(HmIDCollection): filteredIDs
+		Args
+		--------
+			process (``IProcessInProgressEx``) :  process
+			filteredIDs (``HmIDCollection``) :  filteredIDs
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetChangeLogWriter(self) -> IChangeLogWriter:
 		"""No Description
 
-		Returns:
-			IChangeLogWriter: 
+		Returns
+		--------
+			``IChangeLogWriter`` : 
 		"""
 		pass
 
 	def GetEditsDataTable(self) -> DataTable:
 		"""No Description
 
-		Returns:
-			DataTable: 
+		Returns
+		--------
+			``DataTable`` : 
 		"""
 		pass
 
 	def IsInitialized(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -4891,14 +5258,16 @@ class IChangeLogDatabase:
 	def ReadChangeLog(self, dataSet: DataSet, domainDataSet: IDomainDataSet, process: IProcessInProgress, dataRowLoader: IChangeLogDataRowLoader) -> DataSet:
 		"""No Description
 
-		Args:
-			dataSet(DataSet): dataSet
-			domainDataSet(IDomainDataSet): domainDataSet
-			process(IProcessInProgress): process
-			dataRowLoader(IChangeLogDataRowLoader): dataRowLoader
+		Args
+		--------
+			dataSet (``DataSet``) :  dataSet
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			process (``IProcessInProgress``) :  process
+			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
 
-		Returns:
-			DataSet: 
+		Returns
+		--------
+			``DataSet`` : 
 		"""
 		pass
 
@@ -4906,13 +5275,15 @@ class IChangeLogDatabase:
 	def ReadChangeLog(self, domainDataSet: IDomainDataSet, process: IProcessInProgress, dataRowLoader: IChangeLogDataRowLoader) -> DataSet:
 		"""No Description
 
-		Args:
-			domainDataSet(IDomainDataSet): domainDataSet
-			process(IProcessInProgress): process
-			dataRowLoader(IChangeLogDataRowLoader): dataRowLoader
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			process (``IProcessInProgress``) :  process
+			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
 
-		Returns:
-			DataSet: 
+		Returns
+		--------
+			``DataSet`` : 
 		"""
 		pass
 
@@ -4920,8 +5291,9 @@ class IChangeLogDatabase:
 	def LogConnection(self) -> SQLiteConnection:
 		"""No Description
 
-		Returns:
-			IChangeLogDatabase: 
+		Returns
+		--------
+			``IChangeLogDatabase`` : 
 		"""
 		pass
 
@@ -4931,8 +5303,9 @@ class IChangeLogDataRowLoader:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4940,34 +5313,13 @@ class IChangeLogDataRowLoader:
 	def LoadDataRow(self, values: List[object]) -> None:
 		"""No Description
 
-		Args:
-			values(List[object]): values
+		Args
+		--------
+			values (``List[object]``) :  values
 
-		Returns:
-			None: 
-		"""
-		pass
-
-class IChangeLogFieldEntryVerifier:
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def ShouldLogEntryFor(self, fieldName: str) -> bool:
-		"""No Description
-
-		Args:
-			fieldName(str): fieldName
-
-		Returns:
-			bool: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -4977,8 +5329,9 @@ class IChangeLogWriter:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -4986,233 +5339,267 @@ class IChangeLogWriter:
 	def CommitSQLTransaction(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeAdd(self, alternativeID: int, parentAlternativeID: int, alternativeTypeID: int, isChildAlternative: bool) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			parentAlternativeID(int): parentAlternativeID
-			alternativeTypeID(int): alternativeTypeID
-			isChildAlternative(bool): isChildAlternative
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			parentAlternativeID (``int``) :  parentAlternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			isChildAlternative (``bool``) :  isChildAlternative
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeDelete(self, alternativeID: int, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeDuplicated(self, alternativeID: int, alternativeTypeID: int, parentID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			parentID(int): parentID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			parentID (``int``) :  parentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeMerge(self, alternativeID: int, alternativeTypeID: int, parentID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			parentID(int): parentID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			parentID (``int``) :  parentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeModified(self, alternativeID: int, alternativeTypeID: int, fieldTypeLabel: str, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			fieldTypeLabel(str): fieldTypeLabel
-			newValue(object): newValue
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			fieldTypeLabel (``str``) :  fieldTypeLabel
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeParentIDChanged(self, alternativeID: int, alternativeTypeID: int, parentID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			parentID(int): parentID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			parentID (``int``) :  parentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeRestore(self, alternativeID: int, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteChangeLogArchived(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteCollectionFieldGlobalEdit(self, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType, fieldType: str, elementIDs: List[int], value: object) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
-			fieldType(str): fieldType
-			elementIDs(List[int]): elementIDs
-			value(object): value
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			fieldType (``str``) :  fieldType
+			elementIDs (``List[int]``) :  elementIDs
+			value (``object``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteCollectionValueAdd(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteCollectionValueDelete(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementAdd(self, elementID: int, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementDelete(self, elementID: int, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementEdit(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, fieldTypeLabel: str, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			fieldTypeLabel(str): fieldTypeLabel
-			newValue(object): newValue
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			fieldTypeLabel (``str``) :  fieldTypeLabel
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementEditCollection(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType, fieldTypeLabel: str) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
-			fieldTypeLabel(str): fieldTypeLabel
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			fieldTypeLabel (``str``) :  fieldTypeLabel
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
-	def WriteDomainElementEditNoAlternative(self, domainElementID: int, domainElementTypeID: Nullable, fieldTypeLabel: str, newValue: object) -> None:
+	def WriteDomainElementEditNoAlternative(self, domainElementID: int, domainElementTypeID: Nullable[int], fieldTypeLabel: str, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			domainElementTypeID(Nullable): domainElementTypeID
-			fieldTypeLabel(str): fieldTypeLabel
-			newValue(object): newValue
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			domainElementTypeID (``Nullable``) :  domainElementTypeID
+			fieldTypeLabel (``str``) :  fieldTypeLabel
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
-	def WriteDomainElementGlobalEdit(self, alternativeID: int, alternativeTypeID: int, fieldType: str, elementIDNewValueDictionary: Dict[int,int]) -> None:
+	def WriteDomainElementGlobalEdit(self, alternativeID: int, alternativeTypeID: int, fieldType: str, elementIDNewValueDictionary: Dict[int,int][int,object]) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			fieldType(str): fieldType
-			elementIDNewValueDictionary(Dict[int,int]): elementIDNewValueDictionary
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			fieldType (``str``) :  fieldType
+			elementIDNewValueDictionary (``Dict[int,int]``) :  elementIDNewValueDictionary
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5220,12 +5607,14 @@ class IChangeLogWriter:
 	def WriteDomainElementRestore(self, elementIDs: HmIDCollection, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementIDs(HmIDCollection): elementIDs
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementIDs (``HmIDCollection``) :  elementIDs
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5233,54 +5622,61 @@ class IChangeLogWriter:
 	def WriteDomainElementRestore(self, elementID: int, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementTypeLogContext(self, elementID: int, elementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			elementTypeID(int): elementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			elementTypeID (``int``) :  elementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteTrackingTurnedOff(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	@property
-	def CurrentContext(self) -> Nullable:
+	def CurrentContext(self) -> Nullable[Guid]:
 		"""No Description
 
-		Returns:
-			IChangeLogWriter: 
+		Returns
+		--------
+			``IChangeLogWriter`` : 
 		"""
 		pass
 
 	@CurrentContext.setter
-	def CurrentContext(self, currentcontext: Nullable) -> None:
+	def CurrentContext(self, currentcontext: Nullable[Guid]) -> None:
 		pass
 
 	@property
 	def Enabled(self) -> bool:
 		"""No Description
 
-		Returns:
-			IChangeLogWriter: 
+		Returns
+		--------
+			``IChangeLogWriter`` : 
 		"""
 		pass
 
@@ -5294,259 +5690,296 @@ class IChangeLog:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def Archive(self, process: IProcessInProgressEx, changeLogDataTable: DataTable, orderedIDs: array('i'), filteredIDs: HmIDCollection, filename: str, whereClause: str, append: bool = False) -> None:
+	def Archive(self, process: IProcessInProgressEx, changeLogDataTable: DataTable, orderedIDs: array[int], filteredIDs: HmIDCollection, filename: str, whereClause: str, append: bool = False) -> None:
 		"""No Description
 
-		Args:
-			process(IProcessInProgressEx): process
-			changeLogDataTable(DataTable): changeLogDataTable
-			orderedIDs(array('i')): orderedIDs
-			filteredIDs(HmIDCollection): filteredIDs
-			filename(str): filename
-			whereClause(str): whereClause
-			append(bool): append
+		Args
+		--------
+			process (``IProcessInProgressEx``) :  process
+			changeLogDataTable (``DataTable``) :  changeLogDataTable
+			orderedIDs (``array[int]``) :  orderedIDs
+			filteredIDs (``HmIDCollection``) :  filteredIDs
+			filename (``str``) :  filename
+			whereClause (``str``) :  whereClause
+			append (``bool``) :  append
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def CommitSQLTransaction(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeAdd(self, alternativeID: int, parentAlternativeID: int, alternativeTypeID: int, isChildAlternative: bool) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			parentAlternativeID(int): parentAlternativeID
-			alternativeTypeID(int): alternativeTypeID
-			isChildAlternative(bool): isChildAlternative
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			parentAlternativeID (``int``) :  parentAlternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			isChildAlternative (``bool``) :  isChildAlternative
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeDelete(self, alternativeID: int, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeDuplicated(self, alternativeID: int, alternativeTypeID: int, parentID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			parentID(int): parentID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			parentID (``int``) :  parentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeMerge(self, alternativeID: int, alternativeTypeID: int, parentID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			parentID(int): parentID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			parentID (``int``) :  parentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeModified(self, alternativeID: int, alternativeTypeID: int, fieldTypeLabel: str, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			fieldTypeLabel(str): fieldTypeLabel
-			newValue(object): newValue
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			fieldTypeLabel (``str``) :  fieldTypeLabel
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeParentChanged(self, alternativeID: int, alternativeTypeID: int, parentID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			parentID(int): parentID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			parentID (``int``) :  parentID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteAlternativeRestore(self, alternativeID: int, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteChangeLogArchived(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteCollectionFieldGlobalEdit(self, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType, fieldType: str, elementIDs: List[int], value: object) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
-			fieldType(str): fieldType
-			elementIDs(List[int]): elementIDs
-			value(object): value
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			fieldType (``str``) :  fieldType
+			elementIDs (``List[int]``) :  elementIDs
+			value (``object``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteCollectionValueAdd(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteCollectionValueDelete(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementAdd(self, elementID: int, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementDelete(self, elementID: int, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementEdit(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, fieldTypeLabel: str, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			fieldTypeLabel(str): fieldTypeLabel
-			newValue(object): newValue
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			fieldTypeLabel (``str``) :  fieldTypeLabel
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementEditCollection(self, domainElementID: int, alternativeID: int, alternativeTypeID: int, domainElementCollectionFieldType: IDomainElementFieldType, fieldTypeLabel: str) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			domainElementCollectionFieldType(IDomainElementFieldType): domainElementCollectionFieldType
-			fieldTypeLabel(str): fieldTypeLabel
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			fieldTypeLabel (``str``) :  fieldTypeLabel
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
-	def WriteDomainElementEditNoAlternative(self, domainElementID: int, domainElementTypeID: Nullable, fieldTypeLabel: str, newValue: object) -> None:
+	def WriteDomainElementEditNoAlternative(self, domainElementID: int, domainElementTypeID: Nullable[int], fieldTypeLabel: str, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			domainElementTypeID(Nullable): domainElementTypeID
-			fieldTypeLabel(str): fieldTypeLabel
-			newValue(object): newValue
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			domainElementTypeID (``Nullable``) :  domainElementTypeID
+			fieldTypeLabel (``str``) :  fieldTypeLabel
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
-	def WriteDomainElementGlobalEdit(self, alternativeID: int, alternativeTypeID: int, fieldType: str, elementIDNewValueDictionary: Dict[int,int]) -> None:
+	def WriteDomainElementGlobalEdit(self, alternativeID: int, alternativeTypeID: int, fieldType: str, elementIDNewValueDictionary: Dict[int,int][int,object]) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			alternativeTypeID(int): alternativeTypeID
-			fieldType(str): fieldType
-			elementIDNewValueDictionary(Dict[int,int]): elementIDNewValueDictionary
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (``int``) :  alternativeTypeID
+			fieldType (``str``) :  fieldType
+			elementIDNewValueDictionary (``Dict[int,int]``) :  elementIDNewValueDictionary
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5554,12 +5987,14 @@ class IChangeLog:
 	def WriteDomainElementRestore(self, elementIDs: HmIDCollection, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementIDs(HmIDCollection): elementIDs
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementIDs (``HmIDCollection``) :  elementIDs
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5567,32 +6002,37 @@ class IChangeLog:
 	def WriteDomainElementRestore(self, elementID: int, domainElementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteDomainElementTypeLogContext(self, elementID: int, elementTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			elementTypeID(int): elementTypeID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			elementTypeID (``int``) :  elementTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def WriteTrackingTurnedOff(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5600,8 +6040,9 @@ class IChangeLog:
 	def Database(self) -> IChangeLogDatabase:
 		"""No Description
 
-		Returns:
-			IChangeLog: 
+		Returns
+		--------
+			``IChangeLog`` : 
 		"""
 		pass
 
@@ -5609,8 +6050,9 @@ class IChangeLog:
 	def Enabled(self) -> bool:
 		"""No Description
 
-		Returns:
-			IChangeLog: 
+		Returns
+		--------
+			``IChangeLog`` : 
 		"""
 		pass
 
@@ -5624,8 +6066,9 @@ class IDomainDataSetGISIDLinks:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -5633,115 +6076,134 @@ class IDomainDataSetGISIDLinks:
 	def DeleteAllGISIDs(self, elementID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetGISIDsForElementID(self, elementID: int) -> StringCollection:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			StringCollection: 
+		Returns
+		--------
+			``StringCollection`` : 
 		"""
 		pass
 
 	def GetElementIDsForGISID(self, gisID: str) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			gisID(str): gisID
+		Args
+		--------
+			gisID (``str``) :  gisID
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def GetDeletedElementIDsForGISID(self, gisID: str) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			gisID(str): gisID
+		Args
+		--------
+			gisID (``str``) :  gisID
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def GetDeletedGISIDToElementIDsMap(self) -> Dict:
 		"""No Description
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
 	def GetUniqueGISIDsSet(self) -> Dict:
 		"""No Description
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
 	def AddGISIDToElementID(self, elementID: int, gisID: str) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			gisID(str): gisID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			gisID (``str``) :  gisID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def AddGISIDsToElementID(self, elementID: int, gisIDs: StringCollection) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			gisIDs(StringCollection): gisIDs
+		Args
+		--------
+			elementID (``int``) :  elementID
+			gisIDs (``StringCollection``) :  gisIDs
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def IsElementAvailable(self, elementID: int) -> bool:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def GetAllElementIdsWithGISIDs(self) -> Iterator[GenericPair]:
 		"""No Description
 
-		Returns:
-			Iterator[GenericPair]: 
+		Returns
+		--------
+			``Iterator[GenericPair]`` : 
 		"""
 		pass
 
 	def SetGISIDs(self, elementID: int, value: str) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			value(str): value
+		Args
+		--------
+			elementID (``int``) :  elementID
+			value (``str``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5751,8 +6213,9 @@ class IDomainDataSetExternalIDLinks:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -5760,60 +6223,70 @@ class IDomainDataSetExternalIDLinks:
 	def GetElementIDForExternalID(self, idType: ExternalIDType, externalID: str) -> Union[int, None]:
 		"""No Description
 
-		Args:
-			idType(ExternalIDType): idType
-			externalID(str): externalID
+		Args
+		--------
+			idType (``ExternalIDType``) :  idType
+			externalID (``str``) :  externalID
 
-		Returns:
-			Nullable: 
+		Returns
+		--------
+			``Nullable`` : 
 		"""
 		pass
 
 	def GetExternalIDs(self, elementID: int, idType: ExternalIDType) -> List[str]:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			idType(ExternalIDType): idType
+		Args
+		--------
+			elementID (``int``) :  elementID
+			idType (``ExternalIDType``) :  idType
 
-		Returns:
-			List[str]: 
+		Returns
+		--------
+			``List[str]`` : 
 		"""
 		pass
 
 	def AddExternalIDs(self, elementID: int, idType: ExternalIDType, externalIDs: List[str]) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			idType(ExternalIDType): idType
-			externalIDs(List[str]): externalIDs
+		Args
+		--------
+			elementID (``int``) :  elementID
+			idType (``ExternalIDType``) :  idType
+			externalIDs (``List[str]``) :  externalIDs
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ClearExternalIDs(self, elementID: int, idType: ExternalIDType) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			idType(ExternalIDType): idType
+		Args
+		--------
+			elementID (``int``) :  elementID
+			idType (``ExternalIDType``) :  idType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ClearAllExternalIDs(self, idType: ExternalIDType) -> None:
 		"""No Description
 
-		Args:
-			idType(ExternalIDType): idType
+		Args
+		--------
+			idType (``ExternalIDType``) :  idType
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5823,8 +6296,9 @@ class IDomainDataSetBulkOperations:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -5832,19 +6306,22 @@ class IDomainDataSetBulkOperations:
 	def EnterBulkOperationState(self, type: BulkOperationType) -> None:
 		"""No Description
 
-		Args:
-			type(BulkOperationType): type
+		Args
+		--------
+			type (``BulkOperationType``) :  type
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ExitBulkOperationState(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -5852,8 +6329,9 @@ class IDomainDataSetBulkOperations:
 	def CurrentBulkOperationState(self) -> BulkOperationType:
 		"""No Description
 
-		Returns:
-			IDomainDataSetBulkOperations: 
+		Returns
+		--------
+			``IDomainDataSetBulkOperations`` : 
 		"""
 		pass
 
@@ -5863,8 +6341,9 @@ class IModelingElement(IEditLabeled):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -5872,8 +6351,9 @@ class IModelingElement(IEditLabeled):
 	def SupportedFields(self) -> FieldCollection:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -5881,8 +6361,9 @@ class IModelingElement(IEditLabeled):
 	def Id(self) -> int:
 		"""No Description
 
-		Returns:
-			IModelingElement: 
+		Returns
+		--------
+			``IModelingElement`` : 
 		"""
 		pass
 
@@ -5890,8 +6371,9 @@ class IModelingElement(IEditLabeled):
 	def Notes(self) -> str:
 		"""No Description
 
-		Returns:
-			IModelingElement: 
+		Returns
+		--------
+			``IModelingElement`` : 
 		"""
 		pass
 
@@ -5903,8 +6385,9 @@ class IModelingElement(IEditLabeled):
 	def ModelingElementType(self) -> ModelingElementType:
 		"""No Description
 
-		Returns:
-			IModelingElement: 
+		Returns
+		--------
+			``IModelingElement`` : 
 		"""
 		pass
 
@@ -5912,8 +6395,9 @@ class IModelingElement(IEditLabeled):
 	def Manager(self) -> IModelingElementManager:
 		"""No Description
 
-		Returns:
-			IModelingElement: 
+		Returns
+		--------
+			``IModelingElement`` : 
 		"""
 		pass
 
@@ -5923,8 +6407,9 @@ class IModelingElementManager(IListManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -5932,71 +6417,83 @@ class IModelingElementManager(IListManager):
 	def Copy(self, id: int) -> int:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Element(self, id: int) -> IModelingElement:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			IModelingElement: 
+		Returns
+		--------
+			``IModelingElement`` : 
 		"""
 		pass
 
 	def Exists(self, id: int) -> bool:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Restore(self, id: int) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Elements(self) -> ModelingElementCollection:
 		"""No Description
 
-		Returns:
-			ModelingElementCollection: 
+		Returns
+		--------
+			``ModelingElementCollection`` : 
 		"""
 		pass
 
 	def ElementIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def ModelingElementField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6004,8 +6501,9 @@ class IModelingElementManager(IListManager):
 	def DomainDataSet(self) -> IDomainDataSet:
 		"""No Description
 
-		Returns:
-			IModelingElementManager: 
+		Returns
+		--------
+			``IModelingElementManager`` : 
 		"""
 		pass
 
@@ -6015,8 +6513,9 @@ class IModelingElementManagerBatch:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6024,11 +6523,13 @@ class IModelingElementManagerBatch:
 	def Restore(self, ids: HmIDCollection) -> None:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6038,8 +6539,9 @@ class ITreeElement(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6047,8 +6549,9 @@ class ITreeElement(IModelingElement):
 	def Children(self) -> ModelingElementCollection:
 		"""No Description
 
-		Returns:
-			ModelingElementCollection: 
+		Returns
+		--------
+			``ModelingElementCollection`` : 
 		"""
 		pass
 
@@ -6056,8 +6559,9 @@ class ITreeElement(IModelingElement):
 	def ParentID(self) -> int:
 		"""No Description
 
-		Returns:
-			ITreeElement: 
+		Returns
+		--------
+			``ITreeElement`` : 
 		"""
 		pass
 
@@ -6071,8 +6575,9 @@ class ITreeElement2:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6080,20 +6585,23 @@ class ITreeElement2:
 	def GetLevelInHierarchy(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def IsDescendantOf(self, treeElement: ITreeElement, numberOfLevels: int) -> bool:
 		"""No Description
 
-		Args:
-			treeElement(ITreeElement): treeElement
-			numberOfLevels(int): numberOfLevels
+		Args
+		--------
+			treeElement (``ITreeElement``) :  treeElement
+			numberOfLevels (``int``) :  numberOfLevels
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -6103,8 +6611,9 @@ class ITreeElementManager(IModelingElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6112,19 +6621,22 @@ class ITreeElementManager(IModelingElementManager):
 	def BaseElements(self) -> ModelingElementCollection:
 		"""No Description
 
-		Returns:
-			ModelingElementCollection: 
+		Returns
+		--------
+			``ModelingElementCollection`` : 
 		"""
 		pass
 
 	def ChildrenOfElement(self, parentID: int) -> ModelingElementCollection:
 		"""No Description
 
-		Args:
-			parentID(int): parentID
+		Args
+		--------
+			parentID (``int``) :  parentID
 
-		Returns:
-			ModelingElementCollection: 
+		Returns
+		--------
+			``ModelingElementCollection`` : 
 		"""
 		pass
 
@@ -6134,8 +6646,9 @@ class IDomainElement(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6143,8 +6656,9 @@ class IDomainElement(IModelingElement):
 	def DomainElementType(self) -> IDomainElementType:
 		"""No Description
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
@@ -6152,11 +6666,13 @@ class IDomainElement(IModelingElement):
 	def DomainElementField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6164,12 +6680,14 @@ class IDomainElement(IModelingElement):
 	def DomainElementField(self, fieldName: str, alternativeTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6177,8 +6695,9 @@ class IDomainElement(IModelingElement):
 	def DomainElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IDomainElement: 
+		Returns
+		--------
+			``IDomainElement`` : 
 		"""
 		pass
 
@@ -6188,8 +6707,9 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6197,16 +6717,18 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def DomainElementType(self) -> IDomainElementType:
 		"""No Description
 
-		Returns:
-			IDomainElementType: 
+		Returns
+		--------
+			``IDomainElementType`` : 
 		"""
 		pass
 
 	def DelayedElementIDs(self) -> IHmIDDelayedCollection:
 		"""No Description
 
-		Returns:
-			IHmIDDelayedCollection: 
+		Returns
+		--------
+			``IHmIDDelayedCollection`` : 
 		"""
 		pass
 
@@ -6214,11 +6736,13 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def DomainElementField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6226,12 +6750,14 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def DomainElementField(self, fieldName: str, alternativeTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6239,12 +6765,14 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def ResultField(self, fieldName: str, resultRecordTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6252,13 +6780,15 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def ResultField(self, fieldName: str, numericalEngineTypeName: str, resultRecordTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			numericalEngineTypeName(str): numericalEngineTypeName
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -6266,8 +6796,9 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def SupportedResultFields(self) -> FieldCollection:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -6275,26 +6806,30 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 	def SupportedResultFields(self, numericalEngineTypeName: str) -> FieldCollection:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def CrossElementFieldListManager(self, collectionFieldName: str, alternativeTypeName: str, alternativeID: int, sortContexts: SortContextCollection, filterContexts: FilterContextCollection) -> ICrossElementFieldListManager:
 		"""No Description
 
-		Args:
-			collectionFieldName(str): collectionFieldName
-			alternativeTypeName(str): alternativeTypeName
-			alternativeID(int): alternativeID
-			sortContexts(SortContextCollection): sortContexts
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			collectionFieldName (``str``) :  collectionFieldName
+			alternativeTypeName (``str``) :  alternativeTypeName
+			alternativeID (``int``) :  alternativeID
+			sortContexts (``SortContextCollection``) :  sortContexts
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			ICrossElementFieldListManager: 
+		Returns
+		--------
+			``ICrossElementFieldListManager`` : 
 		"""
 		pass
 
@@ -6304,8 +6839,9 @@ class IAlternative(ITreeElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6313,61 +6849,71 @@ class IAlternative(ITreeElement):
 	def AlternativeType(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			IAlternativeType: 
+		Returns
+		--------
+			``IAlternativeType`` : 
 		"""
 		pass
 
 	def AlternativeRecord(self, domainElementTypeID: int) -> IAlternativeRecord:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IAlternativeRecord: 
+		Returns
+		--------
+			``IAlternativeRecord`` : 
 		"""
 		pass
 
 	def AlternativeField(self, name: str, domainElementTypeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			name (``str``) :  name
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def SystemRecordField(self, name: str) -> ISystemRecordField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			ISystemRecordField: 
+		Returns
+		--------
+			``ISystemRecordField`` : 
 		"""
 		pass
 
 	def AlternativeFields(self, domainElementTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def ReferencedScenarios(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -6375,8 +6921,9 @@ class IAlternative(ITreeElement):
 	def AlternativeTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IAlternative: 
+		Returns
+		--------
+			``IAlternative`` : 
 		"""
 		pass
 
@@ -6386,8 +6933,9 @@ class IAlternativeManager(ITreeElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6395,16 +6943,18 @@ class IAlternativeManager(ITreeElementManager):
 	def AlternativeType(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			IAlternativeType: 
+		Returns
+		--------
+			``IAlternativeType`` : 
 		"""
 		pass
 
 	def SystemAlternativeRecord(self) -> ISystemAlternativeRecord:
 		"""No Description
 
-		Returns:
-			ISystemAlternativeRecord: 
+		Returns
+		--------
+			``ISystemAlternativeRecord`` : 
 		"""
 		pass
 
@@ -6412,46 +6962,54 @@ class IAlternativeManager(ITreeElementManager):
 	def Add(self, alternativeParentId: int) -> int:
 		"""No Description
 
-		Args:
-			alternativeParentId(int): alternativeParentId
+		Args
+		--------
+			alternativeParentId (``int``) :  alternativeParentId
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def SystemRecordField(self, name: str) -> ISystemRecordField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			ISystemRecordField: 
+		Returns
+		--------
+			``ISystemRecordField`` : 
 		"""
 		pass
 
 	def AlternativeField(self, name: str, domainElementTypeID: int, initialAlternativeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			domainElementTypeID(int): domainElementTypeID
-			initialAlternativeID(int): initialAlternativeID
+		Args
+		--------
+			name (``str``) :  name
+			domainElementTypeID (``int``) :  domainElementTypeID
+			initialAlternativeID (``int``) :  initialAlternativeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def Merge(self, sourceAlternativeID: int) -> None:
 		"""No Description
 
-		Args:
-			sourceAlternativeID(int): sourceAlternativeID
+		Args
+		--------
+			sourceAlternativeID (``int``) :  sourceAlternativeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6459,8 +7017,9 @@ class IAlternativeManager(ITreeElementManager):
 	def Add(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -6470,8 +7029,9 @@ class IAlternativeRecord:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6479,33 +7039,39 @@ class IAlternativeRecord:
 	def IsLocal(self, elementID: int) -> bool:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def MakeLocal(self, elementID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def MakeInherited(self, elementID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6513,13 +7079,15 @@ class IAlternativeRecord:
 	def GetValue(self, elementID: int, fieldTypeID: int, unit: UnitIndex) -> object:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			fieldTypeID(int): fieldTypeID
-			unit(UnitIndex): unit
+		Args
+		--------
+			elementID (``int``) :  elementID
+			fieldTypeID (``int``) :  fieldTypeID
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -6527,13 +7095,15 @@ class IAlternativeRecord:
 	def GetValue(self, elementID: int, fieldName: str, unit: UnitIndex) -> object:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			fieldName(str): fieldName
-			unit(UnitIndex): unit
+		Args
+		--------
+			elementID (``int``) :  elementID
+			fieldName (``str``) :  fieldName
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -6541,14 +7111,16 @@ class IAlternativeRecord:
 	def SetValue(self, elementID: int, fieldTypeID: int, unit: UnitIndex, newVal: object) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			fieldTypeID(int): fieldTypeID
-			unit(UnitIndex): unit
-			newVal(object): newVal
+		Args
+		--------
+			elementID (``int``) :  elementID
+			fieldTypeID (``int``) :  fieldTypeID
+			unit (``UnitIndex``) :  unit
+			newVal (``object``) :  newVal
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6556,14 +7128,16 @@ class IAlternativeRecord:
 	def SetValue(self, elementID: int, fieldName: str, unit: UnitIndex, newVal: object) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			fieldName(str): fieldName
-			unit(UnitIndex): unit
-			newVal(object): newVal
+		Args
+		--------
+			elementID (``int``) :  elementID
+			fieldName (``str``) :  fieldName
+			unit (``UnitIndex``) :  unit
+			newVal (``object``) :  newVal
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6571,12 +7145,14 @@ class IAlternativeRecord:
 	def GetValues(self, fieldTypeID: int, unit: UnitIndex) -> Dict:
 		"""No Description
 
-		Args:
-			fieldTypeID(int): fieldTypeID
-			unit(UnitIndex): unit
+		Args
+		--------
+			fieldTypeID (``int``) :  fieldTypeID
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -6584,12 +7160,14 @@ class IAlternativeRecord:
 	def GetValues(self, fieldName: str, unit: UnitIndex) -> Dict:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			unit(UnitIndex): unit
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -6597,8 +7175,9 @@ class IAlternativeRecord:
 	def GetDataReader(self) -> IAlternativeRecordDataReader:
 		"""No Description
 
-		Returns:
-			IAlternativeRecordDataReader: 
+		Returns
+		--------
+			``IAlternativeRecordDataReader`` : 
 		"""
 		pass
 
@@ -6606,11 +7185,13 @@ class IAlternativeRecord:
 	def GetDataReader(self, fieldTypeNames: array[str]) -> IAlternativeRecordDataReader:
 		"""No Description
 
-		Args:
-			fieldTypeNames(array[str]): fieldTypeNames
+		Args
+		--------
+			fieldTypeNames (``array[str]``) :  fieldTypeNames
 
-		Returns:
-			IAlternativeRecordDataReader: 
+		Returns
+		--------
+			``IAlternativeRecordDataReader`` : 
 		"""
 		pass
 
@@ -6618,8 +7199,9 @@ class IAlternativeRecord:
 	def Alternative(self) -> IAlternative:
 		"""No Description
 
-		Returns:
-			IAlternativeRecord: 
+		Returns
+		--------
+			``IAlternativeRecord`` : 
 		"""
 		pass
 
@@ -6629,8 +7211,9 @@ class IFieldCollectionDataReader:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6639,11 +7222,13 @@ class IFieldCollectionDataReader:
 	def GetValues(self, fieldTypeName: str) -> Dict:
 		"""No Description
 
-		Args:
-			fieldTypeName(str): fieldTypeName
+		Args
+		--------
+			fieldTypeName (``str``) :  fieldTypeName
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -6651,39 +7236,45 @@ class IFieldCollectionDataReader:
 	def GetValues(self, fieldTypeName: str, unit: UnitIndex) -> Dict:
 		"""No Description
 
-		Args:
-			fieldTypeName(str): fieldTypeName
-			unit(UnitIndex): unit
+		Args
+		--------
+			fieldTypeName (``str``) :  fieldTypeName
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
 	def Dispose(self, fieldTypeName: str) -> None:
 		"""No Description
 
-		Args:
-			fieldTypeName(str): fieldTypeName
+		Args
+		--------
+			fieldTypeName (``str``) :  fieldTypeName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Refresh(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Close(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6693,8 +7284,9 @@ class IAlternativeRecordDataReader(IFieldCollectionDataReader):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6703,8 +7295,9 @@ class IAlternativeRecordDataReader(IFieldCollectionDataReader):
 	def AlternativeRecord(self) -> IAlternativeRecord:
 		"""No Description
 
-		Returns:
-			IAlternativeRecordDataReader: 
+		Returns
+		--------
+			``IAlternativeRecordDataReader`` : 
 		"""
 		pass
 
@@ -6714,8 +7307,9 @@ class ISystemAlternativeRecord:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6723,60 +7317,70 @@ class ISystemAlternativeRecord:
 	def IsLocal(self, alternativeID: int) -> bool:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def MakeLocal(self, alternativeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def MakeInherited(self, alternativeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetValue(self, alternativeID: int, fieldTypeID: int, unit: UnitIndex) -> object:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			fieldTypeID(int): fieldTypeID
-			unit(UnitIndex): unit
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			fieldTypeID (``int``) :  fieldTypeID
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def SetValue(self, alternativeID: int, fieldTypeID: int, unit: UnitIndex, newVal: object) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			fieldTypeID(int): fieldTypeID
-			unit(UnitIndex): unit
-			newVal(object): newVal
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			fieldTypeID (``int``) :  fieldTypeID
+			unit (``UnitIndex``) :  unit
+			newVal (``object``) :  newVal
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6784,8 +7388,9 @@ class ISystemAlternativeRecord:
 	def AlternativeTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			ISystemAlternativeRecord: 
+		Returns
+		--------
+			``ISystemAlternativeRecord`` : 
 		"""
 		pass
 
@@ -6795,8 +7400,9 @@ class IGeometryPointAlternativeRecord(IAlternativeRecord):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6804,23 +7410,27 @@ class IGeometryPointAlternativeRecord(IAlternativeRecord):
 	def GetPoint(self, domainElementID: int) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
 	def SetPoint(self, domainElementID: int, point: GeometryPoint) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			point(GeometryPoint): point
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			point (``GeometryPoint``) :  point
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6830,8 +7440,9 @@ class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6839,58 +7450,27 @@ class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 	def GetPoints(self, domainElementID: int) -> List[GeometryPoint]:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			List[GeometryPoint]: 
+		Returns
+		--------
+			``List[GeometryPoint]`` : 
 		"""
 		pass
 
 	def SetPoints(self, domainElementID: int, points: List[GeometryPoint]) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			points(List[GeometryPoint]): points
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			points (``List[GeometryPoint]``) :  points
 
-		Returns:
-			None: 
-		"""
-		pass
-
-class IGeometryPolyline3DAlternativeRecord(IAlternativeRecord):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def GetPoints(self, domainElementID: int) -> List[GeometryPoint3D]:
-		"""No Description
-
-		Args:
-			domainElementID(int): domainElementID
-
-		Returns:
-			List[GeometryPoint3D]: 
-		"""
-		pass
-
-	def SetPoints(self, domainElementID: int, points3D: List[GeometryPoint3D]) -> None:
-		"""No Description
-
-		Args:
-			domainElementID(int): domainElementID
-			points3D(List[GeometryPoint3D]): points3D
-
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6900,8 +7480,9 @@ class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6909,23 +7490,27 @@ class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 	def GetRings(self, domainElementID: int) -> List[List[GeometryPoint]]:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			List[List[GeometryPoint]]: 
+		Returns
+		--------
+			``List[List[GeometryPoint]]`` : 
 		"""
 		pass
 
 	def SetRings(self, domainElementID: int, rings: List[List[GeometryPoint]]) -> None:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
-			rings(List[List[GeometryPoint]]): rings
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
+			rings (``List[List[GeometryPoint]]``) :  rings
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6935,8 +7520,9 @@ class IScenario(ITreeElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -6945,11 +7531,13 @@ class IScenario(ITreeElement):
 	def AlternativeID(self, alternativeTypeID: int) -> int:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -6957,11 +7545,13 @@ class IScenario(ITreeElement):
 	def AlternativeID(self, alternativeTypeName: str) -> int:
 		"""No Description
 
-		Args:
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -6969,12 +7559,14 @@ class IScenario(ITreeElement):
 	def AlternativeID(self, alternativeTypeID: int, alternativeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -6982,78 +7574,92 @@ class IScenario(ITreeElement):
 	def AlternativeID(self, alternativeTypeName: str, alternativeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeTypeName(str): alternativeTypeName
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeTypeName (``str``) :  alternativeTypeName
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def IsAlternativeLocal(self, alternativeTypeID: int) -> bool:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def MakeAlternativeLocal(self, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def MakeAlternativeInherited(self, alternativeTypeID: int) -> None:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def IsCalculationOptionsLocal(self, numericalEngineTypeName: str) -> bool:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def MakeCalculationOptionsLocal(self, numericalEngineTypeName: str) -> None:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def MakeCalculationOptionsInherited(self, numericalEngineTypeName: str) -> None:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -7061,11 +7667,13 @@ class IScenario(ITreeElement):
 	def CalculationOptionsID(self, numericalEngineTypeName: str) -> int:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -7073,45 +7681,53 @@ class IScenario(ITreeElement):
 	def CalculationOptionsID(self, numericalEngineTypeName: str, calculationOptionsID: int) -> None:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
-			calculationOptionsID(int): calculationOptionsID
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			calculationOptionsID (``int``) :  calculationOptionsID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ResultManager(self, numericalEngineTypeName: str) -> IResultManager:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			IResultManager: 
+		Returns
+		--------
+			``IResultManager`` : 
 		"""
 		pass
 
 	def GetActiveNumericalEngineTypeName(self, resultRecordTypeName: str) -> str:
 		"""No Description
 
-		Args:
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def SetActiveNumericalEngineTypeName(self, numericalEngineTypeName: str) -> None:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -7119,8 +7735,9 @@ class IScenario(ITreeElement):
 	def ActiveTimeStep(self) -> int:
 		"""No Description
 
-		Returns:
-			IScenario: 
+		Returns
+		--------
+			``IScenario`` : 
 		"""
 		pass
 
@@ -7132,8 +7749,9 @@ class IScenario(ITreeElement):
 	def ActiveTimeIncrement(self) -> int:
 		"""No Description
 
-		Returns:
-			IScenario: 
+		Returns
+		--------
+			``IScenario`` : 
 		"""
 		pass
 
@@ -7147,8 +7765,9 @@ class IScenarioManager(ITreeElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7156,11 +7775,13 @@ class IScenarioManager(ITreeElementManager):
 	def CalculationOptionsManager(self, numericalEngineTypeName: str) -> ICalculationOptionsManager:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			ICalculationOptionsManager: 
+		Returns
+		--------
+			``ICalculationOptionsManager`` : 
 		"""
 		pass
 
@@ -7168,11 +7789,13 @@ class IScenarioManager(ITreeElementManager):
 	def ResultField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7180,12 +7803,14 @@ class IScenarioManager(ITreeElementManager):
 	def ResultField(self, fieldName: str, numericalEngineTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7193,8 +7818,9 @@ class IScenarioManager(ITreeElementManager):
 	def SupportedResultFields(self) -> FieldCollection:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -7202,11 +7828,13 @@ class IScenarioManager(ITreeElementManager):
 	def SupportedResultFields(self, numericalEngineTypeName: str) -> FieldCollection:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -7214,8 +7842,9 @@ class IScenarioManager(ITreeElementManager):
 	def ActiveScenarioID(self) -> int:
 		"""No Description
 
-		Returns:
-			IScenarioManager: 
+		Returns
+		--------
+			``IScenarioManager`` : 
 		"""
 		pass
 
@@ -7229,8 +7858,9 @@ class ICalculationOptionsManager(IModelingElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7238,11 +7868,13 @@ class ICalculationOptionsManager(IModelingElementManager):
 	def CalculationOptionsField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7250,8 +7882,9 @@ class ICalculationOptionsManager(IModelingElementManager):
 	def NumericalEngineTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			ICalculationOptionsManager: 
+		Returns
+		--------
+			``ICalculationOptionsManager`` : 
 		"""
 		pass
 
@@ -7261,8 +7894,9 @@ class ICalculationOptions(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7270,11 +7904,13 @@ class ICalculationOptions(IModelingElement):
 	def CalculationOptionsField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7282,8 +7918,9 @@ class ICalculationOptions(IModelingElement):
 	def NumericalEngineTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			ICalculationOptions: 
+		Returns
+		--------
+			``ICalculationOptions`` : 
 		"""
 		pass
 
@@ -7293,8 +7930,9 @@ class ISelectionSetManager(IModelingElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7302,11 +7940,13 @@ class ISelectionSetManager(IModelingElementManager):
 	def SelectionSetField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7316,8 +7956,9 @@ class ISelectionSet(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7325,11 +7966,13 @@ class ISelectionSet(IModelingElement):
 	def SelectionSetField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7339,8 +7982,9 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7348,11 +7992,13 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 	def EmbeddedStickyObjectField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7360,22 +8006,26 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 	def ElementIDs(self, domainElementID: int) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			domainElementID(int): domainElementID
+		Args
+		--------
+			domainElementID (``int``) :  domainElementID
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def ElementIDsForDomainElementType(self, domainElementTypeID: int) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -7383,8 +8033,9 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 	def ElementIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -7394,8 +8045,9 @@ class IEmbeddedStickyObject(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7403,11 +8055,13 @@ class IEmbeddedStickyObject(IModelingElement):
 	def EmbeddedStickyObjectField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -7417,8 +8071,9 @@ class IResultManager:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7426,35 +8081,40 @@ class IResultManager:
 	def Open(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Close(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Deactivate(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
-	def TimeSteps(self, unit: TimeUnit) -> array('f'):
+	def TimeSteps(self, unit: TimeUnit) -> array[float]:
 		"""No Description
 
-		Args:
-			unit(TimeUnit): unit
+		Args
+		--------
+			unit (``TimeUnit``) :  unit
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -7462,11 +8122,13 @@ class IResultManager:
 	def ResultRecord(self, resultRecordTypeID: int) -> IResultRecord:
 		"""No Description
 
-		Args:
-			resultRecordTypeID(int): resultRecordTypeID
+		Args
+		--------
+			resultRecordTypeID (``int``) :  resultRecordTypeID
 
-		Returns:
-			IResultRecord: 
+		Returns
+		--------
+			``IResultRecord`` : 
 		"""
 		pass
 
@@ -7474,22 +8136,26 @@ class IResultManager:
 	def ResultRecord(self, resultRecordTypeName: str) -> IResultRecord:
 		"""No Description
 
-		Args:
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IResultRecord: 
+		Returns
+		--------
+			``IResultRecord`` : 
 		"""
 		pass
 
 	def ResultRecords(self, domainElementTypeID: int) -> ResultRecordCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			ResultRecordCollection: 
+		Returns
+		--------
+			``ResultRecordCollection`` : 
 		"""
 		pass
 
@@ -7497,8 +8163,9 @@ class IResultManager:
 	def IsActive(self) -> bool:
 		"""No Description
 
-		Returns:
-			IResultManager: 
+		Returns
+		--------
+			``IResultManager`` : 
 		"""
 		pass
 
@@ -7506,8 +8173,9 @@ class IResultManager:
 	def HasResults(self) -> bool:
 		"""No Description
 
-		Returns:
-			IResultManager: 
+		Returns
+		--------
+			``IResultManager`` : 
 		"""
 		pass
 
@@ -7515,8 +8183,9 @@ class IResultManager:
 	def NumericalEngineTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			IResultManager: 
+		Returns
+		--------
+			``IResultManager`` : 
 		"""
 		pass
 
@@ -7524,8 +8193,9 @@ class IResultManager:
 	def Scenario(self) -> IScenario:
 		"""No Description
 
-		Returns:
-			IResultManager: 
+		Returns
+		--------
+			``IResultManager`` : 
 		"""
 		pass
 
@@ -7535,8 +8205,9 @@ class IResultRecord:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7544,41 +8215,47 @@ class IResultRecord:
 	def GetValue(self, elementID: int, resultFieldTypeName: str, timeStep: int, unit: UnitIndex) -> object:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			resultFieldTypeName(str): resultFieldTypeName
-			timeStep(int): timeStep
-			unit(UnitIndex): unit
+		Args
+		--------
+			elementID (``int``) :  elementID
+			resultFieldTypeName (``str``) :  resultFieldTypeName
+			timeStep (``int``) :  timeStep
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def GetValues(self, domainElementTypeIDs: HmIDCollection, resultFieldTypeName: str, timeStep: int, unit: UnitIndex) -> Dict:
 		"""No Description
 
-		Args:
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			resultFieldTypeName(str): resultFieldTypeName
-			timeStep(int): timeStep
-			unit(UnitIndex): unit
+		Args
+		--------
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			resultFieldTypeName (``str``) :  resultFieldTypeName
+			timeStep (``int``) :  timeStep
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
-	def GetValuesOverTime(self, elementID: int, resultFieldTypeName: str, unit: UnitIndex) -> Array:
+	def GetValuesOverTime(self, elementID: int, resultFieldTypeName: str, unit: UnitIndex) -> array:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			resultFieldTypeName(str): resultFieldTypeName
-			unit(UnitIndex): unit
+		Args
+		--------
+			elementID (``int``) :  elementID
+			resultFieldTypeName (``str``) :  resultFieldTypeName
+			unit (``UnitIndex``) :  unit
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
@@ -7588,8 +8265,9 @@ class IResultField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7597,34 +8275,40 @@ class IResultField(IField):
 	def IsActive(self, scenarioId: int) -> bool:
 		"""No Description
 
-		Args:
-			scenarioId(int): scenarioId
+		Args
+		--------
+			scenarioId (``int``) :  scenarioId
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def HasResults(self, scenarioId: int) -> bool:
 		"""No Description
 
-		Args:
-			scenarioId(int): scenarioId
+		Args
+		--------
+			scenarioId (``int``) :  scenarioId
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def GetValuesForElementIDs(self, ids: HmIDCollection, scenarioID: int) -> Dict:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
-			scenarioID(int): scenarioID
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7632,8 +8316,9 @@ class IResultField(IField):
 	def NumericalEngineType(self) -> INumericalEngineType:
 		"""No Description
 
-		Returns:
-			IResultField: 
+		Returns
+		--------
+			``IResultField`` : 
 		"""
 		pass
 
@@ -7641,8 +8326,9 @@ class IResultField(IField):
 	def ResultRecordType(self) -> IResultRecordType:
 		"""No Description
 
-		Returns:
-			IResultField: 
+		Returns
+		--------
+			``IResultField`` : 
 		"""
 		pass
 
@@ -7652,8 +8338,9 @@ class IResultNonTimeVariantField(IResultField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7662,12 +8349,14 @@ class IResultNonTimeVariantField(IResultField):
 	def GetValue(self, elementID: int, scenarioID: int) -> object:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -7675,37 +8364,43 @@ class IResultNonTimeVariantField(IResultField):
 	def GetValues(self, domainElementTypeIDs: HmIDCollection, scenarioID: int) -> Dict:
 		"""No Description
 
-		Args:
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			scenarioID(int): scenarioID
+		Args
+		--------
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
 	@overload
-	def GetUniqueValues(self, scenarioID: int) -> Array:
+	def GetUniqueValues(self, scenarioID: int) -> array:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
 	@overload
-	def GetUniqueValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection) -> Array:
+	def GetUniqueValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection) -> array:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
@@ -7713,11 +8408,13 @@ class IResultNonTimeVariantField(IResultField):
 	def GetValue(self, id: int) -> object:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -7725,8 +8422,9 @@ class IResultNonTimeVariantField(IResultField):
 	def GetValues(self) -> Dict:
 		"""No Description
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7734,11 +8432,13 @@ class IResultNonTimeVariantField(IResultField):
 	def GetValues(self, ids: HmIDCollection) -> Dict:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7748,8 +8448,9 @@ class IResultTimeVariantField(IResultField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -7758,25 +8459,29 @@ class IResultTimeVariantField(IResultField):
 	def GetValue(self, elementID: int, scenarioID: int, timeStep: int) -> object:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
-			timeStep(int): timeStep
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
-	def GetValuesOverTime(self, elementID: int, scenarioID: int) -> Array:
+	def GetValuesOverTime(self, elementID: int, scenarioID: int) -> array:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
@@ -7784,40 +8489,46 @@ class IResultTimeVariantField(IResultField):
 	def GetValues(self, domainElementTypeIDs: HmIDCollection, scenarioID: int, timeStep: int) -> Dict:
 		"""No Description
 
-		Args:
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			scenarioID(int): scenarioID
-			timeStep(int): timeStep
+		Args
+		--------
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			scenarioID (``int``) :  scenarioID
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
 	@overload
-	def GetUniqueValues(self, scenarioID: int, timeStep: int) -> Array:
+	def GetUniqueValues(self, scenarioID: int, timeStep: int) -> array:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			timeStep(int): timeStep
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
 	@overload
-	def GetUniqueValues(self, scenarioID: int, timeStep: int, domainElementTypeIDs: HmIDCollection) -> Array:
+	def GetUniqueValues(self, scenarioID: int, timeStep: int, domainElementTypeIDs: HmIDCollection) -> array:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			timeStep(int): timeStep
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			timeStep (``int``) :  timeStep
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
@@ -7825,13 +8536,15 @@ class IResultTimeVariantField(IResultField):
 	def GetValuesForElementIDs(self, ids: HmIDCollection, scenarioID: int, timeStep: int) -> Dict:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
-			scenarioID(int): scenarioID
-			timeStep(int): timeStep
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
+			scenarioID (``int``) :  scenarioID
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7839,12 +8552,14 @@ class IResultTimeVariantField(IResultField):
 	def GetValuesForElementIDs(self, ids: HmIDCollection, scenarioID: int) -> Dict:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
-			scenarioID(int): scenarioID
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7852,11 +8567,13 @@ class IResultTimeVariantField(IResultField):
 	def GetValue(self, id: int) -> object:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -7864,8 +8581,9 @@ class IResultTimeVariantField(IResultField):
 	def GetValues(self) -> Dict:
 		"""No Description
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7873,11 +8591,13 @@ class IResultTimeVariantField(IResultField):
 	def GetValues(self, ids: HmIDCollection) -> Dict:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -7887,20 +8607,23 @@ class IFieldStatistics:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array[float]:
 		"""No Description
 
-		Args:
-			statTypes(List[StatisticType]): statTypes
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -7910,34 +8633,39 @@ class ISelectableFieldStatistics(IFieldStatistics):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			statTypes(List[StatisticType]): statTypes
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array[float]:
 		"""No Description
 
-		Args:
-			statTypes(List[StatisticType]): statTypes
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -7947,63 +8675,72 @@ class IResultFieldStatistics(ISelectableFieldStatistics):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
 	@overload
-	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(List[StatisticType]): statTypes
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			statTypes (``List[StatisticType]``) :  statTypes
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
-	def GetStatisticsEstimate(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatisticsEstimate(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(List[StatisticType]): statTypes
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			statTypes (``List[StatisticType]``) :  statTypes
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
-		"""
-		pass
-
-	@overload
-	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
-		"""No Description
-
-		Args:
-			statTypes(List[StatisticType]): statTypes
-			filterContexts(FilterContextCollection): filterContexts
-
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
+	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			statTypes(List[StatisticType]): statTypes
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
+		"""
+		pass
+
+	@overload
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array[float]:
+		"""No Description
+
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
+
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -8013,79 +8750,90 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
 	@overload
-	def GetStatistics(self, elementID: int, scenarioID: int, statTypes: List[StatisticType]) -> array('f'):
+	def GetStatistics(self, elementID: int, scenarioID: int, statTypes: List[StatisticType]) -> array[float]:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
-			statTypes(List[StatisticType]): statTypes
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
+			statTypes (``List[StatisticType]``) :  statTypes
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(List[StatisticType]): statTypes
-			timeStepIndex(int): timeStepIndex
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			statTypes (``List[StatisticType]``) :  statTypes
+			timeStepIndex (``int``) :  timeStepIndex
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatistics(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			statTypes(List[StatisticType]): statTypes
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			statTypes (``List[StatisticType]``) :  statTypes
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatistics(self, statTypes: List[StatisticType], filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			statTypes(List[StatisticType]): statTypes
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	@overload
-	def GetStatistics(self, statTypes: List[StatisticType]) -> array('f'):
+	def GetStatistics(self, statTypes: List[StatisticType]) -> array[float]:
 		"""No Description
 
-		Args:
-			statTypes(List[StatisticType]): statTypes
+		Args
+		--------
+			statTypes (``List[StatisticType]``) :  statTypes
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -8095,8 +8843,9 @@ class INumericalEngine:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8104,176 +8853,208 @@ class INumericalEngine:
 	def Run(self, scenarios: ModelingElementCollection) -> None:
 		"""No Description
 
-		Args:
-			scenarios(ModelingElementCollection): scenarios
+		Args
+		--------
+			scenarios (``ModelingElementCollection``) :  scenarios
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def IsRunning(self, scenarioID: int) -> bool:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def add_ScenarioCalculationStarted(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_ScenarioCalculationStarted(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def add_ScenarioCalculationFinished(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_ScenarioCalculationFinished(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def add_CalculationStepStarted(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_CalculationStepStarted(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def add_CalculationStepProgress(self, value: CalculationStepProgressEventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(CalculationStepProgressEventHandler): value
+		Args
+		--------
+			value (``CalculationStepProgressEventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_CalculationStepProgress(self, value: CalculationStepProgressEventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(CalculationStepProgressEventHandler): value
+		Args
+		--------
+			value (``CalculationStepProgressEventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def add_CalculationStepFinished(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_CalculationStepFinished(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def add_CalculationStarted(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_CalculationStarted(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def add_CalculationFinished(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def remove_CalculationFinished(self, value: EventHandler) -> None:
 		"""No Description
 
-		Args:
-			value(EventHandler): value
+		Args
+		--------
+			value (``EventHandler``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -8281,8 +9062,9 @@ class INumericalEngine:
 	def NumericalEngineTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			INumericalEngine: 
+		Returns
+		--------
+			``INumericalEngine`` : 
 		"""
 		pass
 
@@ -8290,8 +9072,9 @@ class INumericalEngine:
 	def NumericalEnginePath(self) -> str:
 		"""No Description
 
-		Returns:
-			INumericalEngine: 
+		Returns
+		--------
+			``INumericalEngine`` : 
 		"""
 		pass
 
@@ -8303,8 +9086,9 @@ class INumericalEngine:
 	def ResultDataConnection(self) -> IResultDataConnection:
 		"""No Description
 
-		Returns:
-			INumericalEngine: 
+		Returns
+		--------
+			``INumericalEngine`` : 
 		"""
 		pass
 
@@ -8314,8 +9098,9 @@ class ICompositeNumericalEngine:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8323,22 +9108,26 @@ class ICompositeNumericalEngine:
 	def GetActiveNumericalEngine(self, scenarioID: int) -> INumericalEngine:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			INumericalEngine: 
+		Returns
+		--------
+			``INumericalEngine`` : 
 		"""
 		pass
 
 	def SupportsValidation(self, scenarioID: int) -> bool:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -8348,8 +9137,9 @@ class ICompositeResultDataConnection:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8357,11 +9147,13 @@ class ICompositeResultDataConnection:
 	def GetActiveResultDataConnection(self, scenarioID: int) -> IResultDataConnection:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			IResultDataConnection: 
+		Returns
+		--------
+			``IResultDataConnection`` : 
 		"""
 		pass
 
@@ -8371,8 +9163,9 @@ class IResultDataConnectionFactory:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8380,12 +9173,14 @@ class IResultDataConnectionFactory:
 	def NewResultDataConnection(self, domainDataSet: IDomainDataSet, numericalEngine: INumericalEngine) -> IResultDataConnection:
 		"""No Description
 
-		Args:
-			domainDataSet(IDomainDataSet): domainDataSet
-			numericalEngine(INumericalEngine): numericalEngine
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			numericalEngine (``INumericalEngine``) :  numericalEngine
 
-		Returns:
-			IResultDataConnection: 
+		Returns
+		--------
+			``IResultDataConnection`` : 
 		"""
 		pass
 
@@ -8395,8 +9190,9 @@ class IValidatingNumericalEngine(INumericalEngine):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8404,11 +9200,13 @@ class IValidatingNumericalEngine(INumericalEngine):
 	def Validate(self, scenarios: ModelingElementCollection) -> None:
 		"""No Description
 
-		Args:
-			scenarios(ModelingElementCollection): scenarios
+		Args
+		--------
+			scenarios (``ModelingElementCollection``) :  scenarios
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -8418,8 +9216,9 @@ class ILicensedNumericalEngine(INumericalEngine):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8427,11 +9226,13 @@ class ILicensedNumericalEngine(INumericalEngine):
 	def SetLicensingInfo(self, license: License) -> None:
 		"""No Description
 
-		Args:
-			license(License): license
+		Args
+		--------
+			license (``License``) :  license
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -8441,8 +9242,9 @@ class INumericalEngineWithResultDataConnectionFactory:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8457,8 +9259,9 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8467,22 +9270,13 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 	def SetLicensingInfo(self, licenseProvider: ILicenseProvider) -> None:
 		"""No Description
 
-		Args:
-			licenseProvider(ILicenseProvider): licenseProvider
+		Args
+		--------
+			licenseProvider (``ILicenseProvider``) :  licenseProvider
 
-		Returns:
-			None: 
-		"""
-		pass
-
-	def SetLicenseKey(self, licenseKey: str) -> None:
-		"""No Description
-
-		Args:
-			licenseKey(str): licenseKey
-
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -8490,20 +9284,13 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 	def SetLicensingInfo(self, license: License) -> None:
 		"""No Description
 
-		Args:
-			license(License): license
+		Args
+		--------
+			license (``License``) :  license
 
-		Returns:
-			None: 
-		"""
-		pass
-
-	@property
-	def IgnoreLicensing(self) -> bool:
-		"""No Description
-
-		Returns:
-			ILicensedNumericalEngineEx: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -8513,8 +9300,9 @@ class IResultDataConnection:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8522,155 +9310,182 @@ class IResultDataConnection:
 	def Open(self, scenarioID: int) -> None:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Close(self, scenarioID: int) -> None:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Deactivate(self, scenarioID: int) -> None:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def IsActive(self, scenarioID: int) -> bool:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def HasResults(self, scenarioID: int) -> bool:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
-	def TimeStepsInSeconds(self, scenarioID: int) -> array('f'):
+	def TimeStepsInSeconds(self, scenarioID: int) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
 	def ResultRecordDataBroker(self, resultRecordTypeName: str) -> IResultRecordDataBroker:
 		"""No Description
 
-		Args:
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IResultRecordDataBroker: 
+		Returns
+		--------
+			``IResultRecordDataBroker`` : 
 		"""
 		pass
 
 	def GetScenarioStartDateTime(self, scenarioID: int) -> datetime:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			datetime: 
+		Returns
+		--------
+			``datetime`` : 
 		"""
 		pass
 
 	def GetRunUserNotificationsSummary(self, scenarioID: int) -> List[IUserNotification]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			List[IUserNotification]: 
+		Returns
+		--------
+			``List[IUserNotification]`` : 
 		"""
 		pass
 
 	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int) -> List[IUserNotification]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			timeStepIndex(int): timeStepIndex
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			timeStepIndex (``int``) :  timeStepIndex
 
-		Returns:
-			List[IUserNotification]: 
+		Returns
+		--------
+			``List[IUserNotification]`` : 
 		"""
 		pass
 
 	def GetUserNotifications(self, scenarioID: int, elementID: int, timeStepIndex: int) -> List[IUserNotification]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			elementID(int): elementID
-			timeStepIndex(int): timeStepIndex
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			elementID (``int``) :  elementID
+			timeStepIndex (``int``) :  timeStepIndex
 
-		Returns:
-			List[IUserNotification]: 
+		Returns
+		--------
+			``List[IUserNotification]`` : 
 		"""
 		pass
 
 	def ResultConnectionIDs(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	def ResultPathAndFileNamesFor(self, databasePathAndFileName: str) -> array[str]:
 		"""No Description
 
-		Args:
-			databasePathAndFileName(str): databasePathAndFileName
+		Args
+		--------
+			databasePathAndFileName (``str``) :  databasePathAndFileName
 
-		Returns:
-			array[str]: 
+		Returns
+		--------
+			``array[str]`` : 
 		"""
 		pass
 
 	def NewResultPathAndFileNameFor(self, currentResultFileAndPathName: str, databasePathAndFileName: str) -> str:
 		"""No Description
 
-		Args:
-			currentResultFileAndPathName(str): currentResultFileAndPathName
-			databasePathAndFileName(str): databasePathAndFileName
+		Args
+		--------
+			currentResultFileAndPathName (``str``) :  currentResultFileAndPathName
+			databasePathAndFileName (``str``) :  databasePathAndFileName
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
@@ -8678,8 +9493,9 @@ class IResultDataConnection:
 	def DomainDataSet(self) -> IDomainDataSet:
 		"""No Description
 
-		Returns:
-			IResultDataConnection: 
+		Returns
+		--------
+			``IResultDataConnection`` : 
 		"""
 		pass
 
@@ -8687,8 +9503,9 @@ class IResultDataConnection:
 	def NumericalEngine(self) -> INumericalEngine:
 		"""No Description
 
-		Returns:
-			IResultDataConnection: 
+		Returns
+		--------
+			``IResultDataConnection`` : 
 		"""
 		pass
 
@@ -8698,8 +9515,9 @@ class IResultDataConnectionEX:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8707,12 +9525,14 @@ class IResultDataConnectionEX:
 	def HasHydraulicResults(self, elementId: int, scenarioID: int) -> bool:
 		"""No Description
 
-		Args:
-			elementId(int): elementId
-			scenarioID(int): scenarioID
+		Args
+		--------
+			elementId (``int``) :  elementId
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -8722,8 +9542,9 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8731,26 +9552,30 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 	def GetTranslatedTimeStepIndex(self, scenarioID: int, elementID: int, uberTimeStepIndex: int, isGravityResultField: bool) -> int:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			elementID(int): elementID
-			uberTimeStepIndex(int): uberTimeStepIndex
-			isGravityResultField(bool): isGravityResultField
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			elementID (``int``) :  elementID
+			uberTimeStepIndex (``int``) :  uberTimeStepIndex
+			isGravityResultField (``bool``) :  isGravityResultField
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
-	def GetTimeStepsForSubnetworkID(self, scenarioID: int, subnetworkIndex: int) -> array('f'):
+	def GetTimeStepsForSubnetworkID(self, scenarioID: int, subnetworkIndex: int) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			subnetworkIndex(int): subnetworkIndex
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			subnetworkIndex (``int``) :  subnetworkIndex
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -8758,24 +9583,28 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int, pressureSubnetworkID: int) -> List[IUserNotification]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			timeStepIndex(int): timeStepIndex
-			pressureSubnetworkID(int): pressureSubnetworkID
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			timeStepIndex (``int``) :  timeStepIndex
+			pressureSubnetworkID (``int``) :  pressureSubnetworkID
 
-		Returns:
-			List[IUserNotification]: 
+		Returns
+		--------
+			``List[IUserNotification]`` : 
 		"""
 		pass
 
 	def PrepareResultDataConnectionForTimeStepsRequest(self, factor: int) -> None:
 		"""No Description
 
-		Args:
-			factor(int): factor
+		Args
+		--------
+			factor (``int``) :  factor
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -8783,12 +9612,14 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 	def GetTimeStepUserNotificationsSummary(self, scenarioID: int, timeStepIndex: int) -> List[IUserNotification]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			timeStepIndex(int): timeStepIndex
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			timeStepIndex (``int``) :  timeStepIndex
 
-		Returns:
-			List[IUserNotification]: 
+		Returns
+		--------
+			``List[IUserNotification]`` : 
 		"""
 		pass
 
@@ -8796,8 +9627,9 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 	def UseHydrologicTimeSteps(self) -> bool:
 		"""No Description
 
-		Returns:
-			ITranslatingTimeStepsResultDataConnection: 
+		Returns
+		--------
+			``ITranslatingTimeStepsResultDataConnection`` : 
 		"""
 		pass
 
@@ -8809,8 +9641,9 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 	def UseReportingHydraulicTimeSteps(self) -> bool:
 		"""No Description
 
-		Returns:
-			ITranslatingTimeStepsResultDataConnection: 
+		Returns
+		--------
+			``ITranslatingTimeStepsResultDataConnection`` : 
 		"""
 		pass
 
@@ -8822,8 +9655,9 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 	def ActiveSubnetworkID(self) -> int:
 		"""No Description
 
-		Returns:
-			ITranslatingTimeStepsResultDataConnection: 
+		Returns
+		--------
+			``ITranslatingTimeStepsResultDataConnection`` : 
 		"""
 		pass
 
@@ -8837,8 +9671,9 @@ class IResultRecordDataBroker:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8846,101 +9681,115 @@ class IResultRecordDataBroker:
 	def GetValue(self, elementID: int, scenarioID: int, fieldTypeName: str, timeStep: int) -> object:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
-			fieldTypeName(str): fieldTypeName
-			timeStep(int): timeStep
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
+			fieldTypeName (``str``) :  fieldTypeName
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def GetValues(self, domainElementTypeIDs: HmIDCollection, scenarioID: int, fieldTypeName: str, timeStep: int) -> Dict:
 		"""No Description
 
-		Args:
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			scenarioID(int): scenarioID
-			fieldTypeName(str): fieldTypeName
-			timeStep(int): timeStep
+		Args
+		--------
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			scenarioID (``int``) :  scenarioID
+			fieldTypeName (``str``) :  fieldTypeName
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
 	def GetValuesForElementIDs(self, elementIDs: HmIDCollection, scenarioID: int, fieldTypeName: str, timeStep: int) -> Dict:
 		"""No Description
 
-		Args:
-			elementIDs(HmIDCollection): elementIDs
-			scenarioID(int): scenarioID
-			fieldTypeName(str): fieldTypeName
-			timeStep(int): timeStep
+		Args
+		--------
+			elementIDs (``HmIDCollection``) :  elementIDs
+			scenarioID (``int``) :  scenarioID
+			fieldTypeName (``str``) :  fieldTypeName
+			timeStep (``int``) :  timeStep
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
-	def GetValuesOverTime(self, elementID: int, scenarioID: int, fieldTypeName: str) -> Array:
+	def GetValuesOverTime(self, elementID: int, scenarioID: int, fieldTypeName: str) -> array:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
-			fieldTypeName(str): fieldTypeName
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
+			fieldTypeName (``str``) :  fieldTypeName
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
-	def GetStatisticValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatisticValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			fieldTypeName(str): fieldTypeName
-			statTypes(List[StatisticType]): statTypes
-			timeStepIndex(int): timeStepIndex
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			fieldTypeName (``str``) :  fieldTypeName
+			statTypes (``List[StatisticType]``) :  statTypes
+			timeStepIndex (``int``) :  timeStepIndex
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
-	def GetStatisticEstimateValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array('f'):
+	def GetStatisticEstimateValues(self, scenarioID: int, domainElementTypeIDs: HmIDCollection, fieldTypeName: str, statTypes: List[StatisticType], timeStepIndex: int, filterContexts: FilterContextCollection) -> array[float]:
 		"""No Description
 
-		Args:
-			scenarioID(int): scenarioID
-			domainElementTypeIDs(HmIDCollection): domainElementTypeIDs
-			fieldTypeName(str): fieldTypeName
-			statTypes(List[StatisticType]): statTypes
-			timeStepIndex(int): timeStepIndex
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			fieldTypeName (``str``) :  fieldTypeName
+			statTypes (``List[StatisticType]``) :  statTypes
+			timeStepIndex (``int``) :  timeStepIndex
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
-	def GetStatisticValuesOverTime(self, elementID: int, scenarioID: int, fieldTypeName: str, statTypes: List[StatisticType]) -> array('f'):
+	def GetStatisticValuesOverTime(self, elementID: int, scenarioID: int, fieldTypeName: str, statTypes: List[StatisticType]) -> array[float]:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			scenarioID(int): scenarioID
-			fieldTypeName(str): fieldTypeName
-			statTypes(List[StatisticType]): statTypes
+		Args
+		--------
+			elementID (``int``) :  elementID
+			scenarioID (``int``) :  scenarioID
+			fieldTypeName (``str``) :  fieldTypeName
+			statTypes (``List[StatisticType]``) :  statTypes
 
-		Returns:
-			array('f'): 
+		Returns
+		--------
+			``array[float]`` : 
 		"""
 		pass
 
@@ -8948,8 +9797,9 @@ class IResultRecordDataBroker:
 	def ResultDataConnection(self) -> IResultDataConnection:
 		"""No Description
 
-		Returns:
-			IResultRecordDataBroker: 
+		Returns
+		--------
+			``IResultRecordDataBroker`` : 
 		"""
 		pass
 
@@ -8957,8 +9807,9 @@ class IResultRecordDataBroker:
 	def ResultRecordTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			IResultRecordDataBroker: 
+		Returns
+		--------
+			``IResultRecordDataBroker`` : 
 		"""
 		pass
 
@@ -8968,8 +9819,9 @@ class ISupportElement(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -8977,33 +9829,39 @@ class ISupportElement(IModelingElement):
 	def SupportElementField(self, attributeName: str) -> IField:
 		"""No Description
 
-		Args:
-			attributeName(str): attributeName
+		Args
+		--------
+			attributeName (``str``) :  attributeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def SynchronizeFrom(self, engineeringReference: IEngineeringReference) -> None:
 		"""No Description
 
-		Args:
-			engineeringReference(IEngineeringReference): engineeringReference
+		Args
+		--------
+			engineeringReference (``IEngineeringReference``) :  engineeringReference
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ConnectTo(self, engineeringReference: IEngineeringReference) -> None:
 		"""No Description
 
-		Args:
-			engineeringReference(IEngineeringReference): engineeringReference
+		Args
+		--------
+			engineeringReference (``IEngineeringReference``) :  engineeringReference
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -9011,8 +9869,9 @@ class ISupportElement(IModelingElement):
 	def SupportElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			ISupportElement: 
+		Returns
+		--------
+			``ISupportElement`` : 
 		"""
 		pass
 
@@ -9020,8 +9879,9 @@ class ISupportElement(IModelingElement):
 	def EngineeringReferenceGuid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			ISupportElement: 
+		Returns
+		--------
+			``ISupportElement`` : 
 		"""
 		pass
 
@@ -9029,8 +9889,9 @@ class ISupportElement(IModelingElement):
 	def EngineeringLibraryGuid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			ISupportElement: 
+		Returns
+		--------
+			``ISupportElement`` : 
 		"""
 		pass
 
@@ -9038,8 +9899,9 @@ class ISupportElement(IModelingElement):
 	def DateModified(self) -> datetime:
 		"""No Description
 
-		Returns:
-			ISupportElement: 
+		Returns
+		--------
+			``ISupportElement`` : 
 		"""
 		pass
 
@@ -9049,8 +9911,9 @@ class ISupportElement2:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9058,12 +9921,14 @@ class ISupportElement2:
 	def SetEngineeringReference(self, engineeringLibraryGuid: Guid, engineeringReferenceGuid: Guid) -> None:
 		"""No Description
 
-		Args:
-			engineeringLibraryGuid(Guid): engineeringLibraryGuid
-			engineeringReferenceGuid(Guid): engineeringReferenceGuid
+		Args
+		--------
+			engineeringLibraryGuid (``Guid``) :  engineeringLibraryGuid
+			engineeringReferenceGuid (``Guid``) :  engineeringReferenceGuid
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -9073,8 +9938,9 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9082,11 +9948,13 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 	def SupportElementField(self, attributeName: str) -> IField:
 		"""No Description
 
-		Args:
-			attributeName(str): attributeName
+		Args
+		--------
+			attributeName (``str``) :  attributeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9094,24 +9962,28 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 	def Add(self, engineeringReference: IEngineeringReference) -> int:
 		"""No Description
 
-		Args:
-			engineeringReference(IEngineeringReference): engineeringReference
+		Args
+		--------
+			engineeringReference (``IEngineeringReference``) :  engineeringReference
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def CrossElementFieldListManager(self, collectionFieldName: str, sortContexts: SortContextCollection, filterContexts: FilterContextCollection) -> ICrossElementFieldListManager:
 		"""No Description
 
-		Args:
-			collectionFieldName(str): collectionFieldName
-			sortContexts(SortContextCollection): sortContexts
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			collectionFieldName (``str``) :  collectionFieldName
+			sortContexts (``SortContextCollection``) :  sortContexts
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			ICrossElementFieldListManager: 
+		Returns
+		--------
+			``ICrossElementFieldListManager`` : 
 		"""
 		pass
 
@@ -9119,8 +9991,9 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 	def Add(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -9128,8 +10001,9 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 	def SupportElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			ISupportElementManager: 
+		Returns
+		--------
+			``ISupportElementManager`` : 
 		"""
 		pass
 
@@ -9139,8 +10013,9 @@ class IControlManager(ISupportElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9148,16 +10023,18 @@ class IControlManager(ISupportElementManager):
 	def Flush(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ResetWorkingUnits(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -9167,8 +10044,9 @@ class IPrototypeManager(IModelingElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9177,8 +10055,9 @@ class IPrototypeManager(IModelingElementManager):
 	def ActivePrototypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IPrototypeManager: 
+		Returns
+		--------
+			``IPrototypeManager`` : 
 		"""
 		pass
 
@@ -9192,8 +10071,9 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9202,11 +10082,13 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 	def PrototypeDomainElementField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9214,12 +10096,14 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 	def PrototypeDomainElementField(self, fieldName: str, alternativeTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9227,22 +10111,26 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 	def Exists(self, prototypeGuid: Guid) -> bool:
 		"""No Description
 
-		Args:
-			prototypeGuid(Guid): prototypeGuid
+		Args
+		--------
+			prototypeGuid (``Guid``) :  prototypeGuid
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def ElementID(self, prototypeGuid: Guid) -> int:
 		"""No Description
 
-		Args:
-			prototypeGuid(Guid): prototypeGuid
+		Args
+		--------
+			prototypeGuid (``Guid``) :  prototypeGuid
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -9250,11 +10138,13 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 	def Exists(self, id: int) -> bool:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -9262,8 +10152,9 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 	def DomainElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IPrototypeDomainElementManager: 
+		Returns
+		--------
+			``IPrototypeDomainElementManager`` : 
 		"""
 		pass
 
@@ -9273,8 +10164,9 @@ class IPrototypeDomainElement(IModelingElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9283,11 +10175,13 @@ class IPrototypeDomainElement(IModelingElement):
 	def PrototypeDomainElementField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9295,23 +10189,27 @@ class IPrototypeDomainElement(IModelingElement):
 	def PrototypeDomainElementField(self, fieldName: str, alternativeTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def SetPrototypeGuid(self, prototypeGuid: Guid) -> None:
 		"""No Description
 
-		Args:
-			prototypeGuid(Guid): prototypeGuid
+		Args
+		--------
+			prototypeGuid (``Guid``) :  prototypeGuid
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -9319,8 +10217,9 @@ class IPrototypeDomainElement(IModelingElement):
 	def DomainElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IPrototypeDomainElement: 
+		Returns
+		--------
+			``IPrototypeDomainElement`` : 
 		"""
 		pass
 
@@ -9328,8 +10227,9 @@ class IPrototypeDomainElement(IModelingElement):
 	def PrototypeGuid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			IPrototypeDomainElement: 
+		Returns
+		--------
+			``IPrototypeDomainElement`` : 
 		"""
 		pass
 
@@ -9339,8 +10239,9 @@ class IFieldManager:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9348,36 +10249,42 @@ class IFieldManager:
 	def ModelingElementField(self, name: str, type: ModelingElementType, elementTypeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			type(ModelingElementType): type
-			elementTypeID(int): elementTypeID
+		Args
+		--------
+			name (``str``) :  name
+			type (``ModelingElementType``) :  type
+			elementTypeID (``int``) :  elementTypeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def ModelingElementFields(self, type: ModelingElementType, elementTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			type(ModelingElementType): type
-			elementTypeID(int): elementTypeID
+		Args
+		--------
+			type (``ModelingElementType``) :  type
+			elementTypeID (``int``) :  elementTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def SupportElementFields(self, supportElementTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -9385,12 +10292,14 @@ class IFieldManager:
 	def SupportElementField(self, name: str, supportElementTypeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			supportElementTypeID(int): supportElementTypeID
+		Args
+		--------
+			name (``str``) :  name
+			supportElementTypeID (``int``) :  supportElementTypeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9398,12 +10307,14 @@ class IFieldManager:
 	def SupportElementField(self, name: str, supportElementTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			supportElementTypeName(str): supportElementTypeName
+		Args
+		--------
+			name (``str``) :  name
+			supportElementTypeName (``str``) :  supportElementTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9411,12 +10322,14 @@ class IFieldManager:
 	def DomainElementField(self, name: str, domainElementTypeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			name (``str``) :  name
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9424,12 +10337,14 @@ class IFieldManager:
 	def DomainElementField(self, name: str, domainElementTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			domainElementTypeName(str): domainElementTypeName
+		Args
+		--------
+			name (``str``) :  name
+			domainElementTypeName (``str``) :  domainElementTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9437,13 +10352,15 @@ class IFieldManager:
 	def DomainElementField(self, name: str, alternativeTypeID: int, domainElementTypeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			alternativeTypeID(int): alternativeTypeID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			name (``str``) :  name
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9451,13 +10368,15 @@ class IFieldManager:
 	def DomainElementField(self, name: str, alternativeTypeName: str, domainElementTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			alternativeTypeName(str): alternativeTypeName
-			domainElementTypeName(str): domainElementTypeName
+		Args
+		--------
+			name (``str``) :  name
+			alternativeTypeName (``str``) :  alternativeTypeName
+			domainElementTypeName (``str``) :  domainElementTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9465,14 +10384,16 @@ class IFieldManager:
 	def AlternativeField(self, name: str, alternativeTypeID: int, domainElementTypeID: int, alternativeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			alternativeTypeID(int): alternativeTypeID
-			domainElementTypeID(int): domainElementTypeID
-			alternativeID(int): alternativeID
+		Args
+		--------
+			name (``str``) :  name
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementTypeID (``int``) :  domainElementTypeID
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9480,14 +10401,16 @@ class IFieldManager:
 	def AlternativeField(self, name: str, alternativeTypeName: str, domainElementTypeName: str, alternativeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			alternativeTypeName(str): alternativeTypeName
-			domainElementTypeName(str): domainElementTypeName
-			alternativeID(int): alternativeID
+		Args
+		--------
+			name (``str``) :  name
+			alternativeTypeName (``str``) :  alternativeTypeName
+			domainElementTypeName (``str``) :  domainElementTypeName
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9495,12 +10418,14 @@ class IFieldManager:
 	def SystemRecordField(self, name: str, alternativeTypeID: int) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			name (``str``) :  name
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9508,23 +10433,27 @@ class IFieldManager:
 	def SystemRecordField(self, name: str, alternativeTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			alternativeTypeName(str): alternativeTypeName
+		Args
+		--------
+			name (``str``) :  name
+			alternativeTypeName (``str``) :  alternativeTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def SystemRecordFields(self, alternativeTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -9532,13 +10461,15 @@ class IFieldManager:
 	def AlternativeFields(self, alternativeTypeID: int, domainElementTypeID: int, alternativeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
-			domainElementTypeID(int): domainElementTypeID
-			alternativeID(int): alternativeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementTypeID (``int``) :  domainElementTypeID
+			alternativeID (``int``) :  alternativeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -9546,25 +10477,29 @@ class IFieldManager:
 	def AlternativeFields(self, domainElementTypeID: int, scenarioID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
-			scenarioID(int): scenarioID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
+			scenarioID (``int``) :  scenarioID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def ResultField(self, name: str, numericalEngineType: str, resultRecordTypeName: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
-			numericalEngineType(str): numericalEngineType
-			resultRecordTypeName(str): resultRecordTypeName
+		Args
+		--------
+			name (``str``) :  name
+			numericalEngineType (``str``) :  numericalEngineType
+			resultRecordTypeName (``str``) :  resultRecordTypeName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9572,12 +10507,14 @@ class IFieldManager:
 	def DomainElementFields(self, alternativeTypeID: int, domainElementTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			alternativeTypeID(int): alternativeTypeID
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			alternativeTypeID (``int``) :  alternativeTypeID
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -9585,46 +10522,54 @@ class IFieldManager:
 	def DomainElementFields(self, domainElementTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def ResultFields(self, numericalEngineTypeName: str, resultRecordTypeName: str, domainElementTypeID: int) -> FieldCollection:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
-			resultRecordTypeName(str): resultRecordTypeName
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			resultRecordTypeName (``str``) :  resultRecordTypeName
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def ScenarioResultFields(self, numericalEngineTypeName: str) -> FieldCollection:
 		"""No Description
 
-		Args:
-			numericalEngineTypeName(str): numericalEngineTypeName
+		Args
+		--------
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def DomainDataSetField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -9632,8 +10577,9 @@ class IFieldManager:
 	def DomainDataSet(self) -> IDomainDataSet:
 		"""No Description
 
-		Returns:
-			IFieldManager: 
+		Returns
+		--------
+			``IFieldManager`` : 
 		"""
 		pass
 
@@ -9643,8 +10589,9 @@ class IControlFieldManager(IFieldManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9653,8 +10600,9 @@ class IControlFieldManager(IFieldManager):
 	def IsLoadingControls(self) -> bool:
 		"""No Description
 
-		Returns:
-			IControlFieldManager: 
+		Returns
+		--------
+			``IControlFieldManager`` : 
 		"""
 		pass
 
@@ -9668,8 +10616,9 @@ class IFieldManagerEx(IFieldManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9677,35 +10626,41 @@ class IFieldManagerEx(IFieldManager):
 	def SupportedFlexTableFields(self, domainElementTyepID: int, isPipeTwoScenarioFlexTable: bool) -> FieldCollection:
 		"""No Description
 
-		Args:
-			domainElementTyepID(int): domainElementTyepID
-			isPipeTwoScenarioFlexTable(bool): isPipeTwoScenarioFlexTable
+		Args
+		--------
+			domainElementTyepID (``int``) :  domainElementTyepID
+			isPipeTwoScenarioFlexTable (``bool``) :  isPipeTwoScenarioFlexTable
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
 	def FlexTableField(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def FlexTableFieldExists(self, elementTypeId: int, name: str) -> bool:
 		"""No Description
 
-		Args:
-			elementTypeId(int): elementTypeId
-			name(str): name
+		Args
+		--------
+			elementTypeId (``int``) :  elementTypeId
+			name (``str``) :  name
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -9715,17 +10670,19 @@ class IDomainField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetUniqueValues(self) -> Array:
+	def GetUniqueValues(self) -> array:
 		"""No Description
 
-		Returns:
-			Array: 
+		Returns
+		--------
+			``array`` : 
 		"""
 		pass
 
@@ -9733,8 +10690,9 @@ class IDomainField(IField):
 	def FieldType(self) -> IFieldType:
 		"""No Description
 
-		Returns:
-			IDomainField: 
+		Returns
+		--------
+			``IDomainField`` : 
 		"""
 		pass
 
@@ -9744,8 +10702,9 @@ class IEnumeratedField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9753,8 +10712,9 @@ class IEnumeratedField(IField):
 	def GetEnumeratedMembers(self) -> List[IEnumeratedMember]:
 		"""No Description
 
-		Returns:
-			List[IEnumeratedMember]: 
+		Returns
+		--------
+			``List[IEnumeratedMember]`` : 
 		"""
 		pass
 
@@ -9764,8 +10724,9 @@ class IEnumeratedMember:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9773,19 +10734,22 @@ class IEnumeratedMember:
 	def Field(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def SupportedFields(self) -> FieldCollection:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -9793,8 +10757,9 @@ class IEnumeratedMember:
 	def Name(self) -> str:
 		"""No Description
 
-		Returns:
-			IEnumeratedMember: 
+		Returns
+		--------
+			``IEnumeratedMember`` : 
 		"""
 		pass
 
@@ -9802,8 +10767,9 @@ class IEnumeratedMember:
 	def Label(self) -> str:
 		"""No Description
 
-		Returns:
-			IEnumeratedMember: 
+		Returns
+		--------
+			``IEnumeratedMember`` : 
 		"""
 		pass
 
@@ -9815,8 +10781,9 @@ class IEnumeratedMember:
 	def ParentField(self) -> IField:
 		"""No Description
 
-		Returns:
-			IEnumeratedMember: 
+		Returns
+		--------
+			``IEnumeratedMember`` : 
 		"""
 		pass
 
@@ -9824,8 +10791,9 @@ class IEnumeratedMember:
 	def EnumerationValue(self) -> int:
 		"""No Description
 
-		Returns:
-			IEnumeratedMember: 
+		Returns
+		--------
+			``IEnumeratedMember`` : 
 		"""
 		pass
 
@@ -9835,8 +10803,9 @@ class IDataField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9845,8 +10814,9 @@ class IDataField(IField):
 	def TableName(self) -> str:
 		"""No Description
 
-		Returns:
-			IDataField: 
+		Returns
+		--------
+			``IDataField`` : 
 		"""
 		pass
 
@@ -9856,8 +10826,9 @@ class ICollectionField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9865,8 +10836,9 @@ class ICollectionField(IField):
 	def GetEmptyCollectionFieldListManager(self) -> ICollectionFieldListManager:
 		"""No Description
 
-		Returns:
-			ICollectionFieldListManager: 
+		Returns
+		--------
+			``ICollectionFieldListManager`` : 
 		"""
 		pass
 
@@ -9876,8 +10848,9 @@ class IUnitizedField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9885,11 +10858,13 @@ class IUnitizedField(IField):
 	def GetDoubleValue(self, id: int) -> float:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			float: 
+		Returns
+		--------
+			``float`` : 
 		"""
 		pass
 
@@ -9897,8 +10872,9 @@ class IUnitizedField(IField):
 	def WorkingUnitIndex(self) -> UnitIndex:
 		"""No Description
 
-		Returns:
-			IUnitizedField: 
+		Returns
+		--------
+			``IUnitizedField`` : 
 		"""
 		pass
 
@@ -9910,8 +10886,9 @@ class IUnitizedField(IField):
 	def StorageUnitIndex(self) -> UnitIndex:
 		"""No Description
 
-		Returns:
-			IUnitizedField: 
+		Returns
+		--------
+			``IUnitizedField`` : 
 		"""
 		pass
 
@@ -9921,8 +10898,9 @@ class IPresentationUnitsManager:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9930,24 +10908,28 @@ class IPresentationUnitsManager:
 	def GetDisplayUnitFor(self, formatterName: str) -> Unit:
 		"""No Description
 
-		Args:
-			formatterName(str): formatterName
+		Args
+		--------
+			formatterName (``str``) :  formatterName
 
-		Returns:
-			Unit: 
+		Returns
+		--------
+			``Unit`` : 
 		"""
 		pass
 
 	def StringFromDoubleUnit(self, value: float, formatterName: str, storageUnit: Unit) -> str:
 		"""No Description
 
-		Args:
-			value(float): value
-			formatterName(str): formatterName
-			storageUnit(Unit): storageUnit
+		Args
+		--------
+			value (``float``) :  value
+			formatterName (``str``) :  formatterName
+			storageUnit (``Unit``) :  storageUnit
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
@@ -9957,8 +10939,9 @@ class IGeometryField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9967,8 +10950,9 @@ class IGeometryField(IField):
 	def ShouldUpdateBoundingBox(self) -> bool:
 		"""No Description
 
-		Returns:
-			IGeometryField: 
+		Returns
+		--------
+			``IGeometryField`` : 
 		"""
 		pass
 
@@ -9982,8 +10966,9 @@ class IRealGeometryField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -9991,23 +10976,27 @@ class IRealGeometryField(IField):
 	def GetGeometry(self, id: int) -> List[int]:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			List[int]: 
+		Returns
+		--------
+			``List[int]`` : 
 		"""
 		pass
 
 	def SetGeometry(self, id: int, bytes: List[int]) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
-			bytes(List[int]): bytes
+		Args
+		--------
+			id (``int``) :  id
+			bytes (``List[int]``) :  bytes
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10015,8 +11004,9 @@ class IRealGeometryField(IField):
 	def StorageUnitSystem(self) -> UnitSystem:
 		"""No Description
 
-		Returns:
-			IRealGeometryField: 
+		Returns
+		--------
+			``IRealGeometryField`` : 
 		"""
 		pass
 
@@ -10024,8 +11014,9 @@ class IRealGeometryField(IField):
 	def WorkingUnitSystem(self) -> UnitSystem:
 		"""No Description
 
-		Returns:
-			IRealGeometryField: 
+		Returns
+		--------
+			``IRealGeometryField`` : 
 		"""
 		pass
 
@@ -10039,8 +11030,9 @@ class IReferenceField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10049,8 +11041,9 @@ class IReferenceField(IField):
 	def ReferencedElementManager(self) -> IModelingElementManager:
 		"""No Description
 
-		Returns:
-			IReferenceField: 
+		Returns
+		--------
+			``IReferenceField`` : 
 		"""
 		pass
 
@@ -10060,8 +11053,9 @@ class IGeometryPointField(IUnitizedField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10069,23 +11063,27 @@ class IGeometryPointField(IUnitizedField):
 	def GetPoint(self, id: int) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
 	def SetPoint(self, id: int, point: GeometryPoint) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
-			point(GeometryPoint): point
+		Args
+		--------
+			id (``int``) :  id
+			point (``GeometryPoint``) :  point
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10095,8 +11093,9 @@ class IGeometryReferenceNodeField:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10104,22 +11103,26 @@ class IGeometryReferenceNodeField:
 	def RefreshReferenceNode(self, elementID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RefreshReferenceNodes(self, valuesDic: IHmIDToObjectDictionary) -> None:
 		"""No Description
 
-		Args:
-			valuesDic(IHmIDToObjectDictionary): valuesDic
+		Args
+		--------
+			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10129,8 +11132,9 @@ class IGeometryPolylineField(IUnitizedField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10138,80 +11142,40 @@ class IGeometryPolylineField(IUnitizedField):
 	def GetPoints(self, id: int) -> List[GeometryPoint]:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			List[GeometryPoint]: 
+		Returns
+		--------
+			``List[GeometryPoint]`` : 
 		"""
 		pass
 
 	def SetPoints(self, id: int, points: List[GeometryPoint]) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
-			points(List[GeometryPoint]): points
+		Args
+		--------
+			id (``int``) :  id
+			points (``List[GeometryPoint]``) :  points
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RefreshScaledLengths(self, valuesDic: IHmIDToObjectDictionary) -> None:
 		"""No Description
 
-		Args:
-			valuesDic(IHmIDToObjectDictionary): valuesDic
+		Args
+		--------
+			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
 
-		Returns:
-			None: 
-		"""
-		pass
-
-class IGeometryPolyline3DField(IUnitizedField):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises:
-			Exception: if this class is instanciated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def GetPoints(self, id: int) -> List[GeometryPoint3D]:
-		"""No Description
-
-		Args:
-			id(int): id
-
-		Returns:
-			List[GeometryPoint3D]: 
-		"""
-		pass
-
-	def SetPoints(self, id: int, points3D: List[GeometryPoint3D]) -> None:
-		"""No Description
-
-		Args:
-			id(int): id
-			points3D(List[GeometryPoint3D]): points3D
-
-		Returns:
-			None: 
-		"""
-		pass
-
-	def RefreshScaledLengths(self, valuesDic: IHmIDToObjectDictionary) -> None:
-		"""No Description
-
-		Args:
-			valuesDic(IHmIDToObjectDictionary): valuesDic
-
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10221,8 +11185,9 @@ class IGeometryLateralField:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10230,22 +11195,26 @@ class IGeometryLateralField:
 	def RefreshLateral(self, elementID: int) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
+		Args
+		--------
+			elementID (``int``) :  elementID
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RefreshLaterals(self, valuesDic: IHmIDToObjectDictionary) -> None:
 		"""No Description
 
-		Args:
-			valuesDic(IHmIDToObjectDictionary): valuesDic
+		Args
+		--------
+			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10255,8 +11224,9 @@ class IGeometryPolygonField(IUnitizedField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10264,34 +11234,40 @@ class IGeometryPolygonField(IUnitizedField):
 	def GetRings(self, id: int) -> List[List[GeometryPoint]]:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			List[List[GeometryPoint]]: 
+		Returns
+		--------
+			``List[List[GeometryPoint]]`` : 
 		"""
 		pass
 
 	def SetRings(self, id: int, rings: List[List[GeometryPoint]]) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
-			rings(List[List[GeometryPoint]]): rings
+		Args
+		--------
+			id (``int``) :  id
+			rings (``List[List[GeometryPoint]]``) :  rings
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RefreshScaledAreas(self, valuesDic: IHmIDToObjectDictionary) -> None:
 		"""No Description
 
-		Args:
-			valuesDic(IHmIDToObjectDictionary): valuesDic
+		Args
+		--------
+			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10301,8 +11277,9 @@ class IModelingElementField:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10311,8 +11288,9 @@ class IModelingElementField:
 	def SupportedModelingElementType(self) -> ModelingElementType:
 		"""No Description
 
-		Returns:
-			IModelingElementField: 
+		Returns
+		--------
+			``IModelingElementField`` : 
 		"""
 		pass
 
@@ -10320,8 +11298,9 @@ class IModelingElementField:
 	def ElementTypeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IModelingElementField: 
+		Returns
+		--------
+			``IModelingElementField`` : 
 		"""
 		pass
 
@@ -10331,8 +11310,9 @@ class ISupportElementField(IEditField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10341,8 +11321,9 @@ class ISupportElementField(IEditField):
 	def SupportElementType(self) -> ISupportElementType:
 		"""No Description
 
-		Returns:
-			ISupportElementField: 
+		Returns
+		--------
+			``ISupportElementField`` : 
 		"""
 		pass
 
@@ -10352,8 +11333,9 @@ class IDomainElementField(IDataField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10361,8 +11343,9 @@ class IDomainElementField(IDataField):
 	def AlternativeRecord(self) -> IAlternativeRecord:
 		"""No Description
 
-		Returns:
-			IAlternativeRecord: 
+		Returns
+		--------
+			``IAlternativeRecord`` : 
 		"""
 		pass
 
@@ -10370,8 +11353,9 @@ class IDomainElementField(IDataField):
 	def AlternativeType(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			IDomainElementField: 
+		Returns
+		--------
+			``IDomainElementField`` : 
 		"""
 		pass
 
@@ -10379,8 +11363,9 @@ class IDomainElementField(IDataField):
 	def DomainElementType(self) -> IDomainElementType:
 		"""No Description
 
-		Returns:
-			IDomainElementField: 
+		Returns
+		--------
+			``IDomainElementField`` : 
 		"""
 		pass
 
@@ -10388,8 +11373,9 @@ class IDomainElementField(IDataField):
 	def OwnerDomainElementType(self) -> IDomainElementType:
 		"""No Description
 
-		Returns:
-			IDomainElementField: 
+		Returns
+		--------
+			``IDomainElementField`` : 
 		"""
 		pass
 
@@ -10399,8 +11385,9 @@ class IEditDomainElementField(IEditField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10409,13 +11396,15 @@ class IEditDomainElementField(IEditField):
 	def SetValue(self, elementID: int, makeLocal: bool, newValue: object) -> None:
 		"""No Description
 
-		Args:
-			elementID(int): elementID
-			makeLocal(bool): makeLocal
-			newValue(object): newValue
+		Args
+		--------
+			elementID (``int``) :  elementID
+			makeLocal (``bool``) :  makeLocal
+			newValue (``object``) :  newValue
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10423,12 +11412,14 @@ class IEditDomainElementField(IEditField):
 	def SetValue(self, id: int, value: object) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
-			value(object): value
+		Args
+		--------
+			id (``int``) :  id
+			value (``object``) :  value
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10438,8 +11429,9 @@ class ISystemRecordField(IField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10448,8 +11440,9 @@ class ISystemRecordField(IField):
 	def AlternativeType(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			ISystemRecordField: 
+		Returns
+		--------
+			``ISystemRecordField`` : 
 		"""
 		pass
 
@@ -10459,8 +11452,9 @@ class IAlternativeField(IDomainElementField):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10469,8 +11463,9 @@ class IAlternativeField(IDomainElementField):
 	def ActiveAlternativeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IAlternativeField: 
+		Returns
+		--------
+			``IAlternativeField`` : 
 		"""
 		pass
 
@@ -10484,8 +11479,9 @@ class ICollectionFieldListManager(IOrderedListManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10493,19 +11489,22 @@ class ICollectionFieldListManager(IOrderedListManager):
 	def Field(self, name: str) -> IField:
 		"""No Description
 
-		Args:
-			name(str): name
+		Args
+		--------
+			name (``str``) :  name
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def Clear(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10515,8 +11514,9 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10525,23 +11525,27 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 	def Delete(self, indices: HmIDCollection) -> None:
 		"""No Description
 
-		Args:
-			indices(HmIDCollection): indices
+		Args
+		--------
+			indices (``HmIDCollection``) :  indices
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Reload(self, sortContexts: SortContextCollection, filterContexts: FilterContextCollection) -> None:
 		"""No Description
 
-		Args:
-			sortContexts(SortContextCollection): sortContexts
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			sortContexts (``SortContextCollection``) :  sortContexts
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10549,11 +11553,13 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 	def Delete(self, id: int) -> None:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10561,8 +11567,9 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 	def ActiveElementID(self) -> int:
 		"""No Description
 
-		Returns:
-			ICrossElementFieldListManager: 
+		Returns
+		--------
+			``ICrossElementFieldListManager`` : 
 		"""
 		pass
 
@@ -10574,8 +11581,9 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 	def ActiveSortContexts(self) -> SortContextCollection:
 		"""No Description
 
-		Returns:
-			ICrossElementFieldListManager: 
+		Returns
+		--------
+			``ICrossElementFieldListManager`` : 
 		"""
 		pass
 
@@ -10583,8 +11591,9 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 	def ActiveFilterContexts(self) -> FilterContextCollection:
 		"""No Description
 
-		Returns:
-			ICrossElementFieldListManager: 
+		Returns
+		--------
+			``ICrossElementFieldListManager`` : 
 		"""
 		pass
 
@@ -10594,8 +11603,9 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10604,13 +11614,15 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 	def Reload(self, alternativeID: int, sortContexts: SortContextCollection, filterContexts: FilterContextCollection) -> None:
 		"""No Description
 
-		Args:
-			alternativeID(int): alternativeID
-			sortContexts(SortContextCollection): sortContexts
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			alternativeID (``int``) :  alternativeID
+			sortContexts (``SortContextCollection``) :  sortContexts
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10618,12 +11630,14 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 	def Reload(self, sortContexts: SortContextCollection, filterContexts: FilterContextCollection) -> None:
 		"""No Description
 
-		Args:
-			sortContexts(SortContextCollection): sortContexts
-			filterContexts(FilterContextCollection): filterContexts
+		Args
+		--------
+			sortContexts (``SortContextCollection``) :  sortContexts
+			filterContexts (``FilterContextCollection``) :  filterContexts
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10631,8 +11645,9 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 	def ActiveAlternativeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IAlternativeCrossElementFieldListManager: 
+		Returns
+		--------
+			``IAlternativeCrossElementFieldListManager`` : 
 		"""
 		pass
 
@@ -10642,8 +11657,9 @@ class ISelectableManager:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10651,36 +11667,42 @@ class ISelectableManager:
 	def SelectElementIDs(self, sortContextCollection: SortContextCollection, filterContextCollection: FilterContextCollection) -> IHmIDDelayedCollection:
 		"""No Description
 
-		Args:
-			sortContextCollection(SortContextCollection): sortContextCollection
-			filterContextCollection(FilterContextCollection): filterContextCollection
+		Args
+		--------
+			sortContextCollection (``SortContextCollection``) :  sortContextCollection
+			filterContextCollection (``FilterContextCollection``) :  filterContextCollection
 
-		Returns:
-			IHmIDDelayedCollection: 
+		Returns
+		--------
+			``IHmIDDelayedCollection`` : 
 		"""
 		pass
 
 	def Validate(self, filterContextCollection: FilterContextCollection) -> None:
 		"""No Description
 
-		Args:
-			filterContextCollection(FilterContextCollection): filterContextCollection
+		Args
+		--------
+			filterContextCollection (``FilterContextCollection``) :  filterContextCollection
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetDataReader(self, queryName: str, fields: FieldTypeCollection, parametersMap: Dict) -> IFieldCollectionDataReader:
 		"""No Description
 
-		Args:
-			queryName(str): queryName
-			fields(FieldTypeCollection): fields
-			parametersMap(Dict): parametersMap
+		Args
+		--------
+			queryName (``str``) :  queryName
+			fields (``FieldTypeCollection``) :  fields
+			parametersMap (``Dict``) :  parametersMap
 
-		Returns:
-			IFieldCollectionDataReader: 
+		Returns
+		--------
+			``IFieldCollectionDataReader`` : 
 		"""
 		pass
 
@@ -10690,8 +11712,9 @@ class ISelectableManagerEx:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10699,13 +11722,15 @@ class ISelectableManagerEx:
 	def GetDataReader(self, queryName: str, fields: FieldTypeCollection, parametersMap: Dict) -> IDisposableEnumerable:
 		"""No Description
 
-		Args:
-			queryName(str): queryName
-			fields(FieldTypeCollection): fields
-			parametersMap(Dict): parametersMap
+		Args
+		--------
+			queryName (``str``) :  queryName
+			fields (``FieldTypeCollection``) :  fields
+			parametersMap (``Dict``) :  parametersMap
 
-		Returns:
-			IDisposableEnumerable: 
+		Returns
+		--------
+			``IDisposableEnumerable`` : 
 		"""
 		pass
 
@@ -10715,8 +11740,9 @@ class IEnumeratorDataAccessor:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10724,86 +11750,101 @@ class IEnumeratorDataAccessor:
 	def GetElementID(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def GetNullableInt32(self, fieldIndex: int) -> Union[int, None]:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
 
-		Returns:
-			Nullable: 
+		Returns
+		--------
+			``Nullable`` : 
 		"""
 		pass
 
 	def GetInt32(self, fieldIndex: int) -> int:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def GetDouble(self, fieldIndex: int, unitIndex: UnitIndex) -> float:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
-			unitIndex(UnitIndex): unitIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
+			unitIndex (``UnitIndex``) :  unitIndex
 
-		Returns:
-			float: 
+		Returns
+		--------
+			``float`` : 
 		"""
 		pass
 
 	def GetBoolean(self, fieldIndex: int) -> bool:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def GetDateTime(self, fieldIndex: int) -> datetime:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
 
-		Returns:
-			datetime: 
+		Returns
+		--------
+			``datetime`` : 
 		"""
 		pass
 
 	def GetString(self, fieldIndex: int) -> str:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
 	def GetBlob(self, fieldIndex: int) -> List[int]:
 		"""No Description
 
-		Args:
-			fieldIndex(int): fieldIndex
+		Args
+		--------
+			fieldIndex (``int``) :  fieldIndex
 
-		Returns:
-			List[int]: 
+		Returns
+		--------
+			``List[int]`` : 
 		"""
 		pass
 
@@ -10811,19 +11852,21 @@ class IEnumeratorDataAccessor:
 	def FieldTypes(self) -> List[IFieldType]:
 		"""No Description
 
-		Returns:
-			IEnumeratorDataAccessor: 
+		Returns
+		--------
+			``IEnumeratorDataAccessor`` : 
 		"""
 		pass
 
-class IDisposableEnumerable(Generic[T], IEnumerable[T]):
+class IDisposableEnumerable(Generic[T], Iterator[T]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10834,8 +11877,9 @@ class IAlternativeRecordEx:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10844,13 +11888,15 @@ class IAlternativeRecordEx:
 	def GetDataReader(self, fieldTypeNames: array[str], filterContexts: FilterContextCollection, sortContexts: SortContextCollection) -> IDisposableEnumerable:
 		"""No Description
 
-		Args:
-			fieldTypeNames(array[str]): fieldTypeNames
-			filterContexts(FilterContextCollection): filterContexts
-			sortContexts(SortContextCollection): sortContexts
+		Args
+		--------
+			fieldTypeNames (``array[str]``) :  fieldTypeNames
+			filterContexts (``FilterContextCollection``) :  filterContexts
+			sortContexts (``SortContextCollection``) :  sortContexts
 
-		Returns:
-			IDisposableEnumerable: 
+		Returns
+		--------
+			``IDisposableEnumerable`` : 
 		"""
 		pass
 
@@ -10858,12 +11904,14 @@ class IAlternativeRecordEx:
 	def GetDataReader(self, fieldTypeNames: array[str], domainElementTypeID: int) -> IAlternativeRecordDataReader:
 		"""No Description
 
-		Args:
-			fieldTypeNames(array[str]): fieldTypeNames
-			domainElementTypeID(int): domainElementTypeID
+		Args
+		--------
+			fieldTypeNames (``array[str]``) :  fieldTypeNames
+			domainElementTypeID (``int``) :  domainElementTypeID
 
-		Returns:
-			IAlternativeRecordDataReader: 
+		Returns
+		--------
+			``IAlternativeRecordDataReader`` : 
 		"""
 		pass
 
@@ -10873,8 +11921,9 @@ class IHmIDDelayedCollection(ICloneable, List):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10882,52 +11931,61 @@ class IHmIDDelayedCollection(ICloneable, List):
 	def Add(self, item: int) -> int:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Contains(self, item: int) -> bool:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IndexOf(self, item: int) -> int:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Sort(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Remove(self, item: int) -> None:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -10935,8 +11993,9 @@ class IHmIDDelayedCollection(ICloneable, List):
 	def Item(self) -> int:
 		"""No Description
 
-		Returns:
-			IHmIDDelayedCollection: 
+		Returns
+		--------
+			``IHmIDDelayedCollection`` : 
 		"""
 		pass
 
@@ -10950,8 +12009,9 @@ class IUpdatedFieldInformation:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -10960,8 +12020,9 @@ class IUpdatedFieldInformation:
 	def OldFieldName(self) -> str:
 		"""No Description
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
@@ -10969,8 +12030,9 @@ class IUpdatedFieldInformation:
 	def NewFieldName(self) -> str:
 		"""No Description
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
@@ -10978,8 +12040,9 @@ class IUpdatedFieldInformation:
 	def NewSource(self) -> str:
 		"""No Description
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
@@ -10987,8 +12050,9 @@ class IUpdatedFieldInformation:
 	def FieldUpdateType(self) -> FieldUpdateTypeEnum:
 		"""No Description
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
@@ -10996,8 +12060,9 @@ class IUpdatedFieldInformation:
 	def IsResultField(self) -> bool:
 		"""No Description
 
-		Returns:
-			IUpdatedFieldInformation: 
+		Returns
+		--------
+			``IUpdatedFieldInformation`` : 
 		"""
 		pass
 
@@ -11007,8 +12072,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11017,84 +12083,97 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def Exists(self, guid: Guid) -> bool:
 		"""No Description
 
-		Args:
-			guid(Guid): guid
+		Args
+		--------
+			guid (``Guid``) :  guid
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IsSourceAvailable(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def EngineeringLibraryField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def GetEngineeringObject(self, aguid: Guid) -> IEngineeringReference:
 		"""No Description
 
-		Args:
-			aguid(Guid): aguid
+		Args
+		--------
+			aguid (``Guid``) :  aguid
 
-		Returns:
-			IEngineeringReference: 
+		Returns
+		--------
+			``IEngineeringReference`` : 
 		"""
 		pass
 
 	def AddFolder(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Commit(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Close(self, allowPrompts: bool) -> None:
 		"""No Description
 
-		Args:
-			allowPrompts(bool): allowPrompts
+		Args
+		--------
+			allowPrompts (``bool``) :  allowPrompts
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ForceCheckIfAvailable(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def GetSourceEngineeringLibraryTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			str: 
+		Returns
+		--------
+			``str`` : 
 		"""
 		pass
 
@@ -11102,11 +12181,13 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def Exists(self, id: int) -> bool:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -11114,8 +12195,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def Guid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11123,8 +12205,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def Source(self) -> str:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11136,8 +12219,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def Notes(self) -> str:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11149,8 +12233,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def EngineeringLibraryTypeName(self) -> str:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11158,8 +12243,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def DateModified(self) -> datetime:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11167,8 +12253,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def IsEditable(self) -> bool:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11176,8 +12263,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def IsEnumerable(self) -> bool:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11185,8 +12273,9 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 	def IsInProjectWise(self) -> bool:
 		"""No Description
 
-		Returns:
-			IEngineeringLibrary: 
+		Returns
+		--------
+			``IEngineeringLibrary`` : 
 		"""
 		pass
 
@@ -11196,8 +12285,9 @@ class IEngineeringLibraryEx:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11205,8 +12295,9 @@ class IEngineeringLibraryEx:
 	def GetPersistedGuid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			Guid: 
+		Returns
+		--------
+			``Guid`` : 
 		"""
 		pass
 
@@ -11216,8 +12307,9 @@ class IEngineeringReference(ITreeElement):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11225,22 +12317,26 @@ class IEngineeringReference(ITreeElement):
 	def EngineeringReferenceField(self, fieldName: str) -> IField:
 		"""No Description
 
-		Args:
-			fieldName(str): fieldName
+		Args
+		--------
+			fieldName (``str``) :  fieldName
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
 	def SynchronizeFrom(self, supportElement: ISupportElement) -> None:
 		"""No Description
 
-		Args:
-			supportElement(ISupportElement): supportElement
+		Args
+		--------
+			supportElement (``ISupportElement``) :  supportElement
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11248,8 +12344,9 @@ class IEngineeringReference(ITreeElement):
 	def Guid(self) -> Guid:
 		"""No Description
 
-		Returns:
-			IEngineeringReference: 
+		Returns
+		--------
+			``IEngineeringReference`` : 
 		"""
 		pass
 
@@ -11257,8 +12354,9 @@ class IEngineeringReference(ITreeElement):
 	def DateModified(self) -> datetime:
 		"""No Description
 
-		Returns:
-			IEngineeringReference: 
+		Returns
+		--------
+			``IEngineeringReference`` : 
 		"""
 		pass
 
@@ -11266,8 +12364,9 @@ class IEngineeringReference(ITreeElement):
 	def EngineeringLibrary(self) -> IEngineeringLibrary:
 		"""No Description
 
-		Returns:
-			IEngineeringReference: 
+		Returns
+		--------
+			``IEngineeringReference`` : 
 		"""
 		pass
 
@@ -11277,8 +12376,9 @@ class IBlobable:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11286,16 +12386,18 @@ class IBlobable:
 	def GetBytes(self) -> List[int]:
 		"""No Description
 
-		Returns:
-			List[int]: 
+		Returns
+		--------
+			``List[int]`` : 
 		"""
 		pass
 
 	def GetNumberOfBytes(self) -> int:
 		"""No Description
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -11305,8 +12407,9 @@ class IAlternativeTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11314,16 +12417,18 @@ class IAlternativeTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11331,8 +12436,9 @@ class IAlternativeTypeCollectionEnumerator:
 	def Current(self) -> IAlternativeType:
 		"""No Description
 
-		Returns:
-			IAlternativeTypeCollectionEnumerator: 
+		Returns
+		--------
+			``IAlternativeTypeCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11342,8 +12448,9 @@ class IFieldTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11351,16 +12458,18 @@ class IFieldTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11368,8 +12477,9 @@ class IFieldTypeCollectionEnumerator:
 	def Current(self) -> IFieldType:
 		"""No Description
 
-		Returns:
-			IFieldTypeCollectionEnumerator: 
+		Returns
+		--------
+			``IFieldTypeCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11379,8 +12489,9 @@ class IDomainDataSetCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11388,16 +12499,18 @@ class IDomainDataSetCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11405,8 +12518,9 @@ class IDomainDataSetCollectionEnumerator:
 	def Current(self) -> IDomainDataSet:
 		"""No Description
 
-		Returns:
-			IDomainDataSetCollectionEnumerator: 
+		Returns
+		--------
+			``IDomainDataSetCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11416,8 +12530,9 @@ class IDomainDataSetTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11425,16 +12540,18 @@ class IDomainDataSetTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11442,8 +12559,9 @@ class IDomainDataSetTypeCollectionEnumerator:
 	def Current(self) -> IDomainDataSetType:
 		"""No Description
 
-		Returns:
-			IDomainDataSetTypeCollectionEnumerator: 
+		Returns
+		--------
+			``IDomainDataSetTypeCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11453,8 +12571,9 @@ class IDomainElementTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11462,16 +12581,18 @@ class IDomainElementTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11479,8 +12600,9 @@ class IDomainElementTypeCollectionEnumerator:
 	def Current(self) -> IDomainElementType:
 		"""No Description
 
-		Returns:
-			IDomainElementTypeCollectionEnumerator: 
+		Returns
+		--------
+			``IDomainElementTypeCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11490,8 +12612,9 @@ class IModelingElementCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11499,16 +12622,18 @@ class IModelingElementCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11516,8 +12641,9 @@ class IModelingElementCollectionEnumerator:
 	def Current(self) -> IModelingElement:
 		"""No Description
 
-		Returns:
-			IModelingElementCollectionEnumerator: 
+		Returns
+		--------
+			``IModelingElementCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11527,8 +12653,9 @@ class INumericalEngineTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11536,16 +12663,18 @@ class INumericalEngineTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11553,8 +12682,9 @@ class INumericalEngineTypeCollectionEnumerator:
 	def Current(self) -> INumericalEngineType:
 		"""No Description
 
-		Returns:
-			INumericalEngineTypeCollectionEnumerator: 
+		Returns
+		--------
+			``INumericalEngineTypeCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11564,8 +12694,9 @@ class IResultRecordCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11573,16 +12704,18 @@ class IResultRecordCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11590,8 +12723,9 @@ class IResultRecordCollectionEnumerator:
 	def Current(self) -> IResultRecord:
 		"""No Description
 
-		Returns:
-			IResultRecordCollectionEnumerator: 
+		Returns
+		--------
+			``IResultRecordCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11601,8 +12735,9 @@ class IResultRecordTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11610,16 +12745,18 @@ class IResultRecordTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11627,8 +12764,9 @@ class IResultRecordTypeCollectionEnumerator:
 	def Current(self) -> IResultRecordType:
 		"""No Description
 
-		Returns:
-			IResultRecordTypeCollectionEnumerator: 
+		Returns
+		--------
+			``IResultRecordTypeCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -11638,8 +12776,9 @@ class ISupportElementTypeCollectionEnumerator:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -11647,16 +12786,18 @@ class ISupportElementTypeCollectionEnumerator:
 	def MoveNext(self) -> bool:
 		"""No Description
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Reset(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -11664,8 +12805,9 @@ class ISupportElementTypeCollectionEnumerator:
 	def Current(self) -> ISupportElementType:
 		"""No Description
 
-		Returns:
-			ISupportElementTypeCollectionEnumerator: 
+		Returns
+		--------
+			``ISupportElementTypeCollectionEnumerator`` : 
 		"""
 		pass
 

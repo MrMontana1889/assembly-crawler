@@ -1,4 +1,5 @@
 from enum import Enum
+from System import TypeCode, ICloneable
 from typing import overload, List, Dict, Iterator
 from array import array
 
@@ -143,13 +144,6 @@ class Tag(Enum):
 class Tag(Enum):
 	Default = 0
 
-class CompareType(Enum):
-	IncreasingX = 0
-	IncreasingY = 1
-
-class Tag(Enum):
-	Default = 0
-
 class Tag(Enum):
 	Default = 0
 
@@ -184,10 +178,11 @@ class FieldCollection(List, ICloneable):
 	def __init__(self) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FieldCollection): c
-			a(List[IField]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldCollection``) :  c
+			a (``List[IField]``) :  a
 		"""
 		pass
 
@@ -195,10 +190,11 @@ class FieldCollection(List, ICloneable):
 	def __init__(self, capacity: int) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FieldCollection): c
-			a(List[IField]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldCollection``) :  c
+			a (``List[IField]``) :  a
 		"""
 		pass
 
@@ -206,10 +202,11 @@ class FieldCollection(List, ICloneable):
 	def __init__(self, c: FieldCollection) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FieldCollection): c
-			a(List[IField]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldCollection``) :  c
+			a (``List[IField]``) :  a
 		"""
 		pass
 
@@ -217,10 +214,11 @@ class FieldCollection(List, ICloneable):
 	def __init__(self, a: List[IField]) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FieldCollection): c
-			a(List[IField]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldCollection``) :  c
+			a (``List[IField]``) :  a
 		"""
 		pass
 
@@ -228,11 +226,13 @@ class FieldCollection(List, ICloneable):
 	def Synchronized(list: FieldCollection) -> FieldCollection:
 		"""No Description
 
-		Args:
-			list(FieldCollection): list
+		Args
+		--------
+			list (``FieldCollection``) :  list
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -240,11 +240,13 @@ class FieldCollection(List, ICloneable):
 	def ReadOnly(list: FieldCollection) -> FieldCollection:
 		"""No Description
 
-		Args:
-			list(FieldCollection): list
+		Args
+		--------
+			list (``FieldCollection``) :  list
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -252,11 +254,13 @@ class FieldCollection(List, ICloneable):
 	def CopyTo(self, array: List[IField]) -> None:
 		"""No Description
 
-		Args:
-			array(List[IField]): array
+		Args
+		--------
+			array (``List[IField]``) :  array
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -264,103 +268,120 @@ class FieldCollection(List, ICloneable):
 	def CopyTo(self, array: List[IField], start: int) -> None:
 		"""No Description
 
-		Args:
-			array(List[IField]): array
-			start(int): start
+		Args
+		--------
+			array (``List[IField]``) :  array
+			start (``int``) :  start
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Add(self, item: IField) -> int:
 		"""No Description
 
-		Args:
-			item(IField): item
+		Args
+		--------
+			item (``IField``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Clear(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Clone(self) -> object:
 		"""No Description
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def Contains(self, item: IField) -> bool:
 		"""No Description
 
-		Args:
-			item(IField): item
+		Args
+		--------
+			item (``IField``) :  item
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IndexOf(self, item: IField) -> int:
 		"""No Description
 
-		Args:
-			item(IField): item
+		Args
+		--------
+			item (``IField``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Insert(self, index: int, item: IField) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
-			item(IField): item
+		Args
+		--------
+			index (``int``) :  index
+			item (``IField``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Remove(self, item: IField) -> None:
 		"""No Description
 
-		Args:
-			item(IField): item
+		Args
+		--------
+			item (``IField``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RemoveAt(self, index: int) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
+		Args
+		--------
+			index (``int``) :  index
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetEnumerator(self) -> IFieldCollectionEnumerator:
 		"""No Description
 
-		Returns:
-			IFieldCollectionEnumerator: 
+		Returns
+		--------
+			``IFieldCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -368,11 +389,13 @@ class FieldCollection(List, ICloneable):
 	def AddRange(self, x: FieldCollection) -> int:
 		"""No Description
 
-		Args:
-			x(FieldCollection): x
+		Args
+		--------
+			x (``FieldCollection``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -380,19 +403,22 @@ class FieldCollection(List, ICloneable):
 	def AddRange(self, x: List[IField]) -> int:
 		"""No Description
 
-		Args:
-			x(List[IField]): x
+		Args
+		--------
+			x (``List[IField]``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def TrimToSize(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -400,8 +426,9 @@ class FieldCollection(List, ICloneable):
 	def Count(self) -> int:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -409,8 +436,9 @@ class FieldCollection(List, ICloneable):
 	def IsSynchronized(self) -> bool:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -418,8 +446,9 @@ class FieldCollection(List, ICloneable):
 	def SyncRoot(self) -> object:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -427,8 +456,9 @@ class FieldCollection(List, ICloneable):
 	def Item(self) -> IField:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -440,8 +470,9 @@ class FieldCollection(List, ICloneable):
 	def IsFixedSize(self) -> bool:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -449,8 +480,9 @@ class FieldCollection(List, ICloneable):
 	def IsReadOnly(self) -> bool:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -458,8 +490,9 @@ class FieldCollection(List, ICloneable):
 	def Capacity(self) -> int:
 		"""No Description
 
-		Returns:
-			FieldCollection: 
+		Returns
+		--------
+			``FieldCollection`` : 
 		"""
 		pass
 
@@ -473,10 +506,11 @@ class FilterContextCollection(List, ICloneable):
 	def __init__(self) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FilterContextCollection): c
-			a(List[IFilterContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FilterContextCollection``) :  c
+			a (``List[IFilterContext]``) :  a
 		"""
 		pass
 
@@ -484,10 +518,11 @@ class FilterContextCollection(List, ICloneable):
 	def __init__(self, capacity: int) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FilterContextCollection): c
-			a(List[IFilterContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FilterContextCollection``) :  c
+			a (``List[IFilterContext]``) :  a
 		"""
 		pass
 
@@ -495,10 +530,11 @@ class FilterContextCollection(List, ICloneable):
 	def __init__(self, c: FilterContextCollection) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FilterContextCollection): c
-			a(List[IFilterContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FilterContextCollection``) :  c
+			a (``List[IFilterContext]``) :  a
 		"""
 		pass
 
@@ -506,10 +542,11 @@ class FilterContextCollection(List, ICloneable):
 	def __init__(self, a: List[IFilterContext]) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(FilterContextCollection): c
-			a(List[IFilterContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FilterContextCollection``) :  c
+			a (``List[IFilterContext]``) :  a
 		"""
 		pass
 
@@ -517,11 +554,13 @@ class FilterContextCollection(List, ICloneable):
 	def Synchronized(list: FilterContextCollection) -> FilterContextCollection:
 		"""No Description
 
-		Args:
-			list(FilterContextCollection): list
+		Args
+		--------
+			list (``FilterContextCollection``) :  list
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -529,11 +568,13 @@ class FilterContextCollection(List, ICloneable):
 	def ReadOnly(list: FilterContextCollection) -> FilterContextCollection:
 		"""No Description
 
-		Args:
-			list(FilterContextCollection): list
+		Args
+		--------
+			list (``FilterContextCollection``) :  list
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -541,11 +582,13 @@ class FilterContextCollection(List, ICloneable):
 	def CopyTo(self, array: List[IFilterContext]) -> None:
 		"""No Description
 
-		Args:
-			array(List[IFilterContext]): array
+		Args
+		--------
+			array (``List[IFilterContext]``) :  array
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -553,12 +596,14 @@ class FilterContextCollection(List, ICloneable):
 	def CopyTo(self, array: List[IFilterContext], start: int) -> None:
 		"""No Description
 
-		Args:
-			array(List[IFilterContext]): array
-			start(int): start
+		Args
+		--------
+			array (``List[IFilterContext]``) :  array
+			start (``int``) :  start
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -566,11 +611,13 @@ class FilterContextCollection(List, ICloneable):
 	def Add(self, item: IFilterContext) -> int:
 		"""No Description
 
-		Args:
-			item(IFilterContext): item
+		Args
+		--------
+			item (``IFilterContext``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -578,93 +625,108 @@ class FilterContextCollection(List, ICloneable):
 	def Add(self, field: IField, comparisonOperator: ComparisonOperator, value: object) -> int:
 		"""No Description
 
-		Args:
-			field(IField): field
-			comparisonOperator(ComparisonOperator): comparisonOperator
-			value(object): value
+		Args
+		--------
+			field (``IField``) :  field
+			comparisonOperator (``ComparisonOperator``) :  comparisonOperator
+			value (``object``) :  value
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Clear(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Clone(self) -> object:
 		"""No Description
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def Contains(self, item: IFilterContext) -> bool:
 		"""No Description
 
-		Args:
-			item(IFilterContext): item
+		Args
+		--------
+			item (``IFilterContext``) :  item
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IndexOf(self, item: IFilterContext) -> int:
 		"""No Description
 
-		Args:
-			item(IFilterContext): item
+		Args
+		--------
+			item (``IFilterContext``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Insert(self, index: int, item: IFilterContext) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
-			item(IFilterContext): item
+		Args
+		--------
+			index (``int``) :  index
+			item (``IFilterContext``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Remove(self, item: IFilterContext) -> None:
 		"""No Description
 
-		Args:
-			item(IFilterContext): item
+		Args
+		--------
+			item (``IFilterContext``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RemoveAt(self, index: int) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
+		Args
+		--------
+			index (``int``) :  index
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetEnumerator(self) -> IFilterContextCollectionEnumerator:
 		"""No Description
 
-		Returns:
-			IFilterContextCollectionEnumerator: 
+		Returns
+		--------
+			``IFilterContextCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -672,11 +734,13 @@ class FilterContextCollection(List, ICloneable):
 	def AddRange(self, x: FilterContextCollection) -> int:
 		"""No Description
 
-		Args:
-			x(FilterContextCollection): x
+		Args
+		--------
+			x (``FilterContextCollection``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -684,19 +748,22 @@ class FilterContextCollection(List, ICloneable):
 	def AddRange(self, x: List[IFilterContext]) -> int:
 		"""No Description
 
-		Args:
-			x(List[IFilterContext]): x
+		Args
+		--------
+			x (``List[IFilterContext]``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def TrimToSize(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -704,8 +771,9 @@ class FilterContextCollection(List, ICloneable):
 	def AdditionalFilterSQL(self) -> str:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -717,8 +785,9 @@ class FilterContextCollection(List, ICloneable):
 	def AdditionalFilterStringToFieldsMap(self) -> Dict:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -730,8 +799,9 @@ class FilterContextCollection(List, ICloneable):
 	def IdsToFilter(self) -> HmIDCollection:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -743,8 +813,9 @@ class FilterContextCollection(List, ICloneable):
 	def UseSmartLabels(self) -> bool:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -756,8 +827,9 @@ class FilterContextCollection(List, ICloneable):
 	def IsEmpty(self) -> bool:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -765,8 +837,9 @@ class FilterContextCollection(List, ICloneable):
 	def SelectNOTElementIDs(self) -> bool:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -778,8 +851,9 @@ class FilterContextCollection(List, ICloneable):
 	def Count(self) -> int:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -787,8 +861,9 @@ class FilterContextCollection(List, ICloneable):
 	def IsSynchronized(self) -> bool:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -796,8 +871,9 @@ class FilterContextCollection(List, ICloneable):
 	def SyncRoot(self) -> object:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -805,8 +881,9 @@ class FilterContextCollection(List, ICloneable):
 	def Item(self) -> IFilterContext:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -818,8 +895,9 @@ class FilterContextCollection(List, ICloneable):
 	def IsFixedSize(self) -> bool:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -827,8 +905,9 @@ class FilterContextCollection(List, ICloneable):
 	def IsReadOnly(self) -> bool:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -836,8 +915,9 @@ class FilterContextCollection(List, ICloneable):
 	def Capacity(self) -> int:
 		"""No Description
 
-		Returns:
-			FilterContextCollection: 
+		Returns
+		--------
+			``FilterContextCollection`` : 
 		"""
 		pass
 
@@ -850,21 +930,24 @@ class GeometryPoint:
 	def __init__(self, x: float, y: float) -> None:
 		"""No Description
 
-		Args:
-			x(float): x
-			y(float): y
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
 		"""
 		pass
 
 	def MoveBy(self, x: float, y: float) -> None:
 		"""No Description
 
-		Args:
-			x(float): x
-			y(float): y
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -872,12 +955,14 @@ class GeometryPoint:
 	def op_Equality(point1: GeometryPoint, point2: GeometryPoint) -> bool:
 		"""No Description
 
-		Args:
-			point1(GeometryPoint): point1
-			point2(GeometryPoint): point2
+		Args
+		--------
+			point1 (``GeometryPoint``) :  point1
+			point2 (``GeometryPoint``) :  point2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -885,12 +970,14 @@ class GeometryPoint:
 	def op_Inequality(point1: GeometryPoint, point2: GeometryPoint) -> bool:
 		"""No Description
 
-		Args:
-			point1(GeometryPoint): point1
-			point2(GeometryPoint): point2
+		Args
+		--------
+			point1 (``GeometryPoint``) :  point1
+			point2 (``GeometryPoint``) :  point2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -898,12 +985,14 @@ class GeometryPoint:
 	def op_Addition(left: GeometryPoint, right: GeometryPoint) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			left(GeometryPoint): left
-			right(GeometryPoint): right
+		Args
+		--------
+			left (``GeometryPoint``) :  left
+			right (``GeometryPoint``) :  right
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -911,12 +1000,14 @@ class GeometryPoint:
 	def op_Subtraction(left: GeometryPoint, right: GeometryPoint) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			left(GeometryPoint): left
-			right(GeometryPoint): right
+		Args
+		--------
+			left (``GeometryPoint``) :  left
+			right (``GeometryPoint``) :  right
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -924,11 +1015,13 @@ class GeometryPoint:
 	def op_UnaryPlus(point: GeometryPoint) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			point(GeometryPoint): point
+		Args
+		--------
+			point (``GeometryPoint``) :  point
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -936,11 +1029,13 @@ class GeometryPoint:
 	def op_UnaryNegation(point: GeometryPoint) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			point(GeometryPoint): point
+		Args
+		--------
+			point (``GeometryPoint``) :  point
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -948,12 +1043,14 @@ class GeometryPoint:
 	def op_Addition(left: GeometryPoint, right: GeometryPoint) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			left(GeometryPoint): left
-			right(GeometryPoint): right
+		Args
+		--------
+			left (``GeometryPoint``) :  left
+			right (``GeometryPoint``) :  right
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -961,12 +1058,14 @@ class GeometryPoint:
 	def op_Equality(point1: GeometryPoint, point2: GeometryPoint) -> bool:
 		"""No Description
 
-		Args:
-			point1(GeometryPoint): point1
-			point2(GeometryPoint): point2
+		Args
+		--------
+			point1 (``GeometryPoint``) :  point1
+			point2 (``GeometryPoint``) :  point2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -974,12 +1073,14 @@ class GeometryPoint:
 	def op_Inequality(point1: GeometryPoint, point2: GeometryPoint) -> bool:
 		"""No Description
 
-		Args:
-			point1(GeometryPoint): point1
-			point2(GeometryPoint): point2
+		Args
+		--------
+			point1 (``GeometryPoint``) :  point1
+			point2 (``GeometryPoint``) :  point2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -987,12 +1088,14 @@ class GeometryPoint:
 	def op_Subtraction(left: GeometryPoint, right: GeometryPoint) -> GeometryPoint:
 		"""No Description
 
-		Args:
-			left(GeometryPoint): left
-			right(GeometryPoint): right
+		Args
+		--------
+			left (``GeometryPoint``) :  left
+			right (``GeometryPoint``) :  right
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -1000,8 +1103,9 @@ class GeometryPoint:
 	def X(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -1013,8 +1117,9 @@ class GeometryPoint:
 	def Y(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -1026,8 +1131,9 @@ class GeometryPoint:
 	def IsEmpty(self) -> bool:
 		"""No Description
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -1036,8 +1142,9 @@ class GeometryPoint:
 	def Empty() -> GeometryPoint:
 		"""No Description
 
-		Returns:
-			GeometryPoint: 
+		Returns
+		--------
+			``GeometryPoint`` : 
 		"""
 		pass
 
@@ -1046,11 +1153,12 @@ class GeometryRectangle:
 	def __init__(self, x: float, y: float, width: float, height: float) -> None:
 		"""No Description
 
-		Args:
-			x(float): x
-			y(float): y
-			width(float): width
-			height(float): height
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
+			width (``float``) :  width
+			height (``float``) :  height
 		"""
 		pass
 
@@ -1058,11 +1166,13 @@ class GeometryRectangle:
 	def Contains(self, point: GeometryPoint) -> bool:
 		"""No Description
 
-		Args:
-			point(GeometryPoint): point
+		Args
+		--------
+			point (``GeometryPoint``) :  point
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -1070,12 +1180,14 @@ class GeometryRectangle:
 	def Contains(self, x: float, y: float) -> bool:
 		"""No Description
 
-		Args:
-			x(float): x
-			y(float): y
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -1083,43 +1195,50 @@ class GeometryRectangle:
 	def Contains(self, rectangle: GeometryRectangle) -> bool:
 		"""No Description
 
-		Args:
-			rectangle(GeometryRectangle): rectangle
+		Args
+		--------
+			rectangle (``GeometryRectangle``) :  rectangle
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def Inflate(self, x: float, y: float) -> None:
 		"""No Description
 
-		Args:
-			x(float): x
-			y(float): y
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Offset(self, x: float, y: float) -> None:
 		"""No Description
 
-		Args:
-			x(float): x
-			y(float): y
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def CreatePositiveCopy(self) -> GeometryRectangle:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1127,14 +1246,16 @@ class GeometryRectangle:
 	def FromLTRB(left: float, top: float, right: float, bottom: float) -> GeometryRectangle:
 		"""No Description
 
-		Args:
-			left(float): left
-			top(float): top
-			right(float): right
-			bottom(float): bottom
+		Args
+		--------
+			left (``float``) :  left
+			top (``float``) :  top
+			right (``float``) :  right
+			bottom (``float``) :  bottom
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1142,12 +1263,14 @@ class GeometryRectangle:
 	def Union(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> GeometryRectangle:
 		"""No Description
 
-		Args:
-			rectangle1(GeometryRectangle): rectangle1
-			rectangle2(GeometryRectangle): rectangle2
+		Args
+		--------
+			rectangle1 (``GeometryRectangle``) :  rectangle1
+			rectangle2 (``GeometryRectangle``) :  rectangle2
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1155,12 +1278,14 @@ class GeometryRectangle:
 	def op_Equality(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> bool:
 		"""No Description
 
-		Args:
-			rectangle1(GeometryRectangle): rectangle1
-			rectangle2(GeometryRectangle): rectangle2
+		Args
+		--------
+			rectangle1 (``GeometryRectangle``) :  rectangle1
+			rectangle2 (``GeometryRectangle``) :  rectangle2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -1168,12 +1293,14 @@ class GeometryRectangle:
 	def op_Inequality(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> bool:
 		"""No Description
 
-		Args:
-			rectangle1(GeometryRectangle): rectangle1
-			rectangle2(GeometryRectangle): rectangle2
+		Args
+		--------
+			rectangle1 (``GeometryRectangle``) :  rectangle1
+			rectangle2 (``GeometryRectangle``) :  rectangle2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -1181,12 +1308,14 @@ class GeometryRectangle:
 	def op_Equality(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> bool:
 		"""No Description
 
-		Args:
-			rectangle1(GeometryRectangle): rectangle1
-			rectangle2(GeometryRectangle): rectangle2
+		Args
+		--------
+			rectangle1 (``GeometryRectangle``) :  rectangle1
+			rectangle2 (``GeometryRectangle``) :  rectangle2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -1194,12 +1323,14 @@ class GeometryRectangle:
 	def op_Inequality(rectangle1: GeometryRectangle, rectangle2: GeometryRectangle) -> bool:
 		"""No Description
 
-		Args:
-			rectangle1(GeometryRectangle): rectangle1
-			rectangle2(GeometryRectangle): rectangle2
+		Args
+		--------
+			rectangle1 (``GeometryRectangle``) :  rectangle1
+			rectangle2 (``GeometryRectangle``) :  rectangle2
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
@@ -1207,8 +1338,9 @@ class GeometryRectangle:
 	def X(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1220,8 +1352,9 @@ class GeometryRectangle:
 	def Y(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1233,8 +1366,9 @@ class GeometryRectangle:
 	def Width(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1246,8 +1380,9 @@ class GeometryRectangle:
 	def Height(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1259,8 +1394,9 @@ class GeometryRectangle:
 	def Left(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1268,8 +1404,9 @@ class GeometryRectangle:
 	def Right(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1277,8 +1414,9 @@ class GeometryRectangle:
 	def Top(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1286,8 +1424,9 @@ class GeometryRectangle:
 	def Bottom(self) -> float:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1295,8 +1434,9 @@ class GeometryRectangle:
 	def IsEmpty(self) -> bool:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1304,8 +1444,9 @@ class GeometryRectangle:
 	def Center(self) -> GeometryPoint:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1314,8 +1455,9 @@ class GeometryRectangle:
 	def Empty() -> GeometryRectangle:
 		"""No Description
 
-		Returns:
-			GeometryRectangle: 
+		Returns
+		--------
+			``GeometryRectangle`` : 
 		"""
 		pass
 
@@ -1325,10 +1467,11 @@ class HmIDCollection(List, ICloneable):
 	def __init__(self) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(HmIDCollection): c
-			a(array('i')): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``HmIDCollection``) :  c
+			a (``array[int]``) :  a
 		"""
 		pass
 
@@ -1336,10 +1479,11 @@ class HmIDCollection(List, ICloneable):
 	def __init__(self, capacity: int) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(HmIDCollection): c
-			a(array('i')): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``HmIDCollection``) :  c
+			a (``array[int]``) :  a
 		"""
 		pass
 
@@ -1347,21 +1491,23 @@ class HmIDCollection(List, ICloneable):
 	def __init__(self, c: HmIDCollection) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(HmIDCollection): c
-			a(array('i')): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``HmIDCollection``) :  c
+			a (``array[int]``) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: array('i')) -> None:
+	def __init__(self, a: array[int]) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(HmIDCollection): c
-			a(array('i')): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``HmIDCollection``) :  c
+			a (``array[int]``) :  a
 		"""
 		pass
 
@@ -1369,11 +1515,13 @@ class HmIDCollection(List, ICloneable):
 	def Synchronized(list: HmIDCollection) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			list(HmIDCollection): list
+		Args
+		--------
+			list (``HmIDCollection``) :  list
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1381,142 +1529,165 @@ class HmIDCollection(List, ICloneable):
 	def ReadOnly(list: HmIDCollection) -> HmIDCollection:
 		"""No Description
 
-		Args:
-			list(HmIDCollection): list
+		Args
+		--------
+			list (``HmIDCollection``) :  list
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
 	@overload
-	def CopyTo(self, array: array('i')) -> None:
+	def CopyTo(self, array: array[int]) -> None:
 		"""No Description
 
-		Args:
-			array(array('i')): array
+		Args
+		--------
+			array (``array[int]``) :  array
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	@overload
-	def CopyTo(self, array: array('i'), start: int) -> None:
+	def CopyTo(self, array: array[int], start: int) -> None:
 		"""No Description
 
-		Args:
-			array(array('i')): array
-			start(int): start
+		Args
+		--------
+			array (``array[int]``) :  array
+			start (``int``) :  start
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	@overload
-	def CopyTo(self, array: array('i'), startInTarget: int, startInSource: int, length: int) -> None:
+	def CopyTo(self, array: array[int], startInTarget: int, startInSource: int, length: int) -> None:
 		"""No Description
 
-		Args:
-			array(array('i')): array
-			startInTarget(int): startInTarget
-			startInSource(int): startInSource
-			length(int): length
+		Args
+		--------
+			array (``array[int]``) :  array
+			startInTarget (``int``) :  startInTarget
+			startInSource (``int``) :  startInSource
+			length (``int``) :  length
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Add(self, item: int) -> int:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Clear(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Clone(self) -> object:
 		"""No Description
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def Contains(self, item: int) -> bool:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IndexOf(self, item: int) -> int:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Insert(self, index: int, item: int) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
-			item(int): item
+		Args
+		--------
+			index (``int``) :  index
+			item (``int``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Remove(self, item: int) -> None:
 		"""No Description
 
-		Args:
-			item(int): item
+		Args
+		--------
+			item (``int``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RemoveAt(self, index: int) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
+		Args
+		--------
+			index (``int``) :  index
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetEnumerator(self) -> IHmIDCollectionEnumerator:
 		"""No Description
 
-		Returns:
-			IHmIDCollectionEnumerator: 
+		Returns
+		--------
+			``IHmIDCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -1524,55 +1695,63 @@ class HmIDCollection(List, ICloneable):
 	def AddRange(self, x: HmIDCollection) -> int:
 		"""No Description
 
-		Args:
-			x(HmIDCollection): x
+		Args
+		--------
+			x (``HmIDCollection``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	@overload
-	def AddRange(self, x: array('i')) -> int:
+	def AddRange(self, x: array[int]) -> int:
 		"""No Description
 
-		Args:
-			x(array('i')): x
+		Args
+		--------
+			x (``array[int]``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def TrimToSize(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Sort(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def ReverseInPlace(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
-	def ToArray(self) -> array('i'):
+	def ToArray(self) -> array[int]:
 		"""No Description
 
-		Returns:
-			array('i'): 
+		Returns
+		--------
+			``array[int]`` : 
 		"""
 		pass
 
@@ -1580,8 +1759,9 @@ class HmIDCollection(List, ICloneable):
 	def Count(self) -> int:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1589,8 +1769,9 @@ class HmIDCollection(List, ICloneable):
 	def IsSynchronized(self) -> bool:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1598,8 +1779,9 @@ class HmIDCollection(List, ICloneable):
 	def SyncRoot(self) -> object:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1607,8 +1789,9 @@ class HmIDCollection(List, ICloneable):
 	def Item(self) -> int:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1620,8 +1803,9 @@ class HmIDCollection(List, ICloneable):
 	def IsFixedSize(self) -> bool:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1629,8 +1813,9 @@ class HmIDCollection(List, ICloneable):
 	def IsReadOnly(self) -> bool:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1638,8 +1823,9 @@ class HmIDCollection(List, ICloneable):
 	def Capacity(self) -> int:
 		"""No Description
 
-		Returns:
-			HmIDCollection: 
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -1653,8 +1839,9 @@ class IField:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1662,11 +1849,13 @@ class IField:
 	def GetValue(self, id: int) -> object:
 		"""No Description
 
-		Args:
-			id(int): id
+		Args
+		--------
+			id (``int``) :  id
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
@@ -1674,8 +1863,9 @@ class IField:
 	def GetValues(self) -> Dict:
 		"""No Description
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -1683,11 +1873,13 @@ class IField:
 	def GetValues(self, ids: HmIDCollection) -> Dict:
 		"""No Description
 
-		Args:
-			ids(HmIDCollection): ids
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
 
-		Returns:
-			Dict: 
+		Returns
+		--------
+			``Dict`` : 
 		"""
 		pass
 
@@ -1695,8 +1887,9 @@ class IField:
 	def Id(self) -> int:
 		"""No Description
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -1704,8 +1897,9 @@ class IField:
 	def Name(self) -> str:
 		"""No Description
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -1713,8 +1907,9 @@ class IField:
 	def Label(self) -> str:
 		"""No Description
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -1726,8 +1921,9 @@ class IField:
 	def Notes(self) -> str:
 		"""No Description
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -1739,8 +1935,9 @@ class IField:
 	def Category(self) -> str:
 		"""No Description
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
 		"""
 		pass
 
@@ -1752,8 +1949,60 @@ class IField:
 	def FieldDataType(self) -> FieldDataType:
 		"""No Description
 
-		Returns:
-			IField: 
+		Returns
+		--------
+			``IField`` : 
+		"""
+		pass
+
+class IEditField(IField):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def SetValue(self, id: int, value: object) -> None:
+		"""No Description
+
+		Args
+		--------
+			id (``int``) :  id
+			value (``object``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def SetValues(self, operation: SetValuesOperation, value: object) -> None:
+		"""No Description
+
+		Args
+		--------
+			operation (``SetValuesOperation``) :  operation
+			value (``object``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def DefaultValue(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``IEditField`` : 
 		"""
 		pass
 
@@ -1763,8 +2012,9 @@ class IFilterContext:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1773,8 +2023,9 @@ class IFilterContext:
 	def Field(self) -> IField:
 		"""No Description
 
-		Returns:
-			IFilterContext: 
+		Returns
+		--------
+			``IFilterContext`` : 
 		"""
 		pass
 
@@ -1786,8 +2037,9 @@ class IFilterContext:
 	def ComparisonOperator(self) -> ComparisonOperator:
 		"""No Description
 
-		Returns:
-			IFilterContext: 
+		Returns
+		--------
+			``IFilterContext`` : 
 		"""
 		pass
 
@@ -1799,8 +2051,9 @@ class IFilterContext:
 	def Value(self) -> object:
 		"""No Description
 
-		Returns:
-			IFilterContext: 
+		Returns
+		--------
+			``IFilterContext`` : 
 		"""
 		pass
 
@@ -1812,8 +2065,9 @@ class IFilterContext:
 	def AlternativeID(self) -> int:
 		"""No Description
 
-		Returns:
-			IFilterContext: 
+		Returns
+		--------
+			``IFilterContext`` : 
 		"""
 		pass
 
@@ -1827,8 +2081,9 @@ class ISortContext:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1837,8 +2092,9 @@ class ISortContext:
 	def Field(self) -> IField:
 		"""No Description
 
-		Returns:
-			ISortContext: 
+		Returns
+		--------
+			``ISortContext`` : 
 		"""
 		pass
 
@@ -1850,8 +2106,9 @@ class ISortContext:
 	def SortOrder(self) -> SortOrder:
 		"""No Description
 
-		Returns:
-			ISortContext: 
+		Returns
+		--------
+			``ISortContext`` : 
 		"""
 		pass
 
@@ -1863,8 +2120,9 @@ class ISortContext:
 	def AlternativeID(self) -> int:
 		"""No Description
 
-		Returns:
-			ISortContext: 
+		Returns
+		--------
+			``ISortContext`` : 
 		"""
 		pass
 
@@ -1878,8 +2136,9 @@ class IEditLabeled(ILabeled):
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1888,8 +2147,9 @@ class IEditLabeled(ILabeled):
 	def Label(self) -> str:
 		"""No Description
 
-		Returns:
-			IEditLabeled: 
+		Returns
+		--------
+			``IEditLabeled`` : 
 		"""
 		pass
 
@@ -1903,8 +2163,9 @@ class ILabeled:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1913,8 +2174,9 @@ class ILabeled:
 	def Label(self) -> str:
 		"""No Description
 
-		Returns:
-			ILabeled: 
+		Returns
+		--------
+			``ILabeled`` : 
 		"""
 		pass
 
@@ -1924,8 +2186,9 @@ class INamable:
 		"""Creating a new Instance of this class is not allowed
 
 
-		Raises:
-			Exception: if this class is instanciated
+		Raises
+		--------
+			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
@@ -1934,8 +2197,9 @@ class INamable:
 	def Name(self) -> str:
 		"""No Description
 
-		Returns:
-			INamable: 
+		Returns
+		--------
+			``INamable`` : 
 		"""
 		pass
 
@@ -1945,10 +2209,11 @@ class SortContextCollection(List, ICloneable):
 	def __init__(self) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(SortContextCollection): c
-			a(List[ISortContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SortContextCollection``) :  c
+			a (``List[ISortContext]``) :  a
 		"""
 		pass
 
@@ -1956,10 +2221,11 @@ class SortContextCollection(List, ICloneable):
 	def __init__(self, capacity: int) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(SortContextCollection): c
-			a(List[ISortContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SortContextCollection``) :  c
+			a (``List[ISortContext]``) :  a
 		"""
 		pass
 
@@ -1967,10 +2233,11 @@ class SortContextCollection(List, ICloneable):
 	def __init__(self, c: SortContextCollection) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(SortContextCollection): c
-			a(List[ISortContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SortContextCollection``) :  c
+			a (``List[ISortContext]``) :  a
 		"""
 		pass
 
@@ -1978,10 +2245,11 @@ class SortContextCollection(List, ICloneable):
 	def __init__(self, a: List[ISortContext]) -> None:
 		"""No Description
 
-		Args:
-			capacity(int): capacity
-			c(SortContextCollection): c
-			a(List[ISortContext]): a
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SortContextCollection``) :  c
+			a (``List[ISortContext]``) :  a
 		"""
 		pass
 
@@ -1989,11 +2257,13 @@ class SortContextCollection(List, ICloneable):
 	def Synchronized(list: SortContextCollection) -> SortContextCollection:
 		"""No Description
 
-		Args:
-			list(SortContextCollection): list
+		Args
+		--------
+			list (``SortContextCollection``) :  list
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2001,11 +2271,13 @@ class SortContextCollection(List, ICloneable):
 	def ReadOnly(list: SortContextCollection) -> SortContextCollection:
 		"""No Description
 
-		Args:
-			list(SortContextCollection): list
+		Args
+		--------
+			list (``SortContextCollection``) :  list
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2013,11 +2285,13 @@ class SortContextCollection(List, ICloneable):
 	def CopyTo(self, array: List[ISortContext]) -> None:
 		"""No Description
 
-		Args:
-			array(List[ISortContext]): array
+		Args
+		--------
+			array (``List[ISortContext]``) :  array
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2025,12 +2299,14 @@ class SortContextCollection(List, ICloneable):
 	def CopyTo(self, array: List[ISortContext], start: int) -> None:
 		"""No Description
 
-		Args:
-			array(List[ISortContext]): array
-			start(int): start
+		Args
+		--------
+			array (``List[ISortContext]``) :  array
+			start (``int``) :  start
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2038,11 +2314,13 @@ class SortContextCollection(List, ICloneable):
 	def Add(self, item: ISortContext) -> int:
 		"""No Description
 
-		Args:
-			item(ISortContext): item
+		Args
+		--------
+			item (``ISortContext``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -2050,107 +2328,124 @@ class SortContextCollection(List, ICloneable):
 	def Add(self, field: IField, sortOrder: SortOrder) -> int:
 		"""No Description
 
-		Args:
-			field(IField): field
-			sortOrder(SortOrder): sortOrder
+		Args
+		--------
+			field (``IField``) :  field
+			sortOrder (``SortOrder``) :  sortOrder
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	@overload
-	def Add(self, field: IField, sortOrder: SortOrder, enumLabels: array[str], enumValues: array('i')) -> int:
+	def Add(self, field: IField, sortOrder: SortOrder, enumLabels: array[str], enumValues: array[int]) -> int:
 		"""No Description
 
-		Args:
-			field(IField): field
-			sortOrder(SortOrder): sortOrder
-			enumLabels(array[str]): enumLabels
-			enumValues(array('i')): enumValues
+		Args
+		--------
+			field (``IField``) :  field
+			sortOrder (``SortOrder``) :  sortOrder
+			enumLabels (``array[str]``) :  enumLabels
+			enumValues (``array[int]``) :  enumValues
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Clear(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Clone(self) -> object:
 		"""No Description
 
-		Returns:
-			object: 
+		Returns
+		--------
+			``object`` : 
 		"""
 		pass
 
 	def Contains(self, item: ISortContext) -> bool:
 		"""No Description
 
-		Args:
-			item(ISortContext): item
+		Args
+		--------
+			item (``ISortContext``) :  item
 
-		Returns:
-			bool: 
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
 	def IndexOf(self, item: ISortContext) -> int:
 		"""No Description
 
-		Args:
-			item(ISortContext): item
+		Args
+		--------
+			item (``ISortContext``) :  item
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def Insert(self, index: int, item: ISortContext) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
-			item(ISortContext): item
+		Args
+		--------
+			index (``int``) :  index
+			item (``ISortContext``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def Remove(self, item: ISortContext) -> None:
 		"""No Description
 
-		Args:
-			item(ISortContext): item
+		Args
+		--------
+			item (``ISortContext``) :  item
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def RemoveAt(self, index: int) -> None:
 		"""No Description
 
-		Args:
-			index(int): index
+		Args
+		--------
+			index (``int``) :  index
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
 	def GetEnumerator(self) -> ISortContextCollectionEnumerator:
 		"""No Description
 
-		Returns:
-			ISortContextCollectionEnumerator: 
+		Returns
+		--------
+			``ISortContextCollectionEnumerator`` : 
 		"""
 		pass
 
@@ -2158,11 +2453,13 @@ class SortContextCollection(List, ICloneable):
 	def AddRange(self, x: SortContextCollection) -> int:
 		"""No Description
 
-		Args:
-			x(SortContextCollection): x
+		Args
+		--------
+			x (``SortContextCollection``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -2170,19 +2467,22 @@ class SortContextCollection(List, ICloneable):
 	def AddRange(self, x: List[ISortContext]) -> int:
 		"""No Description
 
-		Args:
-			x(List[ISortContext]): x
+		Args
+		--------
+			x (``List[ISortContext]``) :  x
 
-		Returns:
-			int: 
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
 	def TrimToSize(self) -> None:
 		"""No Description
 
-		Returns:
-			None: 
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -2190,8 +2490,9 @@ class SortContextCollection(List, ICloneable):
 	def UseSmartLabels(self) -> bool:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2203,8 +2504,9 @@ class SortContextCollection(List, ICloneable):
 	def Count(self) -> int:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2212,8 +2514,9 @@ class SortContextCollection(List, ICloneable):
 	def IsSynchronized(self) -> bool:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2221,8 +2524,9 @@ class SortContextCollection(List, ICloneable):
 	def SyncRoot(self) -> object:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2230,8 +2534,9 @@ class SortContextCollection(List, ICloneable):
 	def Item(self) -> ISortContext:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2243,8 +2548,9 @@ class SortContextCollection(List, ICloneable):
 	def IsFixedSize(self) -> bool:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2252,8 +2558,9 @@ class SortContextCollection(List, ICloneable):
 	def IsReadOnly(self) -> bool:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
@@ -2261,8 +2568,9 @@ class SortContextCollection(List, ICloneable):
 	def Capacity(self) -> int:
 		"""No Description
 
-		Returns:
-			SortContextCollection: 
+		Returns
+		--------
+			``SortContextCollection`` : 
 		"""
 		pass
 
