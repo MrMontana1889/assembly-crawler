@@ -1,6 +1,7 @@
 ﻿// PythonProperty.cs
 // Copyright (c) 2021 Kristopher L. Culin see LICENSE for details
 
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -54,6 +55,22 @@ namespace AssemblyCrawler.Support
 
 				if (mi.ReturnType.IsArray)
 					Class.Module.AddImportModule($"{ARRAY}").AddType($"{ARRAY}");
+				else if (mi.ReturnType.IsGenericType)
+				{
+					var arguments = new List<string>();
+					foreach (var genArgType in mi.ReturnType.GetGenericArguments())
+					{
+						arguments.Add(ToPythonType(genArgType));
+						AddReferenceImports(Class.Module, genArgType);
+						Class.Module.AddGenericArgumentType(genArgType);
+					}
+
+					string genericType = ToPythonType(mi.ReturnType);
+					if (!genericType.Contains(string.Join(",", arguments)))
+						adjustedReturnType = $"{ToPythonType(mi.ReturnType)}[{string.Join(",", arguments)}]";
+					else
+						adjustedReturnType = $"{genericType}";
+				}
 
 				var docString = new PythonPropertyDocStringWriterLibrary(
 					type: Class.ClassType,
@@ -75,8 +92,24 @@ namespace AssemblyCrawler.Support
 				if (mi.IsStatic)
 					sb.AppendLine($"{indentation}{STATIC_METHOD}");
 
+				string propertyType = ToPythonType(PropertyInfo.PropertyType);
+				if (PropertyInfo.PropertyType.IsGenericType)
+				{
+					var arguments = new List<string>();
+					foreach (var genArgType in PropertyInfo.PropertyType.GetGenericArguments())
+					{
+						arguments.Add(ToPythonType(genArgType));
+						AddReferenceImports(Class.Module, genArgType);
+						Class.Module.AddGenericArgumentType(genArgType);
+					}
+
+					if (!propertyType.Contains(string.Join(",", arguments)))
+						propertyType = $"{ToPythonType(PropertyInfo.PropertyType)}[{string.Join(",", arguments)}]";
+
+				}
+
 				sb.AppendLine($"{indentation}{DEF} {PropertyInfo.Name}({SELF}, {PropertyInfo.Name.ToLowerInvariant()}: " +
-					$"{ToPythonType(PropertyInfo.PropertyType)}) -> {NONETYPE}:");
+					$"{propertyType}) -> {NONETYPE}:");
 				sb.AppendLine($"{GetIndentation(2)}{PASS}");
 			}
 

@@ -196,6 +196,8 @@ namespace AssemblyCrawler.Support
 
 		private string CreateGenericParentClass(Type interf)
 		{
+			string cn = WriterLibrary.CorrectClassName(ClassType.Name);
+
 			AddReferenceImports(Module, interf);
 			Module.AddGenericArgumentType(interf);
 
@@ -207,7 +209,11 @@ namespace AssemblyCrawler.Support
 				Module.AddGenericArgumentType(arg);
 			}
 
-			return $"{CorrectClassName(interf.Name)}[{string.Join(", ", arguments)}]";
+			string parent = TypeConvertLibrary.ToPythonType(interf);
+			if (!parent.Contains(string.Join(",", arguments)))
+				return $"{CorrectClassName(interf.Name)}[{string.Join(", ", arguments)}]";
+			else
+				return parent;
 		}
 		private void CreateEnumClass()
 		{

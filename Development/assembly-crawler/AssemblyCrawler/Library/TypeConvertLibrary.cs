@@ -27,15 +27,17 @@ namespace AssemblyCrawler.Library
 			{
 				var typeName = type.Name.Replace("[]", "");
 				if (typeName == "Double")
-					return $"array(\'f\')";
+					return $"{Constants.ARRAY}[float]";
 				if (typeName.StartsWith("Int"))
-					return $"array(\'i\')";
+					return $"{Constants.ARRAY}[int]";
 				if (typeName == "String")
-					return $"array[str]";
+					return $"{Constants.ARRAY}[str]";
 
 				var elementType = ToPythonType(type.GetElementType());
 				return $"List[{elementType}]";
 			}
+			else if (type.FullName == "System.Array")
+				return $"{Constants.ARRAY}";
 
 			if (type.IsGenericType)
 			{
@@ -85,7 +87,15 @@ namespace AssemblyCrawler.Library
 		{
 			string pythonType = ToPythonType(type);
 			if (pythonType.StartsWith("List"))
+			{
+				if (type.IsGenericType)
+				{
+					var elementType = type.GetElementType();
+					if (elementType != null)
+						AddImportForPythonType(module, elementType);
+				}
 				module.AddImportModule("typing").AddType("List");
+			}
 			else if (pythonType.StartsWith("Dict"))
 				module.AddImportModule("typing").AddType("Dict");
 			else if (pythonType.StartsWith("Iterator"))
@@ -113,7 +123,12 @@ namespace AssemblyCrawler.Library
 							{
 								var classD = mod.Classes.Find(c => c.ClassName == type.Name);
 								if (classD != null)
-									module.AddImportModule(type.Namespace).AddType(pythonType);
+								{
+									string ns = type.Namespace;
+									if (string.IsNullOrEmpty(ns))
+										ns = $"{type.Assembly.GetName().Name}{Type.Delimiter}Enumerations";
+									module.AddImportModule(ns).AddType(pythonType);
+								}
 							}
 						}
 					}
@@ -206,6 +221,9 @@ namespace AssemblyCrawler.Library
 				default:
 
 					if (type.Name == "Object")
+						return "object";
+
+					if (type.Name == "Void*")
 						return "object";
 
 					return WriterLibrary.CorrectClassName(type.Name, type.GetGenericArguments().Length);

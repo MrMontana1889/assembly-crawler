@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using AssemblyCrawler.Console.Support;
 using AssemblyCrawler.Support;
 using AssemblyCrawler.Xml.Config;
@@ -106,6 +107,12 @@ namespace AssemblyCrawler.Console
 							case "System":
 								netAssembly = Assembly.GetAssembly(typeof(Type));
 								break;
+							case "System.Runtime.Serialization":
+								netAssembly = Assembly.GetAssembly(typeof(ISerializable));
+								break;
+							case "System.Runtime":
+								netAssembly = Assembly.GetAssembly(typeof(IList<>));
+								break;
 							default:
 								continue;
 						}
@@ -158,7 +165,7 @@ namespace AssemblyCrawler.Console
 
 								if (assembly.Namespaces.Count == 0)
 								{
-									// Process the entier assembly
+									// Process the entire assembly
 
 									ITypeFilter typeFilter = new InterfacesOnlyTypeFilter(false);
 									if (assembly.Name.StartsWith("Haestad"))
@@ -193,7 +200,7 @@ namespace AssemblyCrawler.Console
 											}
 
 											filter = new NamespaceTypeFilter(assemblyNamespace.ClassType,
-												assemblyNamespace.Name, classTypes);
+												assemblyNamespace.Name, classTypes, !string.IsNullOrEmpty(assemblyNamespace.Name));
 										}
 
 										if (filter != null)

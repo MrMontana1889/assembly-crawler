@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Security.Policy;
 using AssemblyCrawler.Support;
 using Barber.AutoDiagrammer;
@@ -78,6 +79,12 @@ namespace AssemblyCrawler
 							case "System":
 								assembly = Assembly.GetAssembly(typeof(Type));
 								break;
+							case "System.Runtime.Serialization":
+								assembly = Assembly.GetAssembly(typeof(ISerializable));
+								break;
+							case "System.Runtime":
+								assembly = Assembly.GetAssembly(typeof(IList<>));
+								break;
 							default:
 								Console.WriteLine($"{assemblyFilename} unknown.");
 								return;
@@ -93,30 +100,68 @@ namespace AssemblyCrawler
 
 					foreach (var v in graphResults.Vertices)
 					{
+						Type t = assembly.GetType(v.Name);
+
+						if (!typeFilter.IncludeType(t))
+							continue;
+
+						if (t.Name.Contains("<") || t.Name.Contains(">"))
+							continue;           // Skip this type.
+						if (t.Namespace != null && (t.Namespace.Contains("<") && t.Namespace.Contains(">")))
+							continue;
+
 						// Determine the filename.
 						string[] tokens = v.Name.Split(Type.Delimiter);
 
-						// Last one is the interface name, second to last is the module name to use
-						string filename = tokens[tokens.Length - 2];
-
-						if (tokens.Length > 2)
-							Array.Resize(ref tokens, tokens.Length - 2);
-						else
-							Array.Resize(ref tokens, tokens.Length - 1);
-
-						string joinedFilename = string.Join(@"\", tokens);
-						if (IsInvalidFilename(joinedFilename, Path.GetInvalidPathChars()))
-							continue;
-
-						if (joinedFilename == "std")
-							continue;
-
-						string path = Path.Combine(outputPath, joinedFilename);
-						if (!Directory.Exists(path))
-							Directory.CreateDirectory(path);
-
+						string filename = tokens[0];
 						if (filename == "std")
 							continue;
+
+						int tokenLength = tokens.Length;
+						string path = string.Empty;
+						if (tokens.Length > 1)
+						{
+							// Last one is the interface name, second to last is the module name to use
+							filename = tokens[tokens.Length - 2];
+
+							if (tokens.Length > 2)
+							{
+								Array.Resize(ref tokens, tokens.Length - 2);
+
+								if (tokens.Length > 0)
+								{
+									string joinedFilename = string.Join(@"\", tokens);
+									if (IsInvalidFilename(joinedFilename, Path.GetInvalidPathChars()))
+										continue;
+
+									if (joinedFilename == "std")
+										continue;
+
+									path = Path.Combine(outputPath, joinedFilename);
+								}
+							}
+							else
+							{
+								path = outputPath;
+							}
+
+							if (!Directory.Exists(path))
+								Directory.CreateDirectory(path);
+						}
+						else
+						{
+							if (tokenLength == 1 && (t != null && t.IsEnum && t.Namespace == null))
+							{
+								string assemblyName = assembly.GetName().Name;
+								assemblyName = assemblyName.Replace(Type.Delimiter, Path.DirectorySeparatorChar);
+								path = Path.Combine(outputPath, assemblyName);
+								filename = "Enumerations";
+							}
+							else if (tokenLength == 1 && t.Namespace != null)
+							{
+								path = outputPath;
+							}
+						}
 
 						filename += ".pyi";
 
@@ -125,7 +170,6 @@ namespace AssemblyCrawler
 						if (!typeMap.ContainsKey(filename))
 							typeMap.Add(filename, new List<Type>());
 
-						Type t = assembly.GetType(v.Name);
 						typeMap[filename].Add(t);
 					}
 
@@ -135,7 +179,14 @@ namespace AssemblyCrawler
 						string pyiFilename = Path.Combine(outputPath, type.Key);
 						Console.WriteLine(pyiFilename);
 
-						PythonModule module = assemblyDef.AddModule(type.Value.First().Namespace, pyiFilename, xmlDocumentFileName);
+						string ns = type.Value.First().Namespace;
+						if (ns == null)
+						{
+							// Get the "fake" namespace based on the assembly name.
+							ns = assembly.GetName().Name;
+						}
+
+						PythonModule module = assemblyDef.AddModule(ns, pyiFilename, xmlDocumentFileName);
 						foreach (Type t in type.Value)
 							module.AddClassDefinition(t);
 					}

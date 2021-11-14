@@ -56,10 +56,32 @@ namespace AssemblyCrawler.Support
 				selfKeyword = Method.IsStatic ? string.Empty : SELF;
 				foreach (var arg in Method.GetParameters())
 				{
+					string parameterName = arg.Name;
 					if (!arg.HasDefaultValue)
 					{
-						// Standard argument, no default value assigned.
-						argumentList.Add($"{arg.Name}: {TypeConvertLibrary.ToPythonType(arg.ParameterType)}");
+						// No default value.  Check to see if a generic type.
+						if (arg.ParameterType.IsGenericType)
+						{
+							var arguments = new List<string>();
+							foreach (var genArgType in arg.ParameterType.GetGenericArguments())
+							{
+								arguments.Add(TypeConvertLibrary.ToPythonType(genArgType));
+								AddReferenceImports(Class.Module, genArgType);
+								Class.Module.AddGenericArgumentType(genArgType);
+							}
+
+							string genericType = TypeConvertLibrary.ToPythonType(arg.ParameterType);
+							if (!genericType.Contains(string.Join(",", arguments)))
+								argumentList.Add($"{arg.Name}: {TypeConvertLibrary.ToPythonType(arg.ParameterType)}[{string.Join(",", arguments)}]");
+							else
+								argumentList.Add($"{arg.Name}: {genericType}");
+						}
+						else
+						{
+							// Not a generic type.  Write as-is.
+							// Standard argument, no default value assigned.
+							argumentList.Add($"{arg.Name}: {TypeConvertLibrary.ToPythonType(arg.ParameterType)}");
+						}
 					}
 					else
 					{
