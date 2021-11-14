@@ -24,7 +24,10 @@ namespace AssemblyCrawler.Support
 		public TypeParser Parse()
 		{
 			foreach (var member in Type.GetMembers())
-				MemberInfoMap.Add(member.XmlMemberName(), member);
+			{
+				if (!MemberInfoMap.ContainsKey(member.XmlMemberName()))
+					MemberInfoMap.Add(member.XmlMemberName(), member);
+			}
 
 			foreach (var property in Type.GetProperties())
 				Properties.Add(new PythonProperty(Class, property));

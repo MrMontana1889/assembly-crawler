@@ -84,6 +84,8 @@ namespace AssemblyCrawler.Support
 		}
 		public PythonImport AddImportModule(string module)
 		{
+			module = GetAdjustedModuleName(module);
+
 			if (Imports.Find(m => m.Module == module) == null)
 			{
 				Imports.Add(new PythonImport(module));
@@ -92,6 +94,8 @@ namespace AssemblyCrawler.Support
 		}
 		public PythonImport GetImport(string module)
 		{
+			module = GetAdjustedModuleName(module);
+
 			return Imports.Find(m => m.Module == module);
 		}
 		public bool HasImportedType(string type)
@@ -158,6 +162,39 @@ namespace AssemblyCrawler.Support
 		public string ModuleNamespace { get; }
 		public List<Type> GenericArgumentTypes { get; } = new List<Type>();
 		public XmlDocumentaitonParserLibrary XmlDocument { get; }
+		#endregion
+
+		#region Private Methods
+		private string GetAdjustedModuleName(string module)
+		{
+			if (module == null)
+			{
+				return "Enumerations";
+			}
+
+			return module;
+
+			//if (!module.Contains("."))
+			//{
+			//	switch (module)
+			//	{
+			//		case Constants.ENUM_MODULE:
+			//		case Constants.TYPING:
+			//		case Constants.ARRAY:
+			//		case Constants.DATETIME:
+			//		case Constants.GENERIC_TYPE:
+			//		case Constants.ENUMERATIONS:
+			//			break;
+			//		default:
+			//			// This is a "root" namespace.
+			//			if (!module.EndsWith("_Roott"))
+			//				module = module + "_Roott";
+			//			break;
+			//	}
+			//}
+
+			//return module;
+		}
 		#endregion
 	}
 }

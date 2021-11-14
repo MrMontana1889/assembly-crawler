@@ -7,6 +7,7 @@ namespace AssemblyCrawler.Support
 	{
 		public const string BLANKSTRING = "\t\"\"\" \"\"\"";
 		public const string ARRAY = "array";
+		public const string DATETIME = "datetime";
 		public const string NONETYPE = "None";
 		public const string CLASS = "class";
 		public const string PASS = "pass";
@@ -30,5 +31,8 @@ namespace AssemblyCrawler.Support
 		public const string ENUM_MODULE = "enum";
 		public const string ENUM = "Enum";
 		public const string DISPOSABLE = "IDisposable";
+		public const string GENERIC_TYPE = "T";
+		public const string ENUMERATIONS = "Enumerations";
+		public const string SYSTEM = "System";
 	}
 }

@@ -15,11 +15,12 @@ namespace Barber.AutoDiagrammer.Support
 	public class NamespaceTypeFilter : ITypeFilter
 	{
 		#region Constructor
-		public NamespaceTypeFilter(ClassType classType, string assemblyNamespace, List<Type> classes)
+		public NamespaceTypeFilter(ClassType classType, string assemblyNamespace, List<Type> classes, bool hasNamespace = true)
 		{
 			ClassType = classType;
 			AssemblyNamespace = assemblyNamespace;
 			Classes = classes;
+			HasNamespace = hasNamespace;
 		}
 		#endregion
 
@@ -30,12 +31,16 @@ namespace Barber.AutoDiagrammer.Support
 				return false;
 
 			// The namespace is not specified.  Exclude (no way to compare)
-			if (t.Namespace == null)
+			if (HasNamespace && t.Namespace == null)
 				return false;
 
 			// Determine if the type is in one of the include namespaces
 			string typeNamespace = t.Namespace;
 			string typeName = t.Name;
+
+			if (!HasNamespace)
+				typeNamespace = string.Empty;
+
 			if (ClassType == ClassType.All)
 			{
 				// All types in the specified namespace are included.
@@ -73,6 +78,7 @@ namespace Barber.AutoDiagrammer.Support
 		private ClassType ClassType { get; }
 		private string AssemblyNamespace { get; }
 		private List<Type> Classes { get; }
+		private bool HasNamespace { get; }
 		#endregion
 	}
 }

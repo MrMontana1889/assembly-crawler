@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,12 @@ namespace Barber.AutoDiagrammer.Services
 				{
 					case "System":
 						assembly = Assembly.GetAssembly(typeof(Type));
+						break;
+					case "System.Runtime.Serialization":
+						assembly = Assembly.GetAssembly(typeof(ISerializable));
+						break;
+					case "System.Runtime":
+						assembly = Assembly.GetAssembly(typeof(IList<>));
 						break;
 					default:
 						assembly = null;
@@ -179,9 +186,12 @@ namespace Barber.AutoDiagrammer.Services
 
 			foreach (var g in groupedTypes)
 			{
-				if (g.NameSpace != null)
-				{
+				string ns = g.NameSpace;
+				if (string.IsNullOrEmpty(ns))
+					ns = assembly.GetName().Name;
 
+				if (ns != null)
+				{
 					AssemblyTreeViewModel sub = null;
 					AssemblyTreeViewModel parentToAddTo = null;
 
@@ -196,10 +206,10 @@ namespace Barber.AutoDiagrammer.Services
 					else
 					{
 						string trimmedNamespace = g.NameSpace;
-						if (g.NameSpace.Contains("."))
+						if (g.NameSpace != null && g.NameSpace.Contains("."))
 							trimmedNamespace = g.NameSpace.Substring(0, g.NameSpace.LastIndexOf("."));
 
-						if (g.NameSpace.Equals(String.Empty))
+						if (g.NameSpace != null && g.NameSpace.Equals(String.Empty))
 							parentToAddTo = root;
 						else
 							parentToAddTo = FindCorrectTreeNodeToAddTo(root, trimmedNamespace);
@@ -207,8 +217,11 @@ namespace Barber.AutoDiagrammer.Services
 						if (parentToAddTo == null)
 							parentToAddTo = root;
 
+						string gNamespace = g.NameSpace;
+						if (gNamespace == null)
+							gNamespace = string.Empty;
 						sub = new AssemblyTreeViewModel(
-							RepresentationType.Namespace, g.NameSpace, null, parentToAddTo);
+							RepresentationType.Namespace, gNamespace, null, parentToAddTo);
 
 						parentToAddTo.Children.Add(sub);
 						//add the types
