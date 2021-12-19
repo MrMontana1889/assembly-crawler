@@ -16,16 +16,16 @@ TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType", IElementUnits)
 TNetworkElementType = TypeVar("TNetworkElementType", IElement)
 
 class ModelingElementTypes(Enum):
-	Scenario = 2
-	SelectionSet = 7
+	SCENARIO = 2
+	SELECTIONSET = 7
 
 class ModelElementType(Enum):
-	All = 0
-	Scenario = 2
-	NetworkElement = 3
-	ComponentElement = 4
-	Options = 5
-	SelectionSet = 6
+	ALL = 0
+	SCENARIO = 2
+	NETWORKELEMENT = 3
+	COMPONENTELEMENT = 4
+	OPTIONS = 5
+	SELECTIONSET = 6
 
 class IElementManager:
 

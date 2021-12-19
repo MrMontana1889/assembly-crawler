@@ -10,63 +10,63 @@ from OpenFlows.Domain.DataObjects import IDomainModel
 from OpenFlows.Water.Analysis import IAnalysisTools
 
 class CalculationType(Enum):
-	FireFlow = 0
-	Flushing = 1
-	Age = 2
-	Constituent = 3
-	Trace = 4
-	HydraulicsOnly = 5
+	FIREFLOW = 0
+	FLUSHING = 1
+	AGE = 2
+	CONSTITUENT = 3
+	TRACE = 4
+	HYDRAULICSONLY = 5
 	MSX = 6
-	SCADAConnectAnalysis = 7
-	WaterQuality = 8
+	SCADACONNECTANALYSIS = 7
+	WATERQUALITY = 8
 
 class DemandAdjustmentsType(Enum):
-	None = 0
-	Active = 1
+	NONE = 0
+	ACTIVE = 1
 
 class UnitDemandAdjustmentType(Enum):
-	None = 0
-	Active = 1
+	NONE = 0
+	ACTIVE = 1
 
 class RoughnessAdjustmentType(Enum):
-	None = 0
-	Active = 1
+	NONE = 0
+	ACTIVE = 1
 
 class AdjustmentOperationType(Enum):
-	Add = 0
-	Subtrace = 1
-	Multiply = 2
-	Divide = 3
-	Set = 4
+	ADD = 0
+	SUBTRACE = 1
+	MULTIPLY = 2
+	DIVIDE = 3
+	SET = 4
 
 class ConstituentSourceType(Enum):
-	Concentration = 0
-	FlowPacedBooster = 1
-	SetpointBooster = 2
-	MassBooster = 3
+	CONCENTRATION = 0
+	FLOWPACEDBOOSTER = 1
+	SETPOINTBOOSTER = 2
+	MASSBOOSTER = 3
 
 class PipeStatusType(Enum):
-	Open = 0
-	Closed = 1
+	OPEN = 0
+	CLOSED = 1
 
 class ValveSettingType(Enum):
-	Active = 0
-	Inactive = 1
-	Closed = 2
+	ACTIVE = 0
+	INACTIVE = 1
+	CLOSED = 2
 
 class TCVCoefficientType(Enum):
-	Headloss = 1
-	Discharge = 2
-	ValveCharacteristics = 3
+	HEADLOSS = 1
+	DISCHARGE = 2
+	VALVECHARACTERISTICS = 3
 
 class PressureValvesettingType(Enum):
-	ValvePressure = 0
-	ValveHGL = 1
+	VALVEPRESSURE = 0
+	VALVEHGL = 1
 
 class TankSectionType(Enum):
-	Circular = 0
-	NonCircular = 1
-	VariableArea = 2
+	CIRCULAR = 0
+	NONCIRCULAR = 1
+	VARIABLEAREA = 2
 
 class IWaterModel(IModel[IWaterNetwork, IWaterModelSupport, IWaterScenarios, IWaterScenario, IWaterScenarioOptions, IWaterScenarioOptionsUnits, IWaterSelectionSets, IWaterSelectionSet, IWaterNetworkElement, IWaterNetworkElement, WaterNetworkElementType, IWaterComponent, WaterComponentType, INetworkElementUnits, IComponentElementUnits]):
 

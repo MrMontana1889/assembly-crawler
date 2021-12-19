@@ -6,13 +6,13 @@ from Haestad.Support.Units import Unit, Dimension
 
 
 class FormatCode(Enum):
-	Fixed = 0
-	General = 1
-	ScientificNotation = 2
-	Number = 3
+	FIXED = 0
+	GENERAL = 1
+	SCIENTIFICNOTATION = 2
+	NUMBER = 3
 
 class UnitSystemType(Enum):
-	USCustomary = 0
+	USCUSTOMARY = 0
 	SI = 1
 
 class INetworkUnits:

@@ -2,6 +2,6 @@ from enum import Enum
 from System import TypeCode
 
 class ExtendedPumpDefinitionType(Enum):
-	Standard = 0
-	Custom = 1
+	STANDARD = 0
+	CUSTOM = 1
 
