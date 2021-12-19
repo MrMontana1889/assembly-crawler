@@ -12,9 +12,9 @@ TElementsInputType = TypeVar("TElementsInputType", IElementsInput)
 TElementsResultsType = TypeVar("TElementsResultsType", IElementsResults)
 
 class ElementStateType(Enum):
-	All = 0
-	Active = 1
-	Inactive = 2
+	ALL = 0
+	ACTIVE = 1
+	INACTIVE = 2
 
 class IMorphable(Generic[TElementTypeEnum]):
 

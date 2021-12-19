@@ -14,63 +14,63 @@ from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElemen
 
 
 class ConditionComparisonOperator(Enum):
-	Equals = 0
-	GreaterThan = 1
-	GreaterThanEqual = 2
-	LessThan = 3
-	LessThanEQual = 4
-	NotEQual = 5
+	EQUALS = 0
+	GREATERTHAN = 1
+	GREATERTHANEQUAL = 2
+	LESSTHAN = 3
+	LESSTHANEQUAL = 4
+	NOTEQUAL = 5
 
 class PumpAttribute(Enum):
-	Setting = 1
-	TargetPressure = 2
-	TargetHead = 3
+	SETTING = 1
+	TARGETPRESSURE = 2
+	TARGETHEAD = 3
 
 class PressureValveAttribute(Enum):
-	HydraulicGrade = 0
-	Pressure = 2
+	HYDRAULICGRADE = 0
+	PRESSURE = 2
 
 class PumpConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
+	DISCHARGE = 0
+	SETTING = 1
 
 class PressureValveConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
+	DISCHARGE = 0
+	SETTING = 1
 
 class FCVConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
+	DISCHARGE = 0
+	SETTING = 1
 
 class TCVConditionAttribute(Enum):
-	Discharge = 0
-	Setting = 1
+	DISCHARGE = 0
+	SETTING = 1
 
 class WaterComponentType(Enum):
-	Pattern = 50
-	PumpDefinition = 51
-	Constituent = 52
-	Zone = 53
-	Control = 54
-	ControlAction = 55
-	ControlCondition = 56
-	ControlSet = 59
+	PATTERN = 50
+	PUMPDEFINITION = 51
+	CONSTITUENT = 52
+	ZONE = 53
+	CONTROL = 54
+	CONTROLACTION = 55
+	CONTROLCONDITION = 56
+	CONTROLSET = 59
 	PDD = 60
-	EnergyPrice = 61
-	UnitDemandLoad = 62
-	GPVHeadloss = 63
-	ValveCharacteristic = 66
-	AirFlowCurve = 68
-	MinorLoss = 101
-	UnitCarbonEmission = 202
-	PowerMeter = 203
-	MSXSetup = 220
-	SCADASignal = 257
+	ENERGYPRICE = 61
+	UNITDEMANDLOAD = 62
+	GPVHEADLOSS = 63
+	VALVECHARACTERISTIC = 66
+	AIRFLOWCURVE = 68
+	MINORLOSS = 101
+	UNITCARBONEMISSION = 202
+	POWERMETER = 203
+	MSXSETUP = 220
+	SCADASIGNAL = 257
 
 class SCADASignalTransformMethod(Enum):
-	Threshold = 0
-	Range = 1
-	Formula = 2
+	THRESHOLD = 0
+	RANGE = 1
+	FORMULA = 2
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
 

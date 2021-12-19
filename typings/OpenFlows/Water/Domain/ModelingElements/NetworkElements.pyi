@@ -14,67 +14,67 @@ from OpenFlows.Domain.DataObjects import INetwork
 
 
 class VSPBFixedHeadType(Enum):
-	HydraulicGrade = 0
-	Pressure = 1
+	HYDRAULICGRADE = 0
+	PRESSURE = 1
 
 class WaterNetworkElementType(Enum):
-	SCADAElement = 23
-	Lateral = 24
-	Tap = 26
-	Tank = 52
-	Hydrant = 54
-	Junction = 55
-	Reservoir = 56
+	SCADAELEMENT = 23
+	LATERAL = 24
+	TAP = 26
+	TANK = 52
+	HYDRANT = 54
+	JUNCTION = 55
+	RESERVOIR = 56
 	FCV = 60
 	TCV = 61
 	GPV = 62
 	PRV = 64
 	PSV = 65
 	PBV = 66
-	Pump = 68
-	Pipe = 69
-	SpotElevation = 70
-	IsolationValve = 71
+	PUMP = 68
+	PIPE = 69
+	SPOTELEVATION = 70
+	ISOLATIONVALVE = 71
 	VSPB = 72
-	CustomerMeter = 73
-	Turbine = 300
-	AirValve = 301
-	HydropneumaticTank = 302
-	SurgeValve = 303
-	DischargeToAtmosphere = 305
-	RuptureDisk = 306
-	OrificeBetweenTwoPipes = 307
-	SurgeTank = 308
-	CheckValve = 309
-	ValveWithLinearAreaChange = 310
-	PeriodicHeadFlow = 321
-	PumpStation = 700
+	CUSTOMERMETER = 73
+	TURBINE = 300
+	AIRVALVE = 301
+	HYDROPNEUMATICTANK = 302
+	SURGEVALVE = 303
+	DISCHARGETOATMOSPHERE = 305
+	RUPTUREDISK = 306
+	ORIFICEBETWEENTWOPIPES = 307
+	SURGETANK = 308
+	CHECKVALVE = 309
+	VALVEWITHLINEARAREACHANGE = 310
+	PERIODICHEADFLOW = 321
+	PUMPSTATION = 700
 
 class SCADATargetAttribute(Enum):
-	UnAssigned = 0
-	RelativeClosure = -300
-	ConstituentConcentration = -299
-	PressureNodeDemand = -297
-	ValveStatus = -58
-	PumpStatus = -57
-	PipeStatus = -56
-	TankLevel = -55
-	Pressure = -54
-	HydraulicGrade = -53
-	PumpSetting = -52
-	PressureValveSetting = -51
-	TCValveSetting = -50
-	FCValveSetting = -49
-	PressureOut = -48
-	PressureIn = -47
-	HydraulicGradeOut = -46
-	HydraulicGradeIn = -45
-	Discharge = -44
-	WirePower = -43
+	UNASSIGNED = 0
+	RELATIVECLOSURE = -300
+	CONSTITUENTCONCENTRATION = -299
+	PRESSURENODEDEMAND = -297
+	VALVESTATUS = -58
+	PUMPSTATUS = -57
+	PIPESTATUS = -56
+	TANKLEVEL = -55
+	PRESSURE = -54
+	HYDRAULICGRADE = -53
+	PUMPSETTING = -52
+	PRESSUREVALVESETTING = -51
+	TCVALVESETTING = -50
+	FCVALVESETTING = -49
+	PRESSUREOUT = -48
+	PRESSUREIN = -47
+	HYDRAULICGRADEOUT = -46
+	HYDRAULICGRADEIN = -45
+	DISCHARGE = -44
+	WIREPOWER = -43
 
 class TransientParameterType(Enum):
-	Head = 0
-	Flow = 1
+	HEAD = 0
+	FLOW = 1
 
 class IMinorLoss(ICollectionElement):
 
