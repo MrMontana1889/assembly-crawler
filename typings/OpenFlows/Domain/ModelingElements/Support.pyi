@@ -13,11 +13,11 @@ TFieldType = TypeVar("TFieldType")
 TNetworkElementType = TypeVar("TNetworkElementType", Enum)
 
 class UserFieldDataType(Enum):
-	INTEGER = 1
-	REAL = 2
-	LONGTEXT = 4
-	DATETIME = 5
-	BOOLEAN = 6
+	Integer = 1
+	Real = 2
+	LongText = 4
+	DateTime = 5
+	Boolean = 6
 
 class IFieldInfo(INamable, ILabeled):
 

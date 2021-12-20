@@ -14,20 +14,18 @@ TUnitsType = TypeVar("TUnitsType", IElementUnits)
 TScenarioOptionsType = TypeVar("TScenarioOptionsType", IScenarioOptions)
 TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType", IElementUnits)
 TNetworkElementType = TypeVar("TNetworkElementType", IElement)
-TDomainElementTypeEnum = TypeVar("TDomainElementTypeEnum", Enum)
 
 class ModelingElementTypes(Enum):
-	SCENARIO = 2
-	SELECTIONSET = 7
+	Scenario = 2
+	SelectionSet = 7
 
 class ModelElementType(Enum):
-	ALL = 0
-	SCENARIO = 2
-	NETWORKELEMENT = 3
-	COMPONENTELEMENT = 4
-	OPTIONS = 5
-	SELECTIONSET = 6
-	EMBEDDEDSTICKYOBJECT = 8
+	All = 0
+	Scenario = 2
+	NetworkElement = 3
+	ComponentElement = 4
+	Options = 5
+	SelectionSet = 6
 
 class IElementManager:
 
@@ -560,52 +558,6 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		"""
 		pass
 
-	def Validate(self) -> List[IUserNotification]:
-		"""validates the scenario using the active solver.
-
-		Returns
-		--------
-			``List[IUserNotification]`` : Array of validation user notifications
-		"""
-		pass
-
-	def GetRunUserNotifications(self) -> List[IUserNotification]:
-		"""Gets the summary user notifications for the current scenario.
-            If there are no results, returns an empty array.
-
-		Returns
-		--------
-			``List[IUserNotification]`` : An array of summary IUserNotifications for this scenario 
-		"""
-		pass
-
-	def GetTimeStepUserNotifications(self, timeStepIndex: int) -> List[IUserNotification]:
-		"""Gets the user notifications for the current scenario at the specified time step.
-
-		Args
-		--------
-			timeStepIndex (``int``) :  The time step index to use to get the user notifications
-
-		Returns
-		--------
-			``List[IUserNotification]`` : An array of user notifications for the time step.  If there are no results, returns an empty array.
-		"""
-		pass
-
-	def GetUserNotifications(self, elementID: int, timeStepIndex: int) -> List[IUserNotification]:
-		"""Gets the user notifications for a specific element at a specific time step.
-
-		Args
-		--------
-			elementID (``int``) :  The id of the element.
-			timeStepIndex (``int``) :  The time step
-
-		Returns
-		--------
-			``List[IUserNotification]`` : An array of user notifications for a specific element and time step.  If there are no results, returns an empty array.
-		"""
-		pass
-
 	@property
 	def Options(self) -> TScenarioOptionsType:
 		"""A set of calculation options for the scenario.
@@ -744,72 +696,5 @@ class ISelectionSets(Generic[TElementManagerType, TElementType, TNetworkElementT
 			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBase[IEmbeddedStickyObjects, IEmbeddedStickyObject, ModelElementType]):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises
-		--------
-			Exception: if this class is instantiated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	@property
-	def Element(self) -> IElement:
-		"""The element this sticky object is associated with.
-
-		Returns
-		--------
-			``IEmbeddedStickyObject`` : 
-		"""
-		pass
-
-	@Element.setter
-	def Element(self, element: IElement) -> None:
-		pass
-
-	@property
-	def FullPath(self) -> str:
-		"""The full path and filename to the external file.
-
-		Returns
-		--------
-			``IEmbeddedStickyObject`` : 
-		"""
-		pass
-
-	@FullPath.setter
-	def FullPath(self, fullpath: str) -> None:
-		pass
-
-class IEmbeddedStickyObjects(Generic[TDomainElementTypeEnum], IModelingElementsBase[IEmbeddedStickyObjects, IEmbeddedStickyObject, ModelElementType]):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises
-		--------
-			Exception: if this class is instantiated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def StickyObjectsForType(self, elementType: TDomainElementTypeEnum) -> List[IEmbeddedStickyObject]:
-		"""No Description
-
-		Args
-		--------
-			elementType (``TDomainElementTypeEnum``) :  elementType
-
-		Returns
-		--------
-			``List[IEmbeddedStickyObject]`` : 
-		"""
 		pass
 

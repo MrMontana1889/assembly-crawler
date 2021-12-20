@@ -6,9 +6,9 @@ from OpenFlows.Water.Domain import IWaterModel
 from OpenFlows.Water.Support import IOpenFlowsWaterDefaults
 
 class WaterProductLicenseType(Enum):
-	WATERCAD = 1248
-	WATERGEMS = 1249
-	WATEROPS = 2922
+	WaterCAD = 1248
+	WaterGEMS = 1249
+	WaterOPS = 2922
 
 class OpenFlowsWater:
 

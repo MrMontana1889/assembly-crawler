@@ -11,446 +11,445 @@ from Haestad.Domain import IFieldManager
 
 
 class ModelingElementType(Enum):
-	ALL = 0
-	ALTERNATIVE = 1
-	SCENARIO = 2
-	DOMAINELEMENT = 3
-	SUPPORTELEMENT = 4
-	CALCULATIONOPTIONS = 5
-	ENGINEERINGLIBRARY = 6
-	SELECTIONSET = 7
-	EMBEDDEDSTICKYOBJECT = 8
-	PROTOTYPEDOMAINELEMENT = 9
-	PROFILE = 10
+	All = 0
+	Alternative = 1
+	Scenario = 2
+	DomainElement = 3
+	SupportElement = 4
+	CalculationOptions = 5
+	EngineeringLibrary = 6
+	SelectionSet = 7
+	EmbeddedStickyObject = 8
+	PrototypeDomainElement = 9
+	Profile = 10
 
 class ReferencedElementType(Enum):
-	NONE = 0
-	DOMAINELEMENT = 1
-	SUPPORTELEMENT = 2
-	SCENARIO = 3
-	ALTERNATIVE = 4
-	SELECTIONSET = 5
+	None = 0
+	DomainElement = 1
+	SupportElement = 2
+	Scenario = 3
+	Alternative = 4
+	SelectionSet = 5
 
 class DomainElementType(Enum):
-	MANHOLEELEMENTMANAGER = 1
-	CATCHBASINELEMENTMANAGER = 2
-	CONDUITELEMENTMANAGER = 3
-	CHANNELELEMENTMANAGER = 4
-	OUTFALLELEMENTMANAGER = 5
-	CATCHMENTELEMENTMANAGER = 6
-	PONDELEMENTMANAGER = 7
-	PONDOUTLETSTRUCTUREELEMENTMANAGER = 8
-	CROSSSECTIONNODEELEMENTMANAGER = 9
-	GUTTERLINKELEMENTMANAGER = 10
-	PUMPELEMENTMANAGER = 11
-	WETWELLELEMENTMANAGER = 12
-	PRESSUREJUNCTIONELEMENTMANAGER = 13
-	PRESSUREPIPEELEMENTMANAGER = 14
-	JUNCTIONCHAMBERELEMENTMANAGER = 15
-	BASENODEELEMENTMANAGER = 20
-	BASELINKELEMENTMANAGER = 21
-	BASEPOLYGONELEMENTMANAGER = 22
-	SCADAELEMENTMANAGER = 23
-	LATERALLINKELEMENTMANAGER = 24
-	TAPNODEELEMENTMANAGER = 26
-	BASEIDAHONODEELEMENTMANAGER = 50
-	IDAHODEMANDNODEELEMENTMANAGER = 51
-	IDAHOTANKELEMENTMANAGER = 52
-	IDAHOFIREFLOWNODEMANAGER = 53
-	IDAHOHYDRANTELEMENTMANAGER = 54
-	IDAHOJUNCTIONELEMENTMANAGER = 55
-	IDAHORESERVOIRELEMENTMANAGER = 56
-	BASEDIRECTEDNODEELEMENTMANAGER = 57
-	BASEVALVEELEMENTMANAGER = 58
-	BASEPUMP = 59
-	FCVELEMENTMANAGER = 60
-	TCVELEMENTMANAGER = 61
-	GPVELEMENTMANAGER = 62
-	PRESSUREVALVEELEMENTMANAGER = 63
-	PRVELEMENTMANAGER = 64
-	PSVELEMENTMANAGER = 65
-	PBVELEMENTMANAGER = 66
-	PUMPSTATIONELEMENTMANAGER = 67
-	STANDARDPUMPELEMENTMANAGER = 68
-	IDAHOPIPEELEMENTMANAGER = 69
-	IDAHOSPOTELEVATIONELEMENTMANAGER = 70
-	PRESSUREISOLATIONVALVEELEMENTMANAGER = 71
-	VARIABLESPEEDPUMPBATTERYELEMENTMANAGER = 72
-	CUSTOMERNODEELEMENTMANAGER = 73
-	GRAVITYSURFACESTRUCTUREELEMENTMANAGER = 100
-	GRAVITYLINKELEMENTMANAGER = 201
-	GRAVITYSTRUCTUREELEMENTMANAGER = 203
-	GRAVITYNODEELEMENTMANAGER = 204
-	PHYSICALLINKELEMENTMANAGER = 240
-	TURBINEELEMENTMANAGER = 300
-	AIRVALVEELEMENTMANAGER = 301
-	HYDROPNEUMATICTANKELEMENTMANAGER = 302
-	SAVSRVELEMENTMANAGER = 303
-	BASEORIFICE = 304
-	DISCHARGETOATMOSPHERE = 305
-	RUPTUREDISK = 306
-	ORIFICEBETWEENTWOPIPES = 307
-	SURGETANK = 308
-	CHECKVALVE = 309
-	VALVEWITHLINEARAREACHANGE = 310
-	BASETANK = 311
-	CONVENTIONALTANK = 312
-	BASEHAMMERNODE = 313
-	PERIODICHEADFLOW = 321
-	PRESSURESYSTEMNODE = 400
-	PONDROUTEELEMENTMANAGER = 500
-	GASREGULATINGVALVE = 602
-	GASPIPE = 603
-	GASNODE = 605
-	IDAHOPUMPSTATION = 700
-	LIDELEMENTMANAGER = 701
-	HEADWALL = 800
-	GRID = 801
-	BOUNDARYCONDITIONLINE2D = 803
-	BOUNDARYPOINT2D = 804
-	PROPERTYCONNECTIONELEMENTMANAGER = 810
-	BASESIMPLEPOLYLINE = 999
-	SURFACEPOINT = 1802
-	SURFACEPOLYGON = 1900
-	SURFACEPOLYLINE = 2000
-	SURFACEPROFILEPOLYLINE = 2001
-	CONFLICTNODE = 3000
-	COMMUNICATIONNODE = 3001
-	ELECTRICALNODE = 3002
-	POLNODE = 3003
-	THERMALNODE = 3004
-	WASTEWATERNODE = 3005
-	WATERNODE = 3006
-	GENERICUTILITYNODE = 3007
-	COMMUNICATIONSEGMENT = 3008
-	ELECTRICALSEGMENT = 3009
-	POLSEGMENT = 3010
-	THERMALSEGMENT = 3011
-	WASTEWATERSEGMENT = 3012
-	WATERSEGMENT = 3013
-	GASSEGMENT = 3014
-	GENERICUTILITYSEGMENT = 3015
-	STORMWATERNODE = 3016
-	STORMWATERSEGMENT = 3017
-	REFERENCEELEMENT = 3018
+	ManholeElementManager = 1
+	CatchBasinElementManager = 2
+	ConduitElementManager = 3
+	ChannelElementManager = 4
+	OutfallElementManager = 5
+	CatchmentElementManager = 6
+	PondElementManager = 7
+	PondOutletStructureElementManager = 8
+	CrossSectionNodeElementManager = 9
+	GutterLinkElementManager = 10
+	PumpElementManager = 11
+	WetWellElementManager = 12
+	PressureJunctionElementManager = 13
+	PressurePipeElementManager = 14
+	JunctionChamberElementManager = 15
+	BaseNodeElementManager = 20
+	BaseLinkElementManager = 21
+	BasePolygonElementManager = 22
+	ScadaElementManager = 23
+	LateralLinkElementManager = 24
+	TapNodeElementManager = 26
+	BaseIdahoNodeElementManager = 50
+	IdahoDemandNodeElementManager = 51
+	IdahoTankElementManager = 52
+	IdahoFireFlowNodeManager = 53
+	IdahoHydrantElementManager = 54
+	IdahoJunctionElementManager = 55
+	IdahoReservoirElementManager = 56
+	BaseDirectedNodeElementManager = 57
+	BaseValveElementManager = 58
+	BasePump = 59
+	FCVElementManager = 60
+	TCVElementManager = 61
+	GPVElementManager = 62
+	PressureValveElementManager = 63
+	PRVElementManager = 64
+	PSVElementManager = 65
+	PBVElementManager = 66
+	PumpStationElementManager = 67
+	StandardPumpElementManager = 68
+	IdahoPipeElementManager = 69
+	IdahoSpotElevationElementManager = 70
+	PressureIsolationValveElementManager = 71
+	VariableSpeedPumpBatteryElementManager = 72
+	CustomerNodeElementManager = 73
+	GravitySurfaceStructureElementManager = 100
+	GravityLinkElementManager = 201
+	GravityStructureElementManager = 203
+	GravityNodeElementManager = 204
+	PhysicalLinkElementManager = 240
+	TurbineElementManager = 300
+	AirValveElementManager = 301
+	HydropneumaticTankElementManager = 302
+	SavSrvElementManager = 303
+	BaseOrifice = 304
+	DischargeToAtmosphere = 305
+	RuptureDisk = 306
+	OrificeBetweenTwoPipes = 307
+	SurgeTank = 308
+	CheckValve = 309
+	ValveWithLinearAreaChange = 310
+	BaseTank = 311
+	ConventionalTank = 312
+	BaseHammerNode = 313
+	PeriodicHeadFlow = 321
+	PressureSystemNode = 400
+	PondRouteElementManager = 500
+	GasRegulatingValve = 602
+	GasPipe = 603
+	GasNode = 605
+	IdahoPumpStation = 700
+	LIDElementManager = 701
+	Headwall = 800
+	Grid = 801
+	BoundaryConditionLine2D = 803
+	BoundaryPoint2D = 804
+	PropertyConnectionElementManager = 810
+	BaseSimplePolyline = 999
+	SurfacePoint = 1802
+	SurfacePolygon = 1900
+	SurfacePolyline = 2000
+	ConflictNode = 3000
+	CommunicationNode = 3001
+	ElectricalNode = 3002
+	POLNode = 3003
+	ThermalNode = 3004
+	WasteWaterNode = 3005
+	WaterNode = 3006
+	GenericUtilityNode = 3007
+	CommunicationSegment = 3008
+	ElectricalSegment = 3009
+	POLSegment = 3010
+	ThermalSegment = 3011
+	WasteWaterSegment = 3012
+	WaterSegment = 3013
+	GasSegment = 3014
+	GenericUtilitySegment = 3015
+	StormWaterNode = 3016
+	StormWaterSegment = 3017
+	ReferenceElement = 3018
 
 class DomainElementSubType(Enum):
-	TWODPOLYGON_BUILDING = 901
-	TWODPOLYGON_VOIDAREA = 902
-	TWODPOLYGON_ADJUSTMENTAREA = 903
-	TWODPOLYGON_LANDUSE = 904
-	TWODPOLYGON_ROADAREA = 905
-	TWODPOLYLINE_BREAKLINE = 1001
-	TWODPOLYLINE_ROADCENTERLINE = 1002
-	TWODPOINT_REPORTINGPOINT = 8020
-	TWODPOINT_SPOTELEVATION = 8021
-	TWODPOINT_VOIDPOINT = 8022
+	TwoDPolygon_Building = 901
+	TwoDPolygon_VoidArea = 902
+	TwoDPolygon_AdjustmentArea = 903
+	TwoDPolygon_LandUse = 904
+	TwoDPolygon_RoadArea = 905
+	TwoDPolyline_Breakline = 1001
+	TwoDPolyline_RoadCenterline = 1002
+	TwoDPoint_ReportingPoint = 8020
+	TwoDPoint_SpotElevation = 8021
+	TwoDPoint_VoidPoint = 8022
 
 class AlternativeType(Enum):
-	HMIDATASETGEOMETRYALTERNATIVE = 1
-	HMIDATASETTOPOLOGYALTERNATIVE = 2
-	HMIACTIVETOPOLOGYALTERNATIVE = 3
-	PHYSICALALTERNATIVE = 4
-	BOUNDARYCONDITIONALTERNATIVE = 5
-	INITIALCONDITIONALTERNATIVE = 6
-	HYDROLOGICALTERNATIVE = 7
-	OUTPUTALTERNATIVE = 8
-	DRYLOADALTERNATIVE = 9
-	RAINFALLRUNOFFALTERNATIVE = 10
-	WATERQUALITYALTERNATIVE = 11
-	SANITARYLOADINGALTERNATIVE = 12
-	INFILTRATIONANDINFLOWALTERNATIVE = 13
-	SCADAALTERNATIVE = 14
-	DEMANDALTERNATIVE = 20
-	INITIALSETTINGSALTERNATIVE = 21
-	OPERATIONALALTERNATIVE = 22
-	AGEALTERNATIVE = 23
-	CONSTITUENTALTERNATIVE = 24
-	TRACEALTERNATIVE = 25
-	FIREFLOWALTERNATIVE = 26
-	ENERGYCOSTALTERNATIVE = 28
-	PRESSUREDEPENDENTDEMANDALTERNATIVE = 29
-	CRITICALITYALTERNATIVE = 30
-	FLUSHINGALTERNATIVE = 31
-	CAPITALCOSTALTERNATIVE = 36
-	HEADLOSSALTERNATIVE = 40
-	DESIGNALTERNATIVE = 41
-	SYSTEMFLOWSALTERNATIVE = 45
-	HAMMERALTERNATIVE = 50
-	PIPEBREAKALTERNATIVE = 51
-	HMIUSERDEFINEDEXTENSIONSALTERNATIVE = 100
-	CONFLICTALTERNATIVE = 1000
-	NETWORKDATAALTERNATIVE = 1001
-	SURFACEALTERNATIVE = 1003
+	HmiDataSetGeometryAlternative = 1
+	HMIDataSetTopologyAlternative = 2
+	HMIActiveTopologyAlternative = 3
+	PhysicalAlternative = 4
+	BoundaryConditionAlternative = 5
+	InitialConditionAlternative = 6
+	HydrologicAlternative = 7
+	OutputAlternative = 8
+	DryLoadAlternative = 9
+	RainfallRunoffAlternative = 10
+	WaterQualityAlternative = 11
+	SanitaryLoadingAlternative = 12
+	InfiltrationAndInflowAlternative = 13
+	ScadaAlternative = 14
+	DemandAlternative = 20
+	InitialSettingsAlternative = 21
+	OperationalAlternative = 22
+	AgeAlternative = 23
+	ConstituentAlternative = 24
+	TraceAlternative = 25
+	FireFlowAlternative = 26
+	EnergyCostAlternative = 28
+	PressureDependentDemandAlternative = 29
+	CriticalityAlternative = 30
+	FlushingAlternative = 31
+	CapitalCostAlternative = 36
+	HeadlossAlternative = 40
+	DesignAlternative = 41
+	SystemFlowsAlternative = 45
+	HammerAlternative = 50
+	PipeBreakAlternative = 51
+	HMIUserDefinedExtensionsAlternative = 100
+	ConflictAlternative = 1000
+	NetworkDataAlternative = 1001
+	SurfaceAlternative = 1003
 
 class SupportElementType(Enum):
-	CATALOGPIPEELEMENTMANAGER = 1
-	COMPOSITEOUTLETSTRUCTUREELEMENTMANAGER = 2
-	PROFILEELEMENTMANAGER = 3
-	POLLUTANTELEMENTMANAGER = 4
-	AQUIFERSELEMENTMANAGER = 5
-	CONTROLSETELEMENTMANAGER = 6
-	LANDUSEELEMENTMANAGER = 8
-	CONTROLSTRUCTUREELEMENTELEMENTMANAGER = 9
-	STORMEVENTELEMENTMANAGER = 10
-	PATTERNELEMENTMANAGER = 11
-	EXTREMEFLOWFACTORELEMENTMANAGER = 12
-	UNITSANITARYLOADELEMENTMANAGER = 13
-	EXTREMEFLOWSETUPELEMENTMANAGER = 14
-	PATTERNSETUPELEMENTMANAGER = 15
-	DIMENSIONLESSUNITHYDROGRAPHELEMENTMANAGER = 16
-	RTKSETELEMENTMANAGER = 17
-	PROTOTYPEMANAGER = 18
-	POLLUTOGRAPHELEMENTMANAGER = 19
-	CATALOGGUTTER = 20
-	LIDCONTROL = 21
-	TIMESERIESCONTROLDATAMANAGER = 22
-	IDAHOPATTERNELEMENTMANAGER = 50
-	IDAHOPUMPDEFINITIONELEMENTMANAGER = 51
-	IDAHOCONSTITUENTELEMENTMANAGER = 52
-	ZONEELEMENTMANAGER = 53
-	IDAHOCONTROLELEMENTMANAGER = 54
-	IDAHOCONTROLACTIONELEMENTMANAGER = 55
-	IDAHOCONTROLCONDITIONELEMENTMANAGER = 56
-	IDAHOLOGICALCONTROLSETELEMENTMANAGER = 59
-	PRESSUREDEPENDENTDEMANDFUNCTIONELEMENTMANAGER = 60
-	ENERGYPRICINGELEMENTMANAGER = 61
-	UNITDEMANDLOADELEMENTMANAGER = 62
-	GPVHEADLOSSCURVEELEMENTMANAGER = 63
-	CRITICALITYSTUDYGROUPELEMENTMANAGER = 64
-	CRITICALITYSTUDYELEMENTMANAGER = 65
-	VALVECHARACTERISTICSELEMENTMANAGER = 66
-	FLUSHINGEVENTELEMENTMANAGER = 67
-	AIRFLOWCURVEMANAGER = 68
-	CHECKVALVEDYNAMICCHARACTERISTICSCURVEMANAGER = 69
-	MINORLOSSCOEFFICIENTELEMENTMANAGER = 101
-	TIMESERIESELEMENTMANAGER = 102
-	INLETELEMENTMANAGER = 103
-	GENERICHEADLOSSELEMENTMANAGER = 104
-	STORMEVENTGROUP = 105
-	CATALOGCONDUITELEMENTMANAGER = 106
-	SCSCNVOLUMEELEMENTMANAGER = 107
-	TR55GRAPHICALPEAKSTORAGE = 108
-	FIRSTFLUSHCALCULATOR = 109
-	WEIRDEPTHCOEFFICIENTMANAGER = 111
-	WEIRSUBMERGENCEMANAGER = 112
-	HYDROGRAPHMANAGER = 113
-	TR55TABULARHYDROGRAPH = 114
-	MINDRAINTIME = 115
-	PEAKFLOWESTIMATEDSTORAGE = 116
-	EQTWTABLEELEMENTMANAGER = 117
-	QQPTEMPLATEELEMENTMANAGER = 118
-	OVERLAYHYDROGRAPH = 119
-	RATIONALMETHODQPEAK = 120
-	PONDMAKER = 121
-	STORAGECHAMBER = 124
-	VORTEXVALVE = 125
-	GENERICUNITHYDROGRAPH = 126
-	MAINSCOREASPECT = 150
-	MAINSCORE = 151
-	PIPEBREAKGROUP = 152
-	PIPEBREAKANALYSIS = 153
-	FLUSHINGSTUDY = 175
-	FLUSHINGAREA = 176
-	FLUSHINGREPORTVIEW = 177
-	CULVERTINLETCOEFFICIENTS = 180
-	PRESSUREZONESTUDYGROUPELEMENTMANAGER = 200
-	PRESSUREZONESTUDYELEMENTMANAGER = 201
-	UNITCARBONEMISSIONS = 202
-	POWERMETER = 203
-	ENERGYAGGREGATIONSTUDY = 204
-	MSXSETUP = 220
-	SNOWPACK = 250
-	SWMMRTKUNITHYDROGRAPHSET = 251
-	PUMPSTATION = 252
-	SCADADATASOURCE = 256
-	SCADASIGNAL = 257
-	ALERTMESSAGE = 260
-	SCADACONNECTSIMULATOR = 261
-	OPCPUBLISHINGRESULT = 262
-	PERFORMANCESTUDY = 263
-	DISTRICTMETERAREA = 265
-	GASPIPETYPE = 300
-	GASCUSTOMER = 301
-	TWODDATASOURCE = 350
-	DIGITALTERRAINMODEL = 351
-	DIGITALTERRAINMODELGROUP = 352
-	LANDCOVER = 353
+	CatalogPipeElementManager = 1
+	CompositeOutletStructureElementManager = 2
+	ProfileElementManager = 3
+	PollutantElementManager = 4
+	AquifersElementManager = 5
+	ControlSetElementManager = 6
+	LandUseElementManager = 8
+	ControlStructureElementElementManager = 9
+	StormEventElementManager = 10
+	PatternElementManager = 11
+	ExtremeFlowFactorElementManager = 12
+	UnitSanitaryLoadElementManager = 13
+	ExtremeFlowSetupElementManager = 14
+	PatternSetupElementManager = 15
+	DimensionlessUnitHydrographElementManager = 16
+	RTKSetElementManager = 17
+	PrototypeManager = 18
+	PollutographElementManager = 19
+	CatalogGutter = 20
+	LIDControl = 21
+	TimeSeriesControlDataManager = 22
+	IdahoPatternElementManager = 50
+	IdahoPumpDefinitionElementManager = 51
+	IdahoConstituentElementManager = 52
+	ZoneElementManager = 53
+	IdahoControlElementManager = 54
+	IdahoControlActionElementManager = 55
+	IdahoControlConditionElementManager = 56
+	IdahoLogicalControlSetElementManager = 59
+	PressureDependentDemandFunctionElementManager = 60
+	EnergyPricingElementManager = 61
+	UnitDemandLoadElementManager = 62
+	GpvHeadlossCurveElementManager = 63
+	CriticalityStudyGroupElementManager = 64
+	CriticalityStudyElementManager = 65
+	ValveCharacteristicsElementManager = 66
+	FlushingEventElementManager = 67
+	AirFlowCurveManager = 68
+	CheckValveDynamicCharacteristicsCurveManager = 69
+	MinorLossCoefficientElementManager = 101
+	TimeSeriesElementManager = 102
+	InletElementManager = 103
+	GenericHeadlossElementManager = 104
+	StormEventGroup = 105
+	CatalogConduitElementManager = 106
+	SCSCNVolumeElementManager = 107
+	TR55GraphicalPeakStorage = 108
+	FirstFlushCalculator = 109
+	WeirDepthCoefficientManager = 111
+	WeirSubmergenceManager = 112
+	HydrographManager = 113
+	TR55TabularHydrograph = 114
+	MinDrainTime = 115
+	PeakFlowEstimatedStorage = 116
+	EQTWTableElementManager = 117
+	QqpTemplateElementManager = 118
+	OverlayHydrograph = 119
+	RationalMethodQPeak = 120
+	PondMaker = 121
+	StorageChamber = 124
+	VortexValve = 125
+	GenericUnitHydrograph = 126
+	MainScoreAspect = 150
+	MainScore = 151
+	PipeBreakGroup = 152
+	PipeBreakAnalysis = 153
+	FlushingStudy = 175
+	FlushingArea = 176
+	FlushingReportView = 177
+	CulvertInletCoefficients = 180
+	PressureZoneStudyGroupElementManager = 200
+	PressureZoneStudyElementManager = 201
+	UnitCarbonEmissions = 202
+	PowerMeter = 203
+	EnergyAggregationStudy = 204
+	MSXSetup = 220
+	SnowPack = 250
+	SWMMRTKUnitHydrographSet = 251
+	PumpStation = 252
+	ScadaDataSource = 256
+	ScadaSignal = 257
+	AlertMessage = 260
+	SCADAConnectSimulator = 261
+	OPCPublishingResult = 262
+	PerformanceStudy = 263
+	DistrictMeterArea = 265
+	GasPipeType = 300
+	GasCustomer = 301
+	TwoDDataSource = 350
+	DigitalTerrainModel = 351
+	DigitalTerrainModelGroup = 352
+	LandCover = 353
 
 class DomainElementShapeType(Enum):
-	POINT = 0
-	POLYLINE = 1
-	POLYGON = 2
-	DIRECTEDNODE = 3
-	REFERENCENODE = 4
-	LATERAL = 5
-	SIMPLEPOLYLINE = 6
+	Point = 0
+	Polyline = 1
+	Polygon = 2
+	DirectedNode = 3
+	ReferenceNode = 4
+	Lateral = 5
+	SimplePolyline = 6
 
 class wkbByteOrder(Enum):
-	WKBXDR = 0
-	WKBNDR = 1
+	wkbXDR = 0
+	wkbNDR = 1
 
 class wkbGeometryType(Enum):
-	WKBPOINT = 1
-	WKBLINESTRING = 2
-	WKBPOLYGON = 3
-	WKBMULTIPOINT = 4
-	WKBMULTILINESTRING = 5
-	WKBMULTIPOLYGON = 6
-	WKBGEOMETRYCOLLECTION = 7
+	wkbPoint = 1
+	wkbLineString = 2
+	wkbPolygon = 3
+	wkbMultiPoint = 4
+	wkbMultiLineString = 5
+	wkbMultiPolygon = 6
+	wkbGeometryCollection = 7
 
 class StandardFieldType(Enum):
-	LABEL = 0
-	NOTES = 1
+	Label = 0
+	Notes = 1
 
 class ConnectionType(Enum):
-	JET4PT0 = 1
-	SQLITE = 2
+	Jet4pt0 = 1
+	Sqlite = 2
 
 class ConnectionProperty(Enum):
-	FILENAME = 1
-	CONNECTIONTYPE = 2
-	DATABASEPASSWORD = 3
-	JETWORKSPACEUSERNAME = 4
-	JETWORKSPACEPASSWORD = 5
-	ENABLESCHEMAUPDATE = 6
-	SHOULDUPDATECOUNTERS = 7
-	ENABLECORESCHEMAUPDATE = 8
-	CHECKSUCCESSFULCLOSEFLAG = 9
+	FileName = 1
+	ConnectionType = 2
+	DatabasePassword = 3
+	JetWorkspaceUserName = 4
+	JetWorkspacePassword = 5
+	EnableSchemaUpdate = 6
+	ShouldUpdateCounters = 7
+	EnableCoreSchemaUpdate = 8
+	CheckSuccessfulCloseFlag = 9
 
 class SelectionSetType(Enum):
-	STANDARD = 1
-	PROFILE = 2
+	Standard = 1
+	Profile = 2
 
 class FlowDirection(Enum):
-	NOFLOW = 0
-	POSITIVE = 1
-	NEGATIVE = -1
+	NoFlow = 0
+	Positive = 1
+	Negative = -1
 
 class DomainFieldType(Enum):
-	MODELINGELEMENTFIELD = 1
-	SUPPORTELEMENTFIELD = 2
-	DOMAINELEMENTFIELD = 3
-	RESULTFIELD = 4
-	ALTERNATIVEFIELD = 5
-	SYSTEMRECORDFIELD = 6
+	ModelingElementField = 1
+	SupportElementField = 2
+	DomainElementField = 3
+	ResultField = 4
+	AlternativeField = 5
+	SystemRecordField = 6
 
 class ReferenceCardinality(Enum):
-	ONETOMANY = 0
-	ONETOONE = 1
+	OneToMany = 0
+	OneToOne = 1
 
 class NumericalEngineType(Enum):
-	EPANET = 1
-	GVFENGINE = 2
+	EpaNET = 1
+	GVFEngine = 2
 
 class StatisticType(Enum):
-	MINIMUM = 1
-	MAXIMUM = 2
-	MEAN = 3
-	SUM = 4
-	COUNT = 5
-	STANDARDDEVIATION = 6
-	AREAUNDERCURVE = 7
+	Minimum = 1
+	Maximum = 2
+	Mean = 3
+	Sum = 4
+	Count = 5
+	StandardDeviation = 6
+	AreaUnderCurve = 7
 
 class BulkOperationType(Enum):
-	NONE = 0
-	INSERT = 1
-	LOAD = 2
+	None = 0
+	Insert = 1
+	Load = 2
 
 class StoredQueryType(Enum):
-	VIEW = 0
-	STOREDPROCEDURE = 1
+	View = 0
+	StoredProcedure = 1
 
 class CompactOperationTask(Enum):
-	ALL = 0
-	PURGEDELETEDROWS = 1
-	REFRESHBOUNDINGBOX = 2
-	REFRESHCACHEDMANAGERCOUNTS = 3
-	REFRESHCACHEDGEOMETRYPROPERTIES = 4
-	REFRESHREFERENCENODECACHESONLY = 5
-	REFRESHCACHEDCOLLECTIONCOUNTS = 6
-	REFRESHCACHEDSMARTLABELS = 7
-	VERIFYVISUALLINKCONNECTIVITY = 8
-	PURGEDELETEDGISIDS = 9
-	PURGEDATAROWSFROMGISIDSMARKEDASDELETED = 10
-	VERIFYSELECTIONSETSTHOROUGHLY = 11
-	REFRESHCACHEDALTERNATIVELEVELS = 12
-	WATERREFRESHCACHEDUNITDEMANDBASEFLOW = 13
-	WATERREFRESHCACHEDMINORLOSSES = 14
+	All = 0
+	PurgeDeletedRows = 1
+	RefreshBoundingBox = 2
+	RefreshCachedManagerCounts = 3
+	RefreshCachedGeometryProperties = 4
+	RefreshReferenceNodeCachesOnly = 5
+	RefreshCachedCollectionCounts = 6
+	RefreshCachedSmartLabels = 7
+	VerifyVisualLinkConnectivity = 8
+	PurgeDeletedGISIDs = 9
+	PurgeDataRowsFromGISIDsMarkedAsDeleted = 10
+	VerifySelectionSetsThoroughly = 11
+	RefreshCachedAlternativeLevels = 12
+	WaterRefreshCachedUnitDemandBaseFlow = 13
+	WaterRefreshCachedMinorlosses = 14
 
 class ExpressionType(Enum):
-	NONE = 0
-	ECEXPRESSIONS = 1
+	None = 0
+	ECExpressions = 1
 
 class FieldUpdateTypeEnum(Enum):
-	NOCHANGE = 0
-	CHANGE = 1
-	ELIMINATED = 2
+	NoChange = 0
+	Change = 1
+	Eliminated = 2
 
 class ExternalIDType(Enum):
-	PERSISTENTELEMENTPATH = 1
+	PersistentElementPath = 1
 
 class PressureZoneValveStatusEnum(Enum):
-	ALWAYSUSE = 0
-	USEWHENCLOSED = 1
-	DONOTUSE = 2
-	USEWHENACTIVE = 3
-	USEWHENCLOSEDORACTIVE = 4
+	AlwaysUse = 0
+	UseWhenClosed = 1
+	DoNotUse = 2
+	UseWhenActive = 3
+	UseWhenClosedOrActive = 4
 
 class PressureZonePipeStatusEnum(Enum):
-	USEWHENCLOSEDCHECKVALVE = 0
-	USEWHENCLOSED = 1
-	DONOTUSE = 2
+	UseWhenClosedCheckValve = 0
+	UseWhenClosed = 1
+	DoNotUse = 2
 
 class PressureZonePumpStatusEnum(Enum):
-	ALWAYSUSE = 0
-	DONOTUSE = 1
+	AlwaysUse = 0
+	DoNotUse = 1
 
 class PressureZoneCheckValveStatusEnum(Enum):
-	ALWAYSUSE = 0
-	DONOTUSE = 2
+	AlwaysUse = 0
+	DoNotUse = 2
 
 class PressureZoneOrificeBetweenPipesStatusEnum(Enum):
-	ALWAYSUSE = 0
-	DONOTUSE = 1
+	AlwaysUse = 0
+	DoNotUse = 1
 
 class UseInPressureZoneTraceEnum(Enum):
-	PZTRACEALWAYSUSETYPE = 0
-	PZTRACEUSEWHENCLOSEDTYPE = 1
-	PZTRACEUSEWHENCLOSEDCHECKVALVETYPE = 2
-	PZTRACEDONOTUSETYPE = 3
-	PZTRACEUSEWHENACTIVETYPE = 4
-	PZTRACEUSEWHENCLOSEDORACTIVETYPE = 5
+	PzTraceAlwaysUseType = 0
+	PzTraceUseWhenClosedType = 1
+	PzTraceUseWhenClosedCheckValveType = 2
+	PzTraceDoNotUseType = 3
+	PzTraceUseWhenActiveType = 4
+	PzTraceUseWhenClosedOrActiveType = 5
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class IDataSource:
 

@@ -7,13 +7,13 @@ TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
 TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
 
 class FormatCode(Enum):
-	FIXED = 0
-	GENERAL = 1
-	SCIENTIFICNOTATION = 2
-	NUMBER = 3
+	Fixed = 0
+	General = 1
+	ScientificNotation = 2
+	Number = 3
 
 class UnitSystemType(Enum):
-	USCUSTOMARY = 0
+	USCustomary = 0
 	SI = 1
 
 class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
