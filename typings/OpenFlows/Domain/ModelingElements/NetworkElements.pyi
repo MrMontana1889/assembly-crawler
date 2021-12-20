@@ -12,9 +12,9 @@ TElementsInputType = TypeVar("TElementsInputType", IElementsInput)
 TElementsResultsType = TypeVar("TElementsResultsType", IElementsResults)
 
 class ElementStateType(Enum):
-	ALL = 0
-	ACTIVE = 1
-	INACTIVE = 2
+	All = 0
+	Active = 1
+	Inactive = 2
 
 class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType], IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum]):
 

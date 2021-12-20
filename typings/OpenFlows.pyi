@@ -1,8 +1,8 @@
 from typing import List, Generic, overload, TypeVar
 from enum import Enum
 from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
-from OpenFlows.Domain.ModelingElements import IElement, ModelElementType, IModelingElementBase, IModelingElementsBase, ISelectionSets
-from OpenFlows.Units import IUnits
+from OpenFlows.Domain.ModelingElements import IElement, IElementUnits, IScenarioOptions, ISelectionSet, ModelElementType, IModelingElementBase, IModelingElementsBase, ISelectionSets
+from OpenFlows.Units import IComponentUnits, INetworkUnits, IUnits
 from OpenFlows.Domain.DataObjects import IDomainModel, IModelInfo
 from OpenFlows.Domain.ModelingElements.Components import IModelComponents
 from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
