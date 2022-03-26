@@ -1,5 +1,5 @@
 ﻿// ConfigPackage.cs
-// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,7 +14,7 @@ namespace AssemblyCrawler.Xml.Config
 		#region Constructor
 		public ConfigPackage()
 		{
-			
+
 		}
 		#endregion
 
@@ -22,7 +22,7 @@ namespace AssemblyCrawler.Xml.Config
 		public string OutputPath { get; set; }
 		public string DefaultAssemblyFolder { get; set; }
 		public List<ConfigAssembly> Assemblies { get; } = new List<ConfigAssembly>();
-		public List<ConfigSystemAssembly> SystemAssemblies { get; } = new List<ConfigSystemAssembly>();	
+		public List<ConfigSystemAssembly> SystemAssemblies { get; } = new List<ConfigSystemAssembly>();
 		#endregion
 	}
 }

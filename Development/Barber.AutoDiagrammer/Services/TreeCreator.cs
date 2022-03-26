@@ -1,5 +1,5 @@
 ﻿// TreeCreator.cs
-// Copyright (c) 2021 Sacha Barber  See LICENSE for details
+// Copyright (c) 2021 Sacha Barber See LICENSE for details
 
 using System;
 using System.Collections.Generic;
@@ -9,9 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using Barber.AutoDiagrammer.GraphBits;
 using Barber.AutoDiagrammer.ILReader;
 using Barber.AutoDiagrammer.Models;

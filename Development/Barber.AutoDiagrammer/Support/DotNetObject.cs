@@ -1,4 +1,7 @@
 ﻿// DotNetObject.cs
+// Copyright (c) 2021 Sacha Barber See LICENSE for details
+
+// DotNetObject.cs
 
 using System;
 using System.IO;

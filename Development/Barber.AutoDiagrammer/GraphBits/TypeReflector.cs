@@ -1,12 +1,10 @@
 ﻿// TypeReflector.cs
+// Copyright (c) 2021 Sacha Barber See LICENSE for details
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Barber.AutoDiagrammer.ILReader;
 
 namespace Barber.AutoDiagrammer.GraphBits
 {

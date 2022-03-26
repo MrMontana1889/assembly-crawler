@@ -1,5 +1,5 @@
 ﻿// TypeParserLibrary.cs
-// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 using System;
 using System.Collections.Generic;
@@ -55,15 +55,15 @@ namespace AssemblyCrawler.Library
 		public TypeParserLibrary Parse()
 		{
 			// Member Info is used to extract information from xml document 
-            foreach (var member in Type.GetMembers())
+			foreach (var member in Type.GetMembers())
 				MemberInfoMap.Add(member.XmlMemberName(), member);
 
-            // Static Fields
-            foreach (var field in Type.GetFields())
-            {
+			// Static Fields
+			foreach (var field in Type.GetFields())
+			{
 				if (field.IsStatic)
 					StaticFields.Add(field);
-            }
+			}
 
 			// Constructors
 			Constructors.AddRange(Type.GetConstructors());
@@ -179,17 +179,17 @@ namespace AssemblyCrawler.Library
 		{
 			string methodName = method.Name;
 			var parameters = new List<ParameterInfo>(method.GetParameters());
-			return parameters.Select(p => new KeyValuePair<string, KeyValuePair<Type, object>>(p.Name ?? "", 
+			return parameters.Select(p => new KeyValuePair<string, KeyValuePair<Type, object>>(p.Name ?? "",
 				new KeyValuePair<Type, object>(p.ParameterType, p.HasDefaultValue ? p.DefaultValue : null))).ToList();
 		}
 		public List<KeyValuePair<string, KeyValuePair<Type, object>>> GetConstructorArguments(ConstructorInfo constructorInfo)
-        {
+		{
 			var parameters = new List<ParameterInfo>(constructorInfo.GetParameters());
-			return parameters.Select(p => 
+			return parameters.Select(p =>
 				new KeyValuePair<string, KeyValuePair<Type, object>>(
-					p.Name ?? "", 
+					p.Name ?? "",
 					new KeyValuePair<Type, object>(
-						p.ParameterType, 
+						p.ParameterType,
 						p.HasDefaultValue
 							? p.DefaultValue
 							: null))).ToList();

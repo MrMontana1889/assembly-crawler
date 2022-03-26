@@ -1,12 +1,12 @@
 ﻿// TypeParser.cs
-// Copyright (c) 2021 Kristopher L. Culin see LICENSE for details
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
-using static AssemblyCrawler.Support.Constants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AssemblyCrawler.Extensions;
+using static AssemblyCrawler.Support.Constants;
 
 namespace AssemblyCrawler.Support
 {

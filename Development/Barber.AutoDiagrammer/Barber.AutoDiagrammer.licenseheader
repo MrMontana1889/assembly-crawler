@@ -1,0 +1,15 @@
+﻿extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+// %FileName%
+// Copyright (c) 2021 Sacha Barber See LICENSE for details
+
+extensions: .aspx .ascx
+<%-- 
+Copyright (c) 2021 Sacha Barber See LICENSE for details See LICENSE for detils
+--%>
+extensions: .vb
+'Copyright (c) 2021 Sacha Barber See LICENSE for details See LICENSE for detils
+extensions:  .xml .config .xsd
+<!--
+Copyright (c) 2021 Sacha Barber See LICENSE for details See LICENSE for detils
+-->
