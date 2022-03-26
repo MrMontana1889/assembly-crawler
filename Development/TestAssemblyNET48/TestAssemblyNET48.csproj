@@ -57,6 +57,9 @@
     <Compile Include="Support\GeometryPoint.cs" />
     <Compile Include="Support\RandomNumberLibrary.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="TestAssemblyNET48.licenseheader" />
+  </ItemGroup>
   <PropertyGroup>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
   </PropertyGroup>

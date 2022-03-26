@@ -1,5 +1,5 @@
 ﻿// Interfaces.cs
-// Copyright (c) 2021 See LICENSE for details
+// Copyright (c) 2021 Sacha Barber See LICENSE for details
 
 using System;
 

@@ -1,9 +1,9 @@
 ﻿// CreateAssemblyTreeTestFixture.cs
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 using System;
 using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using Barber.AutoDiagrammer;
 using Barber.AutoDiagrammer.GraphBits;
 using Barber.AutoDiagrammer.Models;

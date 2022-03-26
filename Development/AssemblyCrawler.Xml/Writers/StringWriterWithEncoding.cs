@@ -1,4 +1,7 @@
-﻿using System.IO;
+﻿// StringWriterWithEncoding.cs
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
+
+using System.IO;
 using System.Text;
 
 namespace AssemblyCrawler.Xml.Writers
