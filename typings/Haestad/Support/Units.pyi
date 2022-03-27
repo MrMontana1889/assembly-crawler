@@ -7837,6 +7837,17 @@ class Unit(INamable):
 
 	@staticmethod
 	@property
+	def PerMinute() -> Unit:
+		"""No Description
+
+		Returns
+		--------
+			``Unit`` : 
+		"""
+		pass
+
+	@staticmethod
+	@property
 	def PerSecond() -> Unit:
 		"""No Description
 

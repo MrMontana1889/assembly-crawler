@@ -75,6 +75,11 @@ class ProductId(Enum):
 	Bentley_WaterOPS = 2922
 	Bentley_SewerOPS = 2923
 	Bentley_OverHeadLineDesigner = 2963
+	Bentley_OpenRailChina = 3136
+	Bentley_OpenRailUltimateChina = 3210
+	Bentley_OpenRoadsUltimateChina = 3211
+	Bentley_OpenRoadsChina = 3216
+	Bentley_OpenFlows_Entitlement = 3276
 
 class LicensePlatformType(Enum):
 	Unknown = 0
@@ -946,6 +951,25 @@ class License(ILicense):
 
 	@staticmethod
 	@overload
+	def Default(productRelease: ProductRelease, windowOwner: IntPtr, messageHandler: IMessageHandler, defaultFeatureString: str, isEntitlementLicense: bool) -> License:
+		"""No Description
+
+		Args
+		--------
+			productRelease (``ProductRelease``) :  productRelease
+			windowOwner (``IntPtr``) :  windowOwner
+			messageHandler (``IMessageHandler``) :  messageHandler
+			defaultFeatureString (``str``) :  defaultFeatureString
+			isEntitlementLicense (``bool``) :  isEntitlementLicense
+
+		Returns
+		--------
+			``License`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
 	def Default(productRelease: ProductRelease, windowOwner: IntPtr, messageHandler: IMessageHandler, defaultFeatureString: str) -> License:
 		"""No Description
 
@@ -1300,6 +1324,15 @@ class License(ILicense):
 		"""
 		pass
 
+	def PeekEntitlement(self) -> LicenseType:
+		"""No Description
+
+		Returns
+		--------
+			``LicenseType`` : 
+		"""
+		pass
+
 	def Dispose(self) -> None:
 		"""No Description
 
@@ -1360,6 +1393,16 @@ class License(ILicense):
 
 	@property
 	def RunStatus(self) -> LicenseRunStatusEnum:
+		"""No Description
+
+		Returns
+		--------
+			``License`` : 
+		"""
+		pass
+
+	@property
+	def IsEntitlementLicense(self) -> bool:
 		"""No Description
 
 		Returns
