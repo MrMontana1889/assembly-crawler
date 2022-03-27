@@ -3,8 +3,8 @@ from typing import List, Generic, TypeVar
 from enum import Enum
 from Haestad.Support.Support import IEditLabeled, ILabeled
 
-TElementType = TypeVar("TElementType", IElement)
-TUnitsType = TypeVar("TUnitsType", IElementUnits)
+TElementType = TypeVar("TElementType")
+TUnitsType = TypeVar("TUnitsType")
 
 class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 

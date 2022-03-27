@@ -3,7 +3,6 @@ from typing import overload, Generic, Iterator
 from OpenFlows.Units import IUnit
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType, IModelingElementBase, IModelingElementsBase, IElements, IElementManager
 from enum import Enum
-from System import TypeCode
 from Haestad.Domain.ModelingObjects.Water.Enumerations import ControlTypeEnum, ControlPriorityEnum, ConditionTypeEnum, NodeAttributeEnum, TankAttributeEnum, ControlConditionPressureValveAttributeEnum, ControlConditionFCVAttributeEnum, FCVStatusEnum, ControlConditionGPVAttributeEnum, ControlConditionGPVStatusEnum, ControlConditionTCVAttributeEnum, TCVStatusEnum, HydroTankAttributeEnum, SurgeTankAttributeEnum, LogicalOperatorEnum, ControlActionTypeEnum, PumpEfficiencyTypeEnum, UnitDemandLoadTypeEnum, MinorLossTypeEnum
 from Haestad.Calculations.Pressure import SimpleConditionType, ControlConditionPumpAttribute, ControlConditionPipeAttribute, ControlConditionValveStatus, ControlActionPipeAttribute, ControlActionPipeStatus, ControlActionPumpAttribute, ControlActionPumpStatus, ControlActionTCVAttribute, ControlActionTCVStatus, ControlActionGPVAttribute, ControlActionGPVStatus, ControlActionFCVAttribute, ControlActionFCVStatus, ControlActionPressureValveAttribute, ControlActionPressureValveStatus, PatternCategory, PatternFormat, PumpDefinitionType, WallReactionOrder
 from datetime import datetime
@@ -14,63 +13,71 @@ from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElemen
 
 
 class ConditionComparisonOperator(Enum):
-	EQUALS = 0
-	GREATERTHAN = 1
-	GREATERTHANEQUAL = 2
-	LESSTHAN = 3
-	LESSTHANEQUAL = 4
-	NOTEQUAL = 5
+	Equals = 0
+	GreaterThan = 1
+	GreaterThanEqual = 2
+	LessThan = 3
+	LessThanEQual = 4
+	NotEQual = 5
 
 class PumpAttribute(Enum):
-	SETTING = 1
-	TARGETPRESSURE = 2
-	TARGETHEAD = 3
+	Setting = 1
+	TargetPressure = 2
+	TargetHead = 3
 
 class PressureValveAttribute(Enum):
-	HYDRAULICGRADE = 0
-	PRESSURE = 2
+	HydraulicGrade = 0
+	Pressure = 2
 
 class PumpConditionAttribute(Enum):
-	DISCHARGE = 0
-	SETTING = 1
+	Discharge = 0
+	Setting = 1
 
 class PressureValveConditionAttribute(Enum):
-	DISCHARGE = 0
-	SETTING = 1
+	Discharge = 0
+	Setting = 1
 
 class FCVConditionAttribute(Enum):
-	DISCHARGE = 0
-	SETTING = 1
+	Discharge = 0
+	Setting = 1
 
 class TCVConditionAttribute(Enum):
-	DISCHARGE = 0
-	SETTING = 1
+	Discharge = 0
+	Setting = 1
+
+class PumpConditionStatus(Enum):
+	On = 0
+	Off = 1
+
+class PipeConditionStatus(Enum):
+	Open = 0
+	Closed = 1
 
 class WaterComponentType(Enum):
-	PATTERN = 50
-	PUMPDEFINITION = 51
-	CONSTITUENT = 52
-	ZONE = 53
-	CONTROL = 54
-	CONTROLACTION = 55
-	CONTROLCONDITION = 56
-	CONTROLSET = 59
+	Pattern = 50
+	PumpDefinition = 51
+	Constituent = 52
+	Zone = 53
+	Control = 54
+	ControlAction = 55
+	ControlCondition = 56
+	ControlSet = 59
 	PDD = 60
-	ENERGYPRICE = 61
-	UNITDEMANDLOAD = 62
-	GPVHEADLOSS = 63
-	VALVECHARACTERISTIC = 66
-	AIRFLOWCURVE = 68
-	MINORLOSS = 101
-	UNITCARBONEMISSION = 202
-	POWERMETER = 203
-	MSXSETUP = 220
-	SCADASIGNAL = 257
+	EnergyPrice = 61
+	UnitDemandLoad = 62
+	GPVHeadloss = 63
+	ValveCharacteristic = 66
+	AirFlowCurve = 68
+	MinorLoss = 101
+	UnitCarbonEmission = 202
+	PowerMeter = 203
+	MSXSetup = 220
+	SCADASignal = 257
 
 class SCADASignalTransformMethod(Enum):
-	THRESHOLD = 0
-	RANGE = 1
-	FORMULA = 2
+	Threshold = 0
+	Range = 1
+	Formula = 2
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
 
@@ -1017,7 +1024,7 @@ class IPumpConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PumpStatus(self) -> PumpStatus:
+	def PumpStatus(self) -> PumpConditionStatus:
 		"""Pump status
 
 		Returns
@@ -1027,7 +1034,7 @@ class IPumpConditionInput(IElementConditionInput):
 		pass
 
 	@PumpStatus.setter
-	def PumpStatus(self, pumpstatus: PumpStatus) -> None:
+	def PumpStatus(self, pumpstatus: PumpConditionStatus) -> None:
 		pass
 
 class IPipeConditionInput(IElementConditionInput):
@@ -1072,7 +1079,7 @@ class IPipeConditionInput(IElementConditionInput):
 		pass
 
 	@property
-	def PipeStatus(self) -> PipeStatus:
+	def PipeStatus(self) -> PipeConditionStatus:
 		"""Pipe status
 
 		Returns
@@ -1082,7 +1089,7 @@ class IPipeConditionInput(IElementConditionInput):
 		pass
 
 	@PipeStatus.setter
-	def PipeStatus(self, pipestatus: PipeStatus) -> None:
+	def PipeStatus(self, pipestatus: PipeConditionStatus) -> None:
 		pass
 
 class IPressureValveConditionInput(IElementConditionInput):
@@ -2869,14 +2876,14 @@ class ControlExtensionMethods:
 
 	@staticmethod
 	@overload
-	def CreateCondition(conditions: IControlConditions, pump: IPump, status: PumpStatus) -> IControlCondition:
+	def CreateCondition(conditions: IControlConditions, pump: IPump, status: PumpConditionStatus) -> IControlCondition:
 		"""Create a condition for the pump using its status.
 
 		Args
 		--------
 			conditions (``IControlConditions``) :  conditions
 			pump (``IPump``) :  pump
-			status (``PumpStatus``) :  status
+			status (``PumpConditionStatus``) :  status
 
 		Returns
 		--------
@@ -2904,14 +2911,14 @@ class ControlExtensionMethods:
 
 	@staticmethod
 	@overload
-	def CreateCondition(conditions: IControlConditions, pipe: IPipe, status: PipeStatus) -> IControlCondition:
+	def CreateCondition(conditions: IControlConditions, pipe: IPipe, status: PipeConditionStatus) -> IControlCondition:
 		"""No Description
 
 		Args
 		--------
 			conditions (``IControlConditions``) :  conditions
 			pipe (``IPipe``) :  pipe
-			status (``PipeStatus``) :  status
+			status (``PipeConditionStatus``) :  status
 
 		Returns
 		--------

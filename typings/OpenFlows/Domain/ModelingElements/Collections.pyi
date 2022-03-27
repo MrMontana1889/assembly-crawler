@@ -3,8 +3,8 @@ from typing import List, Generic, Iterator, TypeVar
 from Haestad.Support.Support import SortContextCollection, FilterContextCollection
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 
-TCollectionType = TypeVar("TCollectionType", ICollection)
-TElementType = TypeVar("TElementType", ICollectionElement)
+TCollectionType = TypeVar("TCollectionType")
+TElementType = TypeVar("TElementType")
 
 class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 

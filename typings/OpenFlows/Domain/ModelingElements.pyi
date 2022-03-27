@@ -1,5 +1,4 @@
 from enum import Enum
-from System import TypeCode
 from typing import List, Dict, Generic, overload, TypeVar
 from Haestad.Support.Support import SortContextCollection, FilterContextCollection, IEditLabeled, ILabeled
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
@@ -7,27 +6,27 @@ from OpenFlows.Units import IUnit
 from array import array
 from datetime import datetime
 
-TElementType = TypeVar("TElementType", IElement)
-TElementManagerType = TypeVar("TElementManagerType", IModelingElementsBase)
-TElementTypeEnum = TypeVar("TElementTypeEnum", Enum)
-TUnitsType = TypeVar("TUnitsType", IElementUnits)
-TScenarioOptionsType = TypeVar("TScenarioOptionsType", IScenarioOptions)
-TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType", IElementUnits)
-TNetworkElementType = TypeVar("TNetworkElementType", IElement)
-TDomainElementTypeEnum = TypeVar("TDomainElementTypeEnum", Enum)
+TElementType = TypeVar("TElementType")
+TElementManagerType = TypeVar("TElementManagerType")
+TElementTypeEnum = TypeVar("TElementTypeEnum")
+TUnitsType = TypeVar("TUnitsType")
+TScenarioOptionsType = TypeVar("TScenarioOptionsType")
+TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType")
+TNetworkElementType = TypeVar("TNetworkElementType")
+TDomainElementTypeEnum = TypeVar("TDomainElementTypeEnum")
 
 class ModelingElementTypes(Enum):
-	SCENARIO = 2
-	SELECTIONSET = 7
+	Scenario = 2
+	SelectionSet = 7
 
 class ModelElementType(Enum):
-	ALL = 0
-	SCENARIO = 2
-	NETWORKELEMENT = 3
-	COMPONENTELEMENT = 4
-	OPTIONS = 5
-	SELECTIONSET = 6
-	EMBEDDEDSTICKYOBJECT = 8
+	All = 0
+	Scenario = 2
+	NetworkElement = 3
+	ComponentElement = 4
+	Options = 5
+	SelectionSet = 6
+	EmbeddedStickyObject = 8
 
 class IElementManager:
 

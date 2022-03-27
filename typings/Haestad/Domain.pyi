@@ -1,456 +1,4983 @@
-from enum import Enum
-from System import TypeCode, ICloneable
 from typing import overload, List, Dict, Iterator, Generic
-from Haestad.Support.Support import FieldDataType, HmIDCollection, FieldCollection, IEditLabeled, IField, SortContextCollection, FilterContextCollection, GeometryPoint, IEditField, ILabeled
-from Haestad.Support.Units import UnitIndex, NumericFormatter, TimeUnit, Unit, UnitSystem
+from System import ICloneable, EventHandler, EventArgs, IAsyncResult, AsyncCallback, Guid, T, IntPtr
 from array import array
-from Haestad.LicensingFacade import ILicenseProvider
+from Haestad.Support.Support import HmIDCollection, ILabeled, IField, FieldCollection, FieldDataType, IEditLabeled, SortContextCollection, FilterContextCollection, GeometryPoint, IEditField, INamable
+from Haestad.Support.User import ExceptionEventHandler, IProcessInProgress, IMessageQuestionHandler, IProgressIndicator, IProcessInProgressEx
+from enum import Enum
+from System.Runtime.Serialization import SerializationInfo, StreamingContext, ISerializable
+from Haestad.Support.Units import UnitIndex, NumericFormatter, TimeUnit, Unit, UnitSystem
+from Haestad.LicensingFacade import License, ILicenseProvider
 from datetime import datetime
-from System.Collections.Generic import T
+from System.Collections import IEnumerator, ICollection
 from Haestad.Domain import IFieldManager
 
 
 class ModelingElementType(Enum):
-	ALL = 0
-	ALTERNATIVE = 1
-	SCENARIO = 2
-	DOMAINELEMENT = 3
-	SUPPORTELEMENT = 4
-	CALCULATIONOPTIONS = 5
-	ENGINEERINGLIBRARY = 6
-	SELECTIONSET = 7
-	EMBEDDEDSTICKYOBJECT = 8
-	PROTOTYPEDOMAINELEMENT = 9
-	PROFILE = 10
+	All = 0
+	Alternative = 1
+	Scenario = 2
+	DomainElement = 3
+	SupportElement = 4
+	CalculationOptions = 5
+	EngineeringLibrary = 6
+	SelectionSet = 7
+	EmbeddedStickyObject = 8
+	PrototypeDomainElement = 9
+	Profile = 10
 
 class ReferencedElementType(Enum):
 	NONE = 0
-	DOMAINELEMENT = 1
-	SUPPORTELEMENT = 2
-	SCENARIO = 3
-	ALTERNATIVE = 4
-	SELECTIONSET = 5
+	DomainElement = 1
+	SupportElement = 2
+	Scenario = 3
+	Alternative = 4
+	SelectionSet = 5
 
 class DomainElementType(Enum):
-	MANHOLEELEMENTMANAGER = 1
-	CATCHBASINELEMENTMANAGER = 2
-	CONDUITELEMENTMANAGER = 3
-	CHANNELELEMENTMANAGER = 4
-	OUTFALLELEMENTMANAGER = 5
-	CATCHMENTELEMENTMANAGER = 6
-	PONDELEMENTMANAGER = 7
-	PONDOUTLETSTRUCTUREELEMENTMANAGER = 8
-	CROSSSECTIONNODEELEMENTMANAGER = 9
-	GUTTERLINKELEMENTMANAGER = 10
-	PUMPELEMENTMANAGER = 11
-	WETWELLELEMENTMANAGER = 12
-	PRESSUREJUNCTIONELEMENTMANAGER = 13
-	PRESSUREPIPEELEMENTMANAGER = 14
-	JUNCTIONCHAMBERELEMENTMANAGER = 15
-	BASENODEELEMENTMANAGER = 20
-	BASELINKELEMENTMANAGER = 21
-	BASEPOLYGONELEMENTMANAGER = 22
-	SCADAELEMENTMANAGER = 23
-	LATERALLINKELEMENTMANAGER = 24
-	TAPNODEELEMENTMANAGER = 26
-	BASEIDAHONODEELEMENTMANAGER = 50
-	IDAHODEMANDNODEELEMENTMANAGER = 51
-	IDAHOTANKELEMENTMANAGER = 52
-	IDAHOFIREFLOWNODEMANAGER = 53
-	IDAHOHYDRANTELEMENTMANAGER = 54
-	IDAHOJUNCTIONELEMENTMANAGER = 55
-	IDAHORESERVOIRELEMENTMANAGER = 56
-	BASEDIRECTEDNODEELEMENTMANAGER = 57
-	BASEVALVEELEMENTMANAGER = 58
-	BASEPUMP = 59
-	FCVELEMENTMANAGER = 60
-	TCVELEMENTMANAGER = 61
-	GPVELEMENTMANAGER = 62
-	PRESSUREVALVEELEMENTMANAGER = 63
-	PRVELEMENTMANAGER = 64
-	PSVELEMENTMANAGER = 65
-	PBVELEMENTMANAGER = 66
-	PUMPSTATIONELEMENTMANAGER = 67
-	STANDARDPUMPELEMENTMANAGER = 68
-	IDAHOPIPEELEMENTMANAGER = 69
-	IDAHOSPOTELEVATIONELEMENTMANAGER = 70
-	PRESSUREISOLATIONVALVEELEMENTMANAGER = 71
-	VARIABLESPEEDPUMPBATTERYELEMENTMANAGER = 72
-	CUSTOMERNODEELEMENTMANAGER = 73
-	GRAVITYSURFACESTRUCTUREELEMENTMANAGER = 100
-	GRAVITYLINKELEMENTMANAGER = 201
-	GRAVITYSTRUCTUREELEMENTMANAGER = 203
-	GRAVITYNODEELEMENTMANAGER = 204
-	PHYSICALLINKELEMENTMANAGER = 240
-	TURBINEELEMENTMANAGER = 300
-	AIRVALVEELEMENTMANAGER = 301
-	HYDROPNEUMATICTANKELEMENTMANAGER = 302
-	SAVSRVELEMENTMANAGER = 303
-	BASEORIFICE = 304
-	DISCHARGETOATMOSPHERE = 305
-	RUPTUREDISK = 306
-	ORIFICEBETWEENTWOPIPES = 307
-	SURGETANK = 308
-	CHECKVALVE = 309
-	VALVEWITHLINEARAREACHANGE = 310
-	BASETANK = 311
-	CONVENTIONALTANK = 312
-	BASEHAMMERNODE = 313
-	PERIODICHEADFLOW = 321
-	PRESSURESYSTEMNODE = 400
-	PONDROUTEELEMENTMANAGER = 500
-	GASREGULATINGVALVE = 602
-	GASPIPE = 603
-	GASNODE = 605
-	IDAHOPUMPSTATION = 700
-	LIDELEMENTMANAGER = 701
-	HEADWALL = 800
-	GRID = 801
-	BOUNDARYCONDITIONLINE2D = 803
-	BOUNDARYPOINT2D = 804
-	PROPERTYCONNECTIONELEMENTMANAGER = 810
-	BASESIMPLEPOLYLINE = 999
-	SURFACEPOINT = 1802
-	SURFACEPOLYGON = 1900
-	SURFACEPOLYLINE = 2000
-	SURFACEPROFILEPOLYLINE = 2001
-	CONFLICTNODE = 3000
-	COMMUNICATIONNODE = 3001
-	ELECTRICALNODE = 3002
-	POLNODE = 3003
-	THERMALNODE = 3004
-	WASTEWATERNODE = 3005
-	WATERNODE = 3006
-	GENERICUTILITYNODE = 3007
-	COMMUNICATIONSEGMENT = 3008
-	ELECTRICALSEGMENT = 3009
-	POLSEGMENT = 3010
-	THERMALSEGMENT = 3011
-	WASTEWATERSEGMENT = 3012
-	WATERSEGMENT = 3013
-	GASSEGMENT = 3014
-	GENERICUTILITYSEGMENT = 3015
-	STORMWATERNODE = 3016
-	STORMWATERSEGMENT = 3017
-	REFERENCEELEMENT = 3018
-
-class DomainElementSubType(Enum):
-	TWODPOLYGON_BUILDING = 901
-	TWODPOLYGON_VOIDAREA = 902
-	TWODPOLYGON_ADJUSTMENTAREA = 903
-	TWODPOLYGON_LANDUSE = 904
-	TWODPOLYGON_ROADAREA = 905
-	TWODPOLYLINE_BREAKLINE = 1001
-	TWODPOLYLINE_ROADCENTERLINE = 1002
-	TWODPOINT_REPORTINGPOINT = 8020
-	TWODPOINT_SPOTELEVATION = 8021
-	TWODPOINT_VOIDPOINT = 8022
+	ManholeElementManager = 1
+	CatchBasinElementManager = 2
+	ConduitElementManager = 3
+	ChannelElementManager = 4
+	OutfallElementManager = 5
+	CatchmentElementManager = 6
+	PondElementManager = 7
+	PondOutletStructureElementManager = 8
+	CrossSectionNodeElementManager = 9
+	GutterLinkElementManager = 10
+	PumpElementManager = 11
+	WetWellElementManager = 12
+	PressureJunctionElementManager = 13
+	PressurePipeElementManager = 14
+	JunctionChamberElementManager = 15
+	BaseNodeElementManager = 20
+	BaseLinkElementManager = 21
+	BasePolygonElementManager = 22
+	ScadaElementManager = 23
+	LateralLinkElementManager = 24
+	TapNodeElementManager = 26
+	BaseIdahoNodeElementManager = 50
+	IdahoDemandNodeElementManager = 51
+	IdahoTankElementManager = 52
+	IdahoFireFlowNodeManager = 53
+	IdahoHydrantElementManager = 54
+	IdahoJunctionElementManager = 55
+	IdahoReservoirElementManager = 56
+	BaseDirectedNodeElementManager = 57
+	BaseValveElementManager = 58
+	BasePump = 59
+	FCVElementManager = 60
+	TCVElementManager = 61
+	GPVElementManager = 62
+	PressureValveElementManager = 63
+	PRVElementManager = 64
+	PSVElementManager = 65
+	PBVElementManager = 66
+	PumpStationElementManager = 67
+	StandardPumpElementManager = 68
+	IdahoPipeElementManager = 69
+	IdahoSpotElevationElementManager = 70
+	PressureIsolationValveElementManager = 71
+	VariableSpeedPumpBatteryElementManager = 72
+	CustomerNodeElementManager = 73
+	GravitySurfaceStructureElementManager = 100
+	GravityLinkElementManager = 201
+	GravityStructureElementManager = 203
+	GravityNodeElementManager = 204
+	PhysicalLinkElementManager = 240
+	TurbineElementManager = 300
+	AirValveElementManager = 301
+	HydropneumaticTankElementManager = 302
+	SavSrvElementManager = 303
+	BaseOrifice = 304
+	DischargeToAtmosphere = 305
+	RuptureDisk = 306
+	OrificeBetweenTwoPipes = 307
+	SurgeTank = 308
+	CheckValve = 309
+	ValveWithLinearAreaChange = 310
+	BaseTank = 311
+	ConventionalTank = 312
+	BaseHammerNode = 313
+	PeriodicHeadFlow = 321
+	PressureSystemNode = 400
+	PondRouteElementManager = 500
+	GasRegulatingValve = 602
+	GasPipe = 603
+	GasNode = 605
+	IdahoPumpStation = 700
+	LIDElementManager = 701
+	Headwall = 800
+	PropertyConnectionElementManager = 810
+	ConflictNode = 3000
+	CommunicationNode = 3001
+	ElectricalNode = 3002
+	POLNode = 3003
+	ThermalNode = 3004
+	WasteWaterNode = 3005
+	WaterNode = 3006
+	GenericUtilityNode = 3007
+	CommunicationSegment = 3008
+	ElectricalSegment = 3009
+	POLSegment = 3010
+	ThermalSegment = 3011
+	WasteWaterSegment = 3012
+	WaterSegment = 3013
+	GasSegment = 3014
+	GenericUtilitySegment = 3015
+	StormWaterNode = 3016
+	StormWaterSegment = 3017
+	ReferenceElement = 3018
 
 class AlternativeType(Enum):
-	HMIDATASETGEOMETRYALTERNATIVE = 1
-	HMIDATASETTOPOLOGYALTERNATIVE = 2
-	HMIACTIVETOPOLOGYALTERNATIVE = 3
-	PHYSICALALTERNATIVE = 4
-	BOUNDARYCONDITIONALTERNATIVE = 5
-	INITIALCONDITIONALTERNATIVE = 6
-	HYDROLOGICALTERNATIVE = 7
-	OUTPUTALTERNATIVE = 8
-	DRYLOADALTERNATIVE = 9
-	RAINFALLRUNOFFALTERNATIVE = 10
-	WATERQUALITYALTERNATIVE = 11
-	SANITARYLOADINGALTERNATIVE = 12
-	INFILTRATIONANDINFLOWALTERNATIVE = 13
-	SCADAALTERNATIVE = 14
-	DEMANDALTERNATIVE = 20
-	INITIALSETTINGSALTERNATIVE = 21
-	OPERATIONALALTERNATIVE = 22
-	AGEALTERNATIVE = 23
-	CONSTITUENTALTERNATIVE = 24
-	TRACEALTERNATIVE = 25
-	FIREFLOWALTERNATIVE = 26
-	ENERGYCOSTALTERNATIVE = 28
-	PRESSUREDEPENDENTDEMANDALTERNATIVE = 29
-	CRITICALITYALTERNATIVE = 30
-	FLUSHINGALTERNATIVE = 31
-	CAPITALCOSTALTERNATIVE = 36
-	HEADLOSSALTERNATIVE = 40
-	DESIGNALTERNATIVE = 41
-	SYSTEMFLOWSALTERNATIVE = 45
-	HAMMERALTERNATIVE = 50
-	PIPEBREAKALTERNATIVE = 51
-	HMIUSERDEFINEDEXTENSIONSALTERNATIVE = 100
-	CONFLICTALTERNATIVE = 1000
-	NETWORKDATAALTERNATIVE = 1001
-	SURFACEALTERNATIVE = 1003
+	HmiDataSetGeometryAlternative = 1
+	HMIDataSetTopologyAlternative = 2
+	HMIActiveTopologyAlternative = 3
+	PhysicalAlternative = 4
+	BoundaryConditionAlternative = 5
+	InitialConditionAlternative = 6
+	HydrologicAlternative = 7
+	OutputAlternative = 8
+	DryLoadAlternative = 9
+	RainfallRunoffAlternative = 10
+	WaterQualityAlternative = 11
+	SanitaryLoadingAlternative = 12
+	InfiltrationAndInflowAlternative = 13
+	ScadaAlternative = 14
+	DemandAlternative = 20
+	InitialSettingsAlternative = 21
+	OperationalAlternative = 22
+	AgeAlternative = 23
+	ConstituentAlternative = 24
+	TraceAlternative = 25
+	FireFlowAlternative = 26
+	EnergyCostAlternative = 28
+	PressureDependentDemandAlternative = 29
+	CriticalityAlternative = 30
+	FlushingAlternative = 31
+	CapitalCostAlternative = 36
+	HeadlossAlternative = 40
+	DesignAlternative = 41
+	SystemFlowsAlternative = 45
+	HammerAlternative = 50
+	PipeBreakAlternative = 51
+	HMIUserDefinedExtensionsAlternative = 100
+	ConflictAlternative = 1000
+	NetworkDataAlternative = 1001
 
 class SupportElementType(Enum):
-	CATALOGPIPEELEMENTMANAGER = 1
-	COMPOSITEOUTLETSTRUCTUREELEMENTMANAGER = 2
-	PROFILEELEMENTMANAGER = 3
-	POLLUTANTELEMENTMANAGER = 4
-	AQUIFERSELEMENTMANAGER = 5
-	CONTROLSETELEMENTMANAGER = 6
-	LANDUSEELEMENTMANAGER = 8
-	CONTROLSTRUCTUREELEMENTELEMENTMANAGER = 9
-	STORMEVENTELEMENTMANAGER = 10
-	PATTERNELEMENTMANAGER = 11
-	EXTREMEFLOWFACTORELEMENTMANAGER = 12
-	UNITSANITARYLOADELEMENTMANAGER = 13
-	EXTREMEFLOWSETUPELEMENTMANAGER = 14
-	PATTERNSETUPELEMENTMANAGER = 15
-	DIMENSIONLESSUNITHYDROGRAPHELEMENTMANAGER = 16
-	RTKSETELEMENTMANAGER = 17
-	PROTOTYPEMANAGER = 18
-	POLLUTOGRAPHELEMENTMANAGER = 19
-	CATALOGGUTTER = 20
-	LIDCONTROL = 21
-	TIMESERIESCONTROLDATAMANAGER = 22
-	IDAHOPATTERNELEMENTMANAGER = 50
-	IDAHOPUMPDEFINITIONELEMENTMANAGER = 51
-	IDAHOCONSTITUENTELEMENTMANAGER = 52
-	ZONEELEMENTMANAGER = 53
-	IDAHOCONTROLELEMENTMANAGER = 54
-	IDAHOCONTROLACTIONELEMENTMANAGER = 55
-	IDAHOCONTROLCONDITIONELEMENTMANAGER = 56
-	IDAHOLOGICALCONTROLSETELEMENTMANAGER = 59
-	PRESSUREDEPENDENTDEMANDFUNCTIONELEMENTMANAGER = 60
-	ENERGYPRICINGELEMENTMANAGER = 61
-	UNITDEMANDLOADELEMENTMANAGER = 62
-	GPVHEADLOSSCURVEELEMENTMANAGER = 63
-	CRITICALITYSTUDYGROUPELEMENTMANAGER = 64
-	CRITICALITYSTUDYELEMENTMANAGER = 65
-	VALVECHARACTERISTICSELEMENTMANAGER = 66
-	FLUSHINGEVENTELEMENTMANAGER = 67
-	AIRFLOWCURVEMANAGER = 68
-	CHECKVALVEDYNAMICCHARACTERISTICSCURVEMANAGER = 69
-	MINORLOSSCOEFFICIENTELEMENTMANAGER = 101
-	TIMESERIESELEMENTMANAGER = 102
-	INLETELEMENTMANAGER = 103
-	GENERICHEADLOSSELEMENTMANAGER = 104
-	STORMEVENTGROUP = 105
-	CATALOGCONDUITELEMENTMANAGER = 106
-	SCSCNVOLUMEELEMENTMANAGER = 107
-	TR55GRAPHICALPEAKSTORAGE = 108
-	FIRSTFLUSHCALCULATOR = 109
-	WEIRDEPTHCOEFFICIENTMANAGER = 111
-	WEIRSUBMERGENCEMANAGER = 112
-	HYDROGRAPHMANAGER = 113
-	TR55TABULARHYDROGRAPH = 114
-	MINDRAINTIME = 115
-	PEAKFLOWESTIMATEDSTORAGE = 116
-	EQTWTABLEELEMENTMANAGER = 117
-	QQPTEMPLATEELEMENTMANAGER = 118
-	OVERLAYHYDROGRAPH = 119
-	RATIONALMETHODQPEAK = 120
-	PONDMAKER = 121
-	STORAGECHAMBER = 124
-	VORTEXVALVE = 125
-	GENERICUNITHYDROGRAPH = 126
-	MAINSCOREASPECT = 150
-	MAINSCORE = 151
-	PIPEBREAKGROUP = 152
-	PIPEBREAKANALYSIS = 153
-	FLUSHINGSTUDY = 175
-	FLUSHINGAREA = 176
-	FLUSHINGREPORTVIEW = 177
-	CULVERTINLETCOEFFICIENTS = 180
-	PRESSUREZONESTUDYGROUPELEMENTMANAGER = 200
-	PRESSUREZONESTUDYELEMENTMANAGER = 201
-	UNITCARBONEMISSIONS = 202
-	POWERMETER = 203
-	ENERGYAGGREGATIONSTUDY = 204
-	MSXSETUP = 220
-	SNOWPACK = 250
-	SWMMRTKUNITHYDROGRAPHSET = 251
-	PUMPSTATION = 252
-	SCADADATASOURCE = 256
-	SCADASIGNAL = 257
-	ALERTMESSAGE = 260
-	SCADACONNECTSIMULATOR = 261
-	OPCPUBLISHINGRESULT = 262
-	PERFORMANCESTUDY = 263
-	DISTRICTMETERAREA = 265
-	GASPIPETYPE = 300
-	GASCUSTOMER = 301
-	TWODDATASOURCE = 350
-	DIGITALTERRAINMODEL = 351
-	DIGITALTERRAINMODELGROUP = 352
-	LANDCOVER = 353
+	CatalogPipeElementManager = 1
+	CompositeOutletStructureElementManager = 2
+	ProfileElementManager = 3
+	PollutantElementManager = 4
+	AquifersElementManager = 5
+	ControlSetElementManager = 6
+	LandUseElementManager = 8
+	ControlStructureElementElementManager = 9
+	StormEventElementManager = 10
+	PatternElementManager = 11
+	ExtremeFlowFactorElementManager = 12
+	UnitSanitaryLoadElementManager = 13
+	ExtremeFlowSetupElementManager = 14
+	PatternSetupElementManager = 15
+	DimensionlessUnitHydrographElementManager = 16
+	RTKSetElementManager = 17
+	PrototypeManager = 18
+	PollutographElementManager = 19
+	CatalogGutter = 20
+	LIDControl = 21
+	TimeSeriesControlDataManager = 22
+	IdahoPatternElementManager = 50
+	IdahoPumpDefinitionElementManager = 51
+	IdahoConstituentElementManager = 52
+	ZoneElementManager = 53
+	IdahoControlElementManager = 54
+	IdahoControlActionElementManager = 55
+	IdahoControlConditionElementManager = 56
+	IdahoLogicalControlSetElementManager = 59
+	PressureDependentDemandFunctionElementManager = 60
+	EnergyPricingElementManager = 61
+	UnitDemandLoadElementManager = 62
+	GpvHeadlossCurveElementManager = 63
+	CriticalityStudyGroupElementManager = 64
+	CriticalityStudyElementManager = 65
+	ValveCharacteristicsElementManager = 66
+	FlushingEventElementManager = 67
+	AirFlowCurveManager = 68
+	CheckValveDynamicCharacteristicsCurveManager = 69
+	MinorLossCoefficientElementManager = 101
+	TimeSeriesElementManager = 102
+	InletElementManager = 103
+	GenericHeadlossElementManager = 104
+	StormEventGroup = 105
+	CatalogConduitElementManager = 106
+	SCSCNVolumeElementManager = 107
+	TR55GraphicalPeakStorage = 108
+	FirstFlushCalculator = 109
+	WeirDepthCoefficientManager = 111
+	WeirSubmergenceManager = 112
+	HydrographManager = 113
+	TR55TabularHydrograph = 114
+	MinDrainTime = 115
+	PeakFlowEstimatedStorage = 116
+	EQTWTableElementManager = 117
+	QqpTemplateElementManager = 118
+	OverlayHydrograph = 119
+	RationalMethodQPeak = 120
+	PondMaker = 121
+	StorageChamber = 124
+	VortexValve = 125
+	GenericUnitHydrograph = 126
+	MainScoreAspect = 150
+	MainScore = 151
+	PipeBreakGroup = 152
+	PipeBreakAnalysis = 153
+	FlushingStudy = 175
+	FlushingArea = 176
+	FlushingReportView = 177
+	CulvertInletCoefficients = 180
+	PressureZoneStudyGroupElementManager = 200
+	PressureZoneStudyElementManager = 201
+	UnitCarbonEmissions = 202
+	PowerMeter = 203
+	EnergyAggregationStudy = 204
+	MSXSetup = 220
+	SnowPack = 250
+	SWMMRTKUnitHydrographSet = 251
+	PumpStation = 252
+	ScadaDataSource = 256
+	ScadaSignal = 257
+	AlertMessage = 260
+	SCADAConnectSimulator = 261
+	OPCPublishingResult = 262
+	PerformanceStudy = 263
+	DistrictMeterArea = 265
+	GasPipeType = 300
+	GasCustomer = 301
 
 class DomainElementShapeType(Enum):
-	POINT = 0
-	POLYLINE = 1
-	POLYGON = 2
-	DIRECTEDNODE = 3
-	REFERENCENODE = 4
-	LATERAL = 5
-	SIMPLEPOLYLINE = 6
+	Point = 0
+	Polyline = 1
+	Polygon = 2
+	DirectedNode = 3
+	ReferenceNode = 4
+	Lateral = 5
 
 class wkbByteOrder(Enum):
-	WKBXDR = 0
-	WKBNDR = 1
+	wkbXDR = 0
+	wkbNDR = 1
 
 class wkbGeometryType(Enum):
-	WKBPOINT = 1
-	WKBLINESTRING = 2
-	WKBPOLYGON = 3
-	WKBMULTIPOINT = 4
-	WKBMULTILINESTRING = 5
-	WKBMULTIPOLYGON = 6
-	WKBGEOMETRYCOLLECTION = 7
+	wkbPoint = 1
+	wkbLineString = 2
+	wkbPolygon = 3
+	wkbMultiPoint = 4
+	wkbMultiLineString = 5
+	wkbMultiPolygon = 6
+	wkbGeometryCollection = 7
 
 class StandardFieldType(Enum):
-	LABEL = 0
-	NOTES = 1
+	Label = 0
+	Notes = 1
 
 class ConnectionType(Enum):
-	JET4PT0 = 1
-	SQLITE = 2
+	Jet4pt0 = 1
+	Sqlite = 2
 
 class ConnectionProperty(Enum):
-	FILENAME = 1
-	CONNECTIONTYPE = 2
-	DATABASEPASSWORD = 3
-	JETWORKSPACEUSERNAME = 4
-	JETWORKSPACEPASSWORD = 5
-	ENABLESCHEMAUPDATE = 6
-	SHOULDUPDATECOUNTERS = 7
-	ENABLECORESCHEMAUPDATE = 8
-	CHECKSUCCESSFULCLOSEFLAG = 9
+	FileName = 1
+	ConnectionType = 2
+	DatabasePassword = 3
+	JetWorkspaceUserName = 4
+	JetWorkspacePassword = 5
+	EnableSchemaUpdate = 6
+	ShouldUpdateCounters = 7
+	EnableCoreSchemaUpdate = 8
+	CheckSuccessfulCloseFlag = 9
 
 class SelectionSetType(Enum):
-	STANDARD = 1
-	PROFILE = 2
+	Standard = 1
+	Profile = 2
 
 class FlowDirection(Enum):
-	NOFLOW = 0
-	POSITIVE = 1
-	NEGATIVE = -1
+	NoFlow = 0
+	Positive = 1
+	Negative = -1
 
 class DomainFieldType(Enum):
-	MODELINGELEMENTFIELD = 1
-	SUPPORTELEMENTFIELD = 2
-	DOMAINELEMENTFIELD = 3
-	RESULTFIELD = 4
-	ALTERNATIVEFIELD = 5
-	SYSTEMRECORDFIELD = 6
+	ModelingElementField = 1
+	SupportElementField = 2
+	DomainElementField = 3
+	ResultField = 4
+	AlternativeField = 5
+	SystemRecordField = 6
 
 class ReferenceCardinality(Enum):
-	ONETOMANY = 0
-	ONETOONE = 1
+	OneToMany = 0
+	OneToOne = 1
 
 class NumericalEngineType(Enum):
-	EPANET = 1
-	GVFENGINE = 2
+	EpaNET = 1
+	GVFEngine = 2
 
 class StatisticType(Enum):
-	MINIMUM = 1
-	MAXIMUM = 2
-	MEAN = 3
-	SUM = 4
-	COUNT = 5
-	STANDARDDEVIATION = 6
-	AREAUNDERCURVE = 7
+	Minimum = 1
+	Maximum = 2
+	Mean = 3
+	Sum = 4
+	Count = 5
+	StandardDeviation = 6
+	AreaUnderCurve = 7
 
 class BulkOperationType(Enum):
 	NONE = 0
-	INSERT = 1
-	LOAD = 2
+	Insert = 1
+	Load = 2
 
 class StoredQueryType(Enum):
-	VIEW = 0
-	STOREDPROCEDURE = 1
+	View = 0
+	StoredProcedure = 1
 
 class CompactOperationTask(Enum):
-	ALL = 0
-	PURGEDELETEDROWS = 1
-	REFRESHBOUNDINGBOX = 2
-	REFRESHCACHEDMANAGERCOUNTS = 3
-	REFRESHCACHEDGEOMETRYPROPERTIES = 4
-	REFRESHREFERENCENODECACHESONLY = 5
-	REFRESHCACHEDCOLLECTIONCOUNTS = 6
-	REFRESHCACHEDSMARTLABELS = 7
-	VERIFYVISUALLINKCONNECTIVITY = 8
-	PURGEDELETEDGISIDS = 9
-	PURGEDATAROWSFROMGISIDSMARKEDASDELETED = 10
-	VERIFYSELECTIONSETSTHOROUGHLY = 11
-	REFRESHCACHEDALTERNATIVELEVELS = 12
-	WATERREFRESHCACHEDUNITDEMANDBASEFLOW = 13
-	WATERREFRESHCACHEDMINORLOSSES = 14
+	All = 0
+	PurgeDeletedRows = 1
+	RefreshBoundingBox = 2
+	RefreshCachedManagerCounts = 3
+	RefreshCachedGeometryProperties = 4
+	RefreshReferenceNodeCachesOnly = 5
+	RefreshCachedCollectionCounts = 6
+	RefreshCachedSmartLabels = 7
+	VerifyVisualLinkConnectivity = 8
+	PurgeDeletedGISIDs = 9
+	PurgeDataRowsFromGISIDsMarkedAsDeleted = 10
+	VerifySelectionSetsThoroughly = 11
+	RefreshCachedAlternativeLevels = 12
+	WaterRefreshCachedUnitDemandBaseFlow = 13
+	WaterRefreshCachedMinorlosses = 14
 
 class ExpressionType(Enum):
 	NONE = 0
-	ECEXPRESSIONS = 1
+	ECExpressions = 1
 
 class FieldUpdateTypeEnum(Enum):
-	NOCHANGE = 0
-	CHANGE = 1
-	ELIMINATED = 2
+	NoChange = 0
+	Change = 1
+	Eliminated = 2
 
 class ExternalIDType(Enum):
-	PERSISTENTELEMENTPATH = 1
+	PersistentElementPath = 1
 
 class PressureZoneValveStatusEnum(Enum):
-	ALWAYSUSE = 0
-	USEWHENCLOSED = 1
-	DONOTUSE = 2
-	USEWHENACTIVE = 3
-	USEWHENCLOSEDORACTIVE = 4
+	AlwaysUse = 0
+	UseWhenClosed = 1
+	DoNotUse = 2
+	UseWhenActive = 3
+	UseWhenClosedOrActive = 4
 
 class PressureZonePipeStatusEnum(Enum):
-	USEWHENCLOSEDCHECKVALVE = 0
-	USEWHENCLOSED = 1
-	DONOTUSE = 2
+	UseWhenClosedCheckValve = 0
+	UseWhenClosed = 1
+	DoNotUse = 2
 
 class PressureZonePumpStatusEnum(Enum):
-	ALWAYSUSE = 0
-	DONOTUSE = 1
+	AlwaysUse = 0
+	DoNotUse = 1
 
 class PressureZoneCheckValveStatusEnum(Enum):
-	ALWAYSUSE = 0
-	DONOTUSE = 2
+	AlwaysUse = 0
+	DoNotUse = 2
 
 class PressureZoneOrificeBetweenPipesStatusEnum(Enum):
-	ALWAYSUSE = 0
-	DONOTUSE = 1
+	AlwaysUse = 0
+	DoNotUse = 1
 
 class UseInPressureZoneTraceEnum(Enum):
-	PZTRACEALWAYSUSETYPE = 0
-	PZTRACEUSEWHENCLOSEDTYPE = 1
-	PZTRACEUSEWHENCLOSEDCHECKVALVETYPE = 2
-	PZTRACEDONOTUSETYPE = 3
-	PZTRACEUSEWHENACTIVETYPE = 4
-	PZTRACEUSEWHENCLOSEDORACTIVETYPE = 5
+	PzTraceAlwaysUseType = 0
+	PzTraceUseWhenClosedType = 1
+	PzTraceUseWhenClosedCheckValveType = 2
+	PzTraceDoNotUseType = 3
+	PzTraceUseWhenActiveType = 4
+	PzTraceUseWhenClosedOrActiveType = 5
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
+
+class AlternativeTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``AlternativeTypeCollection``) :  c
+			a (``List[IAlternativeType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``AlternativeTypeCollection``) :  c
+			a (``List[IAlternativeType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: AlternativeTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``AlternativeTypeCollection``) :  c
+			a (``List[IAlternativeType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IAlternativeType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``AlternativeTypeCollection``) :  c
+			a (``List[IAlternativeType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: AlternativeTypeCollection) -> AlternativeTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``AlternativeTypeCollection``) :  list
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: AlternativeTypeCollection) -> AlternativeTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``AlternativeTypeCollection``) :  list
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IAlternativeType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IAlternativeType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IAlternativeType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IAlternativeType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IAlternativeType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IAlternativeType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IAlternativeType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IAlternativeType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IAlternativeType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IAlternativeType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IAlternativeType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IAlternativeType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IAlternativeType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IAlternativeType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IAlternativeTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IAlternativeTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: AlternativeTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``AlternativeTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IAlternativeType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IAlternativeType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IAlternativeType:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IAlternativeType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``AlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class AssemblyLibrary:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@staticmethod
+	def GetAssembly(assemblyName: str, domainPath: str) -> Assembly:
+		"""No Description
+
+		Args
+		--------
+			assemblyName (``str``) :  assemblyName
+			domainPath (``str``) :  domainPath
+
+		Returns
+		--------
+			``Assembly`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetSolverAssembly(assemblyName: str, domainPath: str) -> Assembly:
+		"""No Description
+
+		Args
+		--------
+			assemblyName (``str``) :  assemblyName
+			domainPath (``str``) :  domainPath
+
+		Returns
+		--------
+			``Assembly`` : 
+		"""
+		pass
+
+class FieldTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldTypeCollection``) :  c
+			a (``List[IFieldType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldTypeCollection``) :  c
+			a (``List[IFieldType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: FieldTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldTypeCollection``) :  c
+			a (``List[IFieldType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IFieldType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``FieldTypeCollection``) :  c
+			a (``List[IFieldType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: FieldTypeCollection) -> FieldTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``FieldTypeCollection``) :  list
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: FieldTypeCollection) -> FieldTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``FieldTypeCollection``) :  list
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IFieldType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IFieldType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IFieldType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IFieldType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IFieldType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IFieldType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IFieldType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IFieldType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IFieldType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IFieldType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IFieldType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IFieldType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IFieldType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IFieldType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IFieldTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IFieldTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: FieldTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``FieldTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IFieldType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IFieldType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IFieldType:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IFieldType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``FieldTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class CompactOperationContext:
+
+	def __init__(self, tasks: List[CompactOperationTask]) -> None:
+		"""No Description
+
+		Args
+		--------
+			tasks (``List[CompactOperationTask]``) :  tasks
+		"""
+		pass
+
+	def AddTask(self, task: CompactOperationTask) -> None:
+		"""No Description
+
+		Args
+		--------
+			task (``CompactOperationTask``) :  task
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveTask(self, task: CompactOperationTask) -> None:
+		"""No Description
+
+		Args
+		--------
+			task (``CompactOperationTask``) :  task
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, task: CompactOperationTask) -> bool:
+		"""No Description
+
+		Args
+		--------
+			task (``CompactOperationTask``) :  task
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	@property
+	def Tasks(self) -> List[CompactOperationTask]:
+		"""No Description
+
+		Returns
+		--------
+			``CompactOperationContext`` : 
+		"""
+		pass
+
+class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
+
+	@overload
+	def __init__(self, dataView: DataView) -> None:
+		"""No Description
+
+		Args
+		--------
+			dataView (``DataView``) :  dataView
+			dataView (``DataView``) :  dataView
+			fieldIndex (``int``) :  fieldIndex
+		"""
+		pass
+
+	@overload
+	def __init__(self, dataView: DataView, fieldIndex: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			dataView (``DataView``) :  dataView
+			dataView (``DataView``) :  dataView
+			fieldIndex (``int``) :  fieldIndex
+		"""
+		pass
+
+	def Dispose(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int], startInTarget: int, startInSource: int, length: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+			startInTarget (``int``) :  startInTarget
+			startInSource (``int``) :  startInSource
+			length (``int``) :  length
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: int) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``int``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IHmIDCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IHmIDCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: HmIDCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``HmIDCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array[int]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``array[int]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Sort(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def ReverseInPlace(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def ToArray(self) -> array[int]:
+		"""No Description
+
+		Returns
+		--------
+			``array[int]`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: int) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DataViewDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class DomainDataSetCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetCollection``) :  c
+			a (``List[IDomainDataSet]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetCollection``) :  c
+			a (``List[IDomainDataSet]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: DomainDataSetCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetCollection``) :  c
+			a (``List[IDomainDataSet]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IDomainDataSet]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetCollection``) :  c
+			a (``List[IDomainDataSet]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: DomainDataSetCollection) -> DomainDataSetCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``DomainDataSetCollection``) :  list
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: DomainDataSetCollection) -> DomainDataSetCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``DomainDataSetCollection``) :  list
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSet]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSet]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSet], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSet]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IDomainDataSet) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSet``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IDomainDataSet) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSet``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IDomainDataSet) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSet``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IDomainDataSet) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IDomainDataSet``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IDomainDataSet) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSet``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainDataSetCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainDataSetCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainDataSetCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainDataSetCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainDataSet]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainDataSet]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainDataSet:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainDataSet) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class DomainDataSetTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetTypeCollection``) :  c
+			a (``List[IDomainDataSetType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetTypeCollection``) :  c
+			a (``List[IDomainDataSetType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: DomainDataSetTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetTypeCollection``) :  c
+			a (``List[IDomainDataSetType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IDomainDataSetType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainDataSetTypeCollection``) :  c
+			a (``List[IDomainDataSetType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: DomainDataSetTypeCollection) -> DomainDataSetTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``DomainDataSetTypeCollection``) :  list
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: DomainDataSetTypeCollection) -> DomainDataSetTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``DomainDataSetTypeCollection``) :  list
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSetType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSetType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSetType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSetType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IDomainDataSetType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSetType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IDomainDataSetType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSetType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IDomainDataSetType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSetType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IDomainDataSetType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IDomainDataSetType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IDomainDataSetType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainDataSetType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainDataSetTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainDataSetTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainDataSetTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainDataSetTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainDataSetType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainDataSetType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainDataSetType:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainDataSetType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class DomainElementTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainElementTypeCollection``) :  c
+			a (``List[IDomainElementType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainElementTypeCollection``) :  c
+			a (``List[IDomainElementType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: DomainElementTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainElementTypeCollection``) :  c
+			a (``List[IDomainElementType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IDomainElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``DomainElementTypeCollection``) :  c
+			a (``List[IDomainElementType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: DomainElementTypeCollection) -> DomainElementTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``DomainElementTypeCollection``) :  list
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: DomainElementTypeCollection) -> DomainElementTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``DomainElementTypeCollection``) :  list
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainElementType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainElementType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainElementType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IDomainElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainElementType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IDomainElementType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainElementType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IDomainElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainElementType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IDomainElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IDomainElementType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IDomainElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IDomainElementType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainElementTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainElementTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainElementTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainElementTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainElementType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainElementType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainElementType:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainElementType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class DomainElementTypeLibrary:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	def GetConcreteDomainElementTypeIDs(domainDataSetType: IDomainDataSetType, baseDomainElementTypeIDs: HmIDCollection) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSetType (``IDomainDataSetType``) :  domainDataSetType
+			baseDomainElementTypeIDs (``HmIDCollection``) :  baseDomainElementTypeIDs
+
+		Returns
+		--------
+			``HmIDCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetSubtypeIds(domainDataSet: IDomainDataSet, elementTypeId: int, includeBaseTypes: bool) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			elementTypeId (``int``) :  elementTypeId
+			includeBaseTypes (``bool``) :  includeBaseTypes
+
+		Returns
+		--------
+			``HmIDCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetOrderIndex(domainDataSetType: IDomainDataSetType, domainElementTypeID: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			domainDataSetType (``IDomainDataSetType``) :  domainDataSetType
+			domainElementTypeID (``int``) :  domainElementTypeID
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetOrderedDomainElementTypeIDs(domainDataSetType: IDomainDataSetType, domainElementTypeIDs: HmIDCollection) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSetType (``IDomainDataSetType``) :  domainDataSetType
+			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+
+		Returns
+		--------
+			``HmIDCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetOrderedDomainElementTypes(domainDataSet: IDomainDataSet) -> DomainElementTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetOrderedDomainElementTypes(domainDataSet: IDomainDataSet, includeBaseTypes: bool) -> DomainElementTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			includeBaseTypes (``bool``) :  includeBaseTypes
+
+		Returns
+		--------
+			``DomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetOrderedDomainElementTypeIDs(domainDataSet: IDomainDataSet) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+
+		Returns
+		--------
+			``HmIDCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetOrderedDomainElementTypeIDs(domainDataSet: IDomainDataSet, includeBaseTypes: bool) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			includeBaseTypes (``bool``) :  includeBaseTypes
+
+		Returns
+		--------
+			``HmIDCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def UpdateElementTypeID(originalElementTypeID: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			originalElementTypeID (``int``) :  originalElementTypeID
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@staticmethod
+	def UpdateSupportElementTypeID(originalElementTypeID: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			originalElementTypeID (``int``) :  originalElementTypeID
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+class EngineProgressAdapterBase(IProcessInProgress):
+
+	def __init__(self, numericalEngine: INumericalEngine) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def add_ProcessFailed(self, value: ExceptionEventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``ExceptionEventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def remove_ProcessFailed(self, value: ExceptionEventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``ExceptionEventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def add_ProcessUpdated(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``EventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def remove_ProcessUpdated(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``EventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def add_ProcessFinished(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``EventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def remove_ProcessFinished(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``EventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def add_ProcessStarted(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``EventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def remove_ProcessStarted(self, value: EventHandler) -> None:
+		"""No Description
+
+		Args
+		--------
+			value (``EventHandler``) :  value
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def CancelProcess(self, sender: object, e: EventArgs) -> None:
+		"""No Description
+
+		Args
+		--------
+			sender (``object``) :  sender
+			e (``EventArgs``) :  e
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def AllowCancel(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``EngineProgressAdapterBase`` : 
+		"""
+		pass
+
+	@property
+	def ProgressValue(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``EngineProgressAdapterBase`` : 
+		"""
+		pass
+
+	@ProgressValue.setter
+	def ProgressValue(self, progressvalue: int) -> None:
+		pass
+
+	@property
+	def ProgressDescription(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``EngineProgressAdapterBase`` : 
+		"""
+		pass
+
+	@ProgressDescription.setter
+	def ProgressDescription(self, progressdescription: str) -> None:
+		pass
+
+	@property
+	def Name(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``EngineProgressAdapterBase`` : 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``EngineProgressAdapterBase`` : 
+		"""
+		pass
+
+class CalculationStepEventHandler(ICloneable, ISerializable):
+
+	def __init__(self, object: object, method: IntPtr) -> None:
+		"""No Description
+
+		Args
+		--------
+			object (``object``) :  object
+			method (``IntPtr``) :  method
+		"""
+		pass
+
+	def Invoke(self, sender: object, e: CalculationStepEventArgs) -> None:
+		"""No Description
+
+		Args
+		--------
+			sender (``object``) :  sender
+			e (``CalculationStepEventArgs``) :  e
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def BeginInvoke(self, sender: object, e: CalculationStepEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult:
+		"""No Description
+
+		Args
+		--------
+			sender (``object``) :  sender
+			e (``CalculationStepEventArgs``) :  e
+			callback (``AsyncCallback``) :  callback
+			object (``object``) :  object
+
+		Returns
+		--------
+			``IAsyncResult`` : 
+		"""
+		pass
+
+	def EndInvoke(self, result: IAsyncResult) -> None:
+		"""No Description
+
+		Args
+		--------
+			result (``IAsyncResult``) :  result
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetInvocationList(self) -> List[Delegate]:
+		"""No Description
+
+		Returns
+		--------
+			``List[Delegate]`` : 
+		"""
+		pass
+
+	def DynamicInvoke(self, args: List[object]) -> object:
+		"""No Description
+
+		Args
+		--------
+			args (``List[object]``) :  args
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	@property
+	def Method(self) -> MethodInfo:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepEventHandler`` : 
+		"""
+		pass
+
+	@property
+	def Target(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepEventHandler`` : 
+		"""
+		pass
+
+class CalculationStepProgressEventHandler(ICloneable, ISerializable):
+
+	def __init__(self, object: object, method: IntPtr) -> None:
+		"""No Description
+
+		Args
+		--------
+			object (``object``) :  object
+			method (``IntPtr``) :  method
+		"""
+		pass
+
+	def Invoke(self, sender: object, e: CalculationStepProgressEventArgs) -> None:
+		"""No Description
+
+		Args
+		--------
+			sender (``object``) :  sender
+			e (``CalculationStepProgressEventArgs``) :  e
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def BeginInvoke(self, sender: object, e: CalculationStepProgressEventArgs, callback: AsyncCallback, object: object) -> IAsyncResult:
+		"""No Description
+
+		Args
+		--------
+			sender (``object``) :  sender
+			e (``CalculationStepProgressEventArgs``) :  e
+			callback (``AsyncCallback``) :  callback
+			object (``object``) :  object
+
+		Returns
+		--------
+			``IAsyncResult`` : 
+		"""
+		pass
+
+	def EndInvoke(self, result: IAsyncResult) -> None:
+		"""No Description
+
+		Args
+		--------
+			result (``IAsyncResult``) :  result
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetInvocationList(self) -> List[Delegate]:
+		"""No Description
+
+		Returns
+		--------
+			``List[Delegate]`` : 
+		"""
+		pass
+
+	def DynamicInvoke(self, args: List[object]) -> object:
+		"""No Description
+
+		Args
+		--------
+			args (``List[object]``) :  args
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	@property
+	def Method(self) -> MethodInfo:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepProgressEventHandler`` : 
+		"""
+		pass
+
+	@property
+	def Target(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepProgressEventHandler`` : 
+		"""
+		pass
+
+class CalculationStepEventArgs(ILabeled):
+
+	def __init__(self, label: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			label (``str``) :  label
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepEventArgs`` : 
+		"""
+		pass
+
+class CalculationStepProgressEventArgs(ILabeled):
+
+	def __init__(self, progress: int, label: str, cancel: bool) -> None:
+		"""No Description
+
+		Args
+		--------
+			progress (``int``) :  progress
+			label (``str``) :  label
+			cancel (``bool``) :  cancel
+		"""
+		pass
+
+	def UpdateState(self, label: str, progress: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			label (``str``) :  label
+			progress (``int``) :  progress
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Progress(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepProgressEventArgs`` : 
+		"""
+		pass
+
+	@property
+	def Label(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepProgressEventArgs`` : 
+		"""
+		pass
+
+	@property
+	def Cancel(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``CalculationStepProgressEventArgs`` : 
+		"""
+		pass
+
+	@Cancel.setter
+	def Cancel(self, cancel: bool) -> None:
+		pass
+
+class ScenarioCalculationEventArgs:
+
+	def __init__(self, scenarioId: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			scenarioId (``int``) :  scenarioId
+		"""
+		pass
+
+	@property
+	def ScenarioID(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ScenarioCalculationEventArgs`` : 
+		"""
+		pass
+
+class PossibleCorruptedDatabaseException(ISerializable, _Exception):
+
+	def __init__(self, message: str, corruptedFileName: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			message (``str``) :  message
+			corruptedFileName (``str``) :  corruptedFileName
+		"""
+		pass
+
+	def GetBaseException(self) -> Exception:
+		"""No Description
+
+		Returns
+		--------
+			``Exception`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def CorruptedFileName(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@property
+	def Message(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@property
+	def Data(self) -> Dict:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@property
+	def InnerException(self) -> Exception:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@property
+	def TargetSite(self) -> MethodBase:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@property
+	def StackTrace(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@property
+	def HelpLink(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@HelpLink.setter
+	def HelpLink(self, helplink: str) -> None:
+		pass
+
+	@property
+	def Source(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@Source.setter
+	def Source(self, source: str) -> None:
+		pass
+
+	@property
+	def HResult(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``PossibleCorruptedDatabaseException`` : 
+		"""
+		pass
+
+	@HResult.setter
+	def HResult(self, hresult: int) -> None:
+		pass
+
+class CancelledDatabaseOpenException(ISerializable, _Exception):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def GetBaseException(self) -> Exception:
+		"""No Description
+
+		Returns
+		--------
+			``Exception`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def ErrorCode(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@property
+	def Message(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@property
+	def Data(self) -> Dict:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@property
+	def InnerException(self) -> Exception:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@property
+	def TargetSite(self) -> MethodBase:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@property
+	def StackTrace(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@property
+	def HelpLink(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@HelpLink.setter
+	def HelpLink(self, helplink: str) -> None:
+		pass
+
+	@property
+	def Source(self) -> str:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@Source.setter
+	def Source(self, source: str) -> None:
+		pass
+
+	@property
+	def HResult(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``CancelledDatabaseOpenException`` : 
+		"""
+		pass
+
+	@HResult.setter
+	def HResult(self, hresult: int) -> None:
+		pass
+
+class FieldDescriptor:
+
+	def __init__(self, type: DomainFieldType, name: str, descriptor1: str, descriptor2: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			type (``DomainFieldType``) :  type
+			name (``str``) :  name
+			descriptor1 (``str``) :  descriptor1
+			descriptor2 (``str``) :  descriptor2
+		"""
+		pass
+
+class FieldDescriptorFilterCallback(ICloneable, ISerializable):
+
+	def __init__(self, object: object, method: IntPtr) -> None:
+		"""No Description
+
+		Args
+		--------
+			object (``object``) :  object
+			method (``IntPtr``) :  method
+		"""
+		pass
+
+	def Invoke(self, descriptor: FieldDescriptor) -> bool:
+		"""No Description
+
+		Args
+		--------
+			descriptor (``FieldDescriptor``) :  descriptor
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def BeginInvoke(self, descriptor: FieldDescriptor, callback: AsyncCallback, object: object) -> IAsyncResult:
+		"""No Description
+
+		Args
+		--------
+			descriptor (``FieldDescriptor``) :  descriptor
+			callback (``AsyncCallback``) :  callback
+			object (``object``) :  object
+
+		Returns
+		--------
+			``IAsyncResult`` : 
+		"""
+		pass
+
+	def EndInvoke(self, result: IAsyncResult) -> bool:
+		"""No Description
+
+		Args
+		--------
+			result (``IAsyncResult``) :  result
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetInvocationList(self) -> List[Delegate]:
+		"""No Description
+
+		Returns
+		--------
+			``List[Delegate]`` : 
+		"""
+		pass
+
+	def DynamicInvoke(self, args: List[object]) -> object:
+		"""No Description
+
+		Args
+		--------
+			args (``List[object]``) :  args
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	@property
+	def Method(self) -> MethodInfo:
+		"""No Description
+
+		Returns
+		--------
+			``FieldDescriptorFilterCallback`` : 
+		"""
+		pass
+
+	@property
+	def Target(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``FieldDescriptorFilterCallback`` : 
+		"""
+		pass
+
+class FieldFilterDelegate(ICloneable, ISerializable):
+
+	def __init__(self, object: object, method: IntPtr) -> None:
+		"""No Description
+
+		Args
+		--------
+			object (``object``) :  object
+			method (``IntPtr``) :  method
+		"""
+		pass
+
+	def Invoke(self, field: IField) -> bool:
+		"""No Description
+
+		Args
+		--------
+			field (``IField``) :  field
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def BeginInvoke(self, field: IField, callback: AsyncCallback, object: object) -> IAsyncResult:
+		"""No Description
+
+		Args
+		--------
+			field (``IField``) :  field
+			callback (``AsyncCallback``) :  callback
+			object (``object``) :  object
+
+		Returns
+		--------
+			``IAsyncResult`` : 
+		"""
+		pass
+
+	def EndInvoke(self, result: IAsyncResult) -> bool:
+		"""No Description
+
+		Args
+		--------
+			result (``IAsyncResult``) :  result
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetInvocationList(self) -> List[Delegate]:
+		"""No Description
+
+		Returns
+		--------
+			``List[Delegate]`` : 
+		"""
+		pass
+
+	def DynamicInvoke(self, args: List[object]) -> object:
+		"""No Description
+
+		Args
+		--------
+			args (``List[object]``) :  args
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	@property
+	def Method(self) -> MethodInfo:
+		"""No Description
+
+		Returns
+		--------
+			``FieldFilterDelegate`` : 
+		"""
+		pass
+
+	@property
+	def Target(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``FieldFilterDelegate`` : 
+		"""
+		pass
+
+class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
+
+	def __init__(self, object: object, method: IntPtr) -> None:
+		"""No Description
+
+		Args
+		--------
+			object (``object``) :  object
+			method (``IntPtr``) :  method
+		"""
+		pass
+
+	def Invoke(self, enumMember: IEnumeratedMember) -> bool:
+		"""No Description
+
+		Args
+		--------
+			enumMember (``IEnumeratedMember``) :  enumMember
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def BeginInvoke(self, enumMember: IEnumeratedMember, callback: AsyncCallback, object: object) -> IAsyncResult:
+		"""No Description
+
+		Args
+		--------
+			enumMember (``IEnumeratedMember``) :  enumMember
+			callback (``AsyncCallback``) :  callback
+			object (``object``) :  object
+
+		Returns
+		--------
+			``IAsyncResult`` : 
+		"""
+		pass
+
+	def EndInvoke(self, result: IAsyncResult) -> bool:
+		"""No Description
+
+		Args
+		--------
+			result (``IAsyncResult``) :  result
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def GetObjectData(self, info: SerializationInfo, context: StreamingContext) -> None:
+		"""No Description
+
+		Args
+		--------
+			info (``SerializationInfo``) :  info
+			context (``StreamingContext``) :  context
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetInvocationList(self) -> List[Delegate]:
+		"""No Description
+
+		Returns
+		--------
+			``List[Delegate]`` : 
+		"""
+		pass
+
+	def DynamicInvoke(self, args: List[object]) -> object:
+		"""No Description
+
+		Args
+		--------
+			args (``List[object]``) :  args
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	@property
+	def Method(self) -> MethodInfo:
+		"""No Description
+
+		Returns
+		--------
+			``EnumeratedMemberFilterDelegate`` : 
+		"""
+		pass
+
+	@property
+	def Target(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``EnumeratedMemberFilterDelegate`` : 
+		"""
+		pass
+
+class FieldLibrary:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	def DeserializeSelectionSetIDsBuffer(buffer: List[int]) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			buffer (``List[int]``) :  buffer
+
+		Returns
+		--------
+			``HmIDCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def SerializeSelectionSetIDs(ids: HmIDCollection) -> List[int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
+
+		Returns
+		--------
+			``List[int]`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def FilterFields(fields: Iterator, fieldFilter: FieldFilterDelegate) -> Iterator[IField]:
+		"""No Description
+
+		Args
+		--------
+			fields (``Iterator``) :  fields
+			fieldFilter (``FieldFilterDelegate``) :  fieldFilter
+
+		Returns
+		--------
+			``Iterator[IField]`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def FilterFields(fields: Iterator[IField], fieldFilter: FieldFilterDelegate) -> Iterator[IField]:
+		"""No Description
+
+		Args
+		--------
+			fields (``Iterator[IField]``) :  fields
+			fieldFilter (``FieldFilterDelegate``) :  fieldFilter
+
+		Returns
+		--------
+			``Iterator[IField]`` : 
+		"""
+		pass
+
+	@staticmethod
+	def FilterFieldsByNumericalEngineType(fields: FieldCollection, numericalEngineTypeName: str) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			fields (``FieldCollection``) :  fields
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetFilteredEnumeratedMembersByNumericalEngineType(enumField: IEnumeratedField, numericalEngineTypeName: str) -> List[IEnumeratedMember]:
+		"""No Description
+
+		Args
+		--------
+			enumField (``IEnumeratedField``) :  enumField
+			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+
+		Returns
+		--------
+			``List[IEnumeratedMember]`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetFilteredEnumeratedMembersByProduct(enumField: IEnumeratedField, product: str) -> List[IEnumeratedMember]:
+		"""No Description
+
+		Args
+		--------
+			enumField (``IEnumeratedField``) :  enumField
+			product (``str``) :  product
+
+		Returns
+		--------
+			``List[IEnumeratedMember]`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetSubEnumeratedFieldTypes(enumeratedFieldType: IFieldType) -> Iterator[IFieldType]:
+		"""No Description
+
+		Args
+		--------
+			enumeratedFieldType (``IFieldType``) :  enumeratedFieldType
+
+		Returns
+		--------
+			``Iterator[IFieldType]`` : 
+		"""
+		pass
+
+	@staticmethod
+	def FilterFieldsForPrototypes(fields: FieldCollection) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			fields (``FieldCollection``) :  fields
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def FilterFieldsForComputeCenter(fields: FieldCollection) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			fields (``FieldCollection``) :  fields
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetEnumFieldParentMemberIDOrZero(field: IField) -> int:
+		"""No Description
+
+		Args
+		--------
+			field (``IField``) :  field
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetIsFieldIncludedByProduct(fieldProducts: array[str], productFilter: str) -> bool:
+		"""No Description
+
+		Args
+		--------
+			fieldProducts (``array[str]``) :  fieldProducts
+			productFilter (``str``) :  productFilter
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetCommonFields(modelingElementManagers: List[IModelingElementManager], includeResultFields: bool) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
+			includeResultFields (``bool``) :  includeResultFields
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetCommonFieldDescriptors(modelingElementManagers: List[IModelingElementManager], includeResultFields: bool) -> List[FieldDescriptor]:
+		"""No Description
+
+		Args
+		--------
+			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
+			includeResultFields (``bool``) :  includeResultFields
+
+		Returns
+		--------
+			``List[FieldDescriptor]`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetCommonFieldDescriptors(modelingElementManagers: List[IModelingElementManager], includeResultFields: bool, fieldDescriptorFilterCallback: FieldDescriptorFilterCallback) -> List[FieldDescriptor]:
+		"""No Description
+
+		Args
+		--------
+			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
+			includeResultFields (``bool``) :  includeResultFields
+			fieldDescriptorFilterCallback (``FieldDescriptorFilterCallback``) :  fieldDescriptorFilterCallback
+
+		Returns
+		--------
+			``List[FieldDescriptor]`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetFieldsUnion(modelingElementManagers: List[IModelingElementManager], includeResultFields: bool) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
+			includeResultFields (``bool``) :  includeResultFields
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetFieldsUnion(modelingElementManagers: List[IModelingElementManager], includeResultFields: bool, shouldIncludeInheritedManagers: bool) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
+			includeResultFields (``bool``) :  includeResultFields
+			shouldIncludeInheritedManagers (``bool``) :  shouldIncludeInheritedManagers
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CopyFieldValues(fieldDescriptors: List[FieldDescriptor], sourceManager: IModelingElementManager, targetManager: IModelingElementManager, sourceElementID: int, targetElementID: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			fieldDescriptors (``List[FieldDescriptor]``) :  fieldDescriptors
+			sourceManager (``IModelingElementManager``) :  sourceManager
+			targetManager (``IModelingElementManager``) :  targetManager
+			sourceElementID (``int``) :  sourceElementID
+			targetElementID (``int``) :  targetElementID
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CopyFieldValues(dataSet: IDomainDataSet, commonFields: FieldCollection, sourceElementID: int, targetElementID: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			dataSet (``IDomainDataSet``) :  dataSet
+			commonFields (``FieldCollection``) :  commonFields
+			sourceElementID (``int``) :  sourceElementID
+			targetElementID (``int``) :  targetElementID
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CopyFieldValues(sourceFields: FieldCollection, targetFields: FieldCollection, sourceElementID: int, targetElementID: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			sourceFields (``FieldCollection``) :  sourceFields
+			targetFields (``FieldCollection``) :  targetFields
+			sourceElementID (``int``) :  sourceElementID
+			targetElementID (``int``) :  targetElementID
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def CopyFieldValues(domainDataSet: IDomainDataSet, sourceFields: FieldCollection, targetFields: FieldCollection, sourceElementID: int, targetElementID: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			sourceFields (``FieldCollection``) :  sourceFields
+			targetFields (``FieldCollection``) :  targetFields
+			sourceElementID (``int``) :  sourceElementID
+			targetElementID (``int``) :  targetElementID
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetFilteredFields(fields: FieldCollection, type: FieldDataType) -> FieldCollection:
+		"""No Description
+
+		Args
+		--------
+			fields (``FieldCollection``) :  fields
+			type (``FieldDataType``) :  type
+
+		Returns
+		--------
+			``FieldCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetPersistantDataForField(field: IField) -> FieldDescriptor:
+		"""No Description
+
+		Args
+		--------
+			field (``IField``) :  field
+
+		Returns
+		--------
+			``FieldDescriptor`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetPersistantDataForField(field: IField, type: DomainFieldType, name: str, descriptor1: str, descriptor2: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			field (``IField``) :  field
+			type (``DomainFieldType``) :  type
+			name (``str``) :  name
+			descriptor1 (``str``) :  descriptor1
+			descriptor2 (``str``) :  descriptor2
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetFieldFromPersistantData(manager: IModelingElementManager, fieldDescriptor: FieldDescriptor) -> IField:
+		"""No Description
+
+		Args
+		--------
+			manager (``IModelingElementManager``) :  manager
+			fieldDescriptor (``FieldDescriptor``) :  fieldDescriptor
+
+		Returns
+		--------
+			``IField`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetFieldFromPersistantData(dataSet: IDomainDataSet, fieldDescriptor: FieldDescriptor) -> IField:
+		"""No Description
+
+		Args
+		--------
+			dataSet (``IDomainDataSet``) :  dataSet
+			fieldDescriptor (``FieldDescriptor``) :  fieldDescriptor
+
+		Returns
+		--------
+			``IField`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetFieldFromPersistantData(dataSet: IDomainDataSet, type: DomainFieldType, name: str, descriptor1: str, descriptor2: str) -> IField:
+		"""No Description
+
+		Args
+		--------
+			dataSet (``IDomainDataSet``) :  dataSet
+			type (``DomainFieldType``) :  type
+			name (``str``) :  name
+			descriptor1 (``str``) :  descriptor1
+			descriptor2 (``str``) :  descriptor2
+
+		Returns
+		--------
+			``IField`` : 
+		"""
+		pass
+
+class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			col (``HmIDCollection``) :  col
+		"""
+		pass
+
+	@overload
+	def __init__(self, col: HmIDCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			col (``HmIDCollection``) :  col
+		"""
+		pass
+
+	def Dispose(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int], startInTarget: int, startInSource: int, length: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+			startInTarget (``int``) :  startInTarget
+			startInSource (``int``) :  startInSource
+			length (``int``) :  length
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: int) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``int``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IHmIDCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IHmIDCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: HmIDCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``HmIDCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array[int]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``array[int]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Sort(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def ReverseInPlace(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def ToArray(self) -> array[int]:
+		"""No Description
+
+		Returns
+		--------
+			``array[int]`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: int) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``GenericDelayedHmIDCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
+
+	def __init__(self, ids: HmIDCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			ids (``HmIDCollection``) :  ids
+		"""
+		pass
+
+	def Dispose(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: array[int], startInTarget: int, startInSource: int, length: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``array[int]``) :  array
+			startInTarget (``int``) :  startInTarget
+			startInSource (``int``) :  startInSource
+			length (``int``) :  length
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: int) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``int``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``int``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IHmIDCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IHmIDCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: HmIDCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``HmIDCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: array[int]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``array[int]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Sort(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def ReverseInPlace(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def ToArray(self) -> array[int]:
+		"""No Description
+
+		Returns
+		--------
+			``array[int]`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: int) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``GenericHmIDDelayedCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class GenericPoint(IBlobable):
+
+	@overload
+	def __init__(self, x: float, y: float) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
+			buffer (``List[int]``) :  buffer
+		"""
+		pass
+
+	@overload
+	def __init__(self, buffer: List[int]) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``float``) :  x
+			y (``float``) :  y
+			buffer (``List[int]``) :  buffer
+		"""
+		pass
+
+	def GetBytes(self) -> List[int]:
+		"""No Description
+
+		Returns
+		--------
+			``List[int]`` : 
+		"""
+		pass
+
+	def GetNumberOfBytes(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@property
+	def X(self) -> float:
+		"""No Description
+
+		Returns
+		--------
+			``GenericPoint`` : 
+		"""
+		pass
+
+	@X.setter
+	def X(self, x: float) -> None:
+		pass
+
+	@property
+	def Y(self) -> float:
+		"""No Description
+
+		Returns
+		--------
+			``GenericPoint`` : 
+		"""
+		pass
+
+	@Y.setter
+	def Y(self, y: float) -> None:
+		pass
 
 class IDataSource:
 
@@ -5349,32 +9876,6 @@ class IChangeLogDataRowLoader:
 		"""
 		pass
 
-class IChangeLogFieldEntryVerifier:
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises
-		--------
-			Exception: if this class is instantiated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def ShouldLogEntryFor(self, fieldName: str) -> bool:
-		"""No Description
-
-		Args
-		--------
-			fieldName (``str``) :  fieldName
-
-		Returns
-		--------
-			``bool`` : 
-		"""
-		pass
-
 class IChangeLogWriter:
 
 	def __init__(self) -> None:
@@ -7526,46 +12027,6 @@ class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 		"""
 		pass
 
-class IGeometryPolyline3DAlternativeRecord(IAlternativeRecord):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises
-		--------
-			Exception: if this class is instantiated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def GetPoints(self, domainElementID: int) -> List[GeometryPoint3D]:
-		"""No Description
-
-		Args
-		--------
-			domainElementID (``int``) :  domainElementID
-
-		Returns
-		--------
-			``List[GeometryPoint3D]`` : 
-		"""
-		pass
-
-	def SetPoints(self, domainElementID: int, points3D: List[GeometryPoint3D]) -> None:
-		"""No Description
-
-		Args
-		--------
-			domainElementID (``int``) :  domainElementID
-			points3D (``List[GeometryPoint3D]``) :  points3D
-
-		Returns
-		--------
-			``None`` : 
-		"""
-		pass
-
 class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 
 	def __init__(self) -> None:
@@ -9328,33 +13789,6 @@ class ILicensedNumericalEngine(INumericalEngine):
 		"""
 		pass
 
-class IEntitledNumericalEngine(ILicensedNumericalEngine):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises
-		--------
-			Exception: if this class is instantiated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def SetEntitledLicensingInfo(self, license: License, messageHandler: IMessageHandler) -> None:
-		"""No Description
-
-		Args
-		--------
-			license (``License``) :  license
-			messageHandler (``IMessageHandler``) :  messageHandler
-
-		Returns
-		--------
-			``None`` : 
-		"""
-		pass
-
 class INumericalEngineWithResultDataConnectionFactory:
 
 	def __init__(self) -> None:
@@ -9399,19 +13833,6 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 		"""
 		pass
 
-	def SetLicenseKey(self, licenseKey: str) -> None:
-		"""No Description
-
-		Args
-		--------
-			licenseKey (``str``) :  licenseKey
-
-		Returns
-		--------
-			``None`` : 
-		"""
-		pass
-
 	@overload
 	def SetLicensingInfo(self, license: License) -> None:
 		"""No Description
@@ -9423,16 +13844,6 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 		Returns
 		--------
 			``None`` : 
-		"""
-		pass
-
-	@property
-	def IgnoreLicensing(self) -> bool:
-		"""No Description
-
-		Returns
-		--------
-			``ILicensedNumericalEngineEx`` : 
 		"""
 		pass
 
@@ -11321,59 +15732,6 @@ class IGeometryPolylineField(IUnitizedField):
 		"""
 		pass
 
-class IGeometryPolyline3DField(IUnitizedField):
-
-	def __init__(self) -> None:
-		"""Creating a new Instance of this class is not allowed
-
-
-		Raises
-		--------
-			Exception: if this class is instantiated
-		"""
-		raise Exception("Creating a new Instance of this class is not allowed")
-		pass
-
-	def GetPoints(self, id: int) -> List[GeometryPoint3D]:
-		"""No Description
-
-		Args
-		--------
-			id (``int``) :  id
-
-		Returns
-		--------
-			``List[GeometryPoint3D]`` : 
-		"""
-		pass
-
-	def SetPoints(self, id: int, points3D: List[GeometryPoint3D]) -> None:
-		"""No Description
-
-		Args
-		--------
-			id (``int``) :  id
-			points3D (``List[GeometryPoint3D]``) :  points3D
-
-		Returns
-		--------
-			``None`` : 
-		"""
-		pass
-
-	def RefreshScaledLengths(self, valuesDic: IHmIDToObjectDictionary) -> None:
-		"""No Description
-
-		Args
-		--------
-			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
-
-		Returns
-		--------
-			``None`` : 
-		"""
-		pass
-
 class IGeometryLateralField:
 
 	def __init__(self) -> None:
@@ -12596,6 +16954,1857 @@ class IBlobable:
 		"""
 		pass
 
+class ModelingElementCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ModelingElementCollection``) :  c
+			a (``List[IModelingElement]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ModelingElementCollection``) :  c
+			a (``List[IModelingElement]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: ModelingElementCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ModelingElementCollection``) :  c
+			a (``List[IModelingElement]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IModelingElement]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ModelingElementCollection``) :  c
+			a (``List[IModelingElement]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: ModelingElementCollection) -> ModelingElementCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``ModelingElementCollection``) :  list
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: ModelingElementCollection) -> ModelingElementCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``ModelingElementCollection``) :  list
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IModelingElement]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IModelingElement]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IModelingElement], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IModelingElement]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IModelingElement) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IModelingElement``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IModelingElement) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IModelingElement``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IModelingElement) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IModelingElement``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IModelingElement) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IModelingElement``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IModelingElement) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IModelingElement``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IModelingElementCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IModelingElementCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ModelingElementCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ModelingElementCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IModelingElement]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IModelingElement]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IModelingElement:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IModelingElement) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ModelingElementCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class NumericalEngineTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``NumericalEngineTypeCollection``) :  c
+			a (``List[INumericalEngineType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``NumericalEngineTypeCollection``) :  c
+			a (``List[INumericalEngineType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: NumericalEngineTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``NumericalEngineTypeCollection``) :  c
+			a (``List[INumericalEngineType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[INumericalEngineType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``NumericalEngineTypeCollection``) :  c
+			a (``List[INumericalEngineType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: NumericalEngineTypeCollection) -> NumericalEngineTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``NumericalEngineTypeCollection``) :  list
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: NumericalEngineTypeCollection) -> NumericalEngineTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``NumericalEngineTypeCollection``) :  list
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[INumericalEngineType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[INumericalEngineType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[INumericalEngineType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[INumericalEngineType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: INumericalEngineType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``INumericalEngineType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: INumericalEngineType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``INumericalEngineType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: INumericalEngineType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``INumericalEngineType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: INumericalEngineType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``INumericalEngineType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: INumericalEngineType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``INumericalEngineType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> INumericalEngineTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``INumericalEngineTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: NumericalEngineTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``NumericalEngineTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[INumericalEngineType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[INumericalEngineType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> INumericalEngineType:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: INumericalEngineType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``NumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ResultRecordCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordCollection``) :  c
+			a (``List[IResultRecord]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordCollection``) :  c
+			a (``List[IResultRecord]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: ResultRecordCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordCollection``) :  c
+			a (``List[IResultRecord]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IResultRecord]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordCollection``) :  c
+			a (``List[IResultRecord]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: ResultRecordCollection) -> ResultRecordCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``ResultRecordCollection``) :  list
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: ResultRecordCollection) -> ResultRecordCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``ResultRecordCollection``) :  list
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecord]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecord]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecord], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecord]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IResultRecord) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecord``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IResultRecord) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecord``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IResultRecord) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecord``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IResultRecord) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IResultRecord``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IResultRecord) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecord``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IResultRecordCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IResultRecordCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ResultRecordCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ResultRecordCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IResultRecord]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IResultRecord]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IResultRecord:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IResultRecord) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ResultRecordTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordTypeCollection``) :  c
+			a (``List[IResultRecordType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordTypeCollection``) :  c
+			a (``List[IResultRecordType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: ResultRecordTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordTypeCollection``) :  c
+			a (``List[IResultRecordType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[IResultRecordType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``ResultRecordTypeCollection``) :  c
+			a (``List[IResultRecordType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: ResultRecordTypeCollection) -> ResultRecordTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``ResultRecordTypeCollection``) :  list
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: ResultRecordTypeCollection) -> ResultRecordTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``ResultRecordTypeCollection``) :  list
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecordType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecordType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecordType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecordType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: IResultRecordType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecordType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: IResultRecordType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecordType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: IResultRecordType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecordType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: IResultRecordType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``IResultRecordType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: IResultRecordType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``IResultRecordType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IResultRecordTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IResultRecordTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ResultRecordTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ResultRecordTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IResultRecordType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IResultRecordType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IResultRecordType:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IResultRecordType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class StandardFieldName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardAlternativeName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardDomainElementTypeName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	def GetStandardDomainElementTypeName(DomainElementTypeID: int) -> str:
+		"""No Description
+
+		Args
+		--------
+			DomainElementTypeID (``int``) :  DomainElementTypeID
+
+		Returns
+		--------
+			``str`` : 
+		"""
+		pass
+
+class StandardDomainDataSetFieldNames:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardSupportElementTypeName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	def GetStandardSupportElementTypeName(supportElementTypeID: int) -> str:
+		"""No Description
+
+		Args
+		--------
+			supportElementTypeID (``int``) :  supportElementTypeID
+
+		Returns
+		--------
+			``str`` : 
+		"""
+		pass
+
+class StandardResultRecordName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardResultFieldName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardCalculationOptionFieldName:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardExtendedProperty:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class UntitledNameLibrary:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	def NewElementLabel(typeName: str, manager: IModelingElementManager) -> str:
+		"""No Description
+
+		Args
+		--------
+			typeName (``str``) :  typeName
+			manager (``IModelingElementManager``) :  manager
+
+		Returns
+		--------
+			``str`` : 
+		"""
+		pass
+
+class StandardFieldNameLibrary:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetUnifiedLengthField(domainDataSet: IDomainDataSet, linkElementId: int) -> IUnitizedField:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			linkElementId (``int``) :  linkElementId
+
+		Returns
+		--------
+			``IUnitizedField`` : 
+		"""
+		pass
+
+	@staticmethod
+	@overload
+	def GetUnifiedLengthField(domainElementType: int, domainDataSet: IDomainDataSet) -> IUnitizedField:
+		"""No Description
+
+		Args
+		--------
+			domainElementType (``int``) :  domainElementType
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+
+		Returns
+		--------
+			``IUnitizedField`` : 
+		"""
+		pass
+
+	@staticmethod
+	def GetSlopeField(domainElementType: int, domainDataSet: IDomainDataSet) -> IUnitizedField:
+		"""No Description
+
+		Args
+		--------
+			domainElementType (``int``) :  domainElementType
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+
+		Returns
+		--------
+			``IUnitizedField`` : 
+		"""
+		pass
+
+class PipeNodeFieldNames:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+class StandardElementTypePermission:
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@staticmethod
+	def Assert() -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	def RevertAssert() -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@staticmethod
+	def IsGranted() -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+class SupportElementTypeCollection(List, ICloneable):
+
+	@overload
+	def __init__(self) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SupportElementTypeCollection``) :  c
+			a (``List[ISupportElementType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, capacity: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SupportElementTypeCollection``) :  c
+			a (``List[ISupportElementType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, c: SupportElementTypeCollection) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SupportElementTypeCollection``) :  c
+			a (``List[ISupportElementType]``) :  a
+		"""
+		pass
+
+	@overload
+	def __init__(self, a: List[ISupportElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			capacity (``int``) :  capacity
+			c (``SupportElementTypeCollection``) :  c
+			a (``List[ISupportElementType]``) :  a
+		"""
+		pass
+
+	@staticmethod
+	def Synchronized(list: SupportElementTypeCollection) -> SupportElementTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``SupportElementTypeCollection``) :  list
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@staticmethod
+	def ReadOnly(list: SupportElementTypeCollection) -> SupportElementTypeCollection:
+		"""No Description
+
+		Args
+		--------
+			list (``SupportElementTypeCollection``) :  list
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[ISupportElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[ISupportElementType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[ISupportElementType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[ISupportElementType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, item: ISupportElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``ISupportElementType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def Contains(self, item: ISupportElementType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			item (``ISupportElementType``) :  item
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, item: ISupportElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			item (``ISupportElementType``) :  item
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, index: int, item: ISupportElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+			item (``ISupportElementType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, item: ISupportElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			item (``ISupportElementType``) :  item
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, index: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			index (``int``) :  index
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> ISupportElementTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``ISupportElementTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: SupportElementTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``SupportElementTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[ISupportElementType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[ISupportElementType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> ISupportElementType:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: ISupportElementType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
 class IAlternativeTypeCollectionEnumerator:
 
 	def __init__(self) -> None:
@@ -12635,6 +18844,555 @@ class IAlternativeTypeCollectionEnumerator:
 		--------
 			``IAlternativeTypeCollectionEnumerator`` : 
 		"""
+		pass
+
+class Enumerator(IEnumerator, IAlternativeTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IAlternativeType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncAlternativeTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IAlternativeType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IAlternativeType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IAlternativeType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IAlternativeType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IAlternativeType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IAlternativeType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IAlternativeType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IAlternativeType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IAlternativeType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IAlternativeTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IAlternativeTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: AlternativeTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``AlternativeTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IAlternativeType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IAlternativeType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IAlternativeType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IAlternativeType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyAlternativeTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IAlternativeType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IAlternativeType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IAlternativeType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IAlternativeType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IAlternativeType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IAlternativeType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IAlternativeType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IAlternativeType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IAlternativeType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IAlternativeType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IAlternativeTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IAlternativeTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: AlternativeTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``AlternativeTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IAlternativeType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IAlternativeType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IAlternativeType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IAlternativeType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyAlternativeTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
 		pass
 
 class IFieldTypeCollectionEnumerator:
@@ -12678,6 +19436,555 @@ class IFieldTypeCollectionEnumerator:
 		"""
 		pass
 
+class Enumerator(IEnumerator, IFieldTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IFieldType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncFieldTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IFieldType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IFieldType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IFieldType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IFieldType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IFieldType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IFieldType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IFieldType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IFieldType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IFieldType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IFieldTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IFieldTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: FieldTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``FieldTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IFieldType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IFieldType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IFieldType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IFieldType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncFieldTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyFieldTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IFieldType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IFieldType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IFieldType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IFieldType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IFieldType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IFieldType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IFieldType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IFieldType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IFieldType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IFieldType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IFieldTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IFieldTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: FieldTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``FieldTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IFieldType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IFieldType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IFieldType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IFieldType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyFieldTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
 class IDomainDataSetCollectionEnumerator:
 
 	def __init__(self) -> None:
@@ -12717,6 +20024,555 @@ class IDomainDataSetCollectionEnumerator:
 		--------
 			``IDomainDataSetCollectionEnumerator`` : 
 		"""
+		pass
+
+class Enumerator(IEnumerator, IDomainDataSetCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IDomainDataSet:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncDomainDataSetCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSet]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSet]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSet], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSet]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IDomainDataSet) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IDomainDataSet) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IDomainDataSet) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IDomainDataSet) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IDomainDataSet) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainDataSetCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainDataSetCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainDataSetCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainDataSetCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainDataSet]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainDataSet]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainDataSet:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainDataSet) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyDomainDataSetCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSet]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSet]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSet], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSet]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IDomainDataSet) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IDomainDataSet) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IDomainDataSet) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IDomainDataSet) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IDomainDataSet) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSet``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainDataSetCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainDataSetCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainDataSetCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainDataSetCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainDataSet]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainDataSet]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainDataSet:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainDataSet) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
 		pass
 
 class IDomainDataSetTypeCollectionEnumerator:
@@ -12760,6 +20616,555 @@ class IDomainDataSetTypeCollectionEnumerator:
 		"""
 		pass
 
+class Enumerator(IEnumerator, IDomainDataSetTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IDomainDataSetType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncDomainDataSetTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSetType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSetType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSetType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSetType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IDomainDataSetType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IDomainDataSetType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IDomainDataSetType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IDomainDataSetType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IDomainDataSetType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainDataSetTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainDataSetTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainDataSetTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainDataSetTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainDataSetType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainDataSetType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainDataSetType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainDataSetType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSetType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSetType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainDataSetType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainDataSetType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IDomainDataSetType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IDomainDataSetType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IDomainDataSetType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IDomainDataSetType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IDomainDataSetType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainDataSetType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainDataSetTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainDataSetTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainDataSetTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainDataSetTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainDataSetType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainDataSetType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainDataSetType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainDataSetType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainDataSetTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
 class IDomainElementTypeCollectionEnumerator:
 
 	def __init__(self) -> None:
@@ -12799,6 +21204,555 @@ class IDomainElementTypeCollectionEnumerator:
 		--------
 			``IDomainElementTypeCollectionEnumerator`` : 
 		"""
+		pass
+
+class Enumerator(IEnumerator, IDomainElementTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IDomainElementType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncDomainElementTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainElementType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainElementType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainElementType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IDomainElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IDomainElementType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IDomainElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IDomainElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IDomainElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainElementTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainElementTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainElementTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainElementTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainElementType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainElementType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainElementType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainElementType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyDomainElementTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainElementType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IDomainElementType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IDomainElementType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IDomainElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IDomainElementType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IDomainElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IDomainElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IDomainElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IDomainElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IDomainElementTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IDomainElementTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: DomainElementTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``DomainElementTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IDomainElementType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IDomainElementType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IDomainElementType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IDomainElementType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyDomainElementTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
 		pass
 
 class IModelingElementCollectionEnumerator:
@@ -12842,6 +21796,555 @@ class IModelingElementCollectionEnumerator:
 		"""
 		pass
 
+class Enumerator(IEnumerator, IModelingElementCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IModelingElement:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncModelingElementCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IModelingElement]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IModelingElement]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IModelingElement], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IModelingElement]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IModelingElement) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IModelingElement) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IModelingElement) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IModelingElement) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IModelingElement) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IModelingElementCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IModelingElementCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ModelingElementCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ModelingElementCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IModelingElement]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IModelingElement]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IModelingElement:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IModelingElement) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncModelingElementCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyModelingElementCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IModelingElement]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IModelingElement]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IModelingElement], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IModelingElement]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IModelingElement) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IModelingElement) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IModelingElement) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IModelingElement) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IModelingElement) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IModelingElement``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IModelingElementCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IModelingElementCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ModelingElementCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ModelingElementCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IModelingElement]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IModelingElement]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IModelingElement:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IModelingElement) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyModelingElementCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
 class INumericalEngineTypeCollectionEnumerator:
 
 	def __init__(self) -> None:
@@ -12881,6 +22384,555 @@ class INumericalEngineTypeCollectionEnumerator:
 		--------
 			``INumericalEngineTypeCollectionEnumerator`` : 
 		"""
+		pass
+
+class Enumerator(IEnumerator, INumericalEngineTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> INumericalEngineType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncNumericalEngineTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[INumericalEngineType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[INumericalEngineType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[INumericalEngineType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[INumericalEngineType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: INumericalEngineType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: INumericalEngineType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: INumericalEngineType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: INumericalEngineType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: INumericalEngineType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> INumericalEngineTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``INumericalEngineTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: NumericalEngineTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``NumericalEngineTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[INumericalEngineType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[INumericalEngineType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> INumericalEngineType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: INumericalEngineType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[INumericalEngineType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[INumericalEngineType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[INumericalEngineType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[INumericalEngineType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: INumericalEngineType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: INumericalEngineType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: INumericalEngineType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: INumericalEngineType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: INumericalEngineType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``INumericalEngineType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> INumericalEngineTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``INumericalEngineTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: NumericalEngineTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``NumericalEngineTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[INumericalEngineType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[INumericalEngineType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> INumericalEngineType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: INumericalEngineType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyNumericalEngineTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
 		pass
 
 class IResultRecordCollectionEnumerator:
@@ -12924,6 +22976,555 @@ class IResultRecordCollectionEnumerator:
 		"""
 		pass
 
+class Enumerator(IEnumerator, IResultRecordCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IResultRecord:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncResultRecordCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecord]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecord]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecord], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecord]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IResultRecord) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IResultRecord) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IResultRecord) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IResultRecord) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IResultRecord) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IResultRecordCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IResultRecordCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ResultRecordCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ResultRecordCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IResultRecord]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IResultRecord]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IResultRecord:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IResultRecord) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyResultRecordCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecord]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecord]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecord], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecord]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IResultRecord) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IResultRecord) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IResultRecord) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IResultRecord) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IResultRecord) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecord``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IResultRecordCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IResultRecordCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ResultRecordCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ResultRecordCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IResultRecord]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IResultRecord]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IResultRecord:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IResultRecord) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
 class IResultRecordTypeCollectionEnumerator:
 
 	def __init__(self) -> None:
@@ -12965,6 +23566,555 @@ class IResultRecordTypeCollectionEnumerator:
 		"""
 		pass
 
+class Enumerator(IEnumerator, IResultRecordTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> IResultRecordType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncResultRecordTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecordType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecordType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecordType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecordType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IResultRecordType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IResultRecordType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IResultRecordType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IResultRecordType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IResultRecordType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IResultRecordTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IResultRecordTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ResultRecordTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ResultRecordTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IResultRecordType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IResultRecordType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IResultRecordType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IResultRecordType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlyResultRecordTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecordType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecordType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[IResultRecordType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[IResultRecordType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: IResultRecordType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: IResultRecordType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: IResultRecordType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: IResultRecordType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: IResultRecordType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``IResultRecordType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> IResultRecordTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``IResultRecordTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: ResultRecordTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ResultRecordTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[IResultRecordType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[IResultRecordType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> IResultRecordType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: IResultRecordType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyResultRecordTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
 class ISupportElementTypeCollectionEnumerator:
 
 	def __init__(self) -> None:
@@ -13004,5 +24154,554 @@ class ISupportElementTypeCollectionEnumerator:
 		--------
 			``ISupportElementTypeCollectionEnumerator`` : 
 		"""
+		pass
+
+class Enumerator(IEnumerator, ISupportElementTypeCollectionEnumerator):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	def MoveNext(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def Reset(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Current(self) -> ISupportElementType:
+		"""No Description
+
+		Returns
+		--------
+			``Enumerator`` : 
+		"""
+		pass
+
+class SyncSupportElementTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[ISupportElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[ISupportElementType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[ISupportElementType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[ISupportElementType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: ISupportElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: ISupportElementType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: ISupportElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: ISupportElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: ISupportElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> ISupportElementTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``ISupportElementTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: SupportElementTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``SupportElementTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[ISupportElementType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[ISupportElementType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> ISupportElementType:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: ISupportElementType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``SyncSupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
+		pass
+
+class ReadOnlySupportElementTypeCollection(List, ICloneable):
+
+	def __init__(self) -> None:
+		"""No Description
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[ISupportElementType]) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[ISupportElementType]``) :  array
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@overload
+	def CopyTo(self, array: List[ISupportElementType], start: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			array (``List[ISupportElementType]``) :  array
+			start (``int``) :  start
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Add(self, x: ISupportElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clear(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Contains(self, x: ISupportElementType) -> bool:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``bool`` : 
+		"""
+		pass
+
+	def IndexOf(self, x: ISupportElementType) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Insert(self, pos: int, x: ISupportElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def Remove(self, x: ISupportElementType) -> None:
+		"""No Description
+
+		Args
+		--------
+			x (``ISupportElementType``) :  x
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def RemoveAt(self, pos: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			pos (``int``) :  pos
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetEnumerator(self) -> ISupportElementTypeCollectionEnumerator:
+		"""No Description
+
+		Returns
+		--------
+			``ISupportElementTypeCollectionEnumerator`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: SupportElementTypeCollection) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``SupportElementTypeCollection``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	@overload
+	def AddRange(self, x: List[ISupportElementType]) -> int:
+		"""No Description
+
+		Args
+		--------
+			x (``List[ISupportElementType]``) :  x
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def Clone(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``object`` : 
+		"""
+		pass
+
+	def TrimToSize(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	@property
+	def Count(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsSynchronized(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def SyncRoot(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Item(self) -> ISupportElementType:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@Item.setter
+	def Item(self, item: ISupportElementType) -> None:
+		pass
+
+	@property
+	def IsFixedSize(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def IsReadOnly(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@property
+	def Capacity(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlySupportElementTypeCollection`` : 
+		"""
+		pass
+
+	@Capacity.setter
+	def Capacity(self, capacity: int) -> None:
 		pass
 

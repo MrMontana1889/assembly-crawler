@@ -1,18 +1,17 @@
 from typing import overload
 from datetime import datetime
 from enum import Enum
-from System import TypeCode
 
 class StreamingContextStates(Enum):
-	CROSSPROCESS = 1
-	CROSSMACHINE = 2
-	FILE = 4
-	PERSISTENCE = 8
-	REMOTING = 16
-	OTHER = 32
-	CLONE = 64
-	CROSSAPPDOMAIN = 128
-	ALL = 255
+	CrossProcess = 1
+	CrossMachine = 2
+	File = 4
+	Persistence = 8
+	Remoting = 16
+	Other = 32
+	Clone = 64
+	CrossAppDomain = 128
+	All = 255
 
 class ISerializable:
 

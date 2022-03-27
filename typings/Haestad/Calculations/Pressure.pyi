@@ -1,537 +1,536 @@
 from enum import Enum
-from System import TypeCode
 
 class CalculationResultStatus(Enum):
-	BALANCED = 0
-	UNBALANCED = 1
-	CANNOTSOLVEHYDRAULICEQUATIONS = 2
+	Balanced = 0
+	Unbalanced = 1
+	CannotSolveHydraulicEquations = 2
 
 class BoundaryConditionType(Enum):
-	FREEOUTFALL = 0
-	USERDEFINEDTAILWATER = 1
-	BOUNDARYELEVATIONFLOWCURVE = 2
-	CROWN = 10
+	FreeOutfall = 0
+	UserDefinedTailwater = 1
+	BoundaryElevationFlowCurve = 2
+	Crown = 10
 
 class InflowType(Enum):
-	FIXEDLOAD = 0
-	HYDROGRAPHLOAD = 1
-	INFLOWPATTERN = 2
+	FixedLoad = 0
+	HydrographLoad = 1
+	InflowPattern = 2
 
 class LoadDefinition(Enum):
-	SANITARYHYDROGRAPH = 0
-	SANITARYUNITLOAD = 1
-	SANITARYPATTERNLOAD = 2
+	SanitaryHydrograph = 0
+	SanitaryUnitLoad = 1
+	SanitaryPatternLoad = 2
 
 class TCVCoefficientType(Enum):
-	TCVCOEFFICIENTTYPE_HEADLOSS = 1
-	TCVCOEFFICIENTTYPE_DISCHARGE = 2
-	TCVCOEFFICIENTTYPE_VALVECHARACTERSTICSCURVE = 3
+	TCVCoefficientType_Headloss = 1
+	TCVCoefficientType_Discharge = 2
+	TCVCoefficientType_ValveCharactersticsCurve = 3
 
 class ControlValveCoefficientType(Enum):
-	CONTROLVALVECOEFFICIENTTYPE_MINORLOSS = 1
-	CONTROLVALVECOEFFICIENTTYPE_DISCHARGECOEFFICIENT = 2
+	ControlValveCoefficientType_MinorLoss = 1
+	ControlValveCoefficientType_DischargeCoefficient = 2
 
 class HammerValveType(Enum):
-	HAMMERVALVETYPE_BUTTERFLY = 0
-	HAMMERVALVETYPE_NEEDLE = 1
-	HAMMERVALVETYPE_CIRCULARGATE = 2
-	HAMMERVALVETYPE_GLOBE = 3
-	HAMMERVALVETYPE_BALL = 4
-	HAMMERVALVETYPE_USERDEFINED = 5
+	HammerValveType_Butterfly = 0
+	HammerValveType_Needle = 1
+	HammerValveType_CircularGate = 2
+	HammerValveType_Globe = 3
+	HammerValveType_Ball = 4
+	HammerValveType_UserDefined = 5
 
 class DischargeElementType(Enum):
-	DISCHARGEELEMENTTYPEORIFICE = 0
-	DISCHARGEELEMENTTYPEVALVE = 1
-	DISCHARGEELEMENTTYPERATINGCURVE = 2
+	DischargeElementTypeOrifice = 0
+	DischargeElementTypeValve = 1
+	DischargeElementTypeRatingCurve = 2
 
 class ValveTypeInitialStatus(Enum):
-	VALVETYPEINITIALSTATUS_OPEN = 1
-	VALVETYPEINITIALSTATUS_CLOSED = 2
+	ValveTypeInitialStatus_Open = 1
+	ValveTypeInitialStatus_Closed = 2
 
 class TankCalculationModel(Enum):
-	CONSTANTAREAAPPROXIMATION = 0
-	GASLAWMODEL = 1
+	ConstantAreaApproximation = 0
+	GasLawModel = 1
 
 class FlushingElementType(Enum):
-	ELEMENTTYPE_HYDRANT = 54
-	ELEMENTTYPE_JUNCTION = 55
-	ELEMENTTYPE_FCV = 60
-	ELEMENTTYPE_TCV = 61
-	ELEMENTTYPE_GPV = 62
-	ELEMENTTYPE_PRV = 64
-	ELEMENTTYPE_PSV = 65
-	ELEMENTTYPE_PBV = 66
-	ELEMENTTYPE_PIPE = 69
-	ELEMENTTYPE_PRESSUREISOLATIONVALVE = 71
+	ElementType_Hydrant = 54
+	ElementType_Junction = 55
+	ElementType_FCV = 60
+	ElementType_TCV = 61
+	ElementType_GPV = 62
+	ElementType_PRV = 64
+	ElementType_PSV = 65
+	ElementType_PBV = 66
+	ElementType_Pipe = 69
+	ElementType_PressureIsolationValve = 71
 
 class FlushingStatus(Enum):
-	OPEN = 0
-	CLOSED = 1
-	PIPERUN = 2
-	FLOWING = 3
+	Open = 0
+	Closed = 1
+	PipeRun = 2
+	Flowing = 3
 
 class FlushingType(Enum):
-	CONVENTIONAL = 0
-	UNIDIRECTIONAL = 1
+	Conventional = 0
+	Unidirectional = 1
 
 class FlushingApplyFlushingFlowBy(Enum):
-	ADDINGTOBASELINEDEMAND = 0
-	REPLACINGBASELINEDEMAND = 1
+	AddingToBaselineDemand = 0
+	ReplacingBaselineDemand = 1
 
 class PeriodicHeadFlowTransientBehavior(Enum):
-	TRANSIENTBEHAVIORHEAD = 0
-	TRANSIENTBEHAVIORFLOW = 1
+	TransientBehaviorHead = 0
+	TransientBehaviorFlow = 1
 
 class CheckValveFlowDirection(Enum):
-	TOWARDSWYE = 0
-	AWAYFROMWYE = 1
+	TowardsWye = 0
+	AwayFromWye = 1
 
 class OverrideReportingTimeStepType(Enum):
-	ALL = 0
-	CONSTANT = 1
-	VARIABLE = 2
+	All = 0
+	Constant = 1
+	Variable = 2
 
 class ReportType(Enum):
-	ALL = 0
-	CONSTANT = 1
+	All = 0
+	Constant = 1
 	NONE = 2
 
 class PatternCategory(Enum):
-	PATTERNCATEGORYHYDRAULIC = 0
-	PATTERNCATEGORYCONSTITUENT = 1
-	PATTERNCATEGORYRESERVOIR = 2
-	PATTERNCATEGORYPUMP = 3
-	PATTERNCATEGORYOPERATIONALVALVE = 4
-	PATTERNCATEGORYOPERATIONALPUMP = 5
-	PATTERNCATEGORYOPERATIONALTURBINE = 6
-	PATTERNCATEGORYVALVE = 7
-	PATTERNCATEGORYVALVERELATIVECLOSURE = 8
-	PATTERNCATEGORYPOWERUSAGE = 9
+	PatternCategoryHydraulic = 0
+	PatternCategoryConstituent = 1
+	PatternCategoryReservoir = 2
+	PatternCategoryPump = 3
+	PatternCategoryOperationalValve = 4
+	PatternCategoryOperationalPump = 5
+	PatternCategoryOperationalTurbine = 6
+	PatternCategoryValve = 7
+	PatternCategoryValveRelativeClosure = 8
+	PatternCategoryPowerUsage = 9
 
 class IsolationValveInitialSetting(Enum):
-	ISOLATIONVALVEOPEN = 0
-	ISOLATIONVALVECLOSED = 1
+	IsolationValveOpen = 0
+	IsolationValveClosed = 1
 
 class ApplyFireFlows(Enum):
-	ADDTOBASELINE = 0
-	REPLACEBASELINE = 1
+	AddToBaseline = 0
+	ReplaceBaseline = 1
 
 class PressureValveSetting(Enum):
-	VALVEPRESSURE = 0
-	VALVEHGL = 1
+	ValvePressure = 0
+	ValveHGL = 1
 
 class TurbineStatus(Enum):
-	OPEN = 0
-	CLOSED = 1
+	Open = 0
+	Closed = 1
 
 class HydrantStatus(Enum):
-	OPEN = 0
-	CLOSED = 1
+	Open = 0
+	Closed = 1
 
 class PddFunctionType(Enum):
-	POWERFUNCTION = 0
-	PIECELINEAR = 1
+	PowerFunction = 0
+	PieceLinear = 1
 
 class PumpDefinitionType(Enum):
-	CONSTANTPOWER = 0
-	DESIGNPOINT = 1
-	STANDARD = 2
-	STANDARDEXTENDED = 3
-	CUSTOMEXTENDED = 4
-	MULTIPLEPOINT = 5
-	VOLUMEFLOW = 6
-	DEPTHFLOW = 7
-	DEPTHFLOWVARIABLESPEED = 8
+	ConstantPower = 0
+	DesignPoint = 1
+	Standard = 2
+	StandardExtended = 3
+	CustomExtended = 4
+	MultiplePoint = 5
+	VolumeFlow = 6
+	DepthFlow = 7
+	DepthFlowVariableSpeed = 8
 
 class PatternFormat(Enum):
-	STEPWISE = 0
-	CONTINUOUS = 1
+	Stepwise = 0
+	Continuous = 1
 
 class CalculationType(Enum):
-	FIREFLOW = 0
-	FLUSHING = 1
-	AGEANALYSIS = 2
-	CONSTITUENTANALYSIS = 3
-	TRACEANALYSIS = 4
-	HYDRAULICSONLY = 5
-	MSXANALYSIS = 6
+	FireFlow = 0
+	Flushing = 1
+	AgeAnalysis = 2
+	ConstituentAnalysis = 3
+	TraceAnalysis = 4
+	HydraulicsOnly = 5
+	MSXAnalysis = 6
 	SCADA = 7
-	ALLQUALITIES = 8
+	AllQualities = 8
 
 class ScadaCalculationType(Enum):
-	HYDRAULICSONLY = 0
-	CONSTITUENTANALYSIS = 1
-	AGEANALYSIS = 2
-	TRACEANALYSIS = 3
-	QUALITYANALYSIS = 4
+	HydraulicsOnly = 0
+	ConstituentAnalysis = 1
+	AgeAnalysis = 2
+	TraceAnalysis = 3
+	QualityAnalysis = 4
 
 class SCADASimulationMode(Enum):
-	BASELINE = 0
-	HISTORICAL = 1
-	LIVE = 2
-	LIVEAUTO = 3
-	HISTORICALLIVETRAINING = 4
+	Baseline = 0
+	Historical = 1
+	Live = 2
+	LiveAuto = 3
+	HistoricalLiveTraining = 4
 
 class TimeAnalysisType(Enum):
-	STEADYSTATE = 0
+	SteadyState = 0
 	EPS = 1
 
 class EngineCompatibilityType(Enum):
-	V8ISS2 = 0
-	V8ISS1 = 1
+	V8iSS2 = 0
+	V8iSS1 = 1
 	EPANET2_12 = 2
 	EPANET2_10 = 3
 
 class ConstituentSourceType(Enum):
-	CONCENTRATION = 0
-	FLOWPACEDBOOSTER = 1
-	SETPOINTBOOSTER = 2
-	MASSBOOSTER = 3
+	Concentration = 0
+	FlowPacedBooster = 1
+	SetpointBooster = 2
+	MassBooster = 3
 
 class WallReactionOrder(Enum):
-	ZEROORDER = 0
-	FIRSTORDER = 1
+	ZeroOrder = 0
+	FirstOrder = 1
 
 class TankMixingModel(Enum):
-	TWOCOMPARTMENT = 0
-	COMPLETELYMIXED = 1
+	TwoCompartment = 0
+	CompletelyMixed = 1
 	FIFO = 2
 	LIFO = 3
 
 class VSPType(Enum):
-	PATTERNBASED = 0
-	FIXEDHEAD = 1
-	FIXEDFLOW = 2
+	PatternBased = 0
+	FixedHead = 1
+	FixedFlow = 2
 
 class VSPBType(Enum):
-	FIXEDHEAD = 1
-	FIXEDFLOW = 2
+	FixedHead = 1
+	FixedFlow = 2
 
 class FrictionMethod(Enum):
-	DARCYWEISBACH = 0
-	HAZENWILLIAMS = 1
-	MANNINGS = 2
-	MODIFIEDHAZENWILLIAMS = 3
+	DarcyWeisbach = 0
+	HazenWilliams = 1
+	Mannings = 2
+	ModifiedHazenWilliams = 3
 
 class AlabamaFrictionMethod(Enum):
-	MANNINGS = 0
-	HAZENWILLIAMS = 1
-	DARCYWEISBACH = 2
-	KUTTERS = 3
+	Mannings = 0
+	HazenWilliams = 1
+	DarcyWeisbach = 2
+	Kutters = 3
 
 class OperatingRangeType(Enum):
-	ELEVATIONS = 0
-	LEVELS = 1
+	Elevations = 0
+	Levels = 1
 
 class HydroTankOperatingRangeType(Enum):
-	HYDROTANKOPERATINGRANGEELEVATION = 0
-	HYDROTANKOPERATINGRANGELEVEL = 1
+	HydroTankOperatingRangeElevation = 0
+	HydroTankOperatingRangeLevel = 1
 
 class TankSection(Enum):
-	CIRCULARTANKSECTION = 0
-	NONCIRCULARTANKSECTION = 1
-	VARIABLEAREATANKSECTION = 2
+	CircularTankSection = 0
+	NonCircularTankSection = 1
+	VariableAreaTankSection = 2
 
 class ControlType(Enum):
-	LOGICAL = 0
-	SIMPLE = 1
+	Logical = 0
+	Simple = 1
 
 class SurgeTankType(Enum):
-	SIMPLESURGETANK = 0
-	DIFFERENTIALSURGETANK = 1
+	SimpleSurgeTank = 0
+	DifferentialSurgeTank = 1
 
 class ControlPriority(Enum):
-	PRIORITYDEFAULT = 0
-	PRIORITY1 = 1
-	PRIORITY2 = 2
-	PRIORITY3 = 3
-	PRIORITY4 = 4
-	PRIORITY5 = 5
+	PriorityDefault = 0
+	Priority1 = 1
+	Priority2 = 2
+	Priority3 = 3
+	Priority4 = 4
+	Priority5 = 5
 
 class ControlActionType(Enum):
-	SIMPLEACTION = 0
-	COMPOSITEACTION = 1
+	SimpleAction = 0
+	CompositeAction = 1
 
 class SimpleActionType(Enum):
-	CONTROLACTIONFCV = 60
-	CONTROLACTIONTCV = 61
-	CONTROLACTIONGPV = 62
-	CONTROLACTIONPRESSUREVALVE = 63
-	CONTROLACTIONPUMP = 68
-	CONTROLACTIONPIPE = 69
+	ControlActionFCV = 60
+	ControlActionTCV = 61
+	ControlActionGPV = 62
+	ControlActionPressureValve = 63
+	ControlActionPump = 68
+	ControlActionPipe = 69
 
 class ControlActionPipeAttribute(Enum):
-	PIPESTATUS = 0
+	PipeStatus = 0
 
 class ControlActionPipeStatus(Enum):
-	OPEN = 0
-	CLOSED = 1
+	Open = 0
+	Closed = 1
 
 class ControlActionPumpAttribute(Enum):
-	PUMPSTATUS = 0
-	PUMPSETTING = 1
-	PUMPPRESSURESETTING = 2
-	PUMPHEADSETTING = 3
+	PumpStatus = 0
+	PumpSetting = 1
+	PumpPressureSetting = 2
+	PumpHeadSetting = 3
 
 class ControlActionPumpStatus(Enum):
-	ON = 0
-	OFF = 1
+	On = 0
+	Off = 1
 
 class ControlActionTCVAttribute(Enum):
-	TCVSTATUS = 0
-	TCVSETTING = 1
+	TCVStatus = 0
+	TCVSetting = 1
 
 class ControlActionTCVStatus(Enum):
-	CLOSED = 0
-	INACTIVE = 1
+	Closed = 0
+	Inactive = 1
 
 class ControlActionGPVAttribute(Enum):
-	GPVSTATUS = 0
+	GPVStatus = 0
 
 class ControlActionGPVStatus(Enum):
-	CLOSED = 0
-	ACTIVE = 1
+	Closed = 0
+	Active = 1
 
 class ControlActionFCVAttribute(Enum):
-	FCVSETTING = 0
-	FCVSTATUS = 1
+	FCVSetting = 0
+	FCVStatus = 1
 
 class ControlActionFCVStatus(Enum):
-	CLOSED = 0
-	INACTIVE = 1
+	Closed = 0
+	Inactive = 1
 
 class ControlActionPressureValveAttribute(Enum):
-	PRESSUREVALVESETTINGHYDRAULICGRADE = 0
-	PRESSUREVALVESTATUS = 1
-	PRESSUREVALVESETTINGPRESSURE = 2
+	PressureValveSettingHydraulicGrade = 0
+	PressureValveStatus = 1
+	PressureValveSettingPressure = 2
 
 class ControlActionPressureValveStatus(Enum):
-	CLOSED = 0
-	INACTIVE = 1
+	Closed = 0
+	Inactive = 1
 
 class ControlConditionType(Enum):
-	SIMPLECONDITION = 0
-	COMPOSITECONDITION = 1
+	SimpleCondition = 0
+	CompositeCondition = 1
 
 class SimpleConditionType(Enum):
-	ELEMENT = 0
-	SYSTEMDEMAND = 1
-	CLOCKTIME = 2
-	TIMEFROMSTART = 3
+	Element = 0
+	SystemDemand = 1
+	ClockTime = 2
+	TimeFromStart = 3
 
 class SimpleConditionElementType(Enum):
-	CONTROLCONDITIONPUMPSTATUS = 129
-	CONTROLCONDITIONPIPESTATUS = 130
-	CONTROLCONDITIONGPVSTATUS = 131
-	CONTROLCONDITIONVALVESTATUS = 132
-	CONTROLCONDITIONELEMENTTYPE = 133
+	ControlConditionPumpStatus = 129
+	ControlConditionPipeStatus = 130
+	ControlConditionGPVStatus = 131
+	ControlConditionValveStatus = 132
+	ControlConditionElementType = 133
 
 class ControlConditionPumpStatus(Enum):
-	ON = 0
-	OFF = 1
+	On = 0
+	Off = 1
 
 class ControlConditionPipeStatus(Enum):
-	OPEN = 0
-	CLOSED = 1
+	Open = 0
+	Closed = 1
 
 class ControlConditionGPVStatus(Enum):
-	CLOSED = 0
-	ACTIVE = 1
+	Closed = 0
+	Active = 1
 
 class ControlConditionValveStatus(Enum):
-	CLOSED = 0
-	INACTIVE = 1
+	Closed = 0
+	Inactive = 1
 
 class ControlConditionElementType(Enum):
-	CONTROLCONDITIONNODE = 50
-	CONTROLCONDITIONTANK = 52
-	CONTROLCONDITIONFCV = 60
-	CONTROLCONDITIONTCV = 61
-	CONTROLCONDITIONGPV = 62
-	CONTROLCONDITIONPRESSUREVALVE = 63
-	CONTROLCONDITIONPUMP = 68
-	CONTROLCONDITIONPIPE = 69
-	CONTROLCONDITIONHYDROTANK = 302
-	CONTROLCONDITIONSURGETANK = 308
+	ControlConditionNode = 50
+	ControlConditionTank = 52
+	ControlConditionFCV = 60
+	ControlConditionTCV = 61
+	ControlConditionGPV = 62
+	ControlConditionPressureValve = 63
+	ControlConditionPump = 68
+	ControlConditionPipe = 69
+	ControlConditionHydroTank = 302
+	ControlConditionSurgeTank = 308
 
 class ControlConditionNodeAttribute(Enum):
-	NODEDEMAND = 0
-	NODEHYDRAULICGRADE = 1
-	NODEPRESSURE = 2
+	NodeDemand = 0
+	NodeHydraulicGrade = 1
+	NodePressure = 2
 
 class ControlConditionTankAttribute(Enum):
-	TANKDEMAND = 0
-	TANKHYDRAULICGRADE = 1
-	TANKPRESSURE = 2
-	TANKLEVEL = 3
-	TANKTIMETODRAIN = 4
-	TANKTIMETOFILL = 5
-	TANKPERCENTFULL = 6
+	TankDemand = 0
+	TankHydraulicGrade = 1
+	TankPressure = 2
+	TankLevel = 3
+	TankTimeToDrain = 4
+	TankTimeToFill = 5
+	TankPercentFull = 6
 
 class ControlConditionPumpAttribute(Enum):
-	PUMPDISCHARGE = 0
-	CONDITIONPUMPSETTING = 1
-	CONDITIONPUMPSTATUS = 2
+	PumpDischarge = 0
+	ConditionPumpSetting = 1
+	ConditionPumpStatus = 2
 
 class ControlConditionPipeAttribute(Enum):
-	PIPEDISCHARGE = 0
-	CONDITIONPIPESTATUS = 1
+	PipeDischarge = 0
+	ConditionPipeStatus = 1
 
 class ControlConditionPressureValveAttribute(Enum):
-	PRESSUREVALVEDISCHARGE = 0
-	PRESSUREVALVESETTING = 1
-	PRESSUREVALVESTATUS = 2
+	PressureValveDischarge = 0
+	PressureValveSetting = 1
+	PressureValveStatus = 2
 
 class ControlConditionFCVAttribute(Enum):
-	FCVDISCHARGE = 0
-	FCVSETTING = 1
-	FCVSTATUS = 2
+	FCVDischarge = 0
+	FCVSetting = 1
+	FCVStatus = 2
 
 class ControlConditionGPVAttribute(Enum):
-	GPVDISCHARGE = 0
-	GPVSTATUS = 1
+	GPVDischarge = 0
+	GPVStatus = 1
 
 class ControlConditionTCVAttribute(Enum):
-	TCVDISCHARGE = 0
-	TCVSETTING = 1
-	TCVSTATUS = 2
+	TCVDischarge = 0
+	TCVSetting = 1
+	TCVStatus = 2
 
 class ControlConditionHydroTankAttribute(Enum):
-	HYDROTANKHYDRAULICGRADE = 1
-	HYDROTANKPRESSURE = 2
+	HydroTankHydraulicGrade = 1
+	HydroTankPressure = 2
 
 class ControlConditionSurgeTankAttribute(Enum):
-	SURGETANKDEMAND = 0
-	SURGETANKHYDRAULICGRADE = 1
-	SURGETANKPRESSURE = 2
+	SurgeTankDemand = 0
+	SurgeTankHydraulicGrade = 1
+	SurgeTankPressure = 2
 
 class CompareOperator(Enum):
-	EQUALS = 0
-	GREATERTHAN = 1
-	GREATERTHANEQUAL = 2
-	LESSTHAN = 3
-	LESSTHANEQUAL = 4
-	NOTEQUAL = 5
+	Equals = 0
+	GreaterThan = 1
+	GreaterThanEqual = 2
+	LessThan = 3
+	LessThanEqual = 4
+	NotEqual = 5
 
 class LogicalOperator(Enum):
-	OPERATORIF = 0
-	OPERATORAND = 1
-	OPERATOROR = 2
+	OperatorIf = 0
+	OperatorAnd = 1
+	OperatorOr = 2
 
 class EngineCalculationFlags(Enum):
 	NONE = 0
-	PUMPEXCEEDSMAXIMUMOPERATINGPOINT = 1
-	NEGATIVEPRESSURES = 2
-	TANKEMPTY = 4
-	TANKLOWLEVELALARM = 8
-	TANKHIGHLEVELALARM = 16
-	TANKFULL = 32
-	CONTAINSINFOFLAGMASK = 255
-	UNSTABLE = 256
-	DISCONNECTED = 512
-	PUMPCANNOTDELIVERFLOWORHEAD = 1024
-	VALVECANNOTDELIVERFLOW = 2048
-	VALVECANNOTSUPPLYPRESSURE = 4096
-	DISCONNECTING = 8192
-	PUMPFIXEDFLOWTARGETISTOOLOW = 16384
-	VALVEHEADLOSSSMALLERTHANWHENFULLYOPEN = 32768
-	CONTROLACTIONEXECUTEDONVALVEWITHPATTERN = 65536
-	PUMPCANNOTDELIVERHEAD = 131072
-	PUMPFAILSNPSHR = 262144
-	FF_NODEBELOWMINIMUMPRESSURE = 524288
-	FF_PIPEEXCEEDSMAXIMUMVELOCITY = 1048576
-	FF_FFNODEFAILSRESIDUALPRESSURE = 2097152
-	UNSUPPORTEDSTARTANDENDNODECONFIGURATION = 8388608
-	CONTAINSWARNINGFLAGMASK = 16776960
-	UNBALANCED = 16777216
-	ILLCONDITIONED = 33554432
-	UNABLETOCOMPUTEOMEGAFORVSPUMP = 67108864
-	INCONSISTENTPUMPBATTERYRESULTS = 268435456
-	DEMANDDISCONNECTED = 536870912
-	UNEXPECTEDREVERSEFLOW = 1073741824
+	PumpExceedsMaximumOperatingPoint = 1
+	NegativePressures = 2
+	TankEmpty = 4
+	TankLowLevelAlarm = 8
+	TankHighLevelAlarm = 16
+	TankFull = 32
+	ContainsInfoFlagMask = 255
+	Unstable = 256
+	Disconnected = 512
+	PumpCannotDeliverFlowOrHead = 1024
+	ValveCannotDeliverFlow = 2048
+	ValveCannotSupplyPressure = 4096
+	Disconnecting = 8192
+	PumpFixedFlowTargetIsTooLow = 16384
+	ValveHeadLossSmallerThanWhenFullyOpen = 32768
+	ControlActionExecutedOnValveWithPattern = 65536
+	PumpCannotDeliverHead = 131072
+	PumpFailsNPSHR = 262144
+	FF_NodeBelowMinimumPressure = 524288
+	FF_PipeExceedsMaximumVelocity = 1048576
+	FF_FFNodeFailsResidualPressure = 2097152
+	UnsupportedStartAndEndNodeConfiguration = 8388608
+	ContainsWarningFlagMask = 16776960
+	Unbalanced = 16777216
+	IllConditioned = 33554432
+	UnableToComputeOmegaForVSPump = 67108864
+	InconsistentPumpBatteryResults = 268435456
+	DemandDisconnected = 536870912
+	UnexpectedReverseFlow = 1073741824
 	ContainsErrorFlagMask = 30
 
 class PatternValidationFailureType(Enum):
-	NOTENOUGHPOINTS = 0
-	DUPLICATETIMES = 1
-	FIRSTTIMEISZERO = 2
-	LASTMULTIPLIERMUSTMATCHSTARTMULTIPLIER = 3
-	PATTERNPOINTSOUTOFORDER = 4
-	NEGATIVEMULTIPLIERINPUMPPATTERN = 5
-	LASTCLOSUREMUSTMATCHSTARTCLOSURE = 6
-	RELATIVECLOSUREOUTSIDEALLOWABLERANGE = 7
-	TIMESTEPORSTARTTIMEMISMATCH = 8
+	NotEnoughPoints = 0
+	DuplicateTimes = 1
+	FirstTimeIsZero = 2
+	LastMultiplierMustMatchStartMultiplier = 3
+	PatternPointsOutOfOrder = 4
+	NegativeMultiplierInPumpPattern = 5
+	LastClosureMustMatchStartClosure = 6
+	RelativeClosureOutsideAllowableRange = 7
+	TimeStepOrStartTimeMismatch = 8
 
 class FlushingElementCategory(Enum):
-	FLOWINGNODE = 1
-	STATUSELEMENT = 2
+	FlowingNode = 1
+	StatusElement = 2
 
 class PressureEngineNodeType(Enum):
-	NODETYPEJUNCTION = 0
-	NODETYPERESERVOIR = 1
-	NODETYPETANK = 2
-	NODETYPEVSPCN = 3
+	NodeTypeJunction = 0
+	NodeTypeReservoir = 1
+	NodeTypeTank = 2
+	NodeTypeVSPCN = 3
 
 class PressureEngineLinkType(Enum):
-	LINKTYPECVPIPE = 0
-	LINKTYPEPIPE = 1
-	LINKTYPEPUMP = 2
-	LINKTYPEPRV = 3
-	LINKTYPEPSV = 4
-	LINKTYPEPBV = 5
-	LINKTYPEFCV = 6
-	LINKTYPETCV = 7
-	LINKTYPEGPV = 8
+	LinkTypeCVPipe = 0
+	LinkTypePipe = 1
+	LinkTypePump = 2
+	LinkTypePRV = 3
+	LinkTypePSV = 4
+	LinkTypePBV = 5
+	LinkTypeFCV = 6
+	LinkTypeTCV = 7
+	LinkTypeGPV = 8
 
 class PressureEngineLinkStatus(Enum):
-	LINKSTATUSCLOSED = 0
-	LINKSTATUSOPEN = 1
+	LinkStatusClosed = 0
+	LinkStatusOpen = 1
 
 class PressureEngineSourceType(Enum):
-	SOURCETYPECONCENTRATIONBOOSTER = 0
-	SOURCETYPEMASSBOOSTER = 1
-	SOURCETYPESETPOINTBOOSTER = 2
-	SOURCETYPEFLOWPACEDBOOSTER = 3
+	SourceTypeConcentrationBooster = 0
+	SourceTypeMassBooster = 1
+	SourceTypeSetpointBooster = 2
+	SourceTypeFlowPacedBooster = 3
 
 class PressureEngineMixingModelType(Enum):
-	MIX1 = 0
-	MIX2 = 1
-	FIFO = 2
-	LIFO = 3
+	Mix1 = 0
+	Mix2 = 1
+	Fifo = 2
+	Lifo = 3
 
 class PressureEngineFlowUnit(Enum):
-	FLOWUNITCFS = 0
-	FLOWUNITGPM = 1
-	FLOWUNITMGD = 2
-	FLOWUNITIMGD = 3
-	FLOWUNITAFD = 4
-	FLOWUNITLPS = 5
-	FLOWUNITLPM = 6
-	FLOWUNITMLD = 7
-	FLOWUNITCMH = 8
-	FLOWUNITCMD = 9
+	FlowUnitCFS = 0
+	FlowUnitGPM = 1
+	FlowUnitMGD = 2
+	FlowUnitIMGD = 3
+	FlowUnitAFD = 4
+	FlowUnitLPS = 5
+	FlowUnitLPM = 6
+	FlowUnitMLD = 7
+	FlowUnitCMH = 8
+	FlowUnitCMD = 9
 
 class PressureEngineReportFlag(Enum):
-	REPORTFLAGNOSTATUSREPORT = 0
-	REPORTFLAGNORMALSTATUSREPORT = 1
-	REPORTFLAGFULLSTATUSREPORT = 2
+	ReportFlagNoStatusReport = 0
+	ReportFlagNormalStatusReport = 1
+	ReportFlagFullStatusReport = 2
 
 class PressureEngineControlType(Enum):
-	LOWLEVELCONTROL = 0
-	HIGHLEVELCONTROL = 1
-	TIMERCONTROL = 2
-	TIMEOFDAYCONTROL = 3
+	LowLevelControl = 0
+	HighLevelControl = 1
+	TimerControl = 2
+	TimeOfDayControl = 3
 
 class PressureEngineQualityAnalysisType(Enum):
-	QUALITYANALYSISNONE = 0
-	QUALITYANALYSISCHEMICAL = 1
-	QUALITYANALYSISAGE = 2
-	QUALITYANALYSISTRACE = 3
+	QualityAnalysisNone = 0
+	QualityAnalysisChemical = 1
+	QualityAnalysisAge = 2
+	QualityAnalysisTrace = 3
 
 class PressureEngineTimeStatisticsFlag(Enum):
-	TIMESTATISTICSNONE = 0
-	TIMESTATISTICSAVERAGE = 1
-	TIMESTATISTICSMINIMUM = 2
-	TIMESTATISTICSMAXIMUM = 3
-	TIMESTATISTICSRANGE = 4
+	TimeStatisticsNone = 0
+	TimeStatisticsAverage = 1
+	TimeStatisticsMinimum = 2
+	TimeStatisticsMaximum = 3
+	TimeStatisticsRange = 4
 

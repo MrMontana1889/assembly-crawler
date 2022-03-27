@@ -1,774 +1,773 @@
 from enum import Enum
-from System import TypeCode
 
 class IdahoAlternativeTypes(Enum):
-	HMIDATASETGEOMETRYALTERNATIVE = 1
-	HMIDATASETTOPOLOGYALTERNATIVE = 2
-	HMIACTIVETOPOLOGYALTERNATIVE = 3
-	PHYSICALALTERNATIVE = 4
-	DEMANDALTERNATIVE = 20
-	INITIALSETTINGSALTERNATIVE = 21
-	OPERATIONALALTERNATIVE = 22
-	AGEALTERNATIVE = 23
-	CONSTITUENTALTERNATIVE = 24
-	TRACEALTERNATIVE = 25
-	FIREFLOWALTERNATIVE = 26
-	CAPITALCOSTALTERNATIVE = 27
-	ENERGYCOSTALTERNATIVE = 28
-	PRESSUREDEPENDENTDEMANDALTERNATIVE = 29
-	CRITICALITYALTERNATIVE = 30
-	HMIUSERDEFINEDEXTENSIONSALTERNATIVE = 100
+	HmiDataSetGeometryAlternative = 1
+	HMIDataSetTopologyAlternative = 2
+	HMIActiveTopologyAlternative = 3
+	PhysicalAlternative = 4
+	DemandAlternative = 20
+	InitialSettingsAlternative = 21
+	OperationalAlternative = 22
+	AgeAlternative = 23
+	ConstituentAlternative = 24
+	TraceAlternative = 25
+	FireFlowAlternative = 26
+	CapitalCostAlternative = 27
+	EnergyCostAlternative = 28
+	PressureDependentDemandAlternative = 29
+	CriticalityAlternative = 30
+	HMIUserDefinedExtensionsAlternative = 100
 
 class DemandTypeEnum(Enum):
-	DEMANDTYPE = 0
-	INFLOWTYPE = 1
+	DemandType = 0
+	InflowType = 1
 
 class SCADAUnitDemandSourceType(Enum):
-	USERDEFINEDTYPE = 0
-	SIGNALTYPE = 1
+	UserDefinedType = 0
+	SignalType = 1
 
 class SCADANormalDemandSourceType(Enum):
-	USERDEFINEDTYPE = 0
-	SIGNALTYPE = 1
+	UserDefinedType = 0
+	SignalType = 1
 
 class TankSectionEnum(Enum):
-	CIRCULARTANKSECTIONTYPE = 0
-	NONCIRCULARTANKSECTIONTYPE = 1
-	VARIABLEAREATANKSECTIONTYPE = 2
+	CircularTankSectionType = 0
+	NonCircularTankSectionType = 1
+	VariableAreaTankSectionType = 2
 
 class OperatingRangeTypeEnum(Enum):
-	OPERATINGRANGE_ELEVATIONTYPE = 0
-	OPERATINGRANGE_LEVELTYPE = 1
+	OperatingRange_ElevationType = 0
+	OperatingRange_LevelType = 1
 
 class TankMixingModelEnum(Enum):
-	TWOCOMPARTMENTTYPE = 0
-	COMPLETELYMIXEDTYPE = 1
-	FIFOTYPE = 2
-	LIFOTYPE = 3
+	TwoCompartmentType = 0
+	CompletelyMixedType = 1
+	FIFOType = 2
+	LIFOType = 3
 
 class ConstituentSourceTypeEnum(Enum):
-	CONCENTRATIONTYPE = 0
-	FLOWPACEDBOOSTERTYPE = 1
-	SETPOINTBOOSTERTYPE = 2
-	MASSBOOSTERTYPE = 3
+	ConcentrationType = 0
+	FlowPacedBoosterType = 1
+	SetpointBoosterType = 2
+	MassBoosterType = 3
 
 class ValveSettingEnum(Enum):
-	VALVEACTIVETYPE = 0
-	VALVEINACTIVETYPE = 1
-	VALVECLOSEDTYPE = 2
+	ValveActiveType = 0
+	ValveInactiveType = 1
+	ValveClosedType = 2
 
 class PressureValveSettingEnum(Enum):
-	VALVEPRESSURETYPE = 0
-	VALVEHGLTYPE = 1
+	ValvePressureType = 0
+	ValveHGLType = 1
 
 class PumpStatusEnum(Enum):
-	PUMPONTYPE = 0
-	PUMPOFFTYPE = 1
-	PUMPRESULTCANNOTDELIVERHEAD = 2
-	PUMPRESULTCANNOTDELIVERFLOW = 3
+	PumpOnType = 0
+	PumpOffType = 1
+	PumpResultCannotDeliverHead = 2
+	PumpResultCannotDeliverFlow = 3
 
 class PumpResultControlStatus(Enum):
-	PUMPRESULTONTYPE = 0
-	PUMPRESULTOFFTYPE = 1
-	PUMPRESULTCANNOTDELIVERHEADTYPE = 2
-	PUMPRESULTCANNOTDELIVERFLOWTYPE = 3
+	PumpResultOnType = 0
+	PumpResultOffType = 1
+	PumpResultCannotDeliverHeadType = 2
+	PumpResultCannotDeliverFlowType = 3
 
 class VSPTypeEnum(Enum):
-	PATTERNBASEDTYPE = 0
-	FIXEDHEADTYPE = 1
-	FIXEDFLOWTYPE = 2
+	PatternBasedType = 0
+	FixedHeadType = 1
+	FixedFlowType = 2
 
 class PipeStatusEnum(Enum):
-	OPENTYPE = 0
-	CLOSEDTYPE = 1
+	OpenType = 0
+	ClosedType = 1
 
 class TurbineStatusEnum(Enum):
-	OPENTYPE = 0
-	CLOSEDTYPE = 1
+	OpenType = 0
+	ClosedType = 1
 
 class IdahoDomainElementTypes(Enum):
-	IDAHOTANKELEMENTMANAGER = 52
-	IDAHOHYDRANTELEMENTMANAGER = 54
-	IDAHOJUNCTIONELEMENTMANAGER = 55
-	IDAHORESERVOIRELEMENTMANAGER = 56
-	FCVELEMENTMANAGER = 60
-	TCVELEMENTMANAGER = 61
-	GPVELEMENTMANAGER = 62
-	PRVELEMENTMANAGER = 64
-	PSVELEMENTMANAGER = 65
-	PBVELEMENTMANAGER = 66
-	STANDARDPUMPELEMENTMANAGER = 68
-	IDAHOPIPEELEMENTMANAGER = 69
-	IDAHOSPOTELEVATIONELEMENTMANAGER = 70
-	PRESSUREISOLATIONVALVEELEMENTMANAGER = 71
-	VARIABLESPEEDPUMPBATTERYELEMENTMANAGER = 72
+	IdahoTankElementManager = 52
+	IdahoHydrantElementManager = 54
+	IdahoJunctionElementManager = 55
+	IdahoReservoirElementManager = 56
+	FCVElementManager = 60
+	TCVElementManager = 61
+	GPVElementManager = 62
+	PRVElementManager = 64
+	PSVElementManager = 65
+	PBVElementManager = 66
+	StandardPumpElementManager = 68
+	IdahoPipeElementManager = 69
+	IdahoSpotElevationElementManager = 70
+	PressureIsolationValveElementManager = 71
+	VariableSpeedPumpBatteryElementManager = 72
 
 class ApplyFireFlowsEnum(Enum):
-	ADDTOBASELINETYPE = 0
-	REPLACEBASELINETYPE = 1
+	AddToBaseLineType = 0
+	ReplaceBaselineType = 1
 
 class NumericalEngineTypeEnum(Enum):
-	EPANETENGINE = 1
+	EpaNetEngine = 1
 
 class EpaNetEngine_TimeAnalysisTypeEnum(Enum):
-	STEADYSTATETYPE = 0
-	EPSTYPE = 1
+	SteadyStateType = 0
+	EpsType = 1
 
 class EpaNetEngine_CalculationTypeEnum(Enum):
-	FIREFLOWTYPE = 0
-	FLUSHINGTYPE = 1
-	AGEANALYSISTYPE = 2
-	CONSTITUENTANALYSISTYPE = 3
-	TRACEANALYSISTYPE = 4
-	HYDRAULICSONLYTYPE = 5
-	MSXANALYSISTYPE = 6
-	SCADAANALAYSISTYPE = 7
-	QUALITYANALYSISTYPE = 8
-	CRITICALITYTYPE = 9999
+	FireFlowType = 0
+	FlushingType = 1
+	AgeAnalysisType = 2
+	ConstituentAnalysisType = 3
+	TraceAnalysisType = 4
+	HydraulicsOnlyType = 5
+	MSXAnalysisType = 6
+	SCADAAnalaysisType = 7
+	QualityAnalysisType = 8
+	CriticalityType = 9999
 
 class EpaNetEngine_WaterQualityAnalysisEnum(Enum):
-	NOANALYSISTYPE = 0
-	AGEANALYSISTYPE = 1
-	CONSTITUENTANALYSISTYPE = 2
-	TRACEANALYSISTYPE = 3
-	ALLQUALITIESTYPE = 4
+	NoAnalysisType = 0
+	AgeAnalysisType = 1
+	ConstituentAnalysisType = 2
+	TraceAnalysisType = 3
+	AllQualitiesType = 4
 
 class EpaNetEngine_FrictionMethodEnum(Enum):
-	DARCYWEISBACHTYPE = 0
-	HAZENWILLIAMSTYPE = 1
-	MANNINGSTYPE = 2
+	DarcyWeisbachType = 0
+	HazenWilliamsType = 1
+	ManningsType = 2
 
 class EpaNetEngine_EngineCompatibilityEnum(Enum):
-	V8ISS2 = 0
-	V8ISS1 = 1
+	V8iSS2 = 0
+	V8iSS1 = 1
 	EPANET2_12 = 2
 	EPANET2_10 = 3
 
 class EpaNetEngine_OverrideReportingTimeStepEnum(Enum):
-	ALL = 0
-	CONSTANT = 1
-	VARIABLE = 2
+	All = 0
+	Constant = 1
+	Variable = 2
 
 class IsolationValveInitialSettingEnum(Enum):
-	ISOLATIONVALVEOPENTYPE = 0
-	ISOLATIONVALVECLOSEDTYPE = 1
+	IsolationValveOpenType = 0
+	IsolationValveClosedType = 1
 
 class SegmentationScopeType(Enum):
-	ENTIRENETWORK = 0
-	SUBSETNETWORK = 1
+	EntireNetwork = 0
+	SubsetNetwork = 1
 
 class MinorLossTypeEnum(Enum):
-	ENTRANCETYPE = 0
-	BENDTYPE = 1
-	CONTRACTIONTYPE = 2
-	CROSSTYPE = 3
-	EXITTYPE = 4
-	EXPANSIONTYPE = 5
-	TEETYPE = 6
-	VALVETYPE = 7
-	WYETYPE = 8
+	EntranceType = 0
+	BendType = 1
+	ContractionType = 2
+	CrossType = 3
+	ExitType = 4
+	ExpansionType = 5
+	TeeType = 6
+	ValveType = 7
+	WyeType = 8
 
 class TCVCoefficientType(Enum):
-	HEADLOSS = 1
-	DISCHARGE = 2
-	VALVECHARACTERISTICSCURVE = 3
+	Headloss = 1
+	Discharge = 2
+	ValveCharacteristicsCurve = 3
 
 class ControlValveCoefficientType(Enum):
-	MINORLOSS = 1
-	DISCHARGECOEFFICIENT = 2
+	Minorloss = 1
+	DischargeCoefficient = 2
 
 class BoundaryPumpStatusEnum(Enum):
-	PUMPON = 0
-	PUMPOFF = 1
+	PumpOn = 0
+	PumpOff = 1
 
 class BoundaryPressureValveStatusEnum(Enum):
-	INACTIVE = 0
-	CLOSED = 1
+	Inactive = 0
+	Closed = 1
 
 class BoundaryPipeStatusEnum(Enum):
-	PIPEOPEN = 0
-	PIPECLOSED = 1
+	PipeOpen = 0
+	PipeClosed = 1
 
 class BoundaryGPVStatusEnum(Enum):
-	ACTIVE = 0
-	CLOSED = 1
+	Active = 0
+	Closed = 1
 
 class BoundaryTCVStatusEnum(Enum):
-	CLOSED = 0
-	INACTIVE = 1
+	Closed = 0
+	Inactive = 1
 
 class BoundaryFCVStatusEnum(Enum):
-	CLOSED = 0
-	INACTIVE = 1
+	Closed = 0
+	Inactive = 1
 
 class BoundaryTankAttributeEnum(Enum):
-	TANKHGL = 0
-	TANKLEVEL = 1
+	TankHGL = 0
+	TankLevel = 1
 
 class BoundaryPumpAttributeEnum(Enum):
-	PUMPSETTING = 0
-	PUMPSTATUS = 1
+	PumpSetting = 0
+	PumpStatus = 1
 
 class BoundaryPressureValveAttributeEnum(Enum):
-	VALVESETTING = 0
-	VALVESTATUS = 6
+	ValveSetting = 0
+	ValveStatus = 6
 
 class BoundaryTCVAttributeEnum(Enum):
-	VALVESETTING = 0
-	VALVESTATUS = 1
+	ValveSetting = 0
+	ValveStatus = 1
 
 class BoundaryFCVAttributeEnum(Enum):
-	VALVESETTING = 0
-	VALVESTATUS = 1
+	ValveSetting = 0
+	ValveStatus = 1
 
 class TargetNodeAttributeEnum(Enum):
-	HGL = 0
-	PRESSURE = 1
+	Hgl = 0
+	Pressure = 1
 
 class TargetDirectedNodeAttributeEnum(Enum):
-	FLOW = 0
-	HGLIN = 1
-	HGLOUT = 2
-	PRESSUREIN = 3
-	PRESSUREOUT = 4
+	Flow = 0
+	HglIn = 1
+	HglOut = 2
+	PressureIn = 3
+	PressureOut = 4
 
 class ObservedTargetElementTypeEnum(Enum):
-	TARGETNODE = 1
-	TARGETDIRECTEDNODE = 2
-	TARGETPIPE = 7
+	TargetNode = 1
+	TargetDirectedNode = 2
+	TargetPipe = 7
 
 class BoundaryTargetElementTypeEnum(Enum):
-	TANK = 0
-	PUMP = 2
-	PRESSUREVALVE = 3
+	Tank = 0
+	Pump = 2
+	PressureValve = 3
 	GPV = 4
-	PIPE = 5
+	Pipe = 5
 	TCV = 6
 	FCV = 7
 
 class InitialTransientPumpStatusEnum(Enum):
-	PUMPON = 0
-	PUMPOFF = 1
+	PumpOn = 0
+	PumpOff = 1
 
 class RunDurationTypeEnum(Enum):
-	TIMESTEPS = 0
-	TIMES = 1
+	TimeSteps = 0
+	Times = 1
 
 class ReportPointHistoryTypeEnum(Enum):
-	ALL = 0
-	ONLYIFONPATH = 1
+	All = 0
+	OnlyIfOnPath = 1
 
 class ShowExtremeHeadsAfterEnum(Enum):
-	AFTERTIMEZERO = 0
-	AFTERFIRSTMAXMIN = 1
+	AfterTimeZero = 0
+	AfterFirstMaxMin = 1
 
 class TransientFrictionMethodEnum(Enum):
-	STEADY = 0
-	QUASISTEADY = 1
-	UNSTEADY = 2
-	UNSTEADYVITKOVSKY = 3
+	Steady = 0
+	QuasiSteady = 1
+	Unsteady = 2
+	UnsteadyVitkovsky = 3
 
 class TurbineOperatingCaseEnum(Enum):
-	INSTANTLOADREJECTION = 0
-	LOADREJECTION = 1
-	LOADACCEPTANCE = 2
-	LOADVARIATION = 3
+	InstantLoadRejection = 0
+	LoadRejection = 1
+	LoadAcceptance = 2
+	LoadVariation = 3
 
 class AirValveTypeEnum(Enum):
-	SLOWCLOSING = 0
-	DOUBLEACTING = 1
-	TRIPLEACTING = 2
-	VACUUMBREAKER = 3
+	SlowClosing = 0
+	DoubleActing = 1
+	TripleActing = 2
+	VacuumBreaker = 3
 
 class SAV_SRVTypeEnum(Enum):
 	SAV = 0
 	SRV = 1
-	SAVANDSRV = 2
+	SAVAndSRV = 2
 
 class SAVValveTypeEnum(Enum):
-	NEEDLE = 0
-	CIRCULARGATE = 1
-	GLOBAL = 2
-	BALL = 3
-	BUTTERFLY = 4
+	Needle = 0
+	CircularGate = 1
+	Global = 2
+	Ball = 3
+	Butterfly = 4
 
 class SRVControlTypeEnum(Enum):
-	SPRINGLOADED = 0
-	TIMEBASED = 1
+	SpringLoaded = 0
+	TimeBased = 1
 
 class SRVValveTypeEnum(Enum):
-	NEEDLE = 0
-	CIRCULARGATE = 1
-	GLOBE = 2
-	BALL = 3
-	BUTTERFLY = 4
+	Needle = 0
+	CircularGate = 1
+	Globe = 2
+	Ball = 3
+	Butterfly = 4
 
 class RuptureDiskOrificeDefinitionType(Enum):
-	SIMPLE = 0
-	ORIFICEEQUATION = 1
+	Simple = 0
+	OrificeEquation = 1
 
 class FlowHeadRelationshipEnum(Enum):
-	SIMPLE = 0
-	BASICEMITTER = 1
-	ORIFICEEQUATION = 2
+	Simple = 0
+	BasicEmitter = 1
+	OrificeEquation = 2
 
 class DischargeToAtmosphereTypeEnum(Enum):
-	ORIFICE = 0
-	VALVE = 1
-	RATINGCURVE = 2
+	Orifice = 0
+	Valve = 1
+	RatingCurve = 2
 
 class ValveTypeInitialStatusEnum(Enum):
-	OPEN = 1
-	CLOSED = 2
+	Open = 1
+	Closed = 2
 
 class HammerPumpTypeEnum(Enum):
-	SHUTDOWN = 0
-	CONSTANTSPEEDNOPUMPCURVE = 1
-	CONSTANTSPEEDWITHPUMPCURVE = 2
+	Shutdown = 0
+	ConstantSpeedNoPumpCurve = 1
+	ConstantSpeedWithPumpCurve = 2
 	VSP = 3
-	PUMPSTARTVSP = 4
+	PumpStartVSP = 4
 
 class HammerPumpValveTypeEnum(Enum):
-	CHECKVALVE = 0
-	CONTROLVALVE = 1
+	CheckValve = 0
+	ControlValve = 1
 
 class VariableSpeedType_ControlVariableEnum(Enum):
-	SPEED = 0
-	TORQUE = 1
+	Speed = 0
+	Torque = 1
 
 class SpecificSpeedEnum(Enum):
-	SI25_US1280 = 0
-	SI35_US1800 = 1
-	SI94_US4850 = 2
-	SI117_US6040 = 3
-	SI145_US7500 = 4
-	SI208_US10740 = 5
-	SI260_US13500 = 6
+	Si25_Us1280 = 0
+	Si35_Us1800 = 1
+	Si94_Us4850 = 2
+	Si117_Us6040 = 3
+	Si145_Us7500 = 4
+	Si208_Us10740 = 5
+	Si260_Us13500 = 6
 
 class CheckValveFlowDirectionEnum(Enum):
-	TOWARDSWYE = 0
-	AWAYFROMWYE = 1
+	TowardsWye = 0
+	AwayFromWye = 1
 
 class CheckValveClosureTypeEnum(Enum):
-	INSTANTANEOUSCLOSURE = 0
-	SLOWCLOSURE = 1
-	DYNAMICCHARACTERISTICSCURVE = 2
+	InstantaneousClosure = 0
+	SlowClosure = 1
+	DynamicCharacteristicsCurve = 2
 
 class SurgeTankTypeEnum(Enum):
-	SIMPLE = 0
-	DIFFERENTIAL = 1
+	Simple = 0
+	Differential = 1
 
 class TypeOfVolumeEnum(Enum):
-	AIR = 0
-	VAPOR = 1
+	Air = 0
+	Vapor = 1
 
 class HammerValveType(Enum):
-	BUTTERFLY = 0
-	NEEDLE = 1
-	CIRCULARGATE = 2
-	GLOBE = 3
-	BALL = 4
-	USERDEFINED = 5
+	Butterfly = 0
+	Needle = 1
+	CircularGate = 2
+	Globe = 3
+	Ball = 4
+	UserDefined = 5
 
 class TimestepAdjustmentAttribute(Enum):
-	LENGTH = 0
-	WAVESPEED = 1
+	Length = 0
+	WaveSpeed = 1
 
 class TimestepAdjustmentType(Enum):
-	RELATIVE = 0
-	ABSOLUTE = 1
+	Relative = 0
+	Absolute = 1
 
 class GPVTransientBehaviorEnum(Enum):
-	ORIFICE = 0
-	VALVE = 1
+	Orifice = 0
+	Valve = 1
 
 class PeriodicHeadFlowBehaviorEnum(Enum):
-	HEAD = 0
-	FLOW = 1
+	Head = 0
+	Flow = 1
 
 class HammerReportPointsEnum(Enum):
-	NOPOINTS = 0
-	ALLPOINTS = 1
-	SELECTEDPOINTS = 2
+	NoPoints = 0
+	AllPoints = 1
+	SelectedPoints = 2
 
 class HammerReportTimesEnum(Enum):
-	PERIODICALLY = 0
-	ATNOTIMES = 1
-	ATALLTIMES = 2
-	ATSPECIFICTIMES = 3
+	Periodically = 0
+	AtNoTimes = 1
+	AtAllTimes = 2
+	AtSpecificTimes = 3
 
 class HammerLevelOfPrecision(Enum):
-	LOWEST = 0
-	LOW = 1
-	MEDIUM = 2
-	HIGH = 3
-	HIGHEST = 4
+	Lowest = 0
+	Low = 1
+	Medium = 2
+	High = 3
+	Highest = 4
 
 class SavClosureTriggerEnum(Enum):
-	TIME = 0
-	PRESSURE = 1
+	Time = 0
+	Pressure = 1
 
 class AirValveTransitionType(Enum):
-	BYVOLUME = 0
-	BYPRESSURE = 1
+	ByVolume = 0
+	ByPressure = 1
 
 class GasVesselLevelType(Enum):
-	FIXED = 0
-	MEAN = 1
-	VARIABLE = 2
+	Fixed = 0
+	Mean = 1
+	Variable = 2
 
 class HydroTankType(Enum):
-	SEALED = 0
-	VENTED = 1
-	DIPPINGTUBE = 2
+	Sealed = 0
+	Vented = 1
+	DippingTube = 2
 
 class AirFlowCalculationMethod(Enum):
-	ORIFICEDIAMETER = 0
-	AIRFLOWCURVE = 1
+	OrificeDiameter = 0
+	AirFlowCurve = 1
 
 class PressureZoneScopeType(Enum):
-	ENTIRENETWORK = 0
-	NETWORKSUBSET = 1
+	EntireNetwork = 0
+	NetworkSubset = 1
 
 class FlushingStatus(Enum):
-	OPEN = 0
-	CLOSED = 1
-	TARGET = 2
-	FLOWING = 3
-	REOPEN = 4
-	RECLOSE = 5
-	OPENPRIOR = 6
-	CLOSEDPRIOR = 7
+	Open = 0
+	Closed = 1
+	Target = 2
+	Flowing = 3
+	Reopen = 4
+	Reclose = 5
+	OpenPrior = 6
+	ClosedPrior = 7
 
 class WaterSCADAField(Enum):
-	NULLATTRIBUTE = 0
-	OBSERVEDRELATIVECLOSURE = -300
-	OBSERVEDCONSTITUENTCONCENTRATION = -299
-	PRESSURENODEDEMAND = -297
-	TANKINITIALHGLSETTING = -296
-	TCVALVEINITIALSETTING = -208
-	GPVALVEINITIALSETTING = -207
-	VALVEINITIALSTATUS = -201
-	PUMPINITIALSETTING = -200
-	PUMPINITIALSTATUS = -199
-	PRESSUREPIPEINITIALSTATUS = -198
-	VSPTARGETHEAD = -191
-	VSPCONTROLNODEID = -189
-	OBSERVEDVALVESTATUS = -58
-	OBSERVEDPUMPSTATUS = -57
-	OBSERVEDPIPESTATUS = -56
-	OBSERVEDTANKLEVEL = -55
-	OBSERVEDPRESSURE = -54
-	OBSERVEDHYDRAULICGRADE = -53
-	OBSERVEDPUMPSETTING = -52
-	OBSERVEDPRESSUREVALVESETTING = -51
-	OBSERVEDTCVALVESETTING = -50
-	OBSERVEDFCVALVESETTING = -49
-	OBSERVEDPRESSUREOUT = -48
-	OBSERVEDPRESSUREIN = -47
-	OBSERVEDHYDRAULICGRADEOUT = -46
-	OBSERVEDHYDRAULICGRADEIN = -45
-	OBSERVEDDISCHARGE = -44
-	TANKBASEELEVATION = -39
-	DEMAND = -33
-	INITIALHGLSETTING = -27
-	FCVALVEINITIALSETTING = -26
-	TANKACTIVEVOLUME = -10
-	GROUNDELEVATION = -4
+	NullAttribute = 0
+	ObservedRelativeClosure = -300
+	ObservedConstituentConcentration = -299
+	PressureNodeDemand = -297
+	TankInitialHGLSetting = -296
+	TCValveInitialSetting = -208
+	GPValveInitialSetting = -207
+	ValveInitialStatus = -201
+	PumpInitialSetting = -200
+	PumpInitialStatus = -199
+	PressurePipeInitialStatus = -198
+	VSPTargetHead = -191
+	VSPControlNodeID = -189
+	ObservedValveStatus = -58
+	ObservedPumpStatus = -57
+	ObservedPipeStatus = -56
+	ObservedTankLevel = -55
+	ObservedPressure = -54
+	ObservedHydraulicGrade = -53
+	ObservedPumpSetting = -52
+	ObservedPressureValveSetting = -51
+	ObservedTCValveSetting = -50
+	ObservedFCValveSetting = -49
+	ObservedPressureOut = -48
+	ObservedPressureIn = -47
+	ObservedHydraulicGradeOut = -46
+	ObservedHydraulicGradeIn = -45
+	ObservedDischarge = -44
+	TankBaseElevation = -39
+	Demand = -33
+	InitialHGLSetting = -27
+	FCValveInitialSetting = -26
+	TankActiveVolume = -10
+	GroundElevation = -4
 
 class PumpDefinitionTypeEnum(Enum):
-	CONSTANTPOWERTYPE = 0
-	DESIGNPOINTTYPE = 1
-	STANDARDTYPE = 2
-	STANDARDEXTENDEDTYPE = 3
-	CUSTOMEXTENDEDTYPE = 4
-	MULTIPLEPOINTTYPE = 5
-	VOLUMEFLOW = 6
-	DEPTHFLOW = 7
-	DEPTHFLOWVARIABLESPEED = 8
+	ConstantPowerType = 0
+	DesignPointType = 1
+	StandardType = 2
+	StandardExtendedType = 3
+	CustomExtendedType = 4
+	MultiplePointType = 5
+	VolumeFlow = 6
+	DepthFlow = 7
+	DepthFlowVariableSpeed = 8
 
 class PumpEfficiencyTypeEnum(Enum):
-	CONSTANTEFFICIENCYTYPE = 0
-	BESTEFFICIENCYPOINTTYPE = 1
-	MULTIPLEEFFICIENCYPOINTSTYPE = 2
+	ConstantEfficiencyType = 0
+	BestEfficiencyPointType = 1
+	MultipleEfficiencyPointsType = 2
 
 class WallReactionOrderEnum(Enum):
-	ZEROORDERTYPE = 0
-	FIRSTORDERTYPE = 1
+	ZeroOrderType = 0
+	FirstOrderType = 1
 
 class ControlTypeEnum(Enum):
-	LOGICALTYPE = 0
-	SIMPLETYPE = 1
+	LogicalType = 0
+	SimpleType = 1
 
 class ControlPriorityEnum(Enum):
-	PRIORITYDEFAULTTYPE = 0
-	PRIORITY1TYPE = 1
-	PRIORITY2TYPE = 2
-	PRIORITY3TYPE = 3
-	PRIORITY4TYPE = 4
-	PRIORITY5TYPE = 5
+	PriorityDefaultType = 0
+	Priority1Type = 1
+	Priority2Type = 2
+	Priority3Type = 3
+	Priority4Type = 4
+	Priority5Type = 5
 
 class ControlActionTypeEnum(Enum):
-	SIMPLEACTIONTYPE = 0
-	COMPOSITEACTIONTYPE = 1
+	SimpleActionType = 0
+	CompositeActionType = 1
 
 class ElementTypeEnum(Enum):
-	CONTROLACTIONFCVTYPE = 60
-	CONTROLACTIONTCVTYPE = 61
-	CONTROLACTIONGPVTYPE = 62
-	CONTROLACTIONPRESSUREVALVETYPE = 63
-	CONTROLACTIONPUMPTYPE = 68
-	CONTROLACTIONPIPETYPE = 69
+	ControlActionFCVType = 60
+	ControlActionTCVType = 61
+	ControlActionGPVType = 62
+	ControlActionPressureValveType = 63
+	ControlActionPumpType = 68
+	ControlActionPipeType = 69
 
 class PipeAttributeEnum(Enum):
-	ACTIONPIPESTATUSTYPE = 0
+	ActionPipeStatusType = 0
 
 class ActionPipeStatusEnum(Enum):
-	OPENTYPE = 0
-	OFFTYPE = 1
+	OpenType = 0
+	OffType = 1
 
 class PumpAttributeEnum(Enum):
-	ACTIONPUMPSTATUSTYPE = 0
-	ACTIONPUMPSETTINGTYPE = 1
-	ACTIONPUMPPRESSURESETTING = 2
-	ACTIONPUMPHEADSETTING = 3
+	ActionPumpStatusType = 0
+	ActionPumpSettingType = 1
+	ActionPumpPressureSetting = 2
+	ActionPumpHeadSetting = 3
 
 class ActionPumpStatusEnum(Enum):
-	ONTYPE = 0
-	OFFTYPE = 1
+	OnType = 0
+	OffType = 1
 
 class TCVAttributeEnum(Enum):
-	ACTIONTCVSTATUSTYPE = 0
-	ACTIONTCVSETTINGTYPE = 1
+	ActionTCVStatusType = 0
+	ActionTCVSettingType = 1
 
 class TCVStatusEnum(Enum):
-	CLOSEDTYPE = 0
-	INACTIVETYPE = 1
+	ClosedType = 0
+	InactiveType = 1
 
 class GPVAttributeEnum(Enum):
-	ACTIONGPVSTATUSTYPE = 0
+	ActionGPVStatusType = 0
 
 class GPVStatusEnum(Enum):
-	CLOSEDTYPE = 0
-	ACTIVETYPE = 1
+	ClosedType = 0
+	ActiveType = 1
 
 class FCVAttributeEnum(Enum):
-	ACTIONFCVSETTINGTYPE = 0
-	ACTIONFCVSTATUSTYPE = 1
+	ActionFCVSettingType = 0
+	ActionFCVStatusType = 1
 
 class FCVStatusEnum(Enum):
-	CLOSEDTYPE = 0
-	INACTIVETYPE = 1
+	ClosedType = 0
+	InactiveType = 1
 
 class PRVAttributeEnum(Enum):
-	ACTIONPRESSUREVALVESETTINGTYPE = 0
-	ACTIONPRESSUREVALVESTATUSTYPE = 1
-	ACTIONPRESSUREVALVESETTINGPRESSURE = 2
+	ActionPressureValveSettingType = 0
+	ActionPressureValveStatusType = 1
+	ActionPressureValveSettingPressure = 2
 
 class ActionPressureValveStatusEnum(Enum):
-	CLOSEDTYPE = 0
-	INACTIVETYPE = 1
+	ClosedType = 0
+	InactiveType = 1
 
 class ConditionTypeEnum(Enum):
-	SIMPLECONDITIONTYPE = 0
-	COMPOSITECONDITIONTYPE = 1
+	SimpleConditionType = 0
+	CompositeConditionType = 1
 
 class SimpleConditionTypeEnum(Enum):
-	ELEMENTTYPE = 0
-	SYSTEMDEMANDTYPE = 1
-	CLOCKTIMETYPE = 2
-	TIMEFROMSTARTTYPE = 3
+	ElementType = 0
+	SystemDemandType = 1
+	ClockTimeType = 2
+	TimeFromStartType = 3
 
 class ControlConditionPumpStatusEnum(Enum):
-	ONTYPE = 0
-	OFFTYPE = 1
+	OnType = 0
+	OffType = 1
 
 class ControlConditionPipeStatusEnum(Enum):
-	OPENTYPE = 0
-	CLOSEDTYPE = 1
+	OpenType = 0
+	ClosedType = 1
 
 class ControlConditionGPVStatusEnum(Enum):
-	CLOSEDTYPE = 0
-	ACTIVETYPE = 1
+	ClosedType = 0
+	ActiveType = 1
 
 class ControlConditionValveStatusEnum(Enum):
-	CLOSEDTYPE = 0
-	INACTIVETYPE = 1
+	ClosedType = 0
+	InactiveType = 1
 
 class ControlConditionElementTypeEnum(Enum):
-	CONTROLCONDITIONNODETYPE = 50
-	CONTROLCONDITIONTANKTYPE = 52
-	CONTROLCONDITIONFCVTYPE = 60
-	CONTROLCONDITIONTCVTYPE = 61
-	CONTROLCONDITIONGPVTYPE = 62
-	CONTROLCONDITIONPRESSUREVALVETYPE = 63
-	CONTROLCONDITIONPUMPTYPE = 68
-	CONTROLCONDITIONPIPETYPE = 69
-	CONTROLCONDITIONHYDROTANKTYPE = 302
-	CONTROLCONDITIONSURGETANKTYPE = 308
+	ControlConditionNodeType = 50
+	ControlConditionTankType = 52
+	ControlConditionFCVType = 60
+	ControlConditionTCVType = 61
+	ControlConditionGPVType = 62
+	ControlConditionPressureValveType = 63
+	ControlConditionPumpType = 68
+	ControlConditionPipeType = 69
+	ControlConditionHydroTankType = 302
+	ControlConditionSurgeTankType = 308
 
 class NodeAttributeEnum(Enum):
-	NODEDEMANDTYPE = 0
-	NODEHYDRAULICGRADETYPE = 1
-	NODEPRESSURETYPE = 2
+	NodeDemandType = 0
+	NodeHydraulicGradeType = 1
+	NodePressureType = 2
 
 class TankAttributeEnum(Enum):
-	TANKDEMANDTYPE = 0
-	TANKHYDRAULICGRADETYPE = 1
-	TANKPRESSURETYPE = 2
-	TANKLEVELTYPE = 3
-	TANKTIMETODRAINTYPE = 4
-	TANKTIMETOFILLTYPE = 5
-	TANKPERCENTFULLTYPE = 6
+	TankDemandType = 0
+	TankHydraulicGradeType = 1
+	TankPressureType = 2
+	TankLevelType = 3
+	TankTimeToDrainType = 4
+	TankTimeToFillType = 5
+	TankPercentFullType = 6
 
 class HydroTankAttributeEnum(Enum):
-	HYDROTANKHYDRAULICGRADETYPE = 1
-	HYDROTANKPRESSURETYPE = 2
+	HydroTankHydraulicGradeType = 1
+	HydroTankPressureType = 2
 
 class SuctionDataTypeEnum(Enum):
-	PRESSURE = 0
-	LEVEL = 1
+	Pressure = 0
+	Level = 1
 
 class DischargeDataTypeEnum(Enum):
-	PRESSURE = 0
-	LEVEL = 1
+	Pressure = 0
+	Level = 1
 
 class SurgeTankAttributeEnum(Enum):
-	SURGETANKDEMANDTYPE = 0
-	SURGETANKHYDRAULICGRADETYPE = 1
-	SURGETANKPRESSURETYPE = 2
+	SurgeTankDemandType = 0
+	SurgeTankHydraulicGradeType = 1
+	SurgeTankPressureType = 2
 
 class ControlConditionPumpAttributeEnum(Enum):
-	PUMPDISCHARGETYPE = 0
-	CONDITIONPUMPSETTINGTYPE = 1
-	CONDITIONPUMPSTATUSTYPE = 2
+	PumpDischargeType = 0
+	ConditionPumpSettingType = 1
+	ConditionPumpStatusType = 2
 
 class ConditionPipeAttributeEnum(Enum):
-	PIPEDISCHARGETYPE = 0
-	CONDITIONPIPESTATUSTYPE = 1
+	PipeDischargeType = 0
+	ConditionPipeStatusType = 1
 
 class ControlConditionPressureValveAttributeEnum(Enum):
-	PRESSUREVALVEDISCHARGETYPE = 0
-	PRESSUREVALVESETTINGTYPE = 1
-	PRESSUREVALVESTATUSTYPE = 2
+	PressureValveDischargeType = 0
+	PressureValveSettingType = 1
+	PressureValveStatusType = 2
 
 class ControlConditionFCVAttributeEnum(Enum):
-	FCVDISCHARGETYPE = 0
-	FCVSETTINGTYPE = 1
-	FCVSTATUSTYPE = 2
+	FCVDischargeType = 0
+	FCVSettingType = 1
+	FCVStatusType = 2
 
 class ControlConditionGPVAttributeEnum(Enum):
-	GPVDISCHARGETYPE = 0
-	GPVSTATUSTYPE = 1
+	GPVDischargeType = 0
+	GPVStatusType = 1
 
 class ControlConditionTCVAttributeEnum(Enum):
-	TCVDISCHARGETYPE = 0
-	TCVSETTINGTYPE = 1
-	TCVSTATUSTYPE = 2
+	TCVDischargeType = 0
+	TCVSettingType = 1
+	TCVStatusType = 2
 
 class CompareOperatorEnum(Enum):
-	EQUALSTYPE = 0
-	GREATERTHANTYPE = 1
-	GREATERTHANEQUALTYPE = 2
-	LESSTHANTYPE = 3
-	LESSTHANEQUALTYPE = 4
-	NOTEQUALTYPE = 5
+	EqualsType = 0
+	GreaterThanType = 1
+	GreaterThanEqualType = 2
+	LessThanType = 3
+	LessThanEqualType = 4
+	NotEqualType = 5
 
 class LogicalOperatorEnum(Enum):
-	OPERATORIFTYPE = 0
-	OPERATORANDTYPE = 1
-	OPERATORORTYPE = 2
+	OperatorIfType = 0
+	OperatorAndType = 1
+	OperatorOrType = 2
 
 class UnitDemandLoadTypeEnum(Enum):
-	POPULATIONBASEDTYPE = 0
-	AREABASEDTYPE = 1
-	COUNTUNITTYPE = 3
+	PopulationBasedType = 0
+	AreaBasedType = 1
+	CountUnitType = 3
 
 class EquivalentPipeMethodEnum(Enum):
-	MODIFYDIAMETERTYPE = 0
-	MODIFITYROUGHNESSTYPE = 1
+	ModifyDiameterType = 0
+	ModifityRoughnessType = 1
 
 class DominantPipeCriteriaEnum(Enum):
-	DOMBULKREACTIONRATETYPE = 0
-	DOMDIAMETERTYPE = 1
-	DOMINSTALLATIONYEARTYPE = 2
-	DOMLENGTHTYPE = 3
-	DOMMINORLOSSCOEFFICIENTTYPE = 4
-	DOMROUGHNESSTYPE = 5
-	DOMWALLREACTIONRATETYPE = 6
+	DomBulkReactionRateType = 0
+	DomDiameterType = 1
+	DomInstallationYearType = 2
+	DomLengthType = 3
+	DomMinorLossCoefficientType = 4
+	DomRoughnessType = 5
+	DomWallReactionRateType = 6
 
 class SkelebratorTypeEnum(Enum):
-	SMARTPIPEREMOVALTYPE = 0
-	BRANCHCOLLAPSINGTYPE = 1
-	SERIESPIPEMERGINGTYPE = 2
-	PARALLELPIPEMERGINGTYPE = 3
-	INLINEISOLATINGVALVEREPLACEMENTTYPE = 4
+	SmartPipeRemovalType = 0
+	BranchCollapsingType = 1
+	SeriesPipeMergingType = 2
+	ParallelPipeMergingType = 3
+	InlineIsolatingValveReplacementType = 4
 
 class BranchLoadDistributionStrategyEnum(Enum):
-	MOVELOADTYPE = 0
-	DONTMOVELOADTYPE = 1
+	MoveLoadType = 0
+	DontMoveLoadType = 1
 
 class SeriesLoadDistributionStrategyEnum(Enum):
-	EQUALLYDISTRIBUTEDTYPE = 0
-	PROPORTIONALTODOMINANTCRITERIATYPE = 1
-	PROPORTIONALTOEXISTINGLOADTYPE = 2
-	USERDEFINEDRATIOTYPE = 3
+	EquallyDistributedType = 0
+	ProportionalToDominantCriteriaType = 1
+	ProportionalToExistingLoadType = 2
+	UserDefinedRatioType = 3
 
 class MinorLossStrategyEnum(Enum):
-	FIFTYFIFTYSPLITYTYPE = 0
-	IGNOREMINORLOSSESTYPE = 1
-	SKIPPIPEMINORLOSSGREATERTHANMAXTYPE = 2
+	FiftyFiftySplityType = 0
+	IgnoreMinorLossesType = 1
+	SkipPipeMinorLossGreaterThanMaxType = 2
 
 class MaterialConditionEnum(Enum):
-	CONDITIONSAMETYPE = 0
-	CONDITIONDIFFERENTTYPE = 1
+	ConditionSameType = 0
+	ConditionDifferentType = 1
 
 class PipeConditionAttributeTypeEnum(Enum):
-	CONDITIONBULKREACTIONRATETYPE = 0
-	CONDITIONDIAMETERTYPE = 1
-	CONDITIONHASCHECKVALVETYPE = 2
-	CONDITIONINSTALLATIONYEARTYPE = 3
-	CONDITIONLENGTHTYPE = 4
-	CONDITIONMATERIALTYPE = 5
-	CONDITIONMINORLOSSCOEFFICIENTTYPE = 6
-	CONDITIONROUGHNESSTYPE = 7
-	CONDITIONWALLREACTIONRATETYPE = 8
-	CONDITIONWAVESPEED = 9
+	ConditionBulkReactionRateType = 0
+	ConditionDiameterType = 1
+	ConditionHasCheckValveType = 2
+	ConditionInstallationYearType = 3
+	ConditionLengthType = 4
+	ConditionMaterialType = 5
+	ConditionMinorLossCoefficientType = 6
+	ConditionRoughnessType = 7
+	ConditionWallReactionRateType = 8
+	ConditionWaveSpeed = 9
 
 class PipeConditionOperatorTypeEnum(Enum):
-	PIPECONDITIONLESSTHANTYPE = 0
-	PIPECONDITIONGREATERTHANTYPE = 1
-	PIPECONDITIONLESSTHANEQUALTYPE = 2
-	PIPECONDITIONGREATERTHANEQUALTYPE = 3
-	PIPECONDITIONEQUALTYPE = 4
-	PIPECONDITIONNOTEQUALTYPE = 5
-	PIPECONDITIONTOLERANCETYPE = 6
+	PipeConditionLessThanType = 0
+	PipeConditionGreaterThanType = 1
+	PipeConditionLessThanEqualType = 2
+	PipeConditionGreaterThanEqualType = 3
+	PipeConditionEqualType = 4
+	PipeConditionNotEqualType = 5
+	PipeConditionToleranceType = 6
 
 class JunctionConditionAttributeTypeEnum(Enum):
-	CONDITIONBASEFLOWTYPE = 0
-	CONDITIONELEVATIONTYPE = 1
-	CONDITIONEMITTERCOEFFICIENTTYPE = 2
+	ConditionBaseFlowType = 0
+	ConditionElevationType = 1
+	ConditionEmitterCoefficientType = 2
 
 class JunctionConditionOperatorEnum(Enum):
-	JUNCTIONCONDITIONLESSTHANTYPE = 0
-	JUNCTIONCONDITIONGREATERTHANTYPE = 1
-	JUNCTIONCONDITIONLESSTHANEQUALTYPE = 2
-	JUNCTIONCONDITIONGREATERTHANEQUALTYPE = 3
-	JUNCTIONCONDITIONEQUALTYPE = 4
-	JUNCTIONCONDITIONNOTEQUALTYPE = 5
-	JUNCTIONCONDITIONTOLERANCETYPE = 6
+	JunctionConditionLessThanType = 0
+	JunctionConditionGreaterThanType = 1
+	JunctionConditionLessThanEqualType = 2
+	JunctionConditionGreaterThanEqualType = 3
+	JunctionConditionEqualType = 4
+	JunctionConditionNotEqualType = 5
+	JunctionConditionToleranceType = 6
 
 class IdahoSupportElementTypes(Enum):
-	IDAHOPATTERNELEMENTMANAGER = 50
-	IDAHOPUMPDEFINITIONELEMENTMANAGER = 51
-	IDAHOCONSTITUENTELEMENTMANAGER = 52
-	ZONEELEMENTMANAGER = 53
-	IDAHOCONTROLELEMENTMANAGER = 54
-	IDAHOCONTROLACTIONELEMENTMANAGER = 55
-	IDAHOCONTROLCONDITIONELEMENTMANAGER = 56
-	IDAHOLOGICALCONTROLSETELEMENTMANAGER = 59
-	PRESSUREDEPENDENTDEMANDFUNCTIONELEMENTMANAGER = 60
-	ENERGYPRICINGELEMENTMANAGER = 61
-	UNITDEMANDLOADELEMENTMANAGER = 62
-	GPVHEADLOSSCURVEELEMENTMANAGER = 63
+	IdahoPatternElementManager = 50
+	IdahoPumpDefinitionElementManager = 51
+	IdahoConstituentElementManager = 52
+	ZoneElementManager = 53
+	IdahoControlElementManager = 54
+	IdahoControlActionElementManager = 55
+	IdahoControlConditionElementManager = 56
+	IdahoLogicalControlSetElementManager = 59
+	PressureDependentDemandFunctionElementManager = 60
+	EnergyPricingElementManager = 61
+	UnitDemandLoadElementManager = 62
+	GpvHeadlossCurveElementManager = 63
 

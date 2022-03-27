@@ -1,38 +1,39 @@
 from enum import Enum
-from System import TypeCode, ICloneable
 from typing import overload, List, Dict, Iterator
+from System import ICloneable
 from array import array
+from System.Collections import ICollection
 
 class DictionaryEntryExStringType(Enum):
-	KEY = 0
-	VALUE = 1
+	Key = 0
+	Value = 1
 
 class FieldDataType(Enum):
-	INTEGER = 1
-	REAL = 2
-	TEXT = 3
-	LONGTEXT = 4
-	DATETIME = 5
-	BOOLEAN = 6
-	LONGBINARY = 7
-	REFERENCED = 8
-	COLLECTION = 9
-	ENUMERATED = 10
+	Integer = 1
+	Real = 2
+	Text = 3
+	LongText = 4
+	DateTime = 5
+	Boolean = 6
+	LongBinary = 7
+	Referenced = 8
+	Collection = 9
+	Enumerated = 10
 
 class SystemType(Enum):
-	BOOL = 1
-	BYTE = 2
-	CHAR = 3
-	DATETIME = 4
-	DECIMAL = 5
-	DELEGATE = 6
-	DOUBLE = 7
-	INT = 8
-	LONG = 9
-	OBJECT = 10
-	SELECTIONSET = 11
-	STRING = 12
-	GUID = 13
+	Bool = 1
+	Byte = 2
+	Char = 3
+	DateTime = 4
+	Decimal = 5
+	Delegate = 6
+	Double = 7
+	Int = 8
+	Long = 9
+	Object = 10
+	SelectionSet = 11
+	String = 12
+	Guid = 13
 
 class SymbolStyle(Enum):
 	NONE = 0
@@ -40,144 +41,137 @@ class SymbolStyle(Enum):
 	GIS = 2
 
 class SetValuesOperation(Enum):
-	ADD = 1
-	DIVIDE = 2
-	MULTIPLY = 3
-	SET = 4
-	SUBTRACT = 5
+	Add = 1
+	Divide = 2
+	Multiply = 3
+	Set = 4
+	Subtract = 5
 
 class ComparisonOperator(Enum):
-	NOOPERATOR = 0
-	EQUALTO = 1
-	NOTEQUALTO = 2
-	GREATERTHAN = 3
-	GREATERTHANOREQUALTO = 4
-	LESSTHAN = 5
-	LESSTHANOREQUALTO = 6
-	CONTAINS = 7
-	BEGINSWITH = 8
+	NoOperator = 0
+	EqualTo = 1
+	NotEqualTo = 2
+	GreaterThan = 3
+	GreaterThanOrEqualTo = 4
+	LessThan = 5
+	LessThanOrEqualTo = 6
+	Contains = 7
+	BeginsWith = 8
 
 class SortOrder(Enum):
-	ASCENDING = 1
-	DESCENDING = 2
+	Ascending = 1
+	Descending = 2
 
 class HmiProductBeta(Enum):
 	NONE = 0
-	TEST = 1
-	MARYLAND = 2
-	VEGAS = 3
-	DELAWARE = 4
-	HAMMER = 5
-	IDAHO = 6
+	Test = 1
+	Maryland = 2
+	Vegas = 3
+	Delaware = 4
+	Hammer = 5
+	Idaho = 6
 	UDX = 7
-	IDAHO_WATERCAD = 8
-	FLORIDA = 9
-	TORONTO = 10
-	ALABAMA = 11
-	MONTANA = 12
-	GASANALYSIS = 14
-	FLORIDA_UK = 15
-	WASHINGTON = 16
-	CONTROLROOM = 17
+	Idaho_WaterCAD = 8
+	Florida = 9
+	Toronto = 10
+	Alabama = 11
+	Montana = 12
+	GasAnalysis = 14
+	Florida_UK = 15
+	Washington = 16
+	ControlRoom = 17
 	SUE = 18
-	DIGITALWATERWORKS = 19
-	SEWEROPS = 20
-	WATEROPS = 21
-	SHANGHAI = 22
+	DigitalWaterWorks = 19
+	SewerOPS = 20
+	WaterOPS = 21
+	Shanghai = 22
 
 class HmiProductRelease(Enum):
 	NONE = 0
-	TEST = 1
-	CIVILSTORMDYNAMIC = 2
-	FLOWMASTER = 3
-	SEWERGEMS = 4
-	HAMMER = 5
-	WATERGEMS = 6
-	USERDATAEXTENSIONS = 7
-	WATERCAD = 8
-	STORMCAD = 9
+	Test = 1
+	CivilStormDynamic = 2
+	FlowMaster = 3
+	SewerGEMS = 4
+	Hammer = 5
+	WaterGEMS = 6
+	UserDataExtensions = 7
+	WaterCAD = 8
+	StormCAD = 9
 	HAMMERXM = 10
-	SEWERCAD = 11
-	PONDPACK = 12
-	GASANALYSIS = 14
-	STORMCAD_UK = 15
+	SewerCAD = 11
+	PondPack = 12
+	GasAnalysis = 14
+	StormCAD_UK = 15
 	SUDA = 16
-	CONTROLROOM = 17
+	ControlRoom = 17
 	SUE = 18
-	DIGITALWATERWORKS = 19
-	SEWEROPS = 20
-	WATEROPS = 21
-	SHANGHAI = 22
+	DigitalWaterWorks = 19
+	SewerOPS = 20
+	WaterOPS = 21
+	Shanghai = 22
 
 class hmiProjectType(Enum):
-	HMIALLPROJECT = 0
-	HMIWATERPROJECT = 1
-	HMISEWERPROJECT = 2
-	HMISTORMPROJECT = 3
-	HMIPONDPROJECT = 4
-	HMIDYNPROJECT = 5
-	HMIPUMPMASTERPROJECT = 6
-	HMIGDBCONNECTPROJECT = 7
-	HMIHAMMERPROJECT = 8
-	HMIFLOWMASTERPROJECT = 9
-	HMICULVERTMASTERPROJECT = 10
-	HMIHENDERSONPROJECT = 11
+	hmiAllProject = 0
+	hmiWaterProject = 1
+	hmiSewerProject = 2
+	hmiStormProject = 3
+	hmiPondProject = 4
+	hmiDynProject = 5
+	hmiPumpMasterProject = 6
+	hmiGDBConnectProject = 7
+	hmiHammerProject = 8
+	hmiFlowMasterProject = 9
+	hmiCulvertMasterProject = 10
+	hmiHendersonProject = 11
 
 class LockType(Enum):
 	NONE = 0
-	OPTIMISTIC = 1
-	PESSIMISTIC = 2
+	Optimistic = 1
+	Pessimistic = 2
 
 class HaestadDocumentSpecificationType(Enum):
-	LOCAL = 0
-	PROJECTWISE = 1
-	MULTIFILE = 2
-	INVALID = 3
+	Local = 0
+	ProjectWise = 1
+	Multifile = 2
+	Invalid = 3
 	PWCS = 4
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
 
 class CompareType(Enum):
-	INCREASINGX = 0
-	INCREASINGY = 1
+	IncreasingX = 0
+	IncreasingY = 1
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class Tag(Enum):
-	DEFAULT = 0
-
-class Tag(Enum):
-	DEFAULT = 0
-
-class CompareType(Enum):
-	INCREASINGX = 0
-	INCREASINGY = 1
-
-class Tag(Enum):
-	DEFAULT = 0
-
-class Tag(Enum):
-	DEFAULT = 0
-
-class Tag(Enum):
-	DEFAULT = 0
-
-class Tag(Enum):
-	DEFAULT = 0
+	Default = 0
 
 class FieldCollection(List, ICloneable):
 
@@ -2207,6 +2201,68 @@ class INamable:
 		Returns
 		--------
 			``INamable`` : 
+		"""
+		pass
+
+class IMemento:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@property
+	def State(self) -> object:
+		"""No Description
+
+		Returns
+		--------
+			``IMemento`` : 
+		"""
+		pass
+
+	@State.setter
+	def State(self, state: object) -> None:
+		pass
+
+class IMementoable:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def CreateMemento(self) -> IMemento:
+		"""No Description
+
+		Returns
+		--------
+			``IMemento`` : 
+		"""
+		pass
+
+	def SetMemento(self, aimemento: IMemento) -> bool:
+		"""No Description
+
+		Args
+		--------
+			aimemento (``IMemento``) :  aimemento
+
+		Returns
+		--------
+			``bool`` : 
 		"""
 		pass
 
