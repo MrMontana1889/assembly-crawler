@@ -226,7 +226,13 @@ namespace AssemblyCrawler.Support
 
 			for (int i = 0; i < members.Length; ++i)
 			{
-				try { ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i].ToUpperInvariant()} = {Convert.ToInt32(values.GetValue(i))}"); }
+				try
+				{
+					if (members[i] != "None")
+						ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {Convert.ToInt32(values.GetValue(i))}");
+					else
+						ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i].ToUpperInvariant()} = {Convert.ToInt32(values.GetValue(i))}");
+				}
 				catch { ClassDefinition.AppendLine($"{GetIndentation(1)}{members[i]} = {i}"); }
 			}
 

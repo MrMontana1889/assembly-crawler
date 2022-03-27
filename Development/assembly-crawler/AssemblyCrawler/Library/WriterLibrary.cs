@@ -32,6 +32,9 @@ namespace AssemblyCrawler.Library
 			if (interf == typeof(void))
 				return;
 
+			if (interf == typeof(TypeCode))
+				return;
+
 			TypeConvertLibrary.AddImportForPythonType(module, interf);
 		}
 		#endregion
