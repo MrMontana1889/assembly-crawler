@@ -1,6 +1,6 @@
-from typing import Iterator, Generic, TypeVar
+from typing import Iterator, Generic
+from System import T
 
-T = TypeVar("T")
 
 class IReadOnlyCollection(Generic[T], Iterator[T]):
 

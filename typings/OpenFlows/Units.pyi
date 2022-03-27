@@ -1,10 +1,9 @@
 from enum import Enum
-from System import TypeCode
 from typing import Generic, overload, TypeVar
 from Haestad.Support.Units import Unit, Dimension
 
-TNetworkUnitsType = TypeVar("TNetworkUnitsType", INetworkUnits)
-TComponentUnitsType = TypeVar("TComponentUnitsType", IComponentUnits)
+TNetworkUnitsType = TypeVar("TNetworkUnitsType")
+TComponentUnitsType = TypeVar("TComponentUnitsType")
 
 class FormatCode(Enum):
 	Fixed = 0

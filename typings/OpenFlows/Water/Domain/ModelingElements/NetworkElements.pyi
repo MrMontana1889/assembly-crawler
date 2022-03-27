@@ -5,7 +5,6 @@ from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, I
 from OpenFlows.Units import IUnit
 from Haestad.Domain.ModelingObjects.Water.Enumerations import CheckValveFlowDirectionEnum, TurbineOperatingCaseEnum, TurbineStatusEnum, HammerValveType, SurgeTankTypeEnum, GasVesselLevelType, HydroTankType, OperatingRangeTypeEnum, AirFlowCalculationMethod, AirValveTypeEnum, AirValveTransitionType, SAV_SRVTypeEnum, SAVValveTypeEnum, SavClosureTriggerEnum, SRVControlTypeEnum, SRVValveTypeEnum, DischargeToAtmosphereTypeEnum, ValveTypeInitialStatusEnum
 from enum import Enum
-from System import TypeCode
 from Haestad.Calculations.Pressure import VSPBType, TankCalculationModel, IsolationValveInitialSetting
 from OpenFlows.Water.Domain import ValveSettingType, TCVCoefficientType, PressureValvesettingType, ConstituentSourceType, PipeStatusType, TankSectionType
 from Haestad.Support.Support import GeometryPoint, IEditLabeled, ILabeled
