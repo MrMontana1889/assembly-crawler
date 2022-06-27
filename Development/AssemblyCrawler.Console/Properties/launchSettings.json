@@ -66,6 +66,10 @@
     "TestAssemblyNEt48_2": {
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\repos\\assembly-crawler\\Output\\TestAssemblyNET48\\bin\\Debug\\TestAssemblyNET48.dll\" -x \"\" -o \"D:\\repos\\python\\Test\\typings\""
+    },
+    "WaterSight.Web-config": {
+      "commandName": "Project",
+      "commandLineArgs": "-c \"D:\\repos\\assembly-crawler\\WaterSight.config\""
     }
   }
 }
