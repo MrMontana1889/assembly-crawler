@@ -1,5 +1,5 @@
 ﻿// TestEntry.cs
-// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,9 +25,9 @@ namespace TestGenericAssembly
 		}
 
 		public static IPipes GetPipes(List<int> Ids)
-        {
+		{
 			return new Pipes();
-        }
+		}
 
 		// TODO: Need to support nested Types
 
@@ -44,31 +44,31 @@ namespace TestGenericAssembly
 	/// An example class with multiple constructor
 	/// </summary>
 	public class MultiCtorClass
-    {
+	{
 		public static string STATIC_STRING = "STATIC_STRING";
 
 		/// <summary>
 		/// Constructor with no parameters
 		/// </summary>
 		public MultiCtorClass()
-        {
-        }
+		{
+		}
 
-        /// <summary>
-        /// You will need <paramref name="id"/> to create an instance
-        /// </summary>
-        /// <param name="id">Id of the element</param>
-        /// <param name="label">Default value is Default</param>
-        public MultiCtorClass(int id, string label ="Default"):base()
-        {
+		/// <summary>
+		/// You will need <paramref name="id"/> to create an instance
+		/// </summary>
+		/// <param name="id">Id of the element</param>
+		/// <param name="label">Default value is Default</param>
+		public MultiCtorClass(int id, string label = "Default") : base()
+		{
 			Id = id;
 			Label = label;
-        }
+		}
 
-        public MultiCtorClass(Numbers numbers):base()
-        {
+		public MultiCtorClass(Numbers numbers) : base()
+		{
 			Numbers = numbers;
-        }
+		}
 
 		/// <summary>
 		/// A read-only field for Id
@@ -80,32 +80,32 @@ namespace TestGenericAssembly
 		/// </summary>
 		public string Label { get; set; }
 
-        /// <summary>
-        /// Method with out parameter
-        /// </summary>
-        /// <param name="label">Input label</param>
-        /// <param name="id">This Id will be inizalied</param>
-        /// <param name="one"></param>
-        /// <returns>True/False</returns>
-        public bool Contains(string label, out int id, string one = "one")
-        {
+		/// <summary>
+		/// Method with out parameter
+		/// </summary>
+		/// <param name="label">Input label</param>
+		/// <param name="id">This Id will be inizalied</param>
+		/// <param name="one"></param>
+		/// <returns>True/False</returns>
+		public bool Contains(string label, out int id, string one = "one")
+		{
 			id = 1;
 			return string.IsNullOrEmpty(label);
-        }
+		}
 
 		public Numbers Numbers { get; }
-    }
+	}
 
 	/// <summary>
 	/// Enum of numbers
 	/// </summary>
 	public enum Numbers
-    {
-		Zero=0,
+	{
+		Zero = 0,
 		/// <summary>
 		/// One 1
 		/// </summary>
-		One=1,
-		Two=2
-    }
+		One = 1,
+		Two = 2
+	}
 }

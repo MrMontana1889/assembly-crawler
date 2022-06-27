@@ -1,15 +1,14 @@
 from enum import Enum
-from System import TypeCode
 from OpenFlows.Domain.ModelingElements import IElement, TElementTypeEnum, TUnitsType, IModelingElementBase, TElementManagerType, TElementType, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IGeometryUnits, IElements, IElementManager
 from typing import Generic, List, overload, Dict, TypeVar
 from OpenFlows.Domain.ModelingElements.Support import IFieldManager
 from Haestad.Support.Support import GeometryPoint, IEditLabeled, ILabeled
 from OpenFlows.Units import IUnit
 
-TElementInputType = TypeVar("TElementInputType", IElementInput)
-TElementResultsType = TypeVar("TElementResultsType", IElementResults)
-TElementsInputType = TypeVar("TElementsInputType", IElementsInput)
-TElementsResultsType = TypeVar("TElementsResultsType", IElementsResults)
+TElementInputType = TypeVar("TElementInputType")
+TElementResultsType = TypeVar("TElementResultsType")
+TElementsInputType = TypeVar("TElementsInputType")
+TElementsResultsType = TypeVar("TElementsResultsType")
 
 class ElementStateType(Enum):
 	All = 0

@@ -1,5 +1,4 @@
 from enum import Enum
-from System import TypeCode
 from OpenFlows.Domain.DataObjects import IModel, IModelElementManager, IModelIOOperations, IModelScenarioManagement, IDomainModel, IModelSelectionSetManagement
 from OpenFlows.Water.Units import INetworkElementUnits, IComponentElementUnits
 from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetwork, IWaterElement
@@ -21,15 +20,15 @@ class CalculationType(Enum):
 	WaterQuality = 8
 
 class DemandAdjustmentsType(Enum):
-	None = 0
+	NONE = 0
 	Active = 1
 
 class UnitDemandAdjustmentType(Enum):
-	None = 0
+	NONE = 0
 	Active = 1
 
 class RoughnessAdjustmentType(Enum):
-	None = 0
+	NONE = 0
 	Active = 1
 
 class AdjustmentOperationType(Enum):

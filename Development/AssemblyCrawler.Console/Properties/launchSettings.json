@@ -61,7 +61,7 @@
     },
     "Config-crawler": {
       "commandName": "Project",
-      "commandLineArgs": "-c \"D:\\repos\\assembly-crawler\\OpenFlows.config\""
+      "commandLineArgs": "-c \"D:\\repos\\assembly-crawler-WTRG1036\\OpenFlows.config\""
     },
     "TestAssemblyNEt48_2": {
       "commandName": "Project",

@@ -1,5 +1,5 @@
 ﻿// WriterLibrary.cs
-// Copyright (c) 2021 Kristopher L. Culin see LICENSE for details
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 using System;
 using System.Linq;
@@ -30,6 +30,9 @@ namespace AssemblyCrawler.Library
 		public static void AddReferenceImports(PythonModule module, Type interf)
 		{
 			if (interf == typeof(void))
+				return;
+
+			if (interf == typeof(TypeCode))
 				return;
 
 			TypeConvertLibrary.AddImportForPythonType(module, interf);

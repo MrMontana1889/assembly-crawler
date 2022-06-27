@@ -1,5 +1,5 @@
-﻿// TypeVarDefinition.cs
-// Copyright (c) 2021 Kristopher L. Culin See LICENSE for details
+﻿// PythonTypeVar.cs
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 using System;
 using System.Collections.Generic;
@@ -42,10 +42,14 @@ namespace AssemblyCrawler.Support
 				foreach (var t in Constraints)
 					constraintNames.Add(WriterLibrary.CorrectClassName(t.Name, t.GetGenericArguments().Length));
 
-				if (constraintNames.Count > 0)
-					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\", {string.Join(",", constraintNames)})");
-				else
-					sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\")");
+				// 2022-03-26 - It turns out that by providing a list of types in the TypeVar definition, the "IntelliSense"
+				// restricts the information to ONLY this list.  So by providing the lowest level types, the other properties
+				// in IWaterNetwork, for example, won't show.  By only defining the TypeVar with no restrictions, will the
+				// full list of properties/methods actually show up consistently.
+				// Maybe in the future, some code can be written to figure out the "highest" level interfaces to restrict by
+				// (highest meaning something like IWaterNetwork is included since it is essentially the "concrete" class) but
+				// not INetwork whichi s the class in OpenFlows, not OpenFlows.Water
+				sw.WriteLine($"{TypeVarName} = TypeVar(\"{TypeVarName}\")");
 			}
 			else
 			{

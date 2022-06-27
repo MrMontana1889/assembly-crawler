@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Interfaces.cs
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
 namespace Test.TestGenericAssembly.Links
 {

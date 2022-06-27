@@ -1,4 +1,7 @@
-﻿using System.Reflection;
+﻿// AssemblyInfo.cs
+// Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
+
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
