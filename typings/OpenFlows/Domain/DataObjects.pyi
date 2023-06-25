@@ -3,20 +3,27 @@ from datetime import datetime
 from Haestad.Support.Support import ILabeled
 from typing import overload, Generic, List, TypeVar
 from OpenFlows.Domain.ModelingElements import IModelingElementBase, IModelingElementsBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IEmbeddedStickyObjects, IScenarios, IScenario, IScenarioOptions, IElementUnits
-from OpenFlows.Domain.ModelingElements.Support import TNetworkElementTypeEnum, IUserFieldManager
-from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
+from OpenFlows.Domain.ModelingElements.Alternatives import TAlternativeTypeEnum
 from enum import Enum
-from OpenFlows.Units import IModelUnits, TNetworkUnitsType, TComponentUnitsType, INetworkUnits, IComponentUnits
+from OpenFlows.Units import INetworkUnits, IComponentUnits, IModelUnits
+from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
+from array import array
+from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
 from OpenFlows.Domain.ModelingElements.Components import IModelComponents
 
 TScenarioManagerType = TypeVar("TScenarioManagerType")
 TScenarioType = TypeVar("TScenarioType")
+TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum")
+TNetworkUnitsType = TypeVar("TNetworkUnitsType")
+TComponentUnitsType = TypeVar("TComponentUnitsType")
 TNetworkElementType = TypeVar("TNetworkElementType")
 TSelectionSetsType = TypeVar("TSelectionSetsType")
 TSelectionSetElementType = TypeVar("TSelectionSetElementType")
 TSelectionSetNetworkElementType = TypeVar("TSelectionSetNetworkElementType")
 TNetworkType = TypeVar("TNetworkType")
 TModelComponentsType = TypeVar("TModelComponentsType")
+TNetworkPrototypesType = TypeVar("TNetworkPrototypesType")
+TModelAlternativeManagementType = TypeVar("TModelAlternativeManagementType")
 TScenarioOptionsType = TypeVar("TScenarioOptionsType")
 TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType")
 TComponentElementType = TypeVar("TComponentElementType")
@@ -37,7 +44,7 @@ class IDomainModel:
 		pass
 
 	def IsQuerySelectionSet(self, id: int) -> bool:
-		"""Determines if a selection set is query-based.
+		"""No Description
 
 		Args
 		--------
@@ -51,7 +58,7 @@ class IDomainModel:
 
 	@property
 	def DomainDataSet(self) -> IDomainDataSet:
-		"""The DomainDataSet for the current model to allow for advanced API usage.
+		"""No Description
 
 		Returns
 		--------
@@ -74,7 +81,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Filename(self) -> str:
-		"""The full path and filename of the model
+		"""No Description
 
 		Returns
 		--------
@@ -84,7 +91,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Date(self) -> datetime:
-		"""The project date
+		"""No Description
 
 		Returns
 		--------
@@ -94,7 +101,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Title(self) -> str:
-		"""The project title
+		"""No Description
 
 		Returns
 		--------
@@ -104,7 +111,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Company(self) -> str:
-		"""The company creating the model
+		"""No Description
 
 		Returns
 		--------
@@ -114,7 +121,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Engineer(self) -> str:
-		"""The project engineer for the model
+		"""No Description
 
 		Returns
 		--------
@@ -124,7 +131,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Notes(self) -> str:
-		"""Any notes about the model.
+		"""No Description
 
 		Returns
 		--------
@@ -146,8 +153,7 @@ class IModelIOOperations:
 		pass
 
 	def Save(self) -> None:
-		"""Saves the model from the temporary location back to the original location.
-            Only the SQLite database is copied.
+		"""No Description
 
 		Returns
 		--------
@@ -156,11 +162,11 @@ class IModelIOOperations:
 		pass
 
 	def SaveAs(self, filename: str) -> None:
-		"""Saves the model to the specified location.
+		"""No Description
 
 		Args
 		--------
-			filename (``str``) :  The full path and filename of the project.
+			filename (``str``) :  filename
 
 		Returns
 		--------
@@ -169,7 +175,7 @@ class IModelIOOperations:
 		pass
 
 	def Close(self) -> None:
-		"""Closes the model.
+		"""No Description
 
 		Returns
 		--------
@@ -192,7 +198,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@overload
 	def SetActiveScenario(self, scenarioID: int) -> None:
-		"""Sets the scenario as active.
+		"""No Description
 
 		Args
 		--------
@@ -219,7 +225,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		pass
 
 	def RunActiveScenario(self) -> None:
-		"""Calculates the active scenario using the current set of alternatives and calculation options assigned to the scenario
+		"""No Description
 
 		Returns
 		--------
@@ -229,7 +235,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@property
 	def Scenarios(self) -> TScenarioManagerType:
-		"""A list of scenarios in the model.
+		"""No Description
 
 		Returns
 		--------
@@ -239,11 +245,37 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@property
 	def ActiveScenario(self) -> TScenarioType:
-		"""The currently active scenario.
+		"""No Description
 
 		Returns
 		--------
 			``IModelScenarioManagement`` : 
+		"""
+		pass
+
+class IModelAlternatives(Generic[TNetworkElementTypeEnum, TAlternativeTypeEnum, TNetworkUnitsType, TComponentUnitsType]):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def AlternativeType(self, id: int) -> TAlternativeTypeEnum:
+		"""No Description
+
+		Args
+		--------
+			id (``int``) :  id
+
+		Returns
+		--------
+			``TAlternativeTypeEnum`` : 
 		"""
 		pass
 
@@ -261,7 +293,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TNetworkElementTypeEnum:
-		"""Gets the element type of the given ID
+		"""No Description
 
 		Args
 		--------
@@ -274,7 +306,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def Elements(self, state: ElementStateType = ElementStateType.All) -> List[TNetworkElementType]:
-		"""Returns a list of all domain elements in the model.
+		"""No Description
 
 		Args
 		--------
@@ -283,6 +315,33 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		Returns
 		--------
 			``List[TNetworkElementType]`` : 
+		"""
+		pass
+
+class INetworkPrototypes(Generic[TNetworkElementTypeEnum]):
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def MakeActive(self, elementType: TNetworkElementTypeEnum, label: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			elementType (``TNetworkElementTypeEnum``) :  elementType
+			label (``str``) :  label
+
+		Returns
+		--------
+			``None`` : 
 		"""
 		pass
 
@@ -300,7 +359,7 @@ class IModelElementManager:
 		pass
 
 	def Element(self, id: int) -> IElement:
-		"""Gets an element for the given iD.  Returns null if the id does not exist.
+		"""No Description
 
 		Args
 		--------
@@ -313,34 +372,35 @@ class IModelElementManager:
 		pass
 
 	def NetworkElements(self, label: str, useWildcard: bool = False) -> List[IElement]:
-		"""Gets a list of domain elements that has the given label.
+		"""No Description
 
 		Args
 		--------
-			label (``str``) :  The label to search for
-			useWildcard (``bool``) :  Specifies whether or not the label contains wildcards.  Defaults to false.
+			label (``str``) :  label
+			useWildcard (``bool``) :  useWildcard
 
 		Returns
 		--------
-			``List[IElement]`` : A list of elements that use the label.  May be empty but never null.
+			``List[IElement]`` : 
 		"""
 		pass
 
 	def ModelElementType(self, id: int) -> ModelElementType:
-		"""Gets the type of model element type of the id, if it exists.
+		"""No Description
 
 		Args
 		--------
-			id (``int``) :  The id of the element
+			id (``int``) :  id
 
 		Returns
 		--------
-			``ModelElementType`` : If the id does not exist, throws exception.  Otherwise, returns the model element type.
+			``ModelElementType`` : 
 		"""
 		pass
 
+	@overload
 	def Delete(self, id: int) -> bool:
-		"""Deletes the element of the given id.
+		"""No Description
 
 		Args
 		--------
@@ -352,8 +412,22 @@ class IModelElementManager:
 		"""
 		pass
 
+	@overload
+	def Delete(self, ids: array[int]) -> None:
+		"""No Description
+
+		Args
+		--------
+			ids (``array[int]``) :  ids
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
 	def Exists(self, id: int) -> bool:
-		"""Determines if the id is valid and it exists in the model.
+		"""No Description
 
 		Args
 		--------
@@ -366,50 +440,50 @@ class IModelElementManager:
 		pass
 
 	def IsLink(self, id: int) -> bool:
-		"""Determines if the provided id is a link.
+		"""No Description
 
 		Args
 		--------
-			id (``int``) :  The ID of the element.
+			id (``int``) :  id
 
 		Returns
 		--------
-			``bool`` : True if the ID is a link, otherwise false
+			``bool`` : 
 		"""
 		pass
 
 	def IsNode(self, id: int) -> bool:
-		"""Determines if the provided id is a node.
+		"""No Description
 
 		Args
 		--------
-			id (``int``) :  The ID of the element.
+			id (``int``) :  id
 
 		Returns
 		--------
-			``bool`` : True if the ID is a node, otherwise false.
+			``bool`` : 
 		"""
 		pass
 
 	def IsPolygon(self, id: int) -> bool:
-		"""Determines if the provided is a polygon.
+		"""No Description
 
 		Args
 		--------
-			id (``int``) :  The ID of the element.
+			id (``int``) :  id
 
 		Returns
 		--------
-			``bool`` : True if the id is a polygon, otherwise false.
+			``bool`` : 
 		"""
 		pass
 
 	def NextNetworkElementLabel(self, domainElementType: int) -> str:
-		"""Gets the next label for the element type.
+		"""No Description
 
 		Args
 		--------
-			domainElementType (``int``) :  The type of network element
+			domainElementType (``int``) :  domainElementType
 
 		Returns
 		--------
@@ -432,7 +506,7 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 
 	@property
 	def SelectionSets(self) -> TSelectionSetsType:
-		"""A list of selection sets in the model.
+		"""No Description
 
 		Returns
 		--------
@@ -440,7 +514,7 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 		"""
 		pass
 
-class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType], IModelElementManager, IModelIOOperations, IModelUnits[TNetworkUnitsType, TComponentUnitsType], IModelScenarioManagement[TScenarioManagerType, TScenarioType], IDomainModel, IModelSelectionSetManagement[TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType]):
+class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType, TNetworkPrototypesType, TModelAlternativeManagementType, TAlternativeTypeEnum], IModelElementManager, IModelIOOperations, IModelUnits[TNetworkUnitsType, TComponentUnitsType], IModelScenarioManagement[TScenarioManagerType, TScenarioType], IDomainModel, IModelSelectionSetManagement[TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -469,11 +543,11 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@overload
 	def NextNetworkElementLabel(self, domainElementType: int) -> str:
-		"""Gets the next label for the element type.
+		"""No Description
 
 		Args
 		--------
-			domainElementType (``int``) :  The type of network element
+			domainElementType (``int``) :  domainElementType
 
 		Returns
 		--------
@@ -483,7 +557,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Network(self) -> TNetworkType:
-		"""The network elements in the model.
+		"""No Description
 
 		Returns
 		--------
@@ -493,7 +567,27 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Components(self) -> TModelComponentsType:
-		"""The supporting objects in the model like selection sets and patterns.
+		"""No Description
+
+		Returns
+		--------
+			``IModel`` : 
+		"""
+		pass
+
+	@property
+	def NetworkPrototypes(self) -> TNetworkPrototypesType:
+		"""No Description
+
+		Returns
+		--------
+			``IModel`` : 
+		"""
+		pass
+
+	@property
+	def Alternatives(self) -> TModelAlternativeManagementType:
+		"""No Description
 
 		Returns
 		--------
@@ -503,7 +597,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def ModelInfo(self) -> IModelInfo:
-		"""Basic information about the model.
+		"""No Description
 
 		Returns
 		--------
@@ -513,7 +607,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def UserFieldManager(self) -> IUserFieldManager[TNetworkElementTypeEnum]:
-		"""Provides a way to create custom fields in the current model.
+		"""No Description
 
 		Returns
 		--------
@@ -523,7 +617,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def EmbeddedStickyObjects(self) -> IEmbeddedStickyObjects[TNetworkElementTypeEnum]:
-		"""The external hyperlinks for the model.
+		"""No Description
 
 		Returns
 		--------
@@ -531,7 +625,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 		"""
 		pass
 
-class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType]):
+class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType, TNetworkPrototypesType, TModelAlternativeManagementType, TAlternativeTypeEnum]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
@@ -546,22 +640,22 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 
 	@overload
 	def Open(self, filename: str, openInPlace: bool = False) -> TModelType:
-		"""Opens a model at the given location
+		"""No Description
 
 		Args
 		--------
-			filename (``str``) :  The full path and filename ending in wtg.  The wtg and any support files are automatically copied to the temp folder.
-			openInPlace (``bool``) :  An option to open the specified project in its original location and not make a copy in the temp folder.
+			filename (``str``) :  filename
+			openInPlace (``bool``) :  openInPlace
 
 		Returns
 		--------
-			``TModelType`` : A model object representing the data in the specified file.
+			``TModelType`` : 
 		"""
 		pass
 
 	@overload
 	def Open(self, project: IProject) -> TModelType:
-		"""that wrappers a Framework-managed IProject
+		"""No Description
 
 		Args
 		--------

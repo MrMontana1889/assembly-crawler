@@ -1,6 +1,6 @@
 from enum import Enum
 from System import EventHandler, EventArgs, IAsyncResult, AsyncCallback, ICloneable, TimeSpan, IComparable, IntPtr
-from typing import overload, List
+from typing import overload, List, Dict
 from System.Runtime.Serialization import SerializationInfo, StreamingContext, ISerializable
 from Haestad.Support.Support import INamable, ILabeled
 from array import array
@@ -77,8 +77,11 @@ class PromptKey(Enum):
 	ArcGISProJoins = 47
 	FireFlowConstraints = 48
 	SELECTEntitlements = 49
-	ExportToLumenRT = 50
+	ExportToFile = 50
 	Generate2DGridUponCompute = 51
+	BackgroundLayerIssues = 52
+	TrackedChangesSizeInformation = 53
+	ParallelCriticalityCalculationsOptionInformation = 54
 
 class MessageKeys(Enum):
 	CoreReserved0 = 0
@@ -115,6 +118,19 @@ class MessageKeys(Enum):
 	SaveToPackageMissingSWMMInterfaceFile = 5006
 	SaveToPackageMissingGridAdjustmentLayer = 5007
 	SaveToPackageCustomResultsExcluded = 5008
+	GridOutflowTributariesNotSupported = 6814
+	GridChannelDoesNotIntersectPond = 6815
+	GridElementIsAnUnmappedSection = 6816
+	GridCrossSectionElementOnTheBoundary = 6817
+	GridInletGridPolygonCannotInterceptBoundary = 6818
+	GridChannelsAreOutOfSync = 6819
+	GridReportingPointOutsideOfComputationalGrid = 6820
+	GridBoundaryTimeElevationNotDefinedForTheEntireSimulationDuration = 6821
+	GridInletMustConnectToConduitOrLateral = 6822
+	FloodInflowsOnCatchBasinsFullCaptured = 6823
+	GridPondMustConnectToALink = 6824
+	GridNodeOnChannelBoundaryPartOfChannel = 6825
+	GridVoidSurfacePolygonCannotIntersectChannelPolygon = 6826
 	FmwReserved10000 = 10000
 	FmwReserved10001 = 10001
 	FmwReserved10002 = 10002
@@ -738,6 +754,20 @@ class MessageKeys(Enum):
 	NodeMaxCoverSmallerThanMinCover = 30210
 	MismatchUpstreamNodeMaxCover = 30211
 	MismatchDownstreamNodeMaxCover = 30212
+	ConduitCannotConnectToTapNode = 30213
+	SWGCulvertWarnQExceedsEQTRangeGiveAHigherHw = 30214
+	SWGCulvertWarnTwExceedsEQTRangeGiveAHigherHw = 30215
+	SWGCulvertErrorFailedToGenerateEQTValues = 30216
+	SWGCulvertErrorHWTooNarrowForAnyResults = 30217
+	SWGCrossSectionAsGutterShapeNotSupported = 30218
+	SWGCrossSectionAsGutterMultipleSurfInLinks = 30219
+	SWGCrossSectionAsGutterNoSurfInLinks = 30220
+	SWGCrossSectionAsGutterLinkIsWrongType = 30221
+	SWGCrossSectionAsGutterNeedsSingleManningsN = 30222
+	SWGCrossSectionAsGutterForInSagOnly = 30223
+	SWGCrossSectionAsGutterChannelTopIsBelowRim = 30224
+	SWGCrossSectionAsGutterTypeIsForGratesOnly = 30225
+	SWGCrossSectionAsGutterChannelBottomIsBelowRim = 30226
 	SWGGVFEngineNotSupportElementType = 35000
 	SWGVSPBElementNotSupportedInDWEngine = 35001
 	SWGElementFieldNotSupportedInEngineType = 35002
@@ -782,6 +812,8 @@ class MessageKeys(Enum):
 	SWGOverrideElementIsInactive = 36116
 	SWGOverrideConduitNotAConduit = 36117
 	SWGForecastOIDCNotSignIn = 36118
+	SWGUnsupportedChoiceForEnumeratedField = 36119
+	SWGChannelDrainsToInletAllInjected = 36120
 	IdahoSystemUnbalanced = 40000
 	IdahoMaxTrialsExceeded = 40001
 	IdahoNodeDisconnected = 40002
@@ -810,6 +842,8 @@ class MessageKeys(Enum):
 	IdahoReverseFlow = 40025
 	IdahoPumpCannotDeliverHead = 40026
 	IdahoPumpFailsNPSHR = 40027
+	IdahoTankOverflowing = 40028
+	IdahoCalculationHalted = 40029
 	PressureReservoirIsEmptying = 40200
 	PressureReservoirIsFilling = 40201
 	PressureTankIsEmptying = 40202
@@ -824,6 +858,7 @@ class MessageKeys(Enum):
 	PressureElementIsActive = 40211
 	PressureElementIsTemporarilyClosed = 40212
 	PressureLinkChangedByRule = 40213
+	PressureTankIsOverflowing = 40214
 	PipeBreak_RawBreakRateEqualsIndivBreakRate = 40300
 	PipeBreakGlobalHistoryLengthInvalid = 40301
 	PipeBreakGroupHistoryLengthInvalid = 40302
@@ -979,6 +1014,7 @@ class MessageKeys(Enum):
 	PressureEngineSimpleControlTimeBasedConditionValidationWarning = 41606
 	PressureEngineTopologicalValidationOutOfMemory = 41607
 	PressureEngineUnknownEnumerationValue = 41608
+	PressureEngineConditionElementTypeMismatch = 41609
 	PressureEngineFirstPointInTankCrossSectionCurveMustBeZeroZero = 41662
 	PressureEngineLastPointInTankCrossSectionCurveMustBeOneOne = 41663
 	PressureEngineMultiplePointPumpCurveContainsDuplicatePoints = 41669
@@ -1274,6 +1310,11 @@ class MessageKeys(Enum):
 	PressureEnginePipeBreakUndefinedElementToOpen = 41961
 	PressureEnginePipeShutdownDeletedOrInactiveElementToOpen = 41962
 	PressureEnginePipeShutdownUndefinedElementToOpen = 41963
+	PressureEngineInvalidFlowChangeLimitValue = 41964
+	PressureEngineInvalidHeadLossErrorLimitValue = 41965
+	PressureEngineExtraIterationsCannotBeNegative = 41966
+	PressureEngineMWHFormulaNotSupportedByEpanet = 41967
+	PressureEnginePDDOptionsNotSupportedByEpanet = 41968
 	GenericEngineInvalidOrMissingCalculationOptions = 42000
 	CulvertInletCoeffNotSelected_OnStartNode = 42001
 	CulvertInletCoeffNotSelected_OnStopNode = 42002
@@ -1659,6 +1700,11 @@ class MessageKeys(Enum):
 	STMDiversionLinkWithoutParallelLink = 44135
 	STSWBothRTKMethodsBeingUsed = 44136
 	SewerOPSMixofRTKandNonRTKCatchmentsBeingUsed = 44137
+	UserDefinedConduitNotDesignedUsingSelectedCatalogClass = 44138
+	NoConduitsAvalableForDesignInCatalogClass = 44139
+	NoShapeMaterialCatalogConduitAvailableForDesign = 44140
+	STMPondHGLHigherThanOutletElev = 44141
+	STMDesignNumOfElementsUpdated = 44142
 	STMUKMultipleCatchmentsCantNotExport = 44480
 	STMUKCatchbasinConvertedToManhole = 44481
 	STMUKJunctionConvertedToManhole = 44482
@@ -1678,6 +1724,7 @@ class MessageKeys(Enum):
 	STMUKWinDesVolumeTypeNotSupported = 44496
 	STMUKWinDesFieldDataIgnoredOnExport = 44497
 	STMUKMicrodarainageNonCircularConduitsNotExported = 44498
+	STMCUKMicroDrainageMDXHasTooManyPoints = 44499
 	HMREngineFailedToCompute = 44500
 	HMREnginePipeCountLicensedExceeded = 44501
 	HMREngineNotValidLicenseInPlace = 44502
@@ -2092,6 +2139,7 @@ class MessageKeys(Enum):
 	SWRCPondRoutingInfo = 51072
 	SWRCInletNotDesigned = 51073
 	SWRCVSPBOnOffElevOverrideControls = 51074
+	SWRCPumpSuctionSideNodeMustBeWetWellOrPressureJunction = 51075
 	SWRGPondsNotSupported = 52000
 	SWRGGuttersNotSupported = 52001
 	SWRGPondOutletStructureConverted = 52002
@@ -2855,8 +2903,26 @@ class MessageKeys(Enum):
 	GridPotentialCatchmentDoubleCount = 68128
 	GridTwoDCalcCapturesFullFlow = 68129
 	GridCoupledToGutters = 68130
+	GridCalcOptionMaxCourantNumberNotSuggested = 68131
 	GridBurningInPondFailedCheckPondDimensions = 68132
 	GridFlowBoundaryLineIntersectsVoidCells = 68133
+	GridChannelTerminatesTooCloseToBorder = 68134
+	GridWillOverrideTheOutfallsBoundaryCondition = 68135
+	GridWillIgnoreOutfallRouteToCatchmentID = 68136
+	GridMaxTerrainBoundaryElevationLowerThanGrid = 68137
+	GridBoundaryTailwaterElevationLowerThanGrid = 68138
+	GridBoundaryTailwaterElevationLowerThanMaxTerrain = 68139
+	GridGenerationNoActivateGridElement = 68140
+	GridBoundaryTailwaterElevationIsTooLarge = 68141
+	GridCrossSectionIsSmallerThanGridSpacing = 68142
+	GridMultipleIncomingTributaries = 68143
+	GridCalcOptionMinDepthOnGridOutOfRange = 68145
+	GridUnsupportedInletType = 68146
+	GridUnsupportedInletTypeItem = 68147
+	GridOpenChannelToSubsurfacePond = 68148
+	GridLinksWithSmallCulvert = 68149
+	GridNoBoltedNodesWithCulvert = 68150
+	GridPrismaticOpenChannelNotSupported = 68152
 	FDNodeDepthLessThanMinDepth = 70000
 	FDNodeDepthGreaterThanMaxDepth = 70001
 	FDConduitRiseLessThanMinSize = 70002
@@ -2884,6 +2950,7 @@ class MessageKeys(Enum):
 	DMWWeirOvertoppingDepth = 360341
 	DMWWeirMaxTailwaterLessDownCulvertInvEl = 360342
 	DWMWeirInvElLessCulvertUpstreamTopEl = 360343
+	STMUKMDXClosedConduitPortionHasTooManyPoint = 444500
 	PMNoTargetHydrograph = 600005
 	SwmmDiversionsIgnoredForDynamicRun = 800000
 	SwmmInletAssumesOnGrade = 800001
@@ -2949,6 +3016,14 @@ class MessageKeys(Enum):
 	SwmmStartStopControlStructuresRestriction = 800061
 	SwmmSweepStartTimeGreaterThanStopTime = 800062
 	SWMMExternalTimeSeriesDataFilePathInvalid = 800063
+	SWMMInvalidMoistureDeficitData = 800064
+	SWMMCulvertAndOverflowWeirCannotTerminateAtOutfall = 800065
+	SWMMMinSlopeHasInvalidValue = 800066
+	SWMMControlCurveDoesNotExist = 800067
+	SWMMNoPumpDefinitionSelected = 800068
+	SWMMInletMustHaveConventionalGutter = 800069
+	SWMMGutterUsesStopNodeData = 800070
+	SWMMPumpOnOffDepthElevLowerThanControlElevation = 800071
 	SwmmMissingNodeReference = 805000
 	SwmmStorageUnitHasSeepageAndRDII = 805001
 	SwmmConduitControlUsedByMoreThanOneElement = 805002
@@ -4391,6 +4466,19 @@ class IStatusManager:
 		"""
 		pass
 
+	def AddStatisticsMessage(self, alabel: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			alabel (``str``) :  alabel
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
 class IYesNoToAllPrompt:
 
 	def __init__(self) -> None:
@@ -4900,6 +4988,19 @@ class StatisticsSection:
 		"""
 		pass
 
+	def AddMessage(self, alabel: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			alabel (``str``) :  alabel
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
 	def SetItemCount(self, alabel: str, acount: int) -> None:
 		"""No Description
 
@@ -4914,6 +5015,19 @@ class StatisticsSection:
 		"""
 		pass
 
+	def GetFormattedItemText(self, key: str) -> str:
+		"""No Description
+
+		Args
+		--------
+			key (``str``) :  key
+
+		Returns
+		--------
+			``str`` : 
+		"""
+		pass
+
 	@property
 	def Label(self) -> str:
 		"""No Description
@@ -4925,7 +5039,7 @@ class StatisticsSection:
 		pass
 
 	@property
-	def Items(self) -> SortedList:
+	def Items(self) -> Dict[str,str][str,StatisticsSectionItem]:
 		"""No Description
 
 		Returns
@@ -4989,6 +5103,20 @@ class StatisticsSectionItem:
 
 	@Count.setter
 	def Count(self, count: int) -> None:
+		pass
+
+	@property
+	def ShowCount(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			``StatisticsSectionItem`` : 
+		"""
+		pass
+
+	@ShowCount.setter
+	def ShowCount(self, showcount: bool) -> None:
 		pass
 
 class StatusManager(IStatusManager):
@@ -5082,6 +5210,19 @@ class StatusManager(IStatusManager):
 		--------
 			alabel (``str``) :  alabel
 			incrementAmount (``int``) :  incrementAmount
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def AddStatisticsMessage(self, alabel: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			alabel (``str``) :  alabel
 
 		Returns
 		--------

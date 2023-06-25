@@ -27,6 +27,7 @@ class TargetAttribute(Enum):
 	HydraulicGradeIn = -45
 	Discharge = -44
 	WirePower = -43
+	PressureValvePressureSetting = -42
 	SS_SurfaceElevation = -7
 
 class ActiveAlarmsEnum(Enum):

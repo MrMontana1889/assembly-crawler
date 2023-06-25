@@ -30,7 +30,7 @@ class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@property
 	def Units(self) -> IUnits[TNetworkUnitsType,TComponentUnitsType]:
-		"""The unit manager.
+		"""No Description
 
 		Returns
 		--------
@@ -79,12 +79,12 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@overload
 	def FormatValue(self, value: float, unit: IUnit) -> str:
-		"""Formats the given value to the given unit's format.
+		"""No Description
 
 		Args
 		--------
-			value (``float``) :  The value to format
-			unit (``IUnit``) :  The unit to use to format the value.
+			value (``float``) :  value
+			unit (``IUnit``) :  unit
 
 		Returns
 		--------
@@ -94,42 +94,42 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@overload
 	def FormatValue(self, value: float, unit: IUnit, format: FormatCode, signficantDigits: int) -> str:
-		"""Formats the value using the unit, format and significant digits provided.
+		"""No Description
 
 		Args
 		--------
-			value (``float``) :  The value to format that is in the unit provided
-			unit (``IUnit``) :  The unit the value is in.
-			format (``FormatCode``) :  The format to use.
-			signficantDigits (``int``) :  The number of digits to the right of the decimal.
+			value (``float``) :  value
+			unit (``IUnit``) :  unit
+			format (``FormatCode``) :  format
+			signficantDigits (``int``) :  signficantDigits
 
 		Returns
 		--------
-			``str`` : The format string of the provided value in the unit provided.
+			``str`` : 
 		"""
 		pass
 
 	def ConvertValue(self, value: float, fromUnit: Unit, toUnit: Unit) -> float:
-		"""Convert a value from one unit to another.  The dimension of the toUnit and fromUnit mus be the same.
+		"""No Description
 
 		Args
 		--------
-			value (``float``) :  The value to convert.  Any value other than NaN
-			fromUnit (``Unit``) :  The unit the value is currently in.
-			toUnit (``Unit``) :  The unit to convert the value to.  Must be of the same dimension as fromUnit.
+			value (``float``) :  value
+			fromUnit (``Unit``) :  fromUnit
+			toUnit (``Unit``) :  toUnit
 
 		Returns
 		--------
-			``float`` : The value in the toUnit specified.
+			``float`` : 
 		"""
 		pass
 
 	def Reset(self, unitSystem: UnitSystemType) -> None:
-		"""Sets the units system to either SI or US Customary units
+		"""No Description
 
 		Args
 		--------
-			unitSystem (``UnitSystemType``) :  Resets all units to their default units of the given unit system.
+			unitSystem (``UnitSystemType``) :  unitSystem
 
 		Returns
 		--------
@@ -139,7 +139,7 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@property
 	def NetworkUnits(self) -> TNetworkUnitsType:
-		"""The units for network elements.
+		"""No Description
 
 		Returns
 		--------
@@ -149,7 +149,7 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 	@property
 	def ComponentUnits(self) -> TComponentUnitsType:
-		"""The units for component elements.
+		"""No Description
 
 		Returns
 		--------
@@ -172,40 +172,40 @@ class IUnit:
 
 	@overload
 	def FormatValue(self, value: float) -> str:
-		"""Format's the value into a string using the current unit's settings.
+		"""No Description
 
 		Args
 		--------
-			value (``float``) :  The value to format in the current unit
+			value (``float``) :  value
 
 		Returns
 		--------
-			``str`` : A formatted string of the double value
+			``str`` : 
 		"""
 		pass
 
 	@overload
 	def FormatValue(self, value: float, format: FormatCode, significantDigits: int) -> str:
-		"""Formats the value using the given format without overriding the settings of the Unit
+		"""No Description
 
 		Args
 		--------
-			value (``float``) :  The value to format in current unit
-			format (``FormatCode``) :  Determines how the value is formatted
-			significantDigits (``int``) :  The number of significant digits to the right of the decimal.
+			value (``float``) :  value
+			format (``FormatCode``) :  format
+			significantDigits (``int``) :  significantDigits
 
 		Returns
 		--------
-			``str`` : A formatted string of the double value
+			``str`` : 
 		"""
 		pass
 
 	def SetUnit(self, unit: Unit) -> None:
-		"""Sets the current unit.
+		"""No Description
 
 		Args
 		--------
-			unit (``Unit``) :  The unit to use and must be of the same dimension
+			unit (``Unit``) :  unit
 
 		Returns
 		--------
@@ -214,31 +214,31 @@ class IUnit:
 		pass
 
 	def GetUnit(self) -> Unit:
-		"""Gets the current assigned unit.
+		"""No Description
 
 		Returns
 		--------
-			``Unit`` : The current unit
+			``Unit`` : 
 		"""
 		pass
 
 	def ConvertTo(self, value: float, unit: Unit) -> float:
-		"""Converts a value from the current unit to the provided unit
+		"""No Description
 
 		Args
 		--------
-			value (``float``) :  The value to convert.  The value is assumed in the current unit
-			unit (``Unit``) :  The value is converted to this unit.  The unit must be of the same dimension
+			value (``float``) :  value
+			unit (``Unit``) :  unit
 
 		Returns
 		--------
-			``float`` : The converted value in the new unit
+			``float`` : 
 		"""
 		pass
 
 	@property
 	def Dimension(self) -> Dimension:
-		"""The current dimension of the unit
+		"""No Description
 
 		Returns
 		--------
@@ -248,7 +248,7 @@ class IUnit:
 
 	@property
 	def FormatCode(self) -> FormatCode:
-		"""Defines how the value is formatted.
+		"""No Description
 
 		Returns
 		--------
@@ -262,7 +262,7 @@ class IUnit:
 
 	@property
 	def SignificantDigits(self) -> int:
-		"""The number of digits to the right of the decimal point.
+		"""No Description
 
 		Returns
 		--------
@@ -276,7 +276,7 @@ class IUnit:
 
 	@property
 	def Label(self) -> str:
-		"""The label of the unit.
+		"""No Description
 
 		Returns
 		--------
@@ -286,7 +286,7 @@ class IUnit:
 
 	@property
 	def ShortLabel(self) -> str:
-		"""A short version of the unit label
+		"""No Description
 
 		Returns
 		--------

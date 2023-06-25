@@ -23,12 +23,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "typings", "typings", "{FBAD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenFlows", "OpenFlows", "{8D643D9C-3B1C-407B-9159-81986060D99C}"
 	ProjectSection(SolutionItems) = preProject
-		..\typings\OpenFlows\__init__.pyi = ..\typings\OpenFlows\__init__.pyi
 		..\typings\OpenFlows\Analysis.pyi = ..\typings\OpenFlows\Analysis.pyi
 		..\typings\OpenFlows\Application.pyi = ..\typings\OpenFlows\Application.pyi
 		..\typings\OpenFlows\Licensing.pyi = ..\typings\OpenFlows\Licensing.pyi
 		..\typings\OpenFlows\Units.pyi = ..\typings\OpenFlows\Units.pyi
 		..\typings\OpenFlows\Water.pyi = ..\typings\OpenFlows\Water.pyi
+		..\typings\OpenFlows\__init__.pyi = ..\typings\OpenFlows\__init__.pyi
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Water", "Water", "{41CF8836-1AB1-49D8-805B-D5AD7044D559}"
@@ -48,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A3E12F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelingElements", "ModelingElements", "{4C3B722B-CA30-4CEB-9EE1-DDFA8E5BEB8E}"
 	ProjectSection(SolutionItems) = preProject
+		..\typings\OpenFlows\Domain\ModelingElements\Alternatives.pyi = ..\typings\OpenFlows\Domain\ModelingElements\Alternatives.pyi
 		..\typings\OpenFlows\Domain\ModelingElements\Collections.pyi = ..\typings\OpenFlows\Domain\ModelingElements\Collections.pyi
 		..\typings\OpenFlows\Domain\ModelingElements\Components.pyi = ..\typings\OpenFlows\Domain\ModelingElements\Components.pyi
 		..\typings\OpenFlows\Domain\ModelingElements\NetworkElements.pyi = ..\typings\OpenFlows\Domain\ModelingElements\NetworkElements.pyi
@@ -61,6 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{AF595F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModelingElements", "ModelingElements", "{D1689324-7DC4-4ABF-93A5-D71352C7008A}"
 	ProjectSection(SolutionItems) = preProject
+		..\typings\OpenFlows\Water\Domain\ModelingElements\Alternatives.pyi = ..\typings\OpenFlows\Water\Domain\ModelingElements\Alternatives.pyi
 		..\typings\OpenFlows\Water\Domain\ModelingElements\CalculationOptions.pyi = ..\typings\OpenFlows\Water\Domain\ModelingElements\CalculationOptions.pyi
 		..\typings\OpenFlows\Water\Domain\ModelingElements\Components.pyi = ..\typings\OpenFlows\Water\Domain\ModelingElements\Components.pyi
 		..\typings\OpenFlows\Water\Domain\ModelingElements\NetworkElements.pyi = ..\typings\OpenFlows\Water\Domain\ModelingElements\NetworkElements.pyi

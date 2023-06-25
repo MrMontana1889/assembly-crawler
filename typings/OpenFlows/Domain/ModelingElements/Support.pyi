@@ -4,12 +4,12 @@ from Haestad.Domain import DomainFieldType
 from Haestad.Support.Units import Unit
 from OpenFlows.Units import IUnit
 from System.Collections.Generic import IReadOnlyCollection
-from typing import List, Generic, TypeVar
+from typing import List, Generic, overload, TypeVar
+from OpenFlows.Domain.ModelingElements import TNetworkElementType
 
 TValueType = TypeVar("TValueType")
 TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum")
 TFieldType = TypeVar("TFieldType")
-TNetworkElementType = TypeVar("TNetworkElementType")
 
 class UserFieldDataType(Enum):
 	Integer = 1
@@ -60,7 +60,7 @@ class IFieldInfo(INamable, ILabeled):
 
 	@property
 	def Field(self) -> IField:
-		"""The field associated with this FieldInfo
+		"""No Description
 
 		Returns
 		--------
@@ -70,7 +70,7 @@ class IFieldInfo(INamable, ILabeled):
 
 	@property
 	def FieldType(self) -> DomainFieldType:
-		"""The type of field - domain, support, scenario, etc.
+		"""No Description
 
 		Returns
 		--------
@@ -80,7 +80,7 @@ class IFieldInfo(INamable, ILabeled):
 
 	@property
 	def FieldDataType(self) -> FieldDataType:
-		"""The value type for this field when retrieved.
+		"""No Description
 
 		Returns
 		--------
@@ -90,7 +90,7 @@ class IFieldInfo(INamable, ILabeled):
 
 	@property
 	def StorageUnit(self) -> Unit:
-		"""If unitized, the storage unit the value is stored in.
+		"""No Description
 
 		Returns
 		--------
@@ -100,7 +100,7 @@ class IFieldInfo(INamable, ILabeled):
 
 	@property
 	def Unit(self) -> IUnit:
-		"""If unitized, the format information for the field.
+		"""No Description
 
 		Returns
 		--------
@@ -123,7 +123,7 @@ class INetworkFieldInfo(IFieldInfo):
 
 	@property
 	def AlternativeTypeName(self) -> str:
-		"""The name of the alternative type this field belongs to.
+		"""No Description
 
 		Returns
 		--------
@@ -133,7 +133,7 @@ class INetworkFieldInfo(IFieldInfo):
 
 	@property
 	def DomainElementTypeName(self) -> str:
-		"""The name of the domain element type that this field is assigned.
+		"""No Description
 
 		Returns
 		--------
@@ -155,7 +155,7 @@ class IUserNetworkfieldInfo(INetworkFieldInfo):
 		pass
 
 	def Delete(self) -> None:
-		"""Deletes the user defined field from all supported element types.
+		"""No Description
 
 		Returns
 		--------
@@ -178,7 +178,7 @@ class IResultFieldInfo(IFieldInfo):
 
 	@property
 	def ResultRecordTypeName(self) -> str:
-		"""the result record that the field is part of.
+		"""No Description
 
 		Returns
 		--------
@@ -188,7 +188,7 @@ class IResultFieldInfo(IFieldInfo):
 
 	@property
 	def NumericalEngineTypeName(self) -> str:
-		"""The numerical engine that the field belongs to.
+		"""No Description
 
 		Returns
 		--------
@@ -211,7 +211,7 @@ class IComponentElementFieldInfo(IFieldInfo):
 
 	@property
 	def SupportElementTypeName(self) -> str:
-		"""The name of the support element
+		"""No Description
 
 		Returns
 		--------
@@ -233,35 +233,34 @@ class IFieldManager:
 		pass
 
 	def FieldByName(self, name: str) -> IFieldInfo:
-		"""Gets an IFieldInfo given the name.
+		"""No Description
 
 		Args
 		--------
-			name (``str``) :  The name of the field to return.
+			name (``str``) :  name
 
 		Returns
 		--------
-			``IFieldInfo`` : A non-null IFieldInfo implementation if the name is found, otherwise null.
+			``IFieldInfo`` : 
 		"""
 		pass
 
 	def FieldByLabel(self, label: str) -> IFieldInfo:
-		"""Gets an IFieldINfo by label.
+		"""No Description
 
 		Args
 		--------
-			label (``str``) :  The label of the field to search for.  Exact match is used.
+			label (``str``) :  label
 
 		Returns
 		--------
-			``IFieldInfo`` : A non-null IFieldInfo if found, otherwise null
+			``IFieldInfo`` : 
 		"""
 		pass
 
 	@property
 	def FieldInfo(self) -> IReadOnlyCollection[IFieldInfo]:
-		"""A list of IFieldInfo objects providing information about individual fields including
-            data type, name, etc.
+		"""No Description
 
 		Returns
 		--------
@@ -284,7 +283,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def FieldType(self) -> UserFieldDataType:
-		"""The created field will use this type of data.
+		"""No Description
 
 		Returns
 		--------
@@ -294,7 +293,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def Name(self) -> str:
-		"""The name of the field.  Must be unique across all element types being used.
+		"""No Description
 
 		Returns
 		--------
@@ -308,7 +307,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def Label(self) -> str:
-		"""The display label to show in the user interface (if applicable)
+		"""No Description
 
 		Returns
 		--------
@@ -322,7 +321,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def ElementType(self) -> TNetworkElementTypeEnum:
-		"""The primary element type this field belongs to.
+		"""No Description
 
 		Returns
 		--------
@@ -336,7 +335,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def SharedWith(self) -> List[TNetworkElementTypeEnum]:
-		"""The list of element types to share this field with.  Should not include ElementType in this list.
+		"""No Description
 
 		Returns
 		--------
@@ -346,7 +345,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def DefaultValue(self) -> TFieldType:
-		"""The default value for this field.
+		"""No Description
 
 		Returns
 		--------
@@ -360,7 +359,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def Category(self) -> str:
-		"""The category the field is placed in the property grid or quick attribute selection.
+		"""No Description
 
 		Returns
 		--------
@@ -374,7 +373,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 	@property
 	def JustLikeField(self) -> IFieldInfo:
-		"""The field to use for getting the storage unit for a unitized real field.  Ignored if FieldType is not Real.
+		"""No Description
 
 		Returns
 		--------
@@ -418,6 +417,30 @@ class IUserFieldManager(Generic[TNetworkElementType]):
 		Returns
 		--------
 			``IUserNetworkfieldInfo`` : 
+		"""
+		pass
+
+	@overload
+	def UserDefinedFields(self) -> ReadOnlyCollection:
+		"""No Description
+
+		Returns
+		--------
+			``ReadOnlyCollection`` : 
+		"""
+		pass
+
+	@overload
+	def UserDefinedFields(self, elementType: TNetworkElementType) -> ReadOnlyCollection:
+		"""No Description
+
+		Args
+		--------
+			elementType (``TNetworkElementType``) :  elementType
+
+		Returns
+		--------
+			``ReadOnlyCollection`` : 
 		"""
 		pass
 

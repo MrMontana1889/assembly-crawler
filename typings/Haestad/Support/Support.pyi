@@ -145,21 +145,21 @@ class Tag(Enum):
 class Tag(Enum):
 	Default = 0
 
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
 class CompareType(Enum):
 	IncreasingX = 0
 	IncreasingY = 1
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
 
 class Tag(Enum):
 	Default = 0

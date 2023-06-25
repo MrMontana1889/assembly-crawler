@@ -1,15 +1,15 @@
-from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve
 from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
 from typing import overload, Dict, List, Generic, Iterator
 from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType, IElementInput, IElementsInput, IModelingElementsBase, IElements, IElementManager, IModelingElementBase
 from OpenFlows.Units import IUnit
-from Haestad.Domain.ModelingObjects.Water.Enumerations import CheckValveFlowDirectionEnum, TurbineOperatingCaseEnum, TurbineStatusEnum, HammerValveType, SurgeTankTypeEnum, GasVesselLevelType, HydroTankType, OperatingRangeTypeEnum, AirFlowCalculationMethod, AirValveTypeEnum, AirValveTransitionType, SAV_SRVTypeEnum, SAVValveTypeEnum, SavClosureTriggerEnum, SRVControlTypeEnum, SRVValveTypeEnum, DischargeToAtmosphereTypeEnum, ValveTypeInitialStatusEnum
+from Haestad.Domain.ModelingObjects.Water.Enumerations import CheckValveFlowDirectionEnum, TurbineOperatingCaseEnum, TurbineStatusEnum, HammerValveType, OperatingRangeTypeEnum, SurgeTankTypeEnum, GasVesselLevelType, HydroTankType, AirFlowCalculationMethod, AirValveTypeEnum, AirValveTransitionType, SAV_SRVTypeEnum, SAVValveTypeEnum, SavClosureTriggerEnum, SRVControlTypeEnum, SRVValveTypeEnum, DischargeToAtmosphereTypeEnum, ValveTypeInitialStatusEnum
 from enum import Enum
 from Haestad.Calculations.Pressure import VSPBType, TankCalculationModel, IsolationValveInitialSetting
 from OpenFlows.Water.Domain import ValveSettingType, TCVCoefficientType, PressureValvesettingType, ConstituentSourceType, PipeStatusType, TankSectionType
 from Haestad.Support.Support import GeometryPoint, IEditLabeled, ILabeled
 from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput, IMorphable
 from OpenFlows.Domain.DataObjects import INetwork
+from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, IZone, IUnitDemandLoad, IAirFlowCurve
 
 
 class VSPBFixedHeadType(Enum):
@@ -4222,6 +4222,54 @@ class IPumpsInput(IBasePumpsInput):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
+	def PumpDefinitions(self) -> Dict[int,int]:
+		"""Select the pump definition to apply to the selected pump.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def PumpDefinitions(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def IsVariableSpeedPumps(self) -> Dict[int,int]:
+		"""If set to true then the pump will act as a Variable Speed Pump.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def IsVariableSpeedPumps(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
 class IPumpsResults(IBasePumpsResults):
 
 	def __init__(self) -> None:
@@ -4273,6 +4321,20 @@ class IPumpInput(IBasePumpInput):
 
 	@PumpDefinition.setter
 	def PumpDefinition(self, pumpdefinition: IPumpDefinition) -> None:
+		pass
+
+	@property
+	def IsVariableSpeedPump(self) -> bool:
+		"""If set to true then the pump will act as a Variable Speed Pump.
+
+		Returns
+		--------
+			``IPumpInput`` : 
+		"""
+		pass
+
+	@IsVariableSpeedPump.setter
+	def IsVariableSpeedPump(self, isvariablespeedpump: bool) -> None:
 		pass
 
 class IPumpUnits(IBasePumpUnits):
@@ -10520,6 +10582,30 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
+	def OperatingRange(self) -> Dict[int,int]:
+		"""Specify whether the vertical parameters of the tank are specified as levels measured from the base elevation or as elevations measured from the global datum.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def OperatingRange(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
 	def BaseElevation(self) -> Dict[int,int]:
 		"""Always in display units.
 
@@ -10616,6 +10702,78 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
+	def InitialElevation(self) -> Dict[int,int]:
+		"""Starting water surface elevation/level in the tank.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def InitialElevation(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def MinimumElevation(self) -> Dict[int,int]:
+		"""Lowest allowable water surface elevation or level. If the tank drains below this point, it will be automatically shut off from the system.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def MinimumElevation(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def MaximumElevation(self) -> Dict[int,int]:
+		"""Highest allowable water surface elevation or level. If the tank fills above this point, it will be automatically shut off from the system.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def MaximumElevation(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
 	def UseHighAlarm(self) -> Dict[int,int]:
 		"""Specifies whether or not to check high alarm levels during Steady State/EPS calculation and generate messages if the levels are violated.
 
@@ -10664,6 +10822,30 @@ class IConventionalTanksInput(IBaseTanksInput):
 		pass
 
 	@overload
+	def HighAlarmElevation(self) -> Dict[int,int]:
+		"""The elevation above which the high level alarm is generated. Calculation notifications are produced to advise you of any alarm level violations.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def HighAlarmElevation(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
 	def UseLowAlarm(self) -> Dict[int,int]:
 		"""Specifies whether or not to check low alarm levels during Steady State/EPS calculation and generate messages if the levels are violated.
 
@@ -10699,6 +10881,30 @@ class IConventionalTanksInput(IBaseTanksInput):
 
 	@overload
 	def LowAlarmLevel(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def LowAlarmElevation(self) -> Dict[int,int]:
+		"""The elevation below which the low level alarm is generated. Calculation notifications are produced to advise you of any alarm level violations.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def LowAlarmElevation(self, ids: List[int]) -> Dict[int,int]:
 		"""No Description
 
 		Args
@@ -10816,6 +11022,20 @@ class IConventionalTankInput(IBaseTankInput):
 		pass
 
 	@property
+	def OperatingRange(self) -> OperatingRangeTypeEnum:
+		"""Specify whether the vertical parameters of the tank are specified as levels measured from the base elevation or as elevations measured from the global datum.
+
+		Returns
+		--------
+			``IConventionalTankInput`` : 
+		"""
+		pass
+
+	@OperatingRange.setter
+	def OperatingRange(self, operatingrange: OperatingRangeTypeEnum) -> None:
+		pass
+
+	@property
 	def BaseElevation(self) -> float:
 		"""Always in display units.
 
@@ -10872,6 +11092,48 @@ class IConventionalTankInput(IBaseTankInput):
 		pass
 
 	@property
+	def MinimumElevation(self) -> float:
+		"""Starting water surface elevation/level in the tank.
+
+		Returns
+		--------
+			``IConventionalTankInput`` : 
+		"""
+		pass
+
+	@MinimumElevation.setter
+	def MinimumElevation(self, minimumelevation: float) -> None:
+		pass
+
+	@property
+	def InitialElevation(self) -> float:
+		"""Lowest allowable water surface elevation or level. If the tank drains below this point, it will be automatically shut off from the system.
+
+		Returns
+		--------
+			``IConventionalTankInput`` : 
+		"""
+		pass
+
+	@InitialElevation.setter
+	def InitialElevation(self, initialelevation: float) -> None:
+		pass
+
+	@property
+	def MaximumElevation(self) -> float:
+		"""Highest allowable water surface elevation or level. If the tank fills above this point, it will be automatically shut off from the system.
+
+		Returns
+		--------
+			``IConventionalTankInput`` : 
+		"""
+		pass
+
+	@MaximumElevation.setter
+	def MaximumElevation(self, maximumelevation: float) -> None:
+		pass
+
+	@property
 	def UseHighAlarm(self) -> bool:
 		"""Specifies whether or not to check high alarm levels during Steady State/EPS calculation and generate messages if the levels are violated.
 
@@ -10900,6 +11162,20 @@ class IConventionalTankInput(IBaseTankInput):
 		pass
 
 	@property
+	def HighAlarmElevation(self) -> float:
+		"""The elevation above which the high level alarm is generated. Calculation notifications are produced to advise you of any alarm level violations.
+
+		Returns
+		--------
+			``IConventionalTankInput`` : 
+		"""
+		pass
+
+	@HighAlarmElevation.setter
+	def HighAlarmElevation(self, highalarmelevation: float) -> None:
+		pass
+
+	@property
 	def UseLowAlarm(self) -> bool:
 		"""Specifies whether or not to check low alarm levels during Steady State/EPS calculation and generate messages if the levels are violated.
 
@@ -10925,6 +11201,20 @@ class IConventionalTankInput(IBaseTankInput):
 
 	@LowAlarmLevel.setter
 	def LowAlarmLevel(self, lowalarmlevel: float) -> None:
+		pass
+
+	@property
+	def LowAlarmElevation(self) -> float:
+		"""The elevation below which the low level alarm is generated. Calculation notifications are produced to advise you of any alarm level violations.
+
+		Returns
+		--------
+			``IConventionalTankInput`` : 
+		"""
+		pass
+
+	@LowAlarmElevation.setter
+	def LowAlarmElevation(self, lowalarmelevation: float) -> None:
 		pass
 
 	@property
@@ -16258,6 +16548,20 @@ class IReservoirInput(IBaseNodeInput, IWaterTraceableInput):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@property
+	def HglPattern(self) -> IPattern:
+		"""Allows you to apply a pattern for changes to the reservoirs hydraulic grade line over time for extended period simulations.
+
+		Returns
+		--------
+			``IReservoirInput`` : 
+		"""
+		pass
+
+	@HglPattern.setter
+	def HglPattern(self, hglpattern: IPattern) -> None:
+		pass
+
 class IReservoirsInput(IBaseNodesInput):
 
 	def __init__(self) -> None:
@@ -16269,6 +16573,30 @@ class IReservoirsInput(IBaseNodesInput):
 			Exception: if this class is instantiated
 		"""
 		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	@overload
+	def HglPatterns(self) -> Dict[int,int]:
+		"""Allows you to apply a pattern for changes to the reservoirs hydraulic grade line over time for extended period simulations.
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def HglPatterns(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
 		pass
 
 class IReservoirUnits(IBaseNodeUnits):
@@ -17571,6 +17899,20 @@ class ICustomerMeterInput(IPhysicalNodeElementInput):
 	def NumberOfUnitDemands(self, numberofunitdemands: float) -> None:
 		pass
 
+	@property
+	def BillingID(self) -> str:
+		"""An ID from billing system uniquely identifying the customer meter
+
+		Returns
+		--------
+			``ICustomerMeterInput`` : 
+		"""
+		pass
+
+	@BillingID.setter
+	def BillingID(self, billingid: str) -> None:
+		pass
+
 class ICustomerMetersInput(IPhysicalNodeElementsInput):
 
 	def __init__(self) -> None:
@@ -17740,6 +18082,30 @@ class ICustomerMetersInput(IPhysicalNodeElementsInput):
 
 	@overload
 	def NumberOfUnitDemands(self, ids: List[int]) -> Dict[int,int]:
+		"""No Description
+
+		Args
+		--------
+			ids (``List[int]``) :  ids
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def BillingIDs(self) -> Dict[int,int]:
+		"""An ID from billing system uniquely identifying the customer meter
+
+		Returns
+		--------
+			``Dict[int,int]`` : 
+		"""
+		pass
+
+	@overload
+	def BillingIDs(self, ids: List[int]) -> Dict[int,int]:
 		"""No Description
 
 		Args

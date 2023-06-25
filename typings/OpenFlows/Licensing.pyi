@@ -1,6 +1,6 @@
-from Haestad.LicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider
+from Haestad.LicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider, License
 from typing import overload
-from System import IntPtr
+from System import IntPtr, Guid
 
 class ILicenseManager(ILicenseProvider):
 
@@ -16,7 +16,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsInitialized(self) -> bool:
-		"""Checks to see if the license is initialized.
+		"""No Description
 
 		Returns
 		--------
@@ -26,7 +26,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@overload
 	def Initialize(self, product: ProductId, parentWindow: IntPtr) -> LicenseRunStatusEnum:
-		"""Initializes the license for a given product type.
+		"""No Description
 
 		Args
 		--------
@@ -41,7 +41,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@overload
 	def Initialize(self, licensedFeatureSet: ILicensedFeatureSet) -> LicenseRunStatusEnum:
-		"""Initializes the LicenseManager using the Framework-managed ILicensedFeatureSet
+		"""No Description
 
 		Args
 		--------
@@ -54,7 +54,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def CheckLicenseState(self) -> None:
-		"""Checks the state of the license.
+		"""No Description
 
 		Returns
 		--------
@@ -63,7 +63,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsLicenseValid(self) -> bool:
-		"""Checks to see if the license is valid.
+		"""No Description
 
 		Returns
 		--------
@@ -72,7 +72,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def GetLicenseStatus(self) -> LicenseStatus:
-		"""Gets the current status of the license.
+		"""No Description
 
 		Returns
 		--------
@@ -82,11 +82,50 @@ class ILicenseManager(ILicenseProvider):
 
 	@property
 	def LicenseRunStatus(self) -> LicenseRunStatusEnum:
-		"""Gets the run status at the time it was initialized.
+		"""No Description
 
 		Returns
 		--------
 			``ILicenseManager`` : 
+		"""
+		pass
+
+class ILicenseConfiguration:
+
+	def __init__(self) -> None:
+		"""Creating a new Instance of this class is not allowed
+
+
+		Raises
+		--------
+			Exception: if this class is instantiated
+		"""
+		raise Exception("Creating a new Instance of this class is not allowed")
+		pass
+
+	def ConfigureLicense(self, license: License) -> None:
+		"""No Description
+
+		Args
+		--------
+			license (``License``) :  license
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def GetFeatureTrackingGUID(self, license: License) -> Guid:
+		"""No Description
+
+		Args
+		--------
+			license (``License``) :  license
+
+		Returns
+		--------
+			``Guid`` : 
 		"""
 		pass
 

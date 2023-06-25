@@ -56,7 +56,7 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 
 	@property
 	def GISIDs(self) -> str:
-		"""A comma-delimited string representing the GIDs of the element.
+		"""No Description
 
 		Returns
 		--------
@@ -70,7 +70,7 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 
 	@property
 	def Input(self) -> TElementInputType:
-		"""Provides easy access to only input properties for this element.
+		"""No Description
 
 		Returns
 		--------
@@ -80,8 +80,7 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 
 	@property
 	def Results(self) -> TElementResultsType:
-		"""Provides easy access to only result properties for this element.
-            Null if there are no results available for the current scenario.
+		"""No Description
 
 		Returns
 		--------
@@ -91,7 +90,7 @@ class INetworkElement(Generic[TElementManagerType, TElementType, TUnitsType, TEl
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""Provides easy access to this element's field formatters.
+		"""No Description
 
 		Returns
 		--------
@@ -114,15 +113,15 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 
 	@overload
 	def Elements(self, state: ElementStateType) -> List[TElementType]:
-		"""Returns a list of elements of the given state.
+		"""No Description
 
 		Args
 		--------
-			state (``ElementStateType``) :  Determines the state of the element to include
+			state (``ElementStateType``) :  state
 
 		Returns
 		--------
-			``List[TElementType]`` : Returns a list of 
+			``List[TElementType]`` : 
 		"""
 		pass
 
@@ -152,7 +151,7 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 
 	@property
 	def Results(self) -> TElementsResultsType:
-		"""Access to results for this element list.
+		"""No Description
 
 		Returns
 		--------
@@ -162,7 +161,7 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 
 	@property
 	def Input(self) -> TElementsInputType:
-		"""Access to input for this elements list.
+		"""No Description
 
 		Returns
 		--------
@@ -172,7 +171,7 @@ class INetworkElements(Generic[TElementManagerType, TElementType, TUnitsType, TE
 
 	@property
 	def ResultFields(self) -> IFieldManager:
-		"""Access to result fields for this manager
+		"""No Description
 
 		Returns
 		--------
@@ -195,7 +194,7 @@ class IActiveElementInput(IElementInput):
 
 	@property
 	def IsActive(self) -> bool:
-		"""Specifies whether this element is active in the current scenario.
+		"""No Description
 
 		Returns
 		--------
@@ -222,7 +221,7 @@ class IActiveElementsInput(IElementsInput):
 
 	@overload
 	def IsActives(self) -> Dict[int,int]:
-		"""Gets all IsActive values for all elements of this type.
+		"""No Description
 
 		Returns
 		--------
@@ -258,7 +257,7 @@ class IPointNodeInput(IActiveElementInput):
 		pass
 
 	def GetPoint(self) -> GeometryPoint:
-		"""Gets the geometry of the node.
+		"""No Description
 
 		Returns
 		--------
@@ -267,11 +266,11 @@ class IPointNodeInput(IActiveElementInput):
 		pass
 
 	def SetPoint(self, point: GeometryPoint) -> None:
-		"""Sets the geometry of the node.
+		"""No Description
 
 		Args
 		--------
-			point (``GeometryPoint``) :  The point location of the node.
+			point (``GeometryPoint``) :  point
 
 		Returns
 		--------
@@ -294,7 +293,7 @@ class IPointNodesInput(IActiveElementsInput):
 
 	@overload
 	def Geometries(self) -> Dict[int,int]:
-		"""Gets the geometry of all nodes of this type.
+		"""No Description
 
 		Returns
 		--------
@@ -330,8 +329,7 @@ class IBaseLinkInput(IActiveElementInput):
 		pass
 
 	def GetPoints(self) -> List[GeometryPoint]:
-		"""Gets the list of geometry for the link.  The first point is the geometry of the start node.  The last point
-            is the geometry of the stop node.
+		"""No Description
 
 		Returns
 		--------
@@ -354,7 +352,7 @@ class IBaseLinkInput(IActiveElementInput):
 
 	@property
 	def StartNode(self) -> IElement:
-		"""The ID of the start node of the link.
+		"""No Description
 
 		Returns
 		--------
@@ -368,7 +366,7 @@ class IBaseLinkInput(IActiveElementInput):
 
 	@property
 	def StopNode(self) -> IElement:
-		"""The ID of the stop node of the link.
+		"""No Description
 
 		Returns
 		--------
@@ -382,7 +380,7 @@ class IBaseLinkInput(IActiveElementInput):
 
 	@property
 	def IsUserDefinedLength(self) -> bool:
-		"""Determines if the length is defined by the user.
+		"""No Description
 
 		Returns
 		--------
@@ -396,8 +394,7 @@ class IBaseLinkInput(IActiveElementInput):
 
 	@property
 	def Length(self) -> float:
-		"""Returns the unified length - user defined, scaled or 3D in display units.
-            If the value is set, Is User Defined Length is automatically set to true.
+		"""No Description
 
 		Returns
 		--------
@@ -424,7 +421,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def Geometries(self) -> Dict[int,int]:
-		"""Gets the polyline geometries for all base links.
+		"""No Description
 
 		Returns
 		--------
@@ -448,7 +445,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def StartNodes(self) -> Dict[int,int]:
-		"""Gets start nodes for all base links.
+		"""No Description
 
 		Returns
 		--------
@@ -472,7 +469,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def StopNodes(self) -> Dict[int,int]:
-		"""Gets stop nodes for all base links.
+		"""No Description
 
 		Returns
 		--------
@@ -496,7 +493,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def IsUserDefinedLengths(self) -> Dict[int,int]:
-		"""Gets user defined lengths for all base links.
+		"""No Description
 
 		Returns
 		--------
@@ -520,7 +517,7 @@ class IBaseLinksInput(IActiveElementsInput):
 
 	@overload
 	def Lengths(self) -> Dict[int,int]:
-		"""Gets lengths for all base links.
+		"""No Description
 
 		Returns
 		--------
@@ -583,7 +580,7 @@ class IBaseLinkUnits(IGeometryUnits):
 
 	@property
 	def LengthUnit(self) -> IUnit:
-		"""The formatter name for length.
+		"""No Description
 
 		Returns
 		--------
@@ -605,7 +602,7 @@ class IBasePolygonInput(IActiveElementInput):
 		pass
 
 	def GetRings(self) -> List[List[GeometryPoint]]:
-		"""Gets the rings of the polygon.
+		"""No Description
 
 		Returns
 		--------
@@ -614,7 +611,7 @@ class IBasePolygonInput(IActiveElementInput):
 		pass
 
 	def SetRings(self, rings: List[List[GeometryPoint]]) -> None:
-		"""Sets the rings of the polygon.
+		"""No Description
 
 		Args
 		--------
@@ -623,6 +620,16 @@ class IBasePolygonInput(IActiveElementInput):
 		Returns
 		--------
 			``None`` : 
+		"""
+		pass
+
+	@property
+	def ScaledArea(self) -> float:
+		"""No Description
+
+		Returns
+		--------
+			``IBasePolygonInput`` : 
 		"""
 		pass
 
@@ -641,7 +648,7 @@ class IBasePolygonsInput(IActiveElementsInput):
 
 	@overload
 	def Geometries(self) -> Dict[int,int]:
-		"""Gets ring geometry for all polygons.
+		"""No Description
 
 		Returns
 		--------

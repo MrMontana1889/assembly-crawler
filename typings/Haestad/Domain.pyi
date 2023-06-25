@@ -278,6 +278,7 @@ class SupportElementType(Enum):
 	DigitalTerrainModel = 351
 	DigitalTerrainModelGroup = 352
 	LandCover = 353
+	ControlCurve = 354
 
 class DomainElementShapeType(Enum):
 	Point = 0
@@ -382,7 +383,7 @@ class CompactOperationTask(Enum):
 
 class ExpressionType(Enum):
 	NONE = 0
-	ECExpressions = 1
+	Expression = 1
 
 class FieldUpdateTypeEnum(Enum):
 	NoChange = 0
@@ -9760,6 +9761,21 @@ class IDomainDataSetSearch:
 		"""
 		pass
 
+	def GetLinkStartStopIDForLinkID(self, linkID: int, startID: int, stopID: int) -> None:
+		"""No Description
+
+		Args
+		--------
+			linkID (``int``) :  linkID
+			startID (``int``) :  startID
+			stopID (``int``) :  stopID
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
 class IDomainDataSetLog:
 
 	def __init__(self) -> None:
@@ -9829,17 +9845,40 @@ class IChangeLogDatabase:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def ArchiveChangeLog(self, process: IProcessInProgressEx, filteredIDs: HmIDCollection) -> None:
+	def DeleteFromChangeLog(self, process: IProcessInProgressEx, elementIDs: HmIDCollection) -> None:
 		"""No Description
 
 		Args
 		--------
 			process (``IProcessInProgressEx``) :  process
-			filteredIDs (``HmIDCollection``) :  filteredIDs
+			elementIDs (``HmIDCollection``) :  elementIDs
 
 		Returns
 		--------
 			``None`` : 
+		"""
+		pass
+
+	def DeleteAllChangeTracking(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def DeleteChangeTrackingByRange(self, startID: int, endID: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			startID (``int``) :  startID
+			endID (``int``) :  endID
+
+		Returns
+		--------
+			``int`` : 
 		"""
 		pass
 
@@ -9852,12 +9891,38 @@ class IChangeLogDatabase:
 		"""
 		pass
 
-	def GetEditsDataTable(self) -> DataTable:
+	def GetTotalCountWithLimit(self, limit: int) -> int:
+		"""No Description
+
+		Args
+		--------
+			limit (``int``) :  limit
+
+		Returns
+		--------
+			``int`` : 
+		"""
+		pass
+
+	def GetTotalCount(self) -> int:
 		"""No Description
 
 		Returns
 		--------
-			``DataTable`` : 
+			``int`` : 
+		"""
+		pass
+
+	def GetIds(self, numberIds: int) -> HmIDCollection:
+		"""No Description
+
+		Args
+		--------
+			numberIds (``int``) :  numberIds
+
+		Returns
+		--------
+			``HmIDCollection`` : 
 		"""
 		pass
 
@@ -9896,6 +9961,22 @@ class IChangeLogDatabase:
 			domainDataSet (``IDomainDataSet``) :  domainDataSet
 			process (``IProcessInProgress``) :  process
 			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
+
+		Returns
+		--------
+			``DataSet`` : 
+		"""
+		pass
+
+	def ReadChangeLogByIds(self, domainDataSet: IDomainDataSet, process: IProcessInProgress, dataRowLoader: IChangeLogDataRowLoader, elementIDs: HmIDCollection) -> DataSet:
+		"""No Description
+
+		Args
+		--------
+			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			process (``IProcessInProgress``) :  process
+			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
+			elementIDs (``HmIDCollection``) :  elementIDs
 
 		Returns
 		--------
@@ -10298,6 +10379,24 @@ class IChangeLogWriter:
 		"""
 		pass
 
+	def WriteTrackingTurnedOn(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def WriteTrackingViewed(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
 	@property
 	def CurrentContext(self) -> Nullable[Guid]:
 		"""No Description
@@ -10353,6 +10452,7 @@ class IChangeLog:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Archive(self, process: IProcessInProgressEx, changeLogDataTable: DataTable, orderedIDs: array[int], filteredIDs: HmIDCollection, filename: str, whereClause: str, append: bool = False) -> None:
 		"""No Description
 
@@ -10365,6 +10465,48 @@ class IChangeLog:
 			filename (``str``) :  filename
 			whereClause (``str``) :  whereClause
 			append (``bool``) :  append
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def BeginArchive(self, filename: str) -> SQLiteConnection:
+		"""No Description
+
+		Args
+		--------
+			filename (``str``) :  filename
+
+		Returns
+		--------
+			``SQLiteConnection`` : 
+		"""
+		pass
+
+	@overload
+	def Archive(self, archiveConnection: SQLiteConnection, changeLogDataTable: DataTable, orderedIDs: array[int]) -> None:
+		"""No Description
+
+		Args
+		--------
+			archiveConnection (``SQLiteConnection``) :  archiveConnection
+			changeLogDataTable (``DataTable``) :  changeLogDataTable
+			orderedIDs (``array[int]``) :  orderedIDs
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def EndArchive(self, archiveConnection: SQLiteConnection) -> None:
+		"""No Description
+
+		Args
+		--------
+			archiveConnection (``SQLiteConnection``) :  archiveConnection
 
 		Returns
 		--------
@@ -10684,6 +10826,24 @@ class IChangeLog:
 		pass
 
 	def WriteTrackingTurnedOff(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def WriteTrackingTurnedOn(self) -> None:
+		"""No Description
+
+		Returns
+		--------
+			``None`` : 
+		"""
+		pass
+
+	def WriteTrackingViewed(self) -> None:
 		"""No Description
 
 		Returns

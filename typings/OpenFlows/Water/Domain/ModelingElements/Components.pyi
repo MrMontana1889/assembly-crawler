@@ -5,11 +5,11 @@ from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementM
 from enum import Enum
 from Haestad.Domain.ModelingObjects.Water.Enumerations import ControlTypeEnum, ControlPriorityEnum, ConditionTypeEnum, NodeAttributeEnum, TankAttributeEnum, ControlConditionPressureValveAttributeEnum, ControlConditionFCVAttributeEnum, FCVStatusEnum, ControlConditionGPVAttributeEnum, ControlConditionGPVStatusEnum, ControlConditionTCVAttributeEnum, TCVStatusEnum, HydroTankAttributeEnum, SurgeTankAttributeEnum, LogicalOperatorEnum, ControlActionTypeEnum, PumpEfficiencyTypeEnum, UnitDemandLoadTypeEnum, MinorLossTypeEnum
 from Haestad.Calculations.Pressure import SimpleConditionType, ControlConditionPumpAttribute, ControlConditionPipeAttribute, ControlConditionValveStatus, ControlActionPipeAttribute, ControlActionPipeStatus, ControlActionPumpAttribute, ControlActionPumpStatus, ControlActionTCVAttribute, ControlActionTCVStatus, ControlActionGPVAttribute, ControlActionGPVStatus, ControlActionFCVAttribute, ControlActionFCVStatus, ControlActionPressureValveAttribute, ControlActionPressureValveStatus, PatternCategory, PatternFormat, PumpDefinitionType, WallReactionOrder
+from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement, IPipe, IPump, IThrottleControlValve, IGeneralPurposeValve, IFlowControlValve, IPressureSustainingValve, IPressureBreakingValve, IPressureReducingValve, IReservoir, IJunction, IHydrant, ITank, TElementManagerType, TElementType, TUnitsType
 from datetime import datetime
 from OpenFlows.Domain.ModelingElements.Components import IComponentElements, IComponentElement, IModelComponents
 from Haestad.Support.Units import PopulationUnit, AreaUnit
 from Haestad.Support.Support import IEditLabeled, ILabeled
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement, IPipe, IPump, IThrottleControlValve, IGeneralPurposeValve, IFlowControlValve, IPressureSustainingValve, IPressureBreakingValve, IPressureReducingValve, IReservoir, IJunction, IHydrant, ITank
 
 
 class ConditionComparisonOperator(Enum):
@@ -19,6 +19,32 @@ class ConditionComparisonOperator(Enum):
 	LessThan = 3
 	LessThanEQual = 4
 	NotEQual = 5
+
+class WaterComponentType(Enum):
+	Pattern = 50
+	PumpDefinition = 51
+	Constituent = 52
+	Zone = 53
+	Control = 54
+	ControlAction = 55
+	ControlCondition = 56
+	ControlSet = 59
+	PDD = 60
+	EnergyPrice = 61
+	UnitDemandLoad = 62
+	GPVHeadloss = 63
+	ValveCharacteristic = 66
+	AirFlowCurve = 68
+	MinorLoss = 101
+	UnitCarbonEmission = 202
+	PowerMeter = 203
+	MSXSetup = 220
+	SCADASignal = 257
+
+class SCADASignalTransformMethod(Enum):
+	Threshold = 0
+	Range = 1
+	Formula = 2
 
 class PumpAttribute(Enum):
 	Setting = 1
@@ -52,32 +78,6 @@ class PumpConditionStatus(Enum):
 class PipeConditionStatus(Enum):
 	Open = 0
 	Closed = 1
-
-class WaterComponentType(Enum):
-	Pattern = 50
-	PumpDefinition = 51
-	Constituent = 52
-	Zone = 53
-	Control = 54
-	ControlAction = 55
-	ControlCondition = 56
-	ControlSet = 59
-	PDD = 60
-	EnergyPrice = 61
-	UnitDemandLoad = 62
-	GPVHeadloss = 63
-	ValveCharacteristic = 66
-	AirFlowCurve = 68
-	MinorLoss = 101
-	UnitCarbonEmission = 202
-	PowerMeter = 203
-	MSXSetup = 220
-	SCADASignal = 257
-
-class SCADASignalTransformMethod(Enum):
-	Threshold = 0
-	Range = 1
-	Formula = 2
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
 
@@ -4076,6 +4076,39 @@ class IPumpDefinitionHead:
 	@property
 	def PumpCurve(self) -> IPumpCurveCollection:
 		"""Gets the pump curve collection
+
+		Returns
+		--------
+			``IPumpDefinitionHead`` : 
+		"""
+		pass
+
+	@property
+	def CoefficientA(self) -> float:
+		"""The calculated A coefficient for the pump definition.
+            If the pump definition head data is invalid, returns NaN
+
+		Returns
+		--------
+			``IPumpDefinitionHead`` : 
+		"""
+		pass
+
+	@property
+	def CoefficientB(self) -> float:
+		"""The calculated B coefficient for the pump definition.
+            If the pump definition head data is invalid, returns NaN
+
+		Returns
+		--------
+			``IPumpDefinitionHead`` : 
+		"""
+		pass
+
+	@property
+	def CoefficientC(self) -> float:
+		"""The calculated C coefficient for the pump definition.
+            If the pump definition head data is invalid, returns NaN
 
 		Returns
 		--------

@@ -472,6 +472,20 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 		pass
 
 	@property
+	def ReportingTimeStep(self) -> float:
+		"""Data will be presented every reporting time step.  The reporting time step should be a multiple of the Hydraulic Time Step.
+
+		Returns
+		--------
+			``IWaterScenarioOptions`` : 
+		"""
+		pass
+
+	@ReportingTimeStep.setter
+	def ReportingTimeStep(self, reportingtimestep: float) -> None:
+		pass
+
+	@property
 	def DemandAdjustments(self) -> DemandAdjustmentsType:
 		"""Select whether or not to apply adjustment factors to standard demands.
 

@@ -1,4 +1,5 @@
 from typing import overload
+from System import IntPtr
 
 class ApplicationManagerBase(IApplicationManager):
 
@@ -15,7 +16,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@staticmethod
 	def SetApplicationManager(applicationManager: IApplicationManager) -> None:
-		"""Sets a custom implementation of IApplicationManager
+		"""No Description
 
 		Args
 		--------
@@ -28,7 +29,7 @@ class ApplicationManagerBase(IApplicationManager):
 		pass
 
 	def Start(self, openUI: bool = True) -> None:
-		"""Starts the application
+		"""No Description
 
 		Args
 		--------
@@ -42,7 +43,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@overload
 	def SetParentFormSurrogateDelegate(self, parentFormSurrogateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""Sets a custom ParentFormSurrogate for the application
+		"""No Description
 
 		Args
 		--------
@@ -55,7 +56,7 @@ class ApplicationManagerBase(IApplicationManager):
 		pass
 
 	def Stop(self) -> None:
-		"""Stops the application.  Should be closed when application exits.
+		"""No Description
 
 		Returns
 		--------
@@ -65,8 +66,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@overload
 	def SetParentFormSurrogateDelegate(self, parentFormSurrgateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""Provides a custom ParentFormSurrogate to use for the application
-            instead of the default implementation.
+		"""No Description
 
 		Args
 		--------
@@ -132,6 +132,20 @@ class ApplicationManagerBase(IApplicationManager):
 	def IsStarted(self, isstarted: bool) -> None:
 		pass
 
+	@property
+	def ExitCode(self) -> int:
+		"""No Description
+
+		Returns
+		--------
+			``ApplicationManagerBase`` : 
+		"""
+		pass
+
+	@ExitCode.setter
+	def ExitCode(self, exitcode: int) -> None:
+		pass
+
 class IParentFormSurrogate(IWin32Window, IUserInterface):
 
 	def __init__(self) -> None:
@@ -145,12 +159,12 @@ class IParentFormSurrogate(IWin32Window, IUserInterface):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def SetParentWindowHandle(self, handle: int) -> None:
-		"""Sets the handle of the parent window.
+	def SetParentWindowHandle(self, handle: IntPtr) -> None:
+		"""No Description
 
 		Args
 		--------
-			handle (``int``) :  handle
+			handle (``IntPtr``) :  handle
 
 		Returns
 		--------
@@ -172,11 +186,11 @@ class IApplicationManager:
 		pass
 
 	def Start(self, openUI: bool = True) -> None:
-		"""Starts the application
+		"""No Description
 
 		Args
 		--------
-			openUI (``bool``) :  If true, opens the specified parent form.  Defaults to false.
+			openUI (``bool``) :  openUI
 
 		Returns
 		--------
@@ -185,8 +199,7 @@ class IApplicationManager:
 		pass
 
 	def SetParentFormSurrogateDelegate(self, parentFormSurrgateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""Provides a custom ParentFormSurrogate to use for the application
-            instead of the default implementation.
+		"""No Description
 
 		Args
 		--------
@@ -199,7 +212,7 @@ class IApplicationManager:
 		pass
 
 	def Stop(self) -> None:
-		"""Stops the application
+		"""No Description
 
 		Returns
 		--------
@@ -209,7 +222,7 @@ class IApplicationManager:
 
 	@property
 	def DomainApplicationModel(self) -> IDomainApplicationModel:
-		"""The application model for the product
+		"""No Description
 
 		Returns
 		--------
@@ -219,7 +232,7 @@ class IApplicationManager:
 
 	@property
 	def ParentFormModel(self) -> HaestadParentFormModel:
-		"""The parent form model for primary dialog of the application
+		"""No Description
 
 		Returns
 		--------
@@ -229,7 +242,7 @@ class IApplicationManager:
 
 	@property
 	def ParentFormUIModel(self) -> GraphicalParentFormUIModelBase:
-		"""The UI Model which allows for access to virtually all features of the product.
+		"""No Description
 
 		Returns
 		--------
@@ -239,7 +252,7 @@ class IApplicationManager:
 
 	@property
 	def ParentFormSurrogate(self) -> IParentFormSurrogate:
-		"""If no parent form is in use, this is what is used in its stead.
+		"""No Description
 
 		Returns
 		--------
@@ -249,7 +262,17 @@ class IApplicationManager:
 
 	@property
 	def IsStarted(self) -> bool:
-		"""The flag that determines if the application was started yet.
+		"""No Description
+
+		Returns
+		--------
+			``IApplicationManager`` : 
+		"""
+		pass
+
+	@property
+	def ExitCode(self) -> int:
+		"""No Description
 
 		Returns
 		--------

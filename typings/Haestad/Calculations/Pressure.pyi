@@ -180,6 +180,8 @@ class EngineCompatibilityType(Enum):
 	V8iSS1 = 1
 	EPANET2_12 = 2
 	EPANET2_10 = 3
+	EPANET2_20 = 4
+	CEU4 = 5
 
 class ConstituentSourceType(Enum):
 	Concentration = 0
@@ -425,6 +427,7 @@ class EngineCalculationFlags(Enum):
 	TankLowLevelAlarm = 8
 	TankHighLevelAlarm = 16
 	TankFull = 32
+	TankOverflowing = 64
 	ContainsInfoFlagMask = 255
 	Unstable = 256
 	Disconnected = 512
@@ -440,6 +443,7 @@ class EngineCalculationFlags(Enum):
 	FF_NodeBelowMinimumPressure = 524288
 	FF_PipeExceedsMaximumVelocity = 1048576
 	FF_FFNodeFailsResidualPressure = 2097152
+	CalculationHalted = 4194304
 	UnsupportedStartAndEndNodeConfiguration = 8388608
 	ContainsWarningFlagMask = 16776960
 	Unbalanced = 16777216
@@ -448,7 +452,7 @@ class EngineCalculationFlags(Enum):
 	InconsistentPumpBatteryResults = 268435456
 	DemandDisconnected = 536870912
 	UnexpectedReverseFlow = 1073741824
-	ContainsErrorFlagMask = 30
+	ContainsErrorFlagMask = 32
 
 class PatternValidationFailureType(Enum):
 	NotEnoughPoints = 0

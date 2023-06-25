@@ -3,8 +3,9 @@ from OpenFlows.Domain.DataObjects import IModel, IModelElementManager, IModelIOO
 from OpenFlows.Water.Units import INetworkElementUnits, IComponentElementUnits
 from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetwork, IWaterElement
 from OpenFlows.Water.Domain.ModelingElements.Components import IWaterModelSupport, IWaterComponent
-from OpenFlows.Water.Domain.ModelingElements import IWaterScenarios, IWaterScenario, IWaterSelectionSets, IWaterSelectionSet
+from OpenFlows.Water.Domain.ModelingElements import IWaterScenarios, IWaterScenario, IWaterSelectionSets, IWaterSelectionSet, IWaterNetworkPrototypes
 from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
+from OpenFlows.Water.Domain.ModelingElements.Alternatives import IWaterAlternatives
 from OpenFlows.Units import IModelUnits
 from OpenFlows.Water.Analysis import IAnalysisTools
 
@@ -67,7 +68,7 @@ class TankSectionType(Enum):
 	NonCircular = 1
 	VariableArea = 2
 
-class IWaterModel(IModel[IWaterNetwork, IWaterModelSupport, IWaterScenarios, IWaterScenario, IWaterScenarioOptions, IWaterScenarioOptionsUnits, IWaterSelectionSets, IWaterSelectionSet, IWaterElement, IWaterElement, WaterNetworkElementType, IWaterComponent, WaterComponentType, INetworkElementUnits, IComponentElementUnits]):
+class IWaterModel(IModel[IWaterNetwork, IWaterModelSupport, IWaterScenarios, IWaterScenario, IWaterScenarioOptions, IWaterScenarioOptionsUnits, IWaterSelectionSets, IWaterSelectionSet, IWaterElement, IWaterElement, WaterNetworkElementType, IWaterComponent, WaterComponentType, INetworkElementUnits, IComponentElementUnits, IWaterNetworkPrototypes, IWaterAlternatives, WaterAlternativeType]):
 
 	def __init__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
