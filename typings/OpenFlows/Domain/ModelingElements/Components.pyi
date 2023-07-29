@@ -20,7 +20,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TElementTypeEnum:
-		"""No Description
+		"""Gets type of element for the given id.
 
 		Args
 		--------
@@ -33,7 +33,7 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 		pass
 
 	def Elements(self) -> List[TElementType]:
-		"""No Description
+		"""Returns a list of all support elements in the model.
 
 		Returns
 		--------
@@ -69,7 +69,7 @@ class IComponentElement(Generic[TElementManagerType, TElementType, TUnitsType, T
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""No Description
+		"""Provides easy access to this element's field formatters.
 
 		Returns
 		--------

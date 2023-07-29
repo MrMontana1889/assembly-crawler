@@ -10839,23 +10839,8 @@ class KelvinConverter(IUnitConverter):
 
 class SlopeConverter(IUnitConverter):
 
-	@overload
 	def __init__(self) -> None:
 		"""No Description
-
-		Args
-		--------
-			factor (``float``) :  factor
-		"""
-		pass
-
-	@overload
-	def __init__(self, factor: float) -> None:
-		"""No Description
-
-		Args
-		--------
-			factor (``float``) :  factor
 		"""
 		pass
 

@@ -43,7 +43,7 @@ class IElementManager:
 		pass
 
 	def ElementIDs(self) -> List[int]:
-		"""No Description
+		"""The list of IDs for each element in the manager.
 
 		Returns
 		--------
@@ -52,30 +52,30 @@ class IElementManager:
 		pass
 
 	def Exists(self, id: int) -> bool:
-		"""No Description
+		"""Determines if the ID exists.
 
 		Args
 		--------
-			id (``int``) :  id
+			id (``int``) :  A valid ID of 0 or greater.
 
 		Returns
 		--------
-			``bool`` : 
+			``bool`` : True if the ID exists, otherwise false.
 		"""
 		pass
 
 	def Labels(self) -> Dict[int,int]:
-		"""No Description
+		"""Returns all the labels for this element manager keyed by element id.
 
 		Returns
 		--------
-			``Dict[int,int]`` : 
+			``Dict[int,int]`` : A dictionary keyed by element id with the value of the element label
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""No Description
+		"""The number of elements in the manager.
 
 		Returns
 		--------
@@ -97,7 +97,7 @@ class IElements(Generic[TElementType], IElementManager):
 		pass
 
 	def Elements(self) -> List[TElementType]:
-		"""No Description
+		"""A list of all elements in the manager.
 
 		Returns
 		--------
@@ -106,16 +106,16 @@ class IElements(Generic[TElementType], IElementManager):
 		pass
 
 	def SelectElements(self, sorts: SortContextCollection, filters: FilterContextCollection) -> List[TElementType]:
-		"""No Description
+		"""Selects a set of elements given the criteria.
 
 		Args
 		--------
-			sorts (``SortContextCollection``) :  sorts
-			filters (``FilterContextCollection``) :  filters
+			sorts (``SortContextCollection``) :  Sorts the list based on one or more fields in ascending or descending order
+			filters (``FilterContextCollection``) :  A list of filters against IFields or a provided SQL statement
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			``List[TElementType]`` : A list of elements that match the provided criteria.  If no elements found, returns an empty List
 		"""
 		pass
 
@@ -134,7 +134,7 @@ class IElement(IEditLabeled):
 
 	@property
 	def Id(self) -> int:
-		"""No Description
+		"""The ID of the element.
 
 		Returns
 		--------
@@ -144,7 +144,7 @@ class IElement(IEditLabeled):
 
 	@property
 	def Notes(self) -> str:
-		"""No Description
+		"""User specified notes about the element.
 
 		Returns
 		--------
@@ -158,7 +158,7 @@ class IElement(IEditLabeled):
 
 	@property
 	def ModelElementType(self) -> ModelElementType:
-		"""No Description
+		"""The type of basic element
 
 		Returns
 		--------
@@ -194,7 +194,7 @@ class IElementInput:
 
 	@property
 	def InputFields(self) -> IFieldManager:
-		"""No Description
+		"""Access to fields for this element.
 
 		Returns
 		--------
@@ -230,7 +230,7 @@ class IElementResults:
 
 	@property
 	def ResultFields(self) -> IFieldManager:
-		"""No Description
+		"""Access to result fields for this element.
 
 		Returns
 		--------
@@ -265,7 +265,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 		pass
 
 	def Delete(self) -> None:
-		"""No Description
+		"""Deletes the modeling element from the data source.
 
 		Returns
 		--------
@@ -275,7 +275,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 
 	@property
 	def Manager(self) -> TElementManagerType:
-		"""No Description
+		"""The element's manager.
 
 		Returns
 		--------
@@ -285,7 +285,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 
 	@property
 	def ElementType(self) -> TElementTypeEnum:
-		"""No Description
+		"""The type of element this object represents.
 
 		Returns
 		--------
@@ -307,31 +307,31 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 		pass
 
 	def Create(self) -> TElementType:
-		"""No Description
+		"""Creates a new element and returns the object.
 
 		Returns
 		--------
-			``TElementType`` : 
+			``TElementType`` : Returns a non-null object with minimally initialized properties.
 		"""
 		pass
 
 	@overload
 	def Element(self, id: int) -> TElementType:
-		"""No Description
+		"""Retrieves an element given the ID.
 
 		Args
 		--------
-			id (``int``) :  id
+			id (``int``) :  The non-0 ID of the element.
 
 		Returns
 		--------
-			``TElementType`` : 
+			``TElementType`` : A  non-null object representing the element of the given ID.  If the ID does not exist, returns null.
 		"""
 		pass
 
 	@overload
 	def Element(self, label: str) -> TElementType:
-		"""No Description
+		"""Returns the first element that matches the given label.  If not found, returns null.
 
 		Args
 		--------
@@ -345,15 +345,15 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 	@overload
 	def Elements(self, label: str) -> List[TElementType]:
-		"""No Description
+		"""Returns a list of elements with the given label.
 
 		Args
 		--------
-			label (``str``) :  label
+			label (``str``) :  Case-sensitive label to search for
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			``List[TElementType]`` : A non-null list containing 0 or more elements with the given label
 		"""
 		pass
 
@@ -369,7 +369,7 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 	@property
 	def ElementType(self) -> TElementTypeEnum:
-		"""No Description
+		"""The elementTypeID of the domain element
 
 		Returns
 		--------
@@ -379,7 +379,7 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 	@property
 	def InputFields(self) -> IFieldManager:
-		"""No Description
+		"""Access to input fields for this manager
 
 		Returns
 		--------
@@ -389,7 +389,8 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 	@property
 	def ElementTypeID(self) -> int:
-		"""No Description
+		"""Identifies the type of element this manager will manage.
+            Should only be used for advanced use cases with IDomainDataSet
 
 		Returns
 		--------
@@ -412,7 +413,7 @@ class IGeometryUnits(IElementUnits):
 
 	@property
 	def GeometryUnit(self) -> IUnit:
-		"""No Description
+		"""The formatter name for the geometry of the element.
 
 		Returns
 		--------
@@ -435,7 +436,7 @@ class IScenarioOptions(Generic[TUnitsType], IElement):
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""No Description
+		"""Access to unit information for properties in scenario options.
 
 		Returns
 		--------
@@ -445,7 +446,7 @@ class IScenarioOptions(Generic[TUnitsType], IElement):
 
 	@property
 	def OptionsFields(self) -> IFieldManager:
-		"""No Description
+		"""Provides access to addition calculation option fields.
 
 		Returns
 		--------
@@ -468,7 +469,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 	@overload
 	def Create(self, parentID: int) -> TElementType:
-		"""No Description
+		"""Creates a new scenario.  If parentID is non-0, creates a child of that ID.  Otherwise creates a base scenario
 
 		Args
 		--------
@@ -481,7 +482,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 		pass
 
 	def ChildrenOfElement(self, parentID: int) -> List[TElementType]:
-		"""No Description
+		"""Returns a list of scenarios that have the given parent ID
 
 		Args
 		--------
@@ -494,7 +495,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 		pass
 
 	def BaseElements(self) -> List[TElementType]:
-		"""No Description
+		"""Returns a list of base scenarios
 
 		Returns
 		--------
@@ -514,7 +515,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 	@property
 	def ActiveScenario(self) -> TElementType:
-		"""No Description
+		"""Gets the currently active scenario
 
 		Returns
 		--------
@@ -536,33 +537,34 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		pass
 
 	def TimeIndexToDateTime(self, timeStepIndex: int) -> datetime:
-		"""No Description
+		"""Converts the time at the given time step to a DateTime taking into account
+            the start date and time in the scenario options.
 
 		Args
 		--------
-			timeStepIndex (``int``) :  timeStepIndex
+			timeStepIndex (``int``) :  Th time step index to use with TimeStepsInSeconds.
 
 		Returns
 		--------
-			``datetime`` : 
+			``datetime`` : The DateTime at the given time step index taking into account the start date/time of the simulation.
 		"""
 		pass
 
 	def TimeStepToDateTime(self, timeStepInSeconds: float) -> datetime:
-		"""No Description
+		"""Converts the given time in seconds to a date-time.
 
 		Args
 		--------
-			timeStepInSeconds (``float``) :  timeStepInSeconds
+			timeStepInSeconds (``float``) :  The time step in seconds.
 
 		Returns
 		--------
-			``datetime`` : 
+			``datetime`` : A date-time object representing the time step taking into account the simulation start date and time.
 		"""
 		pass
 
 	def MakeCurrent(self) -> None:
-		"""No Description
+		"""Makes this scenario the active scenario in the model.
 
 		Returns
 		--------
@@ -571,7 +573,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		pass
 
 	def Run(self) -> None:
-		"""No Description
+		"""Runs the active solver for this scenario
 
 		Returns
 		--------
@@ -580,53 +582,54 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 		pass
 
 	def Validate(self) -> List[IUserNotification]:
-		"""No Description
+		"""validates the scenario using the active solver.
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			``List[IUserNotification]`` : Array of validation user notifications
 		"""
 		pass
 
 	def GetRunUserNotifications(self) -> List[IUserNotification]:
-		"""No Description
+		"""Gets the summary user notifications for the current scenario.
+            If there are no results, returns an empty array.
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			``List[IUserNotification]`` : An array of summary IUserNotifications for this scenario 
 		"""
 		pass
 
 	def GetTimeStepUserNotifications(self, timeStepIndex: int) -> List[IUserNotification]:
-		"""No Description
+		"""Gets the user notifications for the current scenario at the specified time step.
 
 		Args
 		--------
-			timeStepIndex (``int``) :  timeStepIndex
+			timeStepIndex (``int``) :  The time step index to use to get the user notifications
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			``List[IUserNotification]`` : An array of user notifications for the time step.  If there are no results, returns an empty array.
 		"""
 		pass
 
 	def GetUserNotifications(self, elementID: int, timeStepIndex: int) -> List[IUserNotification]:
-		"""No Description
+		"""Gets the user notifications for a specific element at a specific time step.
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			timeStepIndex (``int``) :  timeStepIndex
+			elementID (``int``) :  The id of the element.
+			timeStepIndex (``int``) :  The time step
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			``List[IUserNotification]`` : An array of user notifications for a specific element and time step.  If there are no results, returns an empty array.
 		"""
 		pass
 
 	@property
 	def Options(self) -> TScenarioOptionsType:
-		"""No Description
+		"""A set of calculation options for the scenario.
 
 		Returns
 		--------
@@ -636,7 +639,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 	@property
 	def TimeStepsInSeconds(self) -> array[float]:
-		"""No Description
+		"""The list of time steps, in seconds, for the scenario if results are available.  Returns an empty array if no results are available.
 
 		Returns
 		--------
@@ -646,7 +649,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 	@property
 	def HasResults(self) -> bool:
-		"""No Description
+		"""Determines if results are available.
 
 		Returns
 		--------
@@ -656,7 +659,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 	@property
 	def ActiveTimeStep(self) -> int:
-		"""No Description
+		"""The active time step index for this scenario
 
 		Returns
 		--------
@@ -670,7 +673,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 	@property
 	def ParentScenario(self) -> IScenario[TElementManagerType,TElementType,TScenarioOptionsType,TScenarioOptionsUnitsType]:
-		"""No Description
+		"""Gets a parent if not a base scenario.  Assigns a parent if not null.  If null, sets the scenario as a base scenario
 
 		Returns
 		--------
@@ -696,20 +699,20 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 		pass
 
 	def Get(self) -> List[int]:
-		"""No Description
+		"""Gets the IDs in the selection set.
 
 		Returns
 		--------
-			``List[int]`` : 
+			``List[int]`` : A non-null list of IDs in the selection set.  May include deleted IDs.
 		"""
 		pass
 
 	def Elements(self) -> List[TNetworkElementType]:
-		"""No Description
+		"""A list of elements representing each ID.
 
 		Returns
 		--------
-			``List[TNetworkElementType]`` : 
+			``List[TNetworkElementType]`` : A non-null list of elements representing each ID in the selection set.
 		"""
 		pass
 
@@ -743,7 +746,7 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 	@property
 	def Count(self) -> int:
-		"""No Description
+		"""The number of ids in the selection set.
 
 		Returns
 		--------
@@ -779,7 +782,7 @@ class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBas
 
 	@property
 	def Element(self) -> IElement:
-		"""No Description
+		"""The element this sticky object is associated with.
 
 		Returns
 		--------
@@ -793,7 +796,7 @@ class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBas
 
 	@property
 	def FullPath(self) -> str:
-		"""No Description
+		"""The full path and filename to the external file.
 
 		Returns
 		--------

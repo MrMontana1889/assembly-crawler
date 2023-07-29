@@ -20,7 +20,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def Get(self) -> TCollectionType:
-		"""No Description
+		"""Returns the collection data.
 
 		Returns
 		--------
@@ -42,22 +42,22 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 		pass
 
 	def SelectElements(self, sorts: SortContextCollection, filters: FilterContextCollection) -> List[TElementType]:
-		"""No Description
+		"""Applies a sort and/or filter against the collection and returns the matching elements.
 
 		Args
 		--------
-			sorts (``SortContextCollection``) :  sorts
-			filters (``FilterContextCollection``) :  filters
+			sorts (``SortContextCollection``) :  Sorts on a field in either ascending or descending order
+			filters (``FilterContextCollection``) :  Filters the collection on one or more fields
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			``List[TElementType]`` :  containing matching elements for the provided criteria.
 		"""
 		pass
 
 	@property
 	def Count(self) -> int:
-		"""No Description
+		"""The number of items in the collection stored in the model.
 
 		Returns
 		--------
@@ -67,7 +67,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""No Description
+		"""Gets the field units for the collection to modify.
 
 		Returns
 		--------
@@ -89,7 +89,7 @@ class IResultCollectionElements(Generic[TCollectionType, TElementType, TUnitsTyp
 		pass
 
 	def Get(self) -> TCollectionType:
-		"""No Description
+		"""Gets the results collection
 
 		Returns
 		--------
@@ -99,7 +99,7 @@ class IResultCollectionElements(Generic[TCollectionType, TElementType, TUnitsTyp
 
 	@property
 	def Units(self) -> TUnitsType:
-		"""No Description
+		"""The units that are used with the results collection
 
 		Returns
 		--------
@@ -134,7 +134,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 		pass
 
 	def Add(self) -> TElementType:
-		"""No Description
+		"""Creates a new item, adds it to the collection and returns the object.
 
 		Returns
 		--------
@@ -143,11 +143,11 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 		pass
 
 	def RemoveAt(self, index: int) -> None:
-		"""No Description
+		"""Removes the System.Collections.Generic.IList`1 item at the specified index.
 
 		Args
 		--------
-			index (``int``) :  index
+			index (``int``) :  The zero-based index of the item to remove.
 
 		Returns
 		--------
@@ -169,7 +169,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 		pass
 
 	def Clear(self) -> None:
-		"""No Description
+		"""Removes all items from the collection.
 
 		Returns
 		--------
@@ -193,7 +193,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 	@property
 	def Count(self) -> int:
-		"""No Description
+		"""Gets the number of elements contained in the System.Collections.Generic.ICollection`1.
 
 		Returns
 		--------
@@ -203,7 +203,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 	@property
 	def Fields(self) -> IFieldManager:
-		"""No Description
+		"""Gets the fields for this collection
 
 		Returns
 		--------
@@ -225,7 +225,7 @@ class IResultCollection(Generic[TElementType], Iterator[TElementType]):
 		pass
 
 	def AsReadOnly(self) -> ReadOnlyCollection:
-		"""No Description
+		"""Returns a ReadOnlyColection containing the elements in the collection
 
 		Returns
 		--------
@@ -245,7 +245,7 @@ class IResultCollection(Generic[TElementType], Iterator[TElementType]):
 
 	@property
 	def Count(self) -> int:
-		"""No Description
+		"""The number of items in the collection
 
 		Returns
 		--------

@@ -16,7 +16,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@staticmethod
 	def SetApplicationManager(applicationManager: IApplicationManager) -> None:
-		"""No Description
+		"""Sets a custom implementation of IApplicationManager
 
 		Args
 		--------
@@ -29,7 +29,7 @@ class ApplicationManagerBase(IApplicationManager):
 		pass
 
 	def Start(self, openUI: bool = True) -> None:
-		"""No Description
+		"""Starts the application
 
 		Args
 		--------
@@ -43,7 +43,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@overload
 	def SetParentFormSurrogateDelegate(self, parentFormSurrogateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""No Description
+		"""Sets a custom ParentFormSurrogate for the application
 
 		Args
 		--------
@@ -56,7 +56,7 @@ class ApplicationManagerBase(IApplicationManager):
 		pass
 
 	def Stop(self) -> None:
-		"""No Description
+		"""Stops the application.  Should be closed when application exits.
 
 		Returns
 		--------
@@ -66,7 +66,8 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@overload
 	def SetParentFormSurrogateDelegate(self, parentFormSurrgateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""No Description
+		"""Provides a custom ParentFormSurrogate to use for the application
+            instead of the default implementation.
 
 		Args
 		--------
@@ -134,7 +135,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 	@property
 	def ExitCode(self) -> int:
-		"""No Description
+		"""The exit code returned on application shutdown.
 
 		Returns
 		--------
@@ -160,7 +161,7 @@ class IParentFormSurrogate(IWin32Window, IUserInterface):
 		pass
 
 	def SetParentWindowHandle(self, handle: IntPtr) -> None:
-		"""No Description
+		"""Sets the handle of the parent window.
 
 		Args
 		--------
@@ -186,11 +187,11 @@ class IApplicationManager:
 		pass
 
 	def Start(self, openUI: bool = True) -> None:
-		"""No Description
+		"""Starts the application
 
 		Args
 		--------
-			openUI (``bool``) :  openUI
+			openUI (``bool``) :  If true, opens the specified parent form.  Defaults to false.
 
 		Returns
 		--------
@@ -199,7 +200,8 @@ class IApplicationManager:
 		pass
 
 	def SetParentFormSurrogateDelegate(self, parentFormSurrgateDelegate: ParentFormSurrogateDelegate) -> None:
-		"""No Description
+		"""Provides a custom ParentFormSurrogate to use for the application
+            instead of the default implementation.
 
 		Args
 		--------
@@ -212,7 +214,7 @@ class IApplicationManager:
 		pass
 
 	def Stop(self) -> None:
-		"""No Description
+		"""Stops the application
 
 		Returns
 		--------
@@ -222,7 +224,7 @@ class IApplicationManager:
 
 	@property
 	def DomainApplicationModel(self) -> IDomainApplicationModel:
-		"""No Description
+		"""The application model for the product
 
 		Returns
 		--------
@@ -232,7 +234,7 @@ class IApplicationManager:
 
 	@property
 	def ParentFormModel(self) -> HaestadParentFormModel:
-		"""No Description
+		"""The parent form model for primary dialog of the application
 
 		Returns
 		--------
@@ -242,7 +244,7 @@ class IApplicationManager:
 
 	@property
 	def ParentFormUIModel(self) -> GraphicalParentFormUIModelBase:
-		"""No Description
+		"""The UI Model which allows for access to virtually all features of the product.
 
 		Returns
 		--------
@@ -252,7 +254,7 @@ class IApplicationManager:
 
 	@property
 	def ParentFormSurrogate(self) -> IParentFormSurrogate:
-		"""No Description
+		"""If no parent form is in use, this is what is used in its stead.
 
 		Returns
 		--------
@@ -262,7 +264,7 @@ class IApplicationManager:
 
 	@property
 	def IsStarted(self) -> bool:
-		"""No Description
+		"""The flag that determines if the application was started yet.
 
 		Returns
 		--------
@@ -272,7 +274,7 @@ class IApplicationManager:
 
 	@property
 	def ExitCode(self) -> int:
-		"""No Description
+		"""The exit code returned on application shutdown.
 
 		Returns
 		--------

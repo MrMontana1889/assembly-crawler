@@ -37,7 +37,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 	@property
 	def AlternativeType(self) -> TAlternativeTypeEnum:
-		"""No Description
+		"""The type of alternative element.
 
 		Returns
 		--------
@@ -47,7 +47,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 	@property
 	def System(self) -> TSystemAlternativeType:
-		"""No Description
+		"""Access to system alternative properties for this alternative
 
 		Returns
 		--------
@@ -57,7 +57,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 	@property
 	def Units(self) -> TAlternativeUnitsType:
-		"""No Description
+		"""Access the units for this alternative
 
 		Returns
 		--------
