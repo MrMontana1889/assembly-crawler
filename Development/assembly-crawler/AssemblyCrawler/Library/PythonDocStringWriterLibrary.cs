@@ -20,6 +20,7 @@ namespace AssemblyCrawler.Library
 		public static string NoDescription = "No Description";
 		public static string Separator = "--------";
 		public static string Colon = " : ";
+		public static string Backtick = "`";
 		#endregion
 
 		#region Constructor
@@ -122,7 +123,7 @@ namespace AssemblyCrawler.Library
 
 				foreach (var kvp in Returns)
 				{
-					sb.Append(indentation).Append(Tab).Append($"``{TypeConvertLibrary.ToPythonType(kvp.Value)}``").Append(Colon).AppendLine(returnMessage);
+					sb.Append(indentation).Append(Tab).Append($"{Backtick}{TypeConvertLibrary.ToPythonType(kvp.Value)}{Backtick}").Append(Colon).AppendLine(returnMessage);
 				}
 			}
 
