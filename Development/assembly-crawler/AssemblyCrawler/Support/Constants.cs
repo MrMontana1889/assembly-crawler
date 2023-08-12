@@ -34,5 +34,7 @@ namespace AssemblyCrawler.Support
 		public const string GENERIC_TYPE = "T";
 		public const string ENUMERATIONS = "Enumerations";
 		public const string SYSTEM = "System";
+        public const string BACKTICK = "`";
+        public const string NEW = "__new__";
 	}
 }
