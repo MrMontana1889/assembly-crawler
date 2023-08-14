@@ -46,7 +46,7 @@ namespace AssemblyCrawler.Support
             if (Method != null)
                 methodName = CorrectClassName(Method.Name);
             if (Method == null || Method.IsConstructor)
-                methodName = $"{INIT}";
+                methodName = $"{NEW}";
 
             var selfKeyword = SELF;
 
