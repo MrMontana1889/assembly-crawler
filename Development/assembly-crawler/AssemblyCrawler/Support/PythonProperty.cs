@@ -1,19 +1,19 @@
 ﻿// PythonProperty.cs
 // Copyright (c) 2022 Kristopher L. Culin See LICENSE for details
 
+using AssemblyCrawler.Library;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using AssemblyCrawler.Library;
 using static AssemblyCrawler.Library.TypeConvertLibrary;
 using static AssemblyCrawler.Library.WriterLibrary;
 using static AssemblyCrawler.Support.Constants;
 
 namespace AssemblyCrawler.Support
 {
-	public class PythonProperty : WriterBase
-	{
+    public class PythonProperty : WriterBase
+    {
 		#region Constructor
 		public PythonProperty(PythonClass pythonClass, PropertyInfo propertyInfo)
 			: base(pythonClass)
@@ -51,29 +51,12 @@ namespace AssemblyCrawler.Support
 				Class.Module.AddGenericArgumentType(mi.ReturnType);
 
 				var selfKeyword = mi.IsStatic ? string.Empty : SELF;
-				var adjustedReturnType = CorrectClassName(ToPythonType(mi.ReturnType));
 
-				if (mi.ReturnType.IsArray)
-					Class.Module.AddImportModule($"{ARRAY}").AddType($"{ARRAY}");
-				else if (mi.ReturnType.IsGenericType)
-				{
-					var arguments = new List<string>();
-					foreach (var genArgType in mi.ReturnType.GetGenericArguments())
-					{
-						arguments.Add(ToPythonType(genArgType));
-						AddReferenceImports(Class.Module, genArgType);
-						Class.Module.AddGenericArgumentType(genArgType);
-					}
+				var adjustedReturnType = ToDefReturnType(mi.ReturnType, Class.Module);
 
-					string genericType = ToPythonType(mi.ReturnType);
-					if (!genericType.Contains(string.Join(",", arguments)))
-						adjustedReturnType = $"{ToPythonType(mi.ReturnType)}[{string.Join(",", arguments)}]";
-					else
-						adjustedReturnType = $"{genericType}";
-				}
 
-				var docString = new PythonPropertyDocStringWriterLibrary(
-					type: Class.ClassType,
+                var docString = new PythonPropertyDocStringWriterLibrary(
+					type: mi.ReturnType,
 					member: Class.Module.XmlDocument?.GetMember(PropertyInfo),
 					indentLevel: 2).ToString();
 
