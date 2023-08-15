@@ -27,17 +27,13 @@
       "commandName": "Project",
       "commandLineArgs": "-a \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" \"D:\\p4\\Glacier\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.Water.dll\" -x \"\" \"\" -o \"D:\\repos\\python\\assembly-crawler\\typings\""
     },
-    "WP_PF_OpenFlows": {
+    "WP_PF_OpenFlows_Config": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.dll\"  -x \"\" -o \"D:\\Temp\\PythonStubGenerator\\OpenFlows\""
+      "commandLineArgs": "-c \"Configuration\\OpenFlowsProgramFiles.config\""
     },
-    "WP_PF_OpenFlowsWater": {
+    "WP_P4_OpenFlows_Config": {
       "commandName": "Project",
-      "commandLineArgs": "-a \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.Water.dll\" -x \"C:\\Program Files (x86)\\Bentley\\WaterGEMS\\x64\\OpenFlows.Water.xml\" -o \"D:\\Temp\\PythonStubGenerator\\OpenFlowsWater\""
-    },
-    "WP_P4_OpenFlows": {
-      "commandName": "Project",
-      "commandLineArgs": "-a \"D:\\Development\\Perforce\\Aspen\\Products\\WaterGEMS\\Output\\_Starter\\x64\\Debug\\OpenFlows.dll\" -x \"\" -o \"C:\\Users\\Akshaya.Niraula\\AppData\\Local\\Temp\\PythonStubGenerator\\OpenFlows\""
+      "commandLineArgs": "-c \"Configuration\\OpenFlowsTrunk.config\""
     },
     "WP_P4_OpenFlowsWater": {
       "commandName": "Project",
