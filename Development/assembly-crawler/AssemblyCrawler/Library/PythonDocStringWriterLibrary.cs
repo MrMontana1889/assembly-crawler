@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using AssemblyCrawler.Support;
 using AssemblyCrawler.Support.XmlDocumentMember;
 
 namespace AssemblyCrawler.Library
@@ -20,6 +21,7 @@ namespace AssemblyCrawler.Library
 		public static string NoDescription = "No Description";
 		public static string Separator = "--------";
 		public static string Colon = " : ";
+		public static string Backtick = "`";
 		#endregion
 
 		#region Constructor
@@ -98,7 +100,7 @@ namespace AssemblyCrawler.Library
 					var argType = kvp.Value.Key;
 
 					var param = XmlMember?.Param.Where(p => p.Name == kvp.Key)?.FirstOrDefault();
-					sb.Append(indentation).Append(Tab).Append(argsName).AppendLine($" (``{TypeConvertLibrary.ToPythonType(argType)}``){Colon} {param?.Text ?? argsName}");
+					sb.Append(indentation).Append(Tab).Append(argsName).AppendLine($" ({Constants.BACKTICK}{TypeConvertLibrary.ToPythonType(argType)}{Constants.BACKTICK}){Colon} {param?.Text ?? argsName}");
 				}
 			}
 
@@ -122,7 +124,7 @@ namespace AssemblyCrawler.Library
 
 				foreach (var kvp in Returns)
 				{
-					sb.Append(indentation).Append(Tab).Append($"``{TypeConvertLibrary.ToPythonType(kvp.Value)}``").Append(Colon).AppendLine(returnMessage);
+					sb.Append(indentation).Append(Tab).Append($"{Backtick}{TypeConvertLibrary.ToPythonType(kvp.Value)}{Backtick}").Append(Colon).AppendLine(returnMessage);
 				}
 			}
 

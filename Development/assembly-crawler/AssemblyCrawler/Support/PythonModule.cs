@@ -38,6 +38,13 @@ namespace AssemblyCrawler.Support
 
 			using (FileStream fileStream = new FileStream(Filename, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite))
 			{
+				// If the parent folder doesn't have __init__.py, create it
+				var dirInfo = new FileInfo(Filename).Directory;
+				var initPyFilePath = new FileInfo(Path.Combine(dirInfo.FullName, "__init__.py"));
+				if(!initPyFilePath.Exists)
+					initPyFilePath.Create();
+
+
 				using (StreamWriter sw = new StreamWriter(fileStream, Encoding.ASCII))
 				{
 					bool shouldImportTypeVar = false;
