@@ -1,7 +1,7 @@
-from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IElements, IElement, IElementUnits, IElementInput, IModelingElementBase, IElementManager
+from OpenFlows.Domain.IModelingElements import IModelingElementsBase, IElements, IElement, IElementUnits, IElementInput, IModelingElementBase, IElementManager
 from typing import Generic, TypeVar
 from enum import Enum
-from Haestad.Support.Support import IEditLabeled, ILabeled
+from Haestad.Support.ISupport import IEditLabeled, ILabeled
 
 TAlternativeManagerType = TypeVar("TAlternativeManagerType")
 TAlternativeElementType = TypeVar("TAlternativeElementType")

@@ -172,6 +172,17 @@ namespace AssemblyCrawler.Support
 				return "Enumerations";
 			}
 
+            if (module.StartsWith("Haestad") || module.StartsWith("OpenFlows"))
+            {
+                // Split and inser "I" in the last portion of the module name.
+                var tokens = module.Split('.');
+                if (!tokens[tokens.Length - 1].StartsWith("I"))
+                {
+                    tokens[tokens.Length - 1] = $"I{tokens[tokens.Length - 1]}";
+                    module = string.Join(".", tokens);
+                }
+            }
+            
 			return module;
 
 			//if (!module.Contains("."))

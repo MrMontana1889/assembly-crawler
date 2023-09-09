@@ -1,9 +1,9 @@
 from enum import Enum
-from OpenFlows.Domain.ModelingElements import IElement, TElementTypeEnum, TUnitsType, IModelingElementBase, TElementManagerType, TElementType, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IGeometryUnits, IElements, IElementManager
+from OpenFlows.Domain.IModelingElements import IElement, TElementTypeEnum, TUnitsType, IModelingElementBase, TElementManagerType, TElementType, IElementUnits, IElementInput, IElementResults, IElementsInput, IElementsResults, IModelingElementsBase, IGeometryUnits, IElements, IElementManager
 from typing import Generic, List, overload, Dict, TypeVar
-from OpenFlows.Domain.ModelingElements.Support import IFieldManager
-from Haestad.Support.Support import GeometryPoint, IEditLabeled, ILabeled
-from OpenFlows.Units import IUnit
+from OpenFlows.Domain.ModelingElements.ISupport import IFieldManager
+from Haestad.Support.ISupport import GeometryPoint, IEditLabeled, ILabeled
+from OpenFlows.IUnits import IUnit
 
 TElementInputType = TypeVar("TElementInputType")
 TElementResultsType = TypeVar("TElementResultsType")

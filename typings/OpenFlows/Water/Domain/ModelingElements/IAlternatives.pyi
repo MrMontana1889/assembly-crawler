@@ -1,7 +1,7 @@
 from enum import Enum
-from OpenFlows.Domain.DataObjects import IModelAlternatives
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import WaterNetworkElementType
-from OpenFlows.Water.Units import INetworkElementUnits, IComponentElementUnits
+from OpenFlows.Domain.IDataObjects import IModelAlternatives
+from OpenFlows.Water.Domain.ModelingElements.INetworkElements import WaterNetworkElementType
+from OpenFlows.Water.IUnits import INetworkElementUnits, IComponentElementUnits
 
 class WaterAlternativeType(Enum):
 	Physical = 4

@@ -1,15 +1,15 @@
-from Haestad.Domain import IDomainDataSet
+from Haestad.IDomain import IDomainDataSet
 from datetime import datetime
-from Haestad.Support.Support import ILabeled
+from Haestad.Support.ISupport import ILabeled
 from typing import overload, Generic, List, TypeVar
-from OpenFlows.Domain.ModelingElements import IModelingElementBase, IModelingElementsBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IEmbeddedStickyObjects, IScenarios, IScenario, IScenarioOptions, IElementUnits
-from OpenFlows.Domain.ModelingElements.Alternatives import TAlternativeTypeEnum
+from OpenFlows.Domain.IModelingElements import IModelingElementBase, IModelingElementsBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IEmbeddedStickyObjects, IScenarios, IScenario, IScenarioOptions, IElementUnits
+from OpenFlows.Domain.ModelingElements.IAlternatives import TAlternativeTypeEnum
 from enum import Enum
-from OpenFlows.Units import INetworkUnits, IComponentUnits, IModelUnits
-from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
+from OpenFlows.IUnits import INetworkUnits, IComponentUnits, IModelUnits
+from OpenFlows.Domain.ModelingElements.INetworkElements import ElementStateType
 from array import array
-from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
-from OpenFlows.Domain.ModelingElements.Components import IModelComponents
+from OpenFlows.Domain.ModelingElements.ISupport import IUserFieldManager
+from OpenFlows.Domain.ModelingElements.IComponents import IModelComponents
 
 TScenarioManagerType = TypeVar("TScenarioManagerType")
 TScenarioType = TypeVar("TScenarioType")

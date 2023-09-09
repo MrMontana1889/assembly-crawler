@@ -1,4 +1,4 @@
-from Haestad.Support.Support import INamable, IMemento, IMementoable, ILabeled
+from Haestad.Support.ISupport import INamable, IMemento, IMementoable, ILabeled
 from typing import List, overload, Dict
 from enum import Enum
 from datetime import datetime

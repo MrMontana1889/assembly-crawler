@@ -1,8 +1,8 @@
-from OpenFlows.Domain.ModelingElements.NetworkElements import IBaseLinkUnits
-from OpenFlows.Domain.ModelingElements import IGeometryUnits
-from OpenFlows.Units import INetworkUnits, IComponentUnits
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IPumpUnits, IVariableSpeedPumpBatteryUnits, IFlowControlValveUnits, IGeneralPurposeValveUnits, IPressureBreakingValveUnits, IPressureReducingValveUnits, IPressureSustainingValveUnits, IThrottleControlValveUnits, IPipeUnits, IJunctionUnits, IHydrantUnits, ITankUnits, ICustomerMeterUnits, IReservoirUnits, ISpotElevationUnits, IValveWithLinearAreaChangeUnits, IPeriodicHeadFlowUnits, IAirValveUnits, IOrificeBetweenTwoPipesUnits, ISurgeValveUnits, IDischargeToAtmosphereUnits, IRuptureDiskUnits, ITurbineUnits, ISurgeTankUnits, IHydropneumaticTankUnits, IIsolationValveUnits, IPumpStationUnits, ICheckValveUnits
-from OpenFlows.Water.Domain.ModelingElements.Components import IConstituentUnits, IControlConditionUnits, IControlActionUnits, IPatternUnits, IPumpDefinitionUnits, IUnitDemandLoadUnits, IAirFlowCurveUnits, IGPVHeadlossUnits, IValveCharacteristicUnits, IMinorLossCoefficientUnits
+from OpenFlows.Domain.ModelingElements.INetworkElements import IBaseLinkUnits
+from OpenFlows.Domain.IModelingElements import IGeometryUnits
+from OpenFlows.IUnits import INetworkUnits, IComponentUnits
+from OpenFlows.Water.Domain.ModelingElements.INetworkElements import IPumpUnits, IVariableSpeedPumpBatteryUnits, IFlowControlValveUnits, IGeneralPurposeValveUnits, IPressureBreakingValveUnits, IPressureReducingValveUnits, IPressureSustainingValveUnits, IThrottleControlValveUnits, IPipeUnits, IJunctionUnits, IHydrantUnits, ITankUnits, ICustomerMeterUnits, IReservoirUnits, ISpotElevationUnits, IValveWithLinearAreaChangeUnits, IPeriodicHeadFlowUnits, IAirValveUnits, IOrificeBetweenTwoPipesUnits, ISurgeValveUnits, IDischargeToAtmosphereUnits, IRuptureDiskUnits, ITurbineUnits, ISurgeTankUnits, IHydropneumaticTankUnits, IIsolationValveUnits, IPumpStationUnits, ICheckValveUnits
+from OpenFlows.Water.Domain.ModelingElements.IComponents import IConstituentUnits, IControlConditionUnits, IControlActionUnits, IPatternUnits, IPumpDefinitionUnits, IUnitDemandLoadUnits, IAirFlowCurveUnits, IGPVHeadlossUnits, IValveCharacteristicUnits, IMinorLossCoefficientUnits
 
 class INetworkElementUnits(INetworkUnits):
 

@@ -1,11 +1,11 @@
 from enum import Enum
-from Haestad.Support.Support import IField, FieldDataType, INamable, ILabeled
-from Haestad.Domain import DomainFieldType
-from Haestad.Support.Units import Unit
-from OpenFlows.Units import IUnit
+from Haestad.Support.ISupport import IField, FieldDataType, INamable, ILabeled
+from Haestad.IDomain import DomainFieldType
+from Haestad.Support.IUnits import Unit
+from OpenFlows.IUnits import IUnit
 from System.Collections.Generic import IReadOnlyCollection
 from typing import List, Generic, overload, TypeVar
-from OpenFlows.Domain.ModelingElements import TNetworkElementType
+from OpenFlows.Domain.IModelingElements import TNetworkElementType
 
 TValueType = TypeVar("TValueType")
 TNetworkElementTypeEnum = TypeVar("TNetworkElementTypeEnum")

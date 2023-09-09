@@ -1,8 +1,8 @@
 from enum import Enum
 from typing import List, Dict, Generic, overload, TypeVar
-from Haestad.Support.Support import SortContextCollection, FilterContextCollection, IEditLabeled, ILabeled
-from OpenFlows.Domain.ModelingElements.Support import IFieldManager
-from OpenFlows.Units import IUnit
+from Haestad.Support.ISupport import SortContextCollection, FilterContextCollection, IEditLabeled, ILabeled
+from OpenFlows.Domain.ModelingElements.ISupport import IFieldManager
+from OpenFlows.IUnits import IUnit
 from array import array
 from datetime import datetime
 

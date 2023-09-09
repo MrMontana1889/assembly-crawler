@@ -2,7 +2,7 @@ from enum import Enum
 from System import EventHandler, EventArgs, IAsyncResult, AsyncCallback, ICloneable, TimeSpan, IComparable, IntPtr
 from typing import overload, List
 from System.Runtime.Serialization import SerializationInfo, StreamingContext, ISerializable
-from Haestad.Support.Support import INamable, ILabeled
+from Haestad.Support.ISupport import INamable, ILabeled
 from array import array
 from System.Collections import SortedList
 from datetime import datetime

@@ -2,7 +2,7 @@ from enum import Enum
 from typing import overload, Dict
 from System import Guid, IntPtr
 from datetime import datetime
-from Haestad.Support.User import IMessageHandler
+from Haestad.Support.IUser import IMessageHandler
 
 class LicenseRunStatusEnum(Enum):
 	OK = 1001

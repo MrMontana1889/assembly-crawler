@@ -1,6 +1,6 @@
-from OpenFlows.Analysis import IAnalysisCalculator
-from OpenFlows.Water.Domain.ModelingElements import IWaterScenario, IWaterScenarios
-from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
+from OpenFlows.IAnalysis import IAnalysisCalculator
+from OpenFlows.Water.Domain.IModelingElements import IWaterScenario, IWaterScenarios
+from OpenFlows.Water.Domain.ModelingElements.ICalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
 
 class IScenarioEnergyCostCalculator(IAnalysisCalculator[IWaterScenario, IWaterScenarios, IWaterScenarioOptions, IWaterScenarioOptionsUnits]):
 

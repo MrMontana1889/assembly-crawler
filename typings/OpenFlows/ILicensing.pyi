@@ -1,4 +1,4 @@
-from Haestad.LicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider, License
+from Haestad.ILicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider, License
 from typing import overload
 from System import IntPtr, Guid
 

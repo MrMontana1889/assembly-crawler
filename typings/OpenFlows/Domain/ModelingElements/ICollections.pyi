@@ -1,7 +1,7 @@
-from OpenFlows.Domain.ModelingElements import TUnitsType, IElementUnits
+from OpenFlows.Domain.IModelingElements import TUnitsType, IElementUnits
 from typing import List, Generic, Iterator, TypeVar
-from Haestad.Support.Support import SortContextCollection, FilterContextCollection
-from OpenFlows.Domain.ModelingElements.Support import IFieldManager
+from Haestad.Support.ISupport import SortContextCollection, FilterContextCollection
+from OpenFlows.Domain.ModelingElements.ISupport import IFieldManager
 
 TCollectionType = TypeVar("TCollectionType")
 TElementType = TypeVar("TElementType")
