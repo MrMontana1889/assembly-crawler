@@ -163,9 +163,12 @@ namespace AssemblyCrawler
 							}
 						}
 
-						filename += ".pyi";
+                        if (filename != "Enumerations")
+                            filename = $"I{filename}.pyi";
+                        else
+                            filename += ".pyi";
 
-						filename = Path.Combine(path, filename);
+                        filename = Path.Combine(path, filename);
 
 						if (!typeMap.ContainsKey(filename))
 							typeMap.Add(filename, new List<Type>());

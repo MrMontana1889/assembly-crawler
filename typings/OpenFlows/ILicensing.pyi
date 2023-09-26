@@ -1,4 +1,4 @@
-from Haestad.LicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider, License
+from Haestad.ILicensingFacade import LicenseRunStatusEnum, ProductId, LicenseStatus, ILicenseProvider, License
 from typing import overload
 from System import IntPtr, Guid
 
@@ -16,7 +16,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsInitialized(self) -> bool:
-		"""No Description
+		"""Checks to see if the license is initialized.
 
 		Returns
 		--------
@@ -26,7 +26,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@overload
 	def Initialize(self, product: ProductId, parentWindow: IntPtr) -> LicenseRunStatusEnum:
-		"""No Description
+		"""Initializes the license for a given product type.
 
 		Args
 		--------
@@ -41,7 +41,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@overload
 	def Initialize(self, licensedFeatureSet: ILicensedFeatureSet) -> LicenseRunStatusEnum:
-		"""No Description
+		"""Initializes the LicenseManager using the Framework-managed ILicensedFeatureSet
 
 		Args
 		--------
@@ -54,7 +54,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def CheckLicenseState(self) -> None:
-		"""No Description
+		"""Checks the state of the license.
 
 		Returns
 		--------
@@ -63,7 +63,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def IsLicenseValid(self) -> bool:
-		"""No Description
+		"""Checks to see if the license is valid.
 
 		Returns
 		--------
@@ -72,7 +72,7 @@ class ILicenseManager(ILicenseProvider):
 		pass
 
 	def GetLicenseStatus(self) -> LicenseStatus:
-		"""No Description
+		"""Gets the current status of the license.
 
 		Returns
 		--------
@@ -82,7 +82,7 @@ class ILicenseManager(ILicenseProvider):
 
 	@property
 	def LicenseRunStatus(self) -> LicenseRunStatusEnum:
-		"""No Description
+		"""Gets the run status at the time it was initialized.
 
 		Returns
 		--------
@@ -104,7 +104,7 @@ class ILicenseConfiguration:
 		pass
 
 	def ConfigureLicense(self, license: License) -> None:
-		"""No Description
+		"""Configures the license before starting it.
 
 		Args
 		--------
@@ -117,7 +117,7 @@ class ILicenseConfiguration:
 		pass
 
 	def GetFeatureTrackingGUID(self, license: License) -> Guid:
-		"""No Description
+		"""Gets the FeatureTrackingGUID for the product id of the license
 
 		Args
 		--------

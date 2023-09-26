@@ -1,13 +1,13 @@
-from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
-from OpenFlows.Domain.ModelingElements import IElementUnits, IScenarioOptions, IElement
-from OpenFlows.Water.Domain.ModelingElements import IWaterSelectionSet
-from OpenFlows.Water.Domain.ModelingElements.Components import IPattern, IUnitDemandLoad
-from OpenFlows.Water.Domain import AdjustmentOperationType, CalculationType, DemandAdjustmentsType, UnitDemandAdjustmentType, RoughnessAdjustmentType
+from OpenFlows.Domain.ModelingElements.ICollections import ICollectionElements, ICollection, ICollectionElement
+from OpenFlows.Domain.IModelingElements import IElementUnits, IScenarioOptions, IElement
+from OpenFlows.Water.Domain.IModelingElements import IWaterSelectionSet
+from OpenFlows.Water.Domain.ModelingElements.IComponents import IPattern, IUnitDemandLoad
+from OpenFlows.Water.IDomain import AdjustmentOperationType, CalculationType, DemandAdjustmentsType, UnitDemandAdjustmentType, RoughnessAdjustmentType
 from typing import overload, Iterator
-from Haestad.Domain.ModelingObjects.Water.Enumerations import EpaNetEngine_FrictionMethodEnum, EpaNetEngine_TimeAnalysisTypeEnum
+from Haestad.Domain.ModelingObjects.Water.IEnumerations import EpaNetEngine_FrictionMethodEnum, EpaNetEngine_TimeAnalysisTypeEnum
 from datetime import datetime
-from OpenFlows.Units import IUnit
-from Haestad.Support.Support import IEditLabeled, ILabeled
+from OpenFlows.IUnits import IUnit
+from Haestad.Support.ISupport import IEditLabeled, ILabeled
 
 class IActiveDemandAdjustmentsCollection(ICollectionElements[IActiveDemandAdjustments, IActiveDemandAdjustment, IElementUnits]):
 

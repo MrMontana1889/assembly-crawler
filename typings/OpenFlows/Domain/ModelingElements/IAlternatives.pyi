@@ -1,7 +1,7 @@
-from OpenFlows.Domain.ModelingElements import IModelingElementsBase, IElements, IElement, IElementUnits, IElementInput, IModelingElementBase, IElementManager
+from OpenFlows.Domain.IModelingElements import IModelingElementsBase, IElements, IElement, IElementUnits, IElementInput, IModelingElementBase, IElementManager
 from typing import Generic, TypeVar
 from enum import Enum
-from Haestad.Support.Support import IEditLabeled, ILabeled
+from Haestad.Support.ISupport import IEditLabeled, ILabeled
 
 TAlternativeManagerType = TypeVar("TAlternativeManagerType")
 TAlternativeElementType = TypeVar("TAlternativeElementType")
@@ -37,7 +37,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 	@property
 	def AlternativeType(self) -> TAlternativeTypeEnum:
-		"""No Description
+		"""The type of alternative element.
 
 		Returns
 		--------
@@ -47,7 +47,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 	@property
 	def System(self) -> TSystemAlternativeType:
-		"""No Description
+		"""Access to system alternative properties for this alternative
 
 		Returns
 		--------
@@ -57,7 +57,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 	@property
 	def Units(self) -> TAlternativeUnitsType:
-		"""No Description
+		"""Access the units for this alternative
 
 		Returns
 		--------

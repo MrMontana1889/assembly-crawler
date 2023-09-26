@@ -1,15 +1,15 @@
-from Haestad.Domain import IDomainDataSet
+from Haestad.IDomain import IDomainDataSet
 from datetime import datetime
-from Haestad.Support.Support import ILabeled
+from Haestad.Support.ISupport import ILabeled
 from typing import overload, Generic, List, TypeVar
-from OpenFlows.Domain.ModelingElements import IModelingElementBase, IModelingElementsBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IEmbeddedStickyObjects, IScenarios, IScenario, IScenarioOptions, IElementUnits
-from OpenFlows.Domain.ModelingElements.Alternatives import TAlternativeTypeEnum
+from OpenFlows.Domain.IModelingElements import IModelingElementBase, IModelingElementsBase, IElement, ModelElementType, ISelectionSets, ISelectionSet, IEmbeddedStickyObjects, IScenarios, IScenario, IScenarioOptions, IElementUnits
+from OpenFlows.Domain.ModelingElements.IAlternatives import TAlternativeTypeEnum
 from enum import Enum
-from OpenFlows.Units import INetworkUnits, IComponentUnits, IModelUnits
-from OpenFlows.Domain.ModelingElements.NetworkElements import ElementStateType
+from OpenFlows.IUnits import INetworkUnits, IComponentUnits, IModelUnits
+from OpenFlows.Domain.ModelingElements.INetworkElements import ElementStateType
 from array import array
-from OpenFlows.Domain.ModelingElements.Support import IUserFieldManager
-from OpenFlows.Domain.ModelingElements.Components import IModelComponents
+from OpenFlows.Domain.ModelingElements.ISupport import IUserFieldManager
+from OpenFlows.Domain.ModelingElements.IComponents import IModelComponents
 
 TScenarioManagerType = TypeVar("TScenarioManagerType")
 TScenarioType = TypeVar("TScenarioType")
@@ -44,7 +44,7 @@ class IDomainModel:
 		pass
 
 	def IsQuerySelectionSet(self, id: int) -> bool:
-		"""No Description
+		"""Determines if a selection set is query-based.
 
 		Args
 		--------
@@ -58,7 +58,7 @@ class IDomainModel:
 
 	@property
 	def DomainDataSet(self) -> IDomainDataSet:
-		"""No Description
+		"""The DomainDataSet for the current model to allow for advanced API usage.
 
 		Returns
 		--------
@@ -81,7 +81,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Filename(self) -> str:
-		"""No Description
+		"""The full path and filename of the model
 
 		Returns
 		--------
@@ -91,7 +91,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Date(self) -> datetime:
-		"""No Description
+		"""The project date
 
 		Returns
 		--------
@@ -101,7 +101,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Title(self) -> str:
-		"""No Description
+		"""The project title
 
 		Returns
 		--------
@@ -111,7 +111,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Company(self) -> str:
-		"""No Description
+		"""The company creating the model
 
 		Returns
 		--------
@@ -121,7 +121,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Engineer(self) -> str:
-		"""No Description
+		"""The project engineer for the model
 
 		Returns
 		--------
@@ -131,7 +131,7 @@ class IModelInfo(ILabeled):
 
 	@property
 	def Notes(self) -> str:
-		"""No Description
+		"""Any notes about the model.
 
 		Returns
 		--------
@@ -153,7 +153,8 @@ class IModelIOOperations:
 		pass
 
 	def Save(self) -> None:
-		"""No Description
+		"""Saves the model from the temporary location back to the original location.
+            Only the SQLite database is copied.
 
 		Returns
 		--------
@@ -162,11 +163,11 @@ class IModelIOOperations:
 		pass
 
 	def SaveAs(self, filename: str) -> None:
-		"""No Description
+		"""Saves the model to the specified location.
 
 		Args
 		--------
-			filename (``str``) :  filename
+			filename (``str``) :  The full path and filename of the project.
 
 		Returns
 		--------
@@ -175,7 +176,7 @@ class IModelIOOperations:
 		pass
 
 	def Close(self) -> None:
-		"""No Description
+		"""Closes the model.
 
 		Returns
 		--------
@@ -198,7 +199,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@overload
 	def SetActiveScenario(self, scenarioID: int) -> None:
-		"""No Description
+		"""Sets the scenario as active.
 
 		Args
 		--------
@@ -225,7 +226,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 		pass
 
 	def RunActiveScenario(self) -> None:
-		"""No Description
+		"""Calculates the active scenario using the current set of alternatives and calculation options assigned to the scenario
 
 		Returns
 		--------
@@ -235,7 +236,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@property
 	def Scenarios(self) -> TScenarioManagerType:
-		"""No Description
+		"""A list of scenarios in the model.
 
 		Returns
 		--------
@@ -245,7 +246,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 	@property
 	def ActiveScenario(self) -> TScenarioType:
-		"""No Description
+		"""The currently active scenario.
 
 		Returns
 		--------
@@ -267,7 +268,7 @@ class IModelAlternatives(Generic[TNetworkElementTypeEnum, TAlternativeTypeEnum, 
 		pass
 
 	def AlternativeType(self, id: int) -> TAlternativeTypeEnum:
-		"""No Description
+		"""The type of alternative represented by the given id.
 
 		Args
 		--------
@@ -293,7 +294,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def ElementType(self, id: int) -> TNetworkElementTypeEnum:
-		"""No Description
+		"""Gets the element type of the given ID
 
 		Args
 		--------
@@ -306,7 +307,7 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 		pass
 
 	def Elements(self, state: ElementStateType = ElementStateType.All) -> List[TNetworkElementType]:
-		"""No Description
+		"""Returns a list of all domain elements in the model.
 
 		Args
 		--------
@@ -359,7 +360,7 @@ class IModelElementManager:
 		pass
 
 	def Element(self, id: int) -> IElement:
-		"""No Description
+		"""Gets an element for the given iD.  Returns null if the id does not exist.
 
 		Args
 		--------
@@ -372,35 +373,35 @@ class IModelElementManager:
 		pass
 
 	def NetworkElements(self, label: str, useWildcard: bool = False) -> List[IElement]:
-		"""No Description
+		"""Gets a list of domain elements that has the given label.
 
 		Args
 		--------
-			label (``str``) :  label
-			useWildcard (``bool``) :  useWildcard
+			label (``str``) :  The label to search for
+			useWildcard (``bool``) :  Specifies whether or not the label contains wildcards.  Defaults to false.
 
 		Returns
 		--------
-			``List[IElement]`` : 
+			``List[IElement]`` : A list of elements that use the label.  May be empty but never null.
 		"""
 		pass
 
 	def ModelElementType(self, id: int) -> ModelElementType:
-		"""No Description
+		"""Gets the type of model element type of the id, if it exists.
 
 		Args
 		--------
-			id (``int``) :  id
+			id (``int``) :  The id of the element
 
 		Returns
 		--------
-			``ModelElementType`` : 
+			``ModelElementType`` : If the id does not exist, throws exception.  Otherwise, returns the model element type.
 		"""
 		pass
 
 	@overload
 	def Delete(self, id: int) -> bool:
-		"""No Description
+		"""Deletes the element of the given id.
 
 		Args
 		--------
@@ -414,7 +415,7 @@ class IModelElementManager:
 
 	@overload
 	def Delete(self, ids: array[int]) -> None:
-		"""No Description
+		"""Batch delete a list of ids.
 
 		Args
 		--------
@@ -427,7 +428,7 @@ class IModelElementManager:
 		pass
 
 	def Exists(self, id: int) -> bool:
-		"""No Description
+		"""Determines if the id is valid and it exists in the model.
 
 		Args
 		--------
@@ -440,50 +441,50 @@ class IModelElementManager:
 		pass
 
 	def IsLink(self, id: int) -> bool:
-		"""No Description
+		"""Determines if the provided id is a link.
 
 		Args
 		--------
-			id (``int``) :  id
+			id (``int``) :  The ID of the element.
 
 		Returns
 		--------
-			``bool`` : 
+			``bool`` : True if the ID is a link, otherwise false
 		"""
 		pass
 
 	def IsNode(self, id: int) -> bool:
-		"""No Description
+		"""Determines if the provided id is a node.
 
 		Args
 		--------
-			id (``int``) :  id
+			id (``int``) :  The ID of the element.
 
 		Returns
 		--------
-			``bool`` : 
+			``bool`` : True if the ID is a node, otherwise false.
 		"""
 		pass
 
 	def IsPolygon(self, id: int) -> bool:
-		"""No Description
+		"""Determines if the provided is a polygon.
 
 		Args
 		--------
-			id (``int``) :  id
+			id (``int``) :  The ID of the element.
 
 		Returns
 		--------
-			``bool`` : 
+			``bool`` : True if the id is a polygon, otherwise false.
 		"""
 		pass
 
 	def NextNetworkElementLabel(self, domainElementType: int) -> str:
-		"""No Description
+		"""Gets the next label for the element type.
 
 		Args
 		--------
-			domainElementType (``int``) :  domainElementType
+			domainElementType (``int``) :  The type of network element
 
 		Returns
 		--------
@@ -506,7 +507,7 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 
 	@property
 	def SelectionSets(self) -> TSelectionSetsType:
-		"""No Description
+		"""A list of selection sets in the model.
 
 		Returns
 		--------
@@ -543,11 +544,11 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@overload
 	def NextNetworkElementLabel(self, domainElementType: int) -> str:
-		"""No Description
+		"""Gets the next label for the element type.
 
 		Args
 		--------
-			domainElementType (``int``) :  domainElementType
+			domainElementType (``int``) :  The type of network element
 
 		Returns
 		--------
@@ -557,7 +558,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Network(self) -> TNetworkType:
-		"""No Description
+		"""The network elements in the model.
 
 		Returns
 		--------
@@ -567,7 +568,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Components(self) -> TModelComponentsType:
-		"""No Description
+		"""The supporting objects in the model like selection sets and patterns.
 
 		Returns
 		--------
@@ -577,7 +578,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def NetworkPrototypes(self) -> TNetworkPrototypesType:
-		"""No Description
+		"""Access the domain element prototypes in the model.
 
 		Returns
 		--------
@@ -587,7 +588,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def Alternatives(self) -> TModelAlternativeManagementType:
-		"""No Description
+		"""Manage the alternatives in the model.
 
 		Returns
 		--------
@@ -597,7 +598,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def ModelInfo(self) -> IModelInfo:
-		"""No Description
+		"""Basic information about the model.
 
 		Returns
 		--------
@@ -607,7 +608,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def UserFieldManager(self) -> IUserFieldManager[TNetworkElementTypeEnum]:
-		"""No Description
+		"""Provides a way to create custom fields in the current model.
 
 		Returns
 		--------
@@ -617,7 +618,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 	@property
 	def EmbeddedStickyObjects(self) -> IEmbeddedStickyObjects[TNetworkElementTypeEnum]:
-		"""No Description
+		"""The external hyperlinks for the model.
 
 		Returns
 		--------
@@ -640,22 +641,22 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 
 	@overload
 	def Open(self, filename: str, openInPlace: bool = False) -> TModelType:
-		"""No Description
+		"""Opens a model at the given location
 
 		Args
 		--------
-			filename (``str``) :  filename
-			openInPlace (``bool``) :  openInPlace
+			filename (``str``) :  The full path and filename ending in wtg.  The wtg and any support files are automatically copied to the temp folder.
+			openInPlace (``bool``) :  An option to open the specified project in its original location and not make a copy in the temp folder.
 
 		Returns
 		--------
-			``TModelType`` : 
+			``TModelType`` : A model object representing the data in the specified file.
 		"""
 		pass
 
 	@overload
 	def Open(self, project: IProject) -> TModelType:
-		"""No Description
+		"""that wrappers a Framework-managed IProject
 
 		Args
 		--------

@@ -1,11 +1,11 @@
 from typing import List, Iterator
-from OpenFlows.Domain.ModelingElements.Collections import IResultCollectionElements, IResultCollection, ICollectionElement
-from OpenFlows.Units import IUnit
-from OpenFlows.Domain.ModelingElements import IElementUnits, IScenario, IScenarios, ISelectionSet, ISelectionSets, IModelingElementBase, IElement, IModelingElementsBase, IElements, IElementManager
-from OpenFlows.Domain.DataObjects import INetworkPrototypes
-from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement
-from Haestad.Support.Support import IEditLabeled, ILabeled
+from OpenFlows.Domain.ModelingElements.ICollections import IResultCollectionElements, IResultCollection, ICollectionElement
+from OpenFlows.IUnits import IUnit
+from OpenFlows.Domain.IModelingElements import IElementUnits, IScenario, IScenarios, ISelectionSet, ISelectionSets, IModelingElementBase, IElement, IModelingElementsBase, IElements, IElementManager
+from OpenFlows.Domain.IDataObjects import INetworkPrototypes
+from OpenFlows.Water.Domain.ModelingElements.ICalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
+from OpenFlows.Water.Domain.ModelingElements.INetworkElements import IWaterElement
+from Haestad.Support.ISupport import IEditLabeled, ILabeled
 
 class IPressureCalculationSummaryResults:
 

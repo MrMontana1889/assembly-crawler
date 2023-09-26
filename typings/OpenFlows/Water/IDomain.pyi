@@ -1,13 +1,13 @@
 from enum import Enum
-from OpenFlows.Domain.DataObjects import IModel, IModelElementManager, IModelIOOperations, IModelScenarioManagement, IDomainModel, IModelSelectionSetManagement
-from OpenFlows.Water.Units import INetworkElementUnits, IComponentElementUnits
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterNetwork, IWaterElement
-from OpenFlows.Water.Domain.ModelingElements.Components import IWaterModelSupport, IWaterComponent
-from OpenFlows.Water.Domain.ModelingElements import IWaterScenarios, IWaterScenario, IWaterSelectionSets, IWaterSelectionSet, IWaterNetworkPrototypes
-from OpenFlows.Water.Domain.ModelingElements.CalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
-from OpenFlows.Water.Domain.ModelingElements.Alternatives import IWaterAlternatives
-from OpenFlows.Units import IModelUnits
-from OpenFlows.Water.Analysis import IAnalysisTools
+from OpenFlows.Domain.IDataObjects import IModel, IModelElementManager, IModelIOOperations, IModelScenarioManagement, IDomainModel, IModelSelectionSetManagement
+from OpenFlows.Water.IUnits import INetworkElementUnits, IComponentElementUnits
+from OpenFlows.Water.Domain.ModelingElements.INetworkElements import IWaterNetwork, IWaterElement
+from OpenFlows.Water.Domain.ModelingElements.IComponents import IWaterModelSupport, IWaterComponent
+from OpenFlows.Water.Domain.IModelingElements import IWaterScenarios, IWaterScenario, IWaterSelectionSets, IWaterSelectionSet, IWaterNetworkPrototypes
+from OpenFlows.Water.Domain.ModelingElements.ICalculationOptions import IWaterScenarioOptions, IWaterScenarioOptionsUnits
+from OpenFlows.Water.Domain.ModelingElements.IAlternatives import IWaterAlternatives
+from OpenFlows.IUnits import IModelUnits
+from OpenFlows.Water.IAnalysis import IAnalysisTools
 
 class CalculationType(Enum):
 	FireFlow = 0

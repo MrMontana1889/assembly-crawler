@@ -1,8 +1,8 @@
 from enum import Enum
-from Haestad.LicensingFacade import LicenseRunStatusEnum
+from Haestad.ILicensingFacade import LicenseRunStatusEnum
 from typing import overload
-from OpenFlows.Water.Domain import IWaterModel
-from OpenFlows.Water.Support import IOpenFlowsWaterDefaults
+from OpenFlows.Water.IDomain import IWaterModel
+from OpenFlows.Water.ISupport import IOpenFlowsWaterDefaults
 
 class WaterProductLicenseType(Enum):
 	WaterCAD = 1248

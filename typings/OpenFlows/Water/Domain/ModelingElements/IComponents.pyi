@@ -1,15 +1,15 @@
-from OpenFlows.Domain.ModelingElements.Collections import ICollectionElements, ICollection, ICollectionElement
+from OpenFlows.Domain.ModelingElements.ICollections import ICollectionElements, ICollection, ICollectionElement
 from typing import overload, Generic, Iterator
-from OpenFlows.Units import IUnit
-from OpenFlows.Domain.ModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType, IModelingElementBase, IModelingElementsBase, IElements, IElementManager
+from OpenFlows.IUnits import IUnit
+from OpenFlows.Domain.IModelingElements import IElementUnits, IElement, TElementManagerType, TElementType, TUnitsType, IModelingElementBase, IModelingElementsBase, IElements, IElementManager
 from enum import Enum
-from Haestad.Domain.ModelingObjects.Water.Enumerations import ControlTypeEnum, ControlPriorityEnum, ConditionTypeEnum, NodeAttributeEnum, TankAttributeEnum, ControlConditionPressureValveAttributeEnum, ControlConditionFCVAttributeEnum, FCVStatusEnum, ControlConditionGPVAttributeEnum, ControlConditionGPVStatusEnum, ControlConditionTCVAttributeEnum, TCVStatusEnum, HydroTankAttributeEnum, SurgeTankAttributeEnum, LogicalOperatorEnum, ControlActionTypeEnum, PumpEfficiencyTypeEnum, UnitDemandLoadTypeEnum, MinorLossTypeEnum
-from Haestad.Calculations.Pressure import SimpleConditionType, ControlConditionPumpAttribute, ControlConditionPipeAttribute, ControlConditionValveStatus, ControlActionPipeAttribute, ControlActionPipeStatus, ControlActionPumpAttribute, ControlActionPumpStatus, ControlActionTCVAttribute, ControlActionTCVStatus, ControlActionGPVAttribute, ControlActionGPVStatus, ControlActionFCVAttribute, ControlActionFCVStatus, ControlActionPressureValveAttribute, ControlActionPressureValveStatus, PatternCategory, PatternFormat, PumpDefinitionType, WallReactionOrder
-from OpenFlows.Water.Domain.ModelingElements.NetworkElements import IWaterElement, IPipe, IPump, IThrottleControlValve, IGeneralPurposeValve, IFlowControlValve, IPressureSustainingValve, IPressureBreakingValve, IPressureReducingValve, IReservoir, IJunction, IHydrant, ITank, TElementManagerType, TElementType, TUnitsType
+from Haestad.Domain.ModelingObjects.Water.IEnumerations import ControlTypeEnum, ControlPriorityEnum, ConditionTypeEnum, NodeAttributeEnum, TankAttributeEnum, ControlConditionPressureValveAttributeEnum, ControlConditionFCVAttributeEnum, FCVStatusEnum, ControlConditionGPVAttributeEnum, ControlConditionGPVStatusEnum, ControlConditionTCVAttributeEnum, TCVStatusEnum, HydroTankAttributeEnum, SurgeTankAttributeEnum, LogicalOperatorEnum, ControlActionTypeEnum, PumpEfficiencyTypeEnum, UnitDemandLoadTypeEnum, MinorLossTypeEnum
+from Haestad.Calculations.IPressure import SimpleConditionType, ControlConditionPumpAttribute, ControlConditionPipeAttribute, ControlConditionValveStatus, ControlActionPipeAttribute, ControlActionPipeStatus, ControlActionPumpAttribute, ControlActionPumpStatus, ControlActionTCVAttribute, ControlActionTCVStatus, ControlActionGPVAttribute, ControlActionGPVStatus, ControlActionFCVAttribute, ControlActionFCVStatus, ControlActionPressureValveAttribute, ControlActionPressureValveStatus, PatternCategory, PatternFormat, PumpDefinitionType, WallReactionOrder
 from datetime import datetime
-from OpenFlows.Domain.ModelingElements.Components import IComponentElements, IComponentElement, IModelComponents
-from Haestad.Support.Units import PopulationUnit, AreaUnit
-from Haestad.Support.Support import IEditLabeled, ILabeled
+from OpenFlows.Domain.ModelingElements.IComponents import IComponentElements, IComponentElement, IModelComponents
+from Haestad.Support.IUnits import PopulationUnit, AreaUnit
+from Haestad.Support.ISupport import IEditLabeled, ILabeled
+from OpenFlows.Water.Domain.ModelingElements.INetworkElements import IWaterElement, IPipe, IPump, IThrottleControlValve, IGeneralPurposeValve, IFlowControlValve, IPressureSustainingValve, IPressureBreakingValve, IPressureReducingValve, IReservoir, IJunction, IHydrant, ITank
 
 
 class ConditionComparisonOperator(Enum):
@@ -19,32 +19,6 @@ class ConditionComparisonOperator(Enum):
 	LessThan = 3
 	LessThanEQual = 4
 	NotEQual = 5
-
-class WaterComponentType(Enum):
-	Pattern = 50
-	PumpDefinition = 51
-	Constituent = 52
-	Zone = 53
-	Control = 54
-	ControlAction = 55
-	ControlCondition = 56
-	ControlSet = 59
-	PDD = 60
-	EnergyPrice = 61
-	UnitDemandLoad = 62
-	GPVHeadloss = 63
-	ValveCharacteristic = 66
-	AirFlowCurve = 68
-	MinorLoss = 101
-	UnitCarbonEmission = 202
-	PowerMeter = 203
-	MSXSetup = 220
-	SCADASignal = 257
-
-class SCADASignalTransformMethod(Enum):
-	Threshold = 0
-	Range = 1
-	Formula = 2
 
 class PumpAttribute(Enum):
 	Setting = 1
@@ -78,6 +52,32 @@ class PumpConditionStatus(Enum):
 class PipeConditionStatus(Enum):
 	Open = 0
 	Closed = 1
+
+class WaterComponentType(Enum):
+	Pattern = 50
+	PumpDefinition = 51
+	Constituent = 52
+	Zone = 53
+	Control = 54
+	ControlAction = 55
+	ControlCondition = 56
+	ControlSet = 59
+	PDD = 60
+	EnergyPrice = 61
+	UnitDemandLoad = 62
+	GPVHeadloss = 63
+	ValveCharacteristic = 66
+	AirFlowCurve = 68
+	MinorLoss = 101
+	UnitCarbonEmission = 202
+	PowerMeter = 203
+	MSXSetup = 220
+	SCADASignal = 257
+
+class SCADASignalTransformMethod(Enum):
+	Threshold = 0
+	Range = 1
+	Formula = 2
 
 class IAirFlowPressureCollection(ICollectionElements[IAirFlowPressures, IAirFlowPressure, IAirFlowPressureUnits]):
 

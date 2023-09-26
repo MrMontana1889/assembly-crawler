@@ -1,15 +1,15 @@
-from OpenFlows.Domain.ModelingElements.Collections import ICollectionElement, ICollection, ICollectionElements
+from OpenFlows.Water.Domain.ModelingElements.IComponents import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve
+from OpenFlows.Domain.ModelingElements.ICollections import ICollectionElement, ICollection, ICollectionElements
 from typing import overload, Dict, List, Generic, Iterator
-from OpenFlows.Domain.ModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType, IElementInput, IElementsInput, IModelingElementsBase, IElements, IElementManager, IModelingElementBase
-from OpenFlows.Units import IUnit
-from Haestad.Domain.ModelingObjects.Water.Enumerations import CheckValveFlowDirectionEnum, TurbineOperatingCaseEnum, TurbineStatusEnum, HammerValveType, OperatingRangeTypeEnum, SurgeTankTypeEnum, GasVesselLevelType, HydroTankType, AirFlowCalculationMethod, AirValveTypeEnum, AirValveTransitionType, SAV_SRVTypeEnum, SAVValveTypeEnum, SavClosureTriggerEnum, SRVControlTypeEnum, SRVValveTypeEnum, DischargeToAtmosphereTypeEnum, ValveTypeInitialStatusEnum
+from OpenFlows.Domain.IModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType, IElementInput, IElementsInput, IModelingElementsBase, IElements, IElementManager, IModelingElementBase
+from OpenFlows.IUnits import IUnit
+from Haestad.Domain.ModelingObjects.Water.IEnumerations import CheckValveFlowDirectionEnum, TurbineOperatingCaseEnum, TurbineStatusEnum, HammerValveType, OperatingRangeTypeEnum, SurgeTankTypeEnum, GasVesselLevelType, HydroTankType, AirFlowCalculationMethod, AirValveTypeEnum, AirValveTransitionType, SAV_SRVTypeEnum, SAVValveTypeEnum, SavClosureTriggerEnum, SRVControlTypeEnum, SRVValveTypeEnum, DischargeToAtmosphereTypeEnum, ValveTypeInitialStatusEnum
 from enum import Enum
-from Haestad.Calculations.Pressure import VSPBType, TankCalculationModel, IsolationValveInitialSetting
-from OpenFlows.Water.Domain import ValveSettingType, TCVCoefficientType, PressureValvesettingType, ConstituentSourceType, PipeStatusType, TankSectionType
-from Haestad.Support.Support import GeometryPoint, IEditLabeled, ILabeled
-from OpenFlows.Domain.ModelingElements.NetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput, IMorphable
-from OpenFlows.Domain.DataObjects import INetwork
-from OpenFlows.Water.Domain.ModelingElements.Components import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, IZone, IUnitDemandLoad, IAirFlowCurve
+from Haestad.Calculations.IPressure import VSPBType, TankCalculationModel, IsolationValveInitialSetting
+from OpenFlows.Water.IDomain import ValveSettingType, TCVCoefficientType, PressureValvesettingType, ConstituentSourceType, PipeStatusType, TankSectionType
+from Haestad.Support.ISupport import GeometryPoint, IEditLabeled, ILabeled
+from OpenFlows.Domain.ModelingElements.INetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput, IMorphable
+from OpenFlows.Domain.IDataObjects import INetwork
 
 
 class VSPBFixedHeadType(Enum):

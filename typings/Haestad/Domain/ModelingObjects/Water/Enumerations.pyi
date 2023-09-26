@@ -487,7 +487,6 @@ class PumpDefinitionTypeEnum(Enum):
 	VolumeFlow = 6
 	DepthFlow = 7
 	DepthFlowVariableSpeed = 8
-	MultiplePointTypeVS = 9
 
 class PumpEfficiencyTypeEnum(Enum):
 	ConstantEfficiencyType = 0
