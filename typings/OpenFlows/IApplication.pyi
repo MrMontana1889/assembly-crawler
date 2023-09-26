@@ -3,7 +3,7 @@ from System import IntPtr
 
 class ApplicationManagerBase(IApplicationManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -20,11 +20,11 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Args
 		--------
-			applicationManager (``IApplicationManager``) :  applicationManager
+			applicationManager (`IApplicationManager`) :  applicationManager
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -33,11 +33,11 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Args
 		--------
-			openUI (``bool``) :  openUI
+			openUI (`bool`) :  openUI
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -47,11 +47,11 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Args
 		--------
-			parentFormSurrogateDelegate (``ParentFormSurrogateDelegate``) :  parentFormSurrogateDelegate
+			parentFormSurrogateDelegate (`ParentFormSurrogateDelegate`) :  parentFormSurrogateDelegate
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -60,7 +60,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -71,11 +71,11 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Args
 		--------
-			parentFormSurrgateDelegate (``ParentFormSurrogateDelegate``) :  parentFormSurrgateDelegate
+			parentFormSurrgateDelegate (`ParentFormSurrogateDelegate`) :  parentFormSurrgateDelegate
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -85,7 +85,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``ApplicationManagerBase`` : 
+			`IDomainApplicationModel` : 
 		"""
 		pass
 
@@ -95,7 +95,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``ApplicationManagerBase`` : 
+			`HaestadParentFormModel` : 
 		"""
 		pass
 
@@ -105,7 +105,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``ApplicationManagerBase`` : 
+			`GraphicalParentFormUIModelBase` : 
 		"""
 		pass
 
@@ -115,7 +115,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``ApplicationManagerBase`` : 
+			`IParentFormSurrogate` : 
 		"""
 		pass
 
@@ -125,7 +125,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``ApplicationManagerBase`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -139,7 +139,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 		Returns
 		--------
-			``ApplicationManagerBase`` : 
+			`int` : 
 		"""
 		pass
 
@@ -149,7 +149,7 @@ class ApplicationManagerBase(IApplicationManager):
 
 class IParentFormSurrogate(IWin32Window, IUserInterface):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -165,17 +165,17 @@ class IParentFormSurrogate(IWin32Window, IUserInterface):
 
 		Args
 		--------
-			handle (``IntPtr``) :  handle
+			handle (`IntPtr`) :  handle
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IApplicationManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -191,11 +191,11 @@ class IApplicationManager:
 
 		Args
 		--------
-			openUI (``bool``) :  If true, opens the specified parent form.  Defaults to false.
+			openUI (`bool`) :  If true, opens the specified parent form.  Defaults to false.
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -205,11 +205,11 @@ class IApplicationManager:
 
 		Args
 		--------
-			parentFormSurrgateDelegate (``ParentFormSurrogateDelegate``) :  parentFormSurrgateDelegate
+			parentFormSurrgateDelegate (`ParentFormSurrogateDelegate`) :  parentFormSurrgateDelegate
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -218,7 +218,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -228,7 +228,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``IApplicationManager`` : 
+			`IDomainApplicationModel` : 
 		"""
 		pass
 
@@ -238,7 +238,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``IApplicationManager`` : 
+			`HaestadParentFormModel` : 
 		"""
 		pass
 
@@ -248,7 +248,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``IApplicationManager`` : 
+			`GraphicalParentFormUIModelBase` : 
 		"""
 		pass
 
@@ -258,7 +258,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``IApplicationManager`` : 
+			`IParentFormSurrogate` : 
 		"""
 		pass
 
@@ -268,7 +268,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``IApplicationManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -278,7 +278,7 @@ class IApplicationManager:
 
 		Returns
 		--------
-			``IApplicationManager`` : 
+			`int` : 
 		"""
 		pass
 

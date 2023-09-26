@@ -444,13 +444,13 @@ class EngineCalculationFlags(Enum):
 	FF_PipeExceedsMaximumVelocity = 1048576
 	FF_FFNodeFailsResidualPressure = 2097152
 	CalculationHalted = 4194304
+	DemandDisconnected = 8388608
 	UnsupportedStartAndEndNodeConfiguration = 8388608
 	ContainsWarningFlagMask = 16776960
 	Unbalanced = 16777216
 	IllConditioned = 33554432
 	UnableToComputeOmegaForVSPump = 67108864
 	InconsistentPumpBatteryResults = 268435456
-	DemandDisconnected = 536870912
 	UnexpectedReverseFlow = 1073741824
 	ContainsErrorFlagMask = 32
 

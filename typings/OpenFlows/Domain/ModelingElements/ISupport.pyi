@@ -20,7 +20,7 @@ class UserFieldDataType(Enum):
 
 class IFieldInfo(INamable, ILabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -36,11 +36,11 @@ class IFieldInfo(INamable, ILabeled):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``TValueType`` : 
+			`TValueType` : 
 		"""
 		pass
 
@@ -49,12 +49,12 @@ class IFieldInfo(INamable, ILabeled):
 
 		Args
 		--------
-			id (``int``) :  id
-			value (``TValueType``) :  value
+			id (`int`) :  id
+			value (`TValueType`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -64,7 +64,7 @@ class IFieldInfo(INamable, ILabeled):
 
 		Returns
 		--------
-			``IFieldInfo`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -74,7 +74,7 @@ class IFieldInfo(INamable, ILabeled):
 
 		Returns
 		--------
-			``IFieldInfo`` : 
+			`DomainFieldType` : 
 		"""
 		pass
 
@@ -84,7 +84,7 @@ class IFieldInfo(INamable, ILabeled):
 
 		Returns
 		--------
-			``IFieldInfo`` : 
+			`FieldDataType` : 
 		"""
 		pass
 
@@ -94,7 +94,7 @@ class IFieldInfo(INamable, ILabeled):
 
 		Returns
 		--------
-			``IFieldInfo`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -104,13 +104,13 @@ class IFieldInfo(INamable, ILabeled):
 
 		Returns
 		--------
-			``IFieldInfo`` : 
+			`IUnit` : 
 		"""
 		pass
 
 class INetworkFieldInfo(IFieldInfo):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -127,7 +127,7 @@ class INetworkFieldInfo(IFieldInfo):
 
 		Returns
 		--------
-			``INetworkFieldInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -137,13 +137,13 @@ class INetworkFieldInfo(IFieldInfo):
 
 		Returns
 		--------
-			``INetworkFieldInfo`` : 
+			`str` : 
 		"""
 		pass
 
 class IUserNetworkfieldInfo(INetworkFieldInfo):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -159,13 +159,13 @@ class IUserNetworkfieldInfo(INetworkFieldInfo):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IResultFieldInfo(IFieldInfo):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -182,7 +182,7 @@ class IResultFieldInfo(IFieldInfo):
 
 		Returns
 		--------
-			``IResultFieldInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -192,13 +192,13 @@ class IResultFieldInfo(IFieldInfo):
 
 		Returns
 		--------
-			``IResultFieldInfo`` : 
+			`str` : 
 		"""
 		pass
 
 class IComponentElementFieldInfo(IFieldInfo):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -215,13 +215,13 @@ class IComponentElementFieldInfo(IFieldInfo):
 
 		Returns
 		--------
-			``IComponentElementFieldInfo`` : 
+			`str` : 
 		"""
 		pass
 
 class IFieldManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -237,11 +237,11 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  The name of the field to return.
+			name (`str`) :  The name of the field to return.
 
 		Returns
 		--------
-			``IFieldInfo`` : A non-null IFieldInfo implementation if the name is found, otherwise null.
+			`IFieldInfo` : A non-null IFieldInfo implementation if the name is found, otherwise null.
 		"""
 		pass
 
@@ -250,11 +250,11 @@ class IFieldManager:
 
 		Args
 		--------
-			label (``str``) :  The label of the field to search for.  Exact match is used.
+			label (`str`) :  The label of the field to search for.  Exact match is used.
 
 		Returns
 		--------
-			``IFieldInfo`` : A non-null IFieldInfo if found, otherwise null
+			`IFieldInfo` : A non-null IFieldInfo if found, otherwise null
 		"""
 		pass
 
@@ -265,13 +265,13 @@ class IFieldManager:
 
 		Returns
 		--------
-			``IFieldManager`` : 
+			`IReadOnlyCollection` : 
 		"""
 		pass
 
 class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -288,7 +288,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`UserFieldDataType` : 
 		"""
 		pass
 
@@ -298,7 +298,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`str` : 
 		"""
 		pass
 
@@ -312,7 +312,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`str` : 
 		"""
 		pass
 
@@ -326,7 +326,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`TNetworkElementTypeEnum` : 
 		"""
 		pass
 
@@ -340,7 +340,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`List[TNetworkElementTypeEnum]` : 
 		"""
 		pass
 
@@ -350,7 +350,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`TFieldType` : 
 		"""
 		pass
 
@@ -364,7 +364,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`str` : 
 		"""
 		pass
 
@@ -378,7 +378,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`IFieldInfo` : 
 		"""
 		pass
 
@@ -388,7 +388,7 @@ class IUserFieldOptions(Generic[TFieldType, TNetworkElementTypeEnum]):
 
 class IUserFieldManager(Generic[TNetworkElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -399,12 +399,12 @@ class IUserFieldManager(Generic[TNetworkElementType]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def NewFieldOptions(self) -> IUserFieldOptions:
+	def NewFieldOptions(self) -> IUserFieldOptions[TFieldType,TNetworkElementType]:
 		"""No Description
 
 		Returns
 		--------
-			``IUserFieldOptions`` : 
+			`IUserFieldOptions` : 
 		"""
 		pass
 
@@ -413,35 +413,35 @@ class IUserFieldManager(Generic[TNetworkElementType]):
 
 		Args
 		--------
-			options (``IUserFieldOptions``) :  options
+			options (`IUserFieldOptions`) :  options
 
 		Returns
 		--------
-			``IUserNetworkfieldInfo`` : 
+			`IUserNetworkfieldInfo` : 
 		"""
 		pass
 
 	@overload
-	def UserDefinedFields(self) -> ReadOnlyCollection:
+	def UserDefinedFields(self) -> ReadOnlyCollection[IUserNetworkfieldInfo]:
 		"""Returns all user defined fields across all element types.
 
 		Returns
 		--------
-			``ReadOnlyCollection`` : A read-only list containing all user defined fields across all element types
+			`ReadOnlyCollection` : A read-only list containing all user defined fields across all element types
 		"""
 		pass
 
 	@overload
-	def UserDefinedFields(self, elementType: TNetworkElementType) -> ReadOnlyCollection:
+	def UserDefinedFields(self, elementType: TNetworkElementType) -> ReadOnlyCollection[IUserNetworkfieldInfo]:
 		"""Returns all user defined fields across all element types.
 
 		Args
 		--------
-			elementType (``TNetworkElementType``) :  elementType
+			elementType (`TNetworkElementType`) :  elementType
 
 		Returns
 		--------
-			``ReadOnlyCollection`` : A read-only list containing all user defined fields across all element types
+			`ReadOnlyCollection` : A read-only list containing all user defined fields across all element types
 		"""
 		pass
 

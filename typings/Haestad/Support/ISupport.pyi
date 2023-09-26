@@ -145,21 +145,21 @@ class Tag(Enum):
 class Tag(Enum):
 	Default = 0
 
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
+class Tag(Enum):
+	Default = 0
+
 class CompareType(Enum):
 	IncreasingX = 0
 	IncreasingY = 1
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
-
-class Tag(Enum):
-	Default = 0
 
 class Tag(Enum):
 	Default = 0
@@ -183,50 +183,50 @@ class Tag(Enum):
 class FieldCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldCollection``) :  c
-			a (``List[IField]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldCollection`) :  c
+			a (`List[IField]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldCollection``) :  c
-			a (``List[IField]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldCollection`) :  c
+			a (`List[IField]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: FieldCollection) -> None:
+	def __new__(self, c: FieldCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldCollection``) :  c
-			a (``List[IField]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldCollection`) :  c
+			a (`List[IField]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IField]) -> None:
+	def __new__(self, a: List[IField]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldCollection``) :  c
-			a (``List[IField]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldCollection`) :  c
+			a (`List[IField]`) :  a
 		"""
 		pass
 
@@ -236,11 +236,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``FieldCollection``) :  list
+			list (`FieldCollection`) :  list
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -250,11 +250,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``FieldCollection``) :  list
+			list (`FieldCollection`) :  list
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -264,11 +264,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IField]``) :  array
+			array (`List[IField]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -278,12 +278,12 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IField]``) :  array
-			start (``int``) :  start
+			array (`List[IField]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -292,11 +292,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IField``) :  item
+			item (`IField`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -305,7 +305,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -314,7 +314,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -323,11 +323,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IField``) :  item
+			item (`IField`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -336,11 +336,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IField``) :  item
+			item (`IField`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -349,12 +349,12 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IField``) :  item
+			index (`int`) :  index
+			item (`IField`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -363,11 +363,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IField``) :  item
+			item (`IField`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -376,11 +376,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -389,7 +389,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IFieldCollectionEnumerator`` : 
+			`IFieldCollectionEnumerator` : 
 		"""
 		pass
 
@@ -399,11 +399,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``FieldCollection``) :  x
+			x (`FieldCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -413,11 +413,11 @@ class FieldCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IField]``) :  x
+			x (`List[IField]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -426,7 +426,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -436,7 +436,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -446,7 +446,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -456,7 +456,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -466,7 +466,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -480,7 +480,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -490,7 +490,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -500,7 +500,7 @@ class FieldCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -511,50 +511,50 @@ class FieldCollection(List, ICloneable):
 class FilterContextCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FilterContextCollection``) :  c
-			a (``List[IFilterContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`FilterContextCollection`) :  c
+			a (`List[IFilterContext]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FilterContextCollection``) :  c
-			a (``List[IFilterContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`FilterContextCollection`) :  c
+			a (`List[IFilterContext]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: FilterContextCollection) -> None:
+	def __new__(self, c: FilterContextCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FilterContextCollection``) :  c
-			a (``List[IFilterContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`FilterContextCollection`) :  c
+			a (`List[IFilterContext]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IFilterContext]) -> None:
+	def __new__(self, a: List[IFilterContext]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FilterContextCollection``) :  c
-			a (``List[IFilterContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`FilterContextCollection`) :  c
+			a (`List[IFilterContext]`) :  a
 		"""
 		pass
 
@@ -564,11 +564,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``FilterContextCollection``) :  list
+			list (`FilterContextCollection`) :  list
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`FilterContextCollection` : 
 		"""
 		pass
 
@@ -578,11 +578,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``FilterContextCollection``) :  list
+			list (`FilterContextCollection`) :  list
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`FilterContextCollection` : 
 		"""
 		pass
 
@@ -592,11 +592,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFilterContext]``) :  array
+			array (`List[IFilterContext]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -606,12 +606,12 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFilterContext]``) :  array
-			start (``int``) :  start
+			array (`List[IFilterContext]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -621,11 +621,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFilterContext``) :  item
+			item (`IFilterContext`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -635,13 +635,13 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			field (``IField``) :  field
-			comparisonOperator (``ComparisonOperator``) :  comparisonOperator
-			value (``object``) :  value
+			field (`IField`) :  field
+			comparisonOperator (`ComparisonOperator`) :  comparisonOperator
+			value (`object`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -650,7 +650,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -659,7 +659,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -668,11 +668,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFilterContext``) :  item
+			item (`IFilterContext`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -681,11 +681,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFilterContext``) :  item
+			item (`IFilterContext`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -694,12 +694,12 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IFilterContext``) :  item
+			index (`int`) :  index
+			item (`IFilterContext`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -708,11 +708,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFilterContext``) :  item
+			item (`IFilterContext`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -721,11 +721,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -734,7 +734,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IFilterContextCollectionEnumerator`` : 
+			`IFilterContextCollectionEnumerator` : 
 		"""
 		pass
 
@@ -744,11 +744,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``FilterContextCollection``) :  x
+			x (`FilterContextCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -758,11 +758,11 @@ class FilterContextCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IFilterContext]``) :  x
+			x (`List[IFilterContext]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -771,7 +771,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -781,7 +781,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`str` : 
 		"""
 		pass
 
@@ -795,7 +795,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -809,7 +809,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -823,7 +823,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -837,7 +837,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -847,7 +847,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -861,7 +861,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -871,7 +871,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -881,7 +881,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -891,7 +891,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`IFilterContext` : 
 		"""
 		pass
 
@@ -905,7 +905,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -915,7 +915,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -925,7 +925,7 @@ class FilterContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FilterContextCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -935,13 +935,13 @@ class FilterContextCollection(List, ICloneable):
 
 class GeometryPoint:
 
-	def __init__(self, x: float, y: float) -> None:
+	def __new__(self, x: float, y: float) -> None:
 		"""No Description
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
+			x (`float`) :  x
+			y (`float`) :  y
 		"""
 		pass
 
@@ -950,12 +950,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
+			x (`float`) :  x
+			y (`float`) :  y
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -965,12 +965,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			point1 (``GeometryPoint``) :  point1
-			point2 (``GeometryPoint``) :  point2
+			point1 (`GeometryPoint`) :  point1
+			point2 (`GeometryPoint`) :  point2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -980,12 +980,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			point1 (``GeometryPoint``) :  point1
-			point2 (``GeometryPoint``) :  point2
+			point1 (`GeometryPoint`) :  point1
+			point2 (`GeometryPoint`) :  point2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -995,12 +995,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			left (``GeometryPoint``) :  left
-			right (``GeometryPoint``) :  right
+			left (`GeometryPoint`) :  left
+			right (`GeometryPoint`) :  right
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1010,12 +1010,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			left (``GeometryPoint``) :  left
-			right (``GeometryPoint``) :  right
+			left (`GeometryPoint`) :  left
+			right (`GeometryPoint`) :  right
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1025,11 +1025,11 @@ class GeometryPoint:
 
 		Args
 		--------
-			point (``GeometryPoint``) :  point
+			point (`GeometryPoint`) :  point
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1039,11 +1039,11 @@ class GeometryPoint:
 
 		Args
 		--------
-			point (``GeometryPoint``) :  point
+			point (`GeometryPoint`) :  point
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1053,12 +1053,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			left (``GeometryPoint``) :  left
-			right (``GeometryPoint``) :  right
+			left (`GeometryPoint`) :  left
+			right (`GeometryPoint`) :  right
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1068,12 +1068,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			point1 (``GeometryPoint``) :  point1
-			point2 (``GeometryPoint``) :  point2
+			point1 (`GeometryPoint`) :  point1
+			point2 (`GeometryPoint`) :  point2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1083,12 +1083,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			point1 (``GeometryPoint``) :  point1
-			point2 (``GeometryPoint``) :  point2
+			point1 (`GeometryPoint`) :  point1
+			point2 (`GeometryPoint`) :  point2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1098,12 +1098,12 @@ class GeometryPoint:
 
 		Args
 		--------
-			left (``GeometryPoint``) :  left
-			right (``GeometryPoint``) :  right
+			left (`GeometryPoint`) :  left
+			right (`GeometryPoint`) :  right
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1113,7 +1113,7 @@ class GeometryPoint:
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1127,7 +1127,7 @@ class GeometryPoint:
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1141,7 +1141,7 @@ class GeometryPoint:
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1152,21 +1152,21 @@ class GeometryPoint:
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
 class GeometryRectangle:
 
-	def __init__(self, x: float, y: float, width: float, height: float) -> None:
+	def __new__(self, x: float, y: float, width: float, height: float) -> None:
 		"""No Description
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
-			width (``float``) :  width
-			height (``float``) :  height
+			x (`float`) :  x
+			y (`float`) :  y
+			width (`float`) :  width
+			height (`float`) :  height
 		"""
 		pass
 
@@ -1176,11 +1176,11 @@ class GeometryRectangle:
 
 		Args
 		--------
-			point (``GeometryPoint``) :  point
+			point (`GeometryPoint`) :  point
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1190,12 +1190,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
+			x (`float`) :  x
+			y (`float`) :  y
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1205,11 +1205,11 @@ class GeometryRectangle:
 
 		Args
 		--------
-			rectangle (``GeometryRectangle``) :  rectangle
+			rectangle (`GeometryRectangle`) :  rectangle
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1218,12 +1218,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
+			x (`float`) :  x
+			y (`float`) :  y
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1232,12 +1232,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
+			x (`float`) :  x
+			y (`float`) :  y
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1246,7 +1246,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`GeometryRectangle` : 
 		"""
 		pass
 
@@ -1256,14 +1256,14 @@ class GeometryRectangle:
 
 		Args
 		--------
-			left (``float``) :  left
-			top (``float``) :  top
-			right (``float``) :  right
-			bottom (``float``) :  bottom
+			left (`float`) :  left
+			top (`float`) :  top
+			right (`float`) :  right
+			bottom (`float`) :  bottom
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`GeometryRectangle` : 
 		"""
 		pass
 
@@ -1273,12 +1273,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			rectangle1 (``GeometryRectangle``) :  rectangle1
-			rectangle2 (``GeometryRectangle``) :  rectangle2
+			rectangle1 (`GeometryRectangle`) :  rectangle1
+			rectangle2 (`GeometryRectangle`) :  rectangle2
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`GeometryRectangle` : 
 		"""
 		pass
 
@@ -1288,12 +1288,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			rectangle1 (``GeometryRectangle``) :  rectangle1
-			rectangle2 (``GeometryRectangle``) :  rectangle2
+			rectangle1 (`GeometryRectangle`) :  rectangle1
+			rectangle2 (`GeometryRectangle`) :  rectangle2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1303,12 +1303,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			rectangle1 (``GeometryRectangle``) :  rectangle1
-			rectangle2 (``GeometryRectangle``) :  rectangle2
+			rectangle1 (`GeometryRectangle`) :  rectangle1
+			rectangle2 (`GeometryRectangle`) :  rectangle2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1318,12 +1318,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			rectangle1 (``GeometryRectangle``) :  rectangle1
-			rectangle2 (``GeometryRectangle``) :  rectangle2
+			rectangle1 (`GeometryRectangle`) :  rectangle1
+			rectangle2 (`GeometryRectangle`) :  rectangle2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1333,12 +1333,12 @@ class GeometryRectangle:
 
 		Args
 		--------
-			rectangle1 (``GeometryRectangle``) :  rectangle1
-			rectangle2 (``GeometryRectangle``) :  rectangle2
+			rectangle1 (`GeometryRectangle`) :  rectangle1
+			rectangle2 (`GeometryRectangle`) :  rectangle2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1348,7 +1348,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1362,7 +1362,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1376,7 +1376,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1390,7 +1390,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1404,7 +1404,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1414,7 +1414,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1424,7 +1424,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1434,7 +1434,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1444,7 +1444,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1454,7 +1454,7 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -1465,57 +1465,57 @@ class GeometryRectangle:
 
 		Returns
 		--------
-			``GeometryRectangle`` : 
+			`GeometryRectangle` : 
 		"""
 		pass
 
 class HmIDCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``HmIDCollection``) :  c
-			a (``array[int]``) :  a
+			capacity (`int`) :  capacity
+			c (`HmIDCollection`) :  c
+			a (`array[int]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``HmIDCollection``) :  c
-			a (``array[int]``) :  a
+			capacity (`int`) :  capacity
+			c (`HmIDCollection`) :  c
+			a (`array[int]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: HmIDCollection) -> None:
+	def __new__(self, c: HmIDCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``HmIDCollection``) :  c
-			a (``array[int]``) :  a
+			capacity (`int`) :  capacity
+			c (`HmIDCollection`) :  c
+			a (`array[int]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: array[int]) -> None:
+	def __new__(self, a: array[int]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``HmIDCollection``) :  c
-			a (``array[int]``) :  a
+			capacity (`int`) :  capacity
+			c (`HmIDCollection`) :  c
+			a (`array[int]`) :  a
 		"""
 		pass
 
@@ -1525,11 +1525,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``HmIDCollection``) :  list
+			list (`HmIDCollection`) :  list
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -1539,11 +1539,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``HmIDCollection``) :  list
+			list (`HmIDCollection`) :  list
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -1553,11 +1553,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``array[int]``) :  array
+			array (`array[int]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1567,12 +1567,12 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			start (``int``) :  start
+			array (`array[int]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1582,14 +1582,14 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			startInTarget (``int``) :  startInTarget
-			startInSource (``int``) :  startInSource
-			length (``int``) :  length
+			array (`array[int]`) :  array
+			startInTarget (`int`) :  startInTarget
+			startInSource (`int`) :  startInSource
+			length (`int`) :  length
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1598,11 +1598,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1611,7 +1611,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1620,7 +1620,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1629,11 +1629,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1642,11 +1642,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1655,12 +1655,12 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``int``) :  item
+			index (`int`) :  index
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1669,11 +1669,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1682,11 +1682,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1695,7 +1695,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IHmIDCollectionEnumerator`` : 
+			`IHmIDCollectionEnumerator` : 
 		"""
 		pass
 
@@ -1705,11 +1705,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``HmIDCollection``) :  x
+			x (`HmIDCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1719,11 +1719,11 @@ class HmIDCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``array[int]``) :  x
+			x (`array[int]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1732,7 +1732,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1741,7 +1741,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1750,7 +1750,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1759,7 +1759,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``array[int]`` : 
+			`array[int]` : 
 		"""
 		pass
 
@@ -1769,7 +1769,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1779,7 +1779,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1789,7 +1789,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1799,7 +1799,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1813,7 +1813,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1823,7 +1823,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1833,7 +1833,7 @@ class HmIDCollection(List, ICloneable):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1843,7 +1843,7 @@ class HmIDCollection(List, ICloneable):
 
 class IField:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -1859,11 +1859,11 @@ class IField:
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1873,7 +1873,7 @@ class IField:
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -1883,11 +1883,11 @@ class IField:
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
+			ids (`HmIDCollection`) :  ids
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -1897,7 +1897,7 @@ class IField:
 
 		Returns
 		--------
-			``IField`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1907,7 +1907,7 @@ class IField:
 
 		Returns
 		--------
-			``IField`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1917,7 +1917,7 @@ class IField:
 
 		Returns
 		--------
-			``IField`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1931,7 +1931,7 @@ class IField:
 
 		Returns
 		--------
-			``IField`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1945,7 +1945,7 @@ class IField:
 
 		Returns
 		--------
-			``IField`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1959,13 +1959,13 @@ class IField:
 
 		Returns
 		--------
-			``IField`` : 
+			`FieldDataType` : 
 		"""
 		pass
 
 class IEditField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -1981,12 +1981,12 @@ class IEditField(IField):
 
 		Args
 		--------
-			id (``int``) :  id
-			value (``object``) :  value
+			id (`int`) :  id
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1995,12 +1995,12 @@ class IEditField(IField):
 
 		Args
 		--------
-			operation (``SetValuesOperation``) :  operation
-			value (``object``) :  value
+			operation (`SetValuesOperation`) :  operation
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2010,13 +2010,13 @@ class IEditField(IField):
 
 		Returns
 		--------
-			``IEditField`` : 
+			`object` : 
 		"""
 		pass
 
 class IFilterContext:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2033,7 +2033,7 @@ class IFilterContext:
 
 		Returns
 		--------
-			``IFilterContext`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -2047,7 +2047,7 @@ class IFilterContext:
 
 		Returns
 		--------
-			``IFilterContext`` : 
+			`ComparisonOperator` : 
 		"""
 		pass
 
@@ -2061,7 +2061,7 @@ class IFilterContext:
 
 		Returns
 		--------
-			``IFilterContext`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2075,7 +2075,7 @@ class IFilterContext:
 
 		Returns
 		--------
-			``IFilterContext`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2085,7 +2085,7 @@ class IFilterContext:
 
 class ISortContext:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2102,7 +2102,7 @@ class ISortContext:
 
 		Returns
 		--------
-			``ISortContext`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -2116,7 +2116,7 @@ class ISortContext:
 
 		Returns
 		--------
-			``ISortContext`` : 
+			`SortOrder` : 
 		"""
 		pass
 
@@ -2130,7 +2130,7 @@ class ISortContext:
 
 		Returns
 		--------
-			``ISortContext`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2140,7 +2140,7 @@ class ISortContext:
 
 class IEditLabeled(ILabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2157,7 +2157,7 @@ class IEditLabeled(ILabeled):
 
 		Returns
 		--------
-			``IEditLabeled`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2167,7 +2167,7 @@ class IEditLabeled(ILabeled):
 
 class ILabeled:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2184,13 +2184,13 @@ class ILabeled:
 
 		Returns
 		--------
-			``ILabeled`` : 
+			`str` : 
 		"""
 		pass
 
 class INamable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2207,13 +2207,13 @@ class INamable:
 
 		Returns
 		--------
-			``INamable`` : 
+			`str` : 
 		"""
 		pass
 
 class IMemento:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2230,7 +2230,7 @@ class IMemento:
 
 		Returns
 		--------
-			``IMemento`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2240,7 +2240,7 @@ class IMemento:
 
 class IMementoable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2256,7 +2256,7 @@ class IMementoable:
 
 		Returns
 		--------
-			``IMemento`` : 
+			`IMemento` : 
 		"""
 		pass
 
@@ -2265,61 +2265,61 @@ class IMementoable:
 
 		Args
 		--------
-			aimemento (``IMemento``) :  aimemento
+			aimemento (`IMemento`) :  aimemento
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class SortContextCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SortContextCollection``) :  c
-			a (``List[ISortContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`SortContextCollection`) :  c
+			a (`List[ISortContext]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SortContextCollection``) :  c
-			a (``List[ISortContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`SortContextCollection`) :  c
+			a (`List[ISortContext]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: SortContextCollection) -> None:
+	def __new__(self, c: SortContextCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SortContextCollection``) :  c
-			a (``List[ISortContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`SortContextCollection`) :  c
+			a (`List[ISortContext]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[ISortContext]) -> None:
+	def __new__(self, a: List[ISortContext]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SortContextCollection``) :  c
-			a (``List[ISortContext]``) :  a
+			capacity (`int`) :  capacity
+			c (`SortContextCollection`) :  c
+			a (`List[ISortContext]`) :  a
 		"""
 		pass
 
@@ -2329,11 +2329,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``SortContextCollection``) :  list
+			list (`SortContextCollection`) :  list
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`SortContextCollection` : 
 		"""
 		pass
 
@@ -2343,11 +2343,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``SortContextCollection``) :  list
+			list (`SortContextCollection`) :  list
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`SortContextCollection` : 
 		"""
 		pass
 
@@ -2357,11 +2357,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISortContext]``) :  array
+			array (`List[ISortContext]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2371,12 +2371,12 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISortContext]``) :  array
-			start (``int``) :  start
+			array (`List[ISortContext]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2386,11 +2386,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISortContext``) :  item
+			item (`ISortContext`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2400,12 +2400,12 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			field (``IField``) :  field
-			sortOrder (``SortOrder``) :  sortOrder
+			field (`IField`) :  field
+			sortOrder (`SortOrder`) :  sortOrder
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2415,14 +2415,14 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			field (``IField``) :  field
-			sortOrder (``SortOrder``) :  sortOrder
-			enumLabels (``array[str]``) :  enumLabels
-			enumValues (``array[int]``) :  enumValues
+			field (`IField`) :  field
+			sortOrder (`SortOrder`) :  sortOrder
+			enumLabels (`array[str]`) :  enumLabels
+			enumValues (`array[int]`) :  enumValues
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2431,7 +2431,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2440,7 +2440,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2449,11 +2449,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISortContext``) :  item
+			item (`ISortContext`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2462,11 +2462,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISortContext``) :  item
+			item (`ISortContext`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2475,12 +2475,12 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``ISortContext``) :  item
+			index (`int`) :  index
+			item (`ISortContext`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2489,11 +2489,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISortContext``) :  item
+			item (`ISortContext`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2502,11 +2502,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2515,7 +2515,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ISortContextCollectionEnumerator`` : 
+			`ISortContextCollectionEnumerator` : 
 		"""
 		pass
 
@@ -2525,11 +2525,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``SortContextCollection``) :  x
+			x (`SortContextCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2539,11 +2539,11 @@ class SortContextCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[ISortContext]``) :  x
+			x (`List[ISortContext]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2552,7 +2552,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2562,7 +2562,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2576,7 +2576,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2586,7 +2586,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2596,7 +2596,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2606,7 +2606,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`ISortContext` : 
 		"""
 		pass
 
@@ -2620,7 +2620,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2630,7 +2630,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2640,7 +2640,7 @@ class SortContextCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SortContextCollection`` : 
+			`int` : 
 		"""
 		pass
 

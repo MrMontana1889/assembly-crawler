@@ -4,7 +4,7 @@ from OpenFlows.Water.Domain.ModelingElements.ICalculationOptions import IWaterSc
 
 class IScenarioEnergyCostCalculator(IAnalysisCalculator[IWaterScenario, IWaterScenarios, IWaterScenarioOptions, IWaterScenarioOptionsUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -17,7 +17,7 @@ class IScenarioEnergyCostCalculator(IAnalysisCalculator[IWaterScenario, IWaterSc
 
 class IAnalysisTools:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -34,7 +34,7 @@ class IAnalysisTools:
 
 		Returns
 		--------
-			``IAnalysisTools`` : 
+			`IScenarioEnergyCostCalculator` : 
 		"""
 		pass
 

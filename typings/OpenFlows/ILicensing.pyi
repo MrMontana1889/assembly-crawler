@@ -4,7 +4,7 @@ from System import IntPtr, Guid
 
 class ILicenseManager(ILicenseProvider):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -20,7 +20,7 @@ class ILicenseManager(ILicenseProvider):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -30,12 +30,12 @@ class ILicenseManager(ILicenseProvider):
 
 		Args
 		--------
-			product (``ProductId``) :  product
-			parentWindow (``IntPtr``) :  parentWindow
+			product (`ProductId`) :  product
+			parentWindow (`IntPtr`) :  parentWindow
 
 		Returns
 		--------
-			``LicenseRunStatusEnum`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -45,11 +45,11 @@ class ILicenseManager(ILicenseProvider):
 
 		Args
 		--------
-			licensedFeatureSet (``ILicensedFeatureSet``) :  licensedFeatureSet
+			licensedFeatureSet (`ILicensedFeatureSet`) :  licensedFeatureSet
 
 		Returns
 		--------
-			``LicenseRunStatusEnum`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -58,7 +58,7 @@ class ILicenseManager(ILicenseProvider):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -67,7 +67,7 @@ class ILicenseManager(ILicenseProvider):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -76,7 +76,7 @@ class ILicenseManager(ILicenseProvider):
 
 		Returns
 		--------
-			``LicenseStatus`` : 
+			`LicenseStatus` : 
 		"""
 		pass
 
@@ -86,13 +86,13 @@ class ILicenseManager(ILicenseProvider):
 
 		Returns
 		--------
-			``ILicenseManager`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
 class ILicenseConfiguration:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -108,11 +108,11 @@ class ILicenseConfiguration:
 
 		Args
 		--------
-			license (``License``) :  license
+			license (`License`) :  license
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -121,11 +121,11 @@ class ILicenseConfiguration:
 
 		Args
 		--------
-			license (``License``) :  license
+			license (`License`) :  license
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 

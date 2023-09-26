@@ -1,6 +1,6 @@
 class IOpenFlowsWaterDefaults:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -22,7 +22,7 @@ class IOpenFlowsWaterDefaults:
 
 		Returns
 		--------
-			``IOpenFlowsWaterDefaults`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -41,7 +41,7 @@ class IOpenFlowsWaterDefaults:
 
 		Returns
 		--------
-			``IOpenFlowsWaterDefaults`` : 
+			`bool` : 
 		"""
 		pass
 

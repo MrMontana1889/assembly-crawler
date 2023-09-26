@@ -9,7 +9,7 @@ from Haestad.Support.ISupport import IEditLabeled, ILabeled
 
 class IPressureCalculationSummaryResults:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -25,7 +25,7 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``List[ICalculationResultsMessage]`` : A list of messages (can be empty) or null if there are no results
+			`List[ICalculationResultsMessage]` : A list of messages (can be empty) or null if there are no results
 		"""
 		pass
 
@@ -34,7 +34,7 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``List[ICalculationResultsMessage]`` : A list of messages (can be empty) or null if there are no results
+			`List[ICalculationResultsMessage]` : A list of messages (can be empty) or null if there are no results
 		"""
 		pass
 
@@ -43,7 +43,7 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``List[ICalculationResultsMessage]`` : A list of messages (can be empty) or null if thre are no results
+			`List[ICalculationResultsMessage]` : A list of messages (can be empty) or null if thre are no results
 		"""
 		pass
 
@@ -52,81 +52,81 @@ class IPressureCalculationSummaryResults:
 
 		Args
 		--------
-			timeStepIndex (``int``) :  The 0-based time step index to us to get the trial collection.
+			timeStepIndex (`int`) :  The 0-based time step index to us to get the trial collection.
 
 		Returns
 		--------
-			``ITrialCollection`` : 
+			`ITrialCollection` : 
 		"""
 		pass
 
 	@property
-	def IsBalanced(self) -> Nullable[bool]:
+	def IsBalanced(self) -> Union[bool, None]:
 		"""True if the network calculation was balanced overall.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def TotalIterations(self) -> Nullable[int]:
+	def TotalIterations(self) -> Union[int, None]:
 		"""Total number of iterations used.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def MaximumRelativeFlowChange(self) -> Nullable[float]:
+	def MaximumRelativeFlowChange(self) -> Union[float, None]:
 		"""The maximum relative flow change across all time steps.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def FlowSupplied(self) -> Nullable[float]:
+	def FlowSupplied(self) -> Union[float, None]:
 		"""The total flow supplied to the system.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def FlowDemanded(self) -> Nullable[float]:
+	def FlowDemanded(self) -> Union[float, None]:
 		"""The total flow demanded by the system.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def FlowStored(self) -> Nullable[float]:
+	def FlowStored(self) -> Union[float, None]:
 		"""The total flow stored by the system.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def Status(self) -> Nullable[int]:
+	def Status(self) -> Union[int, None]:
 		"""The overall status of the system.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
@@ -136,7 +136,7 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`ICalculationSummaryCollection` : 
 		"""
 		pass
 
@@ -146,17 +146,17 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`ICalculationSummaryUnits` : 
 		"""
 		pass
 
 	@property
-	def CalculationTimeStemp(self) -> Nullable[datetime]:
+	def CalculationTimeStemp(self) -> Union[datetime, None]:
 		"""Date and time when the calculation was started.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
@@ -166,7 +166,7 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`str` : 
 		"""
 		pass
 
@@ -176,43 +176,43 @@ class IPressureCalculationSummaryResults:
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`str` : 
 		"""
 		pass
 
 	@property
-	def TimeStepCount(self) -> Nullable[int]:
+	def TimeStepCount(self) -> Union[int, None]:
 		"""Number of calculated time steps for the analysis.
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def LinkCount(self) -> Nullable[int]:
+	def LinkCount(self) -> Union[int, None]:
 		"""Number of links used in the computational analysis (this statistic is a core engine statistic and will not necessarily match number of pipes in a model).
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def NodeCount(self) -> Nullable[int]:
+	def NodeCount(self) -> Union[int, None]:
 		"""Number of nodes used in the computational analysis (this statistic is a core engine statistic and will not necessarily match number of nodes in a model).
 
 		Returns
 		--------
-			``IPressureCalculationSummaryResults`` : 
+			`Nullable` : 
 		"""
 		pass
 
 class ICalculationSummaryCollection(IResultCollectionElements[ICalculationSummary, ICalculationSummaryElement, ICalculationSummaryUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -225,7 +225,7 @@ class ICalculationSummaryCollection(IResultCollectionElements[ICalculationSummar
 
 class ICalculationSummaryUnits(IElementUnits):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -242,7 +242,7 @@ class ICalculationSummaryUnits(IElementUnits):
 
 		Returns
 		--------
-			``ICalculationSummaryUnits`` : 
+			`IUnit` : 
 		"""
 		pass
 
@@ -252,13 +252,13 @@ class ICalculationSummaryUnits(IElementUnits):
 
 		Returns
 		--------
-			``ICalculationSummaryUnits`` : 
+			`IUnit` : 
 		"""
 		pass
 
 class ICalculationSummary(IResultCollection[ICalculationSummaryElement]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -271,7 +271,7 @@ class ICalculationSummary(IResultCollection[ICalculationSummaryElement]):
 
 class ICalculationSummaryElement(ICollectionElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -288,7 +288,7 @@ class ICalculationSummaryElement(ICollectionElement):
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`int` : 
 		"""
 		pass
 
@@ -298,83 +298,83 @@ class ICalculationSummaryElement(ICollectionElement):
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`str` : 
 		"""
 		pass
 
 	@property
-	def Status(self) -> Nullable[int]:
+	def Status(self) -> Union[int, None]:
 		"""The status of the simulation at this time step
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def IsBAlanced(self) -> Nullable[bool]:
+	def IsBAlanced(self) -> Union[bool, None]:
 		"""Whether or not the system balanced athtis times tep
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def Trials(self) -> Nullable[int]:
+	def Trials(self) -> Union[int, None]:
 		"""The number of trials used to calculate this time step
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def RelativeFlowChange(self) -> Nullable[float]:
+	def RelativeFlowChange(self) -> Union[float, None]:
 		"""the relative flow change at this time step
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def FlowSupplied(self) -> Nullable[float]:
+	def FlowSupplied(self) -> Union[float, None]:
 		"""The flow supplied at this time step
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def FlowDemanded(self) -> Nullable[float]:
+	def FlowDemanded(self) -> Union[float, None]:
 		"""The flow demanded at this time step
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 	@property
-	def FlowStored(self) -> Nullable[float]:
+	def FlowStored(self) -> Union[float, None]:
 		"""The flow stored at this time step
 
 		Returns
 		--------
-			``ICalculationSummaryElement`` : 
+			`Nullable` : 
 		"""
 		pass
 
 class ICalculationResultsMessage(ICollectionElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -391,7 +391,7 @@ class ICalculationResultsMessage(ICollectionElement):
 
 		Returns
 		--------
-			``ICalculationResultsMessage`` : 
+			`str` : 
 		"""
 		pass
 
@@ -401,7 +401,7 @@ class ICalculationResultsMessage(ICollectionElement):
 
 		Returns
 		--------
-			``ICalculationResultsMessage`` : 
+			`int` : 
 		"""
 		pass
 
@@ -411,13 +411,13 @@ class ICalculationResultsMessage(ICollectionElement):
 
 		Returns
 		--------
-			``ICalculationResultsMessage`` : 
+			`str` : 
 		"""
 		pass
 
 class ITrialCollection(IResultCollectionElements[ITrials, ITrial, ITrialUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -430,7 +430,7 @@ class ITrialCollection(IResultCollectionElements[ITrials, ITrial, ITrialUnits]):
 
 class ITrialUnits(IElementUnits):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -447,13 +447,13 @@ class ITrialUnits(IElementUnits):
 
 		Returns
 		--------
-			``ITrialUnits`` : 
+			`IUnit` : 
 		"""
 		pass
 
 class ITrials(IResultCollection[ITrial]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -466,7 +466,7 @@ class ITrials(IResultCollection[ITrial]):
 
 class ITrial(ICollectionElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -483,7 +483,7 @@ class ITrial(ICollectionElement):
 
 		Returns
 		--------
-			``ITrial`` : 
+			`str` : 
 		"""
 		pass
 
@@ -493,7 +493,7 @@ class ITrial(ICollectionElement):
 
 		Returns
 		--------
-			``ITrial`` : 
+			`int` : 
 		"""
 		pass
 
@@ -503,13 +503,13 @@ class ITrial(ICollectionElement):
 
 		Returns
 		--------
-			``ITrial`` : 
+			`float` : 
 		"""
 		pass
 
 class IWaterScenario(IScenario[IWaterScenarios, IWaterScenario, IWaterScenarioOptions, IWaterScenarioOptionsUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -526,13 +526,13 @@ class IWaterScenario(IScenario[IWaterScenarios, IWaterScenario, IWaterScenarioOp
 
 		Returns
 		--------
-			``IWaterScenario`` : 
+			`IPressureCalculationSummaryResults` : 
 		"""
 		pass
 
 class IWaterScenarios(IScenarios[IWaterScenarios, IWaterScenario, IWaterScenarioOptions, IWaterScenarioOptionsUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -545,7 +545,7 @@ class IWaterScenarios(IScenarios[IWaterScenarios, IWaterScenario, IWaterScenario
 
 class IWaterSelectionSet(ISelectionSet[IWaterSelectionSets, IWaterSelectionSet, IWaterElement]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -558,7 +558,7 @@ class IWaterSelectionSet(ISelectionSet[IWaterSelectionSets, IWaterSelectionSet, 
 
 class IWaterSelectionSets(ISelectionSets[IWaterSelectionSets, IWaterSelectionSet, IWaterElement]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -571,7 +571,7 @@ class IWaterSelectionSets(ISelectionSets[IWaterSelectionSets, IWaterSelectionSet
 
 class IWaterNetworkPrototypes(INetworkPrototypes[WaterNetworkElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 

@@ -32,7 +32,7 @@ TModelType = TypeVar("TModelType")
 
 class IDomainModel:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -48,11 +48,11 @@ class IDomainModel:
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -62,13 +62,13 @@ class IDomainModel:
 
 		Returns
 		--------
-			``IDomainModel`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
 class IModelInfo(ILabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -85,7 +85,7 @@ class IModelInfo(ILabeled):
 
 		Returns
 		--------
-			``IModelInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -95,7 +95,7 @@ class IModelInfo(ILabeled):
 
 		Returns
 		--------
-			``IModelInfo`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -105,7 +105,7 @@ class IModelInfo(ILabeled):
 
 		Returns
 		--------
-			``IModelInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -115,7 +115,7 @@ class IModelInfo(ILabeled):
 
 		Returns
 		--------
-			``IModelInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -125,7 +125,7 @@ class IModelInfo(ILabeled):
 
 		Returns
 		--------
-			``IModelInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -135,13 +135,13 @@ class IModelInfo(ILabeled):
 
 		Returns
 		--------
-			``IModelInfo`` : 
+			`str` : 
 		"""
 		pass
 
 class IModelIOOperations:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -158,7 +158,7 @@ class IModelIOOperations:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -167,11 +167,11 @@ class IModelIOOperations:
 
 		Args
 		--------
-			filename (``str``) :  The full path and filename of the project.
+			filename (`str`) :  The full path and filename of the project.
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -180,13 +180,13 @@ class IModelIOOperations:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -203,11 +203,11 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -217,11 +217,11 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 		Args
 		--------
-			scenario (``TScenarioType``) :  scenario
+			scenario (`TScenarioType`) :  scenario
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -230,7 +230,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -240,7 +240,7 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 		Returns
 		--------
-			``IModelScenarioManagement`` : 
+			`TScenarioManagerType` : 
 		"""
 		pass
 
@@ -250,13 +250,13 @@ class IModelScenarioManagement(Generic[TScenarioManagerType, TScenarioType]):
 
 		Returns
 		--------
-			``IModelScenarioManagement`` : 
+			`TScenarioType` : 
 		"""
 		pass
 
 class IModelAlternatives(Generic[TNetworkElementTypeEnum, TAlternativeTypeEnum, TNetworkUnitsType, TComponentUnitsType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -272,17 +272,17 @@ class IModelAlternatives(Generic[TNetworkElementTypeEnum, TAlternativeTypeEnum, 
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``TAlternativeTypeEnum`` : 
+			`TAlternativeTypeEnum` : 
 		"""
 		pass
 
 class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -298,11 +298,11 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``TNetworkElementTypeEnum`` : 
+			`TNetworkElementTypeEnum` : 
 		"""
 		pass
 
@@ -311,17 +311,17 @@ class INetwork(Generic[TNetworkElementType, TNetworkElementTypeEnum]):
 
 		Args
 		--------
-			state (``ElementStateType``) :  state
+			state (`ElementStateType`) :  state
 
 		Returns
 		--------
-			``List[TNetworkElementType]`` : 
+			`List[TNetworkElementType]` : 
 		"""
 		pass
 
 class INetworkPrototypes(Generic[TNetworkElementTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -337,18 +337,18 @@ class INetworkPrototypes(Generic[TNetworkElementTypeEnum]):
 
 		Args
 		--------
-			elementType (``TNetworkElementTypeEnum``) :  elementType
-			label (``str``) :  label
+			elementType (`TNetworkElementTypeEnum`) :  elementType
+			label (`str`) :  label
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IModelElementManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -364,11 +364,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``IElement`` : 
+			`IElement` : 
 		"""
 		pass
 
@@ -377,12 +377,12 @@ class IModelElementManager:
 
 		Args
 		--------
-			label (``str``) :  The label to search for
-			useWildcard (``bool``) :  Specifies whether or not the label contains wildcards.  Defaults to false.
+			label (`str`) :  The label to search for
+			useWildcard (`bool`) :  Specifies whether or not the label contains wildcards.  Defaults to false.
 
 		Returns
 		--------
-			``List[IElement]`` : A list of elements that use the label.  May be empty but never null.
+			`List[IElement]` : A list of elements that use the label.  May be empty but never null.
 		"""
 		pass
 
@@ -391,11 +391,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  The id of the element
+			id (`int`) :  The id of the element
 
 		Returns
 		--------
-			``ModelElementType`` : If the id does not exist, throws exception.  Otherwise, returns the model element type.
+			`ModelElementType` : If the id does not exist, throws exception.  Otherwise, returns the model element type.
 		"""
 		pass
 
@@ -405,11 +405,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -419,11 +419,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			ids (``array[int]``) :  ids
+			ids (`array[int]`) :  ids
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -432,11 +432,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -445,11 +445,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  The ID of the element.
+			id (`int`) :  The ID of the element.
 
 		Returns
 		--------
-			``bool`` : True if the ID is a link, otherwise false
+			`bool` : True if the ID is a link, otherwise false
 		"""
 		pass
 
@@ -458,11 +458,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  The ID of the element.
+			id (`int`) :  The ID of the element.
 
 		Returns
 		--------
-			``bool`` : True if the ID is a node, otherwise false.
+			`bool` : True if the ID is a node, otherwise false.
 		"""
 		pass
 
@@ -471,11 +471,11 @@ class IModelElementManager:
 
 		Args
 		--------
-			id (``int``) :  The ID of the element.
+			id (`int`) :  The ID of the element.
 
 		Returns
 		--------
-			``bool`` : True if the id is a polygon, otherwise false.
+			`bool` : True if the id is a polygon, otherwise false.
 		"""
 		pass
 
@@ -484,17 +484,17 @@ class IModelElementManager:
 
 		Args
 		--------
-			domainElementType (``int``) :  The type of network element
+			domainElementType (`int`) :  The type of network element
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
 class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -511,13 +511,13 @@ class IModelSelectionSetManagement(Generic[TSelectionSetsType, TSelectionSetElem
 
 		Returns
 		--------
-			``IModelSelectionSetManagement`` : 
+			`TSelectionSetsType` : 
 		"""
 		pass
 
 class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType, TNetworkPrototypesType, TModelAlternativeManagementType, TAlternativeTypeEnum], IModelElementManager, IModelIOOperations, IModelUnits[TNetworkUnitsType, TComponentUnitsType], IModelScenarioManagement[TScenarioManagerType, TScenarioType], IDomainModel, IModelSelectionSetManagement[TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -534,11 +534,11 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Args
 		--------
-			domainElementType (``TNetworkElementTypeEnum``) :  domainElementType
+			domainElementType (`TNetworkElementTypeEnum`) :  domainElementType
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -548,11 +548,11 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Args
 		--------
-			domainElementType (``int``) :  The type of network element
+			domainElementType (`int`) :  The type of network element
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -562,7 +562,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`TNetworkType` : 
 		"""
 		pass
 
@@ -572,7 +572,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`TModelComponentsType` : 
 		"""
 		pass
 
@@ -582,7 +582,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`TNetworkPrototypesType` : 
 		"""
 		pass
 
@@ -592,7 +592,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`TModelAlternativeManagementType` : 
 		"""
 		pass
 
@@ -602,7 +602,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`IModelInfo` : 
 		"""
 		pass
 
@@ -612,7 +612,7 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`IUserFieldManager` : 
 		"""
 		pass
 
@@ -622,13 +622,13 @@ class IModel(Generic[TNetworkType, TModelComponentsType, TScenarioManagerType, T
 
 		Returns
 		--------
-			``IModel`` : 
+			`IEmbeddedStickyObjects` : 
 		"""
 		pass
 
 class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenarioManagerType, TScenarioType, TScenarioOptionsType, TScenarioOptionsUnitsType, TSelectionSetsType, TSelectionSetElementType, TSelectionSetNetworkElementType, TNetworkElementType, TNetworkElementTypeEnum, TComponentElementType, TComponentElementTypeEnum, TNetworkUnitsType, TComponentUnitsType, TNetworkPrototypesType, TModelAlternativeManagementType, TAlternativeTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -645,12 +645,12 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 
 		Args
 		--------
-			filename (``str``) :  The full path and filename ending in wtg.  The wtg and any support files are automatically copied to the temp folder.
-			openInPlace (``bool``) :  An option to open the specified project in its original location and not make a copy in the temp folder.
+			filename (`str`) :  The full path and filename ending in wtg.  The wtg and any support files are automatically copied to the temp folder.
+			openInPlace (`bool`) :  An option to open the specified project in its original location and not make a copy in the temp folder.
 
 		Returns
 		--------
-			``TModelType`` : A model object representing the data in the specified file.
+			`TModelType` : A model object representing the data in the specified file.
 		"""
 		pass
 
@@ -660,11 +660,11 @@ class IOpenFlows(Generic[TNetworkType, TModelType, TModelComponentsType, TScenar
 
 		Args
 		--------
-			project (``IProject``) :  project
+			project (`IProject`) :  project
 
 		Returns
 		--------
-			``TModelType`` : 
+			`TModelType` : 
 		"""
 		pass
 

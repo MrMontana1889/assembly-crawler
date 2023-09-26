@@ -8,7 +8,7 @@ class WaterAlternativeType(Enum):
 
 class IWaterAlternatives(IModelAlternatives[WaterNetworkElementType, WaterAlternativeType, INetworkElementUnits, IComponentElementUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 

@@ -11,7 +11,7 @@ from Haestad.Support.ISupport import IEditLabeled, ILabeled
 
 class IActiveDemandAdjustmentsCollection(ICollectionElements[IActiveDemandAdjustments, IActiveDemandAdjustment, IElementUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -24,7 +24,7 @@ class IActiveDemandAdjustmentsCollection(ICollectionElements[IActiveDemandAdjust
 
 class IActiveDemandAdjustments(ICollection[IActiveDemandAdjustment]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -41,14 +41,14 @@ class IActiveDemandAdjustments(ICollection[IActiveDemandAdjustment]):
 
 		Args
 		--------
-			scope (``IWaterSelectionSet``) :  scope
-			demandPattern (``IPattern``) :  demandPattern
-			operation (``AdjustmentOperationType``) :  operation
-			value (``float``) :  value
+			scope (`IWaterSelectionSet`) :  scope
+			demandPattern (`IPattern`) :  demandPattern
+			operation (`AdjustmentOperationType`) :  operation
+			value (`float`) :  value
 
 		Returns
 		--------
-			``IActiveDemandAdjustment`` : 
+			`IActiveDemandAdjustment` : 
 		"""
 		pass
 
@@ -58,13 +58,13 @@ class IActiveDemandAdjustments(ICollection[IActiveDemandAdjustment]):
 
 		Returns
 		--------
-			``IActiveDemandAdjustment`` : 
+			`IActiveDemandAdjustment` : 
 		"""
 		pass
 
 class IActiveDemandAdjustment(ICollectionElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -81,7 +81,7 @@ class IActiveDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveDemandAdjustment`` : 
+			`IWaterSelectionSet` : 
 		"""
 		pass
 
@@ -95,7 +95,7 @@ class IActiveDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveDemandAdjustment`` : 
+			`IPattern` : 
 		"""
 		pass
 
@@ -109,7 +109,7 @@ class IActiveDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveDemandAdjustment`` : 
+			`float` : 
 		"""
 		pass
 
@@ -123,7 +123,7 @@ class IActiveDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveDemandAdjustment`` : 
+			`AdjustmentOperationType` : 
 		"""
 		pass
 
@@ -133,7 +133,7 @@ class IActiveDemandAdjustment(ICollectionElement):
 
 class IActiveRoughnessAdjustmentCollection(ICollectionElements[IActiveRoughnessAdjustments, IActiveRoughnessAdjustment, IElementUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -146,7 +146,7 @@ class IActiveRoughnessAdjustmentCollection(ICollectionElements[IActiveRoughnessA
 
 class IActiveRoughnessAdjustments(ICollection[IActiveRoughnessAdjustment]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -163,13 +163,13 @@ class IActiveRoughnessAdjustments(ICollection[IActiveRoughnessAdjustment]):
 
 		Args
 		--------
-			scope (``IWaterSelectionSet``) :  scope
-			operation (``AdjustmentOperationType``) :  operation
-			value (``float``) :  value
+			scope (`IWaterSelectionSet`) :  scope
+			operation (`AdjustmentOperationType`) :  operation
+			value (`float`) :  value
 
 		Returns
 		--------
-			``IActiveRoughnessAdjustment`` : 
+			`IActiveRoughnessAdjustment` : 
 		"""
 		pass
 
@@ -179,13 +179,13 @@ class IActiveRoughnessAdjustments(ICollection[IActiveRoughnessAdjustment]):
 
 		Returns
 		--------
-			``IActiveRoughnessAdjustment`` : 
+			`IActiveRoughnessAdjustment` : 
 		"""
 		pass
 
 class IActiveRoughnessAdjustment(ICollectionElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -202,7 +202,7 @@ class IActiveRoughnessAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveRoughnessAdjustment`` : 
+			`IWaterSelectionSet` : 
 		"""
 		pass
 
@@ -216,7 +216,7 @@ class IActiveRoughnessAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveRoughnessAdjustment`` : 
+			`float` : 
 		"""
 		pass
 
@@ -230,7 +230,7 @@ class IActiveRoughnessAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveRoughnessAdjustment`` : 
+			`AdjustmentOperationType` : 
 		"""
 		pass
 
@@ -240,7 +240,7 @@ class IActiveRoughnessAdjustment(ICollectionElement):
 
 class IActiveUnitDemandAdjustmentCollection(ICollectionElements[IActiveUnitDemandAdjustments, IActiveUnitDemandAdjustment, IElementUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -253,7 +253,7 @@ class IActiveUnitDemandAdjustmentCollection(ICollectionElements[IActiveUnitDeman
 
 class IActiveUnitDemandAdjustments(ICollection[IActiveUnitDemandAdjustment]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -270,14 +270,14 @@ class IActiveUnitDemandAdjustments(ICollection[IActiveUnitDemandAdjustment]):
 
 		Args
 		--------
-			scope (``IWaterSelectionSet``) :  scope
-			unitDemandLoad (``IUnitDemandLoad``) :  unitDemandLoad
-			operation (``AdjustmentOperationType``) :  operation
-			value (``float``) :  value
+			scope (`IWaterSelectionSet`) :  scope
+			unitDemandLoad (`IUnitDemandLoad`) :  unitDemandLoad
+			operation (`AdjustmentOperationType`) :  operation
+			value (`float`) :  value
 
 		Returns
 		--------
-			``IActiveUnitDemandAdjustment`` : 
+			`IActiveUnitDemandAdjustment` : 
 		"""
 		pass
 
@@ -287,13 +287,13 @@ class IActiveUnitDemandAdjustments(ICollection[IActiveUnitDemandAdjustment]):
 
 		Returns
 		--------
-			``IActiveUnitDemandAdjustment`` : 
+			`IActiveUnitDemandAdjustment` : 
 		"""
 		pass
 
 class IActiveUnitDemandAdjustment(ICollectionElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -310,7 +310,7 @@ class IActiveUnitDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveUnitDemandAdjustment`` : 
+			`IWaterSelectionSet` : 
 		"""
 		pass
 
@@ -324,7 +324,7 @@ class IActiveUnitDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveUnitDemandAdjustment`` : 
+			`IUnitDemandLoad` : 
 		"""
 		pass
 
@@ -338,7 +338,7 @@ class IActiveUnitDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveUnitDemandAdjustment`` : 
+			`float` : 
 		"""
 		pass
 
@@ -352,7 +352,7 @@ class IActiveUnitDemandAdjustment(ICollectionElement):
 
 		Returns
 		--------
-			``IActiveUnitDemandAdjustment`` : 
+			`AdjustmentOperationType` : 
 		"""
 		pass
 
@@ -362,7 +362,7 @@ class IActiveUnitDemandAdjustment(ICollectionElement):
 
 class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -379,7 +379,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`CalculationType` : 
 		"""
 		pass
 
@@ -393,7 +393,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`EpaNetEngine_FrictionMethodEnum` : 
 		"""
 		pass
 
@@ -407,7 +407,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -421,7 +421,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`EpaNetEngine_TimeAnalysisTypeEnum` : 
 		"""
 		pass
 
@@ -435,7 +435,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -449,7 +449,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`float` : 
 		"""
 		pass
 
@@ -463,7 +463,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`float` : 
 		"""
 		pass
 
@@ -477,7 +477,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`float` : 
 		"""
 		pass
 
@@ -491,7 +491,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`DemandAdjustmentsType` : 
 		"""
 		pass
 
@@ -505,7 +505,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`IActiveDemandAdjustmentsCollection` : 
 		"""
 		pass
 
@@ -515,7 +515,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`UnitDemandAdjustmentType` : 
 		"""
 		pass
 
@@ -529,7 +529,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`IActiveUnitDemandAdjustmentCollection` : 
 		"""
 		pass
 
@@ -539,7 +539,7 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`RoughnessAdjustmentType` : 
 		"""
 		pass
 
@@ -553,13 +553,13 @@ class IWaterScenarioOptions(IScenarioOptions[IWaterScenarioOptionsUnits]):
 
 		Returns
 		--------
-			``IWaterScenarioOptions`` : 
+			`IActiveRoughnessAdjustmentCollection` : 
 		"""
 		pass
 
 class IWaterScenarioOptionsUnits(IElementUnits):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -576,7 +576,7 @@ class IWaterScenarioOptionsUnits(IElementUnits):
 
 		Returns
 		--------
-			``IWaterScenarioOptionsUnits`` : 
+			`IUnit` : 
 		"""
 		pass
 
@@ -586,7 +586,7 @@ class IWaterScenarioOptionsUnits(IElementUnits):
 
 		Returns
 		--------
-			``IWaterScenarioOptionsUnits`` : 
+			`IUnit` : 
 		"""
 		pass
 
