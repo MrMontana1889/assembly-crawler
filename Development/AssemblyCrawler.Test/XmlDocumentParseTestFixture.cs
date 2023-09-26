@@ -104,7 +104,7 @@ namespace AssemblyCrawler.Test
 			Assert.IsTrue(elementIdsMethod.XmlMemberName() == elementIdMember.Name);
 			Assert.IsTrue(elementIdMember.Summary.Content.Trim() == "Get all the IDs");
 			Assert.IsTrue(elementIdMember.Returns.Content == "List of element Ids");
-			Assert.IsTrue(elementIdDocString == "\t\"\"\"Get all the IDs\r\n\r\n\t\tReturns:\r\n\t\t\tIElementManager: List of element Ids\r\n\t\t\"\"\"");
+			Assert.IsTrue(elementIdDocString == "\t\"\"\"Get all the IDs\r\n\r\n\t\tReturns\r\n\t\t--------\r\n\t\t\t`IElementManager` : List of element Ids\r\n\t\t\"\"\"");
 
 
 			// Exists
@@ -121,7 +121,7 @@ namespace AssemblyCrawler.Test
 			Assert.IsTrue(exitsMember.Returns.Content == "True if found, otherwise false ");
 			// TODO Example
 
-			Assert.IsTrue(exitsDocString == "\t\"\"\"Evaulates if an id exists\r\n\r\n\t\tArgs:\r\n\t\t\tid(int): The id whose existance has to be checked\r\n\r\n\t\tReturns:\r\n\t\t\tbool: True if found, otherwise false \r\n\t\t\"\"\"");
+			Assert.IsTrue(exitsDocString == "\t\"\"\"Evaulates if an id exists\r\n\r\n\t\tArgs\r\n\t\t--------\r\n\t\t\tid (``int``) :  The id whose existance has to be checked\r\n\r\n\t\tReturns\r\n\t\t--------\r\n\t\t\t`bool` : True if found, otherwise false \r\n\t\t\"\"\"");
 
 		}
 

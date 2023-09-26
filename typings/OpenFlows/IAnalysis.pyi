@@ -8,7 +8,7 @@ TScenarioOptionsUnitsType = TypeVar("TScenarioOptionsUnitsType")
 
 class IAnalysisCalculator(Generic[TScenarioType, TScenarioManagerType, TScenarioOptionsType, TScenarioOptionsUnitsType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -24,11 +24,11 @@ class IAnalysisCalculator(Generic[TScenarioType, TScenarioManagerType, TScenario
 
 		Args
 		--------
-			scenario (``TScenarioType``) :  scenario
+			scenario (`TScenarioType`) :  scenario
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 

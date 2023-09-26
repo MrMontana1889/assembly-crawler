@@ -70,7 +70,7 @@ class TankSectionType(Enum):
 
 class IWaterModel(IModel[IWaterNetwork, IWaterModelSupport, IWaterScenarios, IWaterScenario, IWaterScenarioOptions, IWaterScenarioOptionsUnits, IWaterSelectionSets, IWaterSelectionSet, IWaterElement, IWaterElement, WaterNetworkElementType, IWaterComponent, WaterComponentType, INetworkElementUnits, IComponentElementUnits, IWaterNetworkPrototypes, IWaterAlternatives, WaterAlternativeType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -87,7 +87,7 @@ class IWaterModel(IModel[IWaterNetwork, IWaterModelSupport, IWaterScenarios, IWa
 
 		Returns
 		--------
-			``IWaterModel`` : 
+			`IAnalysisTools` : 
 		"""
 		pass
 

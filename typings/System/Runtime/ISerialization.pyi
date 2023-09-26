@@ -15,7 +15,7 @@ class StreamingContextStates(Enum):
 
 class ISerializable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -31,42 +31,42 @@ class ISerializable:
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class SerializationInfo:
 
 	@overload
-	def __init__(self, type: Type, converter: IFormatterConverter) -> None:
+	def __new__(self, type: Type, converter: IFormatterConverter) -> None:
 		"""No Description
 
 		Args
 		--------
-			type (``Type``) :  type
-			converter (``IFormatterConverter``) :  converter
-			type (``Type``) :  type
-			converter (``IFormatterConverter``) :  converter
-			requireSameTokenInPartialTrust (``bool``) :  requireSameTokenInPartialTrust
+			type (`Type`) :  type
+			converter (`IFormatterConverter`) :  converter
+			type (`Type`) :  type
+			converter (`IFormatterConverter`) :  converter
+			requireSameTokenInPartialTrust (`bool`) :  requireSameTokenInPartialTrust
 		"""
 		pass
 
 	@overload
-	def __init__(self, type: Type, converter: IFormatterConverter, requireSameTokenInPartialTrust: bool) -> None:
+	def __new__(self, type: Type, converter: IFormatterConverter, requireSameTokenInPartialTrust: bool) -> None:
 		"""No Description
 
 		Args
 		--------
-			type (``Type``) :  type
-			converter (``IFormatterConverter``) :  converter
-			type (``Type``) :  type
-			converter (``IFormatterConverter``) :  converter
-			requireSameTokenInPartialTrust (``bool``) :  requireSameTokenInPartialTrust
+			type (`Type`) :  type
+			converter (`IFormatterConverter`) :  converter
+			type (`Type`) :  type
+			converter (`IFormatterConverter`) :  converter
+			requireSameTokenInPartialTrust (`bool`) :  requireSameTokenInPartialTrust
 		"""
 		pass
 
@@ -75,11 +75,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			type (``Type``) :  type
+			type (`Type`) :  type
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -88,7 +88,7 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfoEnumerator`` : 
+			`SerializationInfoEnumerator` : 
 		"""
 		pass
 
@@ -98,13 +98,13 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``object``) :  value
-			type (``Type``) :  type
+			name (`str`) :  name
+			value (`object`) :  value
+			type (`Type`) :  type
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -114,12 +114,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``object``) :  value
+			name (`str`) :  name
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -129,12 +129,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``bool``) :  value
+			name (`str`) :  name
+			value (`bool`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -144,12 +144,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``str``) :  value
+			name (`str`) :  name
+			value (`str`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -159,12 +159,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -174,12 +174,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -189,12 +189,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -204,12 +204,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -219,12 +219,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -234,12 +234,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -249,12 +249,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -264,12 +264,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``int``) :  value
+			name (`str`) :  name
+			value (`int`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -279,12 +279,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``float``) :  value
+			name (`str`) :  name
+			value (`float`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -294,12 +294,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``float``) :  value
+			name (`str`) :  name
+			value (`float`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -309,12 +309,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``float``) :  value
+			name (`str`) :  name
+			value (`float`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -324,12 +324,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			value (``datetime``) :  value
+			name (`str`) :  name
+			value (`datetime`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -338,12 +338,12 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``Type``) :  type
+			name (`str`) :  name
+			type (`Type`) :  type
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -352,11 +352,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -365,11 +365,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -378,11 +378,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -391,11 +391,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -404,11 +404,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -417,11 +417,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -430,11 +430,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -443,11 +443,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -456,11 +456,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -469,11 +469,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -482,11 +482,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -495,11 +495,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -508,11 +508,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -521,11 +521,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -534,11 +534,11 @@ class SerializationInfo:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -548,7 +548,7 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -562,7 +562,7 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfo`` : 
+			`str` : 
 		"""
 		pass
 
@@ -576,7 +576,7 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfo`` : 
+			`int` : 
 		"""
 		pass
 
@@ -586,7 +586,7 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfo`` : 
+			`Type` : 
 		"""
 		pass
 
@@ -596,7 +596,7 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfo`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -606,33 +606,33 @@ class SerializationInfo:
 
 		Returns
 		--------
-			``SerializationInfo`` : 
+			`bool` : 
 		"""
 		pass
 
 class StreamingContext:
 
 	@overload
-	def __init__(self, state: StreamingContextStates) -> None:
+	def __new__(self, state: StreamingContextStates) -> None:
 		"""No Description
 
 		Args
 		--------
-			state (``StreamingContextStates``) :  state
-			state (``StreamingContextStates``) :  state
-			additional (``object``) :  additional
+			state (`StreamingContextStates`) :  state
+			state (`StreamingContextStates`) :  state
+			additional (`object`) :  additional
 		"""
 		pass
 
 	@overload
-	def __init__(self, state: StreamingContextStates, additional: object) -> None:
+	def __new__(self, state: StreamingContextStates, additional: object) -> None:
 		"""No Description
 
 		Args
 		--------
-			state (``StreamingContextStates``) :  state
-			state (``StreamingContextStates``) :  state
-			additional (``object``) :  additional
+			state (`StreamingContextStates`) :  state
+			state (`StreamingContextStates`) :  state
+			additional (`object`) :  additional
 		"""
 		pass
 
@@ -642,7 +642,7 @@ class StreamingContext:
 
 		Returns
 		--------
-			``StreamingContext`` : 
+			`object` : 
 		"""
 		pass
 
@@ -652,7 +652,7 @@ class StreamingContext:
 
 		Returns
 		--------
-			``StreamingContext`` : 
+			`StreamingContextStates` : 
 		"""
 		pass
 

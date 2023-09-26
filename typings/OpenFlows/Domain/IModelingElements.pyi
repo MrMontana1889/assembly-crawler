@@ -31,7 +31,7 @@ class ModelElementType(Enum):
 
 class IElementManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -47,7 +47,7 @@ class IElementManager:
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -56,20 +56,20 @@ class IElementManager:
 
 		Args
 		--------
-			id (``int``) :  A valid ID of 0 or greater.
+			id (`int`) :  A valid ID of 0 or greater.
 
 		Returns
 		--------
-			``bool`` : True if the ID exists, otherwise false.
+			`bool` : True if the ID exists, otherwise false.
 		"""
 		pass
 
-	def Labels(self) -> Dict[int,int]:
+	def Labels(self) -> Dict[int,int][int,str]:
 		"""Returns all the labels for this element manager keyed by element id.
 
 		Returns
 		--------
-			``Dict[int,int]`` : A dictionary keyed by element id with the value of the element label
+			`Dict[int,int]` : A dictionary keyed by element id with the value of the element label
 		"""
 		pass
 
@@ -79,13 +79,13 @@ class IElementManager:
 
 		Returns
 		--------
-			``IElementManager`` : 
+			`int` : 
 		"""
 		pass
 
 class IElements(Generic[TElementType], IElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -101,7 +101,7 @@ class IElements(Generic[TElementType], IElementManager):
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			`List[TElementType]` : 
 		"""
 		pass
 
@@ -110,18 +110,18 @@ class IElements(Generic[TElementType], IElementManager):
 
 		Args
 		--------
-			sorts (``SortContextCollection``) :  Sorts the list based on one or more fields in ascending or descending order
-			filters (``FilterContextCollection``) :  A list of filters against IFields or a provided SQL statement
+			sorts (`SortContextCollection`) :  Sorts the list based on one or more fields in ascending or descending order
+			filters (`FilterContextCollection`) :  A list of filters against IFields or a provided SQL statement
 
 		Returns
 		--------
-			``List[TElementType]`` : A list of elements that match the provided criteria.  If no elements found, returns an empty List
+			`List[TElementType]` : A list of elements that match the provided criteria.  If no elements found, returns an empty List
 		"""
 		pass
 
 class IElement(IEditLabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -138,7 +138,17 @@ class IElement(IEditLabeled):
 
 		Returns
 		--------
-			``IElement`` : 
+			`int` : 
+		"""
+		pass
+
+	@property
+	def IdLabel(self) -> str:
+		"""A combined string of id and label of this element.
+
+		Returns
+		--------
+			`str` : 
 		"""
 		pass
 
@@ -148,7 +158,7 @@ class IElement(IEditLabeled):
 
 		Returns
 		--------
-			``IElement`` : 
+			`str` : 
 		"""
 		pass
 
@@ -162,13 +172,13 @@ class IElement(IEditLabeled):
 
 		Returns
 		--------
-			``IElement`` : 
+			`ModelElementType` : 
 		"""
 		pass
 
 class IElementUnits:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -181,7 +191,7 @@ class IElementUnits:
 
 class IElementInput:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -198,13 +208,13 @@ class IElementInput:
 
 		Returns
 		--------
-			``IElementInput`` : 
+			`IFieldManager` : 
 		"""
 		pass
 
 class IElementsInput:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -217,7 +227,7 @@ class IElementsInput:
 
 class IElementResults:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -234,13 +244,13 @@ class IElementResults:
 
 		Returns
 		--------
-			``IElementResults`` : 
+			`IFieldManager` : 
 		"""
 		pass
 
 class IElementsResults:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -253,7 +263,7 @@ class IElementsResults:
 
 class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTypeEnum], IElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -269,7 +279,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -279,7 +289,7 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 
 		Returns
 		--------
-			``IModelingElementBase`` : 
+			`TElementManagerType` : 
 		"""
 		pass
 
@@ -289,13 +299,13 @@ class IModelingElementBase(Generic[TElementManagerType, TElementType, TElementTy
 
 		Returns
 		--------
-			``IModelingElementBase`` : 
+			`TElementTypeEnum` : 
 		"""
 		pass
 
 class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementTypeEnum], IElements[TElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -306,12 +316,27 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
+	@overload
 	def Create(self) -> TElementType:
 		"""Creates a new element and returns the object.
 
 		Returns
 		--------
-			``TElementType`` : Returns a non-null object with minimally initialized properties.
+			`TElementType` : Returns a non-null object with minimally initialized properties.
+		"""
+		pass
+
+	@overload
+	def Create(self, label: str) -> TElementType:
+		"""Creates a new element with the given label and returns the object.
+
+		Args
+		--------
+			label (`str`) :  The label to use to assign to the new element.
+
+		Returns
+		--------
+			`TElementType` : Returns a non-null object with minimally initialized properties.
 		"""
 		pass
 
@@ -321,11 +346,11 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Args
 		--------
-			id (``int``) :  The non-0 ID of the element.
+			id (`int`) :  The non-0 ID of the element.
 
 		Returns
 		--------
-			``TElementType`` : A  non-null object representing the element of the given ID.  If the ID does not exist, returns null.
+			`TElementType` : A  non-null object representing the element of the given ID.  If the ID does not exist, returns null.
 		"""
 		pass
 
@@ -335,11 +360,11 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Args
 		--------
-			label (``str``) :  label
+			label (`str`) :  label
 
 		Returns
 		--------
-			``TElementType`` : 
+			`TElementType` : 
 		"""
 		pass
 
@@ -349,11 +374,11 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Args
 		--------
-			label (``str``) :  Case-sensitive label to search for
+			label (`str`) :  Case-sensitive label to search for
 
 		Returns
 		--------
-			``List[TElementType]`` : A non-null list containing 0 or more elements with the given label
+			`List[TElementType]` : A non-null list containing 0 or more elements with the given label
 		"""
 		pass
 
@@ -363,7 +388,7 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			`List[TElementType]` : 
 		"""
 		pass
 
@@ -373,7 +398,7 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Returns
 		--------
-			``IModelingElementsBase`` : 
+			`TElementTypeEnum` : 
 		"""
 		pass
 
@@ -383,7 +408,7 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Returns
 		--------
-			``IModelingElementsBase`` : 
+			`IFieldManager` : 
 		"""
 		pass
 
@@ -394,13 +419,13 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 
 		Returns
 		--------
-			``IModelingElementsBase`` : 
+			`int` : 
 		"""
 		pass
 
 class IGeometryUnits(IElementUnits):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -417,13 +442,13 @@ class IGeometryUnits(IElementUnits):
 
 		Returns
 		--------
-			``IGeometryUnits`` : 
+			`IUnit` : 
 		"""
 		pass
 
 class IScenarioOptions(Generic[TUnitsType], IElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -440,7 +465,7 @@ class IScenarioOptions(Generic[TUnitsType], IElement):
 
 		Returns
 		--------
-			``IScenarioOptions`` : 
+			`TUnitsType` : 
 		"""
 		pass
 
@@ -450,13 +475,13 @@ class IScenarioOptions(Generic[TUnitsType], IElement):
 
 		Returns
 		--------
-			``IScenarioOptions`` : 
+			`IFieldManager` : 
 		"""
 		pass
 
 class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType], IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -473,11 +498,11 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 		Args
 		--------
-			parentID (``int``) :  parentID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``TElementType`` : 
+			`TElementType` : 
 		"""
 		pass
 
@@ -486,11 +511,11 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 		Args
 		--------
-			parentID (``int``) :  parentID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			`List[TElementType]` : 
 		"""
 		pass
 
@@ -499,7 +524,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			`List[TElementType]` : 
 		"""
 		pass
 
@@ -509,7 +534,7 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 		Returns
 		--------
-			``TElementType`` : 
+			`TElementType` : 
 		"""
 		pass
 
@@ -519,13 +544,13 @@ class IScenarios(Generic[TElementManagerType, TElementType, TScenarioOptionsType
 
 		Returns
 		--------
-			``IScenarios`` : 
+			`TElementType` : 
 		"""
 		pass
 
 class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType, TScenarioOptionsUnitsType], IModelingElementBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -542,11 +567,11 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Args
 		--------
-			timeStepIndex (``int``) :  Th time step index to use with TimeStepsInSeconds.
+			timeStepIndex (`int`) :  Th time step index to use with TimeStepsInSeconds.
 
 		Returns
 		--------
-			``datetime`` : The DateTime at the given time step index taking into account the start date/time of the simulation.
+			`datetime` : The DateTime at the given time step index taking into account the start date/time of the simulation.
 		"""
 		pass
 
@@ -555,11 +580,11 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Args
 		--------
-			timeStepInSeconds (``float``) :  The time step in seconds.
+			timeStepInSeconds (`float`) :  The time step in seconds.
 
 		Returns
 		--------
-			``datetime`` : A date-time object representing the time step taking into account the simulation start date and time.
+			`datetime` : A date-time object representing the time step taking into account the simulation start date and time.
 		"""
 		pass
 
@@ -568,7 +593,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -577,7 +602,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -586,7 +611,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``List[IUserNotification]`` : Array of validation user notifications
+			`List[IUserNotification]` : Array of validation user notifications
 		"""
 		pass
 
@@ -596,7 +621,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``List[IUserNotification]`` : An array of summary IUserNotifications for this scenario 
+			`List[IUserNotification]` : An array of summary IUserNotifications for this scenario 
 		"""
 		pass
 
@@ -605,11 +630,11 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Args
 		--------
-			timeStepIndex (``int``) :  The time step index to use to get the user notifications
+			timeStepIndex (`int`) :  The time step index to use to get the user notifications
 
 		Returns
 		--------
-			``List[IUserNotification]`` : An array of user notifications for the time step.  If there are no results, returns an empty array.
+			`List[IUserNotification]` : An array of user notifications for the time step.  If there are no results, returns an empty array.
 		"""
 		pass
 
@@ -618,12 +643,12 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Args
 		--------
-			elementID (``int``) :  The id of the element.
-			timeStepIndex (``int``) :  The time step
+			elementID (`int`) :  The id of the element.
+			timeStepIndex (`int`) :  The time step
 
 		Returns
 		--------
-			``List[IUserNotification]`` : An array of user notifications for a specific element and time step.  If there are no results, returns an empty array.
+			`List[IUserNotification]` : An array of user notifications for a specific element and time step.  If there are no results, returns an empty array.
 		"""
 		pass
 
@@ -633,7 +658,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``IScenario`` : 
+			`TScenarioOptionsType` : 
 		"""
 		pass
 
@@ -643,7 +668,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``IScenario`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -653,7 +678,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``IScenario`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -663,7 +688,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``IScenario`` : 
+			`int` : 
 		"""
 		pass
 
@@ -677,7 +702,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 		Returns
 		--------
-			``IScenario`` : 
+			`IScenario` : 
 		"""
 		pass
 
@@ -687,7 +712,7 @@ class IScenario(Generic[TElementManagerType, TElementType, TScenarioOptionsType,
 
 class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementType], IModelingElementBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -703,7 +728,7 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 		Returns
 		--------
-			``List[int]`` : A non-null list of IDs in the selection set.  May include deleted IDs.
+			`List[int]` : A non-null list of IDs in the selection set.  May include deleted IDs.
 		"""
 		pass
 
@@ -712,7 +737,7 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 		Returns
 		--------
-			``List[TNetworkElementType]`` : A non-null list of elements representing each ID in the selection set.
+			`List[TNetworkElementType]` : A non-null list of elements representing each ID in the selection set.
 		"""
 		pass
 
@@ -722,11 +747,11 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 		Args
 		--------
-			ids (``List[int]``) :  ids
+			ids (`List[int]`) :  ids
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -736,11 +761,11 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 		Args
 		--------
-			elements (``List[TNetworkElementType]``) :  elements
+			elements (`List[TNetworkElementType]`) :  elements
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -750,13 +775,13 @@ class ISelectionSet(Generic[TElementManagerType, TElementType, TNetworkElementTy
 
 		Returns
 		--------
-			``ISelectionSet`` : 
+			`int` : 
 		"""
 		pass
 
 class ISelectionSets(Generic[TElementManagerType, TElementType, TNetworkElementType], IModelingElementsBase[TElementManagerType, TElementType, ModelingElementTypes]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -769,7 +794,7 @@ class ISelectionSets(Generic[TElementManagerType, TElementType, TNetworkElementT
 
 class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBase[IEmbeddedStickyObjects, IEmbeddedStickyObject, ModelElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -786,7 +811,7 @@ class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBas
 
 		Returns
 		--------
-			``IEmbeddedStickyObject`` : 
+			`IElement` : 
 		"""
 		pass
 
@@ -800,7 +825,7 @@ class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBas
 
 		Returns
 		--------
-			``IEmbeddedStickyObject`` : 
+			`str` : 
 		"""
 		pass
 
@@ -810,7 +835,7 @@ class IEmbeddedStickyObject(Generic[TDomainElementTypeEnum], IModelingElementBas
 
 class IEmbeddedStickyObjects(Generic[TDomainElementTypeEnum], IModelingElementsBase[IEmbeddedStickyObjects, IEmbeddedStickyObject, ModelElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -826,11 +851,11 @@ class IEmbeddedStickyObjects(Generic[TDomainElementTypeEnum], IModelingElementsB
 
 		Args
 		--------
-			elementType (``TDomainElementTypeEnum``) :  elementType
+			elementType (`TDomainElementTypeEnum`) :  elementType
 
 		Returns
 		--------
-			``List[IEmbeddedStickyObject]`` : 
+			`List[IEmbeddedStickyObject]` : 
 		"""
 		pass
 

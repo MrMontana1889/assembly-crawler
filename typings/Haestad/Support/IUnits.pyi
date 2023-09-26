@@ -1175,126 +1175,126 @@ class UnitSystemIndex(Enum):
 class CurrencyBasedUnit(INamable):
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
@@ -1303,12 +1303,12 @@ class CurrencyBasedUnit(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1317,11 +1317,11 @@ class CurrencyBasedUnit(INamable):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1330,7 +1330,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1340,7 +1340,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -1350,7 +1350,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1360,7 +1360,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1370,7 +1370,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1380,7 +1380,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1390,7 +1390,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1400,7 +1400,7 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1410,49 +1410,49 @@ class CurrencyBasedUnit(INamable):
 
 		Returns
 		--------
-			``CurrencyBasedUnit`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
 class WeirCoefficientParameterized(INamable):
 
 	@overload
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int) -> None:
+	def __new__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``WeirCoefficientParameterizedUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``WeirCoefficientParameterizedUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			bentleyName (``str``) :  bentleyName
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`WeirCoefficientParameterizedUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`WeirCoefficientParameterizedUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int, bentleyName: str) -> None:
+	def __new__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: WeirCoefficientParameterizedUnitConverter, enumVal: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``WeirCoefficientParameterizedUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``WeirCoefficientParameterizedUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			bentleyName (``str``) :  bentleyName
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`WeirCoefficientParameterizedUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`WeirCoefficientParameterizedUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
@@ -1461,12 +1461,12 @@ class WeirCoefficientParameterized(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1475,11 +1475,11 @@ class WeirCoefficientParameterized(INamable):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1488,7 +1488,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1498,7 +1498,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1512,7 +1512,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -1522,7 +1522,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1532,7 +1532,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1542,7 +1542,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1552,7 +1552,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1562,7 +1562,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1572,7 +1572,7 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1582,18 +1582,18 @@ class WeirCoefficientParameterized(INamable):
 
 		Returns
 		--------
-			``WeirCoefficientParameterized`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
 class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
 
-	def __init__(self, unitSystem: UnitSystemIndex) -> None:
+	def __new__(self, unitSystem: UnitSystemIndex) -> None:
 		"""No Description
 
 		Args
 		--------
-			unitSystem (``UnitSystemIndex``) :  unitSystem
+			unitSystem (`UnitSystemIndex`) :  unitSystem
 		"""
 		pass
 
@@ -1602,11 +1602,11 @@ class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1615,11 +1615,11 @@ class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1629,7 +1629,7 @@ class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
 
 		Returns
 		--------
-			``WeirCoefficientParameterizedUnitConverter`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1640,42 +1640,42 @@ class WeirCoefficientParameterizedUnitConverter(IUnitConverter):
 class InfiltrationPerUnitDepthUnit(INamable):
 
 	@overload
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int) -> None:
+	def __new__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``InfiltrationPerUnitDepthConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``InfiltrationPerUnitDepthConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			bentleyName (``str``) :  bentleyName
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`InfiltrationPerUnitDepthConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`InfiltrationPerUnitDepthConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int, bentleyName: str) -> None:
+	def __new__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: InfiltrationPerUnitDepthConverter, enumVal: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``InfiltrationPerUnitDepthConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``InfiltrationPerUnitDepthConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			bentleyName (``str``) :  bentleyName
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`InfiltrationPerUnitDepthConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`InfiltrationPerUnitDepthConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
@@ -1684,12 +1684,12 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1698,11 +1698,11 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1711,7 +1711,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1721,7 +1721,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1735,7 +1735,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -1745,7 +1745,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1755,7 +1755,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1765,7 +1765,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1775,7 +1775,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1785,7 +1785,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1795,7 +1795,7 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1805,19 +1805,19 @@ class InfiltrationPerUnitDepthUnit(INamable):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthUnit`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
 class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
-	def __init__(self, infiltrationUnit: UnitIndex, depthUnit: UnitIndex) -> None:
+	def __new__(self, infiltrationUnit: UnitIndex, depthUnit: UnitIndex) -> None:
 		"""No Description
 
 		Args
 		--------
-			infiltrationUnit (``UnitIndex``) :  infiltrationUnit
-			depthUnit (``UnitIndex``) :  depthUnit
+			infiltrationUnit (`UnitIndex`) :  infiltrationUnit
+			depthUnit (`UnitIndex`) :  depthUnit
 		"""
 		pass
 
@@ -1826,11 +1826,11 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1839,11 +1839,11 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1853,7 +1853,7 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthConverter`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1867,7 +1867,7 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthConverter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -1877,7 +1877,7 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthConverter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -1887,7 +1887,7 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthConverter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -1897,49 +1897,49 @@ class InfiltrationPerUnitDepthConverter(IUnitConverter):
 
 		Returns
 		--------
-			``InfiltrationPerUnitDepthConverter`` : 
+			`Unit` : 
 		"""
 		pass
 
 class DrainageCoefficientUnit(INamable):
 
 	@overload
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int) -> None:
+	def __new__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``DrainageCoefficientUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``DrainageCoefficientUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			bentleyName (``str``) :  bentleyName
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`DrainageCoefficientUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`DrainageCoefficientUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int, bentleyName: str) -> None:
+	def __new__(self, name: str, dimension: Dimension, aunitsystem: UnitSystem, converter: DrainageCoefficientUnitConverter, enumVal: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``DrainageCoefficientUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			name (``str``) :  name
-			dimension (``Dimension``) :  dimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			converter (``DrainageCoefficientUnitConverter``) :  converter
-			enumVal (``int``) :  enumVal
-			bentleyName (``str``) :  bentleyName
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`DrainageCoefficientUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			name (`str`) :  name
+			dimension (`Dimension`) :  dimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			converter (`DrainageCoefficientUnitConverter`) :  converter
+			enumVal (`int`) :  enumVal
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
@@ -1948,12 +1948,12 @@ class DrainageCoefficientUnit(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1962,11 +1962,11 @@ class DrainageCoefficientUnit(INamable):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1975,7 +1975,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1985,7 +1985,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`float` : 
 		"""
 		pass
 
@@ -1999,7 +1999,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2009,7 +2009,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2019,7 +2019,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2029,7 +2029,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2039,7 +2039,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2049,7 +2049,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2059,7 +2059,7 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2069,18 +2069,18 @@ class DrainageCoefficientUnit(INamable):
 
 		Returns
 		--------
-			``DrainageCoefficientUnit`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
 class DrainageCoefficientUnitConverter(IUnitConverter):
 
-	def __init__(self, infiltrationUnit: UnitIndex) -> None:
+	def __new__(self, infiltrationUnit: UnitIndex) -> None:
 		"""No Description
 
 		Args
 		--------
-			infiltrationUnit (``UnitIndex``) :  infiltrationUnit
+			infiltrationUnit (`UnitIndex`) :  infiltrationUnit
 		"""
 		pass
 
@@ -2089,11 +2089,11 @@ class DrainageCoefficientUnitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2102,11 +2102,11 @@ class DrainageCoefficientUnitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2116,7 +2116,7 @@ class DrainageCoefficientUnitConverter(IUnitConverter):
 
 		Returns
 		--------
-			``DrainageCoefficientUnitConverter`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2130,7 +2130,7 @@ class DrainageCoefficientUnitConverter(IUnitConverter):
 
 		Returns
 		--------
-			``DrainageCoefficientUnitConverter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -2140,37 +2140,37 @@ class DrainageCoefficientUnitConverter(IUnitConverter):
 
 		Returns
 		--------
-			``DrainageCoefficientUnitConverter`` : 
+			`Unit` : 
 		"""
 		pass
 
 class Dimension(INamable):
 
 	@overload
-	def __init__(self, astringName: str, aintEnumValue: int) -> None:
+	def __new__(self, astringName: str, aintEnumValue: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, aintEnumValue: int, bentleyName: str) -> None:
+	def __new__(self, astringName: str, aintEnumValue: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
@@ -2180,11 +2180,11 @@ class Dimension(INamable):
 
 		Args
 		--------
-			aindex (``DimensionIndex``) :  aindex
+			aindex (`DimensionIndex`) :  aindex
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2195,11 +2195,11 @@ class Dimension(INamable):
 
 		Args
 		--------
-			aint (``int``) :  aint
+			aint (`int`) :  aint
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2210,11 +2210,11 @@ class Dimension(INamable):
 
 		Args
 		--------
-			dimension (``DimensionType``) :  dimension
+			dimension (`DimensionType`) :  dimension
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2224,11 +2224,11 @@ class Dimension(INamable):
 
 		Args
 		--------
-			asNameDimension (``str``) :  asNameDimension
+			asNameDimension (`str`) :  asNameDimension
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2239,14 +2239,14 @@ class Dimension(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			dimensionType (``DimensionType``) :  dimensionType
-			aintFromUnit (``int``) :  aintFromUnit
-			aintToUnit (``int``) :  aintToUnit
+			adouble (`float`) :  adouble
+			dimensionType (`DimensionType`) :  dimensionType
+			aintFromUnit (`int`) :  aintFromUnit
+			aintToUnit (`int`) :  aintToUnit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2255,11 +2255,11 @@ class Dimension(INamable):
 
 		Args
 		--------
-			currentUnit (``int``) :  currentUnit
+			currentUnit (`int`) :  currentUnit
 
 		Returns
 		--------
-			``List`` : 
+			`List` : 
 		"""
 		pass
 
@@ -2269,13 +2269,13 @@ class Dimension(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aintFromUnit (``int``) :  aintFromUnit
-			aintToUnit (``int``) :  aintToUnit
+			adouble (`float`) :  adouble
+			aintFromUnit (`int`) :  aintFromUnit
+			aintToUnit (`int`) :  aintToUnit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2284,11 +2284,11 @@ class Dimension(INamable):
 
 		Args
 		--------
-			aiEnumValue (``int``) :  aiEnumValue
+			aiEnumValue (`int`) :  aiEnumValue
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -2299,7 +2299,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2310,7 +2310,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2321,7 +2321,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2332,7 +2332,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2343,7 +2343,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2354,7 +2354,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2365,7 +2365,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2376,7 +2376,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2387,7 +2387,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2398,7 +2398,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2409,7 +2409,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2420,7 +2420,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2431,7 +2431,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2442,7 +2442,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2453,7 +2453,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2464,7 +2464,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2475,7 +2475,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2486,7 +2486,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2497,7 +2497,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2508,7 +2508,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2519,7 +2519,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2530,7 +2530,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2541,7 +2541,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2552,7 +2552,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2563,7 +2563,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2574,7 +2574,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2585,7 +2585,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2596,7 +2596,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2607,7 +2607,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2618,7 +2618,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2629,7 +2629,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2640,7 +2640,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2651,7 +2651,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2662,7 +2662,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2673,7 +2673,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2684,7 +2684,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2695,7 +2695,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2706,7 +2706,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2717,7 +2717,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2728,7 +2728,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2739,7 +2739,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2750,7 +2750,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2761,7 +2761,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2772,7 +2772,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2783,7 +2783,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2794,7 +2794,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2805,7 +2805,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2816,7 +2816,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2827,7 +2827,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2838,7 +2838,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2849,7 +2849,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2860,7 +2860,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2871,7 +2871,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2882,7 +2882,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2893,7 +2893,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2904,7 +2904,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2915,7 +2915,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2926,7 +2926,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2937,7 +2937,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2948,7 +2948,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2959,7 +2959,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2970,7 +2970,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2981,7 +2981,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -2992,7 +2992,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3003,7 +3003,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3014,7 +3014,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3025,7 +3025,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3036,7 +3036,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3047,7 +3047,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3058,7 +3058,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3069,7 +3069,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3080,7 +3080,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -3090,7 +3090,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`List` : 
 		"""
 		pass
 
@@ -3100,7 +3100,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3110,7 +3110,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3120,7 +3120,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3130,7 +3130,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3140,7 +3140,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3150,7 +3150,7 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3160,13 +3160,13 @@ class Dimension(INamable):
 
 		Returns
 		--------
-			``Dimension`` : 
+			`ISet` : 
 		"""
 		pass
 
 class IUnitConverter:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3182,11 +3182,11 @@ class IUnitConverter:
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3195,23 +3195,23 @@ class IUnitConverter:
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class NumericConversionHandler:
 
-	def __init__(self, aunitStorage: Unit, anf: NumericFormatter) -> None:
+	def __new__(self, aunitStorage: Unit, anf: NumericFormatter) -> None:
 		"""No Description
 
 		Args
 		--------
-			aunitStorage (``Unit``) :  aunitStorage
-			anf (``NumericFormatter``) :  anf
+			aunitStorage (`Unit`) :  aunitStorage
+			anf (`NumericFormatter`) :  anf
 		"""
 		pass
 
@@ -3220,11 +3220,11 @@ class NumericConversionHandler:
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3233,11 +3233,11 @@ class NumericConversionHandler:
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3246,11 +3246,11 @@ class NumericConversionHandler:
 
 		Args
 		--------
-			astring (``str``) :  astring
+			astring (`str`) :  astring
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3259,7 +3259,7 @@ class NumericConversionHandler:
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3268,11 +3268,11 @@ class NumericConversionHandler:
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3281,11 +3281,11 @@ class NumericConversionHandler:
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3295,7 +3295,7 @@ class NumericConversionHandler:
 
 		Returns
 		--------
-			``NumericConversionHandler`` : 
+			`NumericFormatter` : 
 		"""
 		pass
 
@@ -3305,19 +3305,19 @@ class NumericConversionHandler:
 
 		Returns
 		--------
-			``NumericConversionHandler`` : 
+			`Unit` : 
 		"""
 		pass
 
 class BaseDateTimeDelegate(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -3326,7 +3326,7 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -3335,12 +3335,12 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3349,11 +3349,11 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -3362,12 +3362,12 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3376,7 +3376,7 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3385,11 +3385,11 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3398,7 +3398,7 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3408,7 +3408,7 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``BaseDateTimeDelegate`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3418,13 +3418,13 @@ class BaseDateTimeDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``BaseDateTimeDelegate`` : 
+			`object` : 
 		"""
 		pass
 
 class NumberFormatInfoLibrary:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -3435,7 +3435,7 @@ class NumberFormatInfoLibrary:
 
 		Returns
 		--------
-			``NumberFormatInfoLibrary`` : 
+			`NumberFormatInfo` : 
 		"""
 		pass
 
@@ -3445,7 +3445,7 @@ class NumberFormatInfoLibrary:
 
 		Returns
 		--------
-			``NumberFormatInfoLibrary`` : 
+			`CultureInfo` : 
 		"""
 		pass
 
@@ -3456,366 +3456,366 @@ class NumberFormatInfoLibrary:
 
 		Returns
 		--------
-			``NumberFormatInfoLibrary`` : 
+			`NumberFormatInfoLibrary` : 
 		"""
 		pass
 
 class NumericFormatter(INamable, IMementoable, ILabeled):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+	def __new__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
+	def __new__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, aboolIsStandardFormatter: bool, astringLabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aboolIsStandardFormatter (``bool``) :  aboolIsStandardFormatter
-			astringLabel (``str``) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aboolIsStandardFormatter (`bool`) :  aboolIsStandardFormatter
+			astringLabel (`str`) :  astringLabel
 		"""
 		pass
 
@@ -3824,11 +3824,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3837,11 +3837,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3850,11 +3850,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3863,11 +3863,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3876,11 +3876,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3889,11 +3889,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3902,7 +3902,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``IMemento`` : 
+			`IMemento` : 
 		"""
 		pass
 
@@ -3911,12 +3911,12 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3925,12 +3925,12 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
-			adouble (``float``) :  adouble
+			aunit (`Unit`) :  aunit
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3939,12 +3939,12 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
-			astring (``str``) :  astring
+			aunit (`Unit`) :  aunit
+			astring (`str`) :  astring
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -3953,11 +3953,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3966,11 +3966,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3979,11 +3979,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunitsystem (``UnitSystem``) :  aunitsystem
+			aunitsystem (`UnitSystem`) :  aunitsystem
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3992,11 +3992,11 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aimemento (``IMemento``) :  aimemento
+			aimemento (`IMemento`) :  aimemento
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4005,12 +4005,12 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4020,7 +4020,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4034,7 +4034,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -4044,7 +4044,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -4058,7 +4058,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4068,7 +4068,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4082,7 +4082,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4092,7 +4092,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4102,7 +4102,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4116,7 +4116,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4130,7 +4130,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4140,7 +4140,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4154,7 +4154,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4168,7 +4168,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4178,7 +4178,7 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4189,110 +4189,110 @@ class NumericFormatter(INamable, IMementoable, ILabeled):
 class StationFormatter(INamable, IMementoable, ILabeled):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+	def __new__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
 		"""
 		pass
 
@@ -4301,12 +4301,12 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
-			astring (``str``) :  astring
+			aunit (`Unit`) :  aunit
+			astring (`str`) :  astring
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4315,11 +4315,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4328,12 +4328,12 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4342,11 +4342,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4355,11 +4355,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4368,11 +4368,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4381,11 +4381,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4394,11 +4394,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4407,11 +4407,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4420,7 +4420,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``IMemento`` : 
+			`IMemento` : 
 		"""
 		pass
 
@@ -4429,12 +4429,12 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4443,12 +4443,12 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
-			adouble (``float``) :  adouble
+			aunit (`Unit`) :  aunit
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4457,11 +4457,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4470,11 +4470,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunitsystem (``UnitSystem``) :  aunitsystem
+			aunitsystem (`UnitSystem`) :  aunitsystem
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4483,11 +4483,11 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aimemento (``IMemento``) :  aimemento
+			aimemento (`IMemento`) :  aimemento
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4497,7 +4497,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4511,7 +4511,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4525,7 +4525,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -4535,7 +4535,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -4549,7 +4549,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4559,7 +4559,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4573,7 +4573,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4583,7 +4583,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4593,7 +4593,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4607,7 +4607,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4621,7 +4621,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4631,7 +4631,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4645,7 +4645,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4655,7 +4655,7 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``StationFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4666,122 +4666,122 @@ class StationFormatter(INamable, IMementoable, ILabeled):
 class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
+	def __new__(self, aintId: int, asName: str, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
+	def __new__(self, aintId: int, asName: str, aunit: Unit, asFormatCode: str, aintDecimalDigits: int, aunitDisplayDefaultSi: Unit, aunitDisplayDefaultUs: Unit, baseDateTimeDelegate: BaseDateTimeDelegate) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
-			aintId (``int``) :  aintId
-			asName (``str``) :  asName
-			aunit (``Unit``) :  aunit
-			asFormatCode (``str``) :  asFormatCode
-			aintDecimalDigits (``int``) :  aintDecimalDigits
-			aunitDisplayDefaultSi (``Unit``) :  aunitDisplayDefaultSi
-			aunitDisplayDefaultUs (``Unit``) :  aunitDisplayDefaultUs
-			baseDateTimeDelegate (``BaseDateTimeDelegate``) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
+			aintId (`int`) :  aintId
+			asName (`str`) :  asName
+			aunit (`Unit`) :  aunit
+			asFormatCode (`str`) :  asFormatCode
+			aintDecimalDigits (`int`) :  aintDecimalDigits
+			aunitDisplayDefaultSi (`Unit`) :  aunitDisplayDefaultSi
+			aunitDisplayDefaultUs (`Unit`) :  aunitDisplayDefaultUs
+			baseDateTimeDelegate (`BaseDateTimeDelegate`) :  baseDateTimeDelegate
 		"""
 		pass
 
@@ -4790,12 +4790,12 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
-			astring (``str``) :  astring
+			aunit (`Unit`) :  aunit
+			astring (`str`) :  astring
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4804,11 +4804,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4817,12 +4817,12 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4831,11 +4831,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			dateTimeFormat (``DateTimeFormats``) :  dateTimeFormat
+			dateTimeFormat (`DateTimeFormats`) :  dateTimeFormat
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4844,13 +4844,13 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			formatString (``str``) :  formatString
-			formatIncludesDate (``bool``) :  formatIncludesDate
-			formatIncludesTime (``bool``) :  formatIncludesTime
+			formatString (`str`) :  formatString
+			formatIncludesDate (`bool`) :  formatIncludesDate
+			formatIncludesTime (`bool`) :  formatIncludesTime
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4859,11 +4859,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4872,11 +4872,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4885,11 +4885,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4898,11 +4898,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4911,11 +4911,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4924,11 +4924,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4937,7 +4937,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``IMemento`` : 
+			`IMemento` : 
 		"""
 		pass
 
@@ -4946,12 +4946,12 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4960,12 +4960,12 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
-			adouble (``float``) :  adouble
+			aunit (`Unit`) :  aunit
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4974,11 +4974,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			anf (``NumericFormatter``) :  anf
+			anf (`NumericFormatter`) :  anf
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4987,11 +4987,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aunitsystem (``UnitSystem``) :  aunitsystem
+			aunitsystem (`UnitSystem`) :  aunitsystem
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5000,11 +5000,11 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Args
 		--------
-			aimemento (``IMemento``) :  aimemento
+			aimemento (`IMemento`) :  aimemento
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5014,7 +5014,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5024,7 +5024,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5034,7 +5034,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5048,7 +5048,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`DateTimeFormats` : 
 		"""
 		pass
 
@@ -5062,7 +5062,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5072,7 +5072,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5086,7 +5086,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5100,7 +5100,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -5110,7 +5110,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5124,7 +5124,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5134,7 +5134,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5144,7 +5144,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5154,7 +5154,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5168,7 +5168,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5182,7 +5182,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5192,7 +5192,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5206,7 +5206,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5216,7 +5216,7 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 
 		Returns
 		--------
-			``DateTimeFormatter`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5227,126 +5227,126 @@ class DateTimeFormatter(INamable, IMementoable, ILabeled):
 class Unit(INamable):
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, adouble: float, aintEnumValue: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
 	@overload
-	def __init__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
+	def __new__(self, astringName: str, adimension: Dimension, aunitsystem: UnitSystem, aiunitconverter: IUnitConverter, aintEnumValue: int, bentleyName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			adouble (``float``) :  adouble
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			astringName (``str``) :  astringName
-			adimension (``Dimension``) :  adimension
-			aunitsystem (``UnitSystem``) :  aunitsystem
-			aiunitconverter (``IUnitConverter``) :  aiunitconverter
-			aintEnumValue (``int``) :  aintEnumValue
-			bentleyName (``str``) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			adouble (`float`) :  adouble
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			astringName (`str`) :  astringName
+			adimension (`Dimension`) :  adimension
+			aunitsystem (`UnitSystem`) :  aunitsystem
+			aiunitconverter (`IUnitConverter`) :  aiunitconverter
+			aintEnumValue (`int`) :  aintEnumValue
+			bentleyName (`str`) :  bentleyName
 		"""
 		pass
 
@@ -5356,12 +5356,12 @@ class Unit(INamable):
 
 		Args
 		--------
-			adimension (``Dimension``) :  adimension
-			aint (``int``) :  aint
+			adimension (`Dimension`) :  adimension
+			aint (`int`) :  aint
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5371,12 +5371,12 @@ class Unit(INamable):
 
 		Args
 		--------
-			adimension (``Dimension``) :  adimension
-			asNameUnit (``str``) :  asNameUnit
+			adimension (`Dimension`) :  adimension
+			asNameUnit (`str`) :  asNameUnit
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5386,12 +5386,12 @@ class Unit(INamable):
 
 		Args
 		--------
-			adimension (``Dimension``) :  adimension
-			aUnitLabel (``str``) :  aUnitLabel
+			adimension (`Dimension`) :  adimension
+			aUnitLabel (`str`) :  aUnitLabel
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5401,11 +5401,11 @@ class Unit(INamable):
 
 		Args
 		--------
-			aindex (``UnitIndex``) :  aindex
+			aindex (`UnitIndex`) :  aindex
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5415,11 +5415,11 @@ class Unit(INamable):
 
 		Args
 		--------
-			astring (``str``) :  astring
+			astring (`str`) :  astring
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5428,12 +5428,12 @@ class Unit(INamable):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
-			aunit (``Unit``) :  aunit
+			adouble (`float`) :  adouble
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -5442,11 +5442,11 @@ class Unit(INamable):
 
 		Args
 		--------
-			aunit (``Unit``) :  aunit
+			aunit (`Unit`) :  aunit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -5455,7 +5455,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5466,7 +5466,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5477,7 +5477,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5488,7 +5488,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5499,7 +5499,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5510,7 +5510,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5521,7 +5521,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5532,7 +5532,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5543,7 +5543,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5554,7 +5554,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5565,7 +5565,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5576,7 +5576,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5587,7 +5587,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5598,7 +5598,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5609,7 +5609,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5620,7 +5620,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5631,7 +5631,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5642,7 +5642,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5653,7 +5653,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5664,7 +5664,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5675,7 +5675,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5686,7 +5686,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5697,7 +5697,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5708,7 +5708,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5719,7 +5719,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5730,7 +5730,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5741,7 +5741,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5752,7 +5752,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5763,7 +5763,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5774,7 +5774,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5785,7 +5785,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5796,7 +5796,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5807,7 +5807,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5818,7 +5818,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5829,7 +5829,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5840,7 +5840,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5851,7 +5851,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5862,7 +5862,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5873,7 +5873,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5884,7 +5884,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5895,7 +5895,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5906,7 +5906,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5917,7 +5917,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5928,7 +5928,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5939,7 +5939,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5950,7 +5950,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5961,7 +5961,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5972,7 +5972,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5983,7 +5983,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -5994,7 +5994,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6005,7 +6005,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6016,7 +6016,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6027,7 +6027,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6038,7 +6038,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6049,7 +6049,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6060,7 +6060,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6071,7 +6071,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6082,7 +6082,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6093,7 +6093,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6104,7 +6104,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6115,7 +6115,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6126,7 +6126,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6137,7 +6137,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6148,7 +6148,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6159,7 +6159,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6170,7 +6170,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6181,7 +6181,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6192,7 +6192,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6203,7 +6203,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6214,7 +6214,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6225,7 +6225,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6236,7 +6236,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6247,7 +6247,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6258,7 +6258,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6269,7 +6269,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6280,7 +6280,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6291,7 +6291,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6302,7 +6302,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6313,7 +6313,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6324,7 +6324,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6335,7 +6335,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6346,7 +6346,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6357,7 +6357,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6368,7 +6368,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6379,7 +6379,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6390,7 +6390,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6401,7 +6401,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6412,7 +6412,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6423,7 +6423,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6434,7 +6434,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6445,7 +6445,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6456,7 +6456,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6467,7 +6467,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6478,7 +6478,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6489,7 +6489,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6500,7 +6500,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6511,7 +6511,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6522,7 +6522,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6533,7 +6533,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6544,7 +6544,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6555,7 +6555,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6566,7 +6566,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6577,7 +6577,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6588,7 +6588,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6599,7 +6599,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6610,7 +6610,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6621,7 +6621,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6632,7 +6632,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6643,7 +6643,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6654,7 +6654,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6665,7 +6665,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6676,7 +6676,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6687,7 +6687,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6698,7 +6698,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6709,7 +6709,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6720,7 +6720,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6731,7 +6731,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6742,7 +6742,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6753,7 +6753,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6764,7 +6764,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6775,7 +6775,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6786,7 +6786,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6797,7 +6797,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6808,7 +6808,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6819,7 +6819,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6830,7 +6830,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6841,7 +6841,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6852,7 +6852,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6863,7 +6863,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6874,7 +6874,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6885,7 +6885,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6896,7 +6896,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6907,7 +6907,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6918,7 +6918,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6929,7 +6929,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6940,7 +6940,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6951,7 +6951,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6962,7 +6962,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6973,7 +6973,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6984,7 +6984,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -6995,7 +6995,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7006,7 +7006,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7017,7 +7017,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7028,7 +7028,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7039,7 +7039,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7050,7 +7050,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7061,7 +7061,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7072,7 +7072,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7083,7 +7083,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7094,7 +7094,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7105,7 +7105,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7116,7 +7116,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7127,7 +7127,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7138,7 +7138,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7149,7 +7149,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7160,7 +7160,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7171,7 +7171,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7182,7 +7182,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7193,7 +7193,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7204,7 +7204,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7215,7 +7215,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7226,7 +7226,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7237,7 +7237,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7248,7 +7248,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7259,7 +7259,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7270,7 +7270,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7281,7 +7281,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7292,7 +7292,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7303,7 +7303,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7314,7 +7314,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7325,7 +7325,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7336,7 +7336,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7347,7 +7347,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7358,7 +7358,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7369,7 +7369,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7380,7 +7380,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7391,7 +7391,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7402,7 +7402,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7413,7 +7413,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7424,7 +7424,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7435,7 +7435,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7446,7 +7446,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7457,7 +7457,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7468,7 +7468,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7479,7 +7479,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7490,7 +7490,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7501,7 +7501,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7512,7 +7512,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7523,7 +7523,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7534,7 +7534,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7545,7 +7545,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7556,7 +7556,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7567,7 +7567,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7578,7 +7578,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7589,7 +7589,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7600,7 +7600,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7611,7 +7611,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7622,7 +7622,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7633,7 +7633,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7644,7 +7644,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7655,7 +7655,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7666,7 +7666,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7677,7 +7677,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7688,7 +7688,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7699,7 +7699,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7710,7 +7710,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7721,7 +7721,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7732,7 +7732,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7743,7 +7743,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7754,7 +7754,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7765,7 +7765,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7776,7 +7776,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7787,7 +7787,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7798,7 +7798,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7809,7 +7809,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7820,7 +7820,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7831,7 +7831,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7842,7 +7842,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7853,7 +7853,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7864,7 +7864,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7875,7 +7875,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7886,7 +7886,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7897,7 +7897,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7908,7 +7908,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7919,7 +7919,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7930,7 +7930,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7941,7 +7941,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7952,7 +7952,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7963,7 +7963,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7974,7 +7974,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7985,7 +7985,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -7996,7 +7996,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8007,7 +8007,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8018,7 +8018,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8029,7 +8029,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8040,7 +8040,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8051,7 +8051,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8062,7 +8062,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8073,7 +8073,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8084,7 +8084,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8095,7 +8095,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8106,7 +8106,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8117,7 +8117,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8128,7 +8128,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8139,7 +8139,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8150,7 +8150,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8161,7 +8161,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8172,7 +8172,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8183,7 +8183,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8194,7 +8194,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8205,7 +8205,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8216,7 +8216,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8227,7 +8227,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8238,7 +8238,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8249,7 +8249,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8260,7 +8260,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8271,7 +8271,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8282,7 +8282,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8293,7 +8293,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8304,7 +8304,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8315,7 +8315,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8326,7 +8326,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8337,7 +8337,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8348,7 +8348,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8359,7 +8359,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8370,7 +8370,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8381,7 +8381,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8392,7 +8392,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8403,7 +8403,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8414,7 +8414,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8425,7 +8425,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8436,7 +8436,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8447,7 +8447,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8458,7 +8458,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8469,7 +8469,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8480,7 +8480,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8491,7 +8491,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8502,7 +8502,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8513,7 +8513,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8524,7 +8524,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8535,7 +8535,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8546,7 +8546,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8557,7 +8557,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8568,7 +8568,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8579,7 +8579,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8590,7 +8590,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8601,7 +8601,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8612,7 +8612,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8623,7 +8623,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8634,7 +8634,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8645,7 +8645,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8656,7 +8656,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8667,7 +8667,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8678,7 +8678,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8689,7 +8689,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8700,7 +8700,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8711,7 +8711,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8722,7 +8722,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8733,7 +8733,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8744,7 +8744,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8755,7 +8755,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8766,7 +8766,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8777,7 +8777,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8788,7 +8788,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8799,7 +8799,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8810,7 +8810,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8821,7 +8821,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8832,7 +8832,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8843,7 +8843,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8854,7 +8854,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8865,7 +8865,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8876,7 +8876,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8887,7 +8887,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8898,7 +8898,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8909,7 +8909,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8920,7 +8920,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8931,7 +8931,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8942,7 +8942,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8953,7 +8953,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8964,7 +8964,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8975,7 +8975,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8986,7 +8986,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -8997,7 +8997,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9008,7 +9008,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9019,7 +9019,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9030,7 +9030,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9041,7 +9041,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9052,7 +9052,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9063,7 +9063,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9074,7 +9074,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9085,7 +9085,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9096,7 +9096,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9107,7 +9107,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9118,7 +9118,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9129,7 +9129,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9140,7 +9140,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9151,7 +9151,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9162,7 +9162,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9173,7 +9173,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9184,7 +9184,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9195,7 +9195,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9206,7 +9206,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9217,7 +9217,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9228,7 +9228,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9239,7 +9239,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9250,7 +9250,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9261,7 +9261,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9272,7 +9272,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9283,7 +9283,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9294,7 +9294,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9305,7 +9305,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9316,7 +9316,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9327,7 +9327,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9338,7 +9338,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9349,7 +9349,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9360,7 +9360,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9371,7 +9371,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9382,7 +9382,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9393,7 +9393,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9404,7 +9404,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9415,7 +9415,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9426,7 +9426,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9437,7 +9437,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9448,7 +9448,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9459,7 +9459,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9470,7 +9470,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9481,7 +9481,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9492,7 +9492,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9503,7 +9503,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9514,7 +9514,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9525,7 +9525,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9536,7 +9536,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9547,7 +9547,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9558,7 +9558,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9569,7 +9569,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9580,7 +9580,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9591,7 +9591,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9602,7 +9602,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9613,7 +9613,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9624,7 +9624,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9635,7 +9635,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9646,7 +9646,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9657,7 +9657,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9668,7 +9668,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9679,7 +9679,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9690,7 +9690,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9701,7 +9701,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9712,7 +9712,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9723,7 +9723,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9734,7 +9734,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9745,7 +9745,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9756,7 +9756,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9767,7 +9767,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9778,7 +9778,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9789,7 +9789,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9800,7 +9800,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9811,7 +9811,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9822,7 +9822,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9833,7 +9833,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9844,7 +9844,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9855,7 +9855,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9866,7 +9866,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9877,7 +9877,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9888,7 +9888,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9899,7 +9899,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9910,7 +9910,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9921,7 +9921,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9932,7 +9932,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9943,7 +9943,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9954,7 +9954,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9965,7 +9965,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9976,7 +9976,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9987,7 +9987,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -9998,7 +9998,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10009,7 +10009,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10020,7 +10020,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10031,7 +10031,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10042,7 +10042,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10053,7 +10053,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10064,7 +10064,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10075,7 +10075,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10086,7 +10086,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10097,7 +10097,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10108,7 +10108,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10119,7 +10119,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10130,7 +10130,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10141,7 +10141,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10152,7 +10152,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10163,7 +10163,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10174,7 +10174,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10185,7 +10185,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10196,7 +10196,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10207,7 +10207,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10218,7 +10218,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10228,7 +10228,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -10238,7 +10238,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`int` : 
 		"""
 		pass
 
@@ -10248,7 +10248,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10258,7 +10258,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10268,7 +10268,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10278,7 +10278,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10288,7 +10288,7 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10298,13 +10298,13 @@ class Unit(INamable):
 
 		Returns
 		--------
-			``Unit`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
 class UnitConversionManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -10314,7 +10314,7 @@ class UnitConversionManager:
 
 		Returns
 		--------
-			``List`` : 
+			`List` : 
 		"""
 		pass
 
@@ -10323,11 +10323,11 @@ class UnitConversionManager:
 
 		Args
 		--------
-			adimensionindex (``DimensionIndex``) :  adimensionindex
+			adimensionindex (`DimensionIndex`) :  adimensionindex
 
 		Returns
 		--------
-			``Dimension`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -10336,11 +10336,11 @@ class UnitConversionManager:
 
 		Args
 		--------
-			unit (``Unit``) :  unit
+			unit (`Unit`) :  unit
 
 		Returns
 		--------
-			``UnitIndex`` : 
+			`UnitIndex` : 
 		"""
 		pass
 
@@ -10349,11 +10349,11 @@ class UnitConversionManager:
 
 		Args
 		--------
-			aunitindex (``UnitIndex``) :  aunitindex
+			aunitindex (`UnitIndex`) :  aunitindex
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -10362,11 +10362,11 @@ class UnitConversionManager:
 
 		Args
 		--------
-			aunitsystemindex (``UnitSystemIndex``) :  aunitsystemindex
+			aunitsystemindex (`UnitSystemIndex`) :  aunitsystemindex
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -10377,7 +10377,7 @@ class UnitConversionManager:
 
 		Returns
 		--------
-			``UnitConversionManager`` : 
+			`UnitConversionManager` : 
 		"""
 		pass
 
@@ -10388,7 +10388,7 @@ class UnitConversionManager:
 
 		Returns
 		--------
-			``UnitConversionManager`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10399,12 +10399,12 @@ class UnitConversionManager:
 
 class UnitSystem(INamable):
 
-	def __init__(self, astringName: str) -> None:
+	def __new__(self, astringName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			astringName (``str``) :  astringName
+			astringName (`str`) :  astringName
 		"""
 		pass
 
@@ -10414,11 +10414,11 @@ class UnitSystem(INamable):
 
 		Args
 		--------
-			astring (``str``) :  astring
+			astring (`str`) :  astring
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -10427,7 +10427,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10438,7 +10438,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -10449,7 +10449,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -10460,7 +10460,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -10471,7 +10471,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -10481,7 +10481,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10491,7 +10491,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10501,7 +10501,7 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10511,18 +10511,18 @@ class UnitSystem(INamable):
 
 		Returns
 		--------
-			``UnitSystem`` : 
+			`str` : 
 		"""
 		pass
 
 class ConversionException(ISerializable, _Exception):
 
-	def __init__(self, asMessage: str) -> None:
+	def __new__(self, asMessage: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			asMessage (``str``) :  asMessage
+			asMessage (`str`) :  asMessage
 		"""
 		pass
 
@@ -10531,7 +10531,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``Exception`` : 
+			`Exception` : 
 		"""
 		pass
 
@@ -10540,12 +10540,12 @@ class ConversionException(ISerializable, _Exception):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10555,7 +10555,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10565,7 +10565,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -10575,7 +10575,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`Exception` : 
 		"""
 		pass
 
@@ -10585,7 +10585,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`MethodBase` : 
 		"""
 		pass
 
@@ -10595,7 +10595,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10605,7 +10605,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10619,7 +10619,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -10633,7 +10633,7 @@ class ConversionException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``ConversionException`` : 
+			`int` : 
 		"""
 		pass
 
@@ -10643,12 +10643,12 @@ class ConversionException(ISerializable, _Exception):
 
 class FactorConverter(IUnitConverter):
 
-	def __init__(self, adouble: float) -> None:
+	def __new__(self, adouble: float) -> None:
 		"""No Description
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 		"""
 		pass
 
@@ -10657,11 +10657,11 @@ class FactorConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10670,17 +10670,17 @@ class FactorConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class BaseUnitConverter(IUnitConverter):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -10690,11 +10690,11 @@ class BaseUnitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10703,17 +10703,17 @@ class BaseUnitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class DegreesFahrenheitConverter(IUnitConverter):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -10724,11 +10724,11 @@ class DegreesFahrenheitConverter(IUnitConverter):
 
 		Args
 		--------
-			adoubleCelsius (``float``) :  adoubleCelsius
+			adoubleCelsius (`float`) :  adoubleCelsius
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10738,11 +10738,11 @@ class DegreesFahrenheitConverter(IUnitConverter):
 
 		Args
 		--------
-			adoubleFahrenheit (``float``) :  adoubleFahrenheit
+			adoubleFahrenheit (`float`) :  adoubleFahrenheit
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10752,11 +10752,11 @@ class DegreesFahrenheitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10766,17 +10766,17 @@ class DegreesFahrenheitConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class KelvinConverter(IUnitConverter):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -10787,11 +10787,11 @@ class KelvinConverter(IUnitConverter):
 
 		Args
 		--------
-			adoubleCelsius (``float``) :  adoubleCelsius
+			adoubleCelsius (`float`) :  adoubleCelsius
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10801,11 +10801,11 @@ class KelvinConverter(IUnitConverter):
 
 		Args
 		--------
-			adoubleKelvin (``float``) :  adoubleKelvin
+			adoubleKelvin (`float`) :  adoubleKelvin
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10815,11 +10815,11 @@ class KelvinConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10829,18 +10829,33 @@ class KelvinConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class SlopeConverter(IUnitConverter):
 
-	def __init__(self) -> None:
+	@overload
+	def __new__(self) -> None:
 		"""No Description
+
+		Args
+		--------
+			factor (`float`) :  factor
+		"""
+		pass
+
+	@overload
+	def __new__(self, factor: float) -> None:
+		"""No Description
+
+		Args
+		--------
+			factor (`float`) :  factor
 		"""
 		pass
 
@@ -10849,11 +10864,11 @@ class SlopeConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10862,22 +10877,22 @@ class SlopeConverter(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class EmitterCoefficientConverterUS(IUnitConverter):
 
-	def __init__(self, aTargetUnitFlowFactor: float) -> None:
+	def __new__(self, aTargetUnitFlowFactor: float) -> None:
 		"""No Description
 
 		Args
 		--------
-			aTargetUnitFlowFactor (``float``) :  aTargetUnitFlowFactor
+			aTargetUnitFlowFactor (`float`) :  aTargetUnitFlowFactor
 		"""
 		pass
 
@@ -10887,11 +10902,11 @@ class EmitterCoefficientConverterUS(IUnitConverter):
 
 		Args
 		--------
-			aDouble (``float``) :  aDouble
+			aDouble (`float`) :  aDouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10901,11 +10916,11 @@ class EmitterCoefficientConverterUS(IUnitConverter):
 
 		Args
 		--------
-			aDouble (``float``) :  aDouble
+			aDouble (`float`) :  aDouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10915,11 +10930,11 @@ class EmitterCoefficientConverterUS(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10929,22 +10944,22 @@ class EmitterCoefficientConverterUS(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class EmitterCoefficientConverterSI(IUnitConverter):
 
-	def __init__(self, aTargetUnitFlowFactor: float) -> None:
+	def __new__(self, aTargetUnitFlowFactor: float) -> None:
 		"""No Description
 
 		Args
 		--------
-			aTargetUnitFlowFactor (``float``) :  aTargetUnitFlowFactor
+			aTargetUnitFlowFactor (`float`) :  aTargetUnitFlowFactor
 		"""
 		pass
 
@@ -10954,11 +10969,11 @@ class EmitterCoefficientConverterSI(IUnitConverter):
 
 		Args
 		--------
-			aDouble (``float``) :  aDouble
+			aDouble (`float`) :  aDouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10968,11 +10983,11 @@ class EmitterCoefficientConverterSI(IUnitConverter):
 
 		Args
 		--------
-			aDouble (``float``) :  aDouble
+			aDouble (`float`) :  aDouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10982,11 +10997,11 @@ class EmitterCoefficientConverterSI(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -10996,11 +11011,11 @@ class EmitterCoefficientConverterSI(IUnitConverter):
 
 		Args
 		--------
-			adouble (``float``) :  adouble
+			adouble (`float`) :  adouble
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 

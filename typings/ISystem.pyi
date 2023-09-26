@@ -856,7 +856,7 @@ class State(Enum):
 
 class ICloneable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -872,13 +872,13 @@ class ICloneable:
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
 class IComparable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -894,17 +894,17 @@ class IComparable:
 
 		Args
 		--------
-			obj (``object``) :  obj
+			obj (`object`) :  obj
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
 class IComparable(Generic[T]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -920,17 +920,17 @@ class IComparable(Generic[T]):
 
 		Args
 		--------
-			other (``T``) :  other
+			other (`T`) :  other
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
 class IEquatable(Generic[T]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -943,20 +943,20 @@ class IEquatable(Generic[T]):
 
 class EventArgs:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class EventHandler(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -965,14 +965,14 @@ class EventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``EventArgs``) :  e
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			sender (`object`) :  sender
+			e (`EventArgs`) :  e
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -981,11 +981,11 @@ class EventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -994,12 +994,12 @@ class EventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``EventArgs``) :  e
+			sender (`object`) :  sender
+			e (`EventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1008,12 +1008,12 @@ class EventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1022,7 +1022,7 @@ class EventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -1031,11 +1031,11 @@ class EventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1044,7 +1044,7 @@ class EventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1054,7 +1054,7 @@ class EventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``EventHandler`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -1064,194 +1064,194 @@ class EventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``EventHandler`` : 
+			`object` : 
 		"""
 		pass
 
 class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 	@overload
-	def __init__(self, b: List[int]) -> None:
+	def __new__(self, b: List[int]) -> None:
 		"""No Description
 
 		Args
 		--------
-			b (``List[int]``) :  b
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``List[int]``) :  d
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			g (``str``) :  g
+			b (`List[int]`) :  b
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`List[int]`) :  d
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			g (`str`) :  g
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: int, b: int, c: int, d: int, e: int, f: int, g: int, h: int, i: int, j: int, k: int) -> None:
+	def __new__(self, a: int, b: int, c: int, d: int, e: int, f: int, g: int, h: int, i: int, j: int, k: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			b (``List[int]``) :  b
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``List[int]``) :  d
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			g (``str``) :  g
+			b (`List[int]`) :  b
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`List[int]`) :  d
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			g (`str`) :  g
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: int, b: int, c: int, d: List[int]) -> None:
+	def __new__(self, a: int, b: int, c: int, d: List[int]) -> None:
 		"""No Description
 
 		Args
 		--------
-			b (``List[int]``) :  b
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``List[int]``) :  d
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			g (``str``) :  g
+			b (`List[int]`) :  b
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`List[int]`) :  d
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			g (`str`) :  g
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: int, b: int, c: int, d: int, e: int, f: int, g: int, h: int, i: int, j: int, k: int) -> None:
+	def __new__(self, a: int, b: int, c: int, d: int, e: int, f: int, g: int, h: int, i: int, j: int, k: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			b (``List[int]``) :  b
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``List[int]``) :  d
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			g (``str``) :  g
+			b (`List[int]`) :  b
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`List[int]`) :  d
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			g (`str`) :  g
 		"""
 		pass
 
 	@overload
-	def __init__(self, g: str) -> None:
+	def __new__(self, g: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			b (``List[int]``) :  b
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``List[int]``) :  d
-			a (``int``) :  a
-			b (``int``) :  b
-			c (``int``) :  c
-			d (``int``) :  d
-			e (``int``) :  e
-			f (``int``) :  f
-			g (``int``) :  g
-			h (``int``) :  h
-			i (``int``) :  i
-			j (``int``) :  j
-			k (``int``) :  k
-			g (``str``) :  g
+			b (`List[int]`) :  b
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`List[int]`) :  d
+			a (`int`) :  a
+			b (`int`) :  b
+			c (`int`) :  c
+			d (`int`) :  d
+			e (`int`) :  e
+			f (`int`) :  f
+			g (`int`) :  g
+			h (`int`) :  h
+			i (`int`) :  i
+			j (`int`) :  j
+			k (`int`) :  k
+			g (`str`) :  g
 		"""
 		pass
 
@@ -1261,11 +1261,11 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			input (``str``) :  input
+			input (`str`) :  input
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -1275,12 +1275,12 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			input (``str``) :  input
-			result (``Guid``) :  result
+			input (`str`) :  input
+			result (`Guid`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1290,12 +1290,12 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			input (``str``) :  input
-			format (``str``) :  format
+			input (`str`) :  input
+			format (`str`) :  format
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -1305,13 +1305,13 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			input (``str``) :  input
-			format (``str``) :  format
-			result (``Guid``) :  result
+			input (`str`) :  input
+			format (`str`) :  format
+			result (`Guid`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1320,7 +1320,7 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -1330,11 +1330,11 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			value (``object``) :  value
+			value (`object`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1344,11 +1344,11 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			value (``Guid``) :  value
+			value (`Guid`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1358,12 +1358,12 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			a (``Guid``) :  a
-			b (``Guid``) :  b
+			a (`Guid`) :  a
+			b (`Guid`) :  b
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1373,12 +1373,12 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			a (``Guid``) :  a
-			b (``Guid``) :  b
+			a (`Guid`) :  a
+			b (`Guid`) :  b
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1388,7 +1388,7 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -1398,12 +1398,12 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			a (``Guid``) :  a
-			b (``Guid``) :  b
+			a (`Guid`) :  a
+			b (`Guid`) :  b
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1413,18 +1413,18 @@ class Guid(IFormattable, IComparable, IComparable[Guid], IEquatable[Guid]):
 
 		Args
 		--------
-			a (``Guid``) :  a
-			b (``Guid``) :  b
+			a (`Guid`) :  a
+			b (`Guid`) :  b
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class IFormattable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -1438,38 +1438,38 @@ class IFormattable:
 class IntPtr(ISerializable):
 
 	@overload
-	def __init__(self, value: int) -> None:
+	def __new__(self, value: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			value (``int``) :  value
-			value (``int``) :  value
-			value (``object``) :  value
+			value (`int`) :  value
+			value (`int`) :  value
+			value (`object`) :  value
 		"""
 		pass
 
 	@overload
-	def __init__(self, value: int) -> None:
+	def __new__(self, value: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			value (``int``) :  value
-			value (``int``) :  value
-			value (``object``) :  value
+			value (`int`) :  value
+			value (`int`) :  value
+			value (`object`) :  value
 		"""
 		pass
 
 	@overload
-	def __init__(self, value: object) -> None:
+	def __new__(self, value: object) -> None:
 		"""No Description
 
 		Args
 		--------
-			value (``int``) :  value
-			value (``int``) :  value
-			value (``object``) :  value
+			value (`int`) :  value
+			value (`int`) :  value
+			value (`object`) :  value
 		"""
 		pass
 
@@ -1478,7 +1478,7 @@ class IntPtr(ISerializable):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1487,7 +1487,7 @@ class IntPtr(ISerializable):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1498,11 +1498,11 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value (``int``) :  value
+			value (`int`) :  value
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1513,11 +1513,11 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value (``int``) :  value
+			value (`int`) :  value
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1528,11 +1528,11 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value (``object``) :  value
+			value (`object`) :  value
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1543,11 +1543,11 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value (``IntPtr``) :  value
+			value (`IntPtr`) :  value
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1558,11 +1558,11 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value (``IntPtr``) :  value
+			value (`IntPtr`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1573,11 +1573,11 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value (``IntPtr``) :  value
+			value (`IntPtr`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1587,12 +1587,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value1 (``IntPtr``) :  value1
-			value2 (``IntPtr``) :  value2
+			value1 (`IntPtr`) :  value1
+			value2 (`IntPtr`) :  value2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1602,12 +1602,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value1 (``IntPtr``) :  value1
-			value2 (``IntPtr``) :  value2
+			value1 (`IntPtr`) :  value1
+			value2 (`IntPtr`) :  value2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1617,12 +1617,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			pointer (``IntPtr``) :  pointer
-			offset (``int``) :  offset
+			pointer (`IntPtr`) :  pointer
+			offset (`int`) :  offset
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1632,12 +1632,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			pointer (``IntPtr``) :  pointer
-			offset (``int``) :  offset
+			pointer (`IntPtr`) :  pointer
+			offset (`int`) :  offset
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1647,12 +1647,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			pointer (``IntPtr``) :  pointer
-			offset (``int``) :  offset
+			pointer (`IntPtr`) :  pointer
+			offset (`int`) :  offset
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1662,12 +1662,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			pointer (``IntPtr``) :  pointer
-			offset (``int``) :  offset
+			pointer (`IntPtr`) :  pointer
+			offset (`int`) :  offset
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1676,7 +1676,7 @@ class IntPtr(ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1686,12 +1686,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			pointer (``IntPtr``) :  pointer
-			offset (``int``) :  offset
+			pointer (`IntPtr`) :  pointer
+			offset (`int`) :  offset
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1701,12 +1701,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value1 (``IntPtr``) :  value1
-			value2 (``IntPtr``) :  value2
+			value1 (`IntPtr`) :  value1
+			value2 (`IntPtr`) :  value2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1716,12 +1716,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			value1 (``IntPtr``) :  value1
-			value2 (``IntPtr``) :  value2
+			value1 (`IntPtr`) :  value1
+			value2 (`IntPtr`) :  value2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1731,12 +1731,12 @@ class IntPtr(ISerializable):
 
 		Args
 		--------
-			pointer (``IntPtr``) :  pointer
-			offset (``int``) :  offset
+			pointer (`IntPtr`) :  pointer
+			offset (`int`) :  offset
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1747,97 +1747,97 @@ class IntPtr(ISerializable):
 
 		Returns
 		--------
-			``IntPtr`` : 
+			`int` : 
 		"""
 		pass
 
 class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormattable):
 
 	@overload
-	def __init__(self, ticks: int) -> None:
+	def __new__(self, ticks: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			ticks (``int``) :  ticks
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			milliseconds (``int``) :  milliseconds
+			ticks (`int`) :  ticks
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			milliseconds (`int`) :  milliseconds
 		"""
 		pass
 
 	@overload
-	def __init__(self, hours: int, minutes: int, seconds: int) -> None:
+	def __new__(self, hours: int, minutes: int, seconds: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			ticks (``int``) :  ticks
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			milliseconds (``int``) :  milliseconds
+			ticks (`int`) :  ticks
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			milliseconds (`int`) :  milliseconds
 		"""
 		pass
 
 	@overload
-	def __init__(self, days: int, hours: int, minutes: int, seconds: int) -> None:
+	def __new__(self, days: int, hours: int, minutes: int, seconds: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			ticks (``int``) :  ticks
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			milliseconds (``int``) :  milliseconds
+			ticks (`int`) :  ticks
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			milliseconds (`int`) :  milliseconds
 		"""
 		pass
 
 	@overload
-	def __init__(self, days: int, hours: int, minutes: int, seconds: int, milliseconds: int) -> None:
+	def __new__(self, days: int, hours: int, minutes: int, seconds: int, milliseconds: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			ticks (``int``) :  ticks
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			days (``int``) :  days
-			hours (``int``) :  hours
-			minutes (``int``) :  minutes
-			seconds (``int``) :  seconds
-			milliseconds (``int``) :  milliseconds
+			ticks (`int`) :  ticks
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			days (`int`) :  days
+			hours (`int`) :  hours
+			minutes (`int`) :  minutes
+			seconds (`int`) :  seconds
+			milliseconds (`int`) :  milliseconds
 		"""
 		pass
 
@@ -1846,11 +1846,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			ts (``TimeSpan``) :  ts
+			ts (`TimeSpan`) :  ts
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1860,12 +1860,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1875,11 +1875,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``object``) :  value
+			value (`object`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1889,11 +1889,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``TimeSpan``) :  value
+			value (`TimeSpan`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1903,11 +1903,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``float``) :  value
+			value (`float`) :  value
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1916,7 +1916,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1926,11 +1926,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``float``) :  value
+			value (`float`) :  value
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1940,11 +1940,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``float``) :  value
+			value (`float`) :  value
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1954,11 +1954,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``float``) :  value
+			value (`float`) :  value
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1967,7 +1967,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1977,11 +1977,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``float``) :  value
+			value (`float`) :  value
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -1990,11 +1990,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			ts (``TimeSpan``) :  ts
+			ts (`TimeSpan`) :  ts
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2004,11 +2004,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			value (``int``) :  value
+			value (`int`) :  value
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2019,11 +2019,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			s (``str``) :  s
+			s (`str`) :  s
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2034,12 +2034,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			formatProvider (``IFormatProvider``) :  formatProvider
+			input (`str`) :  input
+			formatProvider (`IFormatProvider`) :  formatProvider
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2050,13 +2050,13 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			format (``str``) :  format
-			formatProvider (``IFormatProvider``) :  formatProvider
+			input (`str`) :  input
+			format (`str`) :  format
+			formatProvider (`IFormatProvider`) :  formatProvider
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2067,13 +2067,13 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			formats (``array[str]``) :  formats
-			formatProvider (``IFormatProvider``) :  formatProvider
+			input (`str`) :  input
+			formats (`array[str]`) :  formats
+			formatProvider (`IFormatProvider`) :  formatProvider
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2084,12 +2084,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			s (``str``) :  s
-			result (``TimeSpan``) :  result
+			s (`str`) :  s
+			result (`TimeSpan`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2100,13 +2100,13 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			formatProvider (``IFormatProvider``) :  formatProvider
-			result (``TimeSpan``) :  result
+			input (`str`) :  input
+			formatProvider (`IFormatProvider`) :  formatProvider
+			result (`TimeSpan`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2117,14 +2117,14 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			format (``str``) :  format
-			formatProvider (``IFormatProvider``) :  formatProvider
-			result (``TimeSpan``) :  result
+			input (`str`) :  input
+			format (`str`) :  format
+			formatProvider (`IFormatProvider`) :  formatProvider
+			result (`TimeSpan`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2135,14 +2135,14 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			formats (``array[str]``) :  formats
-			formatProvider (``IFormatProvider``) :  formatProvider
-			result (``TimeSpan``) :  result
+			input (`str`) :  input
+			formats (`array[str]`) :  formats
+			formatProvider (`IFormatProvider`) :  formatProvider
+			result (`TimeSpan`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2152,11 +2152,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t (``TimeSpan``) :  t
+			t (`TimeSpan`) :  t
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2166,12 +2166,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2181,11 +2181,11 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t (``TimeSpan``) :  t
+			t (`TimeSpan`) :  t
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2195,12 +2195,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2210,12 +2210,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2225,12 +2225,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2240,12 +2240,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2255,12 +2255,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2270,12 +2270,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2285,12 +2285,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2301,14 +2301,14 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			format (``str``) :  format
-			formatProvider (``IFormatProvider``) :  formatProvider
-			styles (``TimeSpanStyles``) :  styles
+			input (`str`) :  input
+			format (`str`) :  format
+			formatProvider (`IFormatProvider`) :  formatProvider
+			styles (`TimeSpanStyles`) :  styles
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2319,14 +2319,14 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			formats (``array[str]``) :  formats
-			formatProvider (``IFormatProvider``) :  formatProvider
-			styles (``TimeSpanStyles``) :  styles
+			input (`str`) :  input
+			formats (`array[str]`) :  formats
+			formatProvider (`IFormatProvider`) :  formatProvider
+			styles (`TimeSpanStyles`) :  styles
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2337,15 +2337,15 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			format (``str``) :  format
-			formatProvider (``IFormatProvider``) :  formatProvider
-			styles (``TimeSpanStyles``) :  styles
-			result (``TimeSpan``) :  result
+			input (`str`) :  input
+			format (`str`) :  format
+			formatProvider (`IFormatProvider`) :  formatProvider
+			styles (`TimeSpanStyles`) :  styles
+			result (`TimeSpan`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2356,15 +2356,15 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			input (``str``) :  input
-			formats (``array[str]``) :  formats
-			formatProvider (``IFormatProvider``) :  formatProvider
-			styles (``TimeSpanStyles``) :  styles
-			result (``TimeSpan``) :  result
+			input (`str`) :  input
+			formats (`array[str]`) :  formats
+			formatProvider (`IFormatProvider`) :  formatProvider
+			styles (`TimeSpanStyles`) :  styles
+			result (`TimeSpan`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2374,12 +2374,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2389,12 +2389,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2404,12 +2404,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2419,12 +2419,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2434,12 +2434,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2449,12 +2449,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2464,12 +2464,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2479,12 +2479,12 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Args
 		--------
-			t1 (``TimeSpan``) :  t1
-			t2 (``TimeSpan``) :  t2
+			t1 (`TimeSpan`) :  t1
+			t2 (`TimeSpan`) :  t2
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -2494,7 +2494,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2504,7 +2504,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2514,7 +2514,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2524,7 +2524,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2534,7 +2534,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2544,7 +2544,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2554,7 +2554,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2564,7 +2564,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2574,7 +2574,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2584,7 +2584,7 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`float` : 
 		"""
 		pass
 
@@ -2594,13 +2594,13 @@ class TimeSpan(IComparable, IComparable[TimeSpan], IEquatable[TimeSpan], IFormat
 
 		Returns
 		--------
-			``TimeSpan`` : 
+			`float` : 
 		"""
 		pass
 
 class Delegate(ICloneable, ISerializable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2616,11 +2616,11 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2631,12 +2631,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			a (``Delegate``) :  a
-			b (``Delegate``) :  b
+			a (`Delegate`) :  a
+			b (`Delegate`) :  b
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2647,11 +2647,11 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			delegates (``List[Delegate]``) :  delegates
+			delegates (`List[Delegate]`) :  delegates
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2660,7 +2660,7 @@ class Delegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -2670,12 +2670,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			source (``Delegate``) :  source
-			value (``Delegate``) :  value
+			source (`Delegate`) :  source
+			value (`Delegate`) :  value
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2685,12 +2685,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			source (``Delegate``) :  source
-			value (``Delegate``) :  value
+			source (`Delegate`) :  source
+			value (`Delegate`) :  value
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2699,7 +2699,7 @@ class Delegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2710,13 +2710,13 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			target (``object``) :  target
-			method (``str``) :  method
+			type (`Type`) :  type
+			target (`object`) :  target
+			method (`str`) :  method
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2727,14 +2727,14 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			target (``object``) :  target
-			method (``str``) :  method
-			ignoreCase (``bool``) :  ignoreCase
+			type (`Type`) :  type
+			target (`object`) :  target
+			method (`str`) :  method
+			ignoreCase (`bool`) :  ignoreCase
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2745,15 +2745,15 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			target (``object``) :  target
-			method (``str``) :  method
-			ignoreCase (``bool``) :  ignoreCase
-			throwOnBindFailure (``bool``) :  throwOnBindFailure
+			type (`Type`) :  type
+			target (`object`) :  target
+			method (`str`) :  method
+			ignoreCase (`bool`) :  ignoreCase
+			throwOnBindFailure (`bool`) :  throwOnBindFailure
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2764,13 +2764,13 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			target (``Type``) :  target
-			method (``str``) :  method
+			type (`Type`) :  type
+			target (`Type`) :  target
+			method (`str`) :  method
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2781,14 +2781,14 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			target (``Type``) :  target
-			method (``str``) :  method
-			ignoreCase (``bool``) :  ignoreCase
+			type (`Type`) :  type
+			target (`Type`) :  target
+			method (`str`) :  method
+			ignoreCase (`bool`) :  ignoreCase
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2799,15 +2799,15 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			target (``Type``) :  target
-			method (``str``) :  method
-			ignoreCase (``bool``) :  ignoreCase
-			throwOnBindFailure (``bool``) :  throwOnBindFailure
+			type (`Type`) :  type
+			target (`Type`) :  target
+			method (`str`) :  method
+			ignoreCase (`bool`) :  ignoreCase
+			throwOnBindFailure (`bool`) :  throwOnBindFailure
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2818,13 +2818,13 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			method (``MethodInfo``) :  method
-			throwOnBindFailure (``bool``) :  throwOnBindFailure
+			type (`Type`) :  type
+			method (`MethodInfo`) :  method
+			throwOnBindFailure (`bool`) :  throwOnBindFailure
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2835,14 +2835,14 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			firstArgument (``object``) :  firstArgument
-			method (``MethodInfo``) :  method
-			throwOnBindFailure (``bool``) :  throwOnBindFailure
+			type (`Type`) :  type
+			firstArgument (`object`) :  firstArgument
+			method (`MethodInfo`) :  method
+			throwOnBindFailure (`bool`) :  throwOnBindFailure
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2852,12 +2852,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			d1 (``Delegate``) :  d1
-			d2 (``Delegate``) :  d2
+			d1 (`Delegate`) :  d1
+			d2 (`Delegate`) :  d2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2867,12 +2867,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			d1 (``Delegate``) :  d1
-			d2 (``Delegate``) :  d2
+			d1 (`Delegate`) :  d1
+			d2 (`Delegate`) :  d2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2881,12 +2881,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2897,12 +2897,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			method (``MethodInfo``) :  method
+			type (`Type`) :  type
+			method (`MethodInfo`) :  method
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2913,13 +2913,13 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			type (``Type``) :  type
-			firstArgument (``object``) :  firstArgument
-			method (``MethodInfo``) :  method
+			type (`Type`) :  type
+			firstArgument (`object`) :  firstArgument
+			method (`MethodInfo`) :  method
 
 		Returns
 		--------
-			``Delegate`` : 
+			`Delegate` : 
 		"""
 		pass
 
@@ -2929,12 +2929,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			d1 (``Delegate``) :  d1
-			d2 (``Delegate``) :  d2
+			d1 (`Delegate`) :  d1
+			d2 (`Delegate`) :  d2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2944,12 +2944,12 @@ class Delegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			d1 (``Delegate``) :  d1
-			d2 (``Delegate``) :  d2
+			d1 (`Delegate`) :  d1
+			d2 (`Delegate`) :  d2
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2959,7 +2959,7 @@ class Delegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``Delegate`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -2969,19 +2969,19 @@ class Delegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``Delegate`` : 
+			`object` : 
 		"""
 		pass
 
 class AsyncCallback(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -2990,11 +2990,11 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			ar (``IAsyncResult``) :  ar
+			ar (`IAsyncResult`) :  ar
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3003,13 +3003,13 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			ar (``IAsyncResult``) :  ar
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			ar (`IAsyncResult`) :  ar
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3018,11 +3018,11 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3031,12 +3031,12 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3045,7 +3045,7 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3054,11 +3054,11 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3067,7 +3067,7 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3077,7 +3077,7 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``AsyncCallback`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3087,13 +3087,13 @@ class AsyncCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``AsyncCallback`` : 
+			`object` : 
 		"""
 		pass
 
 class IAsyncResult:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3110,7 +3110,7 @@ class IAsyncResult:
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3120,7 +3120,7 @@ class IAsyncResult:
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`WaitHandle` : 
 		"""
 		pass
 
@@ -3130,7 +3130,7 @@ class IAsyncResult:
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3140,7 +3140,7 @@ class IAsyncResult:
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`bool` : 
 		"""
 		pass
 

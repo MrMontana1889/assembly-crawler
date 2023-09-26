@@ -68,7 +68,9 @@ class ProductId(Enum):
 	Bentley_GasAnalysis = 1861
 	Bentley_PipeAssetPlanner = 1895
 	Bentley_SUE = 2335
+	Bentley_OpenRoadsConceptStation = 2427
 	Bentley_OpenRoadsDesigner = 2515
+	Bentley_OpenRailConceptStation = 2580
 	Bentley_OpenRailDesigner = 2641
 	Bentley_CNCCBIMOpenRoads = 2697
 	Bentley_OpenSiteDesigner = 2758
@@ -80,6 +82,8 @@ class ProductId(Enum):
 	Bentley_OpenRoadsUltimateChina = 3211
 	Bentley_OpenRoadsChina = 3216
 	Bentley_OpenFlows_Entitlement = 3276
+	Bentley_TRENDROAD = 3303
+	Bentley_OpenAirportChina = 3415
 
 class LicensePlatformType(Enum):
 	Unknown = 0
@@ -103,22 +107,22 @@ class ArchitectureType(Enum):
 class FeatureMap:
 
 	@overload
-	def __init__(self, apstring: str) -> None:
+	def __new__(self, apstring: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			apstring (``str``) :  apstring
+			apstring (`str`) :  apstring
 		"""
 		pass
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			apstring (``str``) :  apstring
+			apstring (`str`) :  apstring
 		"""
 		pass
 
@@ -127,11 +131,11 @@ class FeatureMap:
 
 		Args
 		--------
-			apstringKey (``str``) :  apstringKey
+			apstringKey (`str`) :  apstringKey
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -140,7 +144,7 @@ class FeatureMap:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -150,7 +154,7 @@ class FeatureMap:
 
 		Returns
 		--------
-			``FeatureMap`` : 
+			`StringCollection` : 
 		"""
 		pass
 
@@ -160,7 +164,7 @@ class FeatureMap:
 
 		Returns
 		--------
-			``FeatureMap`` : 
+			`str` : 
 		"""
 		pass
 
@@ -170,7 +174,7 @@ class FeatureMap:
 
 		Returns
 		--------
-			``FeatureMap`` : 
+			`str` : 
 		"""
 		pass
 
@@ -180,7 +184,7 @@ class FeatureMap:
 
 		Returns
 		--------
-			``FeatureMap`` : 
+			`str` : 
 		"""
 		pass
 
@@ -190,85 +194,85 @@ class FeatureMap:
 
 		Returns
 		--------
-			``FeatureMap`` : 
+			`int` : 
 		"""
 		pass
 
 class ProductRelease:
 
 	@overload
-	def __init__(self, productId: ProductId, name: str, productVersion: str) -> None:
+	def __new__(self, productId: ProductId, name: str, productVersion: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			productId (``ProductId``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``ProductId``) :  productId
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			productVersion (``str``) :  productVersion
+			productId (`ProductId`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`ProductId`) :  productId
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			productVersion (`str`) :  productVersion
 		"""
 		pass
 
 	@overload
-	def __init__(self, productId: ProductId, productVersion: str) -> None:
+	def __new__(self, productId: ProductId, productVersion: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			productId (``ProductId``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``ProductId``) :  productId
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			productVersion (``str``) :  productVersion
+			productId (`ProductId`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`ProductId`) :  productId
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			productVersion (`str`) :  productVersion
 		"""
 		pass
 
 	@overload
-	def __init__(self, productId: int, name: str, productVersion: str) -> None:
+	def __new__(self, productId: int, name: str, productVersion: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			productId (``ProductId``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``ProductId``) :  productId
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			productVersion (``str``) :  productVersion
+			productId (`ProductId`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`ProductId`) :  productId
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			productVersion (`str`) :  productVersion
 		"""
 		pass
 
 	@overload
-	def __init__(self, productId: int, productVersion: str) -> None:
+	def __new__(self, productId: int, productVersion: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			productId (``ProductId``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``ProductId``) :  productId
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			name (``str``) :  name
-			productVersion (``str``) :  productVersion
-			productId (``int``) :  productId
-			productVersion (``str``) :  productVersion
+			productId (`ProductId`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`ProductId`) :  productId
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			name (`str`) :  name
+			productVersion (`str`) :  productVersion
+			productId (`int`) :  productId
+			productVersion (`str`) :  productVersion
 		"""
 		pass
 
@@ -277,7 +281,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -288,7 +292,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`int` : 
 		"""
 		pass
 
@@ -298,7 +302,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -312,7 +316,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -322,7 +326,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`str` : 
 		"""
 		pass
 
@@ -332,7 +336,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -342,7 +346,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`str` : 
 		"""
 		pass
 
@@ -356,7 +360,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`str` : 
 		"""
 		pass
 
@@ -370,7 +374,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`ArchitectureType` : 
 		"""
 		pass
 
@@ -384,7 +388,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`LicensePlatformType` : 
 		"""
 		pass
 
@@ -398,7 +402,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`str` : 
 		"""
 		pass
 
@@ -412,7 +416,7 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`str` : 
 		"""
 		pass
 
@@ -422,13 +426,13 @@ class ProductRelease:
 
 		Returns
 		--------
-			``ProductRelease`` : 
+			`int` : 
 		"""
 		pass
 
 class ILicense:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -444,7 +448,7 @@ class ILicense:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -453,7 +457,7 @@ class ILicense:
 
 		Returns
 		--------
-			``LicenseStatus`` : 
+			`LicenseStatus` : 
 		"""
 		pass
 
@@ -462,7 +466,7 @@ class ILicense:
 
 		Returns
 		--------
-			``LicenseRunStatusEnum`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -471,7 +475,7 @@ class ILicense:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -481,13 +485,13 @@ class ILicense:
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			featureUserDataMap (``Dict[str,str]``) :  featureUserDataMap
-			instanceID (``int``) :  instanceID
+			featureID (`Guid`) :  featureID
+			featureUserDataMap (`Dict[str,str]`) :  featureUserDataMap
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -497,12 +501,12 @@ class ILicense:
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			instanceID (``int``) :  instanceID
+			featureID (`Guid`) :  featureID
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -511,11 +515,11 @@ class ILicense:
 
 		Args
 		--------
-			instanceID (``int``) :  instanceID
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -525,12 +529,12 @@ class ILicense:
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			featureUserDataKeyValMap (``Dict[str,str]``) :  featureUserDataKeyValMap
+			featureID (`Guid`) :  featureID
+			featureUserDataKeyValMap (`Dict[str,str]`) :  featureUserDataKeyValMap
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -540,11 +544,11 @@ class ILicense:
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
+			featureID (`Guid`) :  featureID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -553,11 +557,11 @@ class ILicense:
 
 		Args
 		--------
-			projectID (``str``) :  projectID
+			projectID (`str`) :  projectID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -566,7 +570,7 @@ class ILicense:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -575,12 +579,12 @@ class ILicense:
 
 		Args
 		--------
-			apProduct (``ProductRelease``) :  apProduct
-			waitForExit (``bool``) :  waitForExit
+			apProduct (`ProductRelease`) :  apProduct
+			waitForExit (`bool`) :  waitForExit
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -589,11 +593,11 @@ class ILicense:
 
 		Args
 		--------
-			showMessage (``bool``) :  showMessage
+			showMessage (`bool`) :  showMessage
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -602,11 +606,11 @@ class ILicense:
 
 		Args
 		--------
-			showMessage (``bool``) :  showMessage
+			showMessage (`bool`) :  showMessage
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -615,15 +619,15 @@ class ILicense:
 
 		Args
 		--------
-			proxyName (``str``) :  proxyName
-			proxyNeedsAuth (``bool``) :  proxyNeedsAuth
-			proxyUserName (``str``) :  proxyUserName
-			proxyPw (``str``) :  proxyPw
-			handshake (``str``) :  handshake
+			proxyName (`str`) :  proxyName
+			proxyNeedsAuth (`bool`) :  proxyNeedsAuth
+			proxyUserName (`str`) :  proxyUserName
+			proxyPw (`str`) :  proxyPw
+			handshake (`str`) :  handshake
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -632,7 +636,7 @@ class ILicense:
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -641,7 +645,7 @@ class ILicense:
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -650,7 +654,7 @@ class ILicense:
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -659,7 +663,7 @@ class ILicense:
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -668,7 +672,7 @@ class ILicense:
 
 		Returns
 		--------
-			``LicenseType`` : 
+			`LicenseType` : 
 		"""
 		pass
 
@@ -677,7 +681,7 @@ class ILicense:
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -686,7 +690,7 @@ class ILicense:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -696,7 +700,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -706,7 +710,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -716,7 +720,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`int` : 
 		"""
 		pass
 
@@ -726,7 +730,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -740,7 +744,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -750,7 +754,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -760,7 +764,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -770,7 +774,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -780,7 +784,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -790,7 +794,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -800,7 +804,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`str` : 
 		"""
 		pass
 
@@ -810,7 +814,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`str` : 
 		"""
 		pass
 
@@ -820,7 +824,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`str` : 
 		"""
 		pass
 
@@ -830,7 +834,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`FeatureMap` : 
 		"""
 		pass
 
@@ -840,7 +844,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`str` : 
 		"""
 		pass
 
@@ -854,7 +858,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -864,7 +868,7 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -874,13 +878,13 @@ class ILicense:
 
 		Returns
 		--------
-			``ILicense`` : 
+			`ProductRelease` : 
 		"""
 		pass
 
 class ILicenseProvider:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -896,7 +900,7 @@ class ILicenseProvider:
 
 		Returns
 		--------
-			``License`` : 
+			`License` : 
 		"""
 		pass
 
@@ -905,7 +909,7 @@ class ILicenseProvider:
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -914,7 +918,7 @@ class ILicenseProvider:
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -923,12 +927,12 @@ class ILicenseProvider:
 
 		Args
 		--------
-			userKey (``str``) :  userKey
-			userValue (``str``) :  userValue
+			userKey (`str`) :  userKey
+			userValue (`str`) :  userValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -938,13 +942,13 @@ class ILicenseProvider:
 
 		Returns
 		--------
-			``ILicenseProvider`` : 
+			`Dict[str,str]` : 
 		"""
 		pass
 
 class License(ILicense):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -956,15 +960,15 @@ class License(ILicense):
 
 		Args
 		--------
-			productRelease (``ProductRelease``) :  productRelease
-			windowOwner (``IntPtr``) :  windowOwner
-			messageHandler (``IMessageHandler``) :  messageHandler
-			defaultFeatureString (``str``) :  defaultFeatureString
-			isEntitlementLicense (``bool``) :  isEntitlementLicense
+			productRelease (`ProductRelease`) :  productRelease
+			windowOwner (`IntPtr`) :  windowOwner
+			messageHandler (`IMessageHandler`) :  messageHandler
+			defaultFeatureString (`str`) :  defaultFeatureString
+			isEntitlementLicense (`bool`) :  isEntitlementLicense
 
 		Returns
 		--------
-			``License`` : 
+			`License` : 
 		"""
 		pass
 
@@ -975,14 +979,14 @@ class License(ILicense):
 
 		Args
 		--------
-			productRelease (``ProductRelease``) :  productRelease
-			windowOwner (``IntPtr``) :  windowOwner
-			messageHandler (``IMessageHandler``) :  messageHandler
-			defaultFeatureString (``str``) :  defaultFeatureString
+			productRelease (`ProductRelease`) :  productRelease
+			windowOwner (`IntPtr`) :  windowOwner
+			messageHandler (`IMessageHandler`) :  messageHandler
+			defaultFeatureString (`str`) :  defaultFeatureString
 
 		Returns
 		--------
-			``License`` : 
+			`License` : 
 		"""
 		pass
 
@@ -993,13 +997,13 @@ class License(ILicense):
 
 		Args
 		--------
-			productRelease (``ProductRelease``) :  productRelease
-			windowOwner (``IntPtr``) :  windowOwner
-			messageHandler (``IMessageHandler``) :  messageHandler
+			productRelease (`ProductRelease`) :  productRelease
+			windowOwner (`IntPtr`) :  windowOwner
+			messageHandler (`IMessageHandler`) :  messageHandler
 
 		Returns
 		--------
-			``License`` : 
+			`License` : 
 		"""
 		pass
 
@@ -1008,11 +1012,11 @@ class License(ILicense):
 
 		Args
 		--------
-			value (``LicenseStatusChangedDelegate``) :  value
+			value (`LicenseStatusChangedDelegate`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1021,11 +1025,51 @@ class License(ILicense):
 
 		Args
 		--------
-			value (``LicenseStatusChangedDelegate``) :  value
+			value (`LicenseStatusChangedDelegate`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
+		"""
+		pass
+
+	def add_OnGenericEvent(self, newSub: GenericEventCb) -> None:
+		"""No Description
+
+		Args
+		--------
+			newSub (`GenericEventCb`) :  newSub
+
+		Returns
+		--------
+			`None` : 
+		"""
+		pass
+
+	def remove_OnGenericEvent(self, newSub: GenericEventCb) -> None:
+		"""No Description
+
+		Args
+		--------
+			newSub (`GenericEventCb`) :  newSub
+
+		Returns
+		--------
+			`None` : 
+		"""
+		pass
+
+	def raise_OnGenericEvent(self, e: int, data: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			e (`int`) :  e
+			data (`str`) :  data
+
+		Returns
+		--------
+			`None` : 
 		"""
 		pass
 
@@ -1034,11 +1078,11 @@ class License(ILicense):
 
 		Args
 		--------
-			productID (``int``) :  productID
+			productID (`int`) :  productID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1047,7 +1091,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1056,7 +1100,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``LicenseStatus`` : 
+			`LicenseStatus` : 
 		"""
 		pass
 
@@ -1065,7 +1109,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``LicenseRunStatusEnum`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -1074,7 +1118,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1084,13 +1128,13 @@ class License(ILicense):
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			featureUserDataMap (``Dict[str,str]``) :  featureUserDataMap
-			instanceID (``int``) :  instanceID
+			featureID (`Guid`) :  featureID
+			featureUserDataMap (`Dict[str,str]`) :  featureUserDataMap
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1100,12 +1144,12 @@ class License(ILicense):
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			instanceID (``int``) :  instanceID
+			featureID (`Guid`) :  featureID
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1114,11 +1158,11 @@ class License(ILicense):
 
 		Args
 		--------
-			instanceID (``int``) :  instanceID
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1128,12 +1172,12 @@ class License(ILicense):
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			featureUserDataKeyValMap (``Dict[str,str]``) :  featureUserDataKeyValMap
+			featureID (`Guid`) :  featureID
+			featureUserDataKeyValMap (`Dict[str,str]`) :  featureUserDataKeyValMap
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1143,11 +1187,11 @@ class License(ILicense):
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
+			featureID (`Guid`) :  featureID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1156,11 +1200,11 @@ class License(ILicense):
 
 		Args
 		--------
-			projectID (``str``) :  projectID
+			projectID (`str`) :  projectID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1169,7 +1213,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1178,12 +1222,12 @@ class License(ILicense):
 
 		Args
 		--------
-			apProduct (``ProductRelease``) :  apProduct
-			waitForExit (``bool``) :  waitForExit
+			apProduct (`ProductRelease`) :  apProduct
+			waitForExit (`bool`) :  waitForExit
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1192,11 +1236,11 @@ class License(ILicense):
 
 		Args
 		--------
-			handle (``int``) :  handle
+			handle (`int`) :  handle
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1205,7 +1249,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1214,11 +1258,11 @@ class License(ILicense):
 
 		Args
 		--------
-			showMessage (``bool``) :  showMessage
+			showMessage (`bool`) :  showMessage
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1227,11 +1271,11 @@ class License(ILicense):
 
 		Args
 		--------
-			showMessage (``bool``) :  showMessage
+			showMessage (`bool`) :  showMessage
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1240,15 +1284,15 @@ class License(ILicense):
 
 		Args
 		--------
-			proxyName (``str``) :  proxyName
-			proxyNeedsAuth (``bool``) :  proxyNeedsAuth
-			proxyUserName (``str``) :  proxyUserName
-			proxyPw (``str``) :  proxyPw
-			handshake (``str``) :  handshake
+			proxyName (`str`) :  proxyName
+			proxyNeedsAuth (`bool`) :  proxyNeedsAuth
+			proxyUserName (`str`) :  proxyUserName
+			proxyPw (`str`) :  proxyPw
+			handshake (`str`) :  handshake
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1257,7 +1301,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1266,7 +1310,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1275,7 +1319,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1284,7 +1328,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1293,7 +1337,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -1302,7 +1346,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1311,7 +1355,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1320,7 +1364,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``LicenseType`` : 
+			`LicenseType` : 
 		"""
 		pass
 
@@ -1329,7 +1373,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``LicenseType`` : 
+			`LicenseType` : 
 		"""
 		pass
 
@@ -1338,7 +1382,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1348,12 +1392,12 @@ class License(ILicense):
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
-			instanceID (``int``) :  instanceID
+			featureID (`Guid`) :  featureID
+			instanceID (`int`) :  instanceID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1363,11 +1407,11 @@ class License(ILicense):
 
 		Args
 		--------
-			featureID (``Guid``) :  featureID
+			featureID (`Guid`) :  featureID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1377,7 +1421,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1387,7 +1431,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1397,7 +1441,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -1407,7 +1451,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1417,7 +1461,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1427,7 +1471,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1441,7 +1485,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1451,7 +1495,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1461,7 +1505,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1471,7 +1515,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1481,7 +1525,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1491,7 +1535,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1501,7 +1545,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1511,7 +1555,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1521,7 +1565,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1531,7 +1575,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`FeatureMap` : 
 		"""
 		pass
 
@@ -1541,7 +1585,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`str` : 
 		"""
 		pass
 
@@ -1555,7 +1599,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1565,7 +1609,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1575,7 +1619,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`IntPtr` : 
 		"""
 		pass
 
@@ -1589,7 +1633,7 @@ class License(ILicense):
 
 		Returns
 		--------
-			``License`` : 
+			`ProductRelease` : 
 		"""
 		pass
 

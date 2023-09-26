@@ -4,13 +4,13 @@ from System import ICloneable
 
 class DictionaryEntry:
 
-	def __init__(self, key: object, value: object) -> None:
+	def __new__(self, key: object, value: object) -> None:
 		"""No Description
 
 		Args
 		--------
-			key (``object``) :  key
-			value (``object``) :  value
+			key (`object`) :  key
+			value (`object`) :  value
 		"""
 		pass
 
@@ -20,7 +20,7 @@ class DictionaryEntry:
 
 		Returns
 		--------
-			``DictionaryEntry`` : 
+			`object` : 
 		"""
 		pass
 
@@ -34,7 +34,7 @@ class DictionaryEntry:
 
 		Returns
 		--------
-			``DictionaryEntry`` : 
+			`object` : 
 		"""
 		pass
 
@@ -44,7 +44,7 @@ class DictionaryEntry:
 
 class ICollection(Iterator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -60,12 +60,12 @@ class ICollection(Iterator):
 
 		Args
 		--------
-			array (``array``) :  array
-			index (``int``) :  index
+			array (`array`) :  array
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -75,7 +75,7 @@ class ICollection(Iterator):
 
 		Returns
 		--------
-			``ICollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -85,7 +85,7 @@ class ICollection(Iterator):
 
 		Returns
 		--------
-			``ICollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -95,13 +95,13 @@ class ICollection(Iterator):
 
 		Returns
 		--------
-			``ICollection`` : 
+			`bool` : 
 		"""
 		pass
 
 class IComparer:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -117,18 +117,18 @@ class IComparer:
 
 		Args
 		--------
-			x (``object``) :  x
-			y (``object``) :  y
+			x (`object`) :  x
+			y (`object`) :  y
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
 class IDictionaryEnumerator(IEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -145,7 +145,7 @@ class IDictionaryEnumerator(IEnumerator):
 
 		Returns
 		--------
-			``IDictionaryEnumerator`` : 
+			`object` : 
 		"""
 		pass
 
@@ -155,7 +155,7 @@ class IDictionaryEnumerator(IEnumerator):
 
 		Returns
 		--------
-			``IDictionaryEnumerator`` : 
+			`object` : 
 		"""
 		pass
 
@@ -165,13 +165,13 @@ class IDictionaryEnumerator(IEnumerator):
 
 		Returns
 		--------
-			``IDictionaryEnumerator`` : 
+			`DictionaryEntry` : 
 		"""
 		pass
 
 class IEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -187,7 +187,7 @@ class IEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -196,7 +196,7 @@ class IEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -206,105 +206,105 @@ class IEnumerator:
 
 		Returns
 		--------
-			``IEnumerator`` : 
+			`object` : 
 		"""
 		pass
 
 class SortedList(Dict, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			initialCapacity (``int``) :  initialCapacity
-			comparer (``IComparer``) :  comparer
-			comparer (``IComparer``) :  comparer
-			capacity (``int``) :  capacity
-			d (``Dict``) :  d
-			d (``Dict``) :  d
-			comparer (``IComparer``) :  comparer
+			initialCapacity (`int`) :  initialCapacity
+			comparer (`IComparer`) :  comparer
+			comparer (`IComparer`) :  comparer
+			capacity (`int`) :  capacity
+			d (`Dict`) :  d
+			d (`Dict`) :  d
+			comparer (`IComparer`) :  comparer
 		"""
 		pass
 
 	@overload
-	def __init__(self, initialCapacity: int) -> None:
+	def __new__(self, initialCapacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			initialCapacity (``int``) :  initialCapacity
-			comparer (``IComparer``) :  comparer
-			comparer (``IComparer``) :  comparer
-			capacity (``int``) :  capacity
-			d (``Dict``) :  d
-			d (``Dict``) :  d
-			comparer (``IComparer``) :  comparer
+			initialCapacity (`int`) :  initialCapacity
+			comparer (`IComparer`) :  comparer
+			comparer (`IComparer`) :  comparer
+			capacity (`int`) :  capacity
+			d (`Dict`) :  d
+			d (`Dict`) :  d
+			comparer (`IComparer`) :  comparer
 		"""
 		pass
 
 	@overload
-	def __init__(self, comparer: IComparer) -> None:
+	def __new__(self, comparer: IComparer) -> None:
 		"""No Description
 
 		Args
 		--------
-			initialCapacity (``int``) :  initialCapacity
-			comparer (``IComparer``) :  comparer
-			comparer (``IComparer``) :  comparer
-			capacity (``int``) :  capacity
-			d (``Dict``) :  d
-			d (``Dict``) :  d
-			comparer (``IComparer``) :  comparer
+			initialCapacity (`int`) :  initialCapacity
+			comparer (`IComparer`) :  comparer
+			comparer (`IComparer`) :  comparer
+			capacity (`int`) :  capacity
+			d (`Dict`) :  d
+			d (`Dict`) :  d
+			comparer (`IComparer`) :  comparer
 		"""
 		pass
 
 	@overload
-	def __init__(self, comparer: IComparer, capacity: int) -> None:
+	def __new__(self, comparer: IComparer, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			initialCapacity (``int``) :  initialCapacity
-			comparer (``IComparer``) :  comparer
-			comparer (``IComparer``) :  comparer
-			capacity (``int``) :  capacity
-			d (``Dict``) :  d
-			d (``Dict``) :  d
-			comparer (``IComparer``) :  comparer
+			initialCapacity (`int`) :  initialCapacity
+			comparer (`IComparer`) :  comparer
+			comparer (`IComparer`) :  comparer
+			capacity (`int`) :  capacity
+			d (`Dict`) :  d
+			d (`Dict`) :  d
+			comparer (`IComparer`) :  comparer
 		"""
 		pass
 
 	@overload
-	def __init__(self, d: Dict) -> None:
+	def __new__(self, d: Dict) -> None:
 		"""No Description
 
 		Args
 		--------
-			initialCapacity (``int``) :  initialCapacity
-			comparer (``IComparer``) :  comparer
-			comparer (``IComparer``) :  comparer
-			capacity (``int``) :  capacity
-			d (``Dict``) :  d
-			d (``Dict``) :  d
-			comparer (``IComparer``) :  comparer
+			initialCapacity (`int`) :  initialCapacity
+			comparer (`IComparer`) :  comparer
+			comparer (`IComparer`) :  comparer
+			capacity (`int`) :  capacity
+			d (`Dict`) :  d
+			d (`Dict`) :  d
+			comparer (`IComparer`) :  comparer
 		"""
 		pass
 
 	@overload
-	def __init__(self, d: Dict, comparer: IComparer) -> None:
+	def __new__(self, d: Dict, comparer: IComparer) -> None:
 		"""No Description
 
 		Args
 		--------
-			initialCapacity (``int``) :  initialCapacity
-			comparer (``IComparer``) :  comparer
-			comparer (``IComparer``) :  comparer
-			capacity (``int``) :  capacity
-			d (``Dict``) :  d
-			d (``Dict``) :  d
-			comparer (``IComparer``) :  comparer
+			initialCapacity (`int`) :  initialCapacity
+			comparer (`IComparer`) :  comparer
+			comparer (`IComparer`) :  comparer
+			capacity (`int`) :  capacity
+			d (`Dict`) :  d
+			d (`Dict`) :  d
+			comparer (`IComparer`) :  comparer
 		"""
 		pass
 
@@ -313,12 +313,12 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			key (``object``) :  key
-			value (``object``) :  value
+			key (`object`) :  key
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -327,7 +327,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -336,7 +336,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -345,11 +345,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			key (``object``) :  key
+			key (`object`) :  key
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -358,11 +358,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			key (``object``) :  key
+			key (`object`) :  key
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -371,11 +371,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			value (``object``) :  value
+			value (`object`) :  value
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -384,12 +384,12 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			array (``array``) :  array
-			arrayIndex (``int``) :  arrayIndex
+			array (`array`) :  array
+			arrayIndex (`int`) :  arrayIndex
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -398,11 +398,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -411,7 +411,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``IDictionaryEnumerator`` : 
+			`IDictionaryEnumerator` : 
 		"""
 		pass
 
@@ -420,11 +420,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -433,7 +433,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``List`` : 
+			`List` : 
 		"""
 		pass
 
@@ -442,7 +442,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``List`` : 
+			`List` : 
 		"""
 		pass
 
@@ -451,11 +451,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			key (``object``) :  key
+			key (`object`) :  key
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -464,11 +464,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			value (``object``) :  value
+			value (`object`) :  value
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -477,11 +477,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -490,11 +490,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			key (``object``) :  key
+			key (`object`) :  key
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -503,12 +503,12 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			value (``object``) :  value
+			index (`int`) :  index
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -518,11 +518,11 @@ class SortedList(Dict, ICloneable):
 
 		Args
 		--------
-			list (``SortedList``) :  list
+			list (`SortedList`) :  list
 
 		Returns
 		--------
-			``SortedList`` : 
+			`SortedList` : 
 		"""
 		pass
 
@@ -531,7 +531,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -541,7 +541,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`int` : 
 		"""
 		pass
 
@@ -555,7 +555,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`int` : 
 		"""
 		pass
 
@@ -565,7 +565,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`ICollection` : 
 		"""
 		pass
 
@@ -575,7 +575,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`ICollection` : 
 		"""
 		pass
 
@@ -585,7 +585,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -595,7 +595,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -605,7 +605,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -615,7 +615,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`object` : 
 		"""
 		pass
 
@@ -625,7 +625,7 @@ class SortedList(Dict, ICloneable):
 
 		Returns
 		--------
-			``SortedList`` : 
+			`object` : 
 		"""
 		pass
 

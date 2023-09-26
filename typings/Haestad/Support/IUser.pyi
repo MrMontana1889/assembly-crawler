@@ -1,6 +1,6 @@
 from enum import Enum
 from System import EventHandler, EventArgs, IAsyncResult, AsyncCallback, ICloneable, TimeSpan, IComparable, IntPtr
-from typing import overload, List
+from typing import overload, List, Dict
 from System.Runtime.Serialization import SerializationInfo, StreamingContext, ISerializable
 from Haestad.Support.ISupport import INamable, ILabeled
 from array import array
@@ -81,6 +81,7 @@ class PromptKey(Enum):
 	Generate2DGridUponCompute = 51
 	BackgroundLayerIssues = 52
 	TrackedChangesSizeInformation = 53
+	ParallelCriticalityCalculationsOptionInformation = 54
 
 class MessageKeys(Enum):
 	CoreReserved0 = 0
@@ -119,6 +120,17 @@ class MessageKeys(Enum):
 	SaveToPackageCustomResultsExcluded = 5008
 	GridOutflowTributariesNotSupported = 6814
 	GridChannelDoesNotIntersectPond = 6815
+	GridElementIsAnUnmappedSection = 6816
+	GridCrossSectionElementOnTheBoundary = 6817
+	GridInletGridPolygonCannotInterceptBoundary = 6818
+	GridChannelsAreOutOfSync = 6819
+	GridReportingPointOutsideOfComputationalGrid = 6820
+	GridBoundaryTimeElevationNotDefinedForTheEntireSimulationDuration = 6821
+	GridInletMustConnectToConduitOrLateral = 6822
+	FloodInflowsOnCatchBasinsFullCaptured = 6823
+	GridPondMustConnectToALink = 6824
+	GridNodeOnChannelBoundaryPartOfChannel = 6825
+	GridVoidSurfacePolygonCannotIntersectChannelPolygon = 6826
 	FmwReserved10000 = 10000
 	FmwReserved10001 = 10001
 	FmwReserved10002 = 10002
@@ -743,6 +755,19 @@ class MessageKeys(Enum):
 	MismatchUpstreamNodeMaxCover = 30211
 	MismatchDownstreamNodeMaxCover = 30212
 	ConduitCannotConnectToTapNode = 30213
+	SWGCulvertWarnQExceedsEQTRangeGiveAHigherHw = 30214
+	SWGCulvertWarnTwExceedsEQTRangeGiveAHigherHw = 30215
+	SWGCulvertErrorFailedToGenerateEQTValues = 30216
+	SWGCulvertErrorHWTooNarrowForAnyResults = 30217
+	SWGCrossSectionAsGutterShapeNotSupported = 30218
+	SWGCrossSectionAsGutterMultipleSurfInLinks = 30219
+	SWGCrossSectionAsGutterNoSurfInLinks = 30220
+	SWGCrossSectionAsGutterLinkIsWrongType = 30221
+	SWGCrossSectionAsGutterNeedsSingleManningsN = 30222
+	SWGCrossSectionAsGutterForInSagOnly = 30223
+	SWGCrossSectionAsGutterChannelTopIsBelowRim = 30224
+	SWGCrossSectionAsGutterTypeIsForGratesOnly = 30225
+	SWGCrossSectionAsGutterChannelBottomIsBelowRim = 30226
 	SWGGVFEngineNotSupportElementType = 35000
 	SWGVSPBElementNotSupportedInDWEngine = 35001
 	SWGElementFieldNotSupportedInEngineType = 35002
@@ -787,6 +812,8 @@ class MessageKeys(Enum):
 	SWGOverrideElementIsInactive = 36116
 	SWGOverrideConduitNotAConduit = 36117
 	SWGForecastOIDCNotSignIn = 36118
+	SWGUnsupportedChoiceForEnumeratedField = 36119
+	SWGChannelDrainsToInletAllInjected = 36120
 	IdahoSystemUnbalanced = 40000
 	IdahoMaxTrialsExceeded = 40001
 	IdahoNodeDisconnected = 40002
@@ -1288,6 +1315,7 @@ class MessageKeys(Enum):
 	PressureEngineExtraIterationsCannotBeNegative = 41966
 	PressureEngineMWHFormulaNotSupportedByEpanet = 41967
 	PressureEnginePDDOptionsNotSupportedByEpanet = 41968
+	PressureEngineFlushingAtLeastOneInvalidElementOfInterest = 41969
 	GenericEngineInvalidOrMissingCalculationOptions = 42000
 	CulvertInletCoeffNotSelected_OnStartNode = 42001
 	CulvertInletCoeffNotSelected_OnStopNode = 42002
@@ -1673,6 +1701,12 @@ class MessageKeys(Enum):
 	STMDiversionLinkWithoutParallelLink = 44135
 	STSWBothRTKMethodsBeingUsed = 44136
 	SewerOPSMixofRTKandNonRTKCatchmentsBeingUsed = 44137
+	UserDefinedConduitNotDesignedUsingSelectedCatalogClass = 44138
+	NoConduitsAvalableForDesignInCatalogClass = 44139
+	NoShapeMaterialCatalogConduitAvailableForDesign = 44140
+	STMPondHGLHigherThanOutletElev = 44141
+	STMDesignNumOfElementsUpdated = 44142
+	STMBoundaryElementCannotBeBoundaryElement = 44143
 	STMUKMultipleCatchmentsCantNotExport = 44480
 	STMUKCatchbasinConvertedToManhole = 44481
 	STMUKJunctionConvertedToManhole = 44482
@@ -1713,6 +1747,7 @@ class MessageKeys(Enum):
 	AirvalveLargeAirOutflowCurveEnd10000 = 44523
 	AirvalveDiameterIsZero = 44524
 	HMRSlowClosingAirValveNotSupportExtendedCAV = 44525
+	HMRCanOnlyUseOrificeDiameterFlowCalculationMethod = 44526
 	HMROrificeTypicalFlowMustBeGreaterThenZero = 44530
 	HMROrificePressureDropMustBeGreaterThenZero = 44531
 	HMROrificeTypicalFlowMustNotBeNegative = 44532
@@ -1747,6 +1782,8 @@ class MessageKeys(Enum):
 	HMRHydropneumaticTankBottomElevationBiggerDippingTubeBottomElevation = 44593
 	HMRHydropneumaticTankTopElevationNotEqualDippingTubeTopElevation = 44594
 	HMRHydropneumaticTankVoluneSmallerThanCompressionChamberVolume = 44595
+	HMRHydropneumaticTankInitialVolumeLargerThanInputTankVolume = 44596
+	HMRHydropneumaticTankInitialVolumeLargerThanCalculatedTankVolume = 44597
 	HMRJunctionInitialVaporVolumeMustNotBeNegative = 44600
 	HMRJunctionInitialVaporVolumeOnlyAppliesToDeadEnds = 44601
 	HMRJunctionPressureMustNotBeNegative = 44602
@@ -2871,6 +2908,7 @@ class MessageKeys(Enum):
 	GridPotentialCatchmentDoubleCount = 68128
 	GridTwoDCalcCapturesFullFlow = 68129
 	GridCoupledToGutters = 68130
+	GridCalcOptionMaxCourantNumberNotSuggested = 68131
 	GridBurningInPondFailedCheckPondDimensions = 68132
 	GridFlowBoundaryLineIntersectsVoidCells = 68133
 	GridChannelTerminatesTooCloseToBorder = 68134
@@ -2883,6 +2921,15 @@ class MessageKeys(Enum):
 	GridBoundaryTailwaterElevationIsTooLarge = 68141
 	GridCrossSectionIsSmallerThanGridSpacing = 68142
 	GridMultipleIncomingTributaries = 68143
+	GridCalcOptionMinDepthOnGridOutOfRange = 68145
+	GridUnsupportedInletType = 68146
+	GridUnsupportedInletTypeItem = 68147
+	GridOpenChannelToSubsurfacePond = 68148
+	GridLinksWithSmallCulvert = 68149
+	GridNoBoltedNodesWithCulvert = 68150
+	GridPrismaticOpenChannelNotSupported = 68152
+	GridManholeIsInTheMiddleOfTwoCrossSections = 68153
+	GridPondOverlapsChannel = 68154
 	FDNodeDepthLessThanMinDepth = 70000
 	FDNodeDepthGreaterThanMaxDepth = 70001
 	FDConduitRiseLessThanMinSize = 70002
@@ -2977,6 +3024,16 @@ class MessageKeys(Enum):
 	SwmmSweepStartTimeGreaterThanStopTime = 800062
 	SWMMExternalTimeSeriesDataFilePathInvalid = 800063
 	SWMMInvalidMoistureDeficitData = 800064
+	SWMMCulvertAndOverflowWeirCannotTerminateAtOutfall = 800065
+	SWMMMinSlopeHasInvalidValue = 800066
+	SWMMControlCurveDoesNotExist = 800067
+	SWMMNoPumpDefinitionSelected = 800068
+	SWMMInletMustHaveConventionalGutter = 800069
+	SWMMGutterUsesStopNodeData = 800070
+	SWMMPumpOnOffDepthElevLowerThanControlElevation = 800071
+	SWMMTransitionNodeCannotBeStorage = 800072
+	SWMMHydrologicTimeStepGreaterThanOutputIncrement = 800073
+	SWMMInvalidElevationsWhenNodeIsStorage = 800074
 	SwmmMissingNodeReference = 805000
 	SwmmStorageUnitHasSeepageAndRDII = 805001
 	SwmmConduitControlUsedByMoreThanOneElement = 805002
@@ -3049,28 +3106,28 @@ class NotificationLevel(Enum):
 
 class SourceKeys:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class MessageKeyMapIds:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class GenericProcessInProgress(IProcessInProgress):
 
-	def __init__(self, name: str, label: str, allowCancel: bool) -> None:
+	def __new__(self, name: str, label: str, allowCancel: bool) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			label (``str``) :  label
-			allowCancel (``bool``) :  allowCancel
+			name (`str`) :  name
+			label (`str`) :  label
+			allowCancel (`bool`) :  allowCancel
 		"""
 		pass
 
@@ -3079,11 +3136,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3092,11 +3149,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3105,11 +3162,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3118,11 +3175,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3131,11 +3188,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3144,11 +3201,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3157,11 +3214,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3170,11 +3227,11 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3183,12 +3240,12 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``EventArgs``) :  e
+			sender (`object`) :  sender
+			e (`EventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3197,7 +3254,7 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3206,7 +3263,7 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3216,7 +3273,7 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``GenericProcessInProgress`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3230,7 +3287,7 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``GenericProcessInProgress`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3244,7 +3301,7 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``GenericProcessInProgress`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3254,7 +3311,7 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``GenericProcessInProgress`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3264,20 +3321,20 @@ class GenericProcessInProgress(IProcessInProgress):
 
 		Returns
 		--------
-			``GenericProcessInProgress`` : 
+			`str` : 
 		"""
 		pass
 
 class GenericProcessInProgressEx(IProcessInProgressEx):
 
-	def __init__(self, name: str, label: str, allowCancel: bool) -> None:
+	def __new__(self, name: str, label: str, allowCancel: bool) -> None:
 		"""No Description
 
 		Args
 		--------
-			name (``str``) :  name
-			label (``str``) :  label
-			allowCancel (``bool``) :  allowCancel
+			name (`str`) :  name
+			label (`str`) :  label
+			allowCancel (`bool`) :  allowCancel
 		"""
 		pass
 
@@ -3286,12 +3343,12 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			description (``str``) :  description
-			progress (``int``) :  progress
+			description (`str`) :  description
+			progress (`int`) :  progress
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3300,11 +3357,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3313,11 +3370,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3326,11 +3383,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3339,11 +3396,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3352,11 +3409,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3365,11 +3422,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3378,11 +3435,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3391,11 +3448,11 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3404,12 +3461,12 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``EventArgs``) :  e
+			sender (`object`) :  sender
+			e (`EventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3418,7 +3475,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3427,7 +3484,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3437,7 +3494,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``GenericProcessInProgressEx`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3451,7 +3508,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``GenericProcessInProgressEx`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3465,7 +3522,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``GenericProcessInProgressEx`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3479,7 +3536,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``GenericProcessInProgressEx`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3489,7 +3546,7 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``GenericProcessInProgressEx`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3499,13 +3556,13 @@ class GenericProcessInProgressEx(IProcessInProgressEx):
 
 		Returns
 		--------
-			``GenericProcessInProgressEx`` : 
+			`str` : 
 		"""
 		pass
 
 class IMessageHandler:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3521,17 +3578,17 @@ class IMessageHandler:
 
 		Args
 		--------
-			astringMessage (``str``) :  astringMessage
+			astringMessage (`str`) :  astringMessage
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IMessageQuestionHandler(IMessageHandler):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3547,19 +3604,19 @@ class IMessageQuestionHandler(IMessageHandler):
 
 		Args
 		--------
-			question (``str``) :  question
-			caption (``str``) :  caption
-			allowCancel (``bool``) :  allowCancel
+			question (`str`) :  question
+			caption (`str`) :  caption
+			allowCancel (`bool`) :  allowCancel
 
 		Returns
 		--------
-			``MessageHandlerResult`` : 
+			`MessageHandlerResult` : 
 		"""
 		pass
 
 class IStoredResponseMessageQuestionHandler(IMessageQuestionHandler):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3576,15 +3633,15 @@ class IStoredResponseMessageQuestionHandler(IMessageQuestionHandler):
 
 		Args
 		--------
-			key (``PromptKey``) :  key
-			defaultResult (``MessageHandlerResult``) :  defaultResult
-			question (``str``) :  question
-			caption (``str``) :  caption
-			allowCancel (``bool``) :  allowCancel
+			key (`PromptKey`) :  key
+			defaultResult (`MessageHandlerResult`) :  defaultResult
+			question (`str`) :  question
+			caption (`str`) :  caption
+			allowCancel (`bool`) :  allowCancel
 
 		Returns
 		--------
-			``MessageHandlerResult`` : 
+			`MessageHandlerResult` : 
 		"""
 		pass
 
@@ -3594,25 +3651,25 @@ class IStoredResponseMessageQuestionHandler(IMessageQuestionHandler):
 
 		Args
 		--------
-			question (``str``) :  question
-			caption (``str``) :  caption
-			allowCancel (``bool``) :  allowCancel
+			question (`str`) :  question
+			caption (`str`) :  caption
+			allowCancel (`bool`) :  allowCancel
 
 		Returns
 		--------
-			``MessageHandlerResult`` : 
+			`MessageHandlerResult` : 
 		"""
 		pass
 
 class ExceptionEventHandler(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -3621,12 +3678,12 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``ExceptionEventArgs``) :  e
+			sender (`object`) :  sender
+			e (`ExceptionEventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3635,14 +3692,14 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``ExceptionEventArgs``) :  e
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			sender (`object`) :  sender
+			e (`ExceptionEventArgs`) :  e
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3651,11 +3708,11 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3664,12 +3721,12 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3678,7 +3735,7 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3687,11 +3744,11 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3700,7 +3757,7 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3710,7 +3767,7 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``ExceptionEventHandler`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3720,13 +3777,13 @@ class ExceptionEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``ExceptionEventHandler`` : 
+			`object` : 
 		"""
 		pass
 
 class IProcessInProgress(INamable, ILabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3742,12 +3799,12 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``EventArgs``) :  e
+			sender (`object`) :  sender
+			e (`EventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3756,11 +3813,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3769,11 +3826,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3782,11 +3839,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3795,11 +3852,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3808,11 +3865,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3821,11 +3878,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3834,11 +3891,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3847,11 +3904,11 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3861,7 +3918,7 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Returns
 		--------
-			``IProcessInProgress`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3875,7 +3932,7 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Returns
 		--------
-			``IProcessInProgress`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3889,18 +3946,18 @@ class IProcessInProgress(INamable, ILabeled):
 
 		Returns
 		--------
-			``IProcessInProgress`` : 
+			`bool` : 
 		"""
 		pass
 
 class ExceptionEventArgs:
 
-	def __init__(self, exceptionMsg: str) -> None:
+	def __new__(self, exceptionMsg: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			exceptionMsg (``str``) :  exceptionMsg
+			exceptionMsg (`str`) :  exceptionMsg
 		"""
 		pass
 
@@ -3910,7 +3967,7 @@ class ExceptionEventArgs:
 
 		Returns
 		--------
-			``ExceptionEventArgs`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3920,7 +3977,7 @@ class ExceptionEventArgs:
 
 		Returns
 		--------
-			``ExceptionEventArgs`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3930,7 +3987,7 @@ class ExceptionEventArgs:
 
 class IProcessInProgressEx(IProcessInProgress):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3946,12 +4003,12 @@ class IProcessInProgressEx(IProcessInProgress):
 
 		Args
 		--------
-			description (``str``) :  description
-			progress (``int``) :  progress
+			description (`str`) :  description
+			progress (`int`) :  progress
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3961,13 +4018,13 @@ class IProcessInProgressEx(IProcessInProgress):
 
 		Returns
 		--------
-			``IProcessInProgressEx`` : 
+			`bool` : 
 		"""
 		pass
 
 class IProgressIndicator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -3983,11 +4040,11 @@ class IProgressIndicator:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``ProgressIndicatorTask`` : 
+			`ProgressIndicatorTask` : 
 		"""
 		pass
 
@@ -3996,7 +4053,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4005,11 +4062,11 @@ class IProgressIndicator:
 
 		Args
 		--------
-			anumsteps (``int``) :  anumsteps
+			anumsteps (`int`) :  anumsteps
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4018,7 +4075,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4027,7 +4084,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4036,7 +4093,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4045,7 +4102,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4055,7 +4112,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``IProgressIndicator`` : 
+			`List` : 
 		"""
 		pass
 
@@ -4069,7 +4126,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``IProgressIndicator`` : 
+			`ProgressIndicatorTask` : 
 		"""
 		pass
 
@@ -4079,7 +4136,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``IProgressIndicator`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4093,7 +4150,7 @@ class IProgressIndicator:
 
 		Returns
 		--------
-			``IProgressIndicator`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -4107,7 +4164,7 @@ class IProgressIndicator:
 
 class IUserNotification(ILabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -4124,7 +4181,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4134,7 +4191,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4144,7 +4201,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4154,7 +4211,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4164,7 +4221,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`NotificationLevel` : 
 		"""
 		pass
 
@@ -4174,7 +4231,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4184,7 +4241,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`List[object]` : 
 		"""
 		pass
 
@@ -4194,7 +4251,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4204,7 +4261,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4214,7 +4271,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`List[Unit]` : 
 		"""
 		pass
 
@@ -4224,7 +4281,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`array[str]` : 
 		"""
 		pass
 
@@ -4234,7 +4291,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4248,7 +4305,7 @@ class IUserNotification(ILabeled):
 
 		Returns
 		--------
-			``IUserNotification`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4258,7 +4315,7 @@ class IUserNotification(ILabeled):
 
 class ICalculationUserNotification(IUserNotification):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -4275,13 +4332,13 @@ class ICalculationUserNotification(IUserNotification):
 
 		Returns
 		--------
-			``ICalculationUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
 class IObjectValidater:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -4297,7 +4354,7 @@ class IObjectValidater:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4307,7 +4364,7 @@ class IObjectValidater:
 
 		Returns
 		--------
-			``IObjectValidater`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4317,13 +4374,13 @@ class IObjectValidater:
 
 		Returns
 		--------
-			``IObjectValidater`` : 
+			`List` : 
 		"""
 		pass
 
 class IStatusManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -4339,12 +4396,12 @@ class IStatusManager:
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -4353,12 +4410,12 @@ class IStatusManager:
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -4367,12 +4424,12 @@ class IStatusManager:
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -4381,12 +4438,12 @@ class IStatusManager:
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -4396,11 +4453,11 @@ class IStatusManager:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4410,18 +4467,31 @@ class IStatusManager:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			incrementAmount (``int``) :  incrementAmount
+			alabel (`str`) :  alabel
+			incrementAmount (`int`) :  incrementAmount
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
+		"""
+		pass
+
+	def AddStatisticsMessage(self, alabel: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			alabel (`str`) :  alabel
+
+		Returns
+		--------
+			`None` : 
 		"""
 		pass
 
 class IYesNoToAllPrompt:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -4437,7 +4507,7 @@ class IYesNoToAllPrompt:
 
 		Returns
 		--------
-			``DialogYesNoToAllResult`` : 
+			`DialogYesNoToAllResult` : 
 		"""
 		pass
 
@@ -4455,7 +4525,7 @@ class IYesNoToAllPrompt:
 
 class NullMessageHandler(IMessageHandler):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -4466,11 +4536,11 @@ class NullMessageHandler(IMessageHandler):
 
 		Args
 		--------
-			message (``str``) :  message
+			message (`str`) :  message
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4480,17 +4550,17 @@ class NullMessageHandler(IMessageHandler):
 
 		Args
 		--------
-			astringMessage (``str``) :  astringMessage
+			astringMessage (`str`) :  astringMessage
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class NullProgressIndicator(IProgressIndicator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -4500,11 +4570,11 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``ProgressIndicatorTask`` : 
+			`ProgressIndicatorTask` : 
 		"""
 		pass
 
@@ -4513,11 +4583,11 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Args
 		--------
-			anumsteps (``int``) :  anumsteps
+			anumsteps (`int`) :  anumsteps
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4526,7 +4596,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4535,7 +4605,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4544,7 +4614,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4553,7 +4623,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4562,7 +4632,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4571,7 +4641,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4580,7 +4650,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4590,7 +4660,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``NullProgressIndicator`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4612,7 +4682,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``NullProgressIndicator`` : 
+			`TimeSpan` : 
 		"""
 		pass
 
@@ -4622,7 +4692,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``NullProgressIndicator`` : 
+			`ProgressIndicatorTask` : 
 		"""
 		pass
 
@@ -4632,7 +4702,7 @@ class NullProgressIndicator(IProgressIndicator):
 
 		Returns
 		--------
-			``NullProgressIndicator`` : 
+			`List` : 
 		"""
 		pass
 
@@ -4642,13 +4712,13 @@ class NullProgressIndicator(IProgressIndicator):
 
 class ProgressIndicatorTask:
 
-	def __init__(self, alabel: str, aintsteps: int) -> None:
+	def __new__(self, alabel: str, aintsteps: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			aintsteps (``int``) :  aintsteps
+			alabel (`str`) :  alabel
+			aintsteps (`int`) :  aintsteps
 		"""
 		pass
 
@@ -4658,7 +4728,7 @@ class ProgressIndicatorTask:
 
 		Returns
 		--------
-			``ProgressIndicatorTask`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4672,7 +4742,7 @@ class ProgressIndicatorTask:
 
 		Returns
 		--------
-			``ProgressIndicatorTask`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4686,7 +4756,7 @@ class ProgressIndicatorTask:
 
 		Returns
 		--------
-			``ProgressIndicatorTask`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4696,12 +4766,12 @@ class ProgressIndicatorTask:
 
 class ReportManager:
 
-	def __init__(self, alabel: str) -> None:
+	def __new__(self, alabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 		"""
 		pass
 
@@ -4710,11 +4780,11 @@ class ReportManager:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``ReportSection`` : 
+			`ReportSection` : 
 		"""
 		pass
 
@@ -4723,11 +4793,11 @@ class ReportManager:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4737,7 +4807,7 @@ class ReportManager:
 
 		Returns
 		--------
-			``ReportManager`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4747,7 +4817,7 @@ class ReportManager:
 
 		Returns
 		--------
-			``ReportManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4761,18 +4831,18 @@ class ReportManager:
 
 		Returns
 		--------
-			``ReportManager`` : 
+			`List` : 
 		"""
 		pass
 
 class ReportSection(IComparable):
 
-	def __init__(self, alabel: str) -> None:
+	def __new__(self, alabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 		"""
 		pass
 
@@ -4781,11 +4851,11 @@ class ReportSection(IComparable):
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4795,7 +4865,7 @@ class ReportSection(IComparable):
 
 		Returns
 		--------
-			``ReportSection`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4805,7 +4875,7 @@ class ReportSection(IComparable):
 
 		Returns
 		--------
-			``ReportSection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4819,18 +4889,18 @@ class ReportSection(IComparable):
 
 		Returns
 		--------
-			``ReportSection`` : 
+			`List` : 
 		"""
 		pass
 
 class ReportSectionItem(IComparable):
 
-	def __init__(self, alabel: str) -> None:
+	def __new__(self, alabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 		"""
 		pass
 
@@ -4840,18 +4910,18 @@ class ReportSectionItem(IComparable):
 
 		Returns
 		--------
-			``ReportSectionItem`` : 
+			`str` : 
 		"""
 		pass
 
 class StatisticsManager:
 
-	def __init__(self, alabel: str) -> None:
+	def __new__(self, alabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 		"""
 		pass
 
@@ -4860,11 +4930,11 @@ class StatisticsManager:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``StatisticsSection`` : 
+			`StatisticsSection` : 
 		"""
 		pass
 
@@ -4874,7 +4944,7 @@ class StatisticsManager:
 
 		Returns
 		--------
-			``StatisticsManager`` : 
+			`str` : 
 		"""
 		pass
 
@@ -4884,18 +4954,18 @@ class StatisticsManager:
 
 		Returns
 		--------
-			``StatisticsManager`` : 
+			`SortedList` : 
 		"""
 		pass
 
 class StatisticsSection:
 
-	def __init__(self, alabel: str) -> None:
+	def __new__(self, alabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 		"""
 		pass
 
@@ -4905,11 +4975,11 @@ class StatisticsSection:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4919,12 +4989,25 @@ class StatisticsSection:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			incrementAmount (``int``) :  incrementAmount
+			alabel (`str`) :  alabel
+			incrementAmount (`int`) :  incrementAmount
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
+		"""
+		pass
+
+	def AddMessage(self, alabel: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			alabel (`str`) :  alabel
+
+		Returns
+		--------
+			`None` : 
 		"""
 		pass
 
@@ -4933,12 +5016,25 @@ class StatisticsSection:
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			acount (``int``) :  acount
+			alabel (`str`) :  alabel
+			acount (`int`) :  acount
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
+		"""
+		pass
+
+	def GetFormattedItemText(self, key: str) -> str:
+		"""No Description
+
+		Args
+		--------
+			key (`str`) :  key
+
+		Returns
+		--------
+			`str` : 
 		"""
 		pass
 
@@ -4948,28 +5044,28 @@ class StatisticsSection:
 
 		Returns
 		--------
-			``StatisticsSection`` : 
+			`str` : 
 		"""
 		pass
 
 	@property
-	def Items(self) -> SortedList:
+	def Items(self) -> Dict[str,str][str,StatisticsSectionItem]:
 		"""No Description
 
 		Returns
 		--------
-			``StatisticsSection`` : 
+			`Dict[str,str]` : 
 		"""
 		pass
 
 class StatisticsSectionItem:
 
-	def __init__(self, alabel: str) -> None:
+	def __new__(self, alabel: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 		"""
 		pass
 
@@ -4978,7 +5074,7 @@ class StatisticsSectionItem:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4987,11 +5083,11 @@ class StatisticsSectionItem:
 
 		Args
 		--------
-			incrementAmount (``int``) :  incrementAmount
+			incrementAmount (`int`) :  incrementAmount
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5001,7 +5097,7 @@ class StatisticsSectionItem:
 
 		Returns
 		--------
-			``StatisticsSectionItem`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5011,7 +5107,7 @@ class StatisticsSectionItem:
 
 		Returns
 		--------
-			``StatisticsSectionItem`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5019,16 +5115,30 @@ class StatisticsSectionItem:
 	def Count(self, count: int) -> None:
 		pass
 
+	@property
+	def ShowCount(self) -> bool:
+		"""No Description
+
+		Returns
+		--------
+			`bool` : 
+		"""
+		pass
+
+	@ShowCount.setter
+	def ShowCount(self, showcount: bool) -> None:
+		pass
+
 class StatusManager(IStatusManager):
 
-	def __init__(self, alabel: str, adescription: str, aprogress: IProgressIndicator) -> None:
+	def __new__(self, alabel: str, adescription: str, aprogress: IProgressIndicator) -> None:
 		"""No Description
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			adescription (``str``) :  adescription
-			aprogress (``IProgressIndicator``) :  aprogress
+			alabel (`str`) :  alabel
+			adescription (`str`) :  adescription
+			aprogress (`IProgressIndicator`) :  aprogress
 		"""
 		pass
 
@@ -5037,12 +5147,12 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5051,12 +5161,12 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5065,12 +5175,12 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5079,12 +5189,12 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			anid (``int``) :  anid
-			amessage (``str``) :  amessage
+			anid (`int`) :  anid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5094,11 +5204,11 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			alabel (``str``) :  alabel
+			alabel (`str`) :  alabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5108,12 +5218,25 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			incrementAmount (``int``) :  incrementAmount
+			alabel (`str`) :  alabel
+			incrementAmount (`int`) :  incrementAmount
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
+		"""
+		pass
+
+	def AddStatisticsMessage(self, alabel: str) -> None:
+		"""No Description
+
+		Args
+		--------
+			alabel (`str`) :  alabel
+
+		Returns
+		--------
+			`None` : 
 		"""
 		pass
 
@@ -5123,12 +5246,12 @@ class StatusManager(IStatusManager):
 
 		Args
 		--------
-			alabel (``str``) :  alabel
-			incrementAmount (``int``) :  incrementAmount
+			alabel (`str`) :  alabel
+			incrementAmount (`int`) :  incrementAmount
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5138,7 +5261,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5152,7 +5275,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -5162,7 +5285,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5172,7 +5295,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5182,7 +5305,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`IProgressIndicator` : 
 		"""
 		pass
 
@@ -5192,7 +5315,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`StatisticsManager` : 
 		"""
 		pass
 
@@ -5202,7 +5325,7 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`ReportManager` : 
 		"""
 		pass
 
@@ -5212,20 +5335,20 @@ class StatusManager(IStatusManager):
 
 		Returns
 		--------
-			``StatusManager`` : 
+			`StatusMessageManager` : 
 		"""
 		pass
 
 class StatusMessageItem:
 
-	def __init__(self, aelementid: int, amessagetype: StatusMessageTypes, amessage: str) -> None:
+	def __new__(self, aelementid: int, amessagetype: StatusMessageTypes, amessage: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aelementid (``int``) :  aelementid
-			amessagetype (``StatusMessageTypes``) :  amessagetype
-			amessage (``str``) :  amessage
+			aelementid (`int`) :  aelementid
+			amessagetype (`StatusMessageTypes`) :  amessagetype
+			amessage (`str`) :  amessage
 		"""
 		pass
 
@@ -5235,7 +5358,7 @@ class StatusMessageItem:
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5249,7 +5372,7 @@ class StatusMessageItem:
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageTypes` : 
 		"""
 		pass
 
@@ -5263,7 +5386,7 @@ class StatusMessageItem:
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5273,7 +5396,7 @@ class StatusMessageItem:
 
 class StatusMessageManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -5283,12 +5406,12 @@ class StatusMessageManager:
 
 		Args
 		--------
-			aid (``int``) :  aid
-			amessage (``str``) :  amessage
+			aid (`int`) :  aid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5297,12 +5420,12 @@ class StatusMessageManager:
 
 		Args
 		--------
-			aid (``int``) :  aid
-			amessage (``str``) :  amessage
+			aid (`int`) :  aid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5311,12 +5434,12 @@ class StatusMessageManager:
 
 		Args
 		--------
-			aid (``int``) :  aid
-			amessage (``str``) :  amessage
+			aid (`int`) :  aid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5325,12 +5448,12 @@ class StatusMessageManager:
 
 		Args
 		--------
-			aid (``int``) :  aid
-			amessage (``str``) :  amessage
+			aid (`int`) :  aid
+			amessage (`str`) :  amessage
 
 		Returns
 		--------
-			``StatusMessageItem`` : 
+			`StatusMessageItem` : 
 		"""
 		pass
 
@@ -5340,7 +5463,7 @@ class StatusMessageManager:
 
 		Returns
 		--------
-			``StatusMessageManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5350,7 +5473,7 @@ class StatusMessageManager:
 
 		Returns
 		--------
-			``StatusMessageManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5360,7 +5483,7 @@ class StatusMessageManager:
 
 		Returns
 		--------
-			``StatusMessageManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5370,7 +5493,7 @@ class StatusMessageManager:
 
 		Returns
 		--------
-			``StatusMessageManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5380,13 +5503,13 @@ class StatusMessageManager:
 
 		Returns
 		--------
-			``StatusMessageManager`` : 
+			`List` : 
 		"""
 		pass
 
 class TraceMessageHandler(IMessageHandler):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -5396,11 +5519,11 @@ class TraceMessageHandler(IMessageHandler):
 
 		Args
 		--------
-			astringMessage (``str``) :  astringMessage
+			astringMessage (`str`) :  astringMessage
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5411,14 +5534,14 @@ class TraceMessageHandler(IMessageHandler):
 
 		Returns
 		--------
-			``TraceMessageHandler`` : 
+			`TraceMessageHandler` : 
 		"""
 		pass
 
 class UserNotificationBase(ICalculationUserNotification):
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5430,7 +5553,7 @@ class UserNotificationBase(ICalculationUserNotification):
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5442,7 +5565,7 @@ class UserNotificationBase(ICalculationUserNotification):
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5454,7 +5577,7 @@ class UserNotificationBase(ICalculationUserNotification):
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5466,7 +5589,7 @@ class UserNotificationBase(ICalculationUserNotification):
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object], aunitsWorking: List[Unit], astringNumericFormatters: array[str]) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object], aunitsWorking: List[Unit], astringNumericFormatters: array[str]) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5483,7 +5606,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5493,7 +5616,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5507,7 +5630,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5521,7 +5644,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5535,7 +5658,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5549,7 +5672,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`NotificationLevel` : 
 		"""
 		pass
 
@@ -5563,7 +5686,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5577,7 +5700,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`List[object]` : 
 		"""
 		pass
 
@@ -5591,7 +5714,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5605,7 +5728,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5619,7 +5742,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`List[Unit]` : 
 		"""
 		pass
 
@@ -5633,7 +5756,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`array[str]` : 
 		"""
 		pass
 
@@ -5647,7 +5770,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5661,7 +5784,7 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5675,303 +5798,303 @@ class UserNotificationBase(ICalculationUserNotification):
 
 		Returns
 		--------
-			``UserNotificationBase`` : 
+			`int` : 
 		"""
 		pass
 
 class StandardUserNotification(ICalculationUserNotification):
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object]) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object]) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object], aunitsWorking: List[Unit], astringNumericFormatters: array[str]) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object], aunitsWorking: List[Unit], astringNumericFormatters: array[str]) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
 		"""
 		pass
 
@@ -5981,7 +6104,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5991,7 +6114,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6001,7 +6124,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6015,7 +6138,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6029,7 +6152,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6043,7 +6166,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6057,7 +6180,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`NotificationLevel` : 
 		"""
 		pass
 
@@ -6071,7 +6194,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6085,7 +6208,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`List[object]` : 
 		"""
 		pass
 
@@ -6099,7 +6222,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6113,7 +6236,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6127,7 +6250,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`List[Unit]` : 
 		"""
 		pass
 
@@ -6141,7 +6264,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`array[str]` : 
 		"""
 		pass
 
@@ -6155,7 +6278,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6169,7 +6292,7 @@ class StandardUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``StandardUserNotification`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6180,302 +6303,302 @@ class StandardUserNotification(ICalculationUserNotification):
 class CalculationUserNotification(ICalculationUserNotification):
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
-			aintTimeStepIndex (``int``) :  aintTimeStepIndex
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
+			aintTimeStepIndex (`int`) :  aintTimeStepIndex
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
-			aintTimeStepIndex (``int``) :  aintTimeStepIndex
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
+			aintTimeStepIndex (`int`) :  aintTimeStepIndex
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
-			aintTimeStepIndex (``int``) :  aintTimeStepIndex
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
+			aintTimeStepIndex (`int`) :  aintTimeStepIndex
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
-			aintTimeStepIndex (``int``) :  aintTimeStepIndex
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
+			aintTimeStepIndex (`int`) :  aintTimeStepIndex
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object]) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object]) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
-			aintTimeStepIndex (``int``) :  aintTimeStepIndex
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
+			aintTimeStepIndex (`int`) :  aintTimeStepIndex
 		"""
 		pass
 
 	@overload
-	def __init__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object], aunitsWorking: List[Unit], astringNumericFormatters: array[str], aintTimeStepIndex: int) -> None:
+	def __new__(self, aintElementType: int, anotificationlevel: NotificationLevel, astringMessageKey: str, astringSourceKey: str, aintElementId: int, astringHelpId: str, aintScenarioId: int, aobjectParameters: List[object], aunitsWorking: List[Unit], astringNumericFormatters: array[str], aintTimeStepIndex: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aintElementType (``int``) :  aintElementType
-			anotificationlevel (``NotificationLevel``) :  anotificationlevel
-			astringMessageKey (``str``) :  astringMessageKey
-			astringSourceKey (``str``) :  astringSourceKey
-			aintElementId (``int``) :  aintElementId
-			astringHelpId (``str``) :  astringHelpId
-			aintScenarioId (``int``) :  aintScenarioId
-			aobjectParameters (``List[object]``) :  aobjectParameters
-			aunitsWorking (``List[Unit]``) :  aunitsWorking
-			astringNumericFormatters (``array[str]``) :  astringNumericFormatters
-			aintTimeStepIndex (``int``) :  aintTimeStepIndex
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aintElementType (`int`) :  aintElementType
+			anotificationlevel (`NotificationLevel`) :  anotificationlevel
+			astringMessageKey (`str`) :  astringMessageKey
+			astringSourceKey (`str`) :  astringSourceKey
+			aintElementId (`int`) :  aintElementId
+			astringHelpId (`str`) :  astringHelpId
+			aintScenarioId (`int`) :  aintScenarioId
+			aobjectParameters (`List[object]`) :  aobjectParameters
+			aunitsWorking (`List[Unit]`) :  aunitsWorking
+			astringNumericFormatters (`array[str]`) :  astringNumericFormatters
+			aintTimeStepIndex (`int`) :  aintTimeStepIndex
 		"""
 		pass
 
@@ -6485,7 +6608,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6495,7 +6618,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6505,7 +6628,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6519,7 +6642,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6533,7 +6656,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6547,7 +6670,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6561,7 +6684,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`NotificationLevel` : 
 		"""
 		pass
 
@@ -6575,7 +6698,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6589,7 +6712,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`List[object]` : 
 		"""
 		pass
 
@@ -6603,7 +6726,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6617,7 +6740,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6631,7 +6754,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`List[Unit]` : 
 		"""
 		pass
 
@@ -6645,7 +6768,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`array[str]` : 
 		"""
 		pass
 
@@ -6659,7 +6782,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6673,7 +6796,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 		Returns
 		--------
-			``CalculationUserNotification`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6683,7 +6806,7 @@ class CalculationUserNotification(ICalculationUserNotification):
 
 class UserNotificationFieldNames:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass

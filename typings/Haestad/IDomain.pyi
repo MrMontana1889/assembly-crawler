@@ -278,6 +278,7 @@ class SupportElementType(Enum):
 	DigitalTerrainModel = 351
 	DigitalTerrainModelGroup = 352
 	LandCover = 353
+	ControlCurve = 354
 
 class DomainElementShapeType(Enum):
 	Point = 0
@@ -382,7 +383,7 @@ class CompactOperationTask(Enum):
 
 class ExpressionType(Enum):
 	NONE = 0
-	ECExpressions = 1
+	Expression = 1
 
 class FieldUpdateTypeEnum(Enum):
 	NoChange = 0
@@ -457,50 +458,50 @@ class Tag(Enum):
 class AlternativeTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``AlternativeTypeCollection``) :  c
-			a (``List[IAlternativeType]``) :  a
+			capacity (`int`) :  capacity
+			c (`AlternativeTypeCollection`) :  c
+			a (`List[IAlternativeType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``AlternativeTypeCollection``) :  c
-			a (``List[IAlternativeType]``) :  a
+			capacity (`int`) :  capacity
+			c (`AlternativeTypeCollection`) :  c
+			a (`List[IAlternativeType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: AlternativeTypeCollection) -> None:
+	def __new__(self, c: AlternativeTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``AlternativeTypeCollection``) :  c
-			a (``List[IAlternativeType]``) :  a
+			capacity (`int`) :  capacity
+			c (`AlternativeTypeCollection`) :  c
+			a (`List[IAlternativeType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IAlternativeType]) -> None:
+	def __new__(self, a: List[IAlternativeType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``AlternativeTypeCollection``) :  c
-			a (``List[IAlternativeType]``) :  a
+			capacity (`int`) :  capacity
+			c (`AlternativeTypeCollection`) :  c
+			a (`List[IAlternativeType]`) :  a
 		"""
 		pass
 
@@ -510,11 +511,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``AlternativeTypeCollection``) :  list
+			list (`AlternativeTypeCollection`) :  list
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`AlternativeTypeCollection` : 
 		"""
 		pass
 
@@ -524,11 +525,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``AlternativeTypeCollection``) :  list
+			list (`AlternativeTypeCollection`) :  list
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`AlternativeTypeCollection` : 
 		"""
 		pass
 
@@ -538,11 +539,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IAlternativeType]``) :  array
+			array (`List[IAlternativeType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -552,12 +553,12 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IAlternativeType]``) :  array
-			start (``int``) :  start
+			array (`List[IAlternativeType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -566,11 +567,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IAlternativeType``) :  item
+			item (`IAlternativeType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -579,7 +580,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -588,7 +589,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -597,11 +598,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IAlternativeType``) :  item
+			item (`IAlternativeType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -610,11 +611,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IAlternativeType``) :  item
+			item (`IAlternativeType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -623,12 +624,12 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IAlternativeType``) :  item
+			index (`int`) :  index
+			item (`IAlternativeType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -637,11 +638,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IAlternativeType``) :  item
+			item (`IAlternativeType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -650,11 +651,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -663,7 +664,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IAlternativeTypeCollectionEnumerator`` : 
+			`IAlternativeTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -673,11 +674,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``AlternativeTypeCollection``) :  x
+			x (`AlternativeTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -687,11 +688,11 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IAlternativeType]``) :  x
+			x (`List[IAlternativeType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -700,7 +701,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -710,7 +711,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -720,7 +721,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -730,7 +731,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -740,7 +741,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -754,7 +755,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -764,7 +765,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -774,7 +775,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -784,7 +785,7 @@ class AlternativeTypeCollection(List, ICloneable):
 
 class AssemblyLibrary:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -801,12 +802,12 @@ class AssemblyLibrary:
 
 		Args
 		--------
-			assemblyName (``str``) :  assemblyName
-			domainPath (``str``) :  domainPath
+			assemblyName (`str`) :  assemblyName
+			domainPath (`str`) :  domainPath
 
 		Returns
 		--------
-			``Assembly`` : 
+			`Assembly` : 
 		"""
 		pass
 
@@ -816,62 +817,62 @@ class AssemblyLibrary:
 
 		Args
 		--------
-			assemblyName (``str``) :  assemblyName
-			domainPath (``str``) :  domainPath
+			assemblyName (`str`) :  assemblyName
+			domainPath (`str`) :  domainPath
 
 		Returns
 		--------
-			``Assembly`` : 
+			`Assembly` : 
 		"""
 		pass
 
 class FieldTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldTypeCollection``) :  c
-			a (``List[IFieldType]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldTypeCollection`) :  c
+			a (`List[IFieldType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldTypeCollection``) :  c
-			a (``List[IFieldType]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldTypeCollection`) :  c
+			a (`List[IFieldType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: FieldTypeCollection) -> None:
+	def __new__(self, c: FieldTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldTypeCollection``) :  c
-			a (``List[IFieldType]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldTypeCollection`) :  c
+			a (`List[IFieldType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IFieldType]) -> None:
+	def __new__(self, a: List[IFieldType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``FieldTypeCollection``) :  c
-			a (``List[IFieldType]``) :  a
+			capacity (`int`) :  capacity
+			c (`FieldTypeCollection`) :  c
+			a (`List[IFieldType]`) :  a
 		"""
 		pass
 
@@ -881,11 +882,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``FieldTypeCollection``) :  list
+			list (`FieldTypeCollection`) :  list
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -895,11 +896,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``FieldTypeCollection``) :  list
+			list (`FieldTypeCollection`) :  list
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -909,11 +910,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFieldType]``) :  array
+			array (`List[IFieldType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -923,12 +924,12 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFieldType]``) :  array
-			start (``int``) :  start
+			array (`List[IFieldType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -937,11 +938,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFieldType``) :  item
+			item (`IFieldType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -950,7 +951,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -959,7 +960,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -968,11 +969,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFieldType``) :  item
+			item (`IFieldType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -981,11 +982,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFieldType``) :  item
+			item (`IFieldType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -994,12 +995,12 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IFieldType``) :  item
+			index (`int`) :  index
+			item (`IFieldType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1008,11 +1009,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IFieldType``) :  item
+			item (`IFieldType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1021,11 +1022,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1034,7 +1035,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IFieldTypeCollectionEnumerator`` : 
+			`IFieldTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -1044,11 +1045,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``FieldTypeCollection``) :  x
+			x (`FieldTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1058,11 +1059,11 @@ class FieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IFieldType]``) :  x
+			x (`List[IFieldType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1071,7 +1072,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1081,7 +1082,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1091,7 +1092,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1101,7 +1102,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1111,7 +1112,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -1125,7 +1126,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1135,7 +1136,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1145,7 +1146,7 @@ class FieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1155,12 +1156,12 @@ class FieldTypeCollection(List, ICloneable):
 
 class CompactOperationContext:
 
-	def __init__(self, tasks: List[CompactOperationTask]) -> None:
+	def __new__(self, tasks: List[CompactOperationTask]) -> None:
 		"""No Description
 
 		Args
 		--------
-			tasks (``List[CompactOperationTask]``) :  tasks
+			tasks (`List[CompactOperationTask]`) :  tasks
 		"""
 		pass
 
@@ -1169,11 +1170,11 @@ class CompactOperationContext:
 
 		Args
 		--------
-			task (``CompactOperationTask``) :  task
+			task (`CompactOperationTask`) :  task
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1182,11 +1183,11 @@ class CompactOperationContext:
 
 		Args
 		--------
-			task (``CompactOperationTask``) :  task
+			task (`CompactOperationTask`) :  task
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1195,11 +1196,11 @@ class CompactOperationContext:
 
 		Args
 		--------
-			task (``CompactOperationTask``) :  task
+			task (`CompactOperationTask`) :  task
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1209,33 +1210,33 @@ class CompactOperationContext:
 
 		Returns
 		--------
-			``CompactOperationContext`` : 
+			`List[CompactOperationTask]` : 
 		"""
 		pass
 
 class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 	@overload
-	def __init__(self, dataView: DataView) -> None:
+	def __new__(self, dataView: DataView) -> None:
 		"""No Description
 
 		Args
 		--------
-			dataView (``DataView``) :  dataView
-			dataView (``DataView``) :  dataView
-			fieldIndex (``int``) :  fieldIndex
+			dataView (`DataView`) :  dataView
+			dataView (`DataView`) :  dataView
+			fieldIndex (`int`) :  fieldIndex
 		"""
 		pass
 
 	@overload
-	def __init__(self, dataView: DataView, fieldIndex: int) -> None:
+	def __new__(self, dataView: DataView, fieldIndex: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			dataView (``DataView``) :  dataView
-			dataView (``DataView``) :  dataView
-			fieldIndex (``int``) :  fieldIndex
+			dataView (`DataView`) :  dataView
+			dataView (`DataView`) :  dataView
+			fieldIndex (`int`) :  fieldIndex
 		"""
 		pass
 
@@ -1244,7 +1245,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1254,11 +1255,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
+			array (`array[int]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1268,12 +1269,12 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			start (``int``) :  start
+			array (`array[int]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1283,14 +1284,14 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			startInTarget (``int``) :  startInTarget
-			startInSource (``int``) :  startInSource
-			length (``int``) :  length
+			array (`array[int]`) :  array
+			startInTarget (`int`) :  startInTarget
+			startInSource (`int`) :  startInSource
+			length (`int`) :  length
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1299,11 +1300,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1312,7 +1313,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1321,7 +1322,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1330,11 +1331,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1343,11 +1344,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1356,12 +1357,12 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``int``) :  item
+			index (`int`) :  index
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1370,11 +1371,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1383,11 +1384,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1396,7 +1397,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``IHmIDCollectionEnumerator`` : 
+			`IHmIDCollectionEnumerator` : 
 		"""
 		pass
 
@@ -1406,11 +1407,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			x (``HmIDCollection``) :  x
+			x (`HmIDCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1420,11 +1421,11 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			x (``array[int]``) :  x
+			x (`array[int]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1433,7 +1434,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1442,7 +1443,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1451,7 +1452,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1460,7 +1461,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``array[int]`` : 
+			`array[int]` : 
 		"""
 		pass
 
@@ -1470,7 +1471,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1480,7 +1481,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1490,7 +1491,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1500,7 +1501,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1514,7 +1515,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1524,7 +1525,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1534,7 +1535,7 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``DataViewDelayedHmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1545,50 +1546,50 @@ class DataViewDelayedHmIDCollection(IHmIDDelayedCollection):
 class DomainDataSetCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetCollection``) :  c
-			a (``List[IDomainDataSet]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetCollection`) :  c
+			a (`List[IDomainDataSet]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetCollection``) :  c
-			a (``List[IDomainDataSet]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetCollection`) :  c
+			a (`List[IDomainDataSet]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: DomainDataSetCollection) -> None:
+	def __new__(self, c: DomainDataSetCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetCollection``) :  c
-			a (``List[IDomainDataSet]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetCollection`) :  c
+			a (`List[IDomainDataSet]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IDomainDataSet]) -> None:
+	def __new__(self, a: List[IDomainDataSet]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetCollection``) :  c
-			a (``List[IDomainDataSet]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetCollection`) :  c
+			a (`List[IDomainDataSet]`) :  a
 		"""
 		pass
 
@@ -1598,11 +1599,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``DomainDataSetCollection``) :  list
+			list (`DomainDataSetCollection`) :  list
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`DomainDataSetCollection` : 
 		"""
 		pass
 
@@ -1612,11 +1613,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``DomainDataSetCollection``) :  list
+			list (`DomainDataSetCollection`) :  list
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`DomainDataSetCollection` : 
 		"""
 		pass
 
@@ -1626,11 +1627,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSet]``) :  array
+			array (`List[IDomainDataSet]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1640,12 +1641,12 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSet]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainDataSet]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1654,11 +1655,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSet``) :  item
+			item (`IDomainDataSet`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1667,7 +1668,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1676,7 +1677,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1685,11 +1686,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSet``) :  item
+			item (`IDomainDataSet`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1698,11 +1699,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSet``) :  item
+			item (`IDomainDataSet`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1711,12 +1712,12 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IDomainDataSet``) :  item
+			index (`int`) :  index
+			item (`IDomainDataSet`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1725,11 +1726,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSet``) :  item
+			item (`IDomainDataSet`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1738,11 +1739,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1751,7 +1752,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainDataSetCollectionEnumerator`` : 
+			`IDomainDataSetCollectionEnumerator` : 
 		"""
 		pass
 
@@ -1761,11 +1762,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainDataSetCollection``) :  x
+			x (`DomainDataSetCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1775,11 +1776,11 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainDataSet]``) :  x
+			x (`List[IDomainDataSet]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1788,7 +1789,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1798,7 +1799,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1808,7 +1809,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1818,7 +1819,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -1828,7 +1829,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -1842,7 +1843,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1852,7 +1853,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -1862,7 +1863,7 @@ class DomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1873,50 +1874,50 @@ class DomainDataSetCollection(List, ICloneable):
 class DomainDataSetTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetTypeCollection``) :  c
-			a (``List[IDomainDataSetType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetTypeCollection`) :  c
+			a (`List[IDomainDataSetType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetTypeCollection``) :  c
-			a (``List[IDomainDataSetType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetTypeCollection`) :  c
+			a (`List[IDomainDataSetType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: DomainDataSetTypeCollection) -> None:
+	def __new__(self, c: DomainDataSetTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetTypeCollection``) :  c
-			a (``List[IDomainDataSetType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetTypeCollection`) :  c
+			a (`List[IDomainDataSetType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IDomainDataSetType]) -> None:
+	def __new__(self, a: List[IDomainDataSetType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainDataSetTypeCollection``) :  c
-			a (``List[IDomainDataSetType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainDataSetTypeCollection`) :  c
+			a (`List[IDomainDataSetType]`) :  a
 		"""
 		pass
 
@@ -1926,11 +1927,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``DomainDataSetTypeCollection``) :  list
+			list (`DomainDataSetTypeCollection`) :  list
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`DomainDataSetTypeCollection` : 
 		"""
 		pass
 
@@ -1940,11 +1941,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``DomainDataSetTypeCollection``) :  list
+			list (`DomainDataSetTypeCollection`) :  list
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`DomainDataSetTypeCollection` : 
 		"""
 		pass
 
@@ -1954,11 +1955,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSetType]``) :  array
+			array (`List[IDomainDataSetType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1968,12 +1969,12 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSetType]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainDataSetType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -1982,11 +1983,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSetType``) :  item
+			item (`IDomainDataSetType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -1995,7 +1996,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2004,7 +2005,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2013,11 +2014,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSetType``) :  item
+			item (`IDomainDataSetType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2026,11 +2027,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSetType``) :  item
+			item (`IDomainDataSetType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2039,12 +2040,12 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IDomainDataSetType``) :  item
+			index (`int`) :  index
+			item (`IDomainDataSetType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2053,11 +2054,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainDataSetType``) :  item
+			item (`IDomainDataSetType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2066,11 +2067,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2079,7 +2080,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainDataSetTypeCollectionEnumerator`` : 
+			`IDomainDataSetTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -2089,11 +2090,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainDataSetTypeCollection``) :  x
+			x (`DomainDataSetTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2103,11 +2104,11 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainDataSetType]``) :  x
+			x (`List[IDomainDataSetType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2116,7 +2117,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2126,7 +2127,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2136,7 +2137,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2146,7 +2147,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2156,7 +2157,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -2170,7 +2171,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2180,7 +2181,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2190,7 +2191,7 @@ class DomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2201,50 +2202,50 @@ class DomainDataSetTypeCollection(List, ICloneable):
 class DomainElementTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainElementTypeCollection``) :  c
-			a (``List[IDomainElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainElementTypeCollection`) :  c
+			a (`List[IDomainElementType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainElementTypeCollection``) :  c
-			a (``List[IDomainElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainElementTypeCollection`) :  c
+			a (`List[IDomainElementType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: DomainElementTypeCollection) -> None:
+	def __new__(self, c: DomainElementTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainElementTypeCollection``) :  c
-			a (``List[IDomainElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainElementTypeCollection`) :  c
+			a (`List[IDomainElementType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IDomainElementType]) -> None:
+	def __new__(self, a: List[IDomainElementType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``DomainElementTypeCollection``) :  c
-			a (``List[IDomainElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`DomainElementTypeCollection`) :  c
+			a (`List[IDomainElementType]`) :  a
 		"""
 		pass
 
@@ -2254,11 +2255,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``DomainElementTypeCollection``) :  list
+			list (`DomainElementTypeCollection`) :  list
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`DomainElementTypeCollection` : 
 		"""
 		pass
 
@@ -2268,11 +2269,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``DomainElementTypeCollection``) :  list
+			list (`DomainElementTypeCollection`) :  list
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`DomainElementTypeCollection` : 
 		"""
 		pass
 
@@ -2282,11 +2283,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainElementType]``) :  array
+			array (`List[IDomainElementType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2296,12 +2297,12 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainElementType]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainElementType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2310,11 +2311,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainElementType``) :  item
+			item (`IDomainElementType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2323,7 +2324,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2332,7 +2333,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2341,11 +2342,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainElementType``) :  item
+			item (`IDomainElementType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2354,11 +2355,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainElementType``) :  item
+			item (`IDomainElementType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2367,12 +2368,12 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IDomainElementType``) :  item
+			index (`int`) :  index
+			item (`IDomainElementType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2381,11 +2382,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IDomainElementType``) :  item
+			item (`IDomainElementType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2394,11 +2395,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2407,7 +2408,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainElementTypeCollectionEnumerator`` : 
+			`IDomainElementTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -2417,11 +2418,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainElementTypeCollection``) :  x
+			x (`DomainElementTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2431,11 +2432,11 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainElementType]``) :  x
+			x (`List[IDomainElementType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2444,7 +2445,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2454,7 +2455,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2464,7 +2465,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2474,7 +2475,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2484,7 +2485,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -2498,7 +2499,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2508,7 +2509,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2518,7 +2519,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2528,7 +2529,7 @@ class DomainElementTypeCollection(List, ICloneable):
 
 class DomainElementTypeLibrary:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -2539,12 +2540,12 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSetType (``IDomainDataSetType``) :  domainDataSetType
-			baseDomainElementTypeIDs (``HmIDCollection``) :  baseDomainElementTypeIDs
+			domainDataSetType (`IDomainDataSetType`) :  domainDataSetType
+			baseDomainElementTypeIDs (`HmIDCollection`) :  baseDomainElementTypeIDs
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -2554,13 +2555,13 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			elementTypeId (``int``) :  elementTypeId
-			includeBaseTypes (``bool``) :  includeBaseTypes
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			elementTypeId (`int`) :  elementTypeId
+			includeBaseTypes (`bool`) :  includeBaseTypes
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -2570,12 +2571,12 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSetType (``IDomainDataSetType``) :  domainDataSetType
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainDataSetType (`IDomainDataSetType`) :  domainDataSetType
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2586,12 +2587,12 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSetType (``IDomainDataSetType``) :  domainDataSetType
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			domainDataSetType (`IDomainDataSetType`) :  domainDataSetType
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -2602,11 +2603,11 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`DomainElementTypeCollection` : 
 		"""
 		pass
 
@@ -2617,12 +2618,12 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			includeBaseTypes (``bool``) :  includeBaseTypes
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			includeBaseTypes (`bool`) :  includeBaseTypes
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`DomainElementTypeCollection` : 
 		"""
 		pass
 
@@ -2633,11 +2634,11 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -2648,12 +2649,12 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			includeBaseTypes (``bool``) :  includeBaseTypes
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			includeBaseTypes (`bool`) :  includeBaseTypes
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -2663,11 +2664,11 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			originalElementTypeID (``int``) :  originalElementTypeID
+			originalElementTypeID (`int`) :  originalElementTypeID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2677,17 +2678,17 @@ class DomainElementTypeLibrary:
 
 		Args
 		--------
-			originalElementTypeID (``int``) :  originalElementTypeID
+			originalElementTypeID (`int`) :  originalElementTypeID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
 class EngineProgressAdapterBase(IProcessInProgress):
 
-	def __init__(self, numericalEngine: INumericalEngine) -> None:
+	def __new__(self, numericalEngine: INumericalEngine) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -2703,11 +2704,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2716,11 +2717,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``ExceptionEventHandler``) :  value
+			value (`ExceptionEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2729,11 +2730,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2742,11 +2743,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2755,11 +2756,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2768,11 +2769,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2781,11 +2782,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2794,11 +2795,11 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2807,12 +2808,12 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``EventArgs``) :  e
+			sender (`object`) :  sender
+			e (`EventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2822,7 +2823,7 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Returns
 		--------
-			``EngineProgressAdapterBase`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -2832,7 +2833,7 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Returns
 		--------
-			``EngineProgressAdapterBase`` : 
+			`int` : 
 		"""
 		pass
 
@@ -2846,7 +2847,7 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Returns
 		--------
-			``EngineProgressAdapterBase`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2860,7 +2861,7 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Returns
 		--------
-			``EngineProgressAdapterBase`` : 
+			`str` : 
 		"""
 		pass
 
@@ -2870,19 +2871,19 @@ class EngineProgressAdapterBase(IProcessInProgress):
 
 		Returns
 		--------
-			``EngineProgressAdapterBase`` : 
+			`str` : 
 		"""
 		pass
 
 class CalculationStepEventHandler(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -2891,12 +2892,12 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``CalculationStepEventArgs``) :  e
+			sender (`object`) :  sender
+			e (`CalculationStepEventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2905,14 +2906,14 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``CalculationStepEventArgs``) :  e
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			sender (`object`) :  sender
+			e (`CalculationStepEventArgs`) :  e
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -2921,11 +2922,11 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2934,12 +2935,12 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -2948,7 +2949,7 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -2957,11 +2958,11 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2970,7 +2971,7 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -2980,7 +2981,7 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``CalculationStepEventHandler`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -2990,19 +2991,19 @@ class CalculationStepEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``CalculationStepEventHandler`` : 
+			`object` : 
 		"""
 		pass
 
 class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -3011,12 +3012,12 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``CalculationStepProgressEventArgs``) :  e
+			sender (`object`) :  sender
+			e (`CalculationStepProgressEventArgs`) :  e
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3025,14 +3026,14 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			sender (``object``) :  sender
-			e (``CalculationStepProgressEventArgs``) :  e
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			sender (`object`) :  sender
+			e (`CalculationStepProgressEventArgs`) :  e
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3041,11 +3042,11 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3054,12 +3055,12 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3068,7 +3069,7 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3077,11 +3078,11 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3090,7 +3091,7 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3100,7 +3101,7 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``CalculationStepProgressEventHandler`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3110,18 +3111,18 @@ class CalculationStepProgressEventHandler(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``CalculationStepProgressEventHandler`` : 
+			`object` : 
 		"""
 		pass
 
 class CalculationStepEventArgs(ILabeled):
 
-	def __init__(self, label: str) -> None:
+	def __new__(self, label: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			label (``str``) :  label
+			label (`str`) :  label
 		"""
 		pass
 
@@ -3131,20 +3132,20 @@ class CalculationStepEventArgs(ILabeled):
 
 		Returns
 		--------
-			``CalculationStepEventArgs`` : 
+			`str` : 
 		"""
 		pass
 
 class CalculationStepProgressEventArgs(ILabeled):
 
-	def __init__(self, progress: int, label: str, cancel: bool) -> None:
+	def __new__(self, progress: int, label: str, cancel: bool) -> None:
 		"""No Description
 
 		Args
 		--------
-			progress (``int``) :  progress
-			label (``str``) :  label
-			cancel (``bool``) :  cancel
+			progress (`int`) :  progress
+			label (`str`) :  label
+			cancel (`bool`) :  cancel
 		"""
 		pass
 
@@ -3153,12 +3154,12 @@ class CalculationStepProgressEventArgs(ILabeled):
 
 		Args
 		--------
-			label (``str``) :  label
-			progress (``int``) :  progress
+			label (`str`) :  label
+			progress (`int`) :  progress
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3168,7 +3169,7 @@ class CalculationStepProgressEventArgs(ILabeled):
 
 		Returns
 		--------
-			``CalculationStepProgressEventArgs`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3178,7 +3179,7 @@ class CalculationStepProgressEventArgs(ILabeled):
 
 		Returns
 		--------
-			``CalculationStepProgressEventArgs`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3188,7 +3189,7 @@ class CalculationStepProgressEventArgs(ILabeled):
 
 		Returns
 		--------
-			``CalculationStepProgressEventArgs`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3198,12 +3199,12 @@ class CalculationStepProgressEventArgs(ILabeled):
 
 class ScenarioCalculationEventArgs:
 
-	def __init__(self, scenarioId: int) -> None:
+	def __new__(self, scenarioId: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			scenarioId (``int``) :  scenarioId
+			scenarioId (`int`) :  scenarioId
 		"""
 		pass
 
@@ -3213,19 +3214,19 @@ class ScenarioCalculationEventArgs:
 
 		Returns
 		--------
-			``ScenarioCalculationEventArgs`` : 
+			`int` : 
 		"""
 		pass
 
 class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
-	def __init__(self, message: str, corruptedFileName: str) -> None:
+	def __new__(self, message: str, corruptedFileName: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			message (``str``) :  message
-			corruptedFileName (``str``) :  corruptedFileName
+			message (`str`) :  message
+			corruptedFileName (`str`) :  corruptedFileName
 		"""
 		pass
 
@@ -3234,7 +3235,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``Exception`` : 
+			`Exception` : 
 		"""
 		pass
 
@@ -3243,12 +3244,12 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3258,7 +3259,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3268,7 +3269,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3278,7 +3279,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -3288,7 +3289,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`Exception` : 
 		"""
 		pass
 
@@ -3298,7 +3299,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`MethodBase` : 
 		"""
 		pass
 
@@ -3308,7 +3309,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3318,7 +3319,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3332,7 +3333,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3346,7 +3347,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``PossibleCorruptedDatabaseException`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3356,7 +3357,7 @@ class PossibleCorruptedDatabaseException(ISerializable, _Exception):
 
 class CancelledDatabaseOpenException(ISerializable, _Exception):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -3366,7 +3367,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``Exception`` : 
+			`Exception` : 
 		"""
 		pass
 
@@ -3375,12 +3376,12 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3390,7 +3391,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3400,7 +3401,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3410,7 +3411,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -3420,7 +3421,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`Exception` : 
 		"""
 		pass
 
@@ -3430,7 +3431,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`MethodBase` : 
 		"""
 		pass
 
@@ -3440,7 +3441,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3450,7 +3451,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3464,7 +3465,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`str` : 
 		"""
 		pass
 
@@ -3478,7 +3479,7 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 		Returns
 		--------
-			``CancelledDatabaseOpenException`` : 
+			`int` : 
 		"""
 		pass
 
@@ -3488,27 +3489,27 @@ class CancelledDatabaseOpenException(ISerializable, _Exception):
 
 class FieldDescriptor:
 
-	def __init__(self, type: DomainFieldType, name: str, descriptor1: str, descriptor2: str) -> None:
+	def __new__(self, type: DomainFieldType, name: str, descriptor1: str, descriptor2: str) -> None:
 		"""No Description
 
 		Args
 		--------
-			type (``DomainFieldType``) :  type
-			name (``str``) :  name
-			descriptor1 (``str``) :  descriptor1
-			descriptor2 (``str``) :  descriptor2
+			type (`DomainFieldType`) :  type
+			name (`str`) :  name
+			descriptor1 (`str`) :  descriptor1
+			descriptor2 (`str`) :  descriptor2
 		"""
 		pass
 
 class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -3517,11 +3518,11 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			descriptor (``FieldDescriptor``) :  descriptor
+			descriptor (`FieldDescriptor`) :  descriptor
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3530,13 +3531,13 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			descriptor (``FieldDescriptor``) :  descriptor
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			descriptor (`FieldDescriptor`) :  descriptor
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3545,11 +3546,11 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3558,12 +3559,12 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3572,7 +3573,7 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3581,11 +3582,11 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3594,7 +3595,7 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3604,7 +3605,7 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``FieldDescriptorFilterCallback`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3614,19 +3615,19 @@ class FieldDescriptorFilterCallback(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``FieldDescriptorFilterCallback`` : 
+			`object` : 
 		"""
 		pass
 
 class FieldFilterDelegate(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -3635,11 +3636,11 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			field (``IField``) :  field
+			field (`IField`) :  field
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3648,13 +3649,13 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			field (``IField``) :  field
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			field (`IField`) :  field
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3663,11 +3664,11 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3676,12 +3677,12 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3690,7 +3691,7 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3699,11 +3700,11 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3712,7 +3713,7 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3722,7 +3723,7 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``FieldFilterDelegate`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3732,19 +3733,19 @@ class FieldFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``FieldFilterDelegate`` : 
+			`object` : 
 		"""
 		pass
 
 class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
-	def __init__(self, object: object, method: IntPtr) -> None:
+	def __new__(self, object: object, method: IntPtr) -> None:
 		"""No Description
 
 		Args
 		--------
-			object (``object``) :  object
-			method (``IntPtr``) :  method
+			object (`object`) :  object
+			method (`IntPtr`) :  method
 		"""
 		pass
 
@@ -3753,11 +3754,11 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			enumMember (``IEnumeratedMember``) :  enumMember
+			enumMember (`IEnumeratedMember`) :  enumMember
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3766,13 +3767,13 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			enumMember (``IEnumeratedMember``) :  enumMember
-			callback (``AsyncCallback``) :  callback
-			object (``object``) :  object
+			enumMember (`IEnumeratedMember`) :  enumMember
+			callback (`AsyncCallback`) :  callback
+			object (`object`) :  object
 
 		Returns
 		--------
-			``IAsyncResult`` : 
+			`IAsyncResult` : 
 		"""
 		pass
 
@@ -3781,11 +3782,11 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			result (``IAsyncResult``) :  result
+			result (`IAsyncResult`) :  result
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -3794,12 +3795,12 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			info (``SerializationInfo``) :  info
-			context (``StreamingContext``) :  context
+			info (`SerializationInfo`) :  info
+			context (`StreamingContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -3808,7 +3809,7 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``List[Delegate]`` : 
+			`List[Delegate]` : 
 		"""
 		pass
 
@@ -3817,11 +3818,11 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Args
 		--------
-			args (``List[object]``) :  args
+			args (`List[object]`) :  args
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3830,7 +3831,7 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -3840,7 +3841,7 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``EnumeratedMemberFilterDelegate`` : 
+			`MethodInfo` : 
 		"""
 		pass
 
@@ -3850,13 +3851,13 @@ class EnumeratedMemberFilterDelegate(ICloneable, ISerializable):
 
 		Returns
 		--------
-			``EnumeratedMemberFilterDelegate`` : 
+			`object` : 
 		"""
 		pass
 
 class FieldLibrary:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -3867,11 +3868,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			buffer (``List[int]``) :  buffer
+			buffer (`List[int]`) :  buffer
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -3881,11 +3882,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
+			ids (`HmIDCollection`) :  ids
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -3896,12 +3897,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			fields (``Iterator``) :  fields
-			fieldFilter (``FieldFilterDelegate``) :  fieldFilter
+			fields (`Iterator`) :  fields
+			fieldFilter (`FieldFilterDelegate`) :  fieldFilter
 
 		Returns
 		--------
-			``Iterator[IField]`` : 
+			`Iterator[IField]` : 
 		"""
 		pass
 
@@ -3912,12 +3913,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			fields (``Iterator[IField]``) :  fields
-			fieldFilter (``FieldFilterDelegate``) :  fieldFilter
+			fields (`Iterator[IField]`) :  fields
+			fieldFilter (`FieldFilterDelegate`) :  fieldFilter
 
 		Returns
 		--------
-			``Iterator[IField]`` : 
+			`Iterator[IField]` : 
 		"""
 		pass
 
@@ -3927,12 +3928,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			fields (``FieldCollection``) :  fields
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			fields (`FieldCollection`) :  fields
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -3942,12 +3943,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			enumField (``IEnumeratedField``) :  enumField
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			enumField (`IEnumeratedField`) :  enumField
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``List[IEnumeratedMember]`` : 
+			`List[IEnumeratedMember]` : 
 		"""
 		pass
 
@@ -3957,12 +3958,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			enumField (``IEnumeratedField``) :  enumField
-			product (``str``) :  product
+			enumField (`IEnumeratedField`) :  enumField
+			product (`str`) :  product
 
 		Returns
 		--------
-			``List[IEnumeratedMember]`` : 
+			`List[IEnumeratedMember]` : 
 		"""
 		pass
 
@@ -3972,11 +3973,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			enumeratedFieldType (``IFieldType``) :  enumeratedFieldType
+			enumeratedFieldType (`IFieldType`) :  enumeratedFieldType
 
 		Returns
 		--------
-			``Iterator[IFieldType]`` : 
+			`Iterator[IFieldType]` : 
 		"""
 		pass
 
@@ -3986,11 +3987,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			fields (``FieldCollection``) :  fields
+			fields (`FieldCollection`) :  fields
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -4000,11 +4001,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			fields (``FieldCollection``) :  fields
+			fields (`FieldCollection`) :  fields
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -4014,11 +4015,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			field (``IField``) :  field
+			field (`IField`) :  field
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4028,12 +4029,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			fieldProducts (``array[str]``) :  fieldProducts
-			productFilter (``str``) :  productFilter
+			fieldProducts (`array[str]`) :  fieldProducts
+			productFilter (`str`) :  productFilter
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4043,12 +4044,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
-			includeResultFields (``bool``) :  includeResultFields
+			modelingElementManagers (`List[IModelingElementManager]`) :  modelingElementManagers
+			includeResultFields (`bool`) :  includeResultFields
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -4059,12 +4060,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
-			includeResultFields (``bool``) :  includeResultFields
+			modelingElementManagers (`List[IModelingElementManager]`) :  modelingElementManagers
+			includeResultFields (`bool`) :  includeResultFields
 
 		Returns
 		--------
-			``List[FieldDescriptor]`` : 
+			`List[FieldDescriptor]` : 
 		"""
 		pass
 
@@ -4075,13 +4076,13 @@ class FieldLibrary:
 
 		Args
 		--------
-			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
-			includeResultFields (``bool``) :  includeResultFields
-			fieldDescriptorFilterCallback (``FieldDescriptorFilterCallback``) :  fieldDescriptorFilterCallback
+			modelingElementManagers (`List[IModelingElementManager]`) :  modelingElementManagers
+			includeResultFields (`bool`) :  includeResultFields
+			fieldDescriptorFilterCallback (`FieldDescriptorFilterCallback`) :  fieldDescriptorFilterCallback
 
 		Returns
 		--------
-			``List[FieldDescriptor]`` : 
+			`List[FieldDescriptor]` : 
 		"""
 		pass
 
@@ -4092,12 +4093,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
-			includeResultFields (``bool``) :  includeResultFields
+			modelingElementManagers (`List[IModelingElementManager]`) :  modelingElementManagers
+			includeResultFields (`bool`) :  includeResultFields
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -4108,13 +4109,13 @@ class FieldLibrary:
 
 		Args
 		--------
-			modelingElementManagers (``List[IModelingElementManager]``) :  modelingElementManagers
-			includeResultFields (``bool``) :  includeResultFields
-			shouldIncludeInheritedManagers (``bool``) :  shouldIncludeInheritedManagers
+			modelingElementManagers (`List[IModelingElementManager]`) :  modelingElementManagers
+			includeResultFields (`bool`) :  includeResultFields
+			shouldIncludeInheritedManagers (`bool`) :  shouldIncludeInheritedManagers
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -4125,15 +4126,15 @@ class FieldLibrary:
 
 		Args
 		--------
-			fieldDescriptors (``List[FieldDescriptor]``) :  fieldDescriptors
-			sourceManager (``IModelingElementManager``) :  sourceManager
-			targetManager (``IModelingElementManager``) :  targetManager
-			sourceElementID (``int``) :  sourceElementID
-			targetElementID (``int``) :  targetElementID
+			fieldDescriptors (`List[FieldDescriptor]`) :  fieldDescriptors
+			sourceManager (`IModelingElementManager`) :  sourceManager
+			targetManager (`IModelingElementManager`) :  targetManager
+			sourceElementID (`int`) :  sourceElementID
+			targetElementID (`int`) :  targetElementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4144,14 +4145,14 @@ class FieldLibrary:
 
 		Args
 		--------
-			dataSet (``IDomainDataSet``) :  dataSet
-			commonFields (``FieldCollection``) :  commonFields
-			sourceElementID (``int``) :  sourceElementID
-			targetElementID (``int``) :  targetElementID
+			dataSet (`IDomainDataSet`) :  dataSet
+			commonFields (`FieldCollection`) :  commonFields
+			sourceElementID (`int`) :  sourceElementID
+			targetElementID (`int`) :  targetElementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4162,14 +4163,14 @@ class FieldLibrary:
 
 		Args
 		--------
-			sourceFields (``FieldCollection``) :  sourceFields
-			targetFields (``FieldCollection``) :  targetFields
-			sourceElementID (``int``) :  sourceElementID
-			targetElementID (``int``) :  targetElementID
+			sourceFields (`FieldCollection`) :  sourceFields
+			targetFields (`FieldCollection`) :  targetFields
+			sourceElementID (`int`) :  sourceElementID
+			targetElementID (`int`) :  targetElementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4180,15 +4181,15 @@ class FieldLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			sourceFields (``FieldCollection``) :  sourceFields
-			targetFields (``FieldCollection``) :  targetFields
-			sourceElementID (``int``) :  sourceElementID
-			targetElementID (``int``) :  targetElementID
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			sourceFields (`FieldCollection`) :  sourceFields
+			targetFields (`FieldCollection`) :  targetFields
+			sourceElementID (`int`) :  sourceElementID
+			targetElementID (`int`) :  targetElementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4198,12 +4199,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			fields (``FieldCollection``) :  fields
-			type (``FieldDataType``) :  type
+			fields (`FieldCollection`) :  fields
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -4214,11 +4215,11 @@ class FieldLibrary:
 
 		Args
 		--------
-			field (``IField``) :  field
+			field (`IField`) :  field
 
 		Returns
 		--------
-			``FieldDescriptor`` : 
+			`FieldDescriptor` : 
 		"""
 		pass
 
@@ -4229,15 +4230,15 @@ class FieldLibrary:
 
 		Args
 		--------
-			field (``IField``) :  field
-			type (``DomainFieldType``) :  type
-			name (``str``) :  name
-			descriptor1 (``str``) :  descriptor1
-			descriptor2 (``str``) :  descriptor2
+			field (`IField`) :  field
+			type (`DomainFieldType`) :  type
+			name (`str`) :  name
+			descriptor1 (`str`) :  descriptor1
+			descriptor2 (`str`) :  descriptor2
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4248,12 +4249,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			manager (``IModelingElementManager``) :  manager
-			fieldDescriptor (``FieldDescriptor``) :  fieldDescriptor
+			manager (`IModelingElementManager`) :  manager
+			fieldDescriptor (`FieldDescriptor`) :  fieldDescriptor
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -4264,12 +4265,12 @@ class FieldLibrary:
 
 		Args
 		--------
-			dataSet (``IDomainDataSet``) :  dataSet
-			fieldDescriptor (``FieldDescriptor``) :  fieldDescriptor
+			dataSet (`IDomainDataSet`) :  dataSet
+			fieldDescriptor (`FieldDescriptor`) :  fieldDescriptor
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -4280,39 +4281,39 @@ class FieldLibrary:
 
 		Args
 		--------
-			dataSet (``IDomainDataSet``) :  dataSet
-			type (``DomainFieldType``) :  type
-			name (``str``) :  name
-			descriptor1 (``str``) :  descriptor1
-			descriptor2 (``str``) :  descriptor2
+			dataSet (`IDomainDataSet`) :  dataSet
+			type (`DomainFieldType`) :  type
+			name (`str`) :  name
+			descriptor1 (`str`) :  descriptor1
+			descriptor2 (`str`) :  descriptor2
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
 class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			col (``HmIDCollection``) :  col
+			capacity (`int`) :  capacity
+			col (`HmIDCollection`) :  col
 		"""
 		pass
 
 	@overload
-	def __init__(self, col: HmIDCollection) -> None:
+	def __new__(self, col: HmIDCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			col (``HmIDCollection``) :  col
+			capacity (`int`) :  capacity
+			col (`HmIDCollection`) :  col
 		"""
 		pass
 
@@ -4321,7 +4322,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4331,11 +4332,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
+			array (`array[int]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4345,12 +4346,12 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			start (``int``) :  start
+			array (`array[int]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4360,14 +4361,14 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			startInTarget (``int``) :  startInTarget
-			startInSource (``int``) :  startInSource
-			length (``int``) :  length
+			array (`array[int]`) :  array
+			startInTarget (`int`) :  startInTarget
+			startInSource (`int`) :  startInSource
+			length (`int`) :  length
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4376,11 +4377,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4389,7 +4390,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4398,7 +4399,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -4407,11 +4408,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4420,11 +4421,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4433,12 +4434,12 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``int``) :  item
+			index (`int`) :  index
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4447,11 +4448,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4460,11 +4461,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4473,7 +4474,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``IHmIDCollectionEnumerator`` : 
+			`IHmIDCollectionEnumerator` : 
 		"""
 		pass
 
@@ -4483,11 +4484,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			x (``HmIDCollection``) :  x
+			x (`HmIDCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4497,11 +4498,11 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			x (``array[int]``) :  x
+			x (`array[int]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4510,7 +4511,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4519,7 +4520,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4528,7 +4529,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4537,7 +4538,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``array[int]`` : 
+			`array[int]` : 
 		"""
 		pass
 
@@ -4547,7 +4548,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4557,7 +4558,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4567,7 +4568,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -4577,7 +4578,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4591,7 +4592,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4601,7 +4602,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4611,7 +4612,7 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericDelayedHmIDCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4621,12 +4622,12 @@ class GenericDelayedHmIDCollection(IHmIDDelayedCollection):
 
 class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
-	def __init__(self, ids: HmIDCollection) -> None:
+	def __new__(self, ids: HmIDCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
+			ids (`HmIDCollection`) :  ids
 		"""
 		pass
 
@@ -4635,7 +4636,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4645,11 +4646,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
+			array (`array[int]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4659,12 +4660,12 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			start (``int``) :  start
+			array (`array[int]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4674,14 +4675,14 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			array (``array[int]``) :  array
-			startInTarget (``int``) :  startInTarget
-			startInSource (``int``) :  startInSource
-			length (``int``) :  length
+			array (`array[int]`) :  array
+			startInTarget (`int`) :  startInTarget
+			startInSource (`int`) :  startInSource
+			length (`int`) :  length
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4690,11 +4691,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4703,7 +4704,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4712,7 +4713,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -4721,11 +4722,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4734,11 +4735,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4747,12 +4748,12 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``int``) :  item
+			index (`int`) :  index
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4761,11 +4762,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4774,11 +4775,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4787,7 +4788,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``IHmIDCollectionEnumerator`` : 
+			`IHmIDCollectionEnumerator` : 
 		"""
 		pass
 
@@ -4797,11 +4798,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			x (``HmIDCollection``) :  x
+			x (`HmIDCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4811,11 +4812,11 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Args
 		--------
-			x (``array[int]``) :  x
+			x (`array[int]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4824,7 +4825,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4833,7 +4834,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4842,7 +4843,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -4851,7 +4852,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``array[int]`` : 
+			`array[int]` : 
 		"""
 		pass
 
@@ -4861,7 +4862,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4871,7 +4872,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4881,7 +4882,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -4891,7 +4892,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4905,7 +4906,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4915,7 +4916,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -4925,7 +4926,7 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 
 		Returns
 		--------
-			``GenericHmIDDelayedCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4936,26 +4937,26 @@ class GenericHmIDDelayedCollection(IHmIDDelayedCollection):
 class GenericPoint(IBlobable):
 
 	@overload
-	def __init__(self, x: float, y: float) -> None:
+	def __new__(self, x: float, y: float) -> None:
 		"""No Description
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
-			buffer (``List[int]``) :  buffer
+			x (`float`) :  x
+			y (`float`) :  y
+			buffer (`List[int]`) :  buffer
 		"""
 		pass
 
 	@overload
-	def __init__(self, buffer: List[int]) -> None:
+	def __new__(self, buffer: List[int]) -> None:
 		"""No Description
 
 		Args
 		--------
-			x (``float``) :  x
-			y (``float``) :  y
-			buffer (``List[int]``) :  buffer
+			x (`float`) :  x
+			y (`float`) :  y
+			buffer (`List[int]`) :  buffer
 		"""
 		pass
 
@@ -4964,7 +4965,7 @@ class GenericPoint(IBlobable):
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -4973,7 +4974,7 @@ class GenericPoint(IBlobable):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -4983,7 +4984,7 @@ class GenericPoint(IBlobable):
 
 		Returns
 		--------
-			``GenericPoint`` : 
+			`float` : 
 		"""
 		pass
 
@@ -4997,7 +4998,7 @@ class GenericPoint(IBlobable):
 
 		Returns
 		--------
-			``GenericPoint`` : 
+			`float` : 
 		"""
 		pass
 
@@ -5007,7 +5008,7 @@ class GenericPoint(IBlobable):
 
 class IDataSource:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5023,11 +5024,11 @@ class IDataSource:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -5037,11 +5038,11 @@ class IDataSource:
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -5051,11 +5052,11 @@ class IDataSource:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -5064,11 +5065,11 @@ class IDataSource:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5077,7 +5078,7 @@ class IDataSource:
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`DomainDataSetTypeCollection` : 
 		"""
 		pass
 
@@ -5086,7 +5087,7 @@ class IDataSource:
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`DomainDataSetTypeCollection` : 
 		"""
 		pass
 
@@ -5095,12 +5096,12 @@ class IDataSource:
 
 		Args
 		--------
-			name (``str``) :  name
-			parentDomainDataSetTypeID (``int``) :  parentDomainDataSetTypeID
+			name (`str`) :  name
+			parentDomainDataSetTypeID (`int`) :  parentDomainDataSetTypeID
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -5109,12 +5110,12 @@ class IDataSource:
 
 		Args
 		--------
-			parentDomainDataSetTypeID (``int``) :  parentDomainDataSetTypeID
-			subDomainDataSetTypeName (``str``) :  subDomainDataSetTypeName
+			parentDomainDataSetTypeID (`int`) :  parentDomainDataSetTypeID
+			subDomainDataSetTypeName (`str`) :  subDomainDataSetTypeName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5123,11 +5124,11 @@ class IDataSource:
 
 		Args
 		--------
-			parentDomainDataSetTypeID (``int``) :  parentDomainDataSetTypeID
+			parentDomainDataSetTypeID (`int`) :  parentDomainDataSetTypeID
 
 		Returns
 		--------
-			``DomainDataSetTypeCollection`` : 
+			`DomainDataSetTypeCollection` : 
 		"""
 		pass
 
@@ -5137,7 +5138,7 @@ class IDataSource:
 
 		Returns
 		--------
-			``IDataSource`` : 
+			`IDomainDataSetManager` : 
 		"""
 		pass
 
@@ -5147,7 +5148,7 @@ class IDataSource:
 
 		Returns
 		--------
-			``IDataSource`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5157,7 +5158,7 @@ class IDataSource:
 
 class IDataSourceConnection:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5173,7 +5174,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5182,7 +5183,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5191,7 +5192,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5200,7 +5201,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5209,7 +5210,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5218,7 +5219,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5227,7 +5228,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5236,11 +5237,11 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			context (``CompactOperationContext``) :  context
+			context (`CompactOperationContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5249,11 +5250,11 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			context (``CompactOperationContext``) :  context
+			context (`CompactOperationContext`) :  context
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5262,7 +5263,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5271,11 +5272,11 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			domainDataSetTypeID (``int``) :  domainDataSetTypeID
+			domainDataSetTypeID (`int`) :  domainDataSetTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5284,7 +5285,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5293,7 +5294,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5302,7 +5303,7 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5311,13 +5312,13 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			propertyName (``str``) :  propertyName
-			type (``FieldDataType``) :  type
-			defaultValue (``object``) :  defaultValue
+			propertyName (`str`) :  propertyName
+			type (`FieldDataType`) :  type
+			defaultValue (`object`) :  defaultValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5326,11 +5327,11 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			propertyName (``str``) :  propertyName
+			propertyName (`str`) :  propertyName
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -5339,12 +5340,12 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			propertyName (``str``) :  propertyName
-			propertyValue (``object``) :  propertyValue
+			propertyName (`str`) :  propertyName
+			propertyValue (`object`) :  propertyValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5353,12 +5354,12 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			key (``ConnectionProperty``) :  key
-			val (``object``) :  val
+			key (`ConnectionProperty`) :  key
+			val (`object`) :  val
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5367,11 +5368,11 @@ class IDataSourceConnection:
 
 		Args
 		--------
-			key (``ConnectionProperty``) :  key
+			key (`ConnectionProperty`) :  key
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -5381,13 +5382,13 @@ class IDataSourceConnection:
 
 		Returns
 		--------
-			``IDataSourceConnection`` : 
+			`bool` : 
 		"""
 		pass
 
 class ITransactionalConnection:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5403,7 +5404,7 @@ class ITransactionalConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5412,7 +5413,7 @@ class ITransactionalConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5421,13 +5422,13 @@ class ITransactionalConnection:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDataSourceMessaging:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5443,18 +5444,18 @@ class IDataSourceMessaging:
 
 		Args
 		--------
-			questionHandler (``IMessageQuestionHandler``) :  questionHandler
-			progressIndicator (``IProgressIndicator``) :  progressIndicator
+			questionHandler (`IMessageQuestionHandler`) :  questionHandler
+			progressIndicator (`IProgressIndicator`) :  progressIndicator
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDataSourceSchemaUpdateResults:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5470,12 +5471,12 @@ class IDataSourceSchemaUpdateResults:
 
 		Args
 		--------
-			elementTypeId (``int``) :  elementTypeId
-			oldElementId (``int``) :  oldElementId
+			elementTypeId (`int`) :  elementTypeId
+			oldElementId (`int`) :  oldElementId
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5484,12 +5485,12 @@ class IDataSourceSchemaUpdateResults:
 
 		Args
 		--------
-			elementTypeId (``int``) :  elementTypeId
-			oldFieldName (``str``) :  oldFieldName
+			elementTypeId (`int`) :  elementTypeId
+			oldFieldName (`str`) :  oldFieldName
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`IUpdatedFieldInformation` : 
 		"""
 		pass
 
@@ -5498,12 +5499,12 @@ class IDataSourceSchemaUpdateResults:
 
 		Args
 		--------
-			elementTypeId (``int``) :  elementTypeId
-			oldFieldName (``str``) :  oldFieldName
+			elementTypeId (`int`) :  elementTypeId
+			oldFieldName (`str`) :  oldFieldName
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`IUpdatedFieldInformation` : 
 		"""
 		pass
 
@@ -5512,11 +5513,11 @@ class IDataSourceSchemaUpdateResults:
 
 		Args
 		--------
-			elementTypeId (``int``) :  elementTypeId
+			elementTypeId (`int`) :  elementTypeId
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -5525,7 +5526,7 @@ class IDataSourceSchemaUpdateResults:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5535,7 +5536,7 @@ class IDataSourceSchemaUpdateResults:
 
 		Returns
 		--------
-			``IDataSourceSchemaUpdateResults`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5545,13 +5546,13 @@ class IDataSourceSchemaUpdateResults:
 
 		Returns
 		--------
-			``IDataSourceSchemaUpdateResults`` : 
+			`bool` : 
 		"""
 		pass
 
 class IElementType:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5568,7 +5569,7 @@ class IElementType:
 
 		Returns
 		--------
-			``IElementType`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5578,7 +5579,7 @@ class IElementType:
 
 		Returns
 		--------
-			``IElementType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5588,7 +5589,7 @@ class IElementType:
 
 		Returns
 		--------
-			``IElementType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5602,7 +5603,7 @@ class IElementType:
 
 		Returns
 		--------
-			``IElementType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -5616,13 +5617,13 @@ class IElementType:
 
 		Returns
 		--------
-			``IElementType`` : 
+			`bool` : 
 		"""
 		pass
 
 class IElementTypeUpdatable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5638,11 +5639,11 @@ class IElementTypeUpdatable:
 
 		Args
 		--------
-			newId (``int``) :  newId
+			newId (`int`) :  newId
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5651,17 +5652,17 @@ class IElementTypeUpdatable:
 
 		Args
 		--------
-			newName (``str``) :  newName
+			newName (`str`) :  newName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IFieldType(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -5678,7 +5679,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``FieldDataType`` : 
+			`FieldDataType` : 
 		"""
 		pass
 
@@ -5688,11 +5689,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			type (``FieldDataType``) :  type
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5702,7 +5703,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``Type`` : 
+			`Type` : 
 		"""
 		pass
 
@@ -5712,11 +5713,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			type (``Type``) :  type
+			type (`Type`) :  type
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5726,7 +5727,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``UnitIndex`` : 
+			`UnitIndex` : 
 		"""
 		pass
 
@@ -5736,11 +5737,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			unit (``UnitIndex``) :  unit
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5750,7 +5751,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -5760,11 +5761,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			length (``int``) :  length
+			length (`int`) :  length
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5773,7 +5774,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IElementType`` : 
+			`IElementType` : 
 		"""
 		pass
 
@@ -5782,11 +5783,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			elementType (``IElementType``) :  elementType
+			elementType (`IElementType`) :  elementType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5795,11 +5796,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			value (``bool``) :  value
+			value (`bool`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5808,7 +5809,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``ReferenceCardinality`` : 
+			`ReferenceCardinality` : 
 		"""
 		pass
 
@@ -5817,11 +5818,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			cardinality (``ReferenceCardinality``) :  cardinality
+			cardinality (`ReferenceCardinality`) :  cardinality
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5831,7 +5832,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -5841,11 +5842,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			value (``object``) :  value
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5854,12 +5855,12 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -5869,11 +5870,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			fieldTypeId (``int``) :  fieldTypeId
+			fieldTypeId (`int`) :  fieldTypeId
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -5883,11 +5884,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -5896,11 +5897,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5909,7 +5910,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -5918,11 +5919,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			value (``int``) :  value
+			value (`int`) :  value
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -5931,7 +5932,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``List[IEnumeratedTypeMember]`` : 
+			`List[IEnumeratedTypeMember]` : 
 		"""
 		pass
 
@@ -5940,12 +5941,12 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			names (``array[str]``) :  names
-			values (``array[int]``) :  values
+			names (`array[str]`) :  names
+			values (`array[int]`) :  values
 
 		Returns
 		--------
-			``List[IEnumeratedTypeMember]`` : 
+			`List[IEnumeratedTypeMember]` : 
 		"""
 		pass
 
@@ -5954,12 +5955,12 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			minValue (``float``) :  minValue
-			maxValue (``float``) :  maxValue
+			minValue (`float`) :  minValue
+			maxValue (`float`) :  maxValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5968,12 +5969,12 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			minValue (``float``) :  minValue
-			maxValue (``float``) :  maxValue
+			minValue (`float`) :  minValue
+			maxValue (`float`) :  maxValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -5982,7 +5983,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``List[IEnumeratedTypeMember]`` : 
+			`List[IEnumeratedTypeMember]` : 
 		"""
 		pass
 
@@ -5991,7 +5992,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -6000,11 +6001,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			products (``List[str]``) :  products
+			products (`List[str]`) :  products
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6013,7 +6014,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -6022,11 +6023,11 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			uuid (``Guid``) :  uuid
+			uuid (`Guid`) :  uuid
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6035,13 +6036,13 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			factoryClassName (``str``) :  factoryClassName
-			methodName (``str``) :  methodName
-			parameters (``Dict[str,str]``) :  parameters
+			factoryClassName (`str`) :  factoryClassName
+			methodName (`str`) :  methodName
+			parameters (`Dict[str,str]`) :  parameters
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6050,13 +6051,13 @@ class IFieldType(IElementType):
 
 		Args
 		--------
-			factoryClassName (``str``) :  factoryClassName
-			methodName (``str``) :  methodName
-			parameters (``Dict[str,str]``) :  parameters
+			factoryClassName (`str`) :  factoryClassName
+			methodName (`str`) :  methodName
+			parameters (`Dict[str,str]`) :  parameters
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6066,7 +6067,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6080,7 +6081,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6090,7 +6091,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6100,7 +6101,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IEnumeratedTypeMember` : 
 		"""
 		pass
 
@@ -6110,7 +6111,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6120,7 +6121,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -6130,7 +6131,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6140,7 +6141,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6154,7 +6155,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`int` : 
 		"""
 		pass
 
@@ -6168,7 +6169,7 @@ class IFieldType(IElementType):
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6178,7 +6179,7 @@ class IFieldType(IElementType):
 
 class IFieldTypeEx:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6194,7 +6195,7 @@ class IFieldTypeEx:
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -6203,13 +6204,13 @@ class IFieldTypeEx:
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
 class IFieldTypeUI:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6225,7 +6226,7 @@ class IFieldTypeUI:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6234,11 +6235,11 @@ class IFieldTypeUI:
 
 		Args
 		--------
-			val (``bool``) :  val
+			val (`bool`) :  val
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6247,7 +6248,7 @@ class IFieldTypeUI:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6256,11 +6257,11 @@ class IFieldTypeUI:
 
 		Args
 		--------
-			val (``bool``) :  val
+			val (`bool`) :  val
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6269,7 +6270,7 @@ class IFieldTypeUI:
 
 		Returns
 		--------
-			``List[IElementType]`` : 
+			`List[IElementType]` : 
 		"""
 		pass
 
@@ -6278,11 +6279,11 @@ class IFieldTypeUI:
 
 		Args
 		--------
-			elementTypes (``List[IElementType]``) :  elementTypes
+			elementTypes (`List[IElementType]`) :  elementTypes
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6291,7 +6292,7 @@ class IFieldTypeUI:
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -6300,11 +6301,11 @@ class IFieldTypeUI:
 
 		Args
 		--------
-			numericalEngineTypes (``List[str]``) :  numericalEngineTypes
+			numericalEngineTypes (`List[str]`) :  numericalEngineTypes
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6313,7 +6314,7 @@ class IFieldTypeUI:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6322,17 +6323,17 @@ class IFieldTypeUI:
 
 		Args
 		--------
-			val (``bool``) :  val
+			val (`bool`) :  val
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IFieldTypeInternal:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6348,17 +6349,17 @@ class IFieldTypeInternal:
 
 		Args
 		--------
-			enumeratedTypeMemberID (``int``) :  enumeratedTypeMemberID
+			enumeratedTypeMemberID (`int`) :  enumeratedTypeMemberID
 
 		Returns
 		--------
-			``IEnumeratedTypeMember`` : 
+			`IEnumeratedTypeMember` : 
 		"""
 		pass
 
 class IEnumeratedTypeMember(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6374,12 +6375,12 @@ class IEnumeratedTypeMember(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -6388,12 +6389,12 @@ class IEnumeratedTypeMember(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			serializeAsBinary (``bool``) :  serializeAsBinary
+			name (`str`) :  name
+			serializeAsBinary (`bool`) :  serializeAsBinary
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -6402,11 +6403,11 @@ class IEnumeratedTypeMember(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -6415,7 +6416,7 @@ class IEnumeratedTypeMember(IElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -6424,11 +6425,11 @@ class IEnumeratedTypeMember(IElementType):
 
 		Args
 		--------
-			attributeTypeID (``int``) :  attributeTypeID
+			attributeTypeID (`int`) :  attributeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6437,7 +6438,7 @@ class IEnumeratedTypeMember(IElementType):
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -6446,11 +6447,11 @@ class IEnumeratedTypeMember(IElementType):
 
 		Args
 		--------
-			products (``List[str]``) :  products
+			products (`List[str]`) :  products
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6459,7 +6460,7 @@ class IEnumeratedTypeMember(IElementType):
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -6468,11 +6469,11 @@ class IEnumeratedTypeMember(IElementType):
 
 		Args
 		--------
-			numericalEngineTypeNames (``List[str]``) :  numericalEngineTypeNames
+			numericalEngineTypeNames (`List[str]`) :  numericalEngineTypeNames
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6482,7 +6483,7 @@ class IEnumeratedTypeMember(IElementType):
 
 		Returns
 		--------
-			``IEnumeratedTypeMember`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -6492,13 +6493,13 @@ class IEnumeratedTypeMember(IElementType):
 
 		Returns
 		--------
-			``IEnumeratedTypeMember`` : 
+			`int` : 
 		"""
 		pass
 
 class IEnumeratedTypeMemberUpdatable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6514,17 +6515,17 @@ class IEnumeratedTypeMemberUpdatable:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IModelingElementFieldType(IFieldType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6541,7 +6542,7 @@ class IModelingElementFieldType(IFieldType):
 
 		Returns
 		--------
-			``IModelingElementFieldType`` : 
+			`ModelingElementType` : 
 		"""
 		pass
 
@@ -6551,13 +6552,13 @@ class IModelingElementFieldType(IFieldType):
 
 		Returns
 		--------
-			``IModelingElementFieldType`` : 
+			`int` : 
 		"""
 		pass
 
 class ISupportElementFieldType(IFieldType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6574,7 +6575,7 @@ class ISupportElementFieldType(IFieldType):
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -6584,13 +6585,13 @@ class ISupportElementFieldType(IFieldType):
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`str` : 
 		"""
 		pass
 
 class ICalculationOptionsFieldType(IFieldType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6607,7 +6608,7 @@ class ICalculationOptionsFieldType(IFieldType):
 
 		Returns
 		--------
-			``ICalculationOptionsFieldType`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -6617,7 +6618,7 @@ class ICalculationOptionsFieldType(IFieldType):
 
 		Returns
 		--------
-			``ICalculationOptionsFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6627,7 +6628,7 @@ class ICalculationOptionsFieldType(IFieldType):
 
 class IResultFieldType(IFieldType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6643,7 +6644,7 @@ class IResultFieldType(IFieldType):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -6653,7 +6654,7 @@ class IResultFieldType(IFieldType):
 
 		Returns
 		--------
-			``IResultFieldType`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
@@ -6663,7 +6664,7 @@ class IResultFieldType(IFieldType):
 
 		Returns
 		--------
-			``IResultFieldType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -6677,7 +6678,7 @@ class IResultFieldType(IFieldType):
 
 		Returns
 		--------
-			``IResultFieldType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6691,7 +6692,7 @@ class IResultFieldType(IFieldType):
 
 		Returns
 		--------
-			``IResultFieldType`` : 
+			`ExpressionType` : 
 		"""
 		pass
 
@@ -6701,7 +6702,7 @@ class IResultFieldType(IFieldType):
 
 class IDomainElementFieldType(IFieldType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6717,11 +6718,11 @@ class IDomainElementFieldType(IFieldType):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -6730,7 +6731,7 @@ class IDomainElementFieldType(IFieldType):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -6740,13 +6741,13 @@ class IDomainElementFieldType(IFieldType):
 
 		Returns
 		--------
-			``IDomainElementFieldType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
 class ISystemRecordFieldType(IFieldType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6763,13 +6764,13 @@ class ISystemRecordFieldType(IFieldType):
 
 		Returns
 		--------
-			``ISystemRecordFieldType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
 class ISupportElementType(IModelingElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6786,12 +6787,12 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`ISupportElementFieldType` : 
 		"""
 		pass
 
@@ -6800,12 +6801,12 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			serializeAsBinary (``bool``) :  serializeAsBinary
+			name (`str`) :  name
+			serializeAsBinary (`bool`) :  serializeAsBinary
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`ISupportElementFieldType` : 
 		"""
 		pass
 
@@ -6815,14 +6816,14 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
-			enumFieldTypeID (``int``) :  enumFieldTypeID
-			sharedEnumMembers (``array[str]``) :  sharedEnumMembers
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
+			enumFieldTypeID (`int`) :  enumFieldTypeID
+			sharedEnumMembers (`array[str]`) :  sharedEnumMembers
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`ISupportElementFieldType` : 
 		"""
 		pass
 
@@ -6831,11 +6832,11 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			supportElementFieldTypeID (``int``) :  supportElementFieldTypeID
+			supportElementFieldTypeID (`int`) :  supportElementFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6845,11 +6846,11 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			fieldTypeId (``int``) :  fieldTypeId
+			fieldTypeId (`int`) :  fieldTypeId
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`ISupportElementFieldType` : 
 		"""
 		pass
 
@@ -6859,11 +6860,11 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``ISupportElementFieldType`` : 
+			`ISupportElementFieldType` : 
 		"""
 		pass
 
@@ -6872,13 +6873,13 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			factoryClassName (``str``) :  factoryClassName
-			methodName (``str``) :  methodName
-			parameters (``Dict[str,str]``) :  parameters
+			factoryClassName (`str`) :  factoryClassName
+			methodName (`str`) :  methodName
+			parameters (`Dict[str,str]`) :  parameters
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -6887,19 +6888,19 @@ class ISupportElementType(IModelingElementType):
 
 		Args
 		--------
-			factoryClassName (``str``) :  factoryClassName
-			methodName (``str``) :  methodName
-			parameters (``Dict[str,str]``) :  parameters
+			factoryClassName (`str`) :  factoryClassName
+			methodName (`str`) :  methodName
+			parameters (`Dict[str,str]`) :  parameters
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class ITreeElementType(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6915,7 +6916,7 @@ class ITreeElementType(IElementType):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -6925,13 +6926,13 @@ class ITreeElementType(IElementType):
 
 		Returns
 		--------
-			``ITreeElementType`` : 
+			`int` : 
 		"""
 		pass
 
 class ITreeElementTypeUpdatable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6947,17 +6948,17 @@ class ITreeElementTypeUpdatable:
 
 		Args
 		--------
-			newParentID (``int``) :  newParentID
+			newParentID (`int`) :  newParentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IAlternativeType(IModelingElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -6974,12 +6975,12 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IDomainElementFieldType`` : 
+			`IDomainElementFieldType` : 
 		"""
 		pass
 
@@ -6988,12 +6989,12 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			serializeAsBinary (``bool``) :  serializeAsBinary
+			name (`str`) :  name
+			serializeAsBinary (`bool`) :  serializeAsBinary
 
 		Returns
 		--------
-			``IDomainElementFieldType`` : 
+			`IDomainElementFieldType` : 
 		"""
 		pass
 
@@ -7003,14 +7004,14 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
-			enumFieldTypeID (``int``) :  enumFieldTypeID
-			sharedEnumMembers (``array[str]``) :  sharedEnumMembers
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
+			enumFieldTypeID (`int`) :  enumFieldTypeID
+			sharedEnumMembers (`array[str]`) :  sharedEnumMembers
 
 		Returns
 		--------
-			``IDomainElementFieldType`` : 
+			`IDomainElementFieldType` : 
 		"""
 		pass
 
@@ -7019,12 +7020,12 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``ISystemRecordFieldType`` : 
+			`ISystemRecordFieldType` : 
 		"""
 		pass
 
@@ -7033,12 +7034,12 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			serializeAsBinary (``bool``) :  serializeAsBinary
+			name (`str`) :  name
+			serializeAsBinary (`bool`) :  serializeAsBinary
 
 		Returns
 		--------
-			``ISystemRecordFieldType`` : 
+			`ISystemRecordFieldType` : 
 		"""
 		pass
 
@@ -7047,11 +7048,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7060,11 +7061,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			systemRecordFieldTypeID (``int``) :  systemRecordFieldTypeID
+			systemRecordFieldTypeID (`int`) :  systemRecordFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7074,11 +7075,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IDomainElementFieldType`` : 
+			`IDomainElementFieldType` : 
 		"""
 		pass
 
@@ -7088,11 +7089,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			attributeTypeId (``int``) :  attributeTypeId
+			attributeTypeId (`int`) :  attributeTypeId
 
 		Returns
 		--------
-			``IDomainElementFieldType`` : 
+			`IDomainElementFieldType` : 
 		"""
 		pass
 
@@ -7102,11 +7103,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			fieldTypeId (``int``) :  fieldTypeId
+			fieldTypeId (`int`) :  fieldTypeId
 
 		Returns
 		--------
-			``ISystemRecordFieldType`` : 
+			`ISystemRecordFieldType` : 
 		"""
 		pass
 
@@ -7116,11 +7117,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``ISystemRecordFieldType`` : 
+			`ISystemRecordFieldType` : 
 		"""
 		pass
 
@@ -7129,7 +7130,7 @@ class IAlternativeType(IModelingElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7139,11 +7140,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7153,12 +7154,12 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
-			excludeInherited (``bool``) :  excludeInherited
+			domainElementTypeID (`int`) :  domainElementTypeID
+			excludeInherited (`bool`) :  excludeInherited
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7167,11 +7168,11 @@ class IAlternativeType(IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7180,7 +7181,7 @@ class IAlternativeType(IModelingElementType):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -7189,7 +7190,7 @@ class IAlternativeType(IModelingElementType):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7199,13 +7200,13 @@ class IAlternativeType(IModelingElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
 class IAlternativeTypeUI:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -7221,7 +7222,7 @@ class IAlternativeTypeUI:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7230,17 +7231,17 @@ class IAlternativeTypeUI:
 
 		Args
 		--------
-			value (``bool``) :  value
+			value (`bool`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDomainElementType(ITreeElementType, IModelingElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -7256,7 +7257,7 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Returns
 		--------
-			``DomainElementShapeType`` : 
+			`DomainElementShapeType` : 
 		"""
 		pass
 
@@ -7266,11 +7267,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7280,12 +7281,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			dataType (``FieldDataType``) :  dataType
+			name (`str`) :  name
+			dataType (`FieldDataType`) :  dataType
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -7295,11 +7296,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7309,12 +7310,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
-			includeParentTypes (``bool``) :  includeParentTypes
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
+			includeParentTypes (`bool`) :  includeParentTypes
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7324,11 +7325,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			resultFieldTypeID (``int``) :  resultFieldTypeID
+			resultFieldTypeID (`int`) :  resultFieldTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7338,12 +7339,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			resultFieldTypeID (``int``) :  resultFieldTypeID
-			includeParentTypes (``bool``) :  includeParentTypes
+			resultFieldTypeID (`int`) :  resultFieldTypeID
+			includeParentTypes (`bool`) :  includeParentTypes
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7352,11 +7353,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7365,12 +7366,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
-			parentElementTypeID (``int``) :  parentElementTypeID
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
+			parentElementTypeID (`int`) :  parentElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7379,12 +7380,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			domainElementFieldTypeID (``int``) :  domainElementFieldTypeID
-			parentElementTypeID (``int``) :  parentElementTypeID
+			domainElementFieldTypeID (`int`) :  domainElementFieldTypeID
+			parentElementTypeID (`int`) :  parentElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7393,11 +7394,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			resultFieldTypeID (``int``) :  resultFieldTypeID
+			resultFieldTypeID (`int`) :  resultFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7406,11 +7407,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			resultFieldTypeID (``int``) :  resultFieldTypeID
+			resultFieldTypeID (`int`) :  resultFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7420,11 +7421,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			nonAlternativeFieldTypesOnly (``bool``) :  nonAlternativeFieldTypesOnly
+			nonAlternativeFieldTypesOnly (`bool`) :  nonAlternativeFieldTypesOnly
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7434,11 +7435,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7448,12 +7449,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
-			includeParentTypes (``bool``) :  includeParentTypes
+			alternativeTypeID (`int`) :  alternativeTypeID
+			includeParentTypes (`bool`) :  includeParentTypes
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7462,7 +7463,7 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -7471,12 +7472,12 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
-			includeParentTypes (``bool``) :  includeParentTypes
+			alternativeTypeID (`int`) :  alternativeTypeID
+			includeParentTypes (`bool`) :  includeParentTypes
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7485,11 +7486,11 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Args
 		--------
-			fieldTypeId (``int``) :  fieldTypeId
+			fieldTypeId (`int`) :  fieldTypeId
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7498,7 +7499,7 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Returns
 		--------
-			``StringCollection`` : 
+			`StringCollection` : 
 		"""
 		pass
 
@@ -7508,13 +7509,13 @@ class IDomainElementType(ITreeElementType, IModelingElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
 class IDomainElementTypeEx:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -7530,18 +7531,18 @@ class IDomainElementTypeEx:
 
 		Args
 		--------
-			name (``str``) :  name
-			includeHierarchy (``bool``) :  includeHierarchy
+			name (`str`) :  name
+			includeHierarchy (`bool`) :  includeHierarchy
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class IModelingElementTypeUI:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -7558,7 +7559,7 @@ class IModelingElementTypeUI:
 
 		Returns
 		--------
-			``IModelingElementTypeUI`` : 
+			`int` : 
 		"""
 		pass
 
@@ -7568,7 +7569,7 @@ class IModelingElementTypeUI:
 
 class IDomainDataSetType(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -7584,12 +7585,12 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -7598,11 +7599,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7611,11 +7612,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7624,11 +7625,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -7637,7 +7638,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -7646,11 +7647,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			type (``ModelingElementType``) :  type
+			type (`ModelingElementType`) :  type
 
 		Returns
 		--------
-			``IStandardModelingElementType`` : 
+			`IStandardModelingElementType` : 
 		"""
 		pass
 
@@ -7659,11 +7660,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IAlternativeType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -7672,11 +7673,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			standardAlternativeTypeName (``str``) :  standardAlternativeTypeName
+			standardAlternativeTypeName (`str`) :  standardAlternativeTypeName
 
 		Returns
 		--------
-			``IAlternativeType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -7686,11 +7687,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			alternativeTypeName (``str``) :  alternativeTypeName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7700,11 +7701,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7714,11 +7715,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``IAlternativeType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -7728,11 +7729,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			alternativeTypeName (``str``) :  alternativeTypeName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IAlternativeType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -7741,11 +7742,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7754,7 +7755,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``AlternativeTypeCollection`` : 
+			`AlternativeTypeCollection` : 
 		"""
 		pass
 
@@ -7764,12 +7765,12 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			shapeType (``DomainElementShapeType``) :  shapeType
+			name (`str`) :  name
+			shapeType (`DomainElementShapeType`) :  shapeType
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -7779,13 +7780,13 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			shapeType (``DomainElementShapeType``) :  shapeType
-			standardAlternativeTypesToSupport (``StringCollection``) :  standardAlternativeTypesToSupport
+			name (`str`) :  name
+			shapeType (`DomainElementShapeType`) :  shapeType
+			standardAlternativeTypesToSupport (`StringCollection`) :  standardAlternativeTypesToSupport
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -7795,13 +7796,13 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			shapeType (``DomainElementShapeType``) :  shapeType
-			parentDomainElementTypeID (``int``) :  parentDomainElementTypeID
+			name (`str`) :  name
+			shapeType (`DomainElementShapeType`) :  shapeType
+			parentDomainElementTypeID (`int`) :  parentDomainElementTypeID
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -7811,11 +7812,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -7825,11 +7826,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			domainElementTypeName (``str``) :  domainElementTypeName
+			domainElementTypeName (`str`) :  domainElementTypeName
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -7839,11 +7840,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7853,11 +7854,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			domainElementTypeName (``str``) :  domainElementTypeName
+			domainElementTypeName (`str`) :  domainElementTypeName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7866,11 +7867,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7880,7 +7881,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`DomainElementTypeCollection` : 
 		"""
 		pass
 
@@ -7890,11 +7891,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			includeBaseTypes (``bool``) :  includeBaseTypes
+			includeBaseTypes (`bool`) :  includeBaseTypes
 
 		Returns
 		--------
-			``DomainElementTypeCollection`` : 
+			`DomainElementTypeCollection` : 
 		"""
 		pass
 
@@ -7903,11 +7904,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``ISupportElementType`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -7917,11 +7918,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``ISupportElementType`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -7931,11 +7932,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			supportElementTypeName (``str``) :  supportElementTypeName
+			supportElementTypeName (`str`) :  supportElementTypeName
 
 		Returns
 		--------
-			``ISupportElementType`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -7945,11 +7946,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			supportElementTypeName (``str``) :  supportElementTypeName
+			supportElementTypeName (`str`) :  supportElementTypeName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7959,11 +7960,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -7972,11 +7973,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -7985,7 +7986,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`SupportElementTypeCollection` : 
 		"""
 		pass
 
@@ -7994,11 +7995,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``INumericalEngineType`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -8008,11 +8009,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``INumericalEngineType`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -8022,11 +8023,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			numericalEngineTypeID (``int``) :  numericalEngineTypeID
+			numericalEngineTypeID (`int`) :  numericalEngineTypeID
 
 		Returns
 		--------
-			``INumericalEngineType`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -8036,11 +8037,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8050,11 +8051,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			numericalEngineTypeID (``int``) :  numericalEngineTypeID
+			numericalEngineTypeID (`int`) :  numericalEngineTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8063,11 +8064,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8076,7 +8077,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`NumericalEngineTypeCollection` : 
 		"""
 		pass
 
@@ -8085,7 +8086,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -8094,11 +8095,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8107,11 +8108,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IResultRecordType`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
@@ -8120,11 +8121,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IResultRecordType`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
@@ -8133,11 +8134,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8146,7 +8147,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`ResultRecordTypeCollection` : 
 		"""
 		pass
 
@@ -8155,11 +8156,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`NumericFormatter` : 
 		"""
 		pass
 
@@ -8168,11 +8169,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``NumericFormatter`` : 
+			`NumericFormatter` : 
 		"""
 		pass
 
@@ -8181,7 +8182,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``StringCollection`` : 
+			`StringCollection` : 
 		"""
 		pass
 
@@ -8190,13 +8191,13 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``StoredQueryType``) :  type
-			queryText (``str``) :  queryText
+			name (`str`) :  name
+			type (`StoredQueryType`) :  type
+			queryText (`str`) :  queryText
 
 		Returns
 		--------
-			``IStoredQuery`` : 
+			`IStoredQuery` : 
 		"""
 		pass
 
@@ -8205,11 +8206,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8218,11 +8219,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IStoredQuery`` : 
+			`IStoredQuery` : 
 		"""
 		pass
 
@@ -8231,11 +8232,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8244,7 +8245,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``StringCollection`` : 
+			`StringCollection` : 
 		"""
 		pass
 
@@ -8253,7 +8254,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``Version`` : 
+			`Version` : 
 		"""
 		pass
 
@@ -8262,11 +8263,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			version (``Version``) :  version
+			version (`Version`) :  version
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8275,11 +8276,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8288,11 +8289,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			productName (``str``) :  productName
+			productName (`str`) :  productName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8301,7 +8302,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -8310,11 +8311,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			productName (``str``) :  productName
+			productName (`str`) :  productName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8323,7 +8324,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -8332,11 +8333,11 @@ class IDomainDataSetType(IElementType):
 
 		Args
 		--------
-			assemblyName (``str``) :  assemblyName
+			assemblyName (`str`) :  assemblyName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8346,7 +8347,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDataSource` : 
 		"""
 		pass
 
@@ -8356,7 +8357,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`int` : 
 		"""
 		pass
 
@@ -8366,7 +8367,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8380,7 +8381,7 @@ class IDomainDataSetType(IElementType):
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -8390,7 +8391,7 @@ class IDomainDataSetType(IElementType):
 
 class IDomainDataSetTypeRefactoring:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -8406,18 +8407,18 @@ class IDomainDataSetTypeRefactoring:
 
 		Args
 		--------
-			fieldTypes (``FieldTypeCollection``) :  fieldTypes
-			targetAlternativeType (``IAlternativeType``) :  targetAlternativeType
+			fieldTypes (`FieldTypeCollection`) :  fieldTypes
+			targetAlternativeType (`IAlternativeType`) :  targetAlternativeType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IStoredQuery(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -8434,7 +8435,7 @@ class IStoredQuery(IElementType):
 
 		Returns
 		--------
-			``IStoredQuery`` : 
+			`str` : 
 		"""
 		pass
 
@@ -8448,13 +8449,13 @@ class IStoredQuery(IElementType):
 
 		Returns
 		--------
-			``IStoredQuery`` : 
+			`StoredQueryType` : 
 		"""
 		pass
 
 class IModelingElementType(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -8471,11 +8472,11 @@ class IModelingElementType(IElementType):
 
 		Args
 		--------
-			fieldTypeId (``int``) :  fieldTypeId
+			fieldTypeId (`int`) :  fieldTypeId
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8485,11 +8486,11 @@ class IModelingElementType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8498,11 +8499,11 @@ class IModelingElementType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8511,7 +8512,7 @@ class IModelingElementType(IElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -8521,13 +8522,13 @@ class IModelingElementType(IElementType):
 
 		Returns
 		--------
-			``IModelingElementType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
 class IStandardModelingElementType(IModelingElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -8543,12 +8544,12 @@ class IStandardModelingElementType(IModelingElementType):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			type (``FieldDataType``) :  type
+			fieldName (`str`) :  fieldName
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8557,12 +8558,12 @@ class IStandardModelingElementType(IModelingElementType):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			serializeAsBinary (``bool``) :  serializeAsBinary
+			fieldName (`str`) :  fieldName
+			serializeAsBinary (`bool`) :  serializeAsBinary
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8571,12 +8572,12 @@ class IStandardModelingElementType(IModelingElementType):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			elementTypeID (``int``) :  elementTypeID
+			fieldName (`str`) :  fieldName
+			elementTypeID (`int`) :  elementTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8585,11 +8586,11 @@ class IStandardModelingElementType(IModelingElementType):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8598,11 +8599,11 @@ class IStandardModelingElementType(IModelingElementType):
 
 		Args
 		--------
-			elementTypeID (``int``) :  elementTypeID
+			elementTypeID (`int`) :  elementTypeID
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -8612,13 +8613,13 @@ class IStandardModelingElementType(IModelingElementType):
 
 		Returns
 		--------
-			``IStandardModelingElementType`` : 
+			`ModelingElementType` : 
 		"""
 		pass
 
 class INumericalEngineType(IModelingElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -8634,11 +8635,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			resultFieldTypeID (``int``) :  resultFieldTypeID
+			resultFieldTypeID (`int`) :  resultFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8647,7 +8648,7 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``StringCollection`` : 
+			`StringCollection` : 
 		"""
 		pass
 
@@ -8656,12 +8657,12 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			name (`str`) :  name
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IResultFieldType`` : 
+			`IResultFieldType` : 
 		"""
 		pass
 
@@ -8670,12 +8671,12 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			resultRecordTypeName (``str``) :  resultRecordTypeName
-			domainElementTypeID (``int``) :  domainElementTypeID
+			resultRecordTypeName (`str`) :  resultRecordTypeName
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -8684,7 +8685,7 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -8693,11 +8694,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			resultFieldTypeID (``int``) :  resultFieldTypeID
+			resultFieldTypeID (`int`) :  resultFieldTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8707,12 +8708,12 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8722,14 +8723,14 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
-			enumFieldTypeID (``int``) :  enumFieldTypeID
-			sharedEnumMembers (``array[str]``) :  sharedEnumMembers
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
+			enumFieldTypeID (`int`) :  enumFieldTypeID
+			sharedEnumMembers (`array[str]`) :  sharedEnumMembers
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8738,12 +8739,12 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			serializeAsBinary (``bool``) :  serializeAsBinary
+			name (`str`) :  name
+			serializeAsBinary (`bool`) :  serializeAsBinary
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8752,11 +8753,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8765,11 +8766,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8778,7 +8779,7 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -8787,11 +8788,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8800,11 +8801,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			fieldTypeID (``int``) :  fieldTypeID
+			fieldTypeID (`int`) :  fieldTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8813,12 +8814,12 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			subNumericalEngineTypes (``List[INumericalEngineType]``) :  subNumericalEngineTypes
-			defaultActiveNumericalEngineType (``INumericalEngineType``) :  defaultActiveNumericalEngineType
+			subNumericalEngineTypes (`List[INumericalEngineType]`) :  subNumericalEngineTypes
+			defaultActiveNumericalEngineType (`INumericalEngineType`) :  defaultActiveNumericalEngineType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8827,7 +8828,7 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -8836,11 +8837,11 @@ class INumericalEngineType(IModelingElementType):
 
 		Args
 		--------
-			products (``List[str]``) :  products
+			products (`List[str]`) :  products
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8850,7 +8851,7 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``INumericalEngineType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -8864,7 +8865,7 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``INumericalEngineType`` : 
+			`str` : 
 		"""
 		pass
 
@@ -8878,13 +8879,13 @@ class INumericalEngineType(IModelingElementType):
 
 		Returns
 		--------
-			``INumericalEngineType`` : 
+			`bool` : 
 		"""
 		pass
 
 class IResultRecordType(IElementType):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -8900,12 +8901,12 @@ class IResultRecordType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``FieldDataType``) :  type
+			name (`str`) :  name
+			type (`FieldDataType`) :  type
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8914,11 +8915,11 @@ class IResultRecordType(IElementType):
 
 		Args
 		--------
-			resultFieldTypeId (``int``) :  resultFieldTypeId
+			resultFieldTypeId (`int`) :  resultFieldTypeId
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -8928,11 +8929,11 @@ class IResultRecordType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8942,11 +8943,11 @@ class IResultRecordType(IElementType):
 
 		Args
 		--------
-			fieldTypeId (``int``) :  fieldTypeId
+			fieldTypeId (`int`) :  fieldTypeId
 
 		Returns
 		--------
-			``IFieldType`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -8955,11 +8956,11 @@ class IResultRecordType(IElementType):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -8968,7 +8969,7 @@ class IResultRecordType(IElementType):
 
 		Returns
 		--------
-			``FieldTypeCollection`` : 
+			`FieldTypeCollection` : 
 		"""
 		pass
 
@@ -8978,13 +8979,13 @@ class IResultRecordType(IElementType):
 
 		Returns
 		--------
-			``IResultRecordType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
 class IDomainDatabaseContext:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9000,7 +9001,7 @@ class IDomainDatabaseContext:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -9009,7 +9010,7 @@ class IDomainDatabaseContext:
 
 		Returns
 		--------
-			``DbConnection`` : 
+			`DbConnection` : 
 		"""
 		pass
 
@@ -9018,13 +9019,13 @@ class IDomainDatabaseContext:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDomainDataSetManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9040,12 +9041,12 @@ class IDomainDataSetManager:
 
 		Args
 		--------
-			domainDataSetTypeID (``int``) :  domainDataSetTypeID
-			name (``str``) :  name
+			domainDataSetTypeID (`int`) :  domainDataSetTypeID
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -9054,11 +9055,11 @@ class IDomainDataSetManager:
 
 		Args
 		--------
-			domainDataSetID (``int``) :  domainDataSetID
+			domainDataSetID (`int`) :  domainDataSetID
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -9067,11 +9068,11 @@ class IDomainDataSetManager:
 
 		Args
 		--------
-			domainDataSetTypeID (``int``) :  domainDataSetTypeID
+			domainDataSetTypeID (`int`) :  domainDataSetTypeID
 
 		Returns
 		--------
-			``DomainDataSetCollection`` : 
+			`DomainDataSetCollection` : 
 		"""
 		pass
 
@@ -9080,11 +9081,11 @@ class IDomainDataSetManager:
 
 		Args
 		--------
-			domainDataSetID (``int``) :  domainDataSetID
+			domainDataSetID (`int`) :  domainDataSetID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -9094,13 +9095,13 @@ class IDomainDataSetManager:
 
 		Returns
 		--------
-			``IDomainDataSetManager`` : 
+			`IDataSource` : 
 		"""
 		pass
 
 class IDomainDataSet:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9116,11 +9117,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			modelingElementID (``int``) :  modelingElementID
+			modelingElementID (`int`) :  modelingElementID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9129,11 +9130,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9142,11 +9143,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9155,11 +9156,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			calculationOptionsID (``int``) :  calculationOptionsID
+			calculationOptionsID (`int`) :  calculationOptionsID
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -9168,7 +9169,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IHmIDToObjectDictionary`` : 
+			`IHmIDToObjectDictionary` : 
 		"""
 		pass
 
@@ -9177,11 +9178,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			supportElementID (``int``) :  supportElementID
+			supportElementID (`int`) :  supportElementID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9190,11 +9191,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``ModelingElementType`` : 
+			`ModelingElementType` : 
 		"""
 		pass
 
@@ -9203,11 +9204,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			numericalEngineType (``str``) :  numericalEngineType
+			numericalEngineType (`str`) :  numericalEngineType
 
 		Returns
 		--------
-			``INumericalEngine`` : 
+			`INumericalEngine` : 
 		"""
 		pass
 
@@ -9216,7 +9217,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSetType`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -9225,7 +9226,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IAlternativeManager`` : 
+			`IAlternativeManager` : 
 		"""
 		pass
 
@@ -9235,11 +9236,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``IAlternativeManager`` : 
+			`IAlternativeManager` : 
 		"""
 		pass
 
@@ -9249,11 +9250,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			alternativeTypeName (``str``) :  alternativeTypeName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IAlternativeManager`` : 
+			`IAlternativeManager` : 
 		"""
 		pass
 
@@ -9263,11 +9264,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IDomainElementManager`` : 
+			`IDomainElementManager` : 
 		"""
 		pass
 
@@ -9277,11 +9278,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			domainElementTypeName (``str``) :  domainElementTypeName
+			domainElementTypeName (`str`) :  domainElementTypeName
 
 		Returns
 		--------
-			``IDomainElementManager`` : 
+			`IDomainElementManager` : 
 		"""
 		pass
 
@@ -9291,11 +9292,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``ISupportElementManager`` : 
+			`ISupportElementManager` : 
 		"""
 		pass
 
@@ -9305,11 +9306,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			supportElementTypeName (``str``) :  supportElementTypeName
+			supportElementTypeName (`str`) :  supportElementTypeName
 
 		Returns
 		--------
-			``ISupportElementManager`` : 
+			`ISupportElementManager` : 
 		"""
 		pass
 
@@ -9318,11 +9319,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``IPrototypeManager`` : 
+			`IPrototypeManager` : 
 		"""
 		pass
 
@@ -9331,11 +9332,11 @@ class IDomainDataSet:
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IPrototypeDomainElementManager`` : 
+			`IPrototypeDomainElementManager` : 
 		"""
 		pass
 
@@ -9345,7 +9346,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9355,7 +9356,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -9365,7 +9366,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`str` : 
 		"""
 		pass
 
@@ -9379,7 +9380,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`str` : 
 		"""
 		pass
 
@@ -9393,7 +9394,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IDomainDataSetManager` : 
 		"""
 		pass
 
@@ -9403,7 +9404,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IFieldManager` : 
 		"""
 		pass
 
@@ -9413,7 +9414,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IScenarioManager` : 
 		"""
 		pass
 
@@ -9423,7 +9424,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`ISelectionSetManager` : 
 		"""
 		pass
 
@@ -9433,7 +9434,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`ISelectionSetManager` : 
 		"""
 		pass
 
@@ -9443,7 +9444,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`IEmbeddedStickyObjectManager` : 
 		"""
 		pass
 
@@ -9453,7 +9454,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9467,7 +9468,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9481,7 +9482,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9495,7 +9496,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`str` : 
 		"""
 		pass
 
@@ -9509,7 +9510,7 @@ class IDomainDataSet:
 
 		Returns
 		--------
-			``IDomainDataSet`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9519,7 +9520,7 @@ class IDomainDataSet:
 
 class IDomainDataSetUnitPresentation(IDomainDataSet):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9536,13 +9537,13 @@ class IDomainDataSetUnitPresentation(IDomainDataSet):
 
 		Returns
 		--------
-			``IDomainDataSetUnitPresentation`` : 
+			`IPresentationUnitsManager` : 
 		"""
 		pass
 
 class IDomainDataSet2DModeling:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9559,7 +9560,7 @@ class IDomainDataSet2DModeling:
 
 		Returns
 		--------
-			``IDomainDataSet2DModeling`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9573,7 +9574,7 @@ class IDomainDataSet2DModeling:
 
 		Returns
 		--------
-			``IDomainDataSet2DModeling`` : 
+			`float` : 
 		"""
 		pass
 
@@ -9583,7 +9584,7 @@ class IDomainDataSet2DModeling:
 
 class IDomainDataSetUpdatable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9599,7 +9600,7 @@ class IDomainDataSetUpdatable:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -9608,17 +9609,17 @@ class IDomainDataSetUpdatable:
 
 		Args
 		--------
-			guid (``Guid``) :  guid
+			guid (`Guid`) :  guid
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDomainDataSetSearch:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9634,14 +9635,14 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			label (``str``) :  label
-			type (``ModelingElementType``) :  type
-			elementTypeID (``int``) :  elementTypeID
-			useWildcards (``bool``) :  useWildcards
+			label (`str`) :  label
+			type (`ModelingElementType`) :  type
+			elementTypeID (`int`) :  elementTypeID
+			useWildcards (`bool`) :  useWildcards
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9650,12 +9651,12 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			label (``str``) :  label
-			useWildcards (``bool``) :  useWildcards
+			label (`str`) :  label
+			useWildcards (`bool`) :  useWildcards
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9664,11 +9665,11 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -9677,11 +9678,11 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -9691,11 +9692,11 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9705,13 +9706,13 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9721,11 +9722,11 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9735,13 +9736,13 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9750,19 +9751,19 @@ class IDomainDataSetSearch:
 
 		Args
 		--------
-			modelingElementType (``ModelingElementType``) :  modelingElementType
-			elementTypeIDs (``array[int]``) :  elementTypeIDs
-			ignoreBlanks (``bool``) :  ignoreBlanks
+			modelingElementType (`ModelingElementType`) :  modelingElementType
+			elementTypeIDs (`array[int]`) :  elementTypeIDs
+			ignoreBlanks (`bool`) :  ignoreBlanks
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
 class IDomainDataSetLog:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9779,7 +9780,7 @@ class IDomainDataSetLog:
 
 		Returns
 		--------
-			``IDomainDataSetLog`` : 
+			`IChangeLogDatabase` : 
 		"""
 		pass
 
@@ -9789,13 +9790,13 @@ class IDomainDataSetLog:
 
 		Returns
 		--------
-			``IDomainDataSetLog`` : 
+			`IChangeLog` : 
 		"""
 		pass
 
 class IDocumentSpecificationRegistryDataSet:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9812,13 +9813,13 @@ class IDocumentSpecificationRegistryDataSet:
 
 		Returns
 		--------
-			``IDocumentSpecificationRegistryDataSet`` : 
+			`IDocumentSpecificationRegistry` : 
 		"""
 		pass
 
 class IChangeLogDatabase:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9834,12 +9835,12 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			process (``IProcessInProgressEx``) :  process
-			elementIDs (``HmIDCollection``) :  elementIDs
+			process (`IProcessInProgressEx`) :  process
+			elementIDs (`HmIDCollection`) :  elementIDs
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -9848,7 +9849,7 @@ class IChangeLogDatabase:
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9857,12 +9858,12 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			startID (``int``) :  startID
-			endID (``int``) :  endID
+			startID (`int`) :  startID
+			endID (`int`) :  endID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9871,7 +9872,7 @@ class IChangeLogDatabase:
 
 		Returns
 		--------
-			``IChangeLogWriter`` : 
+			`IChangeLogWriter` : 
 		"""
 		pass
 
@@ -9880,11 +9881,11 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			limit (``int``) :  limit
+			limit (`int`) :  limit
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9893,7 +9894,7 @@ class IChangeLogDatabase:
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -9902,11 +9903,11 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			numberIds (``int``) :  numberIds
+			numberIds (`int`) :  numberIds
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -9915,7 +9916,7 @@ class IChangeLogDatabase:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -9925,14 +9926,14 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			dataSet (``DataSet``) :  dataSet
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			process (``IProcessInProgress``) :  process
-			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
+			dataSet (`DataSet`) :  dataSet
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			process (`IProcessInProgress`) :  process
+			dataRowLoader (`IChangeLogDataRowLoader`) :  dataRowLoader
 
 		Returns
 		--------
-			``DataSet`` : 
+			`DataSet` : 
 		"""
 		pass
 
@@ -9942,13 +9943,13 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			process (``IProcessInProgress``) :  process
-			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			process (`IProcessInProgress`) :  process
+			dataRowLoader (`IChangeLogDataRowLoader`) :  dataRowLoader
 
 		Returns
 		--------
-			``DataSet`` : 
+			`DataSet` : 
 		"""
 		pass
 
@@ -9957,14 +9958,14 @@ class IChangeLogDatabase:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			process (``IProcessInProgress``) :  process
-			dataRowLoader (``IChangeLogDataRowLoader``) :  dataRowLoader
-			elementIDs (``HmIDCollection``) :  elementIDs
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			process (`IProcessInProgress`) :  process
+			dataRowLoader (`IChangeLogDataRowLoader`) :  dataRowLoader
+			elementIDs (`HmIDCollection`) :  elementIDs
 
 		Returns
 		--------
-			``DataSet`` : 
+			`DataSet` : 
 		"""
 		pass
 
@@ -9974,13 +9975,13 @@ class IChangeLogDatabase:
 
 		Returns
 		--------
-			``IChangeLogDatabase`` : 
+			`SQLiteConnection` : 
 		"""
 		pass
 
 class IChangeLogDataRowLoader:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -9996,17 +9997,17 @@ class IChangeLogDataRowLoader:
 
 		Args
 		--------
-			values (``List[object]``) :  values
+			values (`List[object]`) :  values
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IChangeLogFieldEntryVerifier:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -10022,17 +10023,17 @@ class IChangeLogFieldEntryVerifier:
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class IChangeLogWriter:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -10048,7 +10049,7 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10057,14 +10058,14 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			parentAlternativeID (``int``) :  parentAlternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			isChildAlternative (``bool``) :  isChildAlternative
+			alternativeID (`int`) :  alternativeID
+			parentAlternativeID (`int`) :  parentAlternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			isChildAlternative (`bool`) :  isChildAlternative
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10073,12 +10074,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10087,13 +10088,13 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			parentID (``int``) :  parentID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10102,13 +10103,13 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			parentID (``int``) :  parentID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10117,14 +10118,14 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			fieldTypeLabel (``str``) :  fieldTypeLabel
-			newValue (``object``) :  newValue
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			fieldTypeLabel (`str`) :  fieldTypeLabel
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10133,13 +10134,13 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			parentID (``int``) :  parentID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10148,12 +10149,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10162,7 +10163,7 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10171,16 +10172,16 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
-			fieldType (``str``) :  fieldType
-			elementIDs (``List[int]``) :  elementIDs
-			value (``object``) :  value
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
+			fieldType (`str`) :  fieldType
+			elementIDs (`List[int]`) :  elementIDs
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10189,14 +10190,14 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10205,14 +10206,14 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10221,12 +10222,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementID (`int`) :  elementID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10235,12 +10236,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementID (`int`) :  elementID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10249,15 +10250,15 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			fieldTypeLabel (``str``) :  fieldTypeLabel
-			newValue (``object``) :  newValue
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			fieldTypeLabel (`str`) :  fieldTypeLabel
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10266,15 +10267,15 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
-			fieldTypeLabel (``str``) :  fieldTypeLabel
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
+			fieldTypeLabel (`str`) :  fieldTypeLabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10283,14 +10284,14 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			domainElementTypeID (``Nullable``) :  domainElementTypeID
-			fieldTypeLabel (``str``) :  fieldTypeLabel
-			newValue (``object``) :  newValue
+			domainElementID (`int`) :  domainElementID
+			domainElementTypeID (`Nullable`) :  domainElementTypeID
+			fieldTypeLabel (`str`) :  fieldTypeLabel
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10299,14 +10300,14 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			fieldType (``str``) :  fieldType
-			elementIDNewValueDictionary (``Dict[int,int]``) :  elementIDNewValueDictionary
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			fieldType (`str`) :  fieldType
+			elementIDNewValueDictionary (`Dict[int,int]`) :  elementIDNewValueDictionary
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10316,12 +10317,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			elementIDs (``HmIDCollection``) :  elementIDs
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementIDs (`HmIDCollection`) :  elementIDs
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10331,12 +10332,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementID (`int`) :  elementID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10345,12 +10346,12 @@ class IChangeLogWriter:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			elementTypeID (``int``) :  elementTypeID
+			elementID (`int`) :  elementID
+			elementTypeID (`int`) :  elementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10359,7 +10360,7 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10368,7 +10369,7 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10377,17 +10378,17 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 	@property
-	def CurrentContext(self) -> Nullable[Guid]:
+	def CurrentContext(self) -> Union[Guid, None]:
 		"""No Description
 
 		Returns
 		--------
-			``IChangeLogWriter`` : 
+			`Nullable` : 
 		"""
 		pass
 
@@ -10401,7 +10402,7 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``IChangeLogWriter`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -10415,7 +10416,7 @@ class IChangeLogWriter:
 
 		Returns
 		--------
-			``IChangeLogWriter`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -10425,7 +10426,7 @@ class IChangeLogWriter:
 
 class IChangeLog:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -10442,17 +10443,17 @@ class IChangeLog:
 
 		Args
 		--------
-			process (``IProcessInProgressEx``) :  process
-			changeLogDataTable (``DataTable``) :  changeLogDataTable
-			orderedIDs (``array[int]``) :  orderedIDs
-			filteredIDs (``HmIDCollection``) :  filteredIDs
-			filename (``str``) :  filename
-			whereClause (``str``) :  whereClause
-			append (``bool``) :  append
+			process (`IProcessInProgressEx`) :  process
+			changeLogDataTable (`DataTable`) :  changeLogDataTable
+			orderedIDs (`array[int]`) :  orderedIDs
+			filteredIDs (`HmIDCollection`) :  filteredIDs
+			filename (`str`) :  filename
+			whereClause (`str`) :  whereClause
+			append (`bool`) :  append
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10461,11 +10462,11 @@ class IChangeLog:
 
 		Args
 		--------
-			filename (``str``) :  filename
+			filename (`str`) :  filename
 
 		Returns
 		--------
-			``SQLiteConnection`` : 
+			`SQLiteConnection` : 
 		"""
 		pass
 
@@ -10475,13 +10476,13 @@ class IChangeLog:
 
 		Args
 		--------
-			archiveConnection (``SQLiteConnection``) :  archiveConnection
-			changeLogDataTable (``DataTable``) :  changeLogDataTable
-			orderedIDs (``array[int]``) :  orderedIDs
+			archiveConnection (`SQLiteConnection`) :  archiveConnection
+			changeLogDataTable (`DataTable`) :  changeLogDataTable
+			orderedIDs (`array[int]`) :  orderedIDs
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10490,11 +10491,11 @@ class IChangeLog:
 
 		Args
 		--------
-			archiveConnection (``SQLiteConnection``) :  archiveConnection
+			archiveConnection (`SQLiteConnection`) :  archiveConnection
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10503,7 +10504,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10512,14 +10513,14 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			parentAlternativeID (``int``) :  parentAlternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			isChildAlternative (``bool``) :  isChildAlternative
+			alternativeID (`int`) :  alternativeID
+			parentAlternativeID (`int`) :  parentAlternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			isChildAlternative (`bool`) :  isChildAlternative
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10528,12 +10529,12 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10542,13 +10543,13 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			parentID (``int``) :  parentID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10557,13 +10558,13 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			parentID (``int``) :  parentID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10572,14 +10573,14 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			fieldTypeLabel (``str``) :  fieldTypeLabel
-			newValue (``object``) :  newValue
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			fieldTypeLabel (`str`) :  fieldTypeLabel
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10588,13 +10589,13 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			parentID (``int``) :  parentID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10603,12 +10604,12 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10617,7 +10618,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10626,16 +10627,16 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
-			fieldType (``str``) :  fieldType
-			elementIDs (``List[int]``) :  elementIDs
-			value (``object``) :  value
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
+			fieldType (`str`) :  fieldType
+			elementIDs (`List[int]`) :  elementIDs
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10644,14 +10645,14 @@ class IChangeLog:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10660,14 +10661,14 @@ class IChangeLog:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10676,12 +10677,12 @@ class IChangeLog:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementID (`int`) :  elementID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10690,12 +10691,12 @@ class IChangeLog:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementID (`int`) :  elementID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10704,15 +10705,15 @@ class IChangeLog:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			fieldTypeLabel (``str``) :  fieldTypeLabel
-			newValue (``object``) :  newValue
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			fieldTypeLabel (`str`) :  fieldTypeLabel
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10721,15 +10722,15 @@ class IChangeLog:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementCollectionFieldType (``IDomainElementFieldType``) :  domainElementCollectionFieldType
-			fieldTypeLabel (``str``) :  fieldTypeLabel
+			domainElementID (`int`) :  domainElementID
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementCollectionFieldType (`IDomainElementFieldType`) :  domainElementCollectionFieldType
+			fieldTypeLabel (`str`) :  fieldTypeLabel
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10738,14 +10739,14 @@ class IChangeLog:
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			domainElementTypeID (``Nullable``) :  domainElementTypeID
-			fieldTypeLabel (``str``) :  fieldTypeLabel
-			newValue (``object``) :  newValue
+			domainElementID (`int`) :  domainElementID
+			domainElementTypeID (`Nullable`) :  domainElementTypeID
+			fieldTypeLabel (`str`) :  fieldTypeLabel
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10754,14 +10755,14 @@ class IChangeLog:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			alternativeTypeID (``int``) :  alternativeTypeID
-			fieldType (``str``) :  fieldType
-			elementIDNewValueDictionary (``Dict[int,int]``) :  elementIDNewValueDictionary
+			alternativeID (`int`) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			fieldType (`str`) :  fieldType
+			elementIDNewValueDictionary (`Dict[int,int]`) :  elementIDNewValueDictionary
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10771,12 +10772,12 @@ class IChangeLog:
 
 		Args
 		--------
-			elementIDs (``HmIDCollection``) :  elementIDs
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementIDs (`HmIDCollection`) :  elementIDs
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10786,12 +10787,12 @@ class IChangeLog:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			elementID (`int`) :  elementID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10800,12 +10801,12 @@ class IChangeLog:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			elementTypeID (``int``) :  elementTypeID
+			elementID (`int`) :  elementID
+			elementTypeID (`int`) :  elementTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10814,7 +10815,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10823,7 +10824,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10832,7 +10833,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10842,7 +10843,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``IChangeLog`` : 
+			`IChangeLogDatabase` : 
 		"""
 		pass
 
@@ -10852,7 +10853,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``IChangeLog`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -10866,7 +10867,7 @@ class IChangeLog:
 
 		Returns
 		--------
-			``IChangeLog`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -10876,7 +10877,7 @@ class IChangeLog:
 
 class IDomainDataSetGISIDLinks:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -10892,11 +10893,11 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10905,11 +10906,11 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``StringCollection`` : 
+			`StringCollection` : 
 		"""
 		pass
 
@@ -10918,11 +10919,11 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			gisID (``str``) :  gisID
+			gisID (`str`) :  gisID
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -10931,11 +10932,11 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			gisID (``str``) :  gisID
+			gisID (`str`) :  gisID
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -10944,7 +10945,7 @@ class IDomainDataSetGISIDLinks:
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -10953,7 +10954,7 @@ class IDomainDataSetGISIDLinks:
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -10962,12 +10963,12 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			gisID (``str``) :  gisID
+			elementID (`int`) :  elementID
+			gisID (`str`) :  gisID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10976,12 +10977,12 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			gisIDs (``StringCollection``) :  gisIDs
+			elementID (`int`) :  elementID
+			gisIDs (`StringCollection`) :  gisIDs
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -10990,11 +10991,11 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -11003,7 +11004,7 @@ class IDomainDataSetGISIDLinks:
 
 		Returns
 		--------
-			``Iterator[GenericPair]`` : 
+			`Iterator[GenericPair]` : 
 		"""
 		pass
 
@@ -11012,18 +11013,18 @@ class IDomainDataSetGISIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			value (``str``) :  value
+			elementID (`int`) :  elementID
+			value (`str`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDomainDataSetExternalIDLinks:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11039,12 +11040,12 @@ class IDomainDataSetExternalIDLinks:
 
 		Args
 		--------
-			idType (``ExternalIDType``) :  idType
-			externalID (``str``) :  externalID
+			idType (`ExternalIDType`) :  idType
+			externalID (`str`) :  externalID
 
 		Returns
 		--------
-			``Nullable`` : 
+			`Nullable` : 
 		"""
 		pass
 
@@ -11053,12 +11054,12 @@ class IDomainDataSetExternalIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			idType (``ExternalIDType``) :  idType
+			elementID (`int`) :  elementID
+			idType (`ExternalIDType`) :  idType
 
 		Returns
 		--------
-			``List[str]`` : 
+			`List[str]` : 
 		"""
 		pass
 
@@ -11067,13 +11068,13 @@ class IDomainDataSetExternalIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			idType (``ExternalIDType``) :  idType
-			externalIDs (``List[str]``) :  externalIDs
+			elementID (`int`) :  elementID
+			idType (`ExternalIDType`) :  idType
+			externalIDs (`List[str]`) :  externalIDs
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11082,12 +11083,12 @@ class IDomainDataSetExternalIDLinks:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			idType (``ExternalIDType``) :  idType
+			elementID (`int`) :  elementID
+			idType (`ExternalIDType`) :  idType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11096,17 +11097,17 @@ class IDomainDataSetExternalIDLinks:
 
 		Args
 		--------
-			idType (``ExternalIDType``) :  idType
+			idType (`ExternalIDType`) :  idType
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IDomainDataSetBulkOperations:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11122,11 +11123,11 @@ class IDomainDataSetBulkOperations:
 
 		Args
 		--------
-			type (``BulkOperationType``) :  type
+			type (`BulkOperationType`) :  type
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11135,7 +11136,7 @@ class IDomainDataSetBulkOperations:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11145,13 +11146,13 @@ class IDomainDataSetBulkOperations:
 
 		Returns
 		--------
-			``IDomainDataSetBulkOperations`` : 
+			`BulkOperationType` : 
 		"""
 		pass
 
 class IModelingElement(IEditLabeled):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11167,7 +11168,7 @@ class IModelingElement(IEditLabeled):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -11177,7 +11178,7 @@ class IModelingElement(IEditLabeled):
 
 		Returns
 		--------
-			``IModelingElement`` : 
+			`int` : 
 		"""
 		pass
 
@@ -11187,7 +11188,7 @@ class IModelingElement(IEditLabeled):
 
 		Returns
 		--------
-			``IModelingElement`` : 
+			`str` : 
 		"""
 		pass
 
@@ -11201,7 +11202,7 @@ class IModelingElement(IEditLabeled):
 
 		Returns
 		--------
-			``IModelingElement`` : 
+			`ModelingElementType` : 
 		"""
 		pass
 
@@ -11211,13 +11212,13 @@ class IModelingElement(IEditLabeled):
 
 		Returns
 		--------
-			``IModelingElement`` : 
+			`IModelingElementManager` : 
 		"""
 		pass
 
 class IModelingElementManager(IListManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11233,11 +11234,11 @@ class IModelingElementManager(IListManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -11246,11 +11247,11 @@ class IModelingElementManager(IListManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``IModelingElement`` : 
+			`IModelingElement` : 
 		"""
 		pass
 
@@ -11259,11 +11260,11 @@ class IModelingElementManager(IListManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -11272,11 +11273,11 @@ class IModelingElementManager(IListManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11285,7 +11286,7 @@ class IModelingElementManager(IListManager):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`ModelingElementCollection` : 
 		"""
 		pass
 
@@ -11294,7 +11295,7 @@ class IModelingElementManager(IListManager):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -11303,11 +11304,11 @@ class IModelingElementManager(IListManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11317,13 +11318,13 @@ class IModelingElementManager(IListManager):
 
 		Returns
 		--------
-			``IModelingElementManager`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
 class IModelingElementManagerBatch:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11339,17 +11340,17 @@ class IModelingElementManagerBatch:
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
+			ids (`HmIDCollection`) :  ids
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class ITreeElement(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11365,7 +11366,7 @@ class ITreeElement(IModelingElement):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`ModelingElementCollection` : 
 		"""
 		pass
 
@@ -11375,7 +11376,7 @@ class ITreeElement(IModelingElement):
 
 		Returns
 		--------
-			``ITreeElement`` : 
+			`int` : 
 		"""
 		pass
 
@@ -11385,7 +11386,7 @@ class ITreeElement(IModelingElement):
 
 class ITreeElement2:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11401,7 +11402,7 @@ class ITreeElement2:
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -11410,18 +11411,18 @@ class ITreeElement2:
 
 		Args
 		--------
-			treeElement (``ITreeElement``) :  treeElement
-			numberOfLevels (``int``) :  numberOfLevels
+			treeElement (`ITreeElement`) :  treeElement
+			numberOfLevels (`int`) :  numberOfLevels
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class ITreeElementManager(IModelingElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11437,7 +11438,7 @@ class ITreeElementManager(IModelingElementManager):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`ModelingElementCollection` : 
 		"""
 		pass
 
@@ -11446,17 +11447,17 @@ class ITreeElementManager(IModelingElementManager):
 
 		Args
 		--------
-			parentID (``int``) :  parentID
+			parentID (`int`) :  parentID
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`ModelingElementCollection` : 
 		"""
 		pass
 
 class IDomainElement(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11472,7 +11473,7 @@ class IDomainElement(IModelingElement):
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -11482,11 +11483,11 @@ class IDomainElement(IModelingElement):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11496,12 +11497,12 @@ class IDomainElement(IModelingElement):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			alternativeTypeName (``str``) :  alternativeTypeName
+			fieldName (`str`) :  fieldName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11511,13 +11512,13 @@ class IDomainElement(IModelingElement):
 
 		Returns
 		--------
-			``IDomainElement`` : 
+			`int` : 
 		"""
 		pass
 
 class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11533,7 +11534,7 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Returns
 		--------
-			``IDomainElementType`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -11542,7 +11543,7 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Returns
 		--------
-			``IHmIDDelayedCollection`` : 
+			`IHmIDDelayedCollection` : 
 		"""
 		pass
 
@@ -11552,11 +11553,11 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11566,12 +11567,12 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			alternativeTypeName (``str``) :  alternativeTypeName
+			fieldName (`str`) :  fieldName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11581,12 +11582,12 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			fieldName (`str`) :  fieldName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11596,13 +11597,13 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			fieldName (`str`) :  fieldName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11612,7 +11613,7 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -11622,11 +11623,11 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -11635,21 +11636,21 @@ class IDomainElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			collectionFieldName (``str``) :  collectionFieldName
-			alternativeTypeName (``str``) :  alternativeTypeName
-			alternativeID (``int``) :  alternativeID
-			sortContexts (``SortContextCollection``) :  sortContexts
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			collectionFieldName (`str`) :  collectionFieldName
+			alternativeTypeName (`str`) :  alternativeTypeName
+			alternativeID (`int`) :  alternativeID
+			sortContexts (`SortContextCollection`) :  sortContexts
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``ICrossElementFieldListManager`` : 
+			`ICrossElementFieldListManager` : 
 		"""
 		pass
 
 class IAlternative(ITreeElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11665,7 +11666,7 @@ class IAlternative(ITreeElement):
 
 		Returns
 		--------
-			``IAlternativeType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -11674,11 +11675,11 @@ class IAlternative(ITreeElement):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IAlternativeRecord`` : 
+			`IAlternativeRecord` : 
 		"""
 		pass
 
@@ -11687,12 +11688,12 @@ class IAlternative(ITreeElement):
 
 		Args
 		--------
-			name (``str``) :  name
-			domainElementTypeID (``int``) :  domainElementTypeID
+			name (`str`) :  name
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11701,11 +11702,11 @@ class IAlternative(ITreeElement):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``ISystemRecordField`` : 
+			`ISystemRecordField` : 
 		"""
 		pass
 
@@ -11714,11 +11715,11 @@ class IAlternative(ITreeElement):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -11727,7 +11728,7 @@ class IAlternative(ITreeElement):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -11737,13 +11738,13 @@ class IAlternative(ITreeElement):
 
 		Returns
 		--------
-			``IAlternative`` : 
+			`int` : 
 		"""
 		pass
 
 class IAlternativeManager(ITreeElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11759,7 +11760,7 @@ class IAlternativeManager(ITreeElementManager):
 
 		Returns
 		--------
-			``IAlternativeType`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -11768,7 +11769,7 @@ class IAlternativeManager(ITreeElementManager):
 
 		Returns
 		--------
-			``ISystemAlternativeRecord`` : 
+			`ISystemAlternativeRecord` : 
 		"""
 		pass
 
@@ -11778,11 +11779,11 @@ class IAlternativeManager(ITreeElementManager):
 
 		Args
 		--------
-			alternativeParentId (``int``) :  alternativeParentId
+			alternativeParentId (`int`) :  alternativeParentId
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -11791,11 +11792,11 @@ class IAlternativeManager(ITreeElementManager):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``ISystemRecordField`` : 
+			`ISystemRecordField` : 
 		"""
 		pass
 
@@ -11804,13 +11805,13 @@ class IAlternativeManager(ITreeElementManager):
 
 		Args
 		--------
-			name (``str``) :  name
-			domainElementTypeID (``int``) :  domainElementTypeID
-			initialAlternativeID (``int``) :  initialAlternativeID
+			name (`str`) :  name
+			domainElementTypeID (`int`) :  domainElementTypeID
+			initialAlternativeID (`int`) :  initialAlternativeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -11819,11 +11820,11 @@ class IAlternativeManager(ITreeElementManager):
 
 		Args
 		--------
-			sourceAlternativeID (``int``) :  sourceAlternativeID
+			sourceAlternativeID (`int`) :  sourceAlternativeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11833,13 +11834,13 @@ class IAlternativeManager(ITreeElementManager):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
 class IAlternativeRecord:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -11855,11 +11856,11 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -11868,11 +11869,11 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11881,11 +11882,11 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11895,13 +11896,13 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			fieldTypeID (``int``) :  fieldTypeID
-			unit (``UnitIndex``) :  unit
+			elementID (`int`) :  elementID
+			fieldTypeID (`int`) :  fieldTypeID
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -11911,13 +11912,13 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			fieldName (``str``) :  fieldName
-			unit (``UnitIndex``) :  unit
+			elementID (`int`) :  elementID
+			fieldName (`str`) :  fieldName
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -11927,14 +11928,14 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			fieldTypeID (``int``) :  fieldTypeID
-			unit (``UnitIndex``) :  unit
-			newVal (``object``) :  newVal
+			elementID (`int`) :  elementID
+			fieldTypeID (`int`) :  fieldTypeID
+			unit (`UnitIndex`) :  unit
+			newVal (`object`) :  newVal
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11944,14 +11945,14 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			fieldName (``str``) :  fieldName
-			unit (``UnitIndex``) :  unit
-			newVal (``object``) :  newVal
+			elementID (`int`) :  elementID
+			fieldName (`str`) :  fieldName
+			unit (`UnitIndex`) :  unit
+			newVal (`object`) :  newVal
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -11961,12 +11962,12 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			fieldTypeID (``int``) :  fieldTypeID
-			unit (``UnitIndex``) :  unit
+			fieldTypeID (`int`) :  fieldTypeID
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -11976,12 +11977,12 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			unit (``UnitIndex``) :  unit
+			fieldName (`str`) :  fieldName
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -11991,7 +11992,7 @@ class IAlternativeRecord:
 
 		Returns
 		--------
-			``IAlternativeRecordDataReader`` : 
+			`IAlternativeRecordDataReader` : 
 		"""
 		pass
 
@@ -12001,11 +12002,11 @@ class IAlternativeRecord:
 
 		Args
 		--------
-			fieldTypeNames (``array[str]``) :  fieldTypeNames
+			fieldTypeNames (`array[str]`) :  fieldTypeNames
 
 		Returns
 		--------
-			``IAlternativeRecordDataReader`` : 
+			`IAlternativeRecordDataReader` : 
 		"""
 		pass
 
@@ -12015,13 +12016,13 @@ class IAlternativeRecord:
 
 		Returns
 		--------
-			``IAlternativeRecord`` : 
+			`IAlternative` : 
 		"""
 		pass
 
 class IFieldCollectionDataReader:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12038,11 +12039,11 @@ class IFieldCollectionDataReader:
 
 		Args
 		--------
-			fieldTypeName (``str``) :  fieldTypeName
+			fieldTypeName (`str`) :  fieldTypeName
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -12052,12 +12053,12 @@ class IFieldCollectionDataReader:
 
 		Args
 		--------
-			fieldTypeName (``str``) :  fieldTypeName
-			unit (``UnitIndex``) :  unit
+			fieldTypeName (`str`) :  fieldTypeName
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -12066,11 +12067,11 @@ class IFieldCollectionDataReader:
 
 		Args
 		--------
-			fieldTypeName (``str``) :  fieldTypeName
+			fieldTypeName (`str`) :  fieldTypeName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12079,7 +12080,7 @@ class IFieldCollectionDataReader:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12088,13 +12089,13 @@ class IFieldCollectionDataReader:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IAlternativeRecordDataReader(IFieldCollectionDataReader):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12111,13 +12112,13 @@ class IAlternativeRecordDataReader(IFieldCollectionDataReader):
 
 		Returns
 		--------
-			``IAlternativeRecordDataReader`` : 
+			`IAlternativeRecord` : 
 		"""
 		pass
 
 class ISystemAlternativeRecord:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12133,11 +12134,11 @@ class ISystemAlternativeRecord:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -12146,11 +12147,11 @@ class ISystemAlternativeRecord:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12159,11 +12160,11 @@ class ISystemAlternativeRecord:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12172,13 +12173,13 @@ class ISystemAlternativeRecord:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			fieldTypeID (``int``) :  fieldTypeID
-			unit (``UnitIndex``) :  unit
+			alternativeID (`int`) :  alternativeID
+			fieldTypeID (`int`) :  fieldTypeID
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -12187,14 +12188,14 @@ class ISystemAlternativeRecord:
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			fieldTypeID (``int``) :  fieldTypeID
-			unit (``UnitIndex``) :  unit
-			newVal (``object``) :  newVal
+			alternativeID (`int`) :  alternativeID
+			fieldTypeID (`int`) :  fieldTypeID
+			unit (`UnitIndex`) :  unit
+			newVal (`object`) :  newVal
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12204,13 +12205,13 @@ class ISystemAlternativeRecord:
 
 		Returns
 		--------
-			``ISystemAlternativeRecord`` : 
+			`int` : 
 		"""
 		pass
 
 class IGeometryPointAlternativeRecord(IAlternativeRecord):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12226,11 +12227,11 @@ class IGeometryPointAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -12239,18 +12240,18 @@ class IGeometryPointAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			point (``GeometryPoint``) :  point
+			domainElementID (`int`) :  domainElementID
+			point (`GeometryPoint`) :  point
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12266,11 +12267,11 @@ class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``List[GeometryPoint]`` : 
+			`List[GeometryPoint]` : 
 		"""
 		pass
 
@@ -12279,18 +12280,18 @@ class IGeometryPolylineAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			points (``List[GeometryPoint]``) :  points
+			domainElementID (`int`) :  domainElementID
+			points (`List[GeometryPoint]`) :  points
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryPolyline3DAlternativeRecord(IAlternativeRecord):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12306,11 +12307,11 @@ class IGeometryPolyline3DAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``List[GeometryPoint3D]`` : 
+			`List[GeometryPoint3D]` : 
 		"""
 		pass
 
@@ -12319,18 +12320,18 @@ class IGeometryPolyline3DAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			points3D (``List[GeometryPoint3D]``) :  points3D
+			domainElementID (`int`) :  domainElementID
+			points3D (`List[GeometryPoint3D]`) :  points3D
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12346,11 +12347,11 @@ class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``List[List[GeometryPoint]]`` : 
+			`List[List[GeometryPoint]]` : 
 		"""
 		pass
 
@@ -12359,18 +12360,18 @@ class IGeometryPolygonAlternativeRecord(IAlternativeRecord):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
-			rings (``List[List[GeometryPoint]]``) :  rings
+			domainElementID (`int`) :  domainElementID
+			rings (`List[List[GeometryPoint]]`) :  rings
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IScenario(ITreeElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12387,11 +12388,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -12401,11 +12402,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeName (``str``) :  alternativeTypeName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -12415,12 +12416,12 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
-			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12430,12 +12431,12 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeName (``str``) :  alternativeTypeName
-			alternativeID (``int``) :  alternativeID
+			alternativeTypeName (`str`) :  alternativeTypeName
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12444,11 +12445,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -12457,11 +12458,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12470,11 +12471,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12483,11 +12484,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -12496,11 +12497,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12509,11 +12510,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12523,11 +12524,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -12537,12 +12538,12 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
-			calculationOptionsID (``int``) :  calculationOptionsID
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
+			calculationOptionsID (`int`) :  calculationOptionsID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12551,11 +12552,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``IResultManager`` : 
+			`IResultManager` : 
 		"""
 		pass
 
@@ -12564,11 +12565,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -12577,11 +12578,11 @@ class IScenario(ITreeElement):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12591,7 +12592,7 @@ class IScenario(ITreeElement):
 
 		Returns
 		--------
-			``IScenario`` : 
+			`int` : 
 		"""
 		pass
 
@@ -12605,7 +12606,7 @@ class IScenario(ITreeElement):
 
 		Returns
 		--------
-			``IScenario`` : 
+			`int` : 
 		"""
 		pass
 
@@ -12615,7 +12616,7 @@ class IScenario(ITreeElement):
 
 class IScenarioManager(ITreeElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12631,11 +12632,11 @@ class IScenarioManager(ITreeElementManager):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``ICalculationOptionsManager`` : 
+			`ICalculationOptionsManager` : 
 		"""
 		pass
 
@@ -12645,11 +12646,11 @@ class IScenarioManager(ITreeElementManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -12659,12 +12660,12 @@ class IScenarioManager(ITreeElementManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			fieldName (`str`) :  fieldName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -12674,7 +12675,7 @@ class IScenarioManager(ITreeElementManager):
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -12684,11 +12685,11 @@ class IScenarioManager(ITreeElementManager):
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -12698,7 +12699,7 @@ class IScenarioManager(ITreeElementManager):
 
 		Returns
 		--------
-			``IScenarioManager`` : 
+			`int` : 
 		"""
 		pass
 
@@ -12708,7 +12709,7 @@ class IScenarioManager(ITreeElementManager):
 
 class ICalculationOptionsManager(IModelingElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12724,11 +12725,11 @@ class ICalculationOptionsManager(IModelingElementManager):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -12738,13 +12739,13 @@ class ICalculationOptionsManager(IModelingElementManager):
 
 		Returns
 		--------
-			``ICalculationOptionsManager`` : 
+			`str` : 
 		"""
 		pass
 
 class ICalculationOptions(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12760,11 +12761,11 @@ class ICalculationOptions(IModelingElement):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -12774,13 +12775,13 @@ class ICalculationOptions(IModelingElement):
 
 		Returns
 		--------
-			``ICalculationOptions`` : 
+			`str` : 
 		"""
 		pass
 
 class ISelectionSetManager(IModelingElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12796,17 +12797,17 @@ class ISelectionSetManager(IModelingElementManager):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
 class ISelectionSet(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12822,17 +12823,17 @@ class ISelectionSet(IModelingElement):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
 class IEmbeddedStickyObjectManager(IModelingElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12848,11 +12849,11 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -12862,11 +12863,11 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 
 		Args
 		--------
-			domainElementID (``int``) :  domainElementID
+			domainElementID (`int`) :  domainElementID
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -12875,11 +12876,11 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -12889,13 +12890,13 @@ class IEmbeddedStickyObjectManager(IModelingElementManager):
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
 class IEmbeddedStickyObject(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12911,17 +12912,17 @@ class IEmbeddedStickyObject(IModelingElement):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
 class IResultManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -12937,7 +12938,7 @@ class IResultManager:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12946,7 +12947,7 @@ class IResultManager:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12955,7 +12956,7 @@ class IResultManager:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -12964,11 +12965,11 @@ class IResultManager:
 
 		Args
 		--------
-			unit (``TimeUnit``) :  unit
+			unit (`TimeUnit`) :  unit
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -12978,11 +12979,11 @@ class IResultManager:
 
 		Args
 		--------
-			resultRecordTypeID (``int``) :  resultRecordTypeID
+			resultRecordTypeID (`int`) :  resultRecordTypeID
 
 		Returns
 		--------
-			``IResultRecord`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
@@ -12992,11 +12993,11 @@ class IResultManager:
 
 		Args
 		--------
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IResultRecord`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
@@ -13005,11 +13006,11 @@ class IResultManager:
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`ResultRecordCollection` : 
 		"""
 		pass
 
@@ -13019,7 +13020,7 @@ class IResultManager:
 
 		Returns
 		--------
-			``IResultManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -13029,7 +13030,7 @@ class IResultManager:
 
 		Returns
 		--------
-			``IResultManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -13039,7 +13040,7 @@ class IResultManager:
 
 		Returns
 		--------
-			``IResultManager`` : 
+			`str` : 
 		"""
 		pass
 
@@ -13049,13 +13050,13 @@ class IResultManager:
 
 		Returns
 		--------
-			``IResultManager`` : 
+			`IScenario` : 
 		"""
 		pass
 
 class IResultRecord:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13071,14 +13072,14 @@ class IResultRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			resultFieldTypeName (``str``) :  resultFieldTypeName
-			timeStep (``int``) :  timeStep
-			unit (``UnitIndex``) :  unit
+			elementID (`int`) :  elementID
+			resultFieldTypeName (`str`) :  resultFieldTypeName
+			timeStep (`int`) :  timeStep
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -13087,14 +13088,14 @@ class IResultRecord:
 
 		Args
 		--------
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			resultFieldTypeName (``str``) :  resultFieldTypeName
-			timeStep (``int``) :  timeStep
-			unit (``UnitIndex``) :  unit
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			resultFieldTypeName (`str`) :  resultFieldTypeName
+			timeStep (`int`) :  timeStep
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13103,19 +13104,19 @@ class IResultRecord:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			resultFieldTypeName (``str``) :  resultFieldTypeName
-			unit (``UnitIndex``) :  unit
+			elementID (`int`) :  elementID
+			resultFieldTypeName (`str`) :  resultFieldTypeName
+			unit (`UnitIndex`) :  unit
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
 class IResultField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13131,11 +13132,11 @@ class IResultField(IField):
 
 		Args
 		--------
-			scenarioId (``int``) :  scenarioId
+			scenarioId (`int`) :  scenarioId
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -13144,11 +13145,11 @@ class IResultField(IField):
 
 		Args
 		--------
-			scenarioId (``int``) :  scenarioId
+			scenarioId (`int`) :  scenarioId
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -13157,12 +13158,12 @@ class IResultField(IField):
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
-			scenarioID (``int``) :  scenarioID
+			ids (`HmIDCollection`) :  ids
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13172,7 +13173,7 @@ class IResultField(IField):
 
 		Returns
 		--------
-			``IResultField`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -13182,13 +13183,13 @@ class IResultField(IField):
 
 		Returns
 		--------
-			``IResultField`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
 class IResultNonTimeVariantField(IResultField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13205,12 +13206,12 @@ class IResultNonTimeVariantField(IResultField):
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -13220,12 +13221,12 @@ class IResultNonTimeVariantField(IResultField):
 
 		Args
 		--------
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			scenarioID (``int``) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13235,11 +13236,11 @@ class IResultNonTimeVariantField(IResultField):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -13249,12 +13250,12 @@ class IResultNonTimeVariantField(IResultField):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -13264,11 +13265,11 @@ class IResultNonTimeVariantField(IResultField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -13278,7 +13279,7 @@ class IResultNonTimeVariantField(IResultField):
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13288,17 +13289,17 @@ class IResultNonTimeVariantField(IResultField):
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
+			ids (`HmIDCollection`) :  ids
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
 class IResultTimeVariantField(IResultField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13315,13 +13316,13 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
-			timeStep (``int``) :  timeStep
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -13330,12 +13331,12 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -13345,13 +13346,13 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			scenarioID (``int``) :  scenarioID
-			timeStep (``int``) :  timeStep
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			scenarioID (`int`) :  scenarioID
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13361,12 +13362,12 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			timeStep (``int``) :  timeStep
+			scenarioID (`int`) :  scenarioID
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -13376,13 +13377,13 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			timeStep (``int``) :  timeStep
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
+			scenarioID (`int`) :  scenarioID
+			timeStep (`int`) :  timeStep
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -13392,13 +13393,13 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
-			scenarioID (``int``) :  scenarioID
-			timeStep (``int``) :  timeStep
+			ids (`HmIDCollection`) :  ids
+			scenarioID (`int`) :  scenarioID
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13408,12 +13409,12 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
-			scenarioID (``int``) :  scenarioID
+			ids (`HmIDCollection`) :  ids
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13423,11 +13424,11 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -13437,7 +13438,7 @@ class IResultTimeVariantField(IResultField):
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -13447,17 +13448,17 @@ class IResultTimeVariantField(IResultField):
 
 		Args
 		--------
-			ids (``HmIDCollection``) :  ids
+			ids (`HmIDCollection`) :  ids
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
 class IFieldStatistics:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13473,17 +13474,17 @@ class IFieldStatistics:
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
+			statTypes (`List[StatisticType]`) :  statTypes
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
 class ISelectableFieldStatistics(IFieldStatistics):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13500,12 +13501,12 @@ class ISelectableFieldStatistics(IFieldStatistics):
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			statTypes (`List[StatisticType]`) :  statTypes
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13515,17 +13516,17 @@ class ISelectableFieldStatistics(IFieldStatistics):
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
+			statTypes (`List[StatisticType]`) :  statTypes
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
 class IResultFieldStatistics(ISelectableFieldStatistics):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13542,14 +13543,14 @@ class IResultFieldStatistics(ISelectableFieldStatistics):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			statTypes (``List[StatisticType]``) :  statTypes
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			statTypes (`List[StatisticType]`) :  statTypes
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13558,14 +13559,14 @@ class IResultFieldStatistics(ISelectableFieldStatistics):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			statTypes (``List[StatisticType]``) :  statTypes
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			statTypes (`List[StatisticType]`) :  statTypes
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13575,12 +13576,12 @@ class IResultFieldStatistics(ISelectableFieldStatistics):
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			statTypes (`List[StatisticType]`) :  statTypes
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13590,17 +13591,17 @@ class IResultFieldStatistics(ISelectableFieldStatistics):
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
+			statTypes (`List[StatisticType]`) :  statTypes
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
 class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13617,13 +13618,13 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
-			statTypes (``List[StatisticType]``) :  statTypes
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
+			statTypes (`List[StatisticType]`) :  statTypes
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13633,15 +13634,15 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			statTypes (``List[StatisticType]``) :  statTypes
-			timeStepIndex (``int``) :  timeStepIndex
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			statTypes (`List[StatisticType]`) :  statTypes
+			timeStepIndex (`int`) :  timeStepIndex
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13651,14 +13652,14 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			statTypes (``List[StatisticType]``) :  statTypes
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			statTypes (`List[StatisticType]`) :  statTypes
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13668,12 +13669,12 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			statTypes (`List[StatisticType]`) :  statTypes
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -13683,17 +13684,17 @@ class IResultTimeVariantFieldStatistics(IResultFieldStatistics):
 
 		Args
 		--------
-			statTypes (``List[StatisticType]``) :  statTypes
+			statTypes (`List[StatisticType]`) :  statTypes
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
 class INumericalEngine:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13709,11 +13710,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			scenarios (``ModelingElementCollection``) :  scenarios
+			scenarios (`ModelingElementCollection`) :  scenarios
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13722,11 +13723,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -13735,11 +13736,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13748,11 +13749,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13761,11 +13762,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13774,11 +13775,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13787,11 +13788,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13800,11 +13801,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13813,11 +13814,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``CalculationStepProgressEventHandler``) :  value
+			value (`CalculationStepProgressEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13826,11 +13827,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``CalculationStepProgressEventHandler``) :  value
+			value (`CalculationStepProgressEventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13839,11 +13840,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13852,11 +13853,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13865,11 +13866,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13878,11 +13879,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13891,11 +13892,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13904,11 +13905,11 @@ class INumericalEngine:
 
 		Args
 		--------
-			value (``EventHandler``) :  value
+			value (`EventHandler`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -13918,7 +13919,7 @@ class INumericalEngine:
 
 		Returns
 		--------
-			``INumericalEngine`` : 
+			`str` : 
 		"""
 		pass
 
@@ -13928,7 +13929,7 @@ class INumericalEngine:
 
 		Returns
 		--------
-			``INumericalEngine`` : 
+			`str` : 
 		"""
 		pass
 
@@ -13942,13 +13943,13 @@ class INumericalEngine:
 
 		Returns
 		--------
-			``INumericalEngine`` : 
+			`IResultDataConnection` : 
 		"""
 		pass
 
 class ICompositeNumericalEngine:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -13964,11 +13965,11 @@ class ICompositeNumericalEngine:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``INumericalEngine`` : 
+			`INumericalEngine` : 
 		"""
 		pass
 
@@ -13977,17 +13978,17 @@ class ICompositeNumericalEngine:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class ICompositeResultDataConnection:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14003,17 +14004,17 @@ class ICompositeResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``IResultDataConnection`` : 
+			`IResultDataConnection` : 
 		"""
 		pass
 
 class IResultDataConnectionFactory:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14029,18 +14030,18 @@ class IResultDataConnectionFactory:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			numericalEngine (``INumericalEngine``) :  numericalEngine
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			numericalEngine (`INumericalEngine`) :  numericalEngine
 
 		Returns
 		--------
-			``IResultDataConnection`` : 
+			`IResultDataConnection` : 
 		"""
 		pass
 
 class IValidatingNumericalEngine(INumericalEngine):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14056,17 +14057,17 @@ class IValidatingNumericalEngine(INumericalEngine):
 
 		Args
 		--------
-			scenarios (``ModelingElementCollection``) :  scenarios
+			scenarios (`ModelingElementCollection`) :  scenarios
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class ILicensedNumericalEngine(INumericalEngine):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14082,17 +14083,17 @@ class ILicensedNumericalEngine(INumericalEngine):
 
 		Args
 		--------
-			license (``License``) :  license
+			license (`License`) :  license
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IEntitledNumericalEngine(ILicensedNumericalEngine):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14108,18 +14109,18 @@ class IEntitledNumericalEngine(ILicensedNumericalEngine):
 
 		Args
 		--------
-			license (``License``) :  license
-			messageHandler (``IMessageHandler``) :  messageHandler
+			license (`License`) :  license
+			messageHandler (`IMessageHandler`) :  messageHandler
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class INumericalEngineWithResultDataConnectionFactory:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14136,7 +14137,7 @@ class INumericalEngineWithResultDataConnectionFactory:
 
 class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14153,11 +14154,11 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 
 		Args
 		--------
-			licenseProvider (``ILicenseProvider``) :  licenseProvider
+			licenseProvider (`ILicenseProvider`) :  licenseProvider
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14166,11 +14167,11 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 
 		Args
 		--------
-			licenseKey (``str``) :  licenseKey
+			licenseKey (`str`) :  licenseKey
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14180,11 +14181,11 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 
 		Args
 		--------
-			license (``License``) :  license
+			license (`License`) :  license
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14194,13 +14195,13 @@ class ILicensedNumericalEngineEx(ILicensedNumericalEngine):
 
 		Returns
 		--------
-			``ILicensedNumericalEngineEx`` : 
+			`bool` : 
 		"""
 		pass
 
 class IResultDataConnection:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14216,11 +14217,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14229,11 +14230,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14242,11 +14243,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14255,11 +14256,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -14268,11 +14269,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -14281,11 +14282,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -14294,11 +14295,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IResultRecordDataBroker`` : 
+			`IResultRecordDataBroker` : 
 		"""
 		pass
 
@@ -14307,11 +14308,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -14320,11 +14321,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			`List[IUserNotification]` : 
 		"""
 		pass
 
@@ -14333,12 +14334,12 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			timeStepIndex (``int``) :  timeStepIndex
+			scenarioID (`int`) :  scenarioID
+			timeStepIndex (`int`) :  timeStepIndex
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			`List[IUserNotification]` : 
 		"""
 		pass
 
@@ -14347,13 +14348,13 @@ class IResultDataConnection:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			elementID (``int``) :  elementID
-			timeStepIndex (``int``) :  timeStepIndex
+			scenarioID (`int`) :  scenarioID
+			elementID (`int`) :  elementID
+			timeStepIndex (`int`) :  timeStepIndex
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			`List[IUserNotification]` : 
 		"""
 		pass
 
@@ -14362,7 +14363,7 @@ class IResultDataConnection:
 
 		Returns
 		--------
-			``HmIDCollection`` : 
+			`HmIDCollection` : 
 		"""
 		pass
 
@@ -14371,11 +14372,11 @@ class IResultDataConnection:
 
 		Args
 		--------
-			databasePathAndFileName (``str``) :  databasePathAndFileName
+			databasePathAndFileName (`str`) :  databasePathAndFileName
 
 		Returns
 		--------
-			``array[str]`` : 
+			`array[str]` : 
 		"""
 		pass
 
@@ -14384,12 +14385,12 @@ class IResultDataConnection:
 
 		Args
 		--------
-			currentResultFileAndPathName (``str``) :  currentResultFileAndPathName
-			databasePathAndFileName (``str``) :  databasePathAndFileName
+			currentResultFileAndPathName (`str`) :  currentResultFileAndPathName
+			databasePathAndFileName (`str`) :  databasePathAndFileName
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -14399,7 +14400,7 @@ class IResultDataConnection:
 
 		Returns
 		--------
-			``IResultDataConnection`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -14409,13 +14410,13 @@ class IResultDataConnection:
 
 		Returns
 		--------
-			``IResultDataConnection`` : 
+			`INumericalEngine` : 
 		"""
 		pass
 
 class IResultDataConnectionEX:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14431,18 +14432,18 @@ class IResultDataConnectionEX:
 
 		Args
 		--------
-			elementId (``int``) :  elementId
-			scenarioID (``int``) :  scenarioID
+			elementId (`int`) :  elementId
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14458,14 +14459,14 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			elementID (``int``) :  elementID
-			uberTimeStepIndex (``int``) :  uberTimeStepIndex
-			isGravityResultField (``bool``) :  isGravityResultField
+			scenarioID (`int`) :  scenarioID
+			elementID (`int`) :  elementID
+			uberTimeStepIndex (`int`) :  uberTimeStepIndex
+			isGravityResultField (`bool`) :  isGravityResultField
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -14474,12 +14475,12 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			subnetworkIndex (``int``) :  subnetworkIndex
+			scenarioID (`int`) :  scenarioID
+			subnetworkIndex (`int`) :  subnetworkIndex
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -14489,13 +14490,13 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			timeStepIndex (``int``) :  timeStepIndex
-			pressureSubnetworkID (``int``) :  pressureSubnetworkID
+			scenarioID (`int`) :  scenarioID
+			timeStepIndex (`int`) :  timeStepIndex
+			pressureSubnetworkID (`int`) :  pressureSubnetworkID
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			`List[IUserNotification]` : 
 		"""
 		pass
 
@@ -14504,11 +14505,11 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Args
 		--------
-			factor (``int``) :  factor
+			factor (`int`) :  factor
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14518,12 +14519,12 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			timeStepIndex (``int``) :  timeStepIndex
+			scenarioID (`int`) :  scenarioID
+			timeStepIndex (`int`) :  timeStepIndex
 
 		Returns
 		--------
-			``List[IUserNotification]`` : 
+			`List[IUserNotification]` : 
 		"""
 		pass
 
@@ -14533,7 +14534,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Returns
 		--------
-			``ITranslatingTimeStepsResultDataConnection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -14547,7 +14548,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Returns
 		--------
-			``ITranslatingTimeStepsResultDataConnection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -14561,7 +14562,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 		Returns
 		--------
-			``ITranslatingTimeStepsResultDataConnection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -14571,7 +14572,7 @@ class ITranslatingTimeStepsResultDataConnection(IResultDataConnection):
 
 class IResultRecordDataBroker:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14587,14 +14588,14 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
-			fieldTypeName (``str``) :  fieldTypeName
-			timeStep (``int``) :  timeStep
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
+			fieldTypeName (`str`) :  fieldTypeName
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -14603,14 +14604,14 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			scenarioID (``int``) :  scenarioID
-			fieldTypeName (``str``) :  fieldTypeName
-			timeStep (``int``) :  timeStep
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			scenarioID (`int`) :  scenarioID
+			fieldTypeName (`str`) :  fieldTypeName
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -14619,14 +14620,14 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			elementIDs (``HmIDCollection``) :  elementIDs
-			scenarioID (``int``) :  scenarioID
-			fieldTypeName (``str``) :  fieldTypeName
-			timeStep (``int``) :  timeStep
+			elementIDs (`HmIDCollection`) :  elementIDs
+			scenarioID (`int`) :  scenarioID
+			fieldTypeName (`str`) :  fieldTypeName
+			timeStep (`int`) :  timeStep
 
 		Returns
 		--------
-			``Dict`` : 
+			`Dict` : 
 		"""
 		pass
 
@@ -14635,13 +14636,13 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
-			fieldTypeName (``str``) :  fieldTypeName
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
+			fieldTypeName (`str`) :  fieldTypeName
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -14650,16 +14651,16 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			fieldTypeName (``str``) :  fieldTypeName
-			statTypes (``List[StatisticType]``) :  statTypes
-			timeStepIndex (``int``) :  timeStepIndex
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			fieldTypeName (`str`) :  fieldTypeName
+			statTypes (`List[StatisticType]`) :  statTypes
+			timeStepIndex (`int`) :  timeStepIndex
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -14668,16 +14669,16 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			domainElementTypeIDs (``HmIDCollection``) :  domainElementTypeIDs
-			fieldTypeName (``str``) :  fieldTypeName
-			statTypes (``List[StatisticType]``) :  statTypes
-			timeStepIndex (``int``) :  timeStepIndex
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			scenarioID (`int`) :  scenarioID
+			domainElementTypeIDs (`HmIDCollection`) :  domainElementTypeIDs
+			fieldTypeName (`str`) :  fieldTypeName
+			statTypes (`List[StatisticType]`) :  statTypes
+			timeStepIndex (`int`) :  timeStepIndex
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -14686,14 +14687,14 @@ class IResultRecordDataBroker:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			scenarioID (``int``) :  scenarioID
-			fieldTypeName (``str``) :  fieldTypeName
-			statTypes (``List[StatisticType]``) :  statTypes
+			elementID (`int`) :  elementID
+			scenarioID (`int`) :  scenarioID
+			fieldTypeName (`str`) :  fieldTypeName
+			statTypes (`List[StatisticType]`) :  statTypes
 
 		Returns
 		--------
-			``array[float]`` : 
+			`array[float]` : 
 		"""
 		pass
 
@@ -14703,7 +14704,7 @@ class IResultRecordDataBroker:
 
 		Returns
 		--------
-			``IResultRecordDataBroker`` : 
+			`IResultDataConnection` : 
 		"""
 		pass
 
@@ -14713,13 +14714,13 @@ class IResultRecordDataBroker:
 
 		Returns
 		--------
-			``IResultRecordDataBroker`` : 
+			`str` : 
 		"""
 		pass
 
 class ISupportElement(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14735,11 +14736,11 @@ class ISupportElement(IModelingElement):
 
 		Args
 		--------
-			attributeName (``str``) :  attributeName
+			attributeName (`str`) :  attributeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -14748,11 +14749,11 @@ class ISupportElement(IModelingElement):
 
 		Args
 		--------
-			engineeringReference (``IEngineeringReference``) :  engineeringReference
+			engineeringReference (`IEngineeringReference`) :  engineeringReference
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14761,11 +14762,11 @@ class ISupportElement(IModelingElement):
 
 		Args
 		--------
-			engineeringReference (``IEngineeringReference``) :  engineeringReference
+			engineeringReference (`IEngineeringReference`) :  engineeringReference
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14775,7 +14776,7 @@ class ISupportElement(IModelingElement):
 
 		Returns
 		--------
-			``ISupportElement`` : 
+			`int` : 
 		"""
 		pass
 
@@ -14785,7 +14786,7 @@ class ISupportElement(IModelingElement):
 
 		Returns
 		--------
-			``ISupportElement`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -14795,7 +14796,7 @@ class ISupportElement(IModelingElement):
 
 		Returns
 		--------
-			``ISupportElement`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -14805,13 +14806,13 @@ class ISupportElement(IModelingElement):
 
 		Returns
 		--------
-			``ISupportElement`` : 
+			`datetime` : 
 		"""
 		pass
 
 class ISupportElement2:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14827,18 +14828,18 @@ class ISupportElement2:
 
 		Args
 		--------
-			engineeringLibraryGuid (``Guid``) :  engineeringLibraryGuid
-			engineeringReferenceGuid (``Guid``) :  engineeringReferenceGuid
+			engineeringLibraryGuid (`Guid`) :  engineeringLibraryGuid
+			engineeringReferenceGuid (`Guid`) :  engineeringReferenceGuid
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class ISupportElementManager(IModelingElementManager, ISelectableManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14854,11 +14855,11 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			attributeName (``str``) :  attributeName
+			attributeName (`str`) :  attributeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -14868,11 +14869,11 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			engineeringReference (``IEngineeringReference``) :  engineeringReference
+			engineeringReference (`IEngineeringReference`) :  engineeringReference
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -14881,13 +14882,13 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 
 		Args
 		--------
-			collectionFieldName (``str``) :  collectionFieldName
-			sortContexts (``SortContextCollection``) :  sortContexts
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			collectionFieldName (`str`) :  collectionFieldName
+			sortContexts (`SortContextCollection`) :  sortContexts
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``ICrossElementFieldListManager`` : 
+			`ICrossElementFieldListManager` : 
 		"""
 		pass
 
@@ -14897,7 +14898,7 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -14907,13 +14908,13 @@ class ISupportElementManager(IModelingElementManager, ISelectableManager):
 
 		Returns
 		--------
-			``ISupportElementManager`` : 
+			`int` : 
 		"""
 		pass
 
 class IControlManager(ISupportElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14929,7 +14930,7 @@ class IControlManager(ISupportElementManager):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -14938,13 +14939,13 @@ class IControlManager(ISupportElementManager):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IPrototypeManager(IModelingElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14961,7 +14962,7 @@ class IPrototypeManager(IModelingElementManager):
 
 		Returns
 		--------
-			``IPrototypeManager`` : 
+			`int` : 
 		"""
 		pass
 
@@ -14971,7 +14972,7 @@ class IPrototypeManager(IModelingElementManager):
 
 class IPrototypeDomainElementManager(IPrototypeManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -14988,11 +14989,11 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15002,12 +15003,12 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			alternativeTypeName (``str``) :  alternativeTypeName
+			fieldName (`str`) :  fieldName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15017,11 +15018,11 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 
 		Args
 		--------
-			prototypeGuid (``Guid``) :  prototypeGuid
+			prototypeGuid (`Guid`) :  prototypeGuid
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -15030,11 +15031,11 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 
 		Args
 		--------
-			prototypeGuid (``Guid``) :  prototypeGuid
+			prototypeGuid (`Guid`) :  prototypeGuid
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -15044,11 +15045,11 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -15058,13 +15059,13 @@ class IPrototypeDomainElementManager(IPrototypeManager):
 
 		Returns
 		--------
-			``IPrototypeDomainElementManager`` : 
+			`int` : 
 		"""
 		pass
 
 class IPrototypeDomainElement(IModelingElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15081,11 +15082,11 @@ class IPrototypeDomainElement(IModelingElement):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15095,12 +15096,12 @@ class IPrototypeDomainElement(IModelingElement):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
-			alternativeTypeName (``str``) :  alternativeTypeName
+			fieldName (`str`) :  fieldName
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15109,11 +15110,11 @@ class IPrototypeDomainElement(IModelingElement):
 
 		Args
 		--------
-			prototypeGuid (``Guid``) :  prototypeGuid
+			prototypeGuid (`Guid`) :  prototypeGuid
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -15123,7 +15124,7 @@ class IPrototypeDomainElement(IModelingElement):
 
 		Returns
 		--------
-			``IPrototypeDomainElement`` : 
+			`int` : 
 		"""
 		pass
 
@@ -15133,13 +15134,13 @@ class IPrototypeDomainElement(IModelingElement):
 
 		Returns
 		--------
-			``IPrototypeDomainElement`` : 
+			`Guid` : 
 		"""
 		pass
 
 class IFieldManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15155,13 +15156,13 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			type (``ModelingElementType``) :  type
-			elementTypeID (``int``) :  elementTypeID
+			name (`str`) :  name
+			type (`ModelingElementType`) :  type
+			elementTypeID (`int`) :  elementTypeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15170,12 +15171,12 @@ class IFieldManager:
 
 		Args
 		--------
-			type (``ModelingElementType``) :  type
-			elementTypeID (``int``) :  elementTypeID
+			type (`ModelingElementType`) :  type
+			elementTypeID (`int`) :  elementTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15184,11 +15185,11 @@ class IFieldManager:
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15198,12 +15199,12 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			supportElementTypeID (``int``) :  supportElementTypeID
+			name (`str`) :  name
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15213,12 +15214,12 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			supportElementTypeName (``str``) :  supportElementTypeName
+			name (`str`) :  name
+			supportElementTypeName (`str`) :  supportElementTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15228,12 +15229,12 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			domainElementTypeID (``int``) :  domainElementTypeID
+			name (`str`) :  name
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15243,12 +15244,12 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			domainElementTypeName (``str``) :  domainElementTypeName
+			name (`str`) :  name
+			domainElementTypeName (`str`) :  domainElementTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15258,13 +15259,13 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			name (`str`) :  name
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15274,13 +15275,13 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			alternativeTypeName (``str``) :  alternativeTypeName
-			domainElementTypeName (``str``) :  domainElementTypeName
+			name (`str`) :  name
+			alternativeTypeName (`str`) :  alternativeTypeName
+			domainElementTypeName (`str`) :  domainElementTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15290,14 +15291,14 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementTypeID (``int``) :  domainElementTypeID
-			alternativeID (``int``) :  alternativeID
+			name (`str`) :  name
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15307,14 +15308,14 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			alternativeTypeName (``str``) :  alternativeTypeName
-			domainElementTypeName (``str``) :  domainElementTypeName
-			alternativeID (``int``) :  alternativeID
+			name (`str`) :  name
+			alternativeTypeName (`str`) :  alternativeTypeName
+			domainElementTypeName (`str`) :  domainElementTypeName
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15324,12 +15325,12 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			alternativeTypeID (``int``) :  alternativeTypeID
+			name (`str`) :  name
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15339,12 +15340,12 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			alternativeTypeName (``str``) :  alternativeTypeName
+			name (`str`) :  name
+			alternativeTypeName (`str`) :  alternativeTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15353,11 +15354,11 @@ class IFieldManager:
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15367,13 +15368,13 @@ class IFieldManager:
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementTypeID (``int``) :  domainElementTypeID
-			alternativeID (``int``) :  alternativeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
+			alternativeID (`int`) :  alternativeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15383,12 +15384,12 @@ class IFieldManager:
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
-			scenarioID (``int``) :  scenarioID
+			domainElementTypeID (`int`) :  domainElementTypeID
+			scenarioID (`int`) :  scenarioID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15397,13 +15398,13 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
-			numericalEngineType (``str``) :  numericalEngineType
-			resultRecordTypeName (``str``) :  resultRecordTypeName
+			name (`str`) :  name
+			numericalEngineType (`str`) :  numericalEngineType
+			resultRecordTypeName (`str`) :  resultRecordTypeName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15413,12 +15414,12 @@ class IFieldManager:
 
 		Args
 		--------
-			alternativeTypeID (``int``) :  alternativeTypeID
-			domainElementTypeID (``int``) :  domainElementTypeID
+			alternativeTypeID (`int`) :  alternativeTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15428,11 +15429,11 @@ class IFieldManager:
 
 		Args
 		--------
-			domainElementTypeID (``int``) :  domainElementTypeID
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15441,13 +15442,13 @@ class IFieldManager:
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
-			resultRecordTypeName (``str``) :  resultRecordTypeName
-			domainElementTypeID (``int``) :  domainElementTypeID
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
+			resultRecordTypeName (`str`) :  resultRecordTypeName
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15456,11 +15457,11 @@ class IFieldManager:
 
 		Args
 		--------
-			numericalEngineTypeName (``str``) :  numericalEngineTypeName
+			numericalEngineTypeName (`str`) :  numericalEngineTypeName
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15469,11 +15470,11 @@ class IFieldManager:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15483,13 +15484,13 @@ class IFieldManager:
 
 		Returns
 		--------
-			``IFieldManager`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
 class IControlFieldManager(IFieldManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15506,7 +15507,7 @@ class IControlFieldManager(IFieldManager):
 
 		Returns
 		--------
-			``IControlFieldManager`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -15516,7 +15517,7 @@ class IControlFieldManager(IFieldManager):
 
 class IFieldManagerEx(IFieldManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15532,12 +15533,12 @@ class IFieldManagerEx(IFieldManager):
 
 		Args
 		--------
-			domainElementTyepID (``int``) :  domainElementTyepID
-			isPipeTwoScenarioFlexTable (``bool``) :  isPipeTwoScenarioFlexTable
+			domainElementTyepID (`int`) :  domainElementTyepID
+			isPipeTwoScenarioFlexTable (`bool`) :  isPipeTwoScenarioFlexTable
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15546,11 +15547,11 @@ class IFieldManagerEx(IFieldManager):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15559,18 +15560,18 @@ class IFieldManagerEx(IFieldManager):
 
 		Args
 		--------
-			elementTypeId (``int``) :  elementTypeId
-			name (``str``) :  name
+			elementTypeId (`int`) :  elementTypeId
+			name (`str`) :  name
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class IDomainField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15586,7 +15587,7 @@ class IDomainField(IField):
 
 		Returns
 		--------
-			``array`` : 
+			`array` : 
 		"""
 		pass
 
@@ -15596,13 +15597,13 @@ class IDomainField(IField):
 
 		Returns
 		--------
-			``IDomainField`` : 
+			`IFieldType` : 
 		"""
 		pass
 
 class IEnumeratedField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15618,13 +15619,13 @@ class IEnumeratedField(IField):
 
 		Returns
 		--------
-			``List[IEnumeratedMember]`` : 
+			`List[IEnumeratedMember]` : 
 		"""
 		pass
 
 class IEnumeratedMember:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15640,11 +15641,11 @@ class IEnumeratedMember:
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15653,7 +15654,7 @@ class IEnumeratedMember:
 
 		Returns
 		--------
-			``FieldCollection`` : 
+			`FieldCollection` : 
 		"""
 		pass
 
@@ -15663,7 +15664,7 @@ class IEnumeratedMember:
 
 		Returns
 		--------
-			``IEnumeratedMember`` : 
+			`str` : 
 		"""
 		pass
 
@@ -15673,7 +15674,7 @@ class IEnumeratedMember:
 
 		Returns
 		--------
-			``IEnumeratedMember`` : 
+			`str` : 
 		"""
 		pass
 
@@ -15687,7 +15688,7 @@ class IEnumeratedMember:
 
 		Returns
 		--------
-			``IEnumeratedMember`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -15697,13 +15698,13 @@ class IEnumeratedMember:
 
 		Returns
 		--------
-			``IEnumeratedMember`` : 
+			`int` : 
 		"""
 		pass
 
 class IDataField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15720,13 +15721,13 @@ class IDataField(IField):
 
 		Returns
 		--------
-			``IDataField`` : 
+			`str` : 
 		"""
 		pass
 
 class ICollectionField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15742,13 +15743,13 @@ class ICollectionField(IField):
 
 		Returns
 		--------
-			``ICollectionFieldListManager`` : 
+			`ICollectionFieldListManager` : 
 		"""
 		pass
 
 class IUnitizedField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15764,11 +15765,11 @@ class IUnitizedField(IField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -15778,7 +15779,7 @@ class IUnitizedField(IField):
 
 		Returns
 		--------
-			``IUnitizedField`` : 
+			`UnitIndex` : 
 		"""
 		pass
 
@@ -15792,13 +15793,13 @@ class IUnitizedField(IField):
 
 		Returns
 		--------
-			``IUnitizedField`` : 
+			`UnitIndex` : 
 		"""
 		pass
 
 class IPresentationUnitsManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15814,11 +15815,11 @@ class IPresentationUnitsManager:
 
 		Args
 		--------
-			formatterName (``str``) :  formatterName
+			formatterName (`str`) :  formatterName
 
 		Returns
 		--------
-			``Unit`` : 
+			`Unit` : 
 		"""
 		pass
 
@@ -15827,19 +15828,19 @@ class IPresentationUnitsManager:
 
 		Args
 		--------
-			value (``float``) :  value
-			formatterName (``str``) :  formatterName
-			storageUnit (``Unit``) :  storageUnit
+			value (`float`) :  value
+			formatterName (`str`) :  formatterName
+			storageUnit (`Unit`) :  storageUnit
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
 class IGridElevationRetriever:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15855,18 +15856,18 @@ class IGridElevationRetriever:
 
 		Args
 		--------
-			scenarioID (``int``) :  scenarioID
-			pointInMeters (``GeometryPoint``) :  pointInMeters
+			scenarioID (`int`) :  scenarioID
+			pointInMeters (`GeometryPoint`) :  pointInMeters
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
 class IGeometryField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15883,7 +15884,7 @@ class IGeometryField(IField):
 
 		Returns
 		--------
-			``IGeometryField`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -15893,7 +15894,7 @@ class IGeometryField(IField):
 
 class IRealGeometryField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15909,11 +15910,11 @@ class IRealGeometryField(IField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -15922,12 +15923,12 @@ class IRealGeometryField(IField):
 
 		Args
 		--------
-			id (``int``) :  id
-			bytes (``List[int]``) :  bytes
+			id (`int`) :  id
+			bytes (`List[int]`) :  bytes
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -15937,7 +15938,7 @@ class IRealGeometryField(IField):
 
 		Returns
 		--------
-			``IRealGeometryField`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -15947,7 +15948,7 @@ class IRealGeometryField(IField):
 
 		Returns
 		--------
-			``IRealGeometryField`` : 
+			`UnitSystem` : 
 		"""
 		pass
 
@@ -15957,7 +15958,7 @@ class IRealGeometryField(IField):
 
 class IReferenceField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15974,13 +15975,13 @@ class IReferenceField(IField):
 
 		Returns
 		--------
-			``IReferenceField`` : 
+			`IModelingElementManager` : 
 		"""
 		pass
 
 class IGeometryPointField(IUnitizedField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -15996,11 +15997,11 @@ class IGeometryPointField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``GeometryPoint`` : 
+			`GeometryPoint` : 
 		"""
 		pass
 
@@ -16009,18 +16010,18 @@ class IGeometryPointField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
-			point (``GeometryPoint``) :  point
+			id (`int`) :  id
+			point (`GeometryPoint`) :  point
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryReferenceNodeField:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16036,11 +16037,11 @@ class IGeometryReferenceNodeField:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16049,17 +16050,17 @@ class IGeometryReferenceNodeField:
 
 		Args
 		--------
-			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
+			valuesDic (`IHmIDToObjectDictionary`) :  valuesDic
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryPolylineField(IUnitizedField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16075,11 +16076,11 @@ class IGeometryPolylineField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``List[GeometryPoint]`` : 
+			`List[GeometryPoint]` : 
 		"""
 		pass
 
@@ -16088,12 +16089,12 @@ class IGeometryPolylineField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
-			points (``List[GeometryPoint]``) :  points
+			id (`int`) :  id
+			points (`List[GeometryPoint]`) :  points
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16102,17 +16103,17 @@ class IGeometryPolylineField(IUnitizedField):
 
 		Args
 		--------
-			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
+			valuesDic (`IHmIDToObjectDictionary`) :  valuesDic
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryPolyline3DField(IUnitizedField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16128,11 +16129,11 @@ class IGeometryPolyline3DField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``List[GeometryPoint3D]`` : 
+			`List[GeometryPoint3D]` : 
 		"""
 		pass
 
@@ -16141,12 +16142,12 @@ class IGeometryPolyline3DField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
-			points3D (``List[GeometryPoint3D]``) :  points3D
+			id (`int`) :  id
+			points3D (`List[GeometryPoint3D]`) :  points3D
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16155,17 +16156,17 @@ class IGeometryPolyline3DField(IUnitizedField):
 
 		Args
 		--------
-			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
+			valuesDic (`IHmIDToObjectDictionary`) :  valuesDic
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryLateralField:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16181,11 +16182,11 @@ class IGeometryLateralField:
 
 		Args
 		--------
-			elementID (``int``) :  elementID
+			elementID (`int`) :  elementID
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16194,17 +16195,17 @@ class IGeometryLateralField:
 
 		Args
 		--------
-			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
+			valuesDic (`IHmIDToObjectDictionary`) :  valuesDic
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IGeometryPolygonField(IUnitizedField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16220,11 +16221,11 @@ class IGeometryPolygonField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``List[List[GeometryPoint]]`` : 
+			`List[List[GeometryPoint]]` : 
 		"""
 		pass
 
@@ -16233,12 +16234,12 @@ class IGeometryPolygonField(IUnitizedField):
 
 		Args
 		--------
-			id (``int``) :  id
-			rings (``List[List[GeometryPoint]]``) :  rings
+			id (`int`) :  id
+			rings (`List[List[GeometryPoint]]`) :  rings
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16247,17 +16248,17 @@ class IGeometryPolygonField(IUnitizedField):
 
 		Args
 		--------
-			valuesDic (``IHmIDToObjectDictionary``) :  valuesDic
+			valuesDic (`IHmIDToObjectDictionary`) :  valuesDic
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class IModelingElementField:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16274,7 +16275,7 @@ class IModelingElementField:
 
 		Returns
 		--------
-			``IModelingElementField`` : 
+			`ModelingElementType` : 
 		"""
 		pass
 
@@ -16284,13 +16285,13 @@ class IModelingElementField:
 
 		Returns
 		--------
-			``IModelingElementField`` : 
+			`int` : 
 		"""
 		pass
 
 class ISupportElementField(IEditField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16307,13 +16308,13 @@ class ISupportElementField(IEditField):
 
 		Returns
 		--------
-			``ISupportElementField`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
 class IDomainElementField(IDataField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16329,7 +16330,7 @@ class IDomainElementField(IDataField):
 
 		Returns
 		--------
-			``IAlternativeRecord`` : 
+			`IAlternativeRecord` : 
 		"""
 		pass
 
@@ -16339,7 +16340,7 @@ class IDomainElementField(IDataField):
 
 		Returns
 		--------
-			``IDomainElementField`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -16349,7 +16350,7 @@ class IDomainElementField(IDataField):
 
 		Returns
 		--------
-			``IDomainElementField`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -16359,13 +16360,13 @@ class IDomainElementField(IDataField):
 
 		Returns
 		--------
-			``IDomainElementField`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
 class IEditDomainElementField(IEditField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16382,13 +16383,13 @@ class IEditDomainElementField(IEditField):
 
 		Args
 		--------
-			elementID (``int``) :  elementID
-			makeLocal (``bool``) :  makeLocal
-			newValue (``object``) :  newValue
+			elementID (`int`) :  elementID
+			makeLocal (`bool`) :  makeLocal
+			newValue (`object`) :  newValue
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16398,18 +16399,18 @@ class IEditDomainElementField(IEditField):
 
 		Args
 		--------
-			id (``int``) :  id
-			value (``object``) :  value
+			id (`int`) :  id
+			value (`object`) :  value
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class ISystemRecordField(IField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16426,13 +16427,13 @@ class ISystemRecordField(IField):
 
 		Returns
 		--------
-			``ISystemRecordField`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
 class IAlternativeField(IDomainElementField):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16449,7 +16450,7 @@ class IAlternativeField(IDomainElementField):
 
 		Returns
 		--------
-			``IAlternativeField`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16459,7 +16460,7 @@ class IAlternativeField(IDomainElementField):
 
 class ICollectionFieldListManager(IOrderedListManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16475,11 +16476,11 @@ class ICollectionFieldListManager(IOrderedListManager):
 
 		Args
 		--------
-			name (``str``) :  name
+			name (`str`) :  name
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -16488,13 +16489,13 @@ class ICollectionFieldListManager(IOrderedListManager):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
 class ICrossElementFieldListManager(ICollectionFieldListManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16511,11 +16512,11 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 
 		Args
 		--------
-			indices (``HmIDCollection``) :  indices
+			indices (`HmIDCollection`) :  indices
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16524,12 +16525,12 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 
 		Args
 		--------
-			sortContexts (``SortContextCollection``) :  sortContexts
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			sortContexts (`SortContextCollection`) :  sortContexts
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16539,11 +16540,11 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16553,7 +16554,7 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 
 		Returns
 		--------
-			``ICrossElementFieldListManager`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16567,7 +16568,7 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 
 		Returns
 		--------
-			``ICrossElementFieldListManager`` : 
+			`SortContextCollection` : 
 		"""
 		pass
 
@@ -16577,13 +16578,13 @@ class ICrossElementFieldListManager(ICollectionFieldListManager):
 
 		Returns
 		--------
-			``ICrossElementFieldListManager`` : 
+			`FilterContextCollection` : 
 		"""
 		pass
 
 class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16600,13 +16601,13 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 
 		Args
 		--------
-			alternativeID (``int``) :  alternativeID
-			sortContexts (``SortContextCollection``) :  sortContexts
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			alternativeID (`int`) :  alternativeID
+			sortContexts (`SortContextCollection`) :  sortContexts
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16616,12 +16617,12 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 
 		Args
 		--------
-			sortContexts (``SortContextCollection``) :  sortContexts
-			filterContexts (``FilterContextCollection``) :  filterContexts
+			sortContexts (`SortContextCollection`) :  sortContexts
+			filterContexts (`FilterContextCollection`) :  filterContexts
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16631,13 +16632,13 @@ class IAlternativeCrossElementFieldListManager(ICrossElementFieldListManager):
 
 		Returns
 		--------
-			``IAlternativeCrossElementFieldListManager`` : 
+			`int` : 
 		"""
 		pass
 
 class ISelectableManager:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16653,12 +16654,12 @@ class ISelectableManager:
 
 		Args
 		--------
-			sortContextCollection (``SortContextCollection``) :  sortContextCollection
-			filterContextCollection (``FilterContextCollection``) :  filterContextCollection
+			sortContextCollection (`SortContextCollection`) :  sortContextCollection
+			filterContextCollection (`FilterContextCollection`) :  filterContextCollection
 
 		Returns
 		--------
-			``IHmIDDelayedCollection`` : 
+			`IHmIDDelayedCollection` : 
 		"""
 		pass
 
@@ -16667,11 +16668,11 @@ class ISelectableManager:
 
 		Args
 		--------
-			filterContextCollection (``FilterContextCollection``) :  filterContextCollection
+			filterContextCollection (`FilterContextCollection`) :  filterContextCollection
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16680,19 +16681,19 @@ class ISelectableManager:
 
 		Args
 		--------
-			queryName (``str``) :  queryName
-			fields (``FieldTypeCollection``) :  fields
-			parametersMap (``Dict``) :  parametersMap
+			queryName (`str`) :  queryName
+			fields (`FieldTypeCollection`) :  fields
+			parametersMap (`Dict`) :  parametersMap
 
 		Returns
 		--------
-			``IFieldCollectionDataReader`` : 
+			`IFieldCollectionDataReader` : 
 		"""
 		pass
 
 class ISelectableManagerEx:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16703,24 +16704,24 @@ class ISelectableManagerEx:
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def GetDataReader(self, queryName: str, fields: FieldTypeCollection, parametersMap: Dict) -> IDisposableEnumerable:
+	def GetDataReader(self, queryName: str, fields: FieldTypeCollection, parametersMap: Dict) -> IDisposableEnumerable[IEnumeratorDataAccessor]:
 		"""No Description
 
 		Args
 		--------
-			queryName (``str``) :  queryName
-			fields (``FieldTypeCollection``) :  fields
-			parametersMap (``Dict``) :  parametersMap
+			queryName (`str`) :  queryName
+			fields (`FieldTypeCollection`) :  fields
+			parametersMap (`Dict`) :  parametersMap
 
 		Returns
 		--------
-			``IDisposableEnumerable`` : 
+			`IDisposableEnumerable` : 
 		"""
 		pass
 
 class IEnumeratorDataAccessor:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16736,7 +16737,7 @@ class IEnumeratorDataAccessor:
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16745,11 +16746,11 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
+			fieldIndex (`int`) :  fieldIndex
 
 		Returns
 		--------
-			``Nullable`` : 
+			`Nullable` : 
 		"""
 		pass
 
@@ -16758,11 +16759,11 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
+			fieldIndex (`int`) :  fieldIndex
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16771,12 +16772,12 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
-			unitIndex (``UnitIndex``) :  unitIndex
+			fieldIndex (`int`) :  fieldIndex
+			unitIndex (`UnitIndex`) :  unitIndex
 
 		Returns
 		--------
-			``float`` : 
+			`float` : 
 		"""
 		pass
 
@@ -16785,11 +16786,11 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
+			fieldIndex (`int`) :  fieldIndex
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -16798,11 +16799,11 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
+			fieldIndex (`int`) :  fieldIndex
 
 		Returns
 		--------
-			``datetime`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -16811,11 +16812,11 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
+			fieldIndex (`int`) :  fieldIndex
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -16824,11 +16825,11 @@ class IEnumeratorDataAccessor:
 
 		Args
 		--------
-			fieldIndex (``int``) :  fieldIndex
+			fieldIndex (`int`) :  fieldIndex
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -16838,13 +16839,13 @@ class IEnumeratorDataAccessor:
 
 		Returns
 		--------
-			``IEnumeratorDataAccessor`` : 
+			`List[IFieldType]` : 
 		"""
 		pass
 
 class IDisposableEnumerable(Generic[T], Iterator[T]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16857,7 +16858,7 @@ class IDisposableEnumerable(Generic[T], Iterator[T]):
 
 class IAlternativeRecordEx:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16869,18 +16870,18 @@ class IAlternativeRecordEx:
 		pass
 
 	@overload
-	def GetDataReader(self, fieldTypeNames: array[str], filterContexts: FilterContextCollection, sortContexts: SortContextCollection) -> IDisposableEnumerable:
+	def GetDataReader(self, fieldTypeNames: array[str], filterContexts: FilterContextCollection, sortContexts: SortContextCollection) -> IDisposableEnumerable[IEnumeratorDataAccessor]:
 		"""No Description
 
 		Args
 		--------
-			fieldTypeNames (``array[str]``) :  fieldTypeNames
-			filterContexts (``FilterContextCollection``) :  filterContexts
-			sortContexts (``SortContextCollection``) :  sortContexts
+			fieldTypeNames (`array[str]`) :  fieldTypeNames
+			filterContexts (`FilterContextCollection`) :  filterContexts
+			sortContexts (`SortContextCollection`) :  sortContexts
 
 		Returns
 		--------
-			``IDisposableEnumerable`` : 
+			`IDisposableEnumerable` : 
 		"""
 		pass
 
@@ -16890,18 +16891,18 @@ class IAlternativeRecordEx:
 
 		Args
 		--------
-			fieldTypeNames (``array[str]``) :  fieldTypeNames
-			domainElementTypeID (``int``) :  domainElementTypeID
+			fieldTypeNames (`array[str]`) :  fieldTypeNames
+			domainElementTypeID (`int`) :  domainElementTypeID
 
 		Returns
 		--------
-			``IAlternativeRecordDataReader`` : 
+			`IAlternativeRecordDataReader` : 
 		"""
 		pass
 
 class IHmIDDelayedCollection(ICloneable, List):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -16917,11 +16918,11 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16930,11 +16931,11 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -16943,11 +16944,11 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16956,7 +16957,7 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16965,11 +16966,11 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 		Args
 		--------
-			item (``int``) :  item
+			item (`int`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -16979,7 +16980,7 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 		Returns
 		--------
-			``IHmIDDelayedCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -16989,7 +16990,7 @@ class IHmIDDelayedCollection(ICloneable, List):
 
 class IUpdatedFieldInformation:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -17006,7 +17007,7 @@ class IUpdatedFieldInformation:
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17016,7 +17017,7 @@ class IUpdatedFieldInformation:
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17026,7 +17027,7 @@ class IUpdatedFieldInformation:
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17036,7 +17037,7 @@ class IUpdatedFieldInformation:
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`FieldUpdateTypeEnum` : 
 		"""
 		pass
 
@@ -17046,13 +17047,13 @@ class IUpdatedFieldInformation:
 
 		Returns
 		--------
-			``IUpdatedFieldInformation`` : 
+			`bool` : 
 		"""
 		pass
 
 class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -17069,11 +17070,11 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Args
 		--------
-			guid (``Guid``) :  guid
+			guid (`Guid`) :  guid
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17082,7 +17083,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17091,11 +17092,11 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -17104,11 +17105,11 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Args
 		--------
-			aguid (``Guid``) :  aguid
+			aguid (`Guid`) :  aguid
 
 		Returns
 		--------
-			``IEngineeringReference`` : 
+			`IEngineeringReference` : 
 		"""
 		pass
 
@@ -17117,7 +17118,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17126,7 +17127,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17135,11 +17136,11 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Args
 		--------
-			allowPrompts (``bool``) :  allowPrompts
+			allowPrompts (`bool`) :  allowPrompts
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17148,7 +17149,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17157,7 +17158,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17167,11 +17168,11 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17181,7 +17182,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -17191,7 +17192,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17205,7 +17206,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17219,7 +17220,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`str` : 
 		"""
 		pass
 
@@ -17229,7 +17230,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -17239,7 +17240,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17249,7 +17250,7 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17259,13 +17260,13 @@ class IEngineeringLibrary(IEditLabeled, ITreeElementManager):
 
 		Returns
 		--------
-			``IEngineeringLibrary`` : 
+			`bool` : 
 		"""
 		pass
 
 class IEngineeringLibraryEx:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -17281,13 +17282,13 @@ class IEngineeringLibraryEx:
 
 		Returns
 		--------
-			``Guid`` : 
+			`Guid` : 
 		"""
 		pass
 
 class IEngineeringReference(ITreeElement):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -17303,11 +17304,11 @@ class IEngineeringReference(ITreeElement):
 
 		Args
 		--------
-			fieldName (``str``) :  fieldName
+			fieldName (`str`) :  fieldName
 
 		Returns
 		--------
-			``IField`` : 
+			`IField` : 
 		"""
 		pass
 
@@ -17316,11 +17317,11 @@ class IEngineeringReference(ITreeElement):
 
 		Args
 		--------
-			supportElement (``ISupportElement``) :  supportElement
+			supportElement (`ISupportElement`) :  supportElement
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17330,7 +17331,7 @@ class IEngineeringReference(ITreeElement):
 
 		Returns
 		--------
-			``IEngineeringReference`` : 
+			`Guid` : 
 		"""
 		pass
 
@@ -17340,7 +17341,7 @@ class IEngineeringReference(ITreeElement):
 
 		Returns
 		--------
-			``IEngineeringReference`` : 
+			`datetime` : 
 		"""
 		pass
 
@@ -17350,13 +17351,13 @@ class IEngineeringReference(ITreeElement):
 
 		Returns
 		--------
-			``IEngineeringReference`` : 
+			`IEngineeringLibrary` : 
 		"""
 		pass
 
 class IBlobable:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -17372,7 +17373,7 @@ class IBlobable:
 
 		Returns
 		--------
-			``List[int]`` : 
+			`List[int]` : 
 		"""
 		pass
 
@@ -17381,57 +17382,57 @@ class IBlobable:
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
 class ModelingElementCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ModelingElementCollection``) :  c
-			a (``List[IModelingElement]``) :  a
+			capacity (`int`) :  capacity
+			c (`ModelingElementCollection`) :  c
+			a (`List[IModelingElement]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ModelingElementCollection``) :  c
-			a (``List[IModelingElement]``) :  a
+			capacity (`int`) :  capacity
+			c (`ModelingElementCollection`) :  c
+			a (`List[IModelingElement]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: ModelingElementCollection) -> None:
+	def __new__(self, c: ModelingElementCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ModelingElementCollection``) :  c
-			a (``List[IModelingElement]``) :  a
+			capacity (`int`) :  capacity
+			c (`ModelingElementCollection`) :  c
+			a (`List[IModelingElement]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IModelingElement]) -> None:
+	def __new__(self, a: List[IModelingElement]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ModelingElementCollection``) :  c
-			a (``List[IModelingElement]``) :  a
+			capacity (`int`) :  capacity
+			c (`ModelingElementCollection`) :  c
+			a (`List[IModelingElement]`) :  a
 		"""
 		pass
 
@@ -17441,11 +17442,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``ModelingElementCollection``) :  list
+			list (`ModelingElementCollection`) :  list
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`ModelingElementCollection` : 
 		"""
 		pass
 
@@ -17455,11 +17456,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``ModelingElementCollection``) :  list
+			list (`ModelingElementCollection`) :  list
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`ModelingElementCollection` : 
 		"""
 		pass
 
@@ -17469,11 +17470,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IModelingElement]``) :  array
+			array (`List[IModelingElement]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17483,12 +17484,12 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IModelingElement]``) :  array
-			start (``int``) :  start
+			array (`List[IModelingElement]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17497,11 +17498,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IModelingElement``) :  item
+			item (`IModelingElement`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17510,7 +17511,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17519,7 +17520,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -17528,11 +17529,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IModelingElement``) :  item
+			item (`IModelingElement`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17541,11 +17542,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IModelingElement``) :  item
+			item (`IModelingElement`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17554,12 +17555,12 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IModelingElement``) :  item
+			index (`int`) :  index
+			item (`IModelingElement`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17568,11 +17569,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IModelingElement``) :  item
+			item (`IModelingElement`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17581,11 +17582,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17594,7 +17595,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IModelingElementCollectionEnumerator`` : 
+			`IModelingElementCollectionEnumerator` : 
 		"""
 		pass
 
@@ -17604,11 +17605,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ModelingElementCollection``) :  x
+			x (`ModelingElementCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17618,11 +17619,11 @@ class ModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IModelingElement]``) :  x
+			x (`List[IModelingElement]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17631,7 +17632,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17641,7 +17642,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17651,7 +17652,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17661,7 +17662,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -17671,7 +17672,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`IModelingElement` : 
 		"""
 		pass
 
@@ -17685,7 +17686,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17695,7 +17696,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17705,7 +17706,7 @@ class ModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ModelingElementCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17716,50 +17717,50 @@ class ModelingElementCollection(List, ICloneable):
 class NumericalEngineTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``NumericalEngineTypeCollection``) :  c
-			a (``List[INumericalEngineType]``) :  a
+			capacity (`int`) :  capacity
+			c (`NumericalEngineTypeCollection`) :  c
+			a (`List[INumericalEngineType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``NumericalEngineTypeCollection``) :  c
-			a (``List[INumericalEngineType]``) :  a
+			capacity (`int`) :  capacity
+			c (`NumericalEngineTypeCollection`) :  c
+			a (`List[INumericalEngineType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: NumericalEngineTypeCollection) -> None:
+	def __new__(self, c: NumericalEngineTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``NumericalEngineTypeCollection``) :  c
-			a (``List[INumericalEngineType]``) :  a
+			capacity (`int`) :  capacity
+			c (`NumericalEngineTypeCollection`) :  c
+			a (`List[INumericalEngineType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[INumericalEngineType]) -> None:
+	def __new__(self, a: List[INumericalEngineType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``NumericalEngineTypeCollection``) :  c
-			a (``List[INumericalEngineType]``) :  a
+			capacity (`int`) :  capacity
+			c (`NumericalEngineTypeCollection`) :  c
+			a (`List[INumericalEngineType]`) :  a
 		"""
 		pass
 
@@ -17769,11 +17770,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``NumericalEngineTypeCollection``) :  list
+			list (`NumericalEngineTypeCollection`) :  list
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`NumericalEngineTypeCollection` : 
 		"""
 		pass
 
@@ -17783,11 +17784,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``NumericalEngineTypeCollection``) :  list
+			list (`NumericalEngineTypeCollection`) :  list
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`NumericalEngineTypeCollection` : 
 		"""
 		pass
 
@@ -17797,11 +17798,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[INumericalEngineType]``) :  array
+			array (`List[INumericalEngineType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17811,12 +17812,12 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[INumericalEngineType]``) :  array
-			start (``int``) :  start
+			array (`List[INumericalEngineType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17825,11 +17826,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``INumericalEngineType``) :  item
+			item (`INumericalEngineType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17838,7 +17839,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17847,7 +17848,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -17856,11 +17857,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``INumericalEngineType``) :  item
+			item (`INumericalEngineType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17869,11 +17870,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``INumericalEngineType``) :  item
+			item (`INumericalEngineType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17882,12 +17883,12 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``INumericalEngineType``) :  item
+			index (`int`) :  index
+			item (`INumericalEngineType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17896,11 +17897,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``INumericalEngineType``) :  item
+			item (`INumericalEngineType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17909,11 +17910,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17922,7 +17923,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``INumericalEngineTypeCollectionEnumerator`` : 
+			`INumericalEngineTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -17932,11 +17933,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``NumericalEngineTypeCollection``) :  x
+			x (`NumericalEngineTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17946,11 +17947,11 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[INumericalEngineType]``) :  x
+			x (`List[INumericalEngineType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17959,7 +17960,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -17969,7 +17970,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -17979,7 +17980,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -17989,7 +17990,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -17999,7 +18000,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -18013,7 +18014,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18023,7 +18024,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18033,7 +18034,7 @@ class NumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``NumericalEngineTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18044,50 +18045,50 @@ class NumericalEngineTypeCollection(List, ICloneable):
 class ResultRecordCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordCollection``) :  c
-			a (``List[IResultRecord]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordCollection`) :  c
+			a (`List[IResultRecord]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordCollection``) :  c
-			a (``List[IResultRecord]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordCollection`) :  c
+			a (`List[IResultRecord]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: ResultRecordCollection) -> None:
+	def __new__(self, c: ResultRecordCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordCollection``) :  c
-			a (``List[IResultRecord]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordCollection`) :  c
+			a (`List[IResultRecord]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IResultRecord]) -> None:
+	def __new__(self, a: List[IResultRecord]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordCollection``) :  c
-			a (``List[IResultRecord]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordCollection`) :  c
+			a (`List[IResultRecord]`) :  a
 		"""
 		pass
 
@@ -18097,11 +18098,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``ResultRecordCollection``) :  list
+			list (`ResultRecordCollection`) :  list
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`ResultRecordCollection` : 
 		"""
 		pass
 
@@ -18111,11 +18112,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``ResultRecordCollection``) :  list
+			list (`ResultRecordCollection`) :  list
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`ResultRecordCollection` : 
 		"""
 		pass
 
@@ -18125,11 +18126,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecord]``) :  array
+			array (`List[IResultRecord]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18139,12 +18140,12 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecord]``) :  array
-			start (``int``) :  start
+			array (`List[IResultRecord]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18153,11 +18154,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecord``) :  item
+			item (`IResultRecord`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18166,7 +18167,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18175,7 +18176,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -18184,11 +18185,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecord``) :  item
+			item (`IResultRecord`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18197,11 +18198,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecord``) :  item
+			item (`IResultRecord`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18210,12 +18211,12 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IResultRecord``) :  item
+			index (`int`) :  index
+			item (`IResultRecord`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18224,11 +18225,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecord``) :  item
+			item (`IResultRecord`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18237,11 +18238,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18250,7 +18251,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IResultRecordCollectionEnumerator`` : 
+			`IResultRecordCollectionEnumerator` : 
 		"""
 		pass
 
@@ -18260,11 +18261,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ResultRecordCollection``) :  x
+			x (`ResultRecordCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18274,11 +18275,11 @@ class ResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IResultRecord]``) :  x
+			x (`List[IResultRecord]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18287,7 +18288,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18297,7 +18298,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18307,7 +18308,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18317,7 +18318,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -18327,7 +18328,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
@@ -18341,7 +18342,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18351,7 +18352,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18361,7 +18362,7 @@ class ResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18372,50 +18373,50 @@ class ResultRecordCollection(List, ICloneable):
 class ResultRecordTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordTypeCollection``) :  c
-			a (``List[IResultRecordType]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordTypeCollection`) :  c
+			a (`List[IResultRecordType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordTypeCollection``) :  c
-			a (``List[IResultRecordType]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordTypeCollection`) :  c
+			a (`List[IResultRecordType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: ResultRecordTypeCollection) -> None:
+	def __new__(self, c: ResultRecordTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordTypeCollection``) :  c
-			a (``List[IResultRecordType]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordTypeCollection`) :  c
+			a (`List[IResultRecordType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[IResultRecordType]) -> None:
+	def __new__(self, a: List[IResultRecordType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``ResultRecordTypeCollection``) :  c
-			a (``List[IResultRecordType]``) :  a
+			capacity (`int`) :  capacity
+			c (`ResultRecordTypeCollection`) :  c
+			a (`List[IResultRecordType]`) :  a
 		"""
 		pass
 
@@ -18425,11 +18426,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``ResultRecordTypeCollection``) :  list
+			list (`ResultRecordTypeCollection`) :  list
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`ResultRecordTypeCollection` : 
 		"""
 		pass
 
@@ -18439,11 +18440,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``ResultRecordTypeCollection``) :  list
+			list (`ResultRecordTypeCollection`) :  list
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`ResultRecordTypeCollection` : 
 		"""
 		pass
 
@@ -18453,11 +18454,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecordType]``) :  array
+			array (`List[IResultRecordType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18467,12 +18468,12 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecordType]``) :  array
-			start (``int``) :  start
+			array (`List[IResultRecordType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18481,11 +18482,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecordType``) :  item
+			item (`IResultRecordType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18494,7 +18495,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18503,7 +18504,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -18512,11 +18513,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecordType``) :  item
+			item (`IResultRecordType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18525,11 +18526,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecordType``) :  item
+			item (`IResultRecordType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18538,12 +18539,12 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``IResultRecordType``) :  item
+			index (`int`) :  index
+			item (`IResultRecordType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18552,11 +18553,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``IResultRecordType``) :  item
+			item (`IResultRecordType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18565,11 +18566,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18578,7 +18579,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IResultRecordTypeCollectionEnumerator`` : 
+			`IResultRecordTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -18588,11 +18589,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ResultRecordTypeCollection``) :  x
+			x (`ResultRecordTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18602,11 +18603,11 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IResultRecordType]``) :  x
+			x (`List[IResultRecordType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18615,7 +18616,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18625,7 +18626,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18635,7 +18636,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18645,7 +18646,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -18655,7 +18656,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
@@ -18669,7 +18670,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18679,7 +18680,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -18689,7 +18690,7 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ResultRecordTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -18699,21 +18700,21 @@ class ResultRecordTypeCollection(List, ICloneable):
 
 class StandardFieldName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardAlternativeName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardDomainElementTypeName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -18724,24 +18725,24 @@ class StandardDomainElementTypeName:
 
 		Args
 		--------
-			DomainElementTypeID (``int``) :  DomainElementTypeID
+			DomainElementTypeID (`int`) :  DomainElementTypeID
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
 class StandardDomainDataSetFieldNames:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardSupportElementTypeName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -18752,45 +18753,45 @@ class StandardSupportElementTypeName:
 
 		Args
 		--------
-			supportElementTypeID (``int``) :  supportElementTypeID
+			supportElementTypeID (`int`) :  supportElementTypeID
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
 class StandardResultRecordName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardResultFieldName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardCalculationOptionFieldName:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardExtendedProperty:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class UntitledNameLibrary:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -18801,18 +18802,18 @@ class UntitledNameLibrary:
 
 		Args
 		--------
-			typeName (``str``) :  typeName
-			manager (``IModelingElementManager``) :  manager
+			typeName (`str`) :  typeName
+			manager (`IModelingElementManager`) :  manager
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
 class StandardFieldNameLibrary:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -18824,12 +18825,12 @@ class StandardFieldNameLibrary:
 
 		Args
 		--------
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
-			linkElementId (``int``) :  linkElementId
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
+			linkElementId (`int`) :  linkElementId
 
 		Returns
 		--------
-			``IUnitizedField`` : 
+			`IUnitizedField` : 
 		"""
 		pass
 
@@ -18840,12 +18841,12 @@ class StandardFieldNameLibrary:
 
 		Args
 		--------
-			domainElementType (``int``) :  domainElementType
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			domainElementType (`int`) :  domainElementType
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
 
 		Returns
 		--------
-			``IUnitizedField`` : 
+			`IUnitizedField` : 
 		"""
 		pass
 
@@ -18855,25 +18856,25 @@ class StandardFieldNameLibrary:
 
 		Args
 		--------
-			domainElementType (``int``) :  domainElementType
-			domainDataSet (``IDomainDataSet``) :  domainDataSet
+			domainElementType (`int`) :  domainElementType
+			domainDataSet (`IDomainDataSet`) :  domainDataSet
 
 		Returns
 		--------
-			``IUnitizedField`` : 
+			`IUnitizedField` : 
 		"""
 		pass
 
 class PipeNodeFieldNames:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
 
 class StandardElementTypePermission:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -18884,7 +18885,7 @@ class StandardElementTypePermission:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18894,7 +18895,7 @@ class StandardElementTypePermission:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -18904,57 +18905,57 @@ class StandardElementTypePermission:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
 class SupportElementTypeCollection(List, ICloneable):
 
 	@overload
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SupportElementTypeCollection``) :  c
-			a (``List[ISupportElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`SupportElementTypeCollection`) :  c
+			a (`List[ISupportElementType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, capacity: int) -> None:
+	def __new__(self, capacity: int) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SupportElementTypeCollection``) :  c
-			a (``List[ISupportElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`SupportElementTypeCollection`) :  c
+			a (`List[ISupportElementType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, c: SupportElementTypeCollection) -> None:
+	def __new__(self, c: SupportElementTypeCollection) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SupportElementTypeCollection``) :  c
-			a (``List[ISupportElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`SupportElementTypeCollection`) :  c
+			a (`List[ISupportElementType]`) :  a
 		"""
 		pass
 
 	@overload
-	def __init__(self, a: List[ISupportElementType]) -> None:
+	def __new__(self, a: List[ISupportElementType]) -> None:
 		"""No Description
 
 		Args
 		--------
-			capacity (``int``) :  capacity
-			c (``SupportElementTypeCollection``) :  c
-			a (``List[ISupportElementType]``) :  a
+			capacity (`int`) :  capacity
+			c (`SupportElementTypeCollection`) :  c
+			a (`List[ISupportElementType]`) :  a
 		"""
 		pass
 
@@ -18964,11 +18965,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``SupportElementTypeCollection``) :  list
+			list (`SupportElementTypeCollection`) :  list
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`SupportElementTypeCollection` : 
 		"""
 		pass
 
@@ -18978,11 +18979,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			list (``SupportElementTypeCollection``) :  list
+			list (`SupportElementTypeCollection`) :  list
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`SupportElementTypeCollection` : 
 		"""
 		pass
 
@@ -18992,11 +18993,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISupportElementType]``) :  array
+			array (`List[ISupportElementType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19006,12 +19007,12 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISupportElementType]``) :  array
-			start (``int``) :  start
+			array (`List[ISupportElementType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19020,11 +19021,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISupportElementType``) :  item
+			item (`ISupportElementType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19033,7 +19034,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19042,7 +19043,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -19051,11 +19052,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISupportElementType``) :  item
+			item (`ISupportElementType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19064,11 +19065,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISupportElementType``) :  item
+			item (`ISupportElementType`) :  item
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19077,12 +19078,12 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
-			item (``ISupportElementType``) :  item
+			index (`int`) :  index
+			item (`ISupportElementType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19091,11 +19092,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			item (``ISupportElementType``) :  item
+			item (`ISupportElementType`) :  item
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19104,11 +19105,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			index (``int``) :  index
+			index (`int`) :  index
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19117,7 +19118,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ISupportElementTypeCollectionEnumerator`` : 
+			`ISupportElementTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -19127,11 +19128,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``SupportElementTypeCollection``) :  x
+			x (`SupportElementTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19141,11 +19142,11 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[ISupportElementType]``) :  x
+			x (`List[ISupportElementType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19154,7 +19155,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19164,7 +19165,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19174,7 +19175,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19184,7 +19185,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -19194,7 +19195,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -19208,7 +19209,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19218,7 +19219,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19228,7 +19229,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SupportElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19238,7 +19239,7 @@ class SupportElementTypeCollection(List, ICloneable):
 
 class IAlternativeTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -19254,7 +19255,7 @@ class IAlternativeTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19263,7 +19264,7 @@ class IAlternativeTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19273,13 +19274,13 @@ class IAlternativeTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``IAlternativeTypeCollectionEnumerator`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IAlternativeTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -19289,7 +19290,7 @@ class Enumerator(IEnumerator, IAlternativeTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19298,7 +19299,7 @@ class Enumerator(IEnumerator, IAlternativeTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19308,13 +19309,13 @@ class Enumerator(IEnumerator, IAlternativeTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
 class SyncAlternativeTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -19325,11 +19326,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IAlternativeType]``) :  array
+			array (`List[IAlternativeType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19339,12 +19340,12 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IAlternativeType]``) :  array
-			start (``int``) :  start
+			array (`List[IAlternativeType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19353,11 +19354,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19366,7 +19367,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19375,11 +19376,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19388,11 +19389,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19401,12 +19402,12 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IAlternativeType``) :  x
+			pos (`int`) :  pos
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19415,11 +19416,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19428,11 +19429,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19441,7 +19442,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IAlternativeTypeCollectionEnumerator`` : 
+			`IAlternativeTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -19451,11 +19452,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``AlternativeTypeCollection``) :  x
+			x (`AlternativeTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19465,11 +19466,11 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IAlternativeType]``) :  x
+			x (`List[IAlternativeType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19478,7 +19479,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -19487,7 +19488,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19497,7 +19498,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19507,7 +19508,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19517,7 +19518,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -19527,7 +19528,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -19541,7 +19542,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19551,7 +19552,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19561,7 +19562,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncAlternativeTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19571,7 +19572,7 @@ class SyncAlternativeTypeCollection(List, ICloneable):
 
 class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -19582,11 +19583,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IAlternativeType]``) :  array
+			array (`List[IAlternativeType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19596,12 +19597,12 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IAlternativeType]``) :  array
-			start (``int``) :  start
+			array (`List[IAlternativeType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19610,11 +19611,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19623,7 +19624,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19632,11 +19633,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19645,11 +19646,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19658,12 +19659,12 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IAlternativeType``) :  x
+			pos (`int`) :  pos
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19672,11 +19673,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IAlternativeType``) :  x
+			x (`IAlternativeType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19685,11 +19686,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19698,7 +19699,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IAlternativeTypeCollectionEnumerator`` : 
+			`IAlternativeTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -19708,11 +19709,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``AlternativeTypeCollection``) :  x
+			x (`AlternativeTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19722,11 +19723,11 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IAlternativeType]``) :  x
+			x (`List[IAlternativeType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19735,7 +19736,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -19744,7 +19745,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19754,7 +19755,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19764,7 +19765,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19774,7 +19775,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -19784,7 +19785,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`IAlternativeType` : 
 		"""
 		pass
 
@@ -19798,7 +19799,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19808,7 +19809,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19818,7 +19819,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyAlternativeTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19828,7 +19829,7 @@ class ReadOnlyAlternativeTypeCollection(List, ICloneable):
 
 class IFieldTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -19844,7 +19845,7 @@ class IFieldTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19853,7 +19854,7 @@ class IFieldTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19863,13 +19864,13 @@ class IFieldTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``IFieldTypeCollectionEnumerator`` : 
+			`IFieldType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IFieldTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -19879,7 +19880,7 @@ class Enumerator(IEnumerator, IFieldTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19888,7 +19889,7 @@ class Enumerator(IEnumerator, IFieldTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19898,13 +19899,13 @@ class Enumerator(IEnumerator, IFieldTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IFieldType` : 
 		"""
 		pass
 
 class SyncFieldTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -19915,11 +19916,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFieldType]``) :  array
+			array (`List[IFieldType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19929,12 +19930,12 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFieldType]``) :  array
-			start (``int``) :  start
+			array (`List[IFieldType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19943,11 +19944,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19956,7 +19957,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -19965,11 +19966,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -19978,11 +19979,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -19991,12 +19992,12 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IFieldType``) :  x
+			pos (`int`) :  pos
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20005,11 +20006,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20018,11 +20019,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20031,7 +20032,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IFieldTypeCollectionEnumerator`` : 
+			`IFieldTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -20041,11 +20042,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``FieldTypeCollection``) :  x
+			x (`FieldTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20055,11 +20056,11 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IFieldType]``) :  x
+			x (`List[IFieldType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20068,7 +20069,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20077,7 +20078,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20087,7 +20088,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20097,7 +20098,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20107,7 +20108,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20117,7 +20118,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -20131,7 +20132,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20141,7 +20142,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20151,7 +20152,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncFieldTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20161,7 +20162,7 @@ class SyncFieldTypeCollection(List, ICloneable):
 
 class ReadOnlyFieldTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -20172,11 +20173,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFieldType]``) :  array
+			array (`List[IFieldType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20186,12 +20187,12 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IFieldType]``) :  array
-			start (``int``) :  start
+			array (`List[IFieldType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20200,11 +20201,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20213,7 +20214,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20222,11 +20223,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20235,11 +20236,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20248,12 +20249,12 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IFieldType``) :  x
+			pos (`int`) :  pos
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20262,11 +20263,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IFieldType``) :  x
+			x (`IFieldType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20275,11 +20276,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20288,7 +20289,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IFieldTypeCollectionEnumerator`` : 
+			`IFieldTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -20298,11 +20299,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``FieldTypeCollection``) :  x
+			x (`FieldTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20312,11 +20313,11 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IFieldType]``) :  x
+			x (`List[IFieldType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20325,7 +20326,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20334,7 +20335,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20344,7 +20345,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20354,7 +20355,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20364,7 +20365,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20374,7 +20375,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`IFieldType` : 
 		"""
 		pass
 
@@ -20388,7 +20389,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20398,7 +20399,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20408,7 +20409,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyFieldTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20418,7 +20419,7 @@ class ReadOnlyFieldTypeCollection(List, ICloneable):
 
 class IDomainDataSetCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -20434,7 +20435,7 @@ class IDomainDataSetCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20443,7 +20444,7 @@ class IDomainDataSetCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20453,13 +20454,13 @@ class IDomainDataSetCollectionEnumerator:
 
 		Returns
 		--------
-			``IDomainDataSetCollectionEnumerator`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IDomainDataSetCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -20469,7 +20470,7 @@ class Enumerator(IEnumerator, IDomainDataSetCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20478,7 +20479,7 @@ class Enumerator(IEnumerator, IDomainDataSetCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20488,13 +20489,13 @@ class Enumerator(IEnumerator, IDomainDataSetCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
 class SyncDomainDataSetCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -20505,11 +20506,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSet]``) :  array
+			array (`List[IDomainDataSet]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20519,12 +20520,12 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSet]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainDataSet]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20533,11 +20534,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20546,7 +20547,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20555,11 +20556,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20568,11 +20569,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20581,12 +20582,12 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IDomainDataSet``) :  x
+			pos (`int`) :  pos
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20595,11 +20596,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20608,11 +20609,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20621,7 +20622,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainDataSetCollectionEnumerator`` : 
+			`IDomainDataSetCollectionEnumerator` : 
 		"""
 		pass
 
@@ -20631,11 +20632,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainDataSetCollection``) :  x
+			x (`DomainDataSetCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20645,11 +20646,11 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainDataSet]``) :  x
+			x (`List[IDomainDataSet]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20658,7 +20659,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20667,7 +20668,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20677,7 +20678,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20687,7 +20688,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20697,7 +20698,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20707,7 +20708,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -20721,7 +20722,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20731,7 +20732,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20741,7 +20742,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20751,7 +20752,7 @@ class SyncDomainDataSetCollection(List, ICloneable):
 
 class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -20762,11 +20763,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSet]``) :  array
+			array (`List[IDomainDataSet]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20776,12 +20777,12 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSet]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainDataSet]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20790,11 +20791,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20803,7 +20804,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20812,11 +20813,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20825,11 +20826,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20838,12 +20839,12 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IDomainDataSet``) :  x
+			pos (`int`) :  pos
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20852,11 +20853,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSet``) :  x
+			x (`IDomainDataSet`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20865,11 +20866,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20878,7 +20879,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainDataSetCollectionEnumerator`` : 
+			`IDomainDataSetCollectionEnumerator` : 
 		"""
 		pass
 
@@ -20888,11 +20889,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainDataSetCollection``) :  x
+			x (`DomainDataSetCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20902,11 +20903,11 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainDataSet]``) :  x
+			x (`List[IDomainDataSet]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20915,7 +20916,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20924,7 +20925,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -20934,7 +20935,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -20944,7 +20945,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20954,7 +20955,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -20964,7 +20965,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`IDomainDataSet` : 
 		"""
 		pass
 
@@ -20978,7 +20979,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20988,7 +20989,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -20998,7 +20999,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21008,7 +21009,7 @@ class ReadOnlyDomainDataSetCollection(List, ICloneable):
 
 class IDomainDataSetTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -21024,7 +21025,7 @@ class IDomainDataSetTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21033,7 +21034,7 @@ class IDomainDataSetTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21043,13 +21044,13 @@ class IDomainDataSetTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``IDomainDataSetTypeCollectionEnumerator`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IDomainDataSetTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -21059,7 +21060,7 @@ class Enumerator(IEnumerator, IDomainDataSetTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21068,7 +21069,7 @@ class Enumerator(IEnumerator, IDomainDataSetTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21078,13 +21079,13 @@ class Enumerator(IEnumerator, IDomainDataSetTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
 class SyncDomainDataSetTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -21095,11 +21096,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSetType]``) :  array
+			array (`List[IDomainDataSetType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21109,12 +21110,12 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSetType]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainDataSetType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21123,11 +21124,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21136,7 +21137,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21145,11 +21146,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21158,11 +21159,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21171,12 +21172,12 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IDomainDataSetType``) :  x
+			pos (`int`) :  pos
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21185,11 +21186,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21198,11 +21199,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21211,7 +21212,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainDataSetTypeCollectionEnumerator`` : 
+			`IDomainDataSetTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -21221,11 +21222,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainDataSetTypeCollection``) :  x
+			x (`DomainDataSetTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21235,11 +21236,11 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainDataSetType]``) :  x
+			x (`List[IDomainDataSetType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21248,7 +21249,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -21257,7 +21258,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21267,7 +21268,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21277,7 +21278,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21287,7 +21288,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -21297,7 +21298,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -21311,7 +21312,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21321,7 +21322,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21331,7 +21332,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainDataSetTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21341,7 +21342,7 @@ class SyncDomainDataSetTypeCollection(List, ICloneable):
 
 class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -21352,11 +21353,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSetType]``) :  array
+			array (`List[IDomainDataSetType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21366,12 +21367,12 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainDataSetType]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainDataSetType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21380,11 +21381,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21393,7 +21394,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21402,11 +21403,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21415,11 +21416,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21428,12 +21429,12 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IDomainDataSetType``) :  x
+			pos (`int`) :  pos
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21442,11 +21443,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainDataSetType``) :  x
+			x (`IDomainDataSetType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21455,11 +21456,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21468,7 +21469,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainDataSetTypeCollectionEnumerator`` : 
+			`IDomainDataSetTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -21478,11 +21479,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainDataSetTypeCollection``) :  x
+			x (`DomainDataSetTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21492,11 +21493,11 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainDataSetType]``) :  x
+			x (`List[IDomainDataSetType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21505,7 +21506,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -21514,7 +21515,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21524,7 +21525,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21534,7 +21535,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21544,7 +21545,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -21554,7 +21555,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`IDomainDataSetType` : 
 		"""
 		pass
 
@@ -21568,7 +21569,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21578,7 +21579,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21588,7 +21589,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainDataSetTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21598,7 +21599,7 @@ class ReadOnlyDomainDataSetTypeCollection(List, ICloneable):
 
 class IDomainElementTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -21614,7 +21615,7 @@ class IDomainElementTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21623,7 +21624,7 @@ class IDomainElementTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21633,13 +21634,13 @@ class IDomainElementTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``IDomainElementTypeCollectionEnumerator`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IDomainElementTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -21649,7 +21650,7 @@ class Enumerator(IEnumerator, IDomainElementTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21658,7 +21659,7 @@ class Enumerator(IEnumerator, IDomainElementTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21668,13 +21669,13 @@ class Enumerator(IEnumerator, IDomainElementTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
 class SyncDomainElementTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -21685,11 +21686,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainElementType]``) :  array
+			array (`List[IDomainElementType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21699,12 +21700,12 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainElementType]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainElementType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21713,11 +21714,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21726,7 +21727,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21735,11 +21736,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21748,11 +21749,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21761,12 +21762,12 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IDomainElementType``) :  x
+			pos (`int`) :  pos
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21775,11 +21776,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21788,11 +21789,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21801,7 +21802,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainElementTypeCollectionEnumerator`` : 
+			`IDomainElementTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -21811,11 +21812,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainElementTypeCollection``) :  x
+			x (`DomainElementTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21825,11 +21826,11 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainElementType]``) :  x
+			x (`List[IDomainElementType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21838,7 +21839,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -21847,7 +21848,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21857,7 +21858,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21867,7 +21868,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21877,7 +21878,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -21887,7 +21888,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -21901,7 +21902,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21911,7 +21912,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -21921,7 +21922,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncDomainElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21931,7 +21932,7 @@ class SyncDomainElementTypeCollection(List, ICloneable):
 
 class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -21942,11 +21943,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainElementType]``) :  array
+			array (`List[IDomainElementType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21956,12 +21957,12 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IDomainElementType]``) :  array
-			start (``int``) :  start
+			array (`List[IDomainElementType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21970,11 +21971,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -21983,7 +21984,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -21992,11 +21993,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22005,11 +22006,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22018,12 +22019,12 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IDomainElementType``) :  x
+			pos (`int`) :  pos
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22032,11 +22033,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IDomainElementType``) :  x
+			x (`IDomainElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22045,11 +22046,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22058,7 +22059,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IDomainElementTypeCollectionEnumerator`` : 
+			`IDomainElementTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -22068,11 +22069,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``DomainElementTypeCollection``) :  x
+			x (`DomainElementTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22082,11 +22083,11 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IDomainElementType]``) :  x
+			x (`List[IDomainElementType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22095,7 +22096,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -22104,7 +22105,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22114,7 +22115,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22124,7 +22125,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22134,7 +22135,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -22144,7 +22145,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`IDomainElementType` : 
 		"""
 		pass
 
@@ -22158,7 +22159,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22168,7 +22169,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22178,7 +22179,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyDomainElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22188,7 +22189,7 @@ class ReadOnlyDomainElementTypeCollection(List, ICloneable):
 
 class IModelingElementCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -22204,7 +22205,7 @@ class IModelingElementCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22213,7 +22214,7 @@ class IModelingElementCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22223,13 +22224,13 @@ class IModelingElementCollectionEnumerator:
 
 		Returns
 		--------
-			``IModelingElementCollectionEnumerator`` : 
+			`IModelingElement` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IModelingElementCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -22239,7 +22240,7 @@ class Enumerator(IEnumerator, IModelingElementCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22248,7 +22249,7 @@ class Enumerator(IEnumerator, IModelingElementCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22258,13 +22259,13 @@ class Enumerator(IEnumerator, IModelingElementCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IModelingElement` : 
 		"""
 		pass
 
 class SyncModelingElementCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -22275,11 +22276,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IModelingElement]``) :  array
+			array (`List[IModelingElement]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22289,12 +22290,12 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IModelingElement]``) :  array
-			start (``int``) :  start
+			array (`List[IModelingElement]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22303,11 +22304,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22316,7 +22317,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22325,11 +22326,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22338,11 +22339,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22351,12 +22352,12 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IModelingElement``) :  x
+			pos (`int`) :  pos
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22365,11 +22366,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22378,11 +22379,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22391,7 +22392,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IModelingElementCollectionEnumerator`` : 
+			`IModelingElementCollectionEnumerator` : 
 		"""
 		pass
 
@@ -22401,11 +22402,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ModelingElementCollection``) :  x
+			x (`ModelingElementCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22415,11 +22416,11 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IModelingElement]``) :  x
+			x (`List[IModelingElement]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22428,7 +22429,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -22437,7 +22438,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22447,7 +22448,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22457,7 +22458,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22467,7 +22468,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -22477,7 +22478,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`IModelingElement` : 
 		"""
 		pass
 
@@ -22491,7 +22492,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22501,7 +22502,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22511,7 +22512,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncModelingElementCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22521,7 +22522,7 @@ class SyncModelingElementCollection(List, ICloneable):
 
 class ReadOnlyModelingElementCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -22532,11 +22533,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IModelingElement]``) :  array
+			array (`List[IModelingElement]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22546,12 +22547,12 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IModelingElement]``) :  array
-			start (``int``) :  start
+			array (`List[IModelingElement]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22560,11 +22561,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22573,7 +22574,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22582,11 +22583,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22595,11 +22596,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22608,12 +22609,12 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IModelingElement``) :  x
+			pos (`int`) :  pos
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22622,11 +22623,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IModelingElement``) :  x
+			x (`IModelingElement`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22635,11 +22636,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22648,7 +22649,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IModelingElementCollectionEnumerator`` : 
+			`IModelingElementCollectionEnumerator` : 
 		"""
 		pass
 
@@ -22658,11 +22659,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ModelingElementCollection``) :  x
+			x (`ModelingElementCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22672,11 +22673,11 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IModelingElement]``) :  x
+			x (`List[IModelingElement]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22685,7 +22686,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -22694,7 +22695,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22704,7 +22705,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22714,7 +22715,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22724,7 +22725,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -22734,7 +22735,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`IModelingElement` : 
 		"""
 		pass
 
@@ -22748,7 +22749,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22758,7 +22759,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22768,7 +22769,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyModelingElementCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22778,7 +22779,7 @@ class ReadOnlyModelingElementCollection(List, ICloneable):
 
 class INumericalEngineTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -22794,7 +22795,7 @@ class INumericalEngineTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22803,7 +22804,7 @@ class INumericalEngineTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22813,13 +22814,13 @@ class INumericalEngineTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``INumericalEngineTypeCollectionEnumerator`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, INumericalEngineTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -22829,7 +22830,7 @@ class Enumerator(IEnumerator, INumericalEngineTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22838,7 +22839,7 @@ class Enumerator(IEnumerator, INumericalEngineTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22848,13 +22849,13 @@ class Enumerator(IEnumerator, INumericalEngineTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
 class SyncNumericalEngineTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -22865,11 +22866,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[INumericalEngineType]``) :  array
+			array (`List[INumericalEngineType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22879,12 +22880,12 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[INumericalEngineType]``) :  array
-			start (``int``) :  start
+			array (`List[INumericalEngineType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22893,11 +22894,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22906,7 +22907,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22915,11 +22916,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -22928,11 +22929,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -22941,12 +22942,12 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``INumericalEngineType``) :  x
+			pos (`int`) :  pos
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22955,11 +22956,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22968,11 +22969,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -22981,7 +22982,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``INumericalEngineTypeCollectionEnumerator`` : 
+			`INumericalEngineTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -22991,11 +22992,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``NumericalEngineTypeCollection``) :  x
+			x (`NumericalEngineTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23005,11 +23006,11 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[INumericalEngineType]``) :  x
+			x (`List[INumericalEngineType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23018,7 +23019,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23027,7 +23028,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23037,7 +23038,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23047,7 +23048,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23057,7 +23058,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23067,7 +23068,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -23081,7 +23082,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23091,7 +23092,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23101,7 +23102,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncNumericalEngineTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23111,7 +23112,7 @@ class SyncNumericalEngineTypeCollection(List, ICloneable):
 
 class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -23122,11 +23123,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[INumericalEngineType]``) :  array
+			array (`List[INumericalEngineType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23136,12 +23137,12 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[INumericalEngineType]``) :  array
-			start (``int``) :  start
+			array (`List[INumericalEngineType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23150,11 +23151,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23163,7 +23164,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23172,11 +23173,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23185,11 +23186,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23198,12 +23199,12 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``INumericalEngineType``) :  x
+			pos (`int`) :  pos
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23212,11 +23213,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``INumericalEngineType``) :  x
+			x (`INumericalEngineType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23225,11 +23226,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23238,7 +23239,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``INumericalEngineTypeCollectionEnumerator`` : 
+			`INumericalEngineTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -23248,11 +23249,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``NumericalEngineTypeCollection``) :  x
+			x (`NumericalEngineTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23262,11 +23263,11 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[INumericalEngineType]``) :  x
+			x (`List[INumericalEngineType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23275,7 +23276,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23284,7 +23285,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23294,7 +23295,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23304,7 +23305,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23314,7 +23315,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23324,7 +23325,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`INumericalEngineType` : 
 		"""
 		pass
 
@@ -23338,7 +23339,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23348,7 +23349,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23358,7 +23359,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyNumericalEngineTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23368,7 +23369,7 @@ class ReadOnlyNumericalEngineTypeCollection(List, ICloneable):
 
 class IResultRecordCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -23384,7 +23385,7 @@ class IResultRecordCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23393,7 +23394,7 @@ class IResultRecordCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23403,13 +23404,13 @@ class IResultRecordCollectionEnumerator:
 
 		Returns
 		--------
-			``IResultRecordCollectionEnumerator`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IResultRecordCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -23419,7 +23420,7 @@ class Enumerator(IEnumerator, IResultRecordCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23428,7 +23429,7 @@ class Enumerator(IEnumerator, IResultRecordCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23438,13 +23439,13 @@ class Enumerator(IEnumerator, IResultRecordCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
 class SyncResultRecordCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -23455,11 +23456,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecord]``) :  array
+			array (`List[IResultRecord]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23469,12 +23470,12 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecord]``) :  array
-			start (``int``) :  start
+			array (`List[IResultRecord]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23483,11 +23484,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23496,7 +23497,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23505,11 +23506,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23518,11 +23519,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23531,12 +23532,12 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IResultRecord``) :  x
+			pos (`int`) :  pos
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23545,11 +23546,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23558,11 +23559,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23571,7 +23572,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IResultRecordCollectionEnumerator`` : 
+			`IResultRecordCollectionEnumerator` : 
 		"""
 		pass
 
@@ -23581,11 +23582,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ResultRecordCollection``) :  x
+			x (`ResultRecordCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23595,11 +23596,11 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IResultRecord]``) :  x
+			x (`List[IResultRecord]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23608,7 +23609,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23617,7 +23618,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23627,7 +23628,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23637,7 +23638,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23647,7 +23648,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23657,7 +23658,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
@@ -23671,7 +23672,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23681,7 +23682,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23691,7 +23692,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23701,7 +23702,7 @@ class SyncResultRecordCollection(List, ICloneable):
 
 class ReadOnlyResultRecordCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -23712,11 +23713,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecord]``) :  array
+			array (`List[IResultRecord]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23726,12 +23727,12 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecord]``) :  array
-			start (``int``) :  start
+			array (`List[IResultRecord]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23740,11 +23741,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23753,7 +23754,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23762,11 +23763,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23775,11 +23776,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23788,12 +23789,12 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IResultRecord``) :  x
+			pos (`int`) :  pos
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23802,11 +23803,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecord``) :  x
+			x (`IResultRecord`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23815,11 +23816,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23828,7 +23829,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IResultRecordCollectionEnumerator`` : 
+			`IResultRecordCollectionEnumerator` : 
 		"""
 		pass
 
@@ -23838,11 +23839,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ResultRecordCollection``) :  x
+			x (`ResultRecordCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23852,11 +23853,11 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IResultRecord]``) :  x
+			x (`List[IResultRecord]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23865,7 +23866,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23874,7 +23875,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23884,7 +23885,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23894,7 +23895,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23904,7 +23905,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -23914,7 +23915,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`IResultRecord` : 
 		"""
 		pass
 
@@ -23928,7 +23929,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23938,7 +23939,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23948,7 +23949,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -23958,7 +23959,7 @@ class ReadOnlyResultRecordCollection(List, ICloneable):
 
 class IResultRecordTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -23974,7 +23975,7 @@ class IResultRecordTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -23983,7 +23984,7 @@ class IResultRecordTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -23993,13 +23994,13 @@ class IResultRecordTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``IResultRecordTypeCollectionEnumerator`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, IResultRecordTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -24009,7 +24010,7 @@ class Enumerator(IEnumerator, IResultRecordTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24018,7 +24019,7 @@ class Enumerator(IEnumerator, IResultRecordTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24028,13 +24029,13 @@ class Enumerator(IEnumerator, IResultRecordTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
 class SyncResultRecordTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -24045,11 +24046,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecordType]``) :  array
+			array (`List[IResultRecordType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24059,12 +24060,12 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecordType]``) :  array
-			start (``int``) :  start
+			array (`List[IResultRecordType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24073,11 +24074,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24086,7 +24087,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24095,11 +24096,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24108,11 +24109,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24121,12 +24122,12 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IResultRecordType``) :  x
+			pos (`int`) :  pos
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24135,11 +24136,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24148,11 +24149,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24161,7 +24162,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IResultRecordTypeCollectionEnumerator`` : 
+			`IResultRecordTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -24171,11 +24172,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ResultRecordTypeCollection``) :  x
+			x (`ResultRecordTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24185,11 +24186,11 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IResultRecordType]``) :  x
+			x (`List[IResultRecordType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24198,7 +24199,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -24207,7 +24208,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24217,7 +24218,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24227,7 +24228,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24237,7 +24238,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -24247,7 +24248,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
@@ -24261,7 +24262,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24271,7 +24272,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24281,7 +24282,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncResultRecordTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24291,7 +24292,7 @@ class SyncResultRecordTypeCollection(List, ICloneable):
 
 class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -24302,11 +24303,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecordType]``) :  array
+			array (`List[IResultRecordType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24316,12 +24317,12 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[IResultRecordType]``) :  array
-			start (``int``) :  start
+			array (`List[IResultRecordType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24330,11 +24331,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24343,7 +24344,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24352,11 +24353,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24365,11 +24366,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24378,12 +24379,12 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``IResultRecordType``) :  x
+			pos (`int`) :  pos
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24392,11 +24393,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``IResultRecordType``) :  x
+			x (`IResultRecordType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24405,11 +24406,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24418,7 +24419,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``IResultRecordTypeCollectionEnumerator`` : 
+			`IResultRecordTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -24428,11 +24429,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ResultRecordTypeCollection``) :  x
+			x (`ResultRecordTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24442,11 +24443,11 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[IResultRecordType]``) :  x
+			x (`List[IResultRecordType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24455,7 +24456,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -24464,7 +24465,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24474,7 +24475,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24484,7 +24485,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24494,7 +24495,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -24504,7 +24505,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`IResultRecordType` : 
 		"""
 		pass
 
@@ -24518,7 +24519,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24528,7 +24529,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24538,7 +24539,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlyResultRecordTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24548,7 +24549,7 @@ class ReadOnlyResultRecordTypeCollection(List, ICloneable):
 
 class ISupportElementTypeCollectionEnumerator:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -24564,7 +24565,7 @@ class ISupportElementTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24573,7 +24574,7 @@ class ISupportElementTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24583,13 +24584,13 @@ class ISupportElementTypeCollectionEnumerator:
 
 		Returns
 		--------
-			``ISupportElementTypeCollectionEnumerator`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
 class Enumerator(IEnumerator, ISupportElementTypeCollectionEnumerator):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -24599,7 +24600,7 @@ class Enumerator(IEnumerator, ISupportElementTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24608,7 +24609,7 @@ class Enumerator(IEnumerator, ISupportElementTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24618,13 +24619,13 @@ class Enumerator(IEnumerator, ISupportElementTypeCollectionEnumerator):
 
 		Returns
 		--------
-			``Enumerator`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
 class SyncSupportElementTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -24635,11 +24636,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISupportElementType]``) :  array
+			array (`List[ISupportElementType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24649,12 +24650,12 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISupportElementType]``) :  array
-			start (``int``) :  start
+			array (`List[ISupportElementType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24663,11 +24664,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24676,7 +24677,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24685,11 +24686,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24698,11 +24699,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24711,12 +24712,12 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``ISupportElementType``) :  x
+			pos (`int`) :  pos
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24725,11 +24726,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24738,11 +24739,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24751,7 +24752,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ISupportElementTypeCollectionEnumerator`` : 
+			`ISupportElementTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -24761,11 +24762,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``SupportElementTypeCollection``) :  x
+			x (`SupportElementTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24775,11 +24776,11 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[ISupportElementType]``) :  x
+			x (`List[ISupportElementType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24788,7 +24789,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -24797,7 +24798,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24807,7 +24808,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24817,7 +24818,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24827,7 +24828,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -24837,7 +24838,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -24851,7 +24852,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24861,7 +24862,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24871,7 +24872,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``SyncSupportElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24881,7 +24882,7 @@ class SyncSupportElementTypeCollection(List, ICloneable):
 
 class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""No Description
 		"""
 		pass
@@ -24892,11 +24893,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISupportElementType]``) :  array
+			array (`List[ISupportElementType]`) :  array
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24906,12 +24907,12 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			array (``List[ISupportElementType]``) :  array
-			start (``int``) :  start
+			array (`List[ISupportElementType]`) :  array
+			start (`int`) :  start
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24920,11 +24921,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24933,7 +24934,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24942,11 +24943,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -24955,11 +24956,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -24968,12 +24969,12 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
-			x (``ISupportElementType``) :  x
+			pos (`int`) :  pos
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24982,11 +24983,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``ISupportElementType``) :  x
+			x (`ISupportElementType`) :  x
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -24995,11 +24996,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			pos (``int``) :  pos
+			pos (`int`) :  pos
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -25008,7 +25009,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ISupportElementTypeCollectionEnumerator`` : 
+			`ISupportElementTypeCollectionEnumerator` : 
 		"""
 		pass
 
@@ -25018,11 +25019,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``SupportElementTypeCollection``) :  x
+			x (`SupportElementTypeCollection`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -25032,11 +25033,11 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Args
 		--------
-			x (``List[ISupportElementType]``) :  x
+			x (`List[ISupportElementType]`) :  x
 
 		Returns
 		--------
-			``int`` : 
+			`int` : 
 		"""
 		pass
 
@@ -25045,7 +25046,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``object`` : 
+			`object` : 
 		"""
 		pass
 
@@ -25054,7 +25055,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -25064,7 +25065,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -25074,7 +25075,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -25084,7 +25085,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`object` : 
 		"""
 		pass
 
@@ -25094,7 +25095,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`ISupportElementType` : 
 		"""
 		pass
 
@@ -25108,7 +25109,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -25118,7 +25119,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -25128,7 +25129,7 @@ class ReadOnlySupportElementTypeCollection(List, ICloneable):
 
 		Returns
 		--------
-			``ReadOnlySupportElementTypeCollection`` : 
+			`int` : 
 		"""
 		pass
 

@@ -11,7 +11,7 @@ TSystemAlternativeType = TypeVar("TSystemAlternativeType")
 
 class IAlternativeElements(Generic[TAlternativeManagerType, TAlternativeElementType, TAlternativeTypeEnum, TAlternativeUnitsType, TSystemAlternativeType], IModelingElementsBase[TAlternativeManagerType, TAlternativeElementType, TAlternativeTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -24,7 +24,7 @@ class IAlternativeElements(Generic[TAlternativeManagerType, TAlternativeElementT
 
 class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementType, TAlternativeTypeEnum, TAlternativeUnitsType, TSystemAlternativeType], IModelingElementBase[TAlternativeManagerType, TAlternativeElementType, TAlternativeTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -41,7 +41,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 		Returns
 		--------
-			``IAlternativeElement`` : 
+			`TAlternativeTypeEnum` : 
 		"""
 		pass
 
@@ -51,7 +51,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 		Returns
 		--------
-			``IAlternativeElement`` : 
+			`TSystemAlternativeType` : 
 		"""
 		pass
 
@@ -61,7 +61,7 @@ class IAlternativeElement(Generic[TAlternativeManagerType, TAlternativeElementTy
 
 		Returns
 		--------
-			``IAlternativeElement`` : 
+			`TAlternativeUnitsType` : 
 		"""
 		pass
 

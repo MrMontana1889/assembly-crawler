@@ -11,7 +11,7 @@ class WaterProductLicenseType(Enum):
 
 class OpenFlowsWater:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -29,11 +29,11 @@ class OpenFlowsWater:
 
 		Args
 		--------
-			product (``WaterProductLicenseType``) :  product
+			product (`WaterProductLicenseType`) :  product
 
 		Returns
 		--------
-			``LicenseRunStatusEnum`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -44,11 +44,11 @@ class OpenFlowsWater:
 
 		Args
 		--------
-			licensedFeatureSet (``ILicensedFeatureSet``) :  licensedFeatureSet
+			licensedFeatureSet (`ILicensedFeatureSet`) :  licensedFeatureSet
 
 		Returns
 		--------
-			``LicenseRunStatusEnum`` : 
+			`LicenseRunStatusEnum` : 
 		"""
 		pass
 
@@ -58,7 +58,7 @@ class OpenFlowsWater:
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -69,11 +69,11 @@ class OpenFlowsWater:
 
 		Args
 		--------
-			count (``int``) :  A minimum of 1 and a maximum of 5 is allowed.
+			count (`int`) :  A minimum of 1 and a maximum of 5 is allowed.
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -83,12 +83,12 @@ class OpenFlowsWater:
 
 		Args
 		--------
-			filename (``str``) :  The file to open.  Can be the project (wtg) file or the sqlite database.
-			openInPlace (``bool``) :  True to open model without a copy.  Otherwise, a copy of the model is made when opened.  Save() has no effect if true.
+			filename (`str`) :  The file to open.  Can be the project (wtg) file or the sqlite database.
+			openInPlace (`bool`) :  True to open model without a copy.  Otherwise, a copy of the model is made when opened.  Save() has no effect if true.
 
 		Returns
 		--------
-			``IWaterModel`` : 
+			`IWaterModel` : 
 		"""
 		pass
 
@@ -98,11 +98,11 @@ class OpenFlowsWater:
 
 		Args
 		--------
-			project (``IProject``) :  project
+			project (`IProject`) :  project
 
 		Returns
 		--------
-			``IWaterModel`` : 
+			`IWaterModel` : 
 		"""
 		pass
 
@@ -112,7 +112,7 @@ class OpenFlowsWater:
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -123,7 +123,7 @@ class OpenFlowsWater:
 
 		Returns
 		--------
-			``OpenFlowsWater`` : 
+			`IOpenFlowsWaterDefaults` : 
 		"""
 		pass
 

@@ -8,7 +8,7 @@ TUnitsType = TypeVar("TUnitsType")
 
 class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -24,11 +24,11 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 
 		Args
 		--------
-			id (``int``) :  id
+			id (`int`) :  id
 
 		Returns
 		--------
-			``TElementTypeEnum`` : 
+			`TElementTypeEnum` : 
 		"""
 		pass
 
@@ -37,13 +37,13 @@ class IModelComponents(Generic[TElementType, TElementTypeEnum]):
 
 		Returns
 		--------
-			``List[TElementType]`` : 
+			`List[TElementType]` : 
 		"""
 		pass
 
 class IComponentElements(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum], IModelingElementsBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -56,7 +56,7 @@ class IComponentElements(Generic[TElementManagerType, TElementType, TUnitsType, 
 
 class IComponentElement(Generic[TElementManagerType, TElementType, TUnitsType, TElementTypeEnum], IModelingElementBase[TElementManagerType, TElementType, TElementTypeEnum]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -73,7 +73,7 @@ class IComponentElement(Generic[TElementManagerType, TElementType, TUnitsType, T
 
 		Returns
 		--------
-			``IComponentElement`` : 
+			`TUnitsType` : 
 		"""
 		pass
 

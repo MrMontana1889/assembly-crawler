@@ -17,7 +17,7 @@ class UnitSystemType(Enum):
 
 class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -34,13 +34,13 @@ class IModelUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Returns
 		--------
-			``IModelUnits`` : 
+			`IUnits` : 
 		"""
 		pass
 
 class INetworkUnits:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -53,7 +53,7 @@ class INetworkUnits:
 
 class IComponentUnits:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -66,7 +66,7 @@ class IComponentUnits:
 
 class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -83,12 +83,12 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Args
 		--------
-			value (``float``) :  The value to format
-			unit (``IUnit``) :  The unit to use to format the value.
+			value (`float`) :  The value to format
+			unit (`IUnit`) :  The unit to use to format the value.
 
 		Returns
 		--------
-			``str`` : 
+			`str` : 
 		"""
 		pass
 
@@ -98,14 +98,14 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Args
 		--------
-			value (``float``) :  The value to format that is in the unit provided
-			unit (``IUnit``) :  The unit the value is in.
-			format (``FormatCode``) :  The format to use.
-			signficantDigits (``int``) :  The number of digits to the right of the decimal.
+			value (`float`) :  The value to format that is in the unit provided
+			unit (`IUnit`) :  The unit the value is in.
+			format (`FormatCode`) :  The format to use.
+			signficantDigits (`int`) :  The number of digits to the right of the decimal.
 
 		Returns
 		--------
-			``str`` : The format string of the provided value in the unit provided.
+			`str` : The format string of the provided value in the unit provided.
 		"""
 		pass
 
@@ -114,13 +114,13 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Args
 		--------
-			value (``float``) :  The value to convert.  Any value other than NaN
-			fromUnit (``Unit``) :  The unit the value is currently in.
-			toUnit (``Unit``) :  The unit to convert the value to.  Must be of the same dimension as fromUnit.
+			value (`float`) :  The value to convert.  Any value other than NaN
+			fromUnit (`Unit`) :  The unit the value is currently in.
+			toUnit (`Unit`) :  The unit to convert the value to.  Must be of the same dimension as fromUnit.
 
 		Returns
 		--------
-			``float`` : The value in the toUnit specified.
+			`float` : The value in the toUnit specified.
 		"""
 		pass
 
@@ -129,11 +129,11 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Args
 		--------
-			unitSystem (``UnitSystemType``) :  Resets all units to their default units of the given unit system.
+			unitSystem (`UnitSystemType`) :  Resets all units to their default units of the given unit system.
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -143,7 +143,7 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Returns
 		--------
-			``IUnits`` : 
+			`TNetworkUnitsType` : 
 		"""
 		pass
 
@@ -153,13 +153,13 @@ class IUnits(Generic[TNetworkUnitsType, TComponentUnitsType]):
 
 		Returns
 		--------
-			``IUnits`` : 
+			`TComponentUnitsType` : 
 		"""
 		pass
 
 class IUnit:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -176,11 +176,11 @@ class IUnit:
 
 		Args
 		--------
-			value (``float``) :  The value to format in the current unit
+			value (`float`) :  The value to format in the current unit
 
 		Returns
 		--------
-			``str`` : A formatted string of the double value
+			`str` : A formatted string of the double value
 		"""
 		pass
 
@@ -190,13 +190,13 @@ class IUnit:
 
 		Args
 		--------
-			value (``float``) :  The value to format in current unit
-			format (``FormatCode``) :  Determines how the value is formatted
-			significantDigits (``int``) :  The number of significant digits to the right of the decimal.
+			value (`float`) :  The value to format in current unit
+			format (`FormatCode`) :  Determines how the value is formatted
+			significantDigits (`int`) :  The number of significant digits to the right of the decimal.
 
 		Returns
 		--------
-			``str`` : A formatted string of the double value
+			`str` : A formatted string of the double value
 		"""
 		pass
 
@@ -205,11 +205,11 @@ class IUnit:
 
 		Args
 		--------
-			unit (``Unit``) :  The unit to use and must be of the same dimension
+			unit (`Unit`) :  The unit to use and must be of the same dimension
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -218,7 +218,7 @@ class IUnit:
 
 		Returns
 		--------
-			``Unit`` : The current unit
+			`Unit` : The current unit
 		"""
 		pass
 
@@ -227,12 +227,12 @@ class IUnit:
 
 		Args
 		--------
-			value (``float``) :  The value to convert.  The value is assumed in the current unit
-			unit (``Unit``) :  The value is converted to this unit.  The unit must be of the same dimension
+			value (`float`) :  The value to convert.  The value is assumed in the current unit
+			unit (`Unit`) :  The value is converted to this unit.  The unit must be of the same dimension
 
 		Returns
 		--------
-			``float`` : The converted value in the new unit
+			`float` : The converted value in the new unit
 		"""
 		pass
 
@@ -242,7 +242,7 @@ class IUnit:
 
 		Returns
 		--------
-			``IUnit`` : 
+			`Dimension` : 
 		"""
 		pass
 
@@ -252,7 +252,7 @@ class IUnit:
 
 		Returns
 		--------
-			``IUnit`` : 
+			`FormatCode` : 
 		"""
 		pass
 
@@ -266,7 +266,7 @@ class IUnit:
 
 		Returns
 		--------
-			``IUnit`` : 
+			`int` : 
 		"""
 		pass
 
@@ -280,7 +280,7 @@ class IUnit:
 
 		Returns
 		--------
-			``IUnit`` : 
+			`str` : 
 		"""
 		pass
 
@@ -290,7 +290,7 @@ class IUnit:
 
 		Returns
 		--------
-			``IUnit`` : 
+			`str` : 
 		"""
 		pass
 

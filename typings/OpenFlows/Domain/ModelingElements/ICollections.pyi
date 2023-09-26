@@ -8,7 +8,7 @@ TElementType = TypeVar("TElementType")
 
 class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -24,7 +24,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 		Returns
 		--------
-			``TCollectionType`` : 
+			`TCollectionType` : 
 		"""
 		pass
 
@@ -33,11 +33,11 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 		Args
 		--------
-			collection (``TCollectionType``) :  collection
+			collection (`TCollectionType`) :  collection
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -46,12 +46,12 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 		Args
 		--------
-			sorts (``SortContextCollection``) :  Sorts on a field in either ascending or descending order
-			filters (``FilterContextCollection``) :  Filters the collection on one or more fields
+			sorts (`SortContextCollection`) :  Sorts on a field in either ascending or descending order
+			filters (`FilterContextCollection`) :  Filters the collection on one or more fields
 
 		Returns
 		--------
-			``List[TElementType]`` :  containing matching elements for the provided criteria.
+			`List[TElementType]` :  containing matching elements for the provided criteria.
 		"""
 		pass
 
@@ -61,7 +61,7 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 		Returns
 		--------
-			``ICollectionElements`` : 
+			`int` : 
 		"""
 		pass
 
@@ -71,13 +71,13 @@ class ICollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
 		Returns
 		--------
-			``ICollectionElements`` : 
+			`TUnitsType` : 
 		"""
 		pass
 
 class IResultCollectionElements(Generic[TCollectionType, TElementType, TUnitsType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -93,7 +93,7 @@ class IResultCollectionElements(Generic[TCollectionType, TElementType, TUnitsTyp
 
 		Returns
 		--------
-			``TCollectionType`` : 
+			`TCollectionType` : 
 		"""
 		pass
 
@@ -103,13 +103,13 @@ class IResultCollectionElements(Generic[TCollectionType, TElementType, TUnitsTyp
 
 		Returns
 		--------
-			``IResultCollectionElements`` : 
+			`TUnitsType` : 
 		"""
 		pass
 
 class ICollectionElement:
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -122,7 +122,7 @@ class ICollectionElement:
 
 class ICollection(Generic[TElementType], Iterator[TElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -138,7 +138,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``TElementType`` : 
+			`TElementType` : 
 		"""
 		pass
 
@@ -147,11 +147,11 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Args
 		--------
-			index (``int``) :  The zero-based index of the item to remove.
+			index (`int`) :  The zero-based index of the item to remove.
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -160,11 +160,11 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Args
 		--------
-			item (``TElementType``) :  item
+			item (`TElementType`) :  item
 
 		Returns
 		--------
-			``bool`` : 
+			`bool` : 
 		"""
 		pass
 
@@ -173,7 +173,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``None`` : 
+			`None` : 
 		"""
 		pass
 
@@ -183,7 +183,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``ICollection`` : 
+			`TElementType` : 
 		"""
 		pass
 
@@ -197,7 +197,7 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``ICollection`` : 
+			`int` : 
 		"""
 		pass
 
@@ -207,13 +207,13 @@ class ICollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``ICollection`` : 
+			`IFieldManager` : 
 		"""
 		pass
 
 class IResultCollection(Generic[TElementType], Iterator[TElementType]):
 
-	def __init__(self) -> None:
+	def __new__(self) -> None:
 		"""Creating a new Instance of this class is not allowed
 
 
@@ -224,12 +224,12 @@ class IResultCollection(Generic[TElementType], Iterator[TElementType]):
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	def AsReadOnly(self) -> ReadOnlyCollection:
+	def AsReadOnly(self) -> ReadOnlyCollection[TElementType]:
 		"""Returns a ReadOnlyColection containing the elements in the collection
 
 		Returns
 		--------
-			``ReadOnlyCollection`` : 
+			`ReadOnlyCollection` : 
 		"""
 		pass
 
@@ -239,7 +239,7 @@ class IResultCollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``IResultCollection`` : 
+			`TElementType` : 
 		"""
 		pass
 
@@ -249,7 +249,7 @@ class IResultCollection(Generic[TElementType], Iterator[TElementType]):
 
 		Returns
 		--------
-			``IResultCollection`` : 
+			`int` : 
 		"""
 		pass
 
