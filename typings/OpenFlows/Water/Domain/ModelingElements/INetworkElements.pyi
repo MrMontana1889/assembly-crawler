@@ -1,3 +1,4 @@
+from OpenFlows.Water.Domain.ModelingElements.IComponents import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, TElementManagerType, TElementType, TUnitsType, IZone, IUnitDemandLoad, IAirFlowCurve
 from OpenFlows.Domain.ModelingElements.ICollections import ICollectionElement, ICollection, ICollectionElements
 from typing import overload, Dict, List, Generic, Iterator
 from OpenFlows.Domain.IModelingElements import IElementUnits, IElementsResults, IElementResults, IElement, IGeometryUnits, TElementManagerType, TElementType, TUnitsType, IElementInput, IElementsInput, IModelingElementsBase, IElements, IElementManager, IModelingElementBase
@@ -9,7 +10,6 @@ from OpenFlows.Water.IDomain import ValveSettingType, TCVCoefficientType, Pressu
 from Haestad.Support.ISupport import GeometryPoint, IEditLabeled, ILabeled
 from OpenFlows.Domain.ModelingElements.INetworkElements import INetworkElements, TElementInputType, TElementResultsType, TElementsInputType, TElementsResultsType, IActiveElementInput, IActiveElementsInput, INetworkElement, IBaseLinksResults, IBaseLinkResults, IBaseLinkInput, IBaseLinksInput, IBaseLinkUnits, IPointNodeInput, IPointNodesInput, IBasePolygonsInput, IBasePolygonsResults, IBasePolygonResults, IBasePolygonInput, IMorphable
 from OpenFlows.Domain.IDataObjects import INetwork
-from OpenFlows.Water.Domain.ModelingElements.IComponents import IMinorLossCoefficient, IPattern, IPumpDefinition, IValveCharacteristic, IGPVHeadlossCurve, ISCADASignal, IZone, IUnitDemandLoad, IAirFlowCurve
 
 
 class VSPBFixedHeadType(Enum):

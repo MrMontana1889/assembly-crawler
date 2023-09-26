@@ -143,16 +143,6 @@ class IElement(IEditLabeled):
 		pass
 
 	@property
-	def IdLabel(self) -> str:
-		"""A combined string of id and label of this element.
-
-		Returns
-		--------
-			`str` : 
-		"""
-		pass
-
-	@property
 	def Notes(self) -> str:
 		"""User specified notes about the element.
 
@@ -316,23 +306,8 @@ class IModelingElementsBase(Generic[TElementManagerType, TElementType, TElementT
 		raise Exception("Creating a new Instance of this class is not allowed")
 		pass
 
-	@overload
 	def Create(self) -> TElementType:
 		"""Creates a new element and returns the object.
-
-		Returns
-		--------
-			`TElementType` : Returns a non-null object with minimally initialized properties.
-		"""
-		pass
-
-	@overload
-	def Create(self, label: str) -> TElementType:
-		"""Creates a new element with the given label and returns the object.
-
-		Args
-		--------
-			label (`str`) :  The label to use to assign to the new element.
 
 		Returns
 		--------

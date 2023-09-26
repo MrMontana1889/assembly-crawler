@@ -1,6 +1,6 @@
 from enum import Enum
 from System import EventHandler, EventArgs, IAsyncResult, AsyncCallback, ICloneable, TimeSpan, IComparable, IntPtr
-from typing import overload, List, Dict
+from typing import overload, List
 from System.Runtime.Serialization import SerializationInfo, StreamingContext, ISerializable
 from Haestad.Support.ISupport import INamable, ILabeled
 from array import array
@@ -81,7 +81,6 @@ class PromptKey(Enum):
 	Generate2DGridUponCompute = 51
 	BackgroundLayerIssues = 52
 	TrackedChangesSizeInformation = 53
-	ParallelCriticalityCalculationsOptionInformation = 54
 
 class MessageKeys(Enum):
 	CoreReserved0 = 0
@@ -120,17 +119,6 @@ class MessageKeys(Enum):
 	SaveToPackageCustomResultsExcluded = 5008
 	GridOutflowTributariesNotSupported = 6814
 	GridChannelDoesNotIntersectPond = 6815
-	GridElementIsAnUnmappedSection = 6816
-	GridCrossSectionElementOnTheBoundary = 6817
-	GridInletGridPolygonCannotInterceptBoundary = 6818
-	GridChannelsAreOutOfSync = 6819
-	GridReportingPointOutsideOfComputationalGrid = 6820
-	GridBoundaryTimeElevationNotDefinedForTheEntireSimulationDuration = 6821
-	GridInletMustConnectToConduitOrLateral = 6822
-	FloodInflowsOnCatchBasinsFullCaptured = 6823
-	GridPondMustConnectToALink = 6824
-	GridNodeOnChannelBoundaryPartOfChannel = 6825
-	GridVoidSurfacePolygonCannotIntersectChannelPolygon = 6826
 	FmwReserved10000 = 10000
 	FmwReserved10001 = 10001
 	FmwReserved10002 = 10002
@@ -755,19 +743,6 @@ class MessageKeys(Enum):
 	MismatchUpstreamNodeMaxCover = 30211
 	MismatchDownstreamNodeMaxCover = 30212
 	ConduitCannotConnectToTapNode = 30213
-	SWGCulvertWarnQExceedsEQTRangeGiveAHigherHw = 30214
-	SWGCulvertWarnTwExceedsEQTRangeGiveAHigherHw = 30215
-	SWGCulvertErrorFailedToGenerateEQTValues = 30216
-	SWGCulvertErrorHWTooNarrowForAnyResults = 30217
-	SWGCrossSectionAsGutterShapeNotSupported = 30218
-	SWGCrossSectionAsGutterMultipleSurfInLinks = 30219
-	SWGCrossSectionAsGutterNoSurfInLinks = 30220
-	SWGCrossSectionAsGutterLinkIsWrongType = 30221
-	SWGCrossSectionAsGutterNeedsSingleManningsN = 30222
-	SWGCrossSectionAsGutterForInSagOnly = 30223
-	SWGCrossSectionAsGutterChannelTopIsBelowRim = 30224
-	SWGCrossSectionAsGutterTypeIsForGratesOnly = 30225
-	SWGCrossSectionAsGutterChannelBottomIsBelowRim = 30226
 	SWGGVFEngineNotSupportElementType = 35000
 	SWGVSPBElementNotSupportedInDWEngine = 35001
 	SWGElementFieldNotSupportedInEngineType = 35002
@@ -812,8 +787,6 @@ class MessageKeys(Enum):
 	SWGOverrideElementIsInactive = 36116
 	SWGOverrideConduitNotAConduit = 36117
 	SWGForecastOIDCNotSignIn = 36118
-	SWGUnsupportedChoiceForEnumeratedField = 36119
-	SWGChannelDrainsToInletAllInjected = 36120
 	IdahoSystemUnbalanced = 40000
 	IdahoMaxTrialsExceeded = 40001
 	IdahoNodeDisconnected = 40002
@@ -1315,7 +1288,6 @@ class MessageKeys(Enum):
 	PressureEngineExtraIterationsCannotBeNegative = 41966
 	PressureEngineMWHFormulaNotSupportedByEpanet = 41967
 	PressureEnginePDDOptionsNotSupportedByEpanet = 41968
-	PressureEngineFlushingAtLeastOneInvalidElementOfInterest = 41969
 	GenericEngineInvalidOrMissingCalculationOptions = 42000
 	CulvertInletCoeffNotSelected_OnStartNode = 42001
 	CulvertInletCoeffNotSelected_OnStopNode = 42002
@@ -1701,12 +1673,6 @@ class MessageKeys(Enum):
 	STMDiversionLinkWithoutParallelLink = 44135
 	STSWBothRTKMethodsBeingUsed = 44136
 	SewerOPSMixofRTKandNonRTKCatchmentsBeingUsed = 44137
-	UserDefinedConduitNotDesignedUsingSelectedCatalogClass = 44138
-	NoConduitsAvalableForDesignInCatalogClass = 44139
-	NoShapeMaterialCatalogConduitAvailableForDesign = 44140
-	STMPondHGLHigherThanOutletElev = 44141
-	STMDesignNumOfElementsUpdated = 44142
-	STMBoundaryElementCannotBeBoundaryElement = 44143
 	STMUKMultipleCatchmentsCantNotExport = 44480
 	STMUKCatchbasinConvertedToManhole = 44481
 	STMUKJunctionConvertedToManhole = 44482
@@ -1747,7 +1713,6 @@ class MessageKeys(Enum):
 	AirvalveLargeAirOutflowCurveEnd10000 = 44523
 	AirvalveDiameterIsZero = 44524
 	HMRSlowClosingAirValveNotSupportExtendedCAV = 44525
-	HMRCanOnlyUseOrificeDiameterFlowCalculationMethod = 44526
 	HMROrificeTypicalFlowMustBeGreaterThenZero = 44530
 	HMROrificePressureDropMustBeGreaterThenZero = 44531
 	HMROrificeTypicalFlowMustNotBeNegative = 44532
@@ -1782,8 +1747,6 @@ class MessageKeys(Enum):
 	HMRHydropneumaticTankBottomElevationBiggerDippingTubeBottomElevation = 44593
 	HMRHydropneumaticTankTopElevationNotEqualDippingTubeTopElevation = 44594
 	HMRHydropneumaticTankVoluneSmallerThanCompressionChamberVolume = 44595
-	HMRHydropneumaticTankInitialVolumeLargerThanInputTankVolume = 44596
-	HMRHydropneumaticTankInitialVolumeLargerThanCalculatedTankVolume = 44597
 	HMRJunctionInitialVaporVolumeMustNotBeNegative = 44600
 	HMRJunctionInitialVaporVolumeOnlyAppliesToDeadEnds = 44601
 	HMRJunctionPressureMustNotBeNegative = 44602
@@ -2908,7 +2871,6 @@ class MessageKeys(Enum):
 	GridPotentialCatchmentDoubleCount = 68128
 	GridTwoDCalcCapturesFullFlow = 68129
 	GridCoupledToGutters = 68130
-	GridCalcOptionMaxCourantNumberNotSuggested = 68131
 	GridBurningInPondFailedCheckPondDimensions = 68132
 	GridFlowBoundaryLineIntersectsVoidCells = 68133
 	GridChannelTerminatesTooCloseToBorder = 68134
@@ -2921,15 +2883,6 @@ class MessageKeys(Enum):
 	GridBoundaryTailwaterElevationIsTooLarge = 68141
 	GridCrossSectionIsSmallerThanGridSpacing = 68142
 	GridMultipleIncomingTributaries = 68143
-	GridCalcOptionMinDepthOnGridOutOfRange = 68145
-	GridUnsupportedInletType = 68146
-	GridUnsupportedInletTypeItem = 68147
-	GridOpenChannelToSubsurfacePond = 68148
-	GridLinksWithSmallCulvert = 68149
-	GridNoBoltedNodesWithCulvert = 68150
-	GridPrismaticOpenChannelNotSupported = 68152
-	GridManholeIsInTheMiddleOfTwoCrossSections = 68153
-	GridPondOverlapsChannel = 68154
 	FDNodeDepthLessThanMinDepth = 70000
 	FDNodeDepthGreaterThanMaxDepth = 70001
 	FDConduitRiseLessThanMinSize = 70002
@@ -3024,16 +2977,6 @@ class MessageKeys(Enum):
 	SwmmSweepStartTimeGreaterThanStopTime = 800062
 	SWMMExternalTimeSeriesDataFilePathInvalid = 800063
 	SWMMInvalidMoistureDeficitData = 800064
-	SWMMCulvertAndOverflowWeirCannotTerminateAtOutfall = 800065
-	SWMMMinSlopeHasInvalidValue = 800066
-	SWMMControlCurveDoesNotExist = 800067
-	SWMMNoPumpDefinitionSelected = 800068
-	SWMMInletMustHaveConventionalGutter = 800069
-	SWMMGutterUsesStopNodeData = 800070
-	SWMMPumpOnOffDepthElevLowerThanControlElevation = 800071
-	SWMMTransitionNodeCannotBeStorage = 800072
-	SWMMHydrologicTimeStepGreaterThanOutputIncrement = 800073
-	SWMMInvalidElevationsWhenNodeIsStorage = 800074
 	SwmmMissingNodeReference = 805000
 	SwmmStorageUnitHasSeepageAndRDII = 805001
 	SwmmConduitControlUsedByMoreThanOneElement = 805002
@@ -4476,19 +4419,6 @@ class IStatusManager:
 		"""
 		pass
 
-	def AddStatisticsMessage(self, alabel: str) -> None:
-		"""No Description
-
-		Args
-		--------
-			alabel (`str`) :  alabel
-
-		Returns
-		--------
-			`None` : 
-		"""
-		pass
-
 class IYesNoToAllPrompt:
 
 	def __new__(self) -> None:
@@ -4998,19 +4928,6 @@ class StatisticsSection:
 		"""
 		pass
 
-	def AddMessage(self, alabel: str) -> None:
-		"""No Description
-
-		Args
-		--------
-			alabel (`str`) :  alabel
-
-		Returns
-		--------
-			`None` : 
-		"""
-		pass
-
 	def SetItemCount(self, alabel: str, acount: int) -> None:
 		"""No Description
 
@@ -5025,19 +4942,6 @@ class StatisticsSection:
 		"""
 		pass
 
-	def GetFormattedItemText(self, key: str) -> str:
-		"""No Description
-
-		Args
-		--------
-			key (`str`) :  key
-
-		Returns
-		--------
-			`str` : 
-		"""
-		pass
-
 	@property
 	def Label(self) -> str:
 		"""No Description
@@ -5049,12 +4953,12 @@ class StatisticsSection:
 		pass
 
 	@property
-	def Items(self) -> Dict[str,str][str,StatisticsSectionItem]:
+	def Items(self) -> SortedList:
 		"""No Description
 
 		Returns
 		--------
-			`Dict[str,str]` : 
+			`SortedList` : 
 		"""
 		pass
 
@@ -5113,20 +5017,6 @@ class StatisticsSectionItem:
 
 	@Count.setter
 	def Count(self, count: int) -> None:
-		pass
-
-	@property
-	def ShowCount(self) -> bool:
-		"""No Description
-
-		Returns
-		--------
-			`bool` : 
-		"""
-		pass
-
-	@ShowCount.setter
-	def ShowCount(self, showcount: bool) -> None:
 		pass
 
 class StatusManager(IStatusManager):
@@ -5220,19 +5110,6 @@ class StatusManager(IStatusManager):
 		--------
 			alabel (`str`) :  alabel
 			incrementAmount (`int`) :  incrementAmount
-
-		Returns
-		--------
-			`None` : 
-		"""
-		pass
-
-	def AddStatisticsMessage(self, alabel: str) -> None:
-		"""No Description
-
-		Args
-		--------
-			alabel (`str`) :  alabel
 
 		Returns
 		--------

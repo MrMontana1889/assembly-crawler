@@ -278,7 +278,6 @@ class SupportElementType(Enum):
 	DigitalTerrainModel = 351
 	DigitalTerrainModelGroup = 352
 	LandCover = 353
-	ControlCurve = 354
 
 class DomainElementShapeType(Enum):
 	Point = 0
@@ -383,7 +382,7 @@ class CompactOperationTask(Enum):
 
 class ExpressionType(Enum):
 	NONE = 0
-	Expression = 1
+	ECExpressions = 1
 
 class FieldUpdateTypeEnum(Enum):
 	NoChange = 0

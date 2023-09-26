@@ -280,7 +280,6 @@ class AirValveTypeEnum(Enum):
 	DoubleActing = 1
 	TripleActing = 2
 	VacuumBreaker = 3
-	Dynamic = 4
 
 class SAV_SRVTypeEnum(Enum):
 	SAV = 0
@@ -488,7 +487,6 @@ class PumpDefinitionTypeEnum(Enum):
 	VolumeFlow = 6
 	DepthFlow = 7
 	DepthFlowVariableSpeed = 8
-	MultiplePointTypeVS = 9
 
 class PumpEfficiencyTypeEnum(Enum):
 	ConstantEfficiencyType = 0

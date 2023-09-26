@@ -68,9 +68,7 @@ class ProductId(Enum):
 	Bentley_GasAnalysis = 1861
 	Bentley_PipeAssetPlanner = 1895
 	Bentley_SUE = 2335
-	Bentley_OpenRoadsConceptStation = 2427
 	Bentley_OpenRoadsDesigner = 2515
-	Bentley_OpenRailConceptStation = 2580
 	Bentley_OpenRailDesigner = 2641
 	Bentley_CNCCBIMOpenRoads = 2697
 	Bentley_OpenSiteDesigner = 2758
@@ -82,8 +80,6 @@ class ProductId(Enum):
 	Bentley_OpenRoadsUltimateChina = 3211
 	Bentley_OpenRoadsChina = 3216
 	Bentley_OpenFlows_Entitlement = 3276
-	Bentley_TRENDROAD = 3303
-	Bentley_OpenAirportChina = 3415
 
 class LicensePlatformType(Enum):
 	Unknown = 0
@@ -1026,46 +1022,6 @@ class License(ILicense):
 		Args
 		--------
 			value (`LicenseStatusChangedDelegate`) :  value
-
-		Returns
-		--------
-			`None` : 
-		"""
-		pass
-
-	def add_OnGenericEvent(self, newSub: GenericEventCb) -> None:
-		"""No Description
-
-		Args
-		--------
-			newSub (`GenericEventCb`) :  newSub
-
-		Returns
-		--------
-			`None` : 
-		"""
-		pass
-
-	def remove_OnGenericEvent(self, newSub: GenericEventCb) -> None:
-		"""No Description
-
-		Args
-		--------
-			newSub (`GenericEventCb`) :  newSub
-
-		Returns
-		--------
-			`None` : 
-		"""
-		pass
-
-	def raise_OnGenericEvent(self, e: int, data: str) -> None:
-		"""No Description
-
-		Args
-		--------
-			e (`int`) :  e
-			data (`str`) :  data
 
 		Returns
 		--------
